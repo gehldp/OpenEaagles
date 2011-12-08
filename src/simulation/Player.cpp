@@ -2957,6 +2957,10 @@ void Player::dynamics(const LCreal dt)
          getDynamicsModel()->freeze( isFrozen() );
          getDynamicsModel()->dynamics(dt);
       }
+      else {
+         // we have no dynamics model, apply accelerations here.
+         setVelocity(getVelocity() + getAcceleration() * dt);
+      }
 
       // Update our position
       positionUpdate(dt);
