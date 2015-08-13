@@ -221,7 +221,7 @@ private:
    // stations[] index; returns -1 if invalid
    inline int mapSta2Idx(const unsigned int s) const {
       if (s == 0 && selected > 0 && selected <= ns) return (selected-1);
-      else if (s <= ns) return (s-1);
+      else if (s > 0 && s <= ns) return (s-1);
       return -1;
    }
 };

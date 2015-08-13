@@ -102,10 +102,7 @@ void CadrgTocEntry::deleteData()
 CadrgFrameEntry* CadrgTocEntry::getFrameEntry(const int v, const int h)
 {
     CadrgFrameEntry* p = &frames[v][h];
-    if (p != nullptr) {
-       return p;
-    }
-    return nullptr;
+    return p;
 }
 
 // -----------------------------------------------------------------------------------------

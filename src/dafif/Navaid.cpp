@@ -155,15 +155,7 @@ void Navaid::printTrueBearingRange(std::ostream& sout, const double aclat, const
    double bearing(0.0), range(0.0), grdrange(0.0);
    Basic::Nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &range, &grdrange);
 
-   bool rangeIsValid = true;
-   bool bearingIsValid = true;
-
-   if (rangeIsValid && bearingIsValid)
-       sout << "     range " << range << "  grdrange " << grdrange << " true_bearing " << bearing << std::endl;
-   else if (rangeIsValid)
-       sout << "  range " << range << "  grdrange " << grdrange << std::endl;
-   else
-       sout << "    true bearing " << bearing << std::endl;
+   sout << "     range " << range << "  grdrange " << grdrange << " true_bearing " << bearing << std::endl;
 }
 
 

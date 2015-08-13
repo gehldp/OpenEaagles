@@ -113,19 +113,25 @@ void SrtmHgtFile::deleteData()
 //------------------------------------------------------------------------------
 bool SrtmHgtFile::loadData()
 {
-    // Compute the filename (why can't we be given just one filename string!??)
-    std::string temp_filename;
-    const char* p = getPathname();
-    if (p != nullptr)
-    {
-        temp_filename += p;
-        temp_filename += '/';
-    }
-    p = getFilename();
-    if (p != nullptr)
-        temp_filename += p;
+   // a filename is required
+   const char* fn = getFilename();
+   if (fn == nullptr || strlen(fn) == 0) return false;
 
-    std::string srtmFilename(p);
+   std::string temp_filename;
+
+   // Optional path name
+   {
+      const char* p = getPathname();
+      if (p != nullptr) {
+         temp_filename += p;
+         temp_filename += '/';
+      }
+   }
+
+    // append the file name
+    temp_filename += fn;
+
+    std::string srtmFilename(fn);
 
     // Open the terrain file.
     const char* filename = temp_filename.c_str();

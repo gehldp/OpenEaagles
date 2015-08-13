@@ -528,7 +528,10 @@ GLubyte* Image::readRgbValuesBMP(FILE* const fp, const unsigned int offset, cons
     GLubyte* bmap = new GLubyte[bmSize];
 
     // Position to start of bitmap
-    std::fseek(fp, offset, SEEK_SET);
+    if (std::fseek(fp, offset, SEEK_SET) < 0) {
+       delete[] bmap;
+       return nullptr;
+    }
 
     // Read the bitmap
     size_t widthBytes = (getWidth() * getNumComponents());          // Number of bytes we want per row
@@ -543,7 +546,10 @@ GLubyte* Image::readRgbValuesBMP(FILE* const fp, const unsigned int offset, cons
             return nullptr;
         }
         if (seekBytes > 0) {
-            std::fseek(fp, static_cast<int>(seekBytes), SEEK_CUR);
+           if (std::fseek(fp, static_cast<int>(seekBytes), SEEK_CUR) < 0) {
+              delete[] bmap;
+              return nullptr;
+           }
         }
     }
 
@@ -567,7 +573,11 @@ GLubyte* Image::readColorValuesBMP(FILE* const fp, const unsigned int offset, co
     size_t nItemRead = std::fread(colorTable, 4, ctSize, fp);
 
     // Position to start of colors
-    std::fseek(fp, offset, SEEK_SET);
+    if (std::fseek(fp, offset, SEEK_SET) < 0) {
+       delete[] colorTable;
+       delete[] bmap;
+       return nullptr;
+    }
 
     // Read the bitmap
     unsigned int nbytes = (((bmfi->biWidth + 3) / 4 ) * 4); // round up to 4 byte boundary
