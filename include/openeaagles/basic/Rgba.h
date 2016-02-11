@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class:  Rgba
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Rgba_H__
-#define __Eaagles_Basic_Rgba_H__
+#ifndef __oe_basic_Rgba_H__
+#define __oe_basic_Rgba_H__
 
 #include "openeaagles/basic/Rgb.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class:  Rgba
@@ -37,7 +37,7 @@ public:
 
 };
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 
 #endif

@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Eadi3DFont
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_Eadi3DFont_H__
-#define __Eaagles_Instruments_Eadi3DFont_H__
+#ifndef __oe_instruments_Eadi3DFont_H__
+#define __oe_instruments_Eadi3DFont_H__
 
-#include "openeaagles/basicGL/Font.h"
+#include "openeaagles/graphics/Font.h"
 
-namespace Eaagles {
-namespace Instruments {
+namespace oe {
+namespace instruments {
 
 //------------------------------------------------------------------------------
 // Class:  Eadi3DFont
@@ -21,9 +21,9 @@ namespace Instruments {
 //          Produces the stroke font map.
 //
 //------------------------------------------------------------------------------
-class Eadi3DFont : public BasicGL::Font
+class Eadi3DFont : public graphics::Font
 {
-    DECLARE_SUBCLASS(Eadi3DFont,BasicGL::Font)
+    DECLARE_SUBCLASS(Eadi3DFont,graphics::Font)
 
 public:
     Eadi3DFont();
@@ -37,6 +37,6 @@ public:
 
 
 } // End Instruments namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

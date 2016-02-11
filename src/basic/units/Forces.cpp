@@ -6,8 +6,8 @@
 #include "openeaagles/basic/osg/Math"
 #include "openeaagles/basic/SlotTable.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 //////////////////////////////////////////////////////////////////////
 // Force() --
@@ -182,6 +182,6 @@ EMPTY_COPYDATA(Poundals)
 EMPTY_DELETEDATA(Poundals)
 
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 

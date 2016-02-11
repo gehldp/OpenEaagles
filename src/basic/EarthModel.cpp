@@ -6,8 +6,8 @@
 
 #include <cstring>
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Pre-defined earth models
@@ -250,5 +250,5 @@ std::ostream& EarthModel::serialize(std::ostream& sout, const int i, const bool 
 }
 
 
-}  // End Basic namespace
-}  // End Eaagles namespace
+}  // End basic namespace
+}  // End oe namespace

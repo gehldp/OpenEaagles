@@ -1,6 +1,6 @@
 
-#ifndef __Eaagles_Basic_Lognormal_H__
-#define __Eaagles_Basic_Lognormal_H__
+#ifndef __oe_basic_Lognormal_H__
+#define __oe_basic_Lognormal_H__
 
 #include "../Rng.h"
 
@@ -12,8 +12,8 @@
 //     gamma : continuous location parameter (gamma = 0 for 2 parameter lognormal)
 //
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 class Number;
 
@@ -47,8 +47,8 @@ protected:
 
 };
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 
 #endif
 

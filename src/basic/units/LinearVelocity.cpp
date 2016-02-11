@@ -4,8 +4,8 @@
 #include "openeaagles/basic/units/Times.h"
 #include "openeaagles/basic/SlotTable.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 //---------------------------------------------------------------------
 // Conversion Constants
@@ -310,5 +310,5 @@ bool LinearVelocity::setSeconds(const LCreal newTime)
 }
 
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace

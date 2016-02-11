@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: SensorMsg
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_SensorMsg_H__
-#define __Eaagles_Simulation_SensorMsg_H__
+#ifndef __oe_simulation_SensorMsg_H__
+#define __oe_simulation_SensorMsg_H__
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
    class Player;
    class Gimbal;
 
@@ -18,9 +18,9 @@ namespace Simulation {
 //
 // Factory name: SensorMsg
 //------------------------------------------------------------------------------
-class SensorMsg : public Basic::Object
+class SensorMsg : public basic::Object
 {
-   DECLARE_SUBCLASS(SensorMsg,Basic::Object)
+   DECLARE_SUBCLASS(SensorMsg,basic::Object)
 
 public:
    SensorMsg();
@@ -139,8 +139,8 @@ public:
    const Player* getTarget() const              { return target; }
 
    // Optional: data message attached to sensor message
-   Basic::Object* getDataMessage()              { return dataMsg; }
-   const Basic::Object* getDataMessage() const  { return dataMsg; }
+   basic::Object* getDataMessage()              { return dataMsg; }
+   const basic::Object* getDataMessage() const  { return dataMsg; }
 
    // Sets the gimbal that generated this message
    void setGimbal(Gimbal* const t);
@@ -152,7 +152,7 @@ public:
    void setTarget(Player* const p);
 
    // Sets the optional data message attached to sensor message
-   void setDataMessage(Basic::Object* const msg);
+   void setDataMessage(basic::Object* const msg);
 
 
    // Clear data
@@ -172,14 +172,14 @@ private:
    osg::Vec3d      losT2O;         // Normalized target to ownship LOS vector (target's NED)
    osg::Vec3d      aoi;            // Normalized target Angle Of Incidence (AOI) vector
    Gimbal*         gimbal;         // The gimbal that transmitted the message
-   Basic::safe_ptr<Player>    ownship;     // The originating (ownship) player
-   Basic::safe_ptr<Player>    target;      // The Target player
-   Basic::safe_ptr<Basic::Object> dataMsg; // Embedded data message (e.g., datalink, etc)
+   basic::safe_ptr<Player>    ownship;     // The originating (ownship) player
+   basic::safe_ptr<Player>    target;      // The Target player
+   basic::safe_ptr<basic::Object> dataMsg; // Embedded data message (e.g., datalink, etc)
    bool            returnReq;      // Return Request
    bool            localOnly;      // Local players only flag
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

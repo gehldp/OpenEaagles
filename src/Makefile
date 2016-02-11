@@ -4,30 +4,29 @@ include makedefs
 # Library      : Requires
 # ------------------------------------------------------------------------
 # basic        : -
-# basicGL      : freeglut, FTGL, freetype
+# graphics     : freeglut, FTGL, freetype
 # dafif        : -
 # dis          : -
-# dynamics     : JSBSim
 # gui          :
 # hla          : HLA RTI
 # instruments  : -
-# ioDevice     : -
-# linearSys    : -
+# iodevice     : -
+# linearsystem : -
+# models       : JSBSim
 # maps         : -
 # otw          : CIGICL 3.x
 # recorder     : Google protocol buffers
-# sensors      : -
 # simulation   : -
 # terrain      : -
 #
 PROJECTS = basic
-PROJECTS += basicGL instruments
+PROJECTS += graphics instruments
 PROJECTS += dafif
-PROJECTS += ioDevice
-PROJECTS += linearSys 
-PROJECTS += simulation sensors terrain
+PROJECTS += iodevice
+PROJECTS += linearsystem 
+PROJECTS += simulation terrain
 PROJECTS += dis
-PROJECTS += dynamics
+PROJECTS += models
 PROJECTS += maps
 PROJECTS += recorder
 

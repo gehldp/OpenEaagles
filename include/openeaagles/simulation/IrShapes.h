@@ -1,16 +1,16 @@
 //------------------------------------------------------------------------------
 // Classes: IrShape, IrSphere, IrBox
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_IrShape_H__
-#define __Eaagles_Simulation_IrShape_H__
+#ifndef __oe_simulation_IrShape_H__
+#define __oe_simulation_IrShape_H__
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
+namespace oe {
 
-namespace Basic { class Number; }
+namespace basic { class Number; }
 
-namespace Simulation {
+namespace simulation {
 
 class IrQueryMsg;
 
@@ -19,15 +19,15 @@ class IrQueryMsg;
 // Description: Base class for infrared shape
 // Factory name: IrShape
 //------------------------------------------------------------------------------
-class IrShape : public Basic::Object
+class IrShape : public basic::Object
 {
-   DECLARE_SUBCLASS(IrShape,Basic::Object)
+   DECLARE_SUBCLASS(IrShape,basic::Object)
 public:
    IrShape();
 
    virtual LCreal getArea();            // returns the effective area as a number in square meters
    virtual LCreal getReflectorAreaInFieldOfView(const IrQueryMsg* const msg);
-   virtual bool setSlotIrShapeArea(const Basic::Number* const s);
+   virtual bool setSlotIrShapeArea(const basic::Number* const s);
 private:
    LCreal area;
 };
@@ -51,7 +51,7 @@ public:
 
    LCreal getRadius()              { return radius; }
 
-   virtual bool setSlotIrSphereRadius(const Basic::Number* const s);
+   virtual bool setSlotIrSphereRadius(const basic::Number* const s);
 
 private:
 
@@ -78,16 +78,16 @@ public:
    LCreal getArea() override;
    LCreal getReflectorAreaInFieldOfView(const IrQueryMsg* const msg) override;
 
-   virtual bool setSlotIrBoxX(const Basic::Number* const s);
-   virtual bool setSlotIrBoxY(const Basic::Number* const s);
-   virtual bool setSlotIrBoxZ(const Basic::Number* const s);
+   virtual bool setSlotIrBoxX(const basic::Number* const s);
+   virtual bool setSlotIrBoxY(const basic::Number* const s);
+   virtual bool setSlotIrBoxZ(const basic::Number* const s);
 
 private:
 
    LCreal x,y,z;
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

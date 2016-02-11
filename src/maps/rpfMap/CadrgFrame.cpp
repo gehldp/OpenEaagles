@@ -8,9 +8,9 @@
 
 #include <cstring>
 
-namespace Eaagles {
-namespace Maps {
-namespace Rpf {
+namespace oe {
+namespace maps {
+namespace rpf {
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
@@ -96,9 +96,9 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
         frameEntry->ref();
     }
 
-    Basic::String* string = nullptr;
+    basic::String* string = nullptr;
     if (frameEntry != nullptr) {
-        string = new Basic::String(frameEntry->getDirectory());
+        string = new basic::String(frameEntry->getDirectory());
         string->catStr(frameEntry->getFileName());
     }
     if (string == nullptr) {
@@ -395,7 +395,7 @@ int CadrgFrame::decompressSubframe(int x, int y, Subframe& subFrame)
     return 1;
 }
 
-}  // End Rpf namespace
-}  // End Maps namespace
-}  // End Eaagles namespace
+}  // End rpf namespace
+}  // End maps namespace
+}  // End oe namespace
 

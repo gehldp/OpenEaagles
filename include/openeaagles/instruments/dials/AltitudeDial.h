@@ -13,13 +13,13 @@
 //      5) thouScissors - same as hun
 //      6) tenThouScissors - same as hun and thou
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_AltitudeDial_H__
-#define __Eaagles_Instruments_AltitudeDial_H__
+#ifndef __oe_instruments_AltitudeDial_H__
+#define __oe_instruments_AltitudeDial_H__
 
 #include "openeaagles/instruments/Instrument.h"
 
-namespace Eaagles {
-namespace Instruments {
+namespace oe {
+namespace instruments {
 
 class AltitudeDial : public Instrument
 {
@@ -39,7 +39,7 @@ private:
     SendData altTenThousandsSD;             // our ten thousands altitude
 };
 
-}  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end instruments namespace
+}  // end oe namespace
 
 #endif

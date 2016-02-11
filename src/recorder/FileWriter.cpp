@@ -13,8 +13,8 @@
 # pragma warning(disable: 4996)
 #endif
 
-namespace Eaagles {
-namespace Recorder {
+namespace oe {
+namespace recorder {
 
 //==============================================================================
 // Class FileWriter
@@ -29,8 +29,8 @@ END_SLOTTABLE(FileWriter)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(FileWriter)
-    ON_SLOT( 1, setFilename, Basic::String)
-    ON_SLOT( 2, setPathName, Basic::String)
+    ON_SLOT( 1, setFilename, basic::String)
+    ON_SLOT( 2, setPathName, basic::String)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -273,14 +273,14 @@ void FileWriter::closeFile()
          eodFlag = true;
 
          // write something to signify don't read any more (e.g., last message)
-         Pb::DataRecord* lastMsg = new Pb::DataRecord();
+         pb::DataRecord* lastMsg = new pb::DataRecord();
 
          // This will be the token representing the last message, but it can be
          // anything that is not one of the other event messages
          lastMsg->set_id(REID_END_OF_DATA);
 
          // Time is also required, although not used:
-         Pb::Time* time = lastMsg->mutable_time();
+         pb::Time* time = lastMsg->mutable_time();
          time->set_exec_time(0);
          time->set_sim_time(0);
          time->set_utc_time(0);
@@ -322,7 +322,7 @@ void FileWriter::processRecordImp(const DataRecordHandle* const handle)
    if ( fileOpened ) {
 
       // The DataRecord to be sent
-      const Pb::DataRecord* dataRecord = handle->getRecord();
+      const pb::DataRecord* dataRecord = handle->getRecord();
 
       // Serialize the DataRecord
       std::string wireFormat;
@@ -391,18 +391,18 @@ void FileWriter::setFullFilename(const char* const name)
    }
 }
 
-bool FileWriter::setFilename(const Basic::String* const msg)
+bool FileWriter::setFilename(const basic::String* const msg)
 {
    if (filename != nullptr) { filename->unref(); filename = nullptr; }
-   if (msg != nullptr) filename = new Basic::String(*msg);
+   if (msg != nullptr) filename = new basic::String(*msg);
 
     return true;
 }
 
-bool FileWriter::setPathName(const Basic::String* const msg)
+bool FileWriter::setPathName(const basic::String* const msg)
 {
    if (pathname != nullptr) { pathname->unref(); pathname = nullptr; }
-   if (msg != nullptr) pathname = new Basic::String(*msg);
+   if (msg != nullptr) pathname = new basic::String(*msg);
 
    return true;
 }
@@ -410,7 +410,7 @@ bool FileWriter::setPathName(const Basic::String* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component
 //------------------------------------------------------------------------------
-Basic::Object* FileWriter::getSlotByIndex(const int si)
+basic::Object* FileWriter::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
@@ -447,5 +447,5 @@ std::ostream& FileWriter::serialize(std::ostream& sout, const int i, const bool 
     return sout;
 }
 
-} // End Recorder namespace
-} // End Eaagles namespace
+} // End recorder namespace
+} // End oe namespace

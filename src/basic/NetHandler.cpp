@@ -27,8 +27,8 @@
 
 #include "openeaagles/basic/NetHandler.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 //==============================================================================
 // Class: NetHandler
@@ -151,6 +151,6 @@ bool NetHandler::checkByteOrder()
     return (n1 == n2);               // No difference? Then we already in network order!
 }
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 

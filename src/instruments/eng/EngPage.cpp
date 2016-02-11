@@ -1,7 +1,7 @@
 #include "openeaagles/instruments/eng/EngPage.h"
 
-namespace Eaagles {
-namespace Instruments {
+namespace oe {
+namespace instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(EngPage,"EngPage")
 EMPTY_SERIALIZER(EngPage)
@@ -168,4 +168,4 @@ void EngPage::updateData(const LCreal dt)
 }
 
 }  // end of Instruments namespace
-}  // end of Eaagles Namespace
+}  // end of oe Namespace

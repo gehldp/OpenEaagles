@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: LandingLight
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_LandingLight_H__
-#define __Eaagles_Instruments_LandingLight_H__
+#ifndef __oe_instruments_LandingLight_H__
+#define __oe_instruments_LandingLight_H__
 
 #include "LandingGear.h"
 
-namespace Eaagles {
-namespace Basic { class Identifier; }
-namespace Instruments {
+namespace oe {
+namespace basic { class Identifier; }
+namespace instruments {
 
 //------------------------------------------------------------------------------
 // Class: LandingLight
@@ -37,7 +37,7 @@ public:
 
 protected:
     // slot functions
-    bool setSlotLightRadius(const Basic::Number* const newLR);
+    bool setSlotLightRadius(const basic::Number* const newLR);
 
 private:
     LCreal lRadius;     // our light radius
@@ -45,7 +45,7 @@ private:
     SendData selSD;     // our selection
 };
 
-}  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end instruments namespace
+}  // end oe namespace
 
 #endif

@@ -1,19 +1,19 @@
 //------------------------------------------------------------------------------
-// Class:  BasicGL::Page -> Eadi3DPage
+// Class:  graphics::Page -> Eadi3DPage
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_Eadi3DPage_H__
-#define __Eaagles_Instruments_Eadi3DPage_H__
+#ifndef __oe_instruments_Eadi3DPage_H__
+#define __oe_instruments_Eadi3DPage_H__
 
-#include "openeaagles/basicGL/Page.h"
+#include "openeaagles/graphics/Page.h"
 #include "openeaagles/instruments/eadi3D/Eadi3DObjects.h"
 
-namespace Eaagles {
-namespace Instruments {
+namespace oe {
+namespace instruments {
 
-class Eadi3DPage : public BasicGL::Page{
+class Eadi3DPage : public graphics::Page{
 
-   DECLARE_SUBCLASS(Eadi3DPage,BasicGL::Page)
+   DECLARE_SUBCLASS(Eadi3DPage,graphics::Page)
 
 public:
     Eadi3DPage();
@@ -41,30 +41,30 @@ public:
 
     void draw() override;
 
-    bool event(const int event, Basic::Object* const obj = nullptr) override;
+    bool event(const int event, basic::Object* const obj = nullptr) override;
 
 private:
     // event functions
-    bool onEventSetAltitude(const Basic::Number* const x);
-    bool onEventSetAirspeed(const Basic::Number* const x);
-    bool onEventSetHeading(const Basic::Number* const x);
-    bool onEventSetAOA(const Basic::Number* const x);
-    bool onEventSetVVI(const Basic::Number* const x);
-    bool onEventSetPitch(const Basic::Number* const x);
-    bool onEventSetRoll(const Basic::Number* const x);
-    bool onEventSetMach(const Basic::Number* const x);
-    bool onEventSetGLoad(const Basic::Number* const x);
-    bool onEventSetLandingMode(const Basic::Number* const x);
-    bool onEventSetPitchSteeringCmd(const Basic::Number* const x);
-    bool onEventSetRollSteeringCmd(const Basic::Number* const x);
-    bool onEventSetPitchSteeringValid(const Basic::Number* const x);
-    bool onEventSetRollSteeringValid(const Basic::Number* const x);
-    bool onEventSetGlideslopeDev(const Basic::Number* const x);
-    bool onEventSetLocalizerDev(const Basic::Number* const x);
-    bool onEventSetTurnRate(const Basic::Number* const x);
-    bool onEventSetSlipInd(const Basic::Number* const x);
-    bool onEventSetGlideslopeValid(const Basic::Number* const x);
-    bool onEventSetLocalizerValid(const Basic::Number* const x);
+    bool onEventSetAltitude(const basic::Number* const x);
+    bool onEventSetAirspeed(const basic::Number* const x);
+    bool onEventSetHeading(const basic::Number* const x);
+    bool onEventSetAOA(const basic::Number* const x);
+    bool onEventSetVVI(const basic::Number* const x);
+    bool onEventSetPitch(const basic::Number* const x);
+    bool onEventSetRoll(const basic::Number* const x);
+    bool onEventSetMach(const basic::Number* const x);
+    bool onEventSetGLoad(const basic::Number* const x);
+    bool onEventSetLandingMode(const basic::Number* const x);
+    bool onEventSetPitchSteeringCmd(const basic::Number* const x);
+    bool onEventSetRollSteeringCmd(const basic::Number* const x);
+    bool onEventSetPitchSteeringValid(const basic::Number* const x);
+    bool onEventSetRollSteeringValid(const basic::Number* const x);
+    bool onEventSetGlideslopeDev(const basic::Number* const x);
+    bool onEventSetLocalizerDev(const basic::Number* const x);
+    bool onEventSetTurnRate(const basic::Number* const x);
+    bool onEventSetSlipInd(const basic::Number* const x);
+    bool onEventSetGlideslopeValid(const basic::Number* const x);
+    bool onEventSetLocalizerValid(const basic::Number* const x);
 
     void globeBall(LCreal pitch, LCreal roll, LCreal pitchCmd, LCreal rollCmd, bool psValid, bool rcValid, bool landMode);
     void scales(LCreal gsDev, LCreal locDev, LCreal turnRate, LCreal slipInd, bool gsValid, bool locValid, bool landMode);
@@ -99,6 +99,6 @@ private:
 };
 
 }; // end of Instruments namespace
-}; // end of Eaagles namespace
+}; // end of oe namespace
 
 #endif

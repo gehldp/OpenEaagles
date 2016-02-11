@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: DialTickMarks
-// Base class: BasicGL::Graphic -> AnalogDial -> DialTickMarks
+// Base class: graphics::Graphic -> AnalogDial -> DialTickMarks
 //
 // Description: Handles tick marks for an analog dial, or any other general
 // application.
@@ -13,13 +13,13 @@
 //      this will override the setLength() function and will use a graphic to
 //      draw.
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_DialTickMarks_H__
-#define __Eaagles_Instruments_DialTickMarks_H__
+#ifndef __oe_instruments_DialTickMarks_H__
+#define __oe_instruments_DialTickMarks_H__
 
 #include "openeaagles/instruments/dials/AnalogDial.h"
 
-namespace Eaagles {
-namespace Instruments {
+namespace oe {
+namespace instruments {
 
 class DialTickMarks : public AnalogDial
 {
@@ -30,26 +30,26 @@ public:
 
     LCreal getLength() const                    { return length; }
     int  getQuantity() const                    { return quantity; }
-    BasicGL::Graphic* getTickGraphic() const    { return myGraphic;  }
+    graphics::Graphic* getTickGraphic() const    { return myGraphic;  }
 
     virtual bool setLength(const LCreal newLength);
     virtual bool setQuantity(const int newQ);
-    virtual bool setTickGraphic(const BasicGL::Graphic* const newGraphic);
+    virtual bool setTickGraphic(const graphics::Graphic* const newGraphic);
 
     void drawFunc() override;
 
 protected:
     // slot functions
-    bool setSlotLength(const Basic::Number* const newLength);
-    bool setSlotQuantity(const Basic::Number* const newQ);
+    bool setSlotLength(const basic::Number* const newLength);
+    bool setSlotQuantity(const basic::Number* const newQ);
 
 private:
     LCreal      length;             // tick mark length (if not a graphic)
     int         quantity;           // how many tick marks will we have?
-    BasicGL::Graphic*  myGraphic; // our graphic (if we choose to use on for a tick mark)
+    graphics::Graphic*  myGraphic; // our graphic (if we choose to use on for a tick mark)
 };
 
-}  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end instruments namespace
+}  // end oe namespace
 
 #endif

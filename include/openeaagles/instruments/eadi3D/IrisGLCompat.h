@@ -1,21 +1,21 @@
 //------------------------------------------------------------------------------
 // Class: IrisGLCompat
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_IrisGLCompat_H__
-#define __Eaagles_Instruments_IrisGLCompat_H__
+#ifndef __oe_instruments_IrisGLCompat_H__
+#define __oe_instruments_IrisGLCompat_H__
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
-namespace Instruments {
+namespace oe {
+namespace instruments {
 
 //------------------------------------------------------------------------------
 // Class:  IrisGLCompat
 // Description:  IrisGL compatibility
 //
 //------------------------------------------------------------------------------
-class IrisGLCompat : public Basic::Object {
-    DECLARE_SUBCLASS(IrisGLCompat,Basic::Object)
+class IrisGLCompat : public basic::Object {
+    DECLARE_SUBCLASS(IrisGLCompat,basic::Object)
 public:
     IrisGLCompat();
 
@@ -38,6 +38,6 @@ private:
 };
 
 } // End Instruments namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

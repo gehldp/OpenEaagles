@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Classes: Cie, MonitorMetrics
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Cie_H__
-#define __Eaagles_Basic_Cie_H__
+#ifndef __oe_basic_Cie_H__
+#define __oe_basic_Cie_H__
 
 #include "openeaagles/basic/Color.h"
 #include "openeaagles/basic/osg/Matrix"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 class MonitorMetrics;
 class Table1;
@@ -146,8 +146,8 @@ private:
     osg::Vec3 refwhiteCIE;
 };
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 
 
 #endif

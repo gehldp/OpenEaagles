@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: State
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Ubf_State_H__
-#define __Eaagles_Basic_Ubf_State_H__
+#ifndef __oe_basic_ubf_State_H__
+#define __oe_basic_ubf_State_H__
 
 #include "openeaagles/basic/Component.h"
 
-namespace Eaagles {
-namespace Basic {
-namespace Ubf {
+namespace oe {
+namespace basic {
+namespace ubf {
 
 //------------------------------------------------------------------------------
 // Class: State
@@ -17,21 +17,21 @@ namespace Ubf {
 //
 // Factory name: UbfState
 //------------------------------------------------------------------------------
-class State : public Basic::Component
+class State : public basic::Component
 {
-   DECLARE_SUBCLASS(State, Basic::Component)
+   DECLARE_SUBCLASS(State, basic::Component)
 public:
    State();
 
    virtual void updateGlobalState(void);
-   virtual void updateState(const Basic::Component* const actor);
+   virtual void updateState(const basic::Component* const actor);
 
    virtual const State* getUbfStateByType(const std::type_info& type) const;
 };
 
-} // End Ubf namespace
-} // End Basic namespace
-} // End Eaagles namespace
+} // End ubf namespace
+} // End basic namespace
+} // End oe namespace
 
 #endif
 

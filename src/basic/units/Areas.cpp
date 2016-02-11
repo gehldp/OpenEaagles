@@ -7,8 +7,8 @@
 #include "openeaagles/basic/osg/Math"
 #include "openeaagles/basic/SlotTable.h"  
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 //////////////////////////////////////////////////////////////////////
 // Area()
@@ -315,5 +315,5 @@ DecibelSquareMeters::DecibelSquareMeters(const Area& value) : Area()
 EMPTY_COPYDATA(DecibelSquareMeters)
 EMPTY_DELETEDATA(DecibelSquareMeters)
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace

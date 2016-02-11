@@ -4,8 +4,8 @@
 
 #include "openeaagles/basic/List.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 //==============================================================================
 // Class Emission
@@ -136,6 +136,6 @@ void IrQueryMsg::clear()
    BaseClass::clear();
 }
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 

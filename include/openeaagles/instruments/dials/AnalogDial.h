@@ -10,13 +10,13 @@
 //      UPDATE_INSTRUMENTS -> (from instrument), sets our rotation angle
 //      UPDATE_VALUE -> setRadius (inches)
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_AnalogDial_H__
-#define __Eaagles_Instruments_AnalogDial_H__
+#ifndef __oe_instruments_AnalogDial_H__
+#define __oe_instruments_AnalogDial_H__
 
 #include "openeaagles/instruments/Instrument.h"
 
-namespace Eaagles {
-namespace Instruments {
+namespace oe {
+namespace instruments {
 
 class AnalogDial : public Instrument
 {
@@ -40,17 +40,17 @@ public:
 
     void drawFunc() override;
 
-    bool event(const int event, Basic::Object* const obj = nullptr) override;
+    bool event(const int event, basic::Object* const obj = nullptr) override;
 
 protected:
     // slot functions
-    bool setSlotOriginAngle(const Basic::Number* const newAngle);
-    bool setSlotMobile(const Basic::Number* const newM);
-    bool setSlotSweepAngle(const Basic::Number* const newSweepAngle);
-    bool setSlotRadius(const Basic::Number* const newR);
-    bool setSlotSlices(const Basic::Number* const x);
+    bool setSlotOriginAngle(const basic::Number* const newAngle);
+    bool setSlotMobile(const basic::Number* const newM);
+    bool setSlotSweepAngle(const basic::Number* const newSweepAngle);
+    bool setSlotRadius(const basic::Number* const newR);
+    bool setSlotSlices(const basic::Number* const x);
     // event function
-    virtual bool onUpdateRadius(const Basic::Number* const x);
+    virtual bool onUpdateRadius(const basic::Number* const x);
 
 private:
     LCreal originAngle;             // angle we start drawing ticks from (degrees, default is 0)
@@ -61,7 +61,7 @@ private:
     int slices;                     // number of slices to use while drawing
 };
 
-}  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end instruments namespace
+}  // end oe namespace
 
 #endif

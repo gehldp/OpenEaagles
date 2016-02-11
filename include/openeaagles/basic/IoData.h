@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: IoData
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_IoData_H__
-#define __Eaagles_Basic_IoData_H__
+#ifndef __oe_basic_IoData_H__
+#define __oe_basic_IoData_H__
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class:  IoData
@@ -18,7 +18,7 @@ namespace Basic {
 //    specific I/O items that are independent of the actual I/O device channels.
 //    Derived classes will handle the application specific details.
 //
-//    For a standard I/O data buffer, see "openeaagles/ioDevice/IoData.h".
+//    For a standard I/O data buffer, see "openeaagles/iodevice/IoData.h".
 //
 //    The main input and output data buffers are typically managed by an I/O
 //    handler class (see IoHander.h).
@@ -99,7 +99,7 @@ public:
    virtual void clear();
 };
 
-} // end Basic namespace
-} // end Eaagles namespace
+} // end basic namespace
+} // end oe namespace
 
 #endif

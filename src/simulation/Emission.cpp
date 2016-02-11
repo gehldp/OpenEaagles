@@ -6,8 +6,8 @@
 
 #include <cmath>
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 //==============================================================================
 // Class Emission
@@ -116,5 +116,5 @@ void Emission::setTransmitter(RfSystem* const t)
    //}
 }
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace

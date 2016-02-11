@@ -136,13 +136,11 @@
     private: static const unsigned int classIndex;                                                    \
     protected: static const _Static* getStatic();                                                     \
     public: static const char* getFactoryName();                                                      \
-    public: static const char* getFormName();                                                         \
     public: virtual bool isFactoryName(const char name[]) const;                                      \
-    public: virtual bool isFormName(const char name[]) const;                                         \
-    protected: virtual bool setSlotByIndex(const int slotindex, Eaagles::Basic::Object* const obj);   \
-    protected: virtual Eaagles::Basic::Object* getSlotByIndex(const int slotindex);                   \
-    public: static const Eaagles::Basic::SlotTable& getSlotTable();                                   \
-    protected: static const Eaagles::Basic::SlotTable slottable;                                      \
+    protected: virtual bool setSlotByIndex(const int slotindex, ::oe::basic::Object* const obj);      \
+    protected: virtual ::oe::basic::Object* getSlotByIndex(const int slotindex);                      \
+    public: static const ::oe::basic::SlotTable& getSlotTable();                                      \
+    protected: static const ::oe::basic::SlotTable slottable;                                         \
     private: static const char* slotnames[];                                                          \
     private: static const int nslots;                                                                 \
     public: virtual std::ostream&                                                                     \
@@ -157,21 +155,14 @@
         &ThisType::slottable, BaseClass::getStatic()                                   \
     );                                                                                 \
     const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
-    const char* ThisType::getFormName() { return _static.fname; }                      \
     const char* ThisType::getFactoryName() { return _static.fname; }                   \
-    bool ThisType::isFormName(const char name[]) const                                 \
-    {                                                                                  \
-        if (name == 0) return false;                                                   \
-        if ( std::strcmp(_static.fname,name) == 0 )  return true;                      \
-        else return ThisType::BaseClass::isFormName(name);                             \
-    }                                                                                  \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
         if (name == 0) return false;                                                   \
         if ( std::strcmp(_static.fname,name) == 0 )  return true;                      \
         else return ThisType::BaseClass::isFactoryName(name);                          \
     }                                                                                  \
-    const Eaagles::Basic::SlotTable& ThisType::getSlotTable()  { return slottable; }   \
+    const ::oe::basic::SlotTable& ThisType::getSlotTable()  { return slottable; }      \
     bool ThisType::isClassType(const std::type_info& type) const                       \
     {                                                                                  \
         if ( type == typeid(ThisType) ) return true;                                   \
@@ -203,21 +194,14 @@
         &ThisType::slottable, BaseClass::getStatic()                                   \
     );                                                                                 \
     const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
-    const char* ThisType::getFormName() { return _static.fname; }                      \
     const char* ThisType::getFactoryName() { return _static.fname; }                   \
-    bool ThisType::isFormName(const char name[]) const                                 \
-    {                                                                                  \
-        if (name == 0) return false;                                                   \
-        if ( std::strcmp(_static.fname,name) == 0 )  return true;                      \
-        else return ThisType::BaseClass::isFormName(name);                             \
-    }                                                                                  \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
         if (name == 0) return false;                                                   \
         if ( std::strcmp(_static.fname,name) == 0 )  return true;                      \
         else return ThisType::BaseClass::isFactoryName(name);                          \
     }                                                                                  \
-    const Eaagles::Basic::SlotTable& ThisType::getSlotTable() { return slottable; }    \
+    const ::oe::basic::SlotTable& ThisType::getSlotTable() { return slottable; }       \
     bool ThisType::isClassType(const std::type_info& type) const                       \
     {                                                                                  \
         if ( type == typeid(ThisType) ) return true;                                   \
@@ -232,21 +216,14 @@
         &ThisType::slottable, BaseClass::getStatic()                                   \
     );                                                                                 \
     const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
-    const char* ThisType::getFormName() { return _static.fname; }                      \
     const char* ThisType::getFactoryName() { return _static.fname; }                   \
-    bool ThisType::isFormName(const char name[]) const                                 \
-    {                                                                                  \
-        if (name == 0) return false;                                                   \
-        if ( std::strcmp(_static.fname,name) == 0 )  return true;                      \
-        else return ThisType::BaseClass::isFormName(name);                             \
-    }                                                                                  \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
         if (name == 0) return false;                                                   \
         if ( std::strcmp(_static.fname,name) == 0 )  return true;                      \
         else return ThisType::BaseClass::isFactoryName(name);                          \
     }                                                                                  \
-    const Eaagles::Basic::SlotTable& ThisType::getSlotTable() { return slottable; }    \
+    const ::oe::basic::SlotTable& ThisType::getSlotTable() { return slottable; }       \
     bool ThisType::isClassType(const std::type_info& type) const                       \
     {                                                                                  \
         if ( type == typeid(ThisType) ) return true;                                   \
@@ -288,12 +265,12 @@
 #define EMPTY_SLOTTABLE(ThisType)                                                          \
     const char* ThisType::slotnames[] = { "" };                                            \
     const int ThisType::nslots = 0;                                                        \
-    const Eaagles::Basic::SlotTable ThisType::slottable(0, 0, BaseClass::getSlotTable());  \
-    bool ThisType::setSlotByIndex(const int si, Eaagles::Basic::Object* const obj)         \
+    const ::oe::basic::SlotTable ThisType::slottable(0, 0, BaseClass::getSlotTable());     \
+    bool ThisType::setSlotByIndex(const int si, ::oe::basic::Object* const obj)            \
     {                                                                                      \
         return BaseClass::setSlotByIndex(si,obj);                                          \
     }                                                                                      \
-    Eaagles::Basic::Object* ThisType::getSlotByIndex(const int si)                         \
+    ::oe::basic::Object* ThisType::getSlotByIndex(const int si)                            \
     {                                                                                      \
         return BaseClass::getSlotByIndex(si);                                              \
     }
@@ -357,13 +334,13 @@
 #define END_SLOTTABLE(ThisType)                                                                \
     };                                                                                         \
     const int ThisType::nslots = (sizeof(slotnames)/sizeof(char*));                            \
-    const Eaagles::Basic::SlotTable ThisType::slottable(ThisType::slotnames, ThisType::nslots, \
+    const ::oe::basic::SlotTable ThisType::slottable(ThisType::slotnames, ThisType::nslots,    \
                                                ThisType::BaseClass::getSlotTable());
 
 
 
 #define BEGIN_SLOT_MAP(ThisType)                                                           \
-    bool ThisType::setSlotByIndex(const int slotindex, Eaagles::Basic::Object* const obj)  \
+    bool ThisType::setSlotByIndex(const int slotindex, ::oe::basic::Object* const obj)     \
     {                                                                                      \
         const int _n = BaseClass::getSlotTable().n();                                      \
         if (slotindex <= _n) {                                                             \
@@ -391,7 +368,7 @@
 
 
 #define BEGIN_EVENT_HANDLER(ThisType)                                                  \
-    bool ThisType::event(const int _event, Eaagles::Basic::Object* const _obj)         \
+    bool ThisType::event(const int _event, ::oe::basic::Object* const _obj)            \
     {                                                                                  \
         bool _used = false;
 

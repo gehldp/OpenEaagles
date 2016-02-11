@@ -5,8 +5,8 @@
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/SensorMsg.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 //==============================================================================
 // Class: Track
@@ -635,5 +635,5 @@ void IrTrack::clear()
    BaseClass::clear();
 }
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace

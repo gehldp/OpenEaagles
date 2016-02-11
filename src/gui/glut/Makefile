@@ -1,11 +1,10 @@
 #
 include ../../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboeGlut.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboeglut.a
 
 OBJS =  \
-	$(LIB)(Factory.o) \
-	$(LIB)(glutFF.o) \
+	$(LIB)(factory.o) \
 	$(LIB)(GlutDisplay.o) \
 	$(LIB)(Shapes3D.o)
 

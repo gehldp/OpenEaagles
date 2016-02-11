@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Classes:  Add, Subtract, Multiply, Divide
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Operators_H__
-#define __Eaagles_Basic_Operators_H__
+#ifndef __oe_basic_Operators_H__
+#define __oe_basic_Operators_H__
 
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class:  Add
@@ -116,7 +116,7 @@ public:
     void operation() override;
 };
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 
 #endif

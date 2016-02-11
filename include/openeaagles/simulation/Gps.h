@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Gps
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Gps_H__
-#define __Eaagles_Simulation_Gps_H__
+#ifndef __oe_simulation_Gps_H__
+#define __oe_simulation_Gps_H__
 
 #include "openeaagles/simulation/Navigation.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Classes:     Gps
@@ -95,7 +95,7 @@ private:
    double   cryptoKeys[2][MAX_CRYPTO_KEYS]; // Crypto Variables
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

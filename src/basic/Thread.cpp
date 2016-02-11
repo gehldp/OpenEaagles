@@ -5,8 +5,8 @@
 #include "openeaagles/basic/Thread.h"
 #include "openeaagles/basic/Component.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Window/Linux specific code
@@ -384,6 +384,6 @@ bool ThreadPeriodicTask::setVariableDeltaTimeFlag(const bool enable)
    return true;
 }
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 

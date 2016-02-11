@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: DynamicsModel
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_DynamicsModel_H__
-#define __Eaagles_Simulation_DynamicsModel_H__
+#ifndef __oe_simulation_DynamicsModel_H__
+#define __oe_simulation_DynamicsModel_H__
 
 #include "openeaagles/basic/Component.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 //==============================================================================
 // Class DynamicsModel
@@ -33,9 +33,9 @@ namespace Simulation {
 // Factory name: DynamicsModel
 //
 //==============================================================================
-class DynamicsModel : public Basic::Component
+class DynamicsModel : public basic::Component
 {
-    DECLARE_SUBCLASS(DynamicsModel, Basic::Component)
+    DECLARE_SUBCLASS(DynamicsModel, basic::Component)
 
 public:
     DynamicsModel();
@@ -106,7 +106,7 @@ public:
     virtual bool setFuelWt(const LCreal lbs);
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

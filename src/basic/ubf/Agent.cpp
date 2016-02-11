@@ -10,9 +10,9 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/String.h"
 
-namespace Eaagles {
-namespace Basic {
-namespace Ubf {
+namespace oe {
+namespace basic {
+namespace ubf {
 
 //
 // Class: Agent
@@ -104,7 +104,7 @@ void Agent::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 void Agent::controller(const LCreal dt)
 {
-   Basic::Component* actor = getActor();
+   basic::Component* actor = getActor();
 
    if ( (actor!=nullptr) && (getState()!=nullptr) && (getBehavior()!=nullptr) ) {
 
@@ -148,7 +148,7 @@ void Agent::setState(State* const x)
    state = x;
    state->ref();
    state->container(this);
-   Basic::Pair* p = new Basic::Pair("", state);
+   basic::Pair* p = new basic::Pair("", state);
    addComponent(p);
    p->unref();
 }
@@ -196,7 +196,7 @@ bool Agent::setSlotBehavior(Behavior* const x)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* Agent::getSlotByIndex(const int si)
+basic::Object* Agent::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
@@ -230,7 +230,7 @@ void AgentTC::updateData(const LCreal dt)
 {
 }
 
-} // End Ubf namespace
-} // End Basic namespace
-} // End Eaagles namespace
+} // End ubf namespace
+} // End basic namespace
+} // End oe namespace
 

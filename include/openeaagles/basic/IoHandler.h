@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: IoHandler
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_IoHandler_H__
-#define __Eaagles_Basic_IoHandler_H__
+#ifndef __oe_basic_IoHandler_H__
+#define __oe_basic_IoHandler_H__
 
 #include "openeaagles/basic/Component.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
    class Frequency;
    class IoData;
    class Number;
@@ -29,7 +29,7 @@ namespace Basic {
 //    handlers will contain a number of I/O adapters that control the flow of
 //    data between a device handler and an I/O data buffer (see IoAdapter.h).
 //
-//    For an example, see the OpenEaagles example 'testIo'.
+//    For an example, see the Openoe example 'testIo'.
 //
 //
 // Notes:
@@ -119,10 +119,10 @@ private:
 
    LCreal rate;               // Thread Rate (hz)
    LCreal pri;                // Priority of the thread (0->lowest, 1->highest)
-   safe_ptr<Basic::Thread> thread; // The thread
+   safe_ptr<basic::Thread> thread; // The thread
 };
 
-} // end Basic
-} // end Eaagles namespace
+} // end basic
+} // end oe namespace
 
 #endif

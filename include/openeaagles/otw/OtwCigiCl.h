@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: OtwCigiCl, CigiCl, CigiClNetwork, OtwModelCigiCl
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Otw_OtwCigiCl_H__
-#define __Eaagles_Otw_OtwCigiCl_H__
+#ifndef __oe_otw_OtwCigiCl_H__
+#define __oe_otw_OtwCigiCl_H__
 
 class CigiEntityCtrlV3;
 class CigiCompCtrlV3;
@@ -26,14 +26,14 @@ class CigiOutgoingMsg;
 
 #include "openeaagles/simulation/Otw.h"
 
-namespace Eaagles {
+namespace oe {
 
-   namespace Basic {
+   namespace basic {
       class NetHandler;
       class Thread;
    }
 
-   namespace Simulation {
+   namespace simulation {
       class AirVehicle;
       class Building;
       class Effects;
@@ -46,7 +46,7 @@ namespace Eaagles {
       class Weapon;
    }
 
-namespace Otw {
+namespace otw {
 
 class CigiCl;
 class OtwModelCigiCl;
@@ -75,9 +75,9 @@ class CigiClNetworkSignalProcessing;
 // startOfFrame() callback (i.e., sync'd with the IG).
 //
 //------------------------------------------------------------------------------
-class OtwCigiCl : public Simulation::Otw
+class OtwCigiCl : public simulation::Otw
 {
-   DECLARE_SUBCLASS(OtwCigiCl, Simulation::Otw)
+   DECLARE_SUBCLASS(OtwCigiCl, simulation::Otw)
 
 public:
    static const unsigned int NUM_BUFFERS = 2;
@@ -133,14 +133,14 @@ public:
 
    // Set Slot functions
    virtual bool setSlotCigi(CigiCl* const msg);
-   virtual bool setSlotASyncMode(const Basic::Number* const msg);
-   virtual bool setSlotHideOwnshipModel(const Basic::Number* const msg);
-   virtual bool setSlotOwnshipModel(const Basic::Number* const msg);
-   virtual bool setSlotMslTrailModel(const Basic::Number* const msg);
-   virtual bool setSlotSmokePlumeModel(const Basic::Number* const msg);
-   virtual bool setSlotAirExplosionModel(const Basic::Number* const msg);
-   virtual bool setSlotGroundExplosionModel(const Basic::Number* const msg);
-   virtual bool setSlotShipWakeModel(const Basic::Number* const msg);
+   virtual bool setSlotASyncMode(const basic::Number* const msg);
+   virtual bool setSlotHideOwnshipModel(const basic::Number* const msg);
+   virtual bool setSlotOwnshipModel(const basic::Number* const msg);
+   virtual bool setSlotMslTrailModel(const basic::Number* const msg);
+   virtual bool setSlotSmokePlumeModel(const basic::Number* const msg);
+   virtual bool setSlotAirExplosionModel(const basic::Number* const msg);
+   virtual bool setSlotGroundExplosionModel(const basic::Number* const msg);
+   virtual bool setSlotShipWakeModel(const basic::Number* const msg);
 
    void updateData(const LCreal dt = 0.0) override;
    void reset() override;
@@ -207,22 +207,22 @@ protected:
    void sendElevationRequests() override;   // Sends terrain height requests
    void recvElevations() override;          // Receives terrain height data
    void frameSync() override;               // Send frame sync (if any)
-   Simulation::OtwModel* modelFactory() override;       // Create OtwModel objects unique to interface
-   Simulation::OtwModel* hotFactory() override;         // Create OtwHot objects unique to interface
+   simulation::OtwModel* modelFactory() override;       // Create OtwModel objects unique to interface
+   simulation::OtwModel* hotFactory() override;         // Create OtwHot objects unique to interface
 
-   virtual bool setAirVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::AirVehicle* const p);
-   virtual bool setBuildingData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::Building* const p);
-   virtual bool setEffectsData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::Effects* const p);
-   virtual bool setGndVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::GroundVehicle* const p);
-   virtual bool setLifeFormData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::LifeForm* const p);
-   virtual bool setMissileData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::Missile* const p);
-   virtual bool setShipData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::Ship* const p);
-   virtual bool setSpaceVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::SpaceVehicle* const p);
-   virtual bool setWeaponData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::Weapon* const p);
-   virtual bool setCommonModelData(CigiEntityCtrlV3* const ec, const unsigned short entity, const Simulation::Player* const p);
+   virtual bool setAirVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const simulation::AirVehicle* const p);
+   virtual bool setBuildingData(OtwModelCigiCl* const m, const unsigned short entity, const simulation::Building* const p);
+   virtual bool setEffectsData(OtwModelCigiCl* const m, const unsigned short entity, const simulation::Effects* const p);
+   virtual bool setGndVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const simulation::GroundVehicle* const p);
+   virtual bool setLifeFormData(OtwModelCigiCl* const m, const unsigned short entity, const simulation::LifeForm* const p);
+   virtual bool setMissileData(OtwModelCigiCl* const m, const unsigned short entity, const simulation::Missile* const p);
+   virtual bool setShipData(OtwModelCigiCl* const m, const unsigned short entity, const simulation::Ship* const p);
+   virtual bool setSpaceVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const simulation::SpaceVehicle* const p);
+   virtual bool setWeaponData(OtwModelCigiCl* const m, const unsigned short entity, const simulation::Weapon* const p);
+   virtual bool setCommonModelData(CigiEntityCtrlV3* const ec, const unsigned short entity, const simulation::Player* const p);
 
 private:
-   Basic::safe_ptr<CigiCl> cigi;         // CIGI handler (direct, networked, ...)
+   basic::safe_ptr<CigiCl> cigi;         // CIGI handler (direct, networked, ...)
    bool   asyncMode;                     // Running in ASYNC mode if true
    bool   hideOwn;                       // Hide ownship model flag
 
@@ -278,9 +278,9 @@ private:
 //
 // Factory name: CigiCl
 //------------------------------------------------------------------------------
-class CigiCl : public Basic::Component
+class CigiCl : public basic::Component
 {
-   DECLARE_SUBCLASS(CigiCl, Basic::Component)
+   DECLARE_SUBCLASS(CigiCl, basic::Component)
 
 public:
    CigiCl();
@@ -341,7 +341,7 @@ private:
 
 //------------------------------------------------------------------------------
 // Class: CigiClNetwork
-// Base class: Basic::Object -> CigiCl -> CigiClNetwork
+// Base class: basic::Object -> CigiCl -> CigiClNetwork
 //
 // Description: Networked CIGI interface to the IG system
 //
@@ -358,14 +358,14 @@ public:
    CigiClNetwork();
 
    // get a pre-ref'd pointer to the network input handler
-   virtual Basic::NetHandler* getInputHandler();
+   virtual basic::NetHandler* getInputHandler();
 
    // get a pre-ref'd pointer to the network output handler
-   virtual Basic::NetHandler* getOutputHandler();
+   virtual basic::NetHandler* getOutputHandler();
 
    // Set Slot functions
-   virtual bool setSlotNetInput(Basic::NetHandler* const msg);
-   virtual bool setSlotNetOutput(Basic::NetHandler* const msg);
+   virtual bool setSlotNetInput(basic::NetHandler* const msg);
+   virtual bool setSlotNetOutput(basic::NetHandler* const msg);
 
    // CIGI's (sync-mode) main network loop
    virtual void mainLoop();
@@ -391,9 +391,9 @@ protected:
    bool initCigiNetwork();          // Initialize the network
 
 private:
-   Basic::safe_ptr<Basic::NetHandler>  netInput;    // Input network handler
-   Basic::safe_ptr<Basic::NetHandler>  netOutput;   // Output network handler
-   Basic::safe_ptr<Basic::Thread>      thread;      // The thread
+   basic::safe_ptr<basic::NetHandler>  netInput;    // Input network handler
+   basic::safe_ptr<basic::NetHandler>  netOutput;   // Output network handler
+   basic::safe_ptr<basic::Thread>      thread;      // The thread
    bool networkInitialized;               // CIGI has been initialized
    bool networkInitFailed;                // CIGI initialization has failed
 
@@ -404,19 +404,19 @@ private:
 
 //------------------------------------------------------------------------------
 // Class: OtwModelCigiCl
-// Base class: Basic::Object -> OtwModel -> OtwModelCigiCl
+// Base class: basic::Object -> OtwModel -> OtwModelCigiCl
 // Description: CIGI OTW model
 //------------------------------------------------------------------------------
-class OtwModelCigiCl : public Simulation::OtwModel
+class OtwModelCigiCl : public simulation::OtwModel
 {
-   DECLARE_SUBCLASS(OtwModelCigiCl,Simulation::OtwModel)
+   DECLARE_SUBCLASS(OtwModelCigiCl,simulation::OtwModel)
 
 public:
    OtwModelCigiCl();
 
    void clear() override;
 
-   virtual void initialize(Simulation::Player* const p);
+   virtual void initialize(simulation::Player* const p);
 
    unsigned short getID() const          { return id; }
    void setID(const unsigned short i)    { id = i; }
@@ -450,7 +450,7 @@ private:
    unsigned short id;
 };
 
-} // End Otw namespace
-} // End Eaagles namespace
+} // End otw namespace
+} // End oe namespace
 
 #endif

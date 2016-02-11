@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Hsv
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Hsv_H__
-#define __Eaagles_Basic_Hsv_H__
+#ifndef __oe_basic_Hsv_H__
+#define __oe_basic_Hsv_H__
 
 #include "openeaagles/basic/Color.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class:  Hsv
@@ -118,7 +118,7 @@ protected:
     osg::Vec4 hsv;
 };
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 
 #endif

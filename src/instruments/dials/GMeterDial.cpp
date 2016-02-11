@@ -2,8 +2,8 @@
 
 #include "openeaagles/basic/PairStream.h"
 
-namespace Eaagles {
-namespace Instruments {
+namespace oe {
+namespace instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(GMeterDial,"GMeterDial")
 EMPTY_SERIALIZER(GMeterDial)
@@ -60,7 +60,7 @@ void GMeterDial::reset()
 //------------------------------------------------------------------------------
 void GMeterDial::drawFunc()
 {
-   Basic::PairStream* subcomponents = getComponents();
+   basic::PairStream* subcomponents = getComponents();
    if (subcomponents != nullptr) {
       subcomponents->unref();
       subcomponents = nullptr;
@@ -125,7 +125,7 @@ void GMeterDial::updateData(const LCreal dt)
     // update our values here
 
     {
-       Basic::PairStream* subcomponents = getComponents();
+       basic::PairStream* subcomponents = getComponents();
        if (subcomponents == nullptr) return;
        subcomponents->unref();
        subcomponents = nullptr;
@@ -145,4 +145,4 @@ void GMeterDial::updateData(const LCreal dt)
 }
 
 }  // end of Instruments namespace
-}  // end of Eaagles namespace
+}  // end of oe namespace

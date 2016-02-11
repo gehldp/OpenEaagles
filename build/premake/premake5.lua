@@ -6,6 +6,7 @@
 --     vs2010     (Visual Studio 2010)
 --     vs2012     (Visual Studio 2012)
 --     vs2013     (Visual Studio 2013)
+--     vs2015     (Visual Studio 2015)
 --     codeblocks (Code::Blocks)
 --     codelite   (CodeLite)
 --
@@ -31,7 +32,7 @@ OE3rdPartyIncPath = OE_3RD_PARTY_ROOT.."/include"
 -- compiled libraries
 --
 locationPath  = "../" .. _ACTION
-if (_ACTION == "vs2010") or (_ACTION == "vs2012") or (_ACTION == "vs2013") then
+if (_ACTION == "vs2010") or (_ACTION == "vs2012") or (_ACTION == "vs2013") or (_ACTION == "vs2015") then
   targetDirPath = "../../lib/".._ACTION
 end
 if (_ACTION == "codelite") or (_ACTION == "codeblocks") then
@@ -75,7 +76,7 @@ solution "oe"
    -- common release configuration flags and symbols
    configuration { "Release" }
       flags { "Optimize" }
-      if (_ACTION == "vs2010") or (_ACTION == "vs2012") or (_ACTION == "vs2013") then
+      if (_ACTION == "vs2010") or (_ACTION == "vs2012") or (_ACTION == "vs2013") or (_ACTION == "vs2015") then
          -- enable compiler intrinsics and favour speed over size
          buildoptions { "/Oi", "/Ot" }
          defines { "WIN32", "_LIB", "NDEBUG" }
@@ -88,7 +89,7 @@ solution "oe"
    configuration { "Debug" }
       targetsuffix "_d"
       flags { "Symbols" }
-      if (_ACTION == "vs2010") or (_ACTION == "vs2012") or (_ACTION == "vs2013") then
+      if (_ACTION == "vs2010") or (_ACTION == "vs2012") or (_ACTION == "vs2013") or (_ACTION == "vs2015") then
          -- enable compiler intrinsics
          buildoptions { "/Oi" }
          defines { "WIN32", "_LIB", "_DEBUG" }
@@ -114,25 +115,25 @@ solution "oe"
          "../../src/basic/osg/Matrix_implementation.cpp",
          "../../src/basic/linux/**.*"
       }
-      targetname "Basic"
+      targetname "basic"
 
-   -- basic OpenGL library
-   project "basicGL"
+   -- OpenGL-based graphics library
+   project "graphics"
       files {
-         "../../include/openeaagles/basicGL/**.h",
-         "../../src/basicGL/**.cpp"
+         "../../include/openeaagles/graphics/**.h",
+         "../../src/graphics/**.cpp"
       }
       includedirs { OE3rdPartyIncPath.."/freetype2" }
       defines { "FTGL_LIBRARY_STATIC" }
-      targetname "BasicGL"
+      targetname "graphics"
 
-   -- GLUT OpenGL interface library
-   project "gui-glut"
+   -- OpenGL GLUT interface library
+   project "glut"
       files {
          "../../include/openeaagles/gui/glut/**.h",
          "../../src/gui/glut/**.cpp"
       }
-      targetname "Glut"
+      targetname "glut"
 
    -- DAFIF airport loader library
    project "dafif"
@@ -140,7 +141,7 @@ solution "oe"
          "../../include/openeaagles/dafif/**.h",
          "../../src/dafif/**.cpp"
       }
-      targetname "Dafif"
+      targetname "dafif"
 
    -- IEEE DIS interface library
    project "dis"
@@ -148,16 +149,7 @@ solution "oe"
          "../../include/openeaagles/dis/**.h",
          "../../src/dis/**.cpp"
       }
-      targetname "Dis"
-
-   -- dynamics library
-   project "dynamics"
-      files {
-         "../../include/openeaagles/dynamics/**.h",
-         "../../src/dynamics/**.cpp"
-      }
-      includedirs { OE3rdPartyIncPath.."/JSBSim" }
-      targetname "Dynamics"
+      targetname "dis"
 
    -- graphical instruments library
    project "instruments"
@@ -166,28 +158,28 @@ solution "oe"
          "../../include/openeaagles/instruments/**.epp",
          "../../src/instruments/**.cpp"
       }
-      targetname "Instruments"
+      targetname "instruments"
 
    -- i/o device library
-   project "ioDevice"
+   project "iodevice"
       files {
-         "../../include/openeaagles/ioDevice/**.h",
-         "../../src/ioDevice/**.cpp"
+         "../../include/openeaagles/iodevice/**.h",
+         "../../src/iodevice/**.cpp"
       }
       if (os.is("linux")) then
-         excludes { "../../src/ioDevice/windows/*" }
+         excludes { "../../src/iodevice/windows/*" }
       else
-         excludes { "../../src/ioDevice/linux/*"   }
+         excludes { "../../src/iodevice/linux/*"   }
       end
-      targetname "IoDevice"
+      targetname "iodevice"
 
    -- linear systems library
-   project "linearSys"
+   project "linearsystem"
       files {
-         "../../include/openeaagles/linearSys/**.h",
-         "../../src/linearSys/**.cpp"
+         "../../include/openeaagles/linearsystem/**.h",
+         "../../src/linearsystem/**.cpp"
       }
-      targetname "LinearSys"
+      targetname "linearsystem"
 
    -- maps library
    project "maps"
@@ -195,7 +187,16 @@ solution "oe"
          "../../include/openeaagles/maps/**.h",
          "../../src/maps/**.cpp"
       }
-      targetname "Maps"
+      targetname "maps"
+
+   -- models library
+   project "models"
+      files {
+         "../../include/openeaagles/models/**.h",
+         "../../src/models/**.cpp"
+      }
+      includedirs { OE3rdPartyIncPath.."/JSBSim" }
+      targetname "models"
 
    -- otw library
    project "otw"
@@ -208,7 +209,7 @@ solution "oe"
          "../../include/openeaagles/otw/OtwCigiClV2.h",
          "../../src/otw/OtwCigiClV2.cpp"
       }
-      targetname "Otw"
+      targetname "otw"
 
    project "recorder"
       files {
@@ -219,15 +220,7 @@ solution "oe"
          "../../src/recorder/**.cc"
       }
       defines { "_SCL_SECURE_NO_WARNINGS" } -- suppress protocol buffer warning
-      targetname "Recorder"
-
-   -- sensors library
-   project "sensors"
-      files {
-         "../../include/openeaagles/sensors/**.h",
-         "../../src/sensors/**.cpp"
-      }
-      targetname "Sensors"
+      targetname "recorder"
 
    -- simulation library
    project "simulation"
@@ -236,7 +229,7 @@ solution "oe"
          "../../include/openeaagles/simulation/*.inl",
          "../../src/simulation/**.cpp"
       }
-      targetname "Simulation"
+      targetname "simulation"
 
    -- terrain library
    project "terrain"
@@ -244,6 +237,6 @@ solution "oe"
          "../../include/openeaagles/terrain/**.h",
          "../../src/terrain/**.cpp"
       }
-      targetname "Terrain"
+      targetname "terrain"
 
 

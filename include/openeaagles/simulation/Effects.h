@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Classes: Effects, Chaff, Flare and Decoy
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Effects_H__
-#define __Eaagles_Simulation_Effects_H__
+#ifndef __oe_simulation_Effects_H__
+#define __oe_simulation_Effects_H__
 
 #include "openeaagles/simulation/Weapon.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Class: Effects
@@ -41,7 +41,7 @@ public:
     bool crashNotification() override;
 
 protected:
-   bool setSlotDragIndex(Basic::Number* const p);
+   bool setSlotDragIndex(basic::Number* const p);
 
    void weaponDynamics(const LCreal dt) override;
    void updateTOF(const LCreal dt) override;
@@ -101,7 +101,7 @@ public:
     int getCategory() const override;
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

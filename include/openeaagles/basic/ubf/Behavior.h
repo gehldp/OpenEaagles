@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: Behavior
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Ubf_Behavior_H__
-#define __Eaagles_Basic_Ubf_Behavior_H__
+#ifndef __oe_basic_ubf_Behavior_H__
+#define __oe_basic_ubf_Behavior_H__
 
 #include "openeaagles/basic/Component.h"
 
-namespace Eaagles {
-namespace Basic {
-namespace Ubf {
+namespace oe {
+namespace basic {
+namespace ubf {
 
 class State;
 class Action;
@@ -23,9 +23,9 @@ class Action;
 //    vote     <Number>    ! default vote/weight value for actions generated
 //                         ! by this behavior
 //------------------------------------------------------------------------------
-class Behavior : public Basic::Component
+class Behavior : public basic::Component
 {
-   DECLARE_SUBCLASS(Behavior, Basic::Component)
+   DECLARE_SUBCLASS(Behavior, basic::Component)
 
 public:
    Behavior();
@@ -37,7 +37,7 @@ protected:
    unsigned int getVote() const;
    virtual void setVote(const unsigned int x);
 
-   bool setSlotVote(const Basic::Number* const num);
+   bool setSlotVote(const basic::Number* const num);
 
 private:
    unsigned int vote;
@@ -47,8 +47,8 @@ inline void Behavior::setVote(const unsigned int x)    { vote = x; }
 inline unsigned int Behavior::getVote() const          { return vote; }
 
 
-} // End Ubf namespace
-} // End Basic namespace
-} // End Eaagles namespace
+} // End ubf namespace
+} // End basic namespace
+} // End oe namespace
 
 #endif

@@ -3,8 +3,8 @@
 #include "openeaagles/basic/units/Angles.h"
 #include <iostream>
 
-namespace Eaagles {
-namespace Dafif {
+namespace oe {
+namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Navaid,"Navaid")
 EMPTY_SERIALIZER(Navaid)
@@ -153,11 +153,11 @@ void Navaid::printRecord(std::ostream& sout) const
 void Navaid::printTrueBearingRange(std::ostream& sout, const double aclat, const double aclon, const double acelev) const
 {
    double bearing(0.0), range(0.0), grdrange(0.0);
-   Basic::Nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &range, &grdrange);
+   basic::Nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &range, &grdrange);
 
    sout << "     range " << range << "  grdrange " << grdrange << " true_bearing " << bearing << std::endl;
 }
 
 
-} // End Dafif namespace
-} // End Eaagles namespace
+} // End dafif namespace
+} // End oe namespace

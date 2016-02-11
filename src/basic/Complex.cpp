@@ -9,8 +9,8 @@
 #include <iomanip>
 #include <cmath>
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 IMPLEMENT_SUBCLASS(Complex,"Complex")
 EMPTY_DELETEDATA(Complex)
@@ -148,6 +148,6 @@ std::ostream& Complex::serialize(std::ostream& sout, const int i, const bool slo
     return sout;
 }
 
-}  // end namespace Basic
-}  // end namespace Eaagles
+}  // end namespace basic
+}  // end namespace oe
 

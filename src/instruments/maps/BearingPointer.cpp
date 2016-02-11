@@ -1,7 +1,7 @@
 #include "openeaagles/instruments/maps/BearingPointer.h"
 
-namespace Eaagles {
-namespace Instruments {
+namespace oe {
+namespace instruments {
 
 IMPLEMENT_SUBCLASS(BearingPointer, "BearingPointer")
 EMPTY_SERIALIZER(BearingPointer)
@@ -13,15 +13,15 @@ END_SLOTTABLE(BearingPointer)
 
 //  Map slot table to handles for Bearing Pointer
 BEGIN_SLOT_MAP(BearingPointer)
-    ON_SLOT(1, setSlotHeadGraphic, BasicGL::Graphic)
-    ON_SLOT(2, setSlotTailGraphic, BasicGL::Graphic)
+    ON_SLOT(1, setSlotHeadGraphic, graphics::Graphic)
+    ON_SLOT(2, setSlotTailGraphic, graphics::Graphic)
 END_SLOT_MAP()
 
 // Macro event handlers for Bearing Pointer events
 BEGIN_EVENT_HANDLER(BearingPointer)
-    ON_EVENT_OBJ(UPDATE_VALUE7,onUpdateRadBearingPointer, Basic::Angle)          // Sets bearing to this Basic::Angle
-    ON_EVENT_OBJ(UPDATE_VALUE7,onUpdateRadBearingPointer, Basic::Number)         // Sets bearing to this angle in radians
-    ON_EVENT_OBJ(UPDATE_VALUE8, onUpdateDegBearingPointer, Basic::Number)        // Sets bearing to this angle in degrees
+    ON_EVENT_OBJ(UPDATE_VALUE7,onUpdateRadBearingPointer, basic::Angle)          // Sets bearing to this basic::Angle
+    ON_EVENT_OBJ(UPDATE_VALUE7,onUpdateRadBearingPointer, basic::Number)         // Sets bearing to this angle in radians
+    ON_EVENT_OBJ(UPDATE_VALUE8, onUpdateDegBearingPointer, basic::Number)        // Sets bearing to this angle in degrees
 END_EVENT_HANDLER()
 
 //------------------------------------------------------------------------------
@@ -78,7 +78,7 @@ void BearingPointer::draw()
     lcSaveMatrix();
         if (!c) lcTranslate(0, dis);
         lcRotate(myRotation);
-        BasicGL::Graphic::draw();
+        graphics::Graphic::draw();
     lcRestoreMatrix();
 }
 
@@ -87,11 +87,11 @@ void BearingPointer::draw()
 //------------------------------------------------------------------------------
 //  onUpdateRadBearingPointer() - update bearing angle
 //------------------------------------------------------------------------------
-bool BearingPointer::onUpdateRadBearingPointer(const Basic::Angle* const msg)
+bool BearingPointer::onUpdateRadBearingPointer(const basic::Angle* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        setBearingRad( static_cast<LCreal>(Basic::Radians::convertStatic( *msg )) );
+        setBearingRad( static_cast<LCreal>(basic::Radians::convertStatic( *msg )) );
         ok = true;
     }
     return ok;
@@ -100,7 +100,7 @@ bool BearingPointer::onUpdateRadBearingPointer(const Basic::Angle* const msg)
 //------------------------------------------------------------------------------
 //  onUpdateRadBearingPointer() - update bearing angle by number
 //------------------------------------------------------------------------------
-bool BearingPointer::onUpdateRadBearingPointer(const Basic::Number* const msg)
+bool BearingPointer::onUpdateRadBearingPointer(const basic::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -113,7 +113,7 @@ bool BearingPointer::onUpdateRadBearingPointer(const Basic::Number* const msg)
 //------------------------------------------------------------------------------
 //  onUpdateDegBearingPointer() - update bearing angle (degrees)
 //------------------------------------------------------------------------------
-bool BearingPointer::onUpdateDegBearingPointer(const Basic::Number* const msg)
+bool BearingPointer::onUpdateDegBearingPointer(const basic::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -129,7 +129,7 @@ bool BearingPointer::onUpdateDegBearingPointer(const Basic::Number* const msg)
 //------------------------------------------------------------------------------
 bool BearingPointer::setBearingDeg(const LCreal newB)
 {
-    bearing = newB * static_cast<LCreal>(Basic::Angle::D2RCC);
+    bearing = newB * static_cast<LCreal>(basic::Angle::D2RCC);
     return true;
 }
 
@@ -212,7 +212,7 @@ void BearingPointer::updateData(const LCreal dt)
 
     // if we are over the max, rotate the other way
     LCreal dd0 = dbrg * dt;
-    LCreal maxdd0 = (90.0f * static_cast<LCreal>(Basic::Angle::D2RCC)) * dt;      // Limit to 90 degs/sec
+    LCreal maxdd0 = (90.0f * static_cast<LCreal>(basic::Angle::D2RCC)) * dt;      // Limit to 90 degs/sec
     if (dd0 < -maxdd0) dd0 = -maxdd0;
     if (dd0 > maxdd0) dd0 = maxdd0;
     bearing += dd0;
@@ -225,7 +225,7 @@ void BearingPointer::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // setSlotHeadGraphic() - sets the head graphic for the bearing pointer
 //------------------------------------------------------------------------------
-bool BearingPointer::setSlotHeadGraphic(const BasicGL::Graphic* const newH)
+bool BearingPointer::setSlotHeadGraphic(const graphics::Graphic* const newH)
 {
     bool ok = false;
     if (head != nullptr) {
@@ -241,7 +241,7 @@ bool BearingPointer::setSlotHeadGraphic(const BasicGL::Graphic* const newH)
 //------------------------------------------------------------------------------
 // setSlotTailGraphic() - sets the tail graphic for the bearing pointer
 //------------------------------------------------------------------------------
-bool BearingPointer::setSlotTailGraphic(const BasicGL::Graphic* const newT)
+bool BearingPointer::setSlotTailGraphic(const graphics::Graphic* const newT)
 {
     bool ok = false;
     if (tail != nullptr) {
@@ -258,10 +258,10 @@ bool BearingPointer::setSlotTailGraphic(const BasicGL::Graphic* const newT)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for BearingPointer
 //------------------------------------------------------------------------------
-Basic::Object* BearingPointer::getSlotByIndex(const int si)
+basic::Object* BearingPointer::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
 
-}  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end instruments namespace
+}  // end oe namespace

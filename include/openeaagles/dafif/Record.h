@@ -109,17 +109,17 @@
 //       set this variable to their own <class>::ptable.
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Dafif_Record_H__
-#define __Eaagles_Dafif_Record_H__
+#ifndef __oe_dafif_Record_H__
+#define __oe_dafif_Record_H__
 
 #include "openeaagles/basic/String.h"
 #include "dafifc.h"
 
-namespace Eaagles {
-namespace Dafif {
+namespace oe {
+namespace dafif {
 
-class Record : public Basic::String {
-    DECLARE_SUBCLASS(Record,Basic::String)
+class Record : public basic::String {
+    DECLARE_SUBCLASS(Record,basic::String)
 
 public:
    // record types
@@ -133,7 +133,7 @@ public:
    Record(const char* const s);
 
    void setRecord(const char* const s);
-   void setRecord(Basic::String* const s);
+   void setRecord(basic::String* const s);
 
    virtual void printRecord(std::ostream&) const    {}
 
@@ -230,7 +230,7 @@ protected:
    const Ptbl* ptbl;    // Position table; one for each instance
 };
 
-} // End Dafif namespace
-} // End Eaagles namespace
+} // End dafif namespace
+} // End oe namespace
 
 #endif

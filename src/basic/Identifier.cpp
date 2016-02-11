@@ -2,8 +2,8 @@
 #include "openeaagles/basic/Identifier.h"
 #include <cstring>
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 IMPLEMENT_SUBCLASS(Identifier,"Identifier")
 EMPTY_SLOTTABLE(Identifier)
@@ -98,5 +98,5 @@ std::ostream& Identifier::serialize(std::ostream& sout, const int, const bool) c
     return sout;
 }
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace

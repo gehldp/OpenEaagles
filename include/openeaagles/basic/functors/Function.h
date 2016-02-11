@@ -1,11 +1,11 @@
 
-#ifndef __Eaagles_Basic_Function_H__
-#define __Eaagles_Basic_Function_H__
+#ifndef __oe_basic_Function_H__
+#define __oe_basic_Function_H__
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 class FStorage;
 class List;
@@ -57,7 +57,7 @@ public:
    FStorage();
 };
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 
 #endif

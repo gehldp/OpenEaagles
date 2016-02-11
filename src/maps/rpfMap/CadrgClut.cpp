@@ -9,9 +9,9 @@
 
 #include <cstring>
 
-namespace Eaagles {
-namespace Maps {
-namespace Rpf {
+namespace oe {
+namespace maps {
+namespace rpf {
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
@@ -95,7 +95,7 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
     // Found lookup table flag
     bool foundLut = false;
     // Temporary filename
-    Basic::String* string = new Basic::String(frame.getDirectory());
+    basic::String* string = new basic::String(frame.getDirectory());
     string->catStr(frame.getFileName());
 
     #if defined(WIN32)
@@ -360,7 +360,7 @@ const CadrgClut::Rgb& CadrgClut::getColor(unsigned int index) const {
     }
 }
 
-} // end Rpf namespace
-} // end Maps namespace
-} // end Eaagles namespace
+} // end rpf namespace
+} // end maps namespace
+} // end oe namespace
 

@@ -7,9 +7,9 @@
 #include <cstdio>
 #include <cstring>
 
-namespace Eaagles {
-namespace Maps {
-namespace Rpf {
+namespace oe {
+namespace maps {
+namespace rpf {
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...+
@@ -171,7 +171,7 @@ bool CadrgTocEntry::isInZone(double lat, double lon)
     return ok;
 }
 
-} // End Rpf namespace
-} // End Maps namespace
-} // End Eaagles namespace
+} // End rpf namespace
+} // End maps namespace
+} // End oe namespace
 

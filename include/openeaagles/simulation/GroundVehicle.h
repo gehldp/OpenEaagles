@@ -5,18 +5,18 @@
 // Description: Generic Ground Vehicles
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_GroundVehicle_H__
-#define __Eaagles_Simulation_GroundVehicle_H__
+#ifndef __oe_simulation_GroundVehicle_H__
+#define __oe_simulation_GroundVehicle_H__
 
 #include "openeaagles/simulation/Player.h"
 
-namespace Eaagles {
-   namespace Basic {
+namespace oe {
+   namespace basic {
       class Distance;
       class Identifier;
       class Time;
    }
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class GroundVehicle
@@ -61,10 +61,10 @@ public:
     virtual bool setLauncherPosition(const LCreal rad);
 
     // Slot functions
-    virtual bool setSlotCommandedPosition(const Basic::Identifier* const msg);
-    virtual bool setSlotLauncherDownAngle(const Basic::Angle* const msg);
-    virtual bool setSlotLauncherUpAngle(const Basic::Angle* const msg);
-    virtual bool setSlotLauncherMoveTime(const Basic::Time* const msg);
+    virtual bool setSlotCommandedPosition(const basic::Identifier* const msg);
+    virtual bool setSlotLauncherDownAngle(const basic::Angle* const msg);
+    virtual bool setSlotLauncherUpAngle(const basic::Angle* const msg);
+    virtual bool setSlotLauncherMoveTime(const basic::Time* const msg);
 
     unsigned int getMajorType() const override;
 
@@ -173,7 +173,7 @@ public:
     GroundStationUav();
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

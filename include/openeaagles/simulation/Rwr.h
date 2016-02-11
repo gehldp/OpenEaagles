@@ -1,17 +1,17 @@
 //------------------------------------------------------------------------------
 // Class: Rwr
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Rwr_H__
-#define __Eaagles_Simulation_Rwr_H__
+#ifndef __oe_simulation_Rwr_H__
+#define __oe_simulation_Rwr_H__
 
 #include "openeaagles/simulation/RfSensor.h"
 #include "openeaagles/basic/safe_queue.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 //------------------------------------------------------------------------------
 // Class: Rwr
-// Base class: Basic::Object -> ... -> RfSystem -> RfSensor -> Rwr
+// Base class: basic::Object -> ... -> RfSystem -> RfSensor -> Rwr
 //
 // Description: General Radar Warning Receiver (RWR) Model
 // Factory name: Rwr
@@ -59,12 +59,12 @@ protected:
 private:
    void initData();
 
-   Basic::safe_queue<Emission*> rptQueue;   // Report queue
+   basic::safe_queue<Emission*> rptQueue;   // Report queue
 
    LCreal rays[2][NUM_RAYS];     // Back (sensor) buffer [0][*] and front (graphics) buffer [1][*]
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

@@ -5,8 +5,8 @@
 #include "openeaagles/basic/osg/Math"
 #include "openeaagles/basic/SlotTable.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 
 //==============================================================================
@@ -206,5 +206,5 @@ TeraHertz::TeraHertz(const Frequency& value) : Frequency()
 EMPTY_COPYDATA(TeraHertz)
 EMPTY_DELETEDATA(TeraHertz)
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace

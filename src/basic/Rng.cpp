@@ -2,8 +2,8 @@
 #include "openeaagles/basic/Rng.h"
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 IMPLEMENT_SUBCLASS(Rng,"Rng")
 EMPTY_SERIALIZER(Rng)

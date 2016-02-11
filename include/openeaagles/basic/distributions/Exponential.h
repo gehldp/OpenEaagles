@@ -1,11 +1,11 @@
 
-#ifndef __Eaagles_Basic_Exponential_H__
-#define __Eaagles_Basic_Exponential_H__
+#ifndef __oe_basic_Exponential_H__
+#define __oe_basic_Exponential_H__
 
 #include "../Rng.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 //====================================================================
 // Exponential
@@ -44,8 +44,8 @@ protected:
 
 };
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 
 #endif
 

@@ -1,8 +1,8 @@
 #include "openeaagles/instruments/gauges/TickMarks.h"
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
-namespace Instruments {
+namespace oe {
+namespace instruments {
 
 IMPLEMENT_SUBCLASS(TickMarks, "TickMarks")
 EMPTY_SERIALIZER(TickMarks)
@@ -19,11 +19,11 @@ END_SLOTTABLE(TickMarks)
 //  Map slot table to handles for Analog Dial
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(TickMarks)
-    ON_SLOT(1, setSlotTickMarkLength, Basic::Number)
-    ON_SLOT(2, setSlotQuantity, Basic::Number)
-    ON_SLOT(3, setSlotGaugeLength, Basic::Number)
-    ON_SLOT(4, setSlotFlip, Basic::Number)
-    ON_SLOT(5, setTickGraphic, BasicGL::Graphic)
+    ON_SLOT(1, setSlotTickMarkLength, basic::Number)
+    ON_SLOT(2, setSlotQuantity, basic::Number)
+    ON_SLOT(3, setSlotGaugeLength, basic::Number)
+    ON_SLOT(4, setSlotFlip, basic::Number)
+    ON_SLOT(5, setTickGraphic, graphics::Graphic)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -127,7 +127,7 @@ void TickMarks::drawFunc()
 //------------------------------------------------------------------------------
 // setSlotTickMarkLength() -- sets our tick mark length
 //------------------------------------------------------------------------------
-bool TickMarks::setSlotTickMarkLength(const Basic::Number* const newLength)
+bool TickMarks::setSlotTickMarkLength(const basic::Number* const newLength)
 {
     bool ok = true;
     if (newLength != nullptr) ok = setTickMarkLength(newLength->getReal());
@@ -136,7 +136,7 @@ bool TickMarks::setSlotTickMarkLength(const Basic::Number* const newLength)
 //------------------------------------------------------------------------------
 // setSlotQuantity() -- sets the number of tick marks
 //------------------------------------------------------------------------------
-bool TickMarks::setSlotQuantity(const Basic::Number* const newQ)
+bool TickMarks::setSlotQuantity(const basic::Number* const newQ)
 {
     bool ok = true;
     if (newQ != nullptr) ok = setQuantity(newQ->getInt());
@@ -145,7 +145,7 @@ bool TickMarks::setSlotQuantity(const Basic::Number* const newQ)
 //------------------------------------------------------------------------------
 // setSlotGaugeLength()
 //------------------------------------------------------------------------------
-bool TickMarks::setSlotGaugeLength(const Basic::Number* const newL)
+bool TickMarks::setSlotGaugeLength(const basic::Number* const newL)
 {
     bool ok = true;
     if (newL != nullptr) ok = setGaugeLength(newL->getReal());
@@ -154,7 +154,7 @@ bool TickMarks::setSlotGaugeLength(const Basic::Number* const newL)
 //------------------------------------------------------------------------------
 // setSlotFlit()
 //------------------------------------------------------------------------------
-bool TickMarks::setSlotFlip(const Basic::Number* const x)
+bool TickMarks::setSlotFlip(const basic::Number* const x)
 {
     bool ok = true;
     if (x != nullptr) ok = setFlip(x->getBoolean());
@@ -163,7 +163,7 @@ bool TickMarks::setSlotFlip(const Basic::Number* const x)
 //------------------------------------------------------------------------------
 // setTickGraphic() -- sets our graphic for using as tick marks
 //------------------------------------------------------------------------------
-bool TickMarks::setTickGraphic(const BasicGL::Graphic* const newGraphic)
+bool TickMarks::setTickGraphic(const graphics::Graphic* const newGraphic)
 {
     bool ok = true;
     if (myGraphic != nullptr) {
@@ -216,10 +216,10 @@ bool TickMarks::setFlip(const bool x)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for TickMarks
 //------------------------------------------------------------------------------
-Basic::Object* TickMarks::getSlotByIndex(const int si)
+basic::Object* TickMarks::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
 
-}  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end instruments namespace
+}  // end oe namespace

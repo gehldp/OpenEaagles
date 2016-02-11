@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: DedFile
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Terrain_DedFile_H__
-#define __Eaagles_Terrain_DedFile_H__
+#ifndef __oe_terrain_DedFile_H__
+#define __oe_terrain_DedFile_H__
 
 #include "../DataFile.h"
 
-namespace Eaagles {
-namespace Terrain {
+namespace oe {
+namespace terrain {
 
 struct DedStdHdr;
 struct DedStats;
@@ -42,11 +42,11 @@ private:
    DedStdHdr* stdhdr;      // Standard header
    DedStats* fstat;        // Statistics header
 
-   // Terrain::Database private interface
+   // terrain::Database private interface
    bool loadData() override;   // Load the data file
 };
 
-} // End Terrain namespace
-} // End Eaagles namespace
+} // End terrain namespace
+} // End oe namespace
 
 #endif

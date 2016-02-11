@@ -2,8 +2,8 @@
 #include "openeaagles/basic/Nav.h"
 #include <iostream>
 
-namespace Eaagles {
-namespace Dafif {
+namespace oe {
+namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Runway,"Runway")
 EMPTY_SERIALIZER(Runway)
@@ -50,8 +50,8 @@ EMPTY_DELETEDATA(Runway)
 void Runway::getRunwayMagHeading(const double aclat, const double aclon, const double acelev, float* magHeading1, float* magHeading2, double* trueBearing1, double* trueBearing2)const
 {
    double range(0.0), grdrange(0.0);
-   Basic::Nav::glla2bd(aclat, aclon, acelev, latitude(LOW_END), longitude(LOW_END), elevation(LOW_END), trueBearing1, &range, &grdrange);
-   Basic::Nav::glla2bd(aclat, aclon, acelev, latitude(HIGH_END), longitude(HIGH_END), elevation(HIGH_END), trueBearing2, &range, &grdrange);
+   basic::Nav::glla2bd(aclat, aclon, acelev, latitude(LOW_END), longitude(LOW_END), elevation(LOW_END), trueBearing1, &range, &grdrange);
+   basic::Nav::glla2bd(aclat, aclon, acelev, latitude(HIGH_END), longitude(HIGH_END), elevation(HIGH_END), trueBearing2, &range, &grdrange);
    *magHeading1 = magHeading(LOW_END);
    *magHeading2 = magHeading(HIGH_END);
 }
@@ -127,5 +127,5 @@ void Runway::printRunwayMagHeading(std::ostream& sout, const double aclat, const
    sout << " Runway_Low_End_Mag_heading " << magHeading1 << " aircraft_bearing_Low_End " << trueBearing1 << "  Runway_High_End_Mag_heading " <<  magHeading2 << " aircraft_bearing_High_End " << trueBearing2;
 }
 
-} // End Dafif namespace
-} // End Eaagles namespace
+} // End dafif namespace
+} // End oe namespace

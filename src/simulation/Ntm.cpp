@@ -1,7 +1,7 @@
 #include "openeaagles/simulation/Ntm.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 //==============================================================================
 // Ntm class
@@ -66,7 +66,7 @@ bool Ntm::setSlotTemplatePlayer(const Player* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* Ntm::getSlotByIndex(const int si)
+basic::Object* Ntm::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
@@ -88,7 +88,7 @@ std::ostream& Ntm::serialize(std::ostream& sout, const int i, const bool slotsOn
       //sout << "template:" << std::endl;
       //tPlayer->serialize(sout,(i+j+4));
       sout << "template: ( " << tPlayer->getFactoryName();
-      const Basic::String* tt = tPlayer->getType();
+      const basic::String* tt = tPlayer->getType();
       if (tt != nullptr) {
          sout << " type: " << *tt;
       }
@@ -106,5 +106,5 @@ std::ostream& Ntm::serialize(std::ostream& sout, const int i, const bool slotsOn
    return sout;
 }
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace

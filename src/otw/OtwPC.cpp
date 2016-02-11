@@ -18,8 +18,8 @@
 #include "openeaagles/basic/units/Distances.h"
 #include "openeaagles/basic/units/Angles.h"
 
-namespace Eaagles {
-namespace Otw {
+namespace oe {
+namespace otw {
 
 IMPLEMENT_SUBCLASS(OtwPC,"OtwPC")
 EMPTY_SERIALIZER(OtwPC)
@@ -33,7 +33,7 @@ END_SLOTTABLE(OtwPC)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(OtwPC)
-    ON_SLOT(1,setSlotNetOutput,Basic::NetHandler)
+    ON_SLOT(1,setSlotNetOutput,basic::NetHandler)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -82,17 +82,17 @@ void OtwPC::deleteData()
 //------------------------------------------------------------------------------
 // modelFactory() -- Create OtwModel objects unique to interface
 //------------------------------------------------------------------------------
-Simulation::OtwModel* OtwPC::modelFactory()
+simulation::OtwModel* OtwPC::modelFactory()
 {
-    return new Simulation::OtwModel();
+    return new simulation::OtwModel();
 }
 
 //------------------------------------------------------------------------------
 // hotFactory() -- Create OtwHot objects unique to interface
 //------------------------------------------------------------------------------
-Simulation::OtwModel* OtwPC::hotFactory()
+simulation::OtwModel* OtwPC::hotFactory()
 {
-    return new Simulation::OtwModel();
+    return new simulation::OtwModel();
 }
 
 //------------------------------------------------------------------------------
@@ -177,7 +177,7 @@ bool OtwPC::initNetwork()
 //------------------------------------------------------------------------------
 
 // Net Network Output Handler
-bool OtwPC::setSlotNetOutput(Basic::NetHandler* const msg)
+bool OtwPC::setSlotNetOutput(basic::NetHandler* const msg)
 {
     netOutput = msg;
     return true;
@@ -186,7 +186,7 @@ bool OtwPC::setSlotNetOutput(Basic::NetHandler* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* OtwPC::getSlotByIndex(const int si)
+basic::Object* OtwPC::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -199,7 +199,7 @@ void OtwPC::sendPcData()
     //const LCreal DEG2MR = (PI / 180.0f * 1000.0f);
 
     // Ownship type air vehicle?
-    const Simulation::AirVehicle* av = dynamic_cast<const Simulation::AirVehicle*>(getOwnship());
+    const simulation::AirVehicle* av = dynamic_cast<const simulation::AirVehicle*>(getOwnship());
     if (av != nullptr) {
 
         dsFlightModelData fmd;
@@ -209,9 +209,9 @@ void OtwPC::sendPcData()
         fmd.m_z_cg = 0;          // altitude
 
         const osg::Vec3 pos = av->getPosition();
-        fmd.m_pilot_eye_x = pos[0] * Basic::Distance::M2FT;
-        fmd.m_pilot_eye_y = pos[1] * Basic::Distance::M2FT;
-        fmd.m_pilot_eye_z = -pos[2] * Basic::Distance::M2FT;   // altitude
+        fmd.m_pilot_eye_x = pos[0] * basic::Distance::M2FT;
+        fmd.m_pilot_eye_y = pos[1] * basic::Distance::M2FT;
+        fmd.m_pilot_eye_z = -pos[2] * basic::Distance::M2FT;   // altitude
 
         fmd.m_alphad = av->getAngleOfAttackD();
         fmd.m_betad = av->getSideSlipD();
@@ -256,6 +256,6 @@ void OtwPC::sendPcData()
     }
 }
 
-} // End Otw namespace
-} // End Eaagles namespace
+} // End otw namespace
+} // End oe namespace
 

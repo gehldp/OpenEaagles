@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Bullseye
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Bullseye_H__
-#define __Eaagles_Simulation_Bullseye_H__
+#ifndef __oe_simulation_Bullseye_H__
+#define __oe_simulation_Bullseye_H__
 
 #include "openeaagles/simulation/Steerpoint.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 //------------------------------------------------------------------------------
 // Class: Bullseye
 //
@@ -24,7 +24,7 @@ public:
     Bullseye();
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

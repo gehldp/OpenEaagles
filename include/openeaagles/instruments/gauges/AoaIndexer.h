@@ -12,13 +12,13 @@
 //      green -> in limit area
 //      yellow -> under limit area
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_AoAIndexer_H__
-#define __Eaagles_Instruments_AoAIndexer_H__
+#ifndef __oe_instruments_AoAIndexer_H__
+#define __oe_instruments_AoAIndexer_H__
 
 #include "openeaagles/instruments/Instrument.h"
 
-namespace Eaagles {
-namespace Instruments {
+namespace oe {
+namespace instruments {
 
 class AoAIndexer : public Instrument
 {
@@ -49,12 +49,12 @@ public:
 protected:
 
     // slot functions
-    virtual bool setSlotAoaRedMin(const Basic::Number* const newRMin);
-    virtual bool setSlotAoaRedMax(const Basic::Number* const newRMax);
-    virtual bool setSlotAoaYellowMin(const Basic::Number* const newYMin);
-    virtual bool setSlotAoaYellowMax(const Basic::Number* const newYMax);
-    virtual bool setSlotAoaGreenMax(const Basic::Number* const newGMax);
-    virtual bool setSlotAoaGreenMin(const Basic::Number* const newGMin);
+    virtual bool setSlotAoaRedMin(const basic::Number* const newRMin);
+    virtual bool setSlotAoaRedMax(const basic::Number* const newRMax);
+    virtual bool setSlotAoaYellowMin(const basic::Number* const newYMin);
+    virtual bool setSlotAoaYellowMax(const basic::Number* const newYMax);
+    virtual bool setSlotAoaGreenMax(const basic::Number* const newGMax);
+    virtual bool setSlotAoaGreenMin(const basic::Number* const newGMin);
 
 private:
 
@@ -77,7 +77,7 @@ private:
     SendData selectSD;      // which graphics are we selecting? (If we are using a rotary)
 };
 
-}  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end instruments namespace
+}  // end oe namespace
 
 #endif

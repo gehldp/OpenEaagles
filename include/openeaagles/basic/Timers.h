@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Classes: UpTimer, DownTimer, Timer
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Timer_H__
-#define __Eaagles_Basic_Timer_H__
+#ifndef __oe_basic_Timer_H__
+#define __oe_basic_Timer_H__
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 class Number;
 class Time;
@@ -30,7 +30,7 @@ class Timer : public Object
 public:
     enum Type { UP, DOWN };        // Timer type/direction
 
-    static  const unsigned int MAX_TIMERS = EAAGLES_CONFIG_MAX_INTERVAL_TIMERS;
+    static  const unsigned int MAX_TIMERS = OE_CONFIG_MAX_INTERVAL_TIMERS;
 
 public:
     Timer();
@@ -149,7 +149,7 @@ public:
     DownTimer(const double rtime = 0.0);
 };
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 
 #endif

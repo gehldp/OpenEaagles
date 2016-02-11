@@ -7,8 +7,8 @@
 #include <cstring>
 #include <cstdlib>
 
-namespace Eaagles {
-namespace Dafif {
+namespace oe {
+namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Record,"Record")
 EMPTY_SERIALIZER(Record)
@@ -63,7 +63,7 @@ void Record::resetData()
 //------------------------------------------------------------------------------
 // setRecord() -- set our record string to 's'.
 //------------------------------------------------------------------------------
-void Record::setRecord(Basic::String* const s)
+void Record::setRecord(basic::String* const s)
 {
    setStr( *s );
 }
@@ -535,9 +535,9 @@ float Record::dsFrequency(const char* const p)
 void Record::printTrueBearingRange(std::ostream& sout, const double aclat, const double aclon, const double acelev)const
 {
    double bearing, range, grdrange;
-   Basic::Nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &range, &grdrange);
+   basic::Nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &range, &grdrange);
    sout << "  range " << range << "  grdrange " << grdrange << " true_bearing " << bearing;
 }
 
-} // End Dafif namespace
-} // End Eaagles namespace
+} // End dafif namespace
+} // End oe namespace

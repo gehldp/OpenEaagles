@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: FileWriter
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Recorder_FileWriter_H__
-#define __Eaagles_Recorder_FileWriter_H__
+#ifndef __oe_recorder_FileWriter_H__
+#define __oe_recorder_FileWriter_H__
 
 #include "openeaagles/recorder/OutputHandler.h"
 
-namespace Eaagles {
-   namespace Basic { class String; }
-namespace Recorder {
+namespace oe {
+   namespace basic { class String; }
+namespace recorder {
 
 //------------------------------------------------------------------------------
 // Class:   FileWriter
@@ -56,8 +56,8 @@ public:
                                           // (valid only while file is open)
 
    // File and path names; set before calling openFile()
-   virtual bool setFilename(const Basic::String* const msg);
-   virtual bool setPathName(const Basic::String* const msg);
+   virtual bool setFilename(const basic::String* const msg);
+   virtual bool setPathName(const basic::String* const msg);
 
 protected:
    void setFullFilename(const char* const name);
@@ -72,15 +72,15 @@ private:
    std::ofstream* sout;             // Output stream
 
    char* fullFilename;              // Full file name of the output file
-   const Basic::String* filename;   // Output file name
-   const Basic::String* pathname;   // Path to the output file directory
+   const basic::String* filename;   // Output file name
+   const basic::String* pathname;   // Path to the output file directory
 
    bool fileOpened;                 // File opened
    bool fileFailed;                 // Open or write failed
    bool eodFlag;                    // REID_END_OF_DATA message has been written
 };
 
-} // End Recorder namespace
-} // End Eaagles namespace
+} // End recorder namespace
+} // End oe namespace
 
 #endif

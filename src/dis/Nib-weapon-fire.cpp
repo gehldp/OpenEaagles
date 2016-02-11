@@ -15,9 +15,9 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
 
-namespace Eaagles {
-namespace Network {
-namespace Dis {
+namespace oe {
+namespace network {
+namespace dis {
 
 //------------------------------------------------------------------------------
 // weaponFireMsgFactory() -- (Output support) Weapon fire message factory
@@ -32,14 +32,14 @@ bool Nib::weaponFireMsgFactory(const LCreal)
     //Simulation* sim = disIO->getSimulation();
 
     // Set the NIB mode so that we don't do this again.
-    setMode(Simulation::Player::ACTIVE);
+    setMode(simulation::Player::ACTIVE);
 
     // Our NIB's player is a weapon that just became active
-    Simulation::Weapon* mPlayer = static_cast<Simulation::Weapon*>(getPlayer());
+    simulation::Weapon* mPlayer = static_cast<simulation::Weapon*>(getPlayer());
 
     // Ok, we have the weapon, now get the firing and target players
-    Simulation::Player* tPlayer = mPlayer->getTargetPlayer();
-    Simulation::Player* fPlayer = mPlayer->getLaunchVehicle();
+    simulation::Player* tPlayer = mPlayer->getTargetPlayer();
+    simulation::Player* fPlayer = mPlayer->getLaunchVehicle();
     if (fPlayer == nullptr) return false;
 
     // ---
@@ -113,15 +113,15 @@ bool Nib::weaponFireMsgFactory(const LCreal)
 
     // World Coordinates
     osg::Vec3d geocPos = mPlayer->getGeocPosition();
-    pdu.location.X_coord = geocPos[Basic::Nav::IX];
-    pdu.location.Y_coord = geocPos[Basic::Nav::IY];
-    pdu.location.Z_coord = geocPos[Basic::Nav::IZ];
+    pdu.location.X_coord = geocPos[basic::Nav::IX];
+    pdu.location.Y_coord = geocPos[basic::Nav::IY];
+    pdu.location.Z_coord = geocPos[basic::Nav::IZ];
 
     // Velocity
     osg::Vec3d geocVel = mPlayer->getGeocVelocity();
-    pdu.velocity.component[0] = static_cast<float>(geocVel[Basic::Nav::IX]);
-    pdu.velocity.component[1] = static_cast<float>(geocVel[Basic::Nav::IY]);
-    pdu.velocity.component[2] = static_cast<float>(geocVel[Basic::Nav::IZ]);
+    pdu.velocity.component[0] = static_cast<float>(geocVel[basic::Nav::IX]);
+    pdu.velocity.component[1] = static_cast<float>(geocVel[basic::Nav::IY]);
+    pdu.velocity.component[2] = static_cast<float>(geocVel[basic::Nav::IZ]);
 
     // ---
     // Burst
@@ -155,12 +155,12 @@ bool Nib::weaponFireMsgFactory(const LCreal)
     //std::cout << "," << pdu.munitionID.simulationID.siteIdentification;
     //std::cout << ")" << std::endl;
 
-    if (Basic::NetHandler::isNotNetworkByteOrder()) pdu.swapBytes();
+    if (basic::NetHandler::isNotNetworkByteOrder()) pdu.swapBytes();
     ok = disIO->sendData(reinterpret_cast<char*>(&pdu),sizeof(pdu));
 
     return ok;
 }
 
-} // End Dis namespace
+} // End dis namespace
 } // End Network namespace
-} // End Eaagles namespace
+} // End oe namespace

@@ -2,8 +2,8 @@
 
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 //==============================================================================
 // AvionicsPod class -- Generic external fuel tank
@@ -16,6 +16,6 @@ EMPTY_DELETEDATA(AvionicsPod)
 EMPTY_SERIALIZER(AvionicsPod)
 
 
-} // end Simulation namespace
-} // end Eaagles namespace
+} // end simulation namespace
+} // end oe namespace
 

@@ -19,8 +19,8 @@
 #include <sys/time.h>
 #endif
 
-namespace Eaagles {
-namespace Glut {
+namespace oe {
+namespace glut {
 
 IMPLEMENT_SUBCLASS(GlutDisplay,"GlutDisplay")
 
@@ -48,13 +48,13 @@ END_SLOTTABLE(GlutDisplay)
 //  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(GlutDisplay)
-   ON_SLOT(1,setSlotFullScreen,Basic::Number)
-   ON_SLOT(2,setSlotIdleSleepTime,Basic::Number)
-   ON_SLOT(3,setSlotResizeWindows,Basic::Number)
-   ON_SLOT(4,setSlotPickWidth,Basic::Number)
-   ON_SLOT(5,setSlotPickHeight,Basic::Number)
-   ON_SLOT(6,setSlotAccumBuff,Basic::Number)
-   ON_SLOT(7,setSlotStencilBuff,Basic::Number)
+   ON_SLOT(1,setSlotFullScreen,basic::Number)
+   ON_SLOT(2,setSlotIdleSleepTime,basic::Number)
+   ON_SLOT(3,setSlotResizeWindows,basic::Number)
+   ON_SLOT(4,setSlotPickWidth,basic::Number)
+   ON_SLOT(5,setSlotPickHeight,basic::Number)
+   ON_SLOT(6,setSlotAccumBuff,basic::Number)
+   ON_SLOT(7,setSlotStencilBuff,basic::Number)
 END_SLOT_MAP()
 
 //-----------------------------------------------------------------------------
@@ -145,7 +145,7 @@ bool GlutDisplay::onEscKey()
    if (isMainDisplay()) {
       shutdownNotification();
       if (isMessageEnabled(MSG_INFO)) {
-         std::cout<<"Eaagles::Glut::GlutDisplay::onEscKey()Exit by the ESC key!"<<std::endl;
+         std::cout<<"oe::glut::GlutDisplay::onEscKey()Exit by the ESC key!"<<std::endl;
       }
 #ifdef __FREEGLUT_EXT_H__     /* freeglut only */
       glutLeaveMainLoop();
@@ -212,9 +212,9 @@ int GlutDisplay::createWindow()
 
       // Create sub windows (if any)
       if (subDisplays() != nullptr) {
-         Basic::List::Item* item = subDisplays()->getFirstItem();
+         basic::List::Item* item = subDisplays()->getFirstItem();
          while (item != nullptr) {
-            Basic::Pair* pair = dynamic_cast<Basic::Pair*>(item->getValue());
+            basic::Pair* pair = dynamic_cast<basic::Pair*>(item->getValue());
             if (pair != nullptr) {
                GlutDisplay* dobj = dynamic_cast<GlutDisplay*>( pair->object() );
                if (dobj != nullptr) dobj->createSubWindow(winId);
@@ -289,9 +289,9 @@ int GlutDisplay::createSubWindow(const int mainId)
 
       // Create sub windows (if any)
       if (subDisplays() != nullptr) {
-         Basic::List::Item* item = subDisplays()->getFirstItem();
+         basic::List::Item* item = subDisplays()->getFirstItem();
          while (item != nullptr) {
-            Basic::Pair* pair = dynamic_cast<Basic::Pair*>(item->getValue());
+            basic::Pair* pair = dynamic_cast<basic::Pair*>(item->getValue());
             if (pair != nullptr) {
                GlutDisplay* dobj = dynamic_cast<GlutDisplay*>( pair->object() );
                if (dobj != nullptr) dobj->createSubWindow(winId);
@@ -362,9 +362,9 @@ void GlutDisplay::reshapeIt(int w, int h)
       if (subDisplays() != nullptr && okToResize) {
 
          // go through and put our new numbers in
-         Basic::List::Item* item = subDisplays()->getFirstItem();
+         basic::List::Item* item = subDisplays()->getFirstItem();
          while (item != nullptr) {
-            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+            basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
             if (pair != nullptr) {
                GlutDisplay* gd = dynamic_cast<GlutDisplay*>(pair->object());
                if (gd != nullptr) gd->reshapeSubWindow();
@@ -444,7 +444,7 @@ void GlutDisplay::reshapeSubWindow()
 // 4) Returns zero(0) when there are no entries in the select buffer or if the
 //    Graphic for the select ID is not found.
 //-----------------------------------------------------------------------------
-BasicGL::Graphic* GlutDisplay::pick(const int item)
+graphics::Graphic* GlutDisplay::pick(const int item)
 {
    GLint viewport[4];
    glGetIntegerv(GL_VIEWPORT,viewport);
@@ -518,7 +518,7 @@ void GlutDisplay::clearSelectBuffer(GLuint sbuff[], const int size)
 // 4) Returns zero(0) when there are no entries in the select buffer or if the
 //    Graphic for the select ID is not found.
 //-----------------------------------------------------------------------------
-BasicGL::Graphic* GlutDisplay::findSelected(const GLint hits, const GLuint sbuff[], const int item)
+graphics::Graphic* GlutDisplay::findSelected(const GLint hits, const GLuint sbuff[], const int item)
 {
    Graphic* sel = nullptr;
    GLuint id = 0;
@@ -590,7 +590,7 @@ BasicGL::Graphic* GlutDisplay::findSelected(const GLint hits, const GLuint sbuff
    // Find the Graphic with this id
    // ---
    if (id > 0) {
-      Basic::Pair* pair = findBySelectName(id);
+      basic::Pair* pair = findBySelectName(id);
       if (pair != nullptr) {
          sel = static_cast<Graphic*>(pair->object());
       }
@@ -955,7 +955,7 @@ void GlutDisplay::entryFuncCB(int state)
 //-----------------------------------------------------------------------------
 
 // setSlotFullScreen()
-bool GlutDisplay::setSlotFullScreen(const Basic::Number* const msg)
+bool GlutDisplay::setSlotFullScreen(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -966,7 +966,7 @@ bool GlutDisplay::setSlotFullScreen(const Basic::Number* const msg)
 }
 
 // setSlotIdleSleepTime()
-bool GlutDisplay::setSlotIdleSleepTime(const Basic::Number* const msg)
+bool GlutDisplay::setSlotIdleSleepTime(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -980,7 +980,7 @@ bool GlutDisplay::setSlotIdleSleepTime(const Basic::Number* const msg)
 }
 
 // setSlotResizeWindows()
-bool GlutDisplay::setSlotResizeWindows(const Basic::Number* const msg)
+bool GlutDisplay::setSlotResizeWindows(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -990,7 +990,7 @@ bool GlutDisplay::setSlotResizeWindows(const Basic::Number* const msg)
 }
 
 // pickWidth -- Width of the pick area
-bool GlutDisplay::setSlotPickWidth(const Basic::Number* const msg)
+bool GlutDisplay::setSlotPickWidth(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1007,7 +1007,7 @@ bool GlutDisplay::setSlotPickWidth(const Basic::Number* const msg)
 }
 
 // pickHeight -- Height of the pick area
-bool GlutDisplay::setSlotPickHeight(const Basic::Number* const msg)
+bool GlutDisplay::setSlotPickHeight(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1023,7 +1023,7 @@ bool GlutDisplay::setSlotPickHeight(const Basic::Number* const msg)
    return ok;
 }
 
-bool GlutDisplay::setSlotAccumBuff(const Basic::Number* const msg)
+bool GlutDisplay::setSlotAccumBuff(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1033,7 +1033,7 @@ bool GlutDisplay::setSlotAccumBuff(const Basic::Number* const msg)
    return ok;
 }
 
-bool GlutDisplay::setSlotStencilBuff(const Basic::Number* const msg)
+bool GlutDisplay::setSlotStencilBuff(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1046,7 +1046,7 @@ bool GlutDisplay::setSlotStencilBuff(const Basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Page
 //------------------------------------------------------------------------------
-Basic::Object* GlutDisplay::getSlotByIndex(const int si)
+basic::Object* GlutDisplay::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
@@ -1093,5 +1093,5 @@ std::ostream& GlutDisplay::serialize(std::ostream& sout, const int i, const bool
    return sout;
 }
 
-} // End Glut namespace
-} // End Eaagles namespace
+} // End glut namespace
+} // End oe namespace

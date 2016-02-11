@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Class: NetInput
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Recorder_NetInput_H__
-#define __Eaagles_Recorder_NetInput_H__
+#ifndef __oe_recorder_NetInput_H__
+#define __oe_recorder_NetInput_H__
 
 #include "openeaagles/recorder/InputHandler.h"
 
-namespace Eaagles {
-   namespace Basic { class NetHandler; class Number; }
+namespace oe {
+   namespace basic { class NetHandler; class Number; }
 
-namespace Recorder {
+namespace recorder {
 
 //------------------------------------------------------------------------------
 // Class:   NetInput
@@ -37,15 +37,15 @@ public:
 
 protected:
    // Slot functions
-   virtual bool setSlotNetwork(Basic::NetHandler* const msg);
-   virtual bool setSlotNoWait(Basic::Number* const msg);
+   virtual bool setSlotNetwork(basic::NetHandler* const msg);
+   virtual bool setSlotNoWait(basic::Number* const msg);
 
    const DataRecordHandle* readRecordImp() override;
 
 private:
    void initData();
 
-    Basic::safe_ptr<Eaagles::Basic::NetHandler> netHandler;   // Network handler (input/output, or just output if netInput is defined)
+    basic::safe_ptr<oe::basic::NetHandler> netHandler;   // Network handler (input/output, or just output if netInput is defined)
     bool   networkInitialized;                     // Network has been initialized
     bool   networkInitFailed;                      // Network initialization has failed
     bool   noWaitFlag;                             // No wait (unblocked) I/O flag
@@ -54,7 +54,7 @@ private:
    char* ibuf;    // Input buffer
 };
 
-} // End Recorder namespace
-} // End Eaagles namespace
+} // End recorder namespace
+} // End oe namespace
 
 #endif

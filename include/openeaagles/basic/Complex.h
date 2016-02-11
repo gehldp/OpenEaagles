@@ -1,13 +1,13 @@
 //==============================================================================
 // Class: Complex
 //==============================================================================
-#ifndef __Eaagles_Basic_Complex_H__
-#define __Eaagles_Basic_Complex_H__
+#ifndef __oe_basic_Complex_H__
+#define __oe_basic_Complex_H__
 
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
    class Number;
 
 //==============================================================================
@@ -138,7 +138,7 @@ private:
 
 #include "openeaagles/basic/Complex.inl"
 
-}  // end namespace Basic
-}  // end namespace Eaagles
+}  // end namespace basic
+}  // end namespace oe
 
 #endif

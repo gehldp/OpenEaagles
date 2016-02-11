@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: TickMarks
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_TickMarks_H__
-#define __Eaagles_Instruments_TickMarks_H__
+#ifndef __oe_instruments_TickMarks_H__
+#define __oe_instruments_TickMarks_H__
 
 #include "openeaagles/instruments/gauges/AnalogGauge.h"
 
-namespace Eaagles {
-namespace Instruments {
+namespace oe {
+namespace instruments {
 
 //------------------------------------------------------------------------------
 // Class: TickMarks
@@ -27,7 +27,7 @@ public:
     virtual bool setQuantity(const int newQ);
     virtual bool setGaugeLength(const LCreal newL);
     virtual bool setFlip(const bool x);
-    virtual bool setTickGraphic(const BasicGL::Graphic* const newGraphic);
+    virtual bool setTickGraphic(const graphics::Graphic* const newGraphic);
 
     LCreal getTickMarkLength() const { return lengthTM; }
     int  getQuantity() const         { return quantity; }
@@ -36,20 +36,20 @@ public:
 
 protected:
     // slot functions
-    bool setSlotTickMarkLength(const Basic::Number* const newLength);
-    bool setSlotQuantity(const Basic::Number* const newQ);
-    bool setSlotGaugeLength(const Basic::Number* const newL);
-    bool setSlotFlip(const Basic::Number* const x);
+    bool setSlotTickMarkLength(const basic::Number* const newLength);
+    bool setSlotQuantity(const basic::Number* const newQ);
+    bool setSlotGaugeLength(const basic::Number* const newL);
+    bool setSlotFlip(const basic::Number* const x);
 
 private:
     LCreal lengthTM;       // tick mark length (if not a graphic)
     int    quantity;       // how many tick marks will we have?
     LCreal gaugeLength;    // length we are spanning our tick marks over
     bool   flip;           // our flip variable
-    BasicGL::Graphic* myGraphic; // our graphic (if we choose to use one for a tick mark)
+    graphics::Graphic* myGraphic; // our graphic (if we choose to use one for a tick mark)
 };
 
 }  // end of Instruments namespace
-}  // end of Eaagles namespace
+}  // end of oe namespace
 
 #endif

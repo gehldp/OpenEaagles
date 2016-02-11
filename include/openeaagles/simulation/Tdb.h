@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Tdb
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Tdb_H__
-#define __Eaagles_Simulation_Tdb_H__
+#ifndef __oe_simulation_Tdb_H__
+#define __oe_simulation_Tdb_H__
 
 #include "openeaagles/simulation/System.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
    class Gimbal;
    class Player;
 
@@ -55,9 +55,9 @@ namespace Simulation {
 //       Z+ is the cross product of X into Y
 //
 //------------------------------------------------------------------------------
-class Tdb : public Basic::Object
+class Tdb : public basic::Object
 {
-   DECLARE_SUBCLASS(Tdb,Basic::Object)
+   DECLARE_SUBCLASS(Tdb,basic::Object)
 
 public:
    Tdb(const unsigned int maxTargets, const Gimbal* const gimbal);
@@ -69,7 +69,7 @@ public:
    // 
    // Notes:
    //------------------------------------------------------------------------------
-   virtual unsigned int processPlayers(Basic::PairStream* const players);
+   virtual unsigned int processPlayers(basic::PairStream* const players);
 
    // ---
    // Data from processPlayers()
@@ -166,7 +166,7 @@ protected:
    double* ra;
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

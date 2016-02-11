@@ -17,21 +17,21 @@
 //    void CadrgFrameEntry::setFrame(CadrgFrame* newFrame)
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Maps_Rpf_CadrgFrameEntry_H__
-#define __Eaagles_Maps_Rpf_CadrgFrameEntry_H__
+#ifndef __oe_maps_rpf_CadrgFrameEntry_H__
+#define __oe_maps_rpf_CadrgFrameEntry_H__
 
 #include "openeaagles/maps/rpfMap/CadrgClut.h"
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
-namespace Maps {
-namespace Rpf {
+namespace oe {
+namespace maps {
+namespace rpf {
 
 class CadrgFrame;
 
-class CadrgFrameEntry : public Basic::Object
+class CadrgFrameEntry : public basic::Object
 {
-    DECLARE_SUBCLASS(CadrgFrameEntry, Basic::Object)
+    DECLARE_SUBCLASS(CadrgFrameEntry, basic::Object)
 
 public:
     CadrgFrameEntry();
@@ -59,9 +59,9 @@ private:
     bool cib;           // Are we a CIB or not?
 };
 
-} // End Rpf namespace
-} // End Maps namespace
-} // End Eaagles namespace
+} // End rpf namespace
+} // End maps namespace
+} // End oe namespace
 
 #endif
 

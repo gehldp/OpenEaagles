@@ -35,8 +35,8 @@
 
 #include <cstdio>
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 IMPLEMENT_SUBCLASS(TcpServerSingle, "TcpServerSingle")
 EMPTY_SLOTTABLE(TcpServerSingle)
@@ -185,6 +185,6 @@ bool TcpServerSingle::acceptConnection()
    return true;
 }
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 

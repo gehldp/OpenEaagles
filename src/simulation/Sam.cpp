@@ -1,8 +1,8 @@
 
 #include "openeaagles/simulation/Sam.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 //==============================================================================
 // Sam class -- Generic Surface to Air Missile
@@ -25,9 +25,9 @@ Sam::Sam()
 {
     STANDARD_CONSTRUCTOR()
 
-   static Basic::String gsam(getDescription());
+   static basic::String gsam(getDescription());
    setType(&gsam);
 }
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace

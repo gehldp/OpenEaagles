@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Locus
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Locus_H__
-#define __Eaagles_Basic_Locus_H__
+#ifndef __oe_basic_Locus_H__
+#define __oe_basic_Locus_H__
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class: Locus
@@ -75,7 +75,7 @@ private:
 };
 
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 
 #endif

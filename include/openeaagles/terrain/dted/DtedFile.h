@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Classes: DtedFile
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Terrain_DtedFile_H__
-#define __Eaagles_Terrain_DtedFile_H__
+#ifndef __oe_terrain_DtedFile_H__
+#define __oe_terrain_DtedFile_H__
 
 #include "../DataFile.h"
 
-namespace Eaagles {
-   namespace Basic { class Number; }
-namespace Terrain {
+namespace oe {
+   namespace basic { class Number; }
+namespace terrain {
 
 //------------------------------------------------------------------------------
 // Class: DtedFile
@@ -28,7 +28,7 @@ public:
 
 protected:
    bool isVerifyChecksum() const { return verifyChecksum; }
-   virtual bool setSlotVerifyChecksum(const Basic::Number* const msg);
+   virtual bool setSlotVerifyChecksum(const basic::Number* const msg);
 
 private:
     // Interpret signed-magnitude values from DTED file
@@ -45,7 +45,7 @@ private:
 };
 
 
-} // End Terrain namespace
-} // End Eaagles namespace
+} // End terrain namespace
+} // End oe namespace
 
 #endif

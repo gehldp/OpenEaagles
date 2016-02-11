@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: NetHandler
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_NetHandler_H__
-#define __Eaagles_Basic_NetHandler_H__
+#ifndef __oe_basic_NetHandler_H__
+#define __oe_basic_NetHandler_H__
 
 #include "openeaagles/basic/Component.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class: NetHandler
@@ -260,8 +260,8 @@ inline void NetHandler::fromNetOrder(double* const vout, const double vin)
     return toNetOrder(vout,vin);
 }
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 
 #endif
 

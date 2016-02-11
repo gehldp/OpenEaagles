@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Class: Bomb
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Bomb_H__
-#define __Eaagles_Simulation_Bomb_H__
+#ifndef __oe_simulation_Bomb_H__
+#define __oe_simulation_Bomb_H__
 
 #include "openeaagles/simulation/Weapon.h"
 
-namespace Eaagles {
-   namespace Basic { class Identifier; }
+namespace oe {
+   namespace basic { class Identifier; }
 
-namespace Simulation {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Class: Bomb
@@ -90,13 +90,13 @@ protected:
     virtual bool setDragIndex(const LCreal v);
 
     // slot functions
-    bool setSlotDragIndex(Basic::Number* const p);
-    bool setSlotArmingOption(Basic::Identifier* const p);
-    bool setSlotNoseFuze(Basic::Number* const p);
-    bool setSlotMidFuze(Basic::Number* const p);
-    bool setSlotTailFuze(Basic::Number* const p);
-    bool setSlotFuzeAltitude(Basic::Number* const p);
-    bool setSlotFuzeTime(Basic::Number* const p);
+    bool setSlotDragIndex(basic::Number* const p);
+    bool setSlotArmingOption(basic::Identifier* const p);
+    bool setSlotNoseFuze(basic::Number* const p);
+    bool setSlotMidFuze(basic::Number* const p);
+    bool setSlotTailFuze(basic::Number* const p);
+    bool setSlotFuzeAltitude(basic::Number* const p);
+    bool setSlotFuzeTime(basic::Number* const p);
 
     void weaponGuidance(const LCreal dt) override;
     void weaponDynamics(const LCreal dt) override;
@@ -122,7 +122,7 @@ private:
    LCreal fuzeTime;        // Fuze Arming Time
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

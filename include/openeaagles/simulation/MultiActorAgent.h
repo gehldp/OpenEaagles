@@ -1,17 +1,17 @@
 //------------------------------------------------------------------------------
 // Class: MultiActorAgent
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_MultiActorAgent_H__
-#define __Eaagles_Simulation_MultiActorAgent_H__
+#ifndef __oe_simulation_MultiActorAgent_H__
+#define __oe_simulation_MultiActorAgent_H__
 
 #include "openeaagles/basic/Component.h"
 
-namespace Eaagles {
-   namespace Basic {
-      namespace Ubf { class Behavior; class State; }
+namespace oe {
+   namespace basic {
+      namespace ubf { class Behavior; class State; }
    }
 
-namespace Simulation {
+namespace simulation {
 
 class Simulation;
 class Station;
@@ -28,9 +28,9 @@ class Station;
 //    state       <State>           ! state
 //    agentList   <PairStream>      ! behavior pairstream
 //------------------------------------------------------------------------------
-class MultiActorAgent : public Basic::Component
+class MultiActorAgent : public basic::Component
 {
-   DECLARE_SUBCLASS(MultiActorAgent, Basic::Component)
+   DECLARE_SUBCLASS(MultiActorAgent, basic::Component)
 
 public:
    MultiActorAgent();
@@ -42,33 +42,33 @@ protected:
    // generic controller
    virtual void controller(const LCreal dt = 0.0);
 
-   void setState(Basic::Ubf::State* const);
-   Basic::Ubf::State* getState() const                { return state; }
+   void setState(basic::ubf::State* const);
+   basic::ubf::State* getState() const                { return state; }
 
-   void setActor(Basic::Component* c);
-   Basic::Component*      getActor() { return actor;}
+   void setActor(basic::Component* c);
+   basic::Component*      getActor() { return actor;}
 
    Station*     getStation();
    Simulation*  getSimulation();
 
    struct AgentItem
    {
-      Basic::safe_ptr<Basic::String> actorName;
-      Basic::safe_ptr<Basic::Ubf::Behavior> behavior;
-      Basic::safe_ptr<Basic::Component> actor;
+      basic::safe_ptr<basic::String> actorName;
+      basic::safe_ptr<basic::ubf::Behavior> behavior;
+      basic::safe_ptr<basic::Component> actor;
    };
 
    static const unsigned int MAX_AGENTS = 10;
    bool clearAgentList();
-   bool addAgent( Basic::String* name, Basic::Ubf::Behavior* const b);
+   bool addAgent( basic::String* name, basic::ubf::Behavior* const b);
 
    // slot functions
-   bool setSlotState(Basic::Ubf::State* const state);
-   bool setSlotAgentList(Basic::PairStream* const msg);
+   bool setSlotState(basic::ubf::State* const state);
+   bool setSlotAgentList(basic::PairStream* const msg);
 
 private:
-   Basic::Component* actor;
-   Basic::Ubf::State* state;
+   basic::Component* actor;
+   basic::ubf::State* state;
    Station*     myStation;
 
    // agent/behavior list
@@ -76,10 +76,10 @@ private:
    AgentItem agentList[MAX_AGENTS];
 };
 
-inline void MultiActorAgent::setActor(Basic::Component* c) { actor=c; }
+inline void MultiActorAgent::setActor(basic::Component* c) { actor=c; }
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 
 // A MultiActorAgent can be configured as shown below: (assuming the existence of the "abc" state and behavior classes)

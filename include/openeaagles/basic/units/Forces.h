@@ -53,13 +53,13 @@
 //        instance into the units of a specific Force derived class.
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Forces_H__
-#define __Eaagles_Basic_Forces_H__
+#ifndef __oe_basic_Forces_H__
+#define __oe_basic_Forces_H__
 
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 // ----------------------------------------------------------------------------
 // Defined Force Conversion Constants:
@@ -204,7 +204,7 @@ public:
     LCreal fromForce(const LCreal a) const override    { return a * N2PD; }
 };
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 
 #endif

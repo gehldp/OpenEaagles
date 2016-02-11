@@ -1,9 +1,8 @@
 
 #include "openeaagles/basic/util/lfi.h"
 
-namespace Eaagles {
-namespace Basic {
-namespace lfi {
+namespace oe {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // lfi - One dimensional Linear Function Interpolator
@@ -483,6 +482,5 @@ LCreal lfi_5D(
    return m * (a2 - a1) + a1;
 }
 
-}
 }
 }

@@ -3,8 +3,8 @@
 #include <cstdlib>
 #include <cstring>
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 IMPLEMENT_SUBCLASS(String, "String")
 EMPTY_SLOTTABLE(String)
@@ -272,5 +272,5 @@ std::ostream& String::serialize(std::ostream& sout, const int, const bool) const
    return sout;
 }
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace

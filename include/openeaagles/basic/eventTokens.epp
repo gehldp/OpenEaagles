@@ -3,8 +3,8 @@
 // 
 // (Master event list is eventTokens.h)
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Event_Tokens_EPP__
-#define __Eaagles_Event_Tokens_EPP__
+#ifndef __oe_Event_Tokens_EPP__
+#define __oe_Event_Tokens_EPP__
 
 // ---
 // Key events -- Are passed up to an object's container if not used.
@@ -111,7 +111,7 @@
 #define  EID_SHUTDOWN_EVENT         1001  /* Shutdown notification event */
 
 // ---
-// BasicGL events
+// graphics events
 // ---
 #define  EID_ON_ENTRY               1201      /* Entry (active) */
 #define  EID_ON_EXIT                1202      /* Exit  (inactive) */

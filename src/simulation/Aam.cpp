@@ -1,8 +1,8 @@
 
 #include "openeaagles/simulation/Aam.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 //==============================================================================
 // Aam class -- Generic Air to Air Missile
@@ -25,7 +25,7 @@ Aam::Aam()
 {
     STANDARD_CONSTRUCTOR()
         
-   static Basic::String gaam(getDescription());
+   static basic::String gaam(getDescription());
    setType(&gaam);
 
    // Default guidance & dynamics for generic A/A missile
@@ -43,5 +43,5 @@ Aam::Aam()
     setMaxAccel(50.0);
 }
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace

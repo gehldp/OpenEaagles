@@ -19,8 +19,8 @@
 # pragma warning(disable: 4996)
 #endif
 
-namespace Eaagles {
-namespace Recorder {
+namespace oe {
+namespace recorder {
 
 
 //==============================================================================
@@ -33,7 +33,7 @@ IMPLEMENT_SUBCLASS(PrintSelected,"PrintSelected")
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(PrintSelected)
    "messageToken",   // 1) Message ID (token)
-   "fieldName",      // 2) Full field name (e.g., Eaagles.Recorder.Pb.PlayerId.name)
+   "fieldName",      // 2) Full field name (e.g., oe.Recorder.Pb.PlayerId.name)
    "compareToValS",  // 3) value to compare (string)
    "compareToValI",  // 4) value to compare (num)
    "compareToValD",  // 5) value to compare (dbl)
@@ -43,13 +43,13 @@ END_SLOTTABLE(PrintSelected)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(PrintSelected)
-   ON_SLOT( 1, setSlotMsgToken,        Basic::Number)
-   ON_SLOT( 2, setSlotFieldName,       Basic::String)
-   ON_SLOT( 3, setSlotCompareToStr,    Basic::String)
-   ON_SLOT( 4, setSlotCompareToNum,    Basic::Number)
-   ON_SLOT( 5, setSlotCompareToDbl,    Basic::Number)
-   ON_SLOT( 6, setSlotCondition,       Basic::String)
-   ON_SLOT( 7, setSlotTimeOnly,        Basic::Number)
+   ON_SLOT( 1, setSlotMsgToken,        basic::Number)
+   ON_SLOT( 2, setSlotFieldName,       basic::String)
+   ON_SLOT( 3, setSlotCompareToStr,    basic::String)
+   ON_SLOT( 4, setSlotCompareToNum,    basic::Number)
+   ON_SLOT( 5, setSlotCompareToDbl,    basic::Number)
+   ON_SLOT( 6, setSlotCondition,       basic::String)
+   ON_SLOT( 7, setSlotTimeOnly,        basic::Number)
 END_SLOT_MAP()
 
 EMPTY_SERIALIZER(PrintSelected)
@@ -110,7 +110,7 @@ void PrintSelected::deleteData()
 
 // Slots
 
-bool PrintSelected::setSlotMsgToken(const Basic::Number* const msg)
+bool PrintSelected::setSlotMsgToken(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -120,7 +120,7 @@ bool PrintSelected::setSlotMsgToken(const Basic::Number* const msg)
    return ok;
 }
 
-bool PrintSelected::setSlotFieldName(const Basic::String* const msg)
+bool PrintSelected::setSlotFieldName(const basic::String* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -131,7 +131,7 @@ bool PrintSelected::setSlotFieldName(const Basic::String* const msg)
 
 }
 
-bool PrintSelected::setSlotCompareToStr(const Basic::String* const msg)
+bool PrintSelected::setSlotCompareToStr(const basic::String* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -141,7 +141,7 @@ bool PrintSelected::setSlotCompareToStr(const Basic::String* const msg)
    return ok;
 }
 
-bool PrintSelected::setSlotCompareToNum(const Basic::Number* const msg)
+bool PrintSelected::setSlotCompareToNum(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -151,7 +151,7 @@ bool PrintSelected::setSlotCompareToNum(const Basic::Number* const msg)
    return ok;
 }
 
-bool PrintSelected::setSlotCompareToDbl(const Basic::Number* const msg)
+bool PrintSelected::setSlotCompareToDbl(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -162,7 +162,7 @@ bool PrintSelected::setSlotCompareToDbl(const Basic::Number* const msg)
 }
 
 
-bool PrintSelected::setSlotCondition(const Basic::String* const msg)
+bool PrintSelected::setSlotCondition(const basic::String* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -186,7 +186,7 @@ bool PrintSelected::setSlotCondition(const Basic::String* const msg)
    return ok;
 }
 
-bool PrintSelected::setSlotTimeOnly(const Basic::Number* const msg)
+bool PrintSelected::setSlotTimeOnly(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -198,7 +198,7 @@ bool PrintSelected::setSlotTimeOnly(const Basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* PrintSelected::getSlotByIndex(const int si)
+basic::Object* PrintSelected::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -211,7 +211,7 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
 {
 
    if (handle == nullptr) return;  // cannot continue
-   const Pb::DataRecord* dataRecord = handle->getRecord();
+   const pb::DataRecord* dataRecord = handle->getRecord();
    if (dataRecord == nullptr) return;  // cannot continue
 
    // using reflection:
@@ -423,7 +423,7 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
       soutVals << msgCat << "\t" << msgType << "\t";
 
       // Print the time
-  //    const Pb::Time* timeMsg  = &dataRecord->time();
+  //    const pb::Time* timeMsg  = &dataRecord->time();
   //    printMessage(soutFields, soutVals, timeMsg);  // print out the time message
 
          soutFields <<  std::left << std::setw(12)<< "exec time " << "\t";
@@ -792,7 +792,7 @@ std::string PrintSelected::printTimeMsg(double time)
     LCreal ss = 0;  // Sec
 
     // utc time
-    Basic::Time::getHHMMSS(static_cast<LCreal>(time), &hh, &mm, &ss);
+    basic::Time::getHHMMSS(static_cast<LCreal>(time), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     std::string timeStr;
     timeStr.assign(cbuf);
@@ -800,5 +800,5 @@ std::string PrintSelected::printTimeMsg(double time)
 
 }
 
-} // End Recorder namespace
-} // End Eaagles namespace
+} // End recorder namespace
+} // End oe namespace

@@ -6,8 +6,8 @@
 #include <cstdlib>
 #include <cmath>
 
-namespace Eaagles {
-namespace Dafif {
+namespace oe {
+namespace dafif {
 
 IMPLEMENT_SUBCLASS(AirportLoader,"AirportLoader")
 EMPTY_SLOTTABLE(AirportLoader)
@@ -1708,5 +1708,5 @@ const char* AirportLoader::createIlsRecord(const Key* key)
 }
 #endif
 
-} // End Dafif namespace
-} // End Eaagles namespace
+} // End dafif namespace
+} // End oe namespace

@@ -1,16 +1,16 @@
 //------------------------------------------------------------------------------
 // Class: DataRecordHandle
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Recorder_DataRecordHandle_H__
-#define __Eaagles_Recorder_DataRecordHandle_H__
+#ifndef __oe_recorder_DataRecordHandle_H__
+#define __oe_recorder_DataRecordHandle_H__
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
-namespace Recorder {
+namespace oe {
+namespace recorder {
 
    // Main (protocol buffer) data record
-   namespace Pb { class DataRecord; }
+   namespace pb { class DataRecord; }
 
 //------------------------------------------------------------------------------
 // Class: DataRecordHandle
@@ -26,25 +26,25 @@ namespace Recorder {
 //       of handle2's DataRecord will be copied into handle1's DataRecord.
 //
 //------------------------------------------------------------------------------
-class DataRecordHandle : public Basic::Object
+class DataRecordHandle : public basic::Object
 {
-    DECLARE_SUBCLASS(DataRecordHandle, Basic::Object)
+    DECLARE_SUBCLASS(DataRecordHandle, basic::Object)
 
 public:
-   DataRecordHandle(Pb::DataRecord* const record);
+   DataRecordHandle(pb::DataRecord* const record);
 
-   const Pb::DataRecord* getRecord() const;
+   const pb::DataRecord* getRecord() const;
 
 protected:
    DataRecordHandle();  // Default Constructor
 
 private:
-   Pb::DataRecord* record;
+   pb::DataRecord* record;
 };
 
-inline const Pb::DataRecord* DataRecordHandle::getRecord() const { return record; }
+inline const pb::DataRecord* DataRecordHandle::getRecord() const { return record; }
 
-} // End Recorder namespace
-} // End Eaagles namespace
+} // End recorder namespace
+} // End oe namespace
 
 #endif

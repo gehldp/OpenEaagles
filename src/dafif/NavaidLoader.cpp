@@ -4,8 +4,8 @@
 #include <cstring>
 #include <cstdlib>
 
-namespace Eaagles {
-namespace Dafif {
+namespace oe {
+namespace dafif {
 
 IMPLEMENT_SUBCLASS(NavaidLoader,"NavaidLoader")
 EMPTY_SLOTTABLE(NavaidLoader)
@@ -484,5 +484,5 @@ NavaidLoader::NavaidKey::~NavaidKey()
 {
 }
 
-} // End Dafif namespace
-} // End Eaagles namespace
+} // End dafif namespace
+} // End oe namespace

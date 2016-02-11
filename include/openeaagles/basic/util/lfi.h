@@ -1,12 +1,11 @@
 
-#ifndef __Eaagles_Basic_lfi_H__
-#define __Eaagles_Basic_lfi_H__
+#ifndef __oe_basic_lfi_H__
+#define __oe_basic_lfi_H__
 
 #include "openeaagles/basic/support.h"
 
-namespace Eaagles {
-namespace Basic {
-namespace lfi {
+namespace oe {
+namespace basic {
 
 //==============================================================================
 // Linear Function Interpolators
@@ -113,7 +112,6 @@ LCreal lfi_5D(const LCreal x, const LCreal y, const LCreal z, const LCreal w, co
          unsigned int* const vbp=nullptr
       );
 
-}
 }
 }
 

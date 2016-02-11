@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: GlutDisplay
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Glut_GlutDisplay_H__
-#define __Eaagles_Glut_GlutDisplay_H__
+#ifndef __oe_glut_GlutDisplay_H__
+#define __oe_glut_GlutDisplay_H__
 
-#include "openeaagles/basicGL/Display.h"
+#include "openeaagles/graphics/Display.h"
 
-namespace Eaagles {
-namespace Glut {
+namespace oe {
+namespace glut {
 
 //------------------------------------------------------------------------------
 // Class:  GlutDisplay
@@ -22,7 +22,7 @@ namespace Glut {
 //    function and exit (main windows only).  Override the onEscKey() event
 //    handler as required.
 //
-//    3) By default, the clear depth value (see BasicGL::Display slot 'clearDepth')
+//    3) By default, the clear depth value (see graphics::Display slot 'clearDepth')
 //    is not set, which is disables the GL_DEPTH_TEST and does the depth buffer
 //    is not enabled.  To enabled the depth buffer and the depth test, set the
 //    clear depth values using the 'clearDepth' slot.
@@ -47,8 +47,8 @@ namespace Glut {
 //    ESC_KEY     -- calls onEscKey() event handler; see note #2.
 //
 //------------------------------------------------------------------------------
-class GlutDisplay : public BasicGL::Display {
-   DECLARE_SUBCLASS(GlutDisplay, BasicGL::Display)
+class GlutDisplay : public graphics::Display {
+   DECLARE_SUBCLASS(GlutDisplay, graphics::Display)
 
 public:
    GlutDisplay();
@@ -93,13 +93,13 @@ public:
    const osg::Vec2d& getSubwindowSize() const;
 
    // Slot functions
-   bool setSlotFullScreen(const Basic::Number* const msg);
-   bool setSlotIdleSleepTime(const Basic::Number* const msg);
-   bool setSlotResizeWindows(const Basic::Number* const msg);
-   bool setSlotPickWidth(const Basic::Number* const msg);
-   bool setSlotPickHeight(const Basic::Number* const msg);
-   bool setSlotAccumBuff(const Basic::Number* const msg);
-   bool setSlotStencilBuff(const Basic::Number* const msg);
+   bool setSlotFullScreen(const basic::Number* const msg);
+   bool setSlotIdleSleepTime(const basic::Number* const msg);
+   bool setSlotResizeWindows(const basic::Number* const msg);
+   bool setSlotPickWidth(const basic::Number* const msg);
+   bool setSlotPickHeight(const basic::Number* const msg);
+   bool setSlotAccumBuff(const basic::Number* const msg);
+   bool setSlotStencilBuff(const basic::Number* const msg);
 
    void select() override;                       // Selects this display.
    void hide() override;
@@ -109,7 +109,7 @@ public:
    void mouseEvent(const int button, const int state, const int x, const int y) override;
 
    void reset() override;
-   bool event(const int event, Basic::Object* const obj = nullptr) override;
+   bool event(const int event, basic::Object* const obj = nullptr) override;
 
 protected:
    // Creates a subwindow and returns the window ID (or -1 if failed)
@@ -197,7 +197,7 @@ inline unsigned int GlutDisplay::getIdleSleepTime() const           { return idl
 inline const osg::Vec2d& GlutDisplay::getSubwindowPosition() const  { return swPosition;      }
 inline const osg::Vec2d& GlutDisplay::getSubwindowSize() const      { return swSize;          }
 
-} // End Glut namespace
-} // End Eaagles namespace
+} // End glut namespace
+} // End oe namespace
 
 #endif

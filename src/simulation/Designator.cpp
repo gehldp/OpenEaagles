@@ -1,7 +1,7 @@
 #include "openeaagles/simulation/Designator.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Designator,"Designator")
 EMPTY_SERIALIZER(Designator)
@@ -26,5 +26,5 @@ void Designator::deleteData()
 {
 }
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace

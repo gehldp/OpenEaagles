@@ -1,16 +1,16 @@
 //------------------------------------------------------------------------------
 // Class:       Switch
-// Base class:  Basic::Object -> Basic::Component -> BasicGL::Graphic -> Button -> Switch
+// Base class:  basic::Object -> basic::Component -> graphics::Graphic -> Button -> Switch
 // Description: Button that can have multiple formats, up to as many as the user
 // wants.
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_Switch_H__
-#define __Eaagles_Instruments_Switch_H__
+#ifndef __oe_instruments_Switch_H__
+#define __oe_instruments_Switch_H__
 
 #include "openeaagles/instruments/buttons/Button.h"
 
-namespace Eaagles {
-namespace Instruments {
+namespace oe {
+namespace instruments {
 
 class Switch : public Button {
     DECLARE_SUBCLASS(Switch,Button)
@@ -31,8 +31,8 @@ public:
     void updateData(const LCreal dt = 0.0) override;
 
 protected:
-    bool setSlotNumSelections(const Basic::Number* const msg);
-    bool setSlotCurrentState(const Basic::Number* const msg);
+    bool setSlotNumSelections(const basic::Number* const msg);
+    bool setSlotCurrentState(const basic::Number* const msg);
 
 private:
     int currentState;   // which state are we currently in?
@@ -40,7 +40,7 @@ private:
     SendData currentStateSD;
 };
 
-}  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end instruments namespace
+}  // end oe namespace
 
 #endif

@@ -1,12 +1,12 @@
 #
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboeRecorder.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboerecorder.a
 
 OBJS =  \
 	$(LIB)(DataRecorder.o) \
 	$(LIB)(DataRecordHandle.o) \
-	$(LIB)(Factory.o) \
+	$(LIB)(factory.o) \
 	$(LIB)(FileReader.o) \
 	$(LIB)(FileWriter.o) \
 	$(LIB)(InputHandler.o) \
@@ -16,7 +16,6 @@ OBJS =  \
 	$(LIB)(PrintHandler.o) \
 	$(LIB)(PrintPlayer.o) \
 	$(LIB)(PrintSelected.o) \
-	$(LIB)(recorderFF.o) \
 	$(LIB)(TabPrinter.o)
 
 SUBDIRS = protobuf

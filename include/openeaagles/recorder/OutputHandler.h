@@ -1,16 +1,16 @@
 //------------------------------------------------------------------------------
 // Class: OutputHandler
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Recorder_OutputHandler_H__
-#define __Eaagles_Recorder_OutputHandler_H__
+#ifndef __oe_recorder_OutputHandler_H__
+#define __oe_recorder_OutputHandler_H__
 
 #include "openeaagles/simulation/DataRecorder.h"
 #include "openeaagles/basic/List.h"
 
-namespace Eaagles {
-   namespace Basic { class List; }
+namespace oe {
+   namespace basic { class List; }
 
-namespace Recorder {
+namespace recorder {
    class DataRecordHandle;
 
 //------------------------------------------------------------------------------
@@ -36,9 +36,9 @@ namespace Recorder {
 //    components     ! Must contain only 'OutputHandler' type objects
 //
 //------------------------------------------------------------------------------
-class OutputHandler : public Simulation::RecorderComponent
+class OutputHandler : public simulation::RecorderComponent
 {
-   DECLARE_SUBCLASS(OutputHandler, Simulation::RecorderComponent)
+   DECLARE_SUBCLASS(OutputHandler, simulation::RecorderComponent)
 
 public:
    OutputHandler();
@@ -60,21 +60,21 @@ protected:
    bool isDataTypeEnabled(const DataRecordHandle* const handle) const;
 
    void processComponents(
-         Basic::PairStream* const list,        // Source list of components
+         basic::PairStream* const list,        // Source list of components
          const std::type_info& filter,           // Type filter
-         Basic::Pair* const add = 0,           // Optional pair to add
-         Basic::Component* const remove = 0    // Optional subcomponent to remove
+         basic::Pair* const add = 0,           // Optional pair to add
+         basic::Component* const remove = 0    // Optional subcomponent to remove
       ) override;
    bool shutdownNotification() override;
 
 private:
    void initData();
 
-   Basic::List queue; // Data Record Queue
+   basic::List queue; // Data Record Queue
    mutable long semaphore;
 };
 
-} // End Recorder namespace
-} // End Eaagles namespace
+} // End recorder namespace
+} // End oe namespace
 
 #endif

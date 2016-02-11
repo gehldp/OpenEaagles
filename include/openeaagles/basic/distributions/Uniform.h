@@ -1,11 +1,11 @@
 
-#ifndef __Eaagles_Basic_Uniform_H__
-#define __Eaagles_Basic_Uniform_H__
+#ifndef __oe_basic_Uniform_H__
+#define __oe_basic_Uniform_H__
 
 #include "../Rng.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 class Number;
 
@@ -35,7 +35,7 @@ protected:
 
 };
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 
 #endif

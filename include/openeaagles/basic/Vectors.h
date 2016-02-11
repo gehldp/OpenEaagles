@@ -9,13 +9,13 @@
 // "Numerical Methods", 1ed, Robert W. Hornbeck, Quantum (1975)
 // "Applied Numerical Methods for Digital Computation", 4ed, James-Smith-Wolford, Harper Collins (1993)
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Vectors_H__
-#define __Eaagles_Basic_Vectors_H__
+#ifndef __oe_basic_Vectors_H__
+#define __oe_basic_Vectors_H__
 
 #include "openeaagles/basic/Matrix.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class: RVector

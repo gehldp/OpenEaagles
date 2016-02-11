@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: LandingGear
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_LandingGear_H__
-#define __Eaagles_Instruments_LandingGear_H__
+#ifndef __oe_instruments_LandingGear_H__
+#define __oe_instruments_LandingGear_H__
 
 #include "openeaagles/instruments/Instrument.h"
 
-namespace Eaagles {
-namespace Instruments {
+namespace oe {
+namespace instruments {
 
 //------------------------------------------------------------------------------
 // Class: LandingGear
@@ -41,8 +41,8 @@ public:
 
 protected:
     // slot functions
-    bool setSlotGearDownValue(const Basic::Number* const newDV);
-    bool setSlotGearUpValue(const Basic::Number* const newUV);
+    bool setSlotGearDownValue(const basic::Number* const newDV);
+    bool setSlotGearUpValue(const basic::Number* const newUV);
 
 private:
     int gearState;      // is our gear down, up, or in transit?
@@ -55,7 +55,7 @@ private:
     bool haveRotary;    // do we have a rotary now that is our components (we won't draw if we do)
 };
 
-}  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end instruments namespace
+}  // end oe namespace
 
 #endif

@@ -1,7 +1,7 @@
 #
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboeSimulation.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboesimulation.a
 
 OBJS =  \
 	$(LIB)(Aam.o) \
@@ -24,7 +24,7 @@ OBJS =  \
 	$(LIB)(Effects.o) \
 	$(LIB)(Emission.o) \
 	$(LIB)(ExternalStore.o) \
-	$(LIB)(Factory.o) \
+	$(LIB)(factory.o) \
 	$(LIB)(FuelTank.o) \
 	$(LIB)(Gimbal.o) \
 	$(LIB)(Gps.o) \
@@ -72,7 +72,6 @@ OBJS =  \
 	$(LIB)(SimAgent.o) \
 	$(LIB)(SimLogger.o) \
 	$(LIB)(Simulation.o) \
-	$(LIB)(simulationFF.o) \
 	$(LIB)(SpaceVehicle.o) \
 	$(LIB)(StabilizingGimbal.o) \
 	$(LIB)(Station.o) \

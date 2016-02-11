@@ -9,8 +9,8 @@
 #include "openeaagles/basic/units/Angles.h"
 #include "openeaagles/simulation/Player.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Rwr,"Rwr")
 EMPTY_SLOTTABLE(Rwr)
@@ -149,7 +149,7 @@ void Rwr::receive(const LCreal dt)
             // Store received power for real-beam display
             const LCreal sigDbl = 10.0f * lcLog10(signal);
             const LCreal signal10 = (sigDbl + 50.0f)/50.f;
-            const int idx = getRayIndex( static_cast<LCreal>(Basic::Angle::R2DCC * aoa) );
+            const int idx = getRayIndex( static_cast<LCreal>(basic::Angle::R2DCC * aoa) );
             rays[0][idx] = lim01(rays[0][idx] + signal10);
             //if (idx == 0 && getOwnship()->getID() == 1011) {
             //   std::cout << "sig = " << signal10 << std::endl;
@@ -257,5 +257,5 @@ std::ostream& Rwr::serialize(std::ostream& sout, const int i, const bool slotsOn
     return sout;
 }
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace

@@ -44,13 +44,13 @@
 //
 //------------------------------------------------------------------------------
 
-#ifndef __Eaagles_Basic_Volumes_H__
-#define __Eaagles_Basic_Volumes_H__
+#ifndef __oe_basic_Volumes_H__
+#define __oe_basic_Volumes_H__
 
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 // ----------------------------------------------------------------------------
 // Define Volumes Conversion Constants:
@@ -189,7 +189,7 @@ public:
     LCreal fromVolume(const LCreal a) const override { return a * CM2L; }
 };
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 
 #endif

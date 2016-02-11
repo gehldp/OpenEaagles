@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Sam
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Sam_H__
-#define __Eaagles_Simulation_Sam_H__
+#ifndef __oe_simulation_Sam_H__
+#define __oe_simulation_Sam_H__
 
 #include "openeaagles/simulation/Missile.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Class: Sam
@@ -28,7 +28,7 @@ public:
     int getCategory() const override;
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

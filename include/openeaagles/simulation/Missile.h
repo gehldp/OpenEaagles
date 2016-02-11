@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Class: Missile
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Missile_H__
-#define __Eaagles_Simulation_Missile_H__
+#ifndef __oe_simulation_Missile_H__
+#define __oe_simulation_Missile_H__
 
 #include "openeaagles/simulation/Weapon.h"
 #include "openeaagles/basic/units/Angles.h"
 
-namespace Eaagles {
-   namespace Basic { class Number; }
-namespace Simulation {
+namespace oe {
+   namespace basic { class Number; }
+namespace simulation {
 
 class Player;
 class Track;
@@ -57,24 +57,24 @@ public:
     int getCategory() const override;
     void atReleaseInit() override;
 
-    virtual void setCmdPitchD(const LCreal x)  { cmdPitch   = x * static_cast<LCreal>(Basic::Angle::D2RCC); }
-    virtual void setCmdHdgD(const LCreal x)    { cmdHeading = x * static_cast<LCreal>(Basic::Angle::D2RCC); }
+    virtual void setCmdPitchD(const LCreal x)  { cmdPitch   = x * static_cast<LCreal>(basic::Angle::D2RCC); }
+    virtual void setCmdHdgD(const LCreal x)    { cmdHeading = x * static_cast<LCreal>(basic::Angle::D2RCC); }
 
     bool setTargetTrack(Track* const trk, const bool posTrkEnb) override;
     bool setTargetPlayer(Player* const tgt, const bool posTrkEnb) override;
 
-    bool event(const int event, Basic::Object* const obj = nullptr) override;
+    bool event(const int event, basic::Object* const obj = nullptr) override;
     void reset() override;
 
 protected:
-   virtual bool setSlotVpMin(const Basic::Number* const msg);
-   virtual bool setSlotVpMax(const Basic::Number* const msg);
-   virtual bool setSlotVpMaxG(const Basic::Number* const msg);
-   virtual bool setSlotMaxG(const Basic::Number* const msg);
-   virtual bool setSlotMaxAccel(const Basic::Number* const msg);
-   virtual bool setSlotCmdPitch(const Basic::Number* const msg);
-   virtual bool setSlotCmdHeading(const Basic::Number* const msg);
-   virtual bool setSlotCmdVelocity(const Basic::Number* const msg);
+   virtual bool setSlotVpMin(const basic::Number* const msg);
+   virtual bool setSlotVpMax(const basic::Number* const msg);
+   virtual bool setSlotVpMaxG(const basic::Number* const msg);
+   virtual bool setSlotMaxG(const basic::Number* const msg);
+   virtual bool setSlotMaxAccel(const basic::Number* const msg);
+   virtual bool setSlotCmdPitch(const basic::Number* const msg);
+   virtual bool setSlotCmdHeading(const basic::Number* const msg);
+   virtual bool setSlotCmdVelocity(const basic::Number* const msg);
 
    // Weapon interface
    void weaponGuidance(const LCreal dt) override;
@@ -101,7 +101,7 @@ private:
 
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

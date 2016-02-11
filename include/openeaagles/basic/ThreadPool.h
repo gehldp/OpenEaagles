@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: ThreadPool
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_ThreadPool_H__
-#define __Eaagles_Basic_ThreadPool_H__
+#ifndef __oe_basic_ThreadPool_H__
+#define __oe_basic_ThreadPool_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
    class Component;
    class ThreadPoolThread;
 
@@ -145,8 +145,8 @@ private:
    Object* unthreadedObj;
 };
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 
 #endif
 

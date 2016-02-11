@@ -19,14 +19,14 @@
 // ThreadSyncTask thread classes that are used can be found in the "otw/OtwCigiCl.cpp",
 // "simulation/Station.cpp" and "simulation/Simulation.cpp" files, respectively.
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Thread_H__
-#define __Eaagles_Basic_Thread_H__
+#ifndef __oe_basic_Thread_H__
+#define __oe_basic_Thread_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/basic/Statistic.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
    class Component;
 
 //------------------------------------------------------------------------------
@@ -265,8 +265,8 @@ private:
    void* completedSig;  // completed signal
 };
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 
 #endif
 

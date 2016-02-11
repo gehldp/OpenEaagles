@@ -1,34 +1,34 @@
 //------------------------------------------------------------------------------
-// Class: Dis::Nib
+// Class: dis::Nib
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Network_Dis_Nib_H__
-#define __Eaagles_Network_Dis_Nib_H__
+#ifndef __oe_network_dis_Nib_H__
+#define __oe_network_dis_Nib_H__
 
 #include "openeaagles/simulation/Nib.h"
 #include "openeaagles/dis/NetIO.h"
 
-namespace Eaagles {
-namespace Network {
-namespace Dis {
+namespace oe {
+namespace network {
+namespace dis {
 class Ntm;
 
 //==============================================================================
-// Class: Dis::Nib
+// Class: dis::Nib
 // Description: Unique DIS Network Interface Block (NIB)
 //
-//    This class, which is derived from the Simulation::Nib, is used to manage
+//    This class, which is derived from the simulation::Nib, is used to manage
 //    the relationship between players and their corresponding DIS entities.
 //
 //==============================================================================
-class Nib : public Simulation::Nib
+class Nib : public simulation::Nib
 {
-    DECLARE_SUBCLASS(Nib,Simulation::Nib)
+    DECLARE_SUBCLASS(Nib,simulation::Nib)
 
 public:
     enum { MAX_EM_SYSTEMS = 16 };
 
 public:
-    Nib(const Simulation::NetIO::IoType ioType);
+    Nib(const simulation::NetIO::IoType ioType);
 
    // Site & App IDs
    unsigned short getSiteID() const                           { return siteID; }
@@ -41,7 +41,7 @@ public:
    virtual void entityStatePdu2Nib(const EntityStatePDU* const pdu);
 
    // Update check functions
-   virtual bool isIffUpdateRequired(const LCreal curExecTime, const Simulation::Iff* const iffSystem);
+   virtual bool isIffUpdateRequired(const LCreal curExecTime, const simulation::Iff* const iffSystem);
 
    //These are all going to be moved to separate classes, but for now, are just virtual functions, see above in disIO)
    virtual bool IffManager(const LCreal curExecTime);
@@ -114,8 +114,8 @@ private:
    double timeOffset;
 };
 
-} // End Dis namespace
-} // End Network namespace
-} // End Eaagles namespace
+} // End dis namespace
+} // End network namespace
+} // End oe namespace
 
 #endif

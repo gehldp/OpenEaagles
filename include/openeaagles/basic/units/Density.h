@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Class: Density
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Density_H__
-#define __Eaagles_Basic_Density_H__
+#ifndef __oe_basic_Density_H__
+#define __oe_basic_Density_H__
 
 #include "openeaagles/basic/Number.h"
 #include "Masses.h"
 #include "Volumes.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 //------------------------------------------------------------------------------
 // Classes: Density
 //
@@ -81,7 +81,7 @@ inline std::ostream& operator<<(std::ostream& sout, const Density& n)
     return sout;
 }
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 
 #endif

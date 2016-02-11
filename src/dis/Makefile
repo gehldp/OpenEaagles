@@ -1,12 +1,11 @@
 #
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboeDis.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboedis.a
 
 OBJS =  \
-	$(LIB)(disFF.o) \
 	$(LIB)(EmissionPduHandler.o) \
-	$(LIB)(Factory.o) \
+	$(LIB)(factory.o) \
 	$(LIB)(NetIO.o) \
 	$(LIB)(NetIO-entity-state.o) \
 	$(LIB)(NetIO-munition-detonation.o) \

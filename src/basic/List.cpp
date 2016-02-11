@@ -6,8 +6,8 @@
 
 #include <cstdlib>
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(List,"List")
 
@@ -423,5 +423,5 @@ std::ostream& List::serialize(std::ostream& sout, const int, const bool) const
     return sout;
 }
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace

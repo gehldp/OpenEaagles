@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: SimAgent
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_SimAgent_H__
-#define __Eaagles_Simulation_SimAgent_H__
+#ifndef __oe_simulation_SimAgent_H__
+#define __oe_simulation_SimAgent_H__
 
 #include "openeaagles/basic/ubf/Agent.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 class Simulation;
 class Station;
@@ -25,9 +25,9 @@ class Station;
 //    actorPlayerName      <String>    ! The agent's actor - playerName
 //    actorComponentName   <String>    ! The agent's actor - componentName
 //------------------------------------------------------------------------------
-class SimAgent : public Basic::Ubf::Agent
+class SimAgent : public basic::ubf::Agent
 {
-   DECLARE_SUBCLASS(SimAgent, Basic::Ubf::Agent)
+   DECLARE_SUBCLASS(SimAgent, basic::ubf::Agent)
 public:
    SimAgent();
 
@@ -44,12 +44,12 @@ protected:
 
    // slot functions
    // slot to set agent's actor (component to be controlled)
-   bool setSlotActorPlayerName(const Basic::String* const);
-   bool setSlotActorComponentName(const Basic::String* const);
+   bool setSlotActorPlayerName(const basic::String* const);
+   bool setSlotActorComponentName(const basic::String* const);
 
 private:
-   const Basic::String*    actorPlayerName;
-   const Basic::String*    actorComponentName;
+   const basic::String*    actorPlayerName;
+   const basic::String*    actorComponentName;
    Station* myStation;
 };
 
@@ -76,8 +76,8 @@ private:
 //   ) // simulation
 //) // Station
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif
 

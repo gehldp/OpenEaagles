@@ -4,9 +4,9 @@
 
 #include "openeaagles/basic/ubf/Action.h"
 
-namespace Eaagles {
-namespace Basic {
-namespace Ubf {
+namespace oe {
+namespace basic {
+namespace ubf {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(Action, "UbfAction")
 EMPTY_SLOTTABLE(Action)
@@ -25,7 +25,7 @@ void Action::copyData(const Action& org, const bool cc)
    vote = org.vote;
 }
 
-} // End Ubf namespace
-} // End Basic namespace
-} // End Eaagles namespace
+} // End ubf namespace
+} // End basic namespace
+} // End oe namespace
 

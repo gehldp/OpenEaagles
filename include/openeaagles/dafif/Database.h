@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: Database
-// Base class:  Basic::Object -> Database
+// Base class:  basic::Object -> Database
 //
 // Description: Abstract class used to access DAFIF databases; both file
 //              loaders and network clients.
@@ -99,21 +99,21 @@
 //       Prints the records in the ICAO sorted list
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Dafif_Database_H__
-#define __Eaagles_Dafif_Database_H__
+#ifndef __oe_dafif_Database_H__
+#define __oe_dafif_Database_H__
 
 #include "openeaagles/basic/Object.h"
 #include "dafifc.h"
 
-namespace Eaagles {
-   namespace Basic {
+namespace oe {
+   namespace basic {
       class FileReader;
       class String;
    }
-namespace Dafif {
+namespace dafif {
 
-class Database : public Basic::Object {
-    DECLARE_SUBCLASS(Database,Basic::Object)
+class Database : public basic::Object {
+    DECLARE_SUBCLASS(Database,basic::Object)
 
 public:
    Database();
@@ -154,7 +154,7 @@ public:
    bool setPathname(const char* path);
    bool setFilename(const char* file);
 
-   // Memory key used for quick Dafif record lookup
+   // Memory key used for quick dafif record lookup
    struct Key {
       int      idx;     // Database index
       int      size;    // Size of record
@@ -174,8 +174,8 @@ public:
    };
 
 protected:
-   bool setSlotPathname(Basic::String* const msg);
-   bool setSlotFilename(Basic::String* const msg);
+   bool setSlotPathname(basic::String* const msg);
+   bool setSlotFilename(basic::String* const msg);
 
    bool openDatabaseFile();
 
@@ -207,7 +207,7 @@ protected:
    static void stripSpaces(char buff[], const int n);
    static void fillSpaces(char buff[], const int n);
 
-   Basic::FileReader* db; // The database (loaders)
+   basic::FileReader* db; // The database (loaders)
    long ncache;      // Number of keys alloced
 
    Key** rl;         // List of DAFIF records in the database
@@ -230,7 +230,7 @@ protected:
    bool dbLoaded;    // Database has been loader
 };
 
-} // End Dafif namespace
-} // End Eaagles namespace
+} // End dafif namespace
+} // End oe namespace
 
 #endif

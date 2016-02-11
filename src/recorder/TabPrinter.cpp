@@ -15,8 +15,8 @@
 # pragma warning(disable: 4996)
 #endif
 
-namespace Eaagles {
-namespace Recorder {
+namespace oe {
+namespace recorder {
 
 
 //==============================================================================
@@ -34,8 +34,8 @@ END_SLOTTABLE(TabPrinter)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(TabPrinter)
-   ON_SLOT( 1, setSlotMsgHdr,      Basic::String)
-   ON_SLOT( 2, setSlotDivider,     Basic::String)
+   ON_SLOT( 1, setSlotMsgHdr,      basic::String)
+   ON_SLOT( 2, setSlotDivider,     basic::String)
 END_SLOT_MAP()
 
 EMPTY_SERIALIZER(TabPrinter)
@@ -109,7 +109,7 @@ void TabPrinter::setMsgHeaders(const bool f)
 //------------------------------------------------------------------------------
 // setSlotMsgHdr
 //------------------------------------------------------------------------------
-bool TabPrinter::setSlotMsgHdr(const Basic::String* const msg)
+bool TabPrinter::setSlotMsgHdr(const basic::String* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -143,7 +143,7 @@ bool TabPrinter::setSlotMsgHdr(const Basic::String* const msg)
 //------------------------------------------------------------------------------
 // setSlotDivider
 //------------------------------------------------------------------------------
-bool TabPrinter::setSlotDivider(const Basic::String* const msg)
+bool TabPrinter::setSlotDivider(const basic::String* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -158,7 +158,7 @@ bool TabPrinter::setSlotDivider(const Basic::String* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* TabPrinter::getSlotByIndex(const int si)
+basic::Object* TabPrinter::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -169,11 +169,11 @@ Basic::Object* TabPrinter::getSlotByIndex(const int si)
 void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
 {
    if (handle == nullptr) return;  // cannot continue
-   const Pb::DataRecord* dataRecord = handle->getRecord();
+   const pb::DataRecord* dataRecord = handle->getRecord();
    if (dataRecord == nullptr) return;  // cannot continue
 
    // Get the time msg
-   const Pb::Time* timeMsg = nullptr;
+   const pb::Time* timeMsg = nullptr;
    if (dataRecord->has_time()) {
       timeMsg = &dataRecord->time();
    }
@@ -213,7 +213,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_file_id_msg()) {
             if ((option == NEW_MSG) && (fileIdHdr)) printHeader = true;
             fileIdHdr = false;
-            const Pb::FileIdMsg* msg = &dataRecord->file_id_msg();
+            const pb::FileIdMsg* msg = &dataRecord->file_id_msg();
             printFileIdMsg(timeMsg, msg);
          }
          break;
@@ -224,7 +224,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_new_player_event_msg()) {
             if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
-            const Pb::NewPlayerEventMsg* msg = &dataRecord->new_player_event_msg();
+            const pb::NewPlayerEventMsg* msg = &dataRecord->new_player_event_msg();
             printNewPlayerEventMsg(timeMsg, msg);
          }
          break;
@@ -234,7 +234,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_removed_event_msg()) {
             if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
-            const Pb::PlayerRemovedEventMsg* msg = &dataRecord->player_removed_event_msg();
+            const pb::PlayerRemovedEventMsg* msg = &dataRecord->player_removed_event_msg();
             printPlayerRemovedEventMsg(timeMsg, msg);
          }
          break;
@@ -244,7 +244,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_data_msg()) {
             if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
-            const Pb::PlayerDataMsg* msg = &dataRecord->player_data_msg();
+            const pb::PlayerDataMsg* msg = &dataRecord->player_data_msg();
             printPlayerDataMsg(timeMsg, msg);
          }
          break;
@@ -253,7 +253,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
         if (dataRecord->has_player_damaged_event_msg()) {
             if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
-            const Pb::PlayerDamagedEventMsg* msg = &dataRecord->player_damaged_event_msg();
+            const pb::PlayerDamagedEventMsg* msg = &dataRecord->player_damaged_event_msg();
             printPlayerDamagedEventMsg(timeMsg, msg);
          }
          break;
@@ -262,7 +262,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_collision_event_msg()) {
             if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
-            const Pb::PlayerCollisionEventMsg* msg = &dataRecord->player_collision_event_msg();
+            const pb::PlayerCollisionEventMsg* msg = &dataRecord->player_collision_event_msg();
             printPlayerCollisionEventMsg(timeMsg, msg);
          }
          break;
@@ -271,7 +271,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_crash_event_msg()) {
             if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
-            const Pb::PlayerCrashEventMsg* msg = &dataRecord->player_crash_event_msg();
+            const pb::PlayerCrashEventMsg* msg = &dataRecord->player_crash_event_msg();
             printPlayerCrashEventMsg(timeMsg, msg);
          }
          break;
@@ -280,7 +280,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_killed_event_msg()) {
             if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
-            const Pb::PlayerKilledEventMsg* msg = &dataRecord->player_killed_event_msg();
+            const pb::PlayerKilledEventMsg* msg = &dataRecord->player_killed_event_msg();
             printPlayerKilledEventMsg(timeMsg, msg);
          }
          break;
@@ -289,7 +289,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_weapon_release_event_msg()) {
             if ((option == NEW_MSG) && (weaponHeader)) printHeader = true;
             weaponHeader = false;
-            const Pb::WeaponReleaseEventMsg* msg = &dataRecord->weapon_release_event_msg();
+            const pb::WeaponReleaseEventMsg* msg = &dataRecord->weapon_release_event_msg();
             printWeaponReleaseEventMsg(timeMsg, msg);
          }
          break;
@@ -298,7 +298,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_weapon_hung_event_msg()) {
             if ((option == NEW_MSG) && (weaponHeader)) printHeader = true;
             weaponHeader = false;
-            const Pb::WeaponHungEventMsg* msg = &dataRecord->weapon_hung_event_msg();
+            const pb::WeaponHungEventMsg* msg = &dataRecord->weapon_hung_event_msg();
             printWeaponHungEventMsg(timeMsg, msg);
          }
          break;
@@ -307,7 +307,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_weapon_detonation_event_msg()) {
             if ((option == NEW_MSG) && (weaponHeader)) printHeader = true;
             weaponHeader = false;
-            const Pb::WeaponDetonationEventMsg* msg = &dataRecord->weapon_detonation_event_msg();
+            const pb::WeaponDetonationEventMsg* msg = &dataRecord->weapon_detonation_event_msg();
             printWeaponDetonationEventMsg(timeMsg, msg);
          }
          break;
@@ -316,7 +316,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_gun_fired_event_msg()) {
             if ((option == NEW_MSG) && (gunFiredHdr)) printHeader = true;
             gunFiredHdr = false;
-            const Pb::GunFiredEventMsg* msg = &dataRecord->gun_fired_event_msg();
+            const pb::GunFiredEventMsg* msg = &dataRecord->gun_fired_event_msg();
             printGunFiredEventMsg(timeMsg, msg);
          }
          break;
@@ -325,7 +325,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_new_track_event_msg()) {
             if ((option == NEW_MSG) && (trackHeader)) printHeader = true;
             trackHeader = false;
-            const Pb::NewTrackEventMsg* msg = &dataRecord->new_track_event_msg();
+            const pb::NewTrackEventMsg* msg = &dataRecord->new_track_event_msg();
             printNewTrackEventMsg(timeMsg, msg);
          }
          break;
@@ -334,7 +334,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_track_removed_event_msg()) {
             if ((option == NEW_MSG) && (trackHeader)) printHeader = true;
             trackHeader = false;
-            const Pb::TrackRemovedEventMsg* msg = &dataRecord->track_removed_event_msg();
+            const pb::TrackRemovedEventMsg* msg = &dataRecord->track_removed_event_msg();
             printTrackRemovedEventMsg(timeMsg, msg);
          }
          break;
@@ -343,7 +343,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_track_data_msg()) {
             if ((option == NEW_MSG) && (trackHeader)) printHeader = true;
             trackHeader = false;
-            const Pb::TrackDataMsg* msg = &dataRecord->track_data_msg();
+            const pb::TrackDataMsg* msg = &dataRecord->track_data_msg();
             printTrackDataMsg(timeMsg, msg);
          }
          break;
@@ -358,7 +358,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_marker_msg()) {
             if ((option == NEW_MSG) && (markerHdr)) printHeader = true;
             markerHdr = false;
-            const Pb::MarkerMsg* msg = &dataRecord->marker_msg();
+            const pb::MarkerMsg* msg = &dataRecord->marker_msg();
             printMarkerMsg(timeMsg, msg);
          }
          break;
@@ -368,7 +368,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_input_device_msg()) {
             if ((option == NEW_MSG) && (inputDeviceHdr)) printHeader = true;
             inputDeviceHdr = false;
-            const Pb::InputDeviceMsg* msg = &dataRecord->input_device_msg();
+            const pb::InputDeviceMsg* msg = &dataRecord->input_device_msg();
             printInputDeviceMsg(timeMsg, msg, messageId);
          }
          break;
@@ -378,7 +378,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_input_device_msg()) {
             if ((option == NEW_MSG) && (inputDeviceHdr)) printHeader = true;
             inputDeviceHdr = false;
-            const Pb::InputDeviceMsg* msg = &dataRecord->input_device_msg();
+            const pb::InputDeviceMsg* msg = &dataRecord->input_device_msg();
             printInputDeviceMsg(timeMsg, msg, messageId);
          }
          break;
@@ -397,7 +397,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          break;
       }
       default: {
-         // not an Eaagles message.
+         // not an oe message.
          break;
       }
    }
@@ -412,7 +412,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
 //------------------------------------------------------------------------------
 // printFileIdMsg
 //-----------------------------------------------------------------------------
-void TabPrinter::printFileIdMsg(const Pb::Time* const timeMsg, const Pb::FileIdMsg* const msg)
+void TabPrinter::printFileIdMsg(const pb::Time* const timeMsg, const pb::FileIdMsg* const msg)
 {
    std::stringstream sout;
 
@@ -493,7 +493,7 @@ void TabPrinter::printFileIdMsg(const Pb::Time* const timeMsg, const Pb::FileIdM
 //------------------------------------------------------------------------------
 // printNewPlayerEventMsg
 //--------------------------------------------------------------------------
-void TabPrinter::printNewPlayerEventMsg(const Pb::Time* const timeMsg, const Pb::NewPlayerEventMsg* const msg)
+void TabPrinter::printNewPlayerEventMsg(const pb::Time* const timeMsg, const pb::NewPlayerEventMsg* const msg)
 {
    std::stringstream sout;
 
@@ -533,7 +533,7 @@ void TabPrinter::printNewPlayerEventMsg(const Pb::Time* const timeMsg, const Pb:
 //------------------------------------------------------------------------------
 // printPlayerRemovedEventMsg
 //--------------------------------------------------------------------------
-void TabPrinter::printPlayerRemovedEventMsg(const Pb::Time* const timeMsg, const Pb::PlayerRemovedEventMsg* const msg)
+void TabPrinter::printPlayerRemovedEventMsg(const pb::Time* const timeMsg, const pb::PlayerRemovedEventMsg* const msg)
 {
    std::stringstream sout;
 
@@ -573,7 +573,7 @@ void TabPrinter::printPlayerRemovedEventMsg(const Pb::Time* const timeMsg, const
 //------------------------------------------------------------------------------
 // printPlayerDataMsg
 //--------------------------------------------------------------------------
-void TabPrinter::printPlayerDataMsg(const Pb::Time* const timeMsg, const Pb::PlayerDataMsg* const msg)
+void TabPrinter::printPlayerDataMsg(const pb::Time* const timeMsg, const pb::PlayerDataMsg* const msg)
 {
    std::stringstream sout;
 
@@ -634,7 +634,7 @@ void TabPrinter::printPlayerDataMsg(const Pb::Time* const timeMsg, const Pb::Pla
 //------------------------------------------------------------------------------
 // printPlayerDamagedEventMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printPlayerDamagedEventMsg(const Pb::Time* const timeMsg, const Pb::PlayerDamagedEventMsg* const msg)
+void TabPrinter::printPlayerDamagedEventMsg(const pb::Time* const timeMsg, const pb::PlayerDamagedEventMsg* const msg)
 {
    std::stringstream sout;
 
@@ -676,7 +676,7 @@ void TabPrinter::printPlayerDamagedEventMsg(const Pb::Time* const timeMsg, const
 //------------------------------------------------------------------------------
 // printPlayerCollisionEventMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printPlayerCollisionEventMsg(const Pb::Time* const timeMsg, const Pb::PlayerCollisionEventMsg* const msg)
+void TabPrinter::printPlayerCollisionEventMsg(const pb::Time* const timeMsg, const pb::PlayerCollisionEventMsg* const msg)
 {
    std::stringstream sout;
 
@@ -726,7 +726,7 @@ void TabPrinter::printPlayerCollisionEventMsg(const Pb::Time* const timeMsg, con
 //------------------------------------------------------------------------------
 // printPlayerCrashEventMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printPlayerCrashEventMsg(const Pb::Time* const timeMsg, const Pb::PlayerCrashEventMsg* const msg)
+void TabPrinter::printPlayerCrashEventMsg(const pb::Time* const timeMsg, const pb::PlayerCrashEventMsg* const msg)
 {
    std::stringstream sout;
 
@@ -767,7 +767,7 @@ void TabPrinter::printPlayerCrashEventMsg(const Pb::Time* const timeMsg, const P
 //------------------------------------------------------------------------------
 // printPlayerKilledEventMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printPlayerKilledEventMsg(const Pb::Time* const timeMsg, const Pb::PlayerKilledEventMsg* const msg)
+void TabPrinter::printPlayerKilledEventMsg(const pb::Time* const timeMsg, const pb::PlayerKilledEventMsg* const msg)
 {
    std::stringstream sout;
 
@@ -816,7 +816,7 @@ void TabPrinter::printPlayerKilledEventMsg(const Pb::Time* const timeMsg, const 
 //------------------------------------------------------------------------------
 // printWeaponReleaseEventMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printWeaponReleaseEventMsg(const Pb::Time* const timeMsg, const Pb::WeaponReleaseEventMsg* const msg)
+void TabPrinter::printWeaponReleaseEventMsg(const pb::Time* const timeMsg, const pb::WeaponReleaseEventMsg* const msg)
 {
    std::stringstream sout;
 
@@ -869,7 +869,7 @@ void TabPrinter::printWeaponReleaseEventMsg(const Pb::Time* const timeMsg, const
 //------------------------------------------------------------------------------
 // printWeaponHungEventMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printWeaponHungEventMsg(const Pb::Time* const timeMsg, const Pb::WeaponHungEventMsg* const msg)
+void TabPrinter::printWeaponHungEventMsg(const pb::Time* const timeMsg, const pb::WeaponHungEventMsg* const msg)
 {
    std::stringstream sout;
 
@@ -921,7 +921,7 @@ void TabPrinter::printWeaponHungEventMsg(const Pb::Time* const timeMsg, const Pb
 //------------------------------------------------------------------------------
 // printWeaponDetonationEventMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printWeaponDetonationEventMsg(const Pb::Time* const timeMsg, const Pb::WeaponDetonationEventMsg* const msg)
+void TabPrinter::printWeaponDetonationEventMsg(const pb::Time* const timeMsg, const pb::WeaponDetonationEventMsg* const msg)
 {
    std::stringstream sout;
 
@@ -990,7 +990,7 @@ void TabPrinter::printWeaponDetonationEventMsg(const Pb::Time* const timeMsg, co
 //------------------------------------------------------------------------------
 // printGunFiredEventMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printGunFiredEventMsg(const Pb::Time* const timeMsg, const Pb::GunFiredEventMsg* const msg)
+void TabPrinter::printGunFiredEventMsg(const pb::Time* const timeMsg, const pb::GunFiredEventMsg* const msg)
 {
    std::stringstream sout;
 
@@ -1032,7 +1032,7 @@ void TabPrinter::printGunFiredEventMsg(const Pb::Time* const timeMsg, const Pb::
 //------------------------------------------------------------------------------
 // printNewTrackEventMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printNewTrackEventMsg(const Pb::Time* const timeMsg, const Pb::NewTrackEventMsg* const msg)
+void TabPrinter::printNewTrackEventMsg(const pb::Time* const timeMsg, const pb::NewTrackEventMsg* const msg)
 {
    std::stringstream sout;
 
@@ -1110,7 +1110,7 @@ void TabPrinter::printNewTrackEventMsg(const Pb::Time* const timeMsg, const Pb::
 //------------------------------------------------------------------------------
 // printTrackRemovedEventMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printTrackRemovedEventMsg(const Pb::Time* const timeMsg, const Pb::TrackRemovedEventMsg* const msg)
+void TabPrinter::printTrackRemovedEventMsg(const pb::Time* const timeMsg, const pb::TrackRemovedEventMsg* const msg)
 {
    std::stringstream sout;
 
@@ -1154,7 +1154,7 @@ void TabPrinter::printTrackRemovedEventMsg(const Pb::Time* const timeMsg, const 
 //------------------------------------------------------------------------------
 // printTrackDataMsg (event)
 //------------------------------------------------------------------------------
-void TabPrinter::printTrackDataMsg(const Pb::Time* const timeMsg, const Pb::TrackDataMsg* const msg)
+void TabPrinter::printTrackDataMsg(const pb::Time* const timeMsg, const pb::TrackDataMsg* const msg)
 {
    std::stringstream sout;
 
@@ -1255,7 +1255,7 @@ void TabPrinter::printTrackMsgHdr(std::ostream& sout)
 //------------------------------------------------------------------------------
 // printTimeMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printTimeMsg(std::ostream& sout, const Pb::Time* const timeMsg)
+void TabPrinter::printTimeMsg(std::ostream& sout, const pb::Time* const timeMsg)
 {
 
    // print time message values:
@@ -1297,7 +1297,7 @@ void TabPrinter::printTimeMsgHdr(std::ostream& sout)
 //------------------------------------------------------------------------------
 // printPlayerIdMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printPlayerIdMsg(std::ostream& sout, const Pb::PlayerId* const msg)
+void TabPrinter::printPlayerIdMsg(std::ostream& sout, const pb::PlayerId* const msg)
 {
    // values
    if (msg != nullptr) {
@@ -1356,7 +1356,7 @@ void TabPrinter::printPlayerIdSpacer(std::ostream& sout)
 //------------------------------------------------------------------------------
 // printPlayerStateMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printPlayerStateMsg(std::ostream& sout, const Pb::PlayerState* const msg)
+void TabPrinter::printPlayerStateMsg(std::ostream& sout, const pb::PlayerState* const msg)
 {
    // Player State
    if (msg != nullptr) {
@@ -1368,7 +1368,7 @@ void TabPrinter::printPlayerStateMsg(std::ostream& sout, const Pb::PlayerState* 
          double pLon(0.0);
          double pAlt(0.0);
          if (( msg->pos().has_x()) && ( msg->pos().has_y()) && ( msg->pos().has_z())) {
-            Eaagles::Basic::Nav::convertEcef2Geod(msg->pos().x(), msg->pos().y(),  msg->pos().z(),
+            oe::basic::Nav::convertEcef2Geod(msg->pos().x(), msg->pos().y(),  msg->pos().z(),
                &pLat, &pLon, &pAlt);
             sout << pLat << divider << pLon << divider << pAlt << divider;
          }
@@ -1392,17 +1392,17 @@ void TabPrinter::printPlayerStateMsg(std::ostream& sout, const Pb::PlayerState* 
       // angles (convert to degrees)
       if (msg->has_angles()) {
          if (msg->angles().has_x()) {
-            sout << msg->angles().x() * Basic::Angle::R2DCC << divider;
+            sout << msg->angles().x() * basic::Angle::R2DCC << divider;
          }
          else sout << divider;
 
          if (msg->angles().has_y()) {
-            sout << msg->angles().y() * Basic::Angle::R2DCC << divider;
+            sout << msg->angles().y() * basic::Angle::R2DCC << divider;
          }
          else sout << divider;
 
          if (msg->angles().has_z()) {
-            sout << msg->angles().z() * Basic::Angle::R2DCC << divider;
+            sout << msg->angles().z() * basic::Angle::R2DCC << divider;
          }
          else sout << divider;
       }
@@ -1487,7 +1487,7 @@ void TabPrinter::printWeaponMsgHdr(std::ostream& sout)
 //------------------------------------------------------------------------------
 // printCommonTrackDataMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printCommonTrackDataMsg(std::ostream& sout, const Pb::TrackData* const msg)
+void TabPrinter::printCommonTrackDataMsg(std::ostream& sout, const pb::TrackData* const msg)
 {
    // Track Data
 
@@ -1503,17 +1503,17 @@ void TabPrinter::printCommonTrackDataMsg(std::ostream& sout, const Pb::TrackData
       else sout << divider;
 
       if (msg->has_true_az()) {
-         sout << msg->true_az() * Basic::Angle::R2DCC << divider;
+         sout << msg->true_az() * basic::Angle::R2DCC << divider;
       }
       else sout << divider;
 
       if (msg->has_rel_az()) {
-         sout << msg->rel_az() * Basic::Angle::R2DCC << divider;
+         sout << msg->rel_az() * basic::Angle::R2DCC << divider;
       }
       else sout << divider;
 
       if (msg->has_elevation()) {
-         sout << msg->elevation() * Basic::Angle::R2DCC << divider;
+         sout << msg->elevation() * basic::Angle::R2DCC << divider;
       }
       else sout << divider;
 
@@ -1629,7 +1629,7 @@ void TabPrinter::printTrackDataSpacer(std::ostream& sout)
 //------------------------------------------------------------------------------
 // printEmissionDataMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printEmissionDataMsg(std::ostream& sout, const Pb::EmissionData* const msg)
+void TabPrinter::printEmissionDataMsg(std::ostream& sout, const pb::EmissionData* const msg)
 {
    if (msg != nullptr) {
       // emission data values
@@ -1663,12 +1663,12 @@ void TabPrinter::printEmissionDataMsg(std::ostream& sout, const Pb::EmissionData
       else sout << " " << divider;
       if (msg->has_azimuth_aoi()) {
          // Convert to degrees
-         sout << msg->azimuth_aoi() * Basic::Angle::R2DCC << divider;
+         sout << msg->azimuth_aoi() * basic::Angle::R2DCC << divider;
       }
       else sout << " " << divider;
       if (msg->elevation_aoi()) {
          // Convert to degrees
-         sout << msg->elevation_aoi() * Basic::Angle::R2DCC << divider;
+         sout << msg->elevation_aoi() * basic::Angle::R2DCC << divider;
       }
       else sout << " " << divider;
    }
@@ -1712,7 +1712,7 @@ void TabPrinter::printEmissionDataSpacer(std::ostream& sout)
 //------------------------------------------------------------------------------
 // printMarkerMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printMarkerMsg(const Pb::Time* const timeMsg, const Pb::MarkerMsg* const msg)
+void TabPrinter::printMarkerMsg(const pb::Time* const timeMsg, const pb::MarkerMsg* const msg)
 {
    std::stringstream sout;
 
@@ -1753,7 +1753,7 @@ void TabPrinter::printMarkerMsg(const Pb::Time* const timeMsg, const Pb::MarkerM
 //------------------------------------------------------------------------------
 // printInputDeviceMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printInputDeviceMsg(const Pb::Time* const timeMsg, const Pb::InputDeviceMsg* const msg, const unsigned int msgId)
+void TabPrinter::printInputDeviceMsg(const pb::Time* const timeMsg, const pb::InputDeviceMsg* const msg, const unsigned int msgId)
 {
    std::stringstream sout;
    std::string inputType = "";
@@ -1806,7 +1806,7 @@ void TabPrinter::printInputDeviceMsg(const Pb::Time* const timeMsg, const Pb::In
 //------------------------------------------------------------------------------
 // printEndOfData
 //------------------------------------------------------------------------------
-void TabPrinter::printEndOfData(const Pb::Time* const timeMsg)
+void TabPrinter::printEndOfData(const pb::Time* const timeMsg)
 {
    std::stringstream sout;
 
@@ -1827,7 +1827,7 @@ void TabPrinter::printEndOfData(const Pb::Time* const timeMsg)
 //------------------------------------------------------------------------------
 // printUnhandledIdToken
 //------------------------------------------------------------------------------
-void TabPrinter::printUnhandledIdToken(const Pb::Time* const timeMsg)
+void TabPrinter::printUnhandledIdToken(const pb::Time* const timeMsg)
 {
    std::stringstream sout;
 
@@ -1848,7 +1848,7 @@ void TabPrinter::printUnhandledIdToken(const Pb::Time* const timeMsg)
 //------------------------------------------------------------------------------
 // printResetEvent
 //------------------------------------------------------------------------------
-void TabPrinter::printResetEvent(const Pb::Time* const timeMsg)
+void TabPrinter::printResetEvent(const pb::Time* const timeMsg)
 {
    std::stringstream sout;
 
@@ -1877,7 +1877,7 @@ void TabPrinter::printExecTimeMsg(std::ostream& sout, double execTime)
     double ss = 0;  // Sec
 
     // exec time
-    Basic::Time::getHHMMSS(static_cast<LCreal>(execTime), &hh, &mm, &ss);
+    basic::Time::getHHMMSS(static_cast<LCreal>(execTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 }
@@ -1893,7 +1893,7 @@ void TabPrinter::printUtcTimeMsg(std::ostream& sout, double utcTime)
     LCreal ss = 0;  // Sec
 
     // sim time
-    Basic::Time::getHHMMSS(static_cast<LCreal>(utcTime), &hh, &mm, &ss);
+    basic::Time::getHHMMSS(static_cast<LCreal>(utcTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 }
@@ -1909,10 +1909,10 @@ void TabPrinter::printSimTimeMsg(std::ostream& sout, double simTime)
     LCreal ss = 0;  // Sec
 
     // utc time
-    Basic::Time::getHHMMSS(static_cast<LCreal>(simTime), &hh, &mm, &ss);
+    basic::Time::getHHMMSS(static_cast<LCreal>(simTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 }
 
-} // End Recorder namespace
-} // End Eaagles namespace
+} // End recorder namespace
+} // End oe namespace

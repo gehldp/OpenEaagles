@@ -5,8 +5,8 @@
 #include "openeaagles/basic/NetHandler.h"
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
-namespace Recorder {
+namespace oe {
+namespace recorder {
 
 //==============================================================================
 // Class NetInput
@@ -21,8 +21,8 @@ END_SLOTTABLE(NetInput)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(NetInput)
-    ON_SLOT(1, setSlotNetwork,   Eaagles::Basic::NetHandler)
-    ON_SLOT(2, setSlotNoWait,    Eaagles::Basic::Number)
+    ON_SLOT(1, setSlotNetwork,   oe::basic::NetHandler)
+    ON_SLOT(2, setSlotNoWait,    oe::basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -138,7 +138,7 @@ const DataRecordHandle* NetInput::readRecordImp()
       if (n > 0) {
          // Parse the data record
          std::string wireFormat(ibuf, n);
-         Pb::DataRecord* dataRecord = new Pb::DataRecord();
+         pb::DataRecord* dataRecord = new pb::DataRecord();
          bool ok = dataRecord->ParseFromString(wireFormat);
 
          if (ok) {
@@ -163,14 +163,14 @@ const DataRecordHandle* NetInput::readRecordImp()
 //------------------------------------------------------------------------------
 
 // Network Handler
-bool NetInput::setSlotNetwork(Eaagles::Basic::NetHandler* const msg)
+bool NetInput::setSlotNetwork(oe::basic::NetHandler* const msg)
 {
    netHandler = msg;
    return true;
 }
 
 // No wait (unblocked) I/O flag
-bool NetInput::setSlotNoWait(Eaagles::Basic::Number* const msg)
+bool NetInput::setSlotNoWait(oe::basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -183,10 +183,10 @@ bool NetInput::setSlotNoWait(Eaagles::Basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component
 //------------------------------------------------------------------------------
-Eaagles::Basic::Object* NetInput::getSlotByIndex(const int si)
+oe::basic::Object* NetInput::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
 
-} // End Recorder namespace
-} // End Eaagles namespace
+} // End recorder namespace
+} // End oe namespace

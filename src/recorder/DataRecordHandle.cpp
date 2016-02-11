@@ -2,8 +2,8 @@
 #include "openeaagles/recorder/DataRecordHandle.h"
 #include "openeaagles/recorder/protobuf/DataRecord.pb.h"
 
-namespace Eaagles {
-namespace Recorder {
+namespace oe {
+namespace recorder {
 
 IMPLEMENT_SUBCLASS(DataRecordHandle,"DataRecordHandle")
 EMPTY_SLOTTABLE(DataRecordHandle)
@@ -21,7 +21,7 @@ DataRecordHandle::DataRecordHandle()
 //------------------------------------------------------------------------------
 // Constructor
 //------------------------------------------------------------------------------
-DataRecordHandle::DataRecordHandle(Pb::DataRecord* const r) : record(r)
+DataRecordHandle::DataRecordHandle(pb::DataRecord* const r) : record(r)
 {
    STANDARD_CONSTRUCTOR()
 }
@@ -32,7 +32,7 @@ DataRecordHandle::DataRecordHandle(Pb::DataRecord* const r) : record(r)
 void DataRecordHandle::copyData(const DataRecordHandle& org, const bool cc)
 {
    BaseClass::copyData(org);
-   if (cc) record = new Pb::DataRecord();
+   if (cc) record = new pb::DataRecord();
 
    // Copy the record
    *record = *org.record;
@@ -44,5 +44,5 @@ void DataRecordHandle::deleteData()
    if (record != nullptr) { delete record;  record = nullptr; }
 }
 
-} // End Recorder namespace
-} // End Eaagles namespace
+} // End recorder namespace
+} // End oe namespace

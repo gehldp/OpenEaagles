@@ -6,8 +6,8 @@
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/units/Angles.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 
 //==============================================================================
@@ -382,5 +382,5 @@ bool Transform::setComputematrix4(const Number* const sc4obj)
     return ok;
 }
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace

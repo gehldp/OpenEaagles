@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Class:       PushButton
-// Base class:  Basic::Object -> Basic::Component -> BasicGL::Graphic -> Button -> PushButton
+// Base class:  basic::Object -> basic::Component -> graphics::Graphic -> Button -> PushButton
 // Description: Button which will select one or another graphic based on being pressed or not.
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_PushButton_H__
-#define __Eaagles_Instruments_PushButton_H__
+#ifndef __oe_instruments_PushButton_H__
+#define __oe_instruments_PushButton_H__
 
 #include "openeaagles/instruments/buttons/Button.h"
 
-namespace Eaagles {
-namespace Instruments {
+namespace oe {
+namespace instruments {
 
 class PushButton : public Button
 {
@@ -34,12 +34,12 @@ public:
    bool onCancel() override;
 
    void updateData(const LCreal dt = 0.0) override;
-   bool event(const int event, Basic::Object* const obj = nullptr) override;
+   bool event(const int event, basic::Object* const obj = nullptr) override;
 
 protected:
    // sets the pushbutton type to momentary = false or maintained = true
-   bool setSlotFunction(const Basic::Number* const newFunction);
-   bool setSlotStartState(const Basic::Number* const newFunction);
+   bool setSlotFunction(const basic::Number* const newFunction);
+   bool setSlotStartState(const basic::Number* const newFunction);
 
 private:
    bool  functionType;     //false = momentary, true = maintained
@@ -49,7 +49,7 @@ private:
    bool initState;          // initial state
 };
 
-} // end Instruments namespace
-} // end Eaagles namespace
+} // end instruments namespace
+} // end oe namespace
 
 #endif

@@ -1,12 +1,12 @@
 
-#ifndef __Eaagles_Simulation_SynchronizedState_H__
-#define __Eaagles_Simulation_SynchronizedState_H__
+#ifndef __oe_simulation_SynchronizedState_H__
+#define __oe_simulation_SynchronizedState_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/basic/osg/Vec3"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Class: SynchronizedState
@@ -14,9 +14,9 @@ namespace Simulation {
 // Description: A snapshot of position state at a given time
 //
 //------------------------------------------------------------------------------
-class SynchronizedState : public Basic::Object
+class SynchronizedState : public basic::Object
 {
-   DECLARE_SUBCLASS(SynchronizedState, Basic::Object)
+   DECLARE_SUBCLASS(SynchronizedState, basic::Object)
 
 public:
    SynchronizedState();
@@ -53,8 +53,8 @@ private:
    bool        valid;
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif
 

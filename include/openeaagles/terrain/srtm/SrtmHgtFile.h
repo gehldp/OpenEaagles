@@ -1,23 +1,21 @@
 //------------------------------------------------------------------------------
 // Classes: SrtmHgtFile
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Terrain_SrtmHgtFile_H__
-#define __Eaagles_Terrain_SrtmHgtFile_H__
+#ifndef __oe_terrain_SrtmHgtFile_H__
+#define __oe_terrain_SrtmHgtFile_H__
 
 #include "../DataFile.h"
 
-namespace Eaagles {
-   namespace Basic { class Number; }
-namespace Terrain {
+namespace oe {
+   namespace basic { class Number; }
+namespace terrain {
 
 //------------------------------------------------------------------------------
 // Class: SrtmHgtFile
-// Base classes: Basic::Object -> Basic::Component
-//               -> Terrain::Database -> Terrain::DataFile
 //
 // Description: SRTM data loader.
 //
-// Adapted from Terrain::DtedFile
+// Adapted from terrain::DtedFile
 //
 // OpenEaagles version by Christopher Buell
 //
@@ -68,7 +66,7 @@ private:
 };
 
 
-} // End Terrain namespace
-} // End Eaagles namespace
+} // End terrain namespace
+} // End oe namespace
 
 #endif

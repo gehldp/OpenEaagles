@@ -31,9 +31,9 @@
 # pragma warning(disable: 4996)
 #endif
 
-namespace Eaagles {
-namespace Network {
-namespace Dis {
+namespace oe {
+namespace network {
+namespace dis {
 
 static const unsigned int CAMOUFLAGE_BIT  = 0x00000001;   // Paint scheme (camouflage) bit (0 - Uniform color; 1 - Camouflaged)
 static const unsigned int FLAMES_BIT      = 0x00008000;   // Flames appearance bit (0 - no flames, 1 - flames present)
@@ -48,7 +48,7 @@ static const unsigned int DEACTIVATE_BIT  = 0x00800000;   // State bit (0 - acti
 void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
 {
    NetIO* const disIO = static_cast<NetIO*>(getNetIO());
-   Simulation::Simulation* sim = disIO->getSimulation();
+   simulation::Simulation* sim = disIO->getSimulation();
 
    // Mark the current time
    setTimeExec( static_cast<LCreal>(sim->getExecTimeSec()) );
@@ -63,9 +63,9 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
    // from the PDU and use them to reset the dead reckoning.
    {
       osg::Vec3d geocPos;
-      geocPos[Basic::Nav::IX] = pdu->entityLocation.X_coord;
-      geocPos[Basic::Nav::IY] = pdu->entityLocation.Y_coord;
-      geocPos[Basic::Nav::IZ] = pdu->entityLocation.Z_coord;
+      geocPos[basic::Nav::IX] = pdu->entityLocation.X_coord;
+      geocPos[basic::Nav::IY] = pdu->entityLocation.Y_coord;
+      geocPos[basic::Nav::IZ] = pdu->entityLocation.Z_coord;
       //std::cout << "entityStatePdu2Nib(): geoc POS(";
       //std::cout << geocPos[0] << ", ";
       //std::cout << geocPos[1] << ", ";
@@ -73,9 +73,9 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
       //std::cout << std::endl;
 
       osg::Vec3d geocVel;
-      geocVel[Basic::Nav::IX] = pdu->entityLinearVelocity.component[0];
-      geocVel[Basic::Nav::IY] = pdu->entityLinearVelocity.component[1];
-      geocVel[Basic::Nav::IZ] = pdu->entityLinearVelocity.component[2];
+      geocVel[basic::Nav::IX] = pdu->entityLinearVelocity.component[0];
+      geocVel[basic::Nav::IY] = pdu->entityLinearVelocity.component[1];
+      geocVel[basic::Nav::IZ] = pdu->entityLinearVelocity.component[2];
       //std::cout << "entityStatePdu2Nib(): geoc VEL(";
       //std::cout << geocVel[0] << ", ";
       //std::cout << geocVel[1] << ", ";
@@ -83,19 +83,19 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
       //std::cout << std::endl;
 
       osg::Vec3d geocAcc;
-      geocAcc[Basic::Nav::IX] = pdu->DRentityLinearAcceleration.component[0];
-      geocAcc[Basic::Nav::IY] = pdu->DRentityLinearAcceleration.component[1];
-      geocAcc[Basic::Nav::IZ] = pdu->DRentityLinearAcceleration.component[2];
+      geocAcc[basic::Nav::IX] = pdu->DRentityLinearAcceleration.component[0];
+      geocAcc[basic::Nav::IY] = pdu->DRentityLinearAcceleration.component[1];
+      geocAcc[basic::Nav::IZ] = pdu->DRentityLinearAcceleration.component[2];
 
       osg::Vec3d geocAngles;
-      geocAngles[Basic::Nav::IPHI] = pdu->entityOrientation.phi;
-      geocAngles[Basic::Nav::ITHETA] = pdu->entityOrientation.theta;
-      geocAngles[Basic::Nav::IPSI] = pdu->entityOrientation.psi;
+      geocAngles[basic::Nav::IPHI] = pdu->entityOrientation.phi;
+      geocAngles[basic::Nav::ITHETA] = pdu->entityOrientation.theta;
+      geocAngles[basic::Nav::IPSI] = pdu->entityOrientation.psi;
 
       osg::Vec3d arates;
-      arates[Basic::Nav::IX] = pdu->DRentityAngularVelocity.x_axis;
-      arates[Basic::Nav::IY] = pdu->DRentityAngularVelocity.y_axis;
-      arates[Basic::Nav::IZ] = pdu->DRentityAngularVelocity.z_axis;
+      arates[basic::Nav::IX] = pdu->DRentityAngularVelocity.x_axis;
+      arates[basic::Nav::IY] = pdu->DRentityAngularVelocity.y_axis;
+      arates[basic::Nav::IZ] = pdu->DRentityAngularVelocity.z_axis;
 
 #if 0
       // (re)initialize the dead reckoning function
@@ -181,25 +181,25 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
    // Life form states
    {
       unsigned int bits = ( (pdu->appearance >> 16) & 0x0000000f );
-      if (getPlayer() != nullptr && getPlayer()->isMajorType(Simulation::Player::LIFE_FORM)) {
-         Simulation::LifeForm* lf = dynamic_cast<Simulation::LifeForm*>(getPlayer());
+      if (getPlayer() != nullptr && getPlayer()->isMajorType(simulation::Player::LIFE_FORM)) {
+         simulation::LifeForm* lf = dynamic_cast<simulation::LifeForm*>(getPlayer());
          if (lf != nullptr) {
             // get our life form state (appearance bit 16 - 19)
-            if (bits == 1) lf->setActionState(Simulation::LifeForm::UPRIGHT_STANDING);
-            else if (bits == 2) lf->setActionState(Simulation::LifeForm::UPRIGHT_WALKING);
-            else if (bits == 3) lf->setActionState(Simulation::LifeForm::UPRIGHT_RUNNING);
-            else if (bits == 4) lf->setActionState(Simulation::LifeForm::KNEELING);
-            else if (bits == 5) lf->setActionState(Simulation::LifeForm::PRONE);
-            else if (bits == 6) lf->setActionState(Simulation::LifeForm::CRAWLING);
-            else if (bits == 8) lf->setActionState(Simulation::LifeForm::PARACHUTING);
-            else if (bits == 9) lf->setActionState(Simulation::LifeForm::JUMPING);
-            else if (bits == 10) lf->setActionState(Simulation::LifeForm::SITTING);
-            else if (bits == 11) lf->setActionState(Simulation::LifeForm::SQUATTING);
-            else if (bits == 12) lf->setActionState(Simulation::LifeForm::CROUCHING);
-            else if (bits == 13) lf->setActionState(Simulation::LifeForm::WADING);
-            else if (bits == 14) lf->setActionState(Simulation::LifeForm::SURRENDER);
-            else if (bits == 15) lf->setActionState(Simulation::LifeForm::DETAINED);
-            else lf->setActionState(Simulation::LifeForm::UPRIGHT_STANDING);
+            if (bits == 1) lf->setActionState(simulation::LifeForm::UPRIGHT_STANDING);
+            else if (bits == 2) lf->setActionState(simulation::LifeForm::UPRIGHT_WALKING);
+            else if (bits == 3) lf->setActionState(simulation::LifeForm::UPRIGHT_RUNNING);
+            else if (bits == 4) lf->setActionState(simulation::LifeForm::KNEELING);
+            else if (bits == 5) lf->setActionState(simulation::LifeForm::PRONE);
+            else if (bits == 6) lf->setActionState(simulation::LifeForm::CRAWLING);
+            else if (bits == 8) lf->setActionState(simulation::LifeForm::PARACHUTING);
+            else if (bits == 9) lf->setActionState(simulation::LifeForm::JUMPING);
+            else if (bits == 10) lf->setActionState(simulation::LifeForm::SITTING);
+            else if (bits == 11) lf->setActionState(simulation::LifeForm::SQUATTING);
+            else if (bits == 12) lf->setActionState(simulation::LifeForm::CROUCHING);
+            else if (bits == 13) lf->setActionState(simulation::LifeForm::WADING);
+            else if (bits == 14) lf->setActionState(simulation::LifeForm::SURRENDER);
+            else if (bits == 15) lf->setActionState(simulation::LifeForm::DETAINED);
+            else lf->setActionState(simulation::LifeForm::UPRIGHT_STANDING);
          }
       }
    }
@@ -207,10 +207,10 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
    // Active or inactive
    if ((pdu->appearance & DEACTIVATE_BIT) != 0) {
       // Player has just gone inactive
-      setMode(Simulation::Player::INACTIVE);
+      setMode(simulation::Player::INACTIVE);
    }
    else {
-      setMode(Simulation::Player::ACTIVE);
+      setMode(simulation::Player::ACTIVE);
    }
 
    // Process the articulated parameters and attached parts
@@ -222,10 +222,10 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
 //------------------------------------------------------------------------------
 void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
 {
-   Simulation::Player* p = getPlayer();
+   simulation::Player* p = getPlayer();
    if ( pdu->numberOfArticulationParameters > 0 && p != nullptr ) {
-      Simulation::AirVehicle* av = dynamic_cast<Simulation::AirVehicle*>(p);
-      Simulation::GroundVehicle* gv = dynamic_cast<Simulation::GroundVehicle*>(p);
+      simulation::AirVehicle* av = dynamic_cast<simulation::AirVehicle*>(p);
+      simulation::GroundVehicle* gv = dynamic_cast<simulation::GroundVehicle*>(p);
 
       // ---
       // Loop for all articulation parameters ...
@@ -286,12 +286,12 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
             unsigned int sta = ap->parameterType; // station number
 
             if (sta >= 1 && sta <= MAX_AMSL) {
-               Simulation::StoresMgr* sms = p->getStoresManagement();
+               simulation::StoresMgr* sms = p->getStoresManagement();
 
                // If needed, create the stores manager
                if (sms == nullptr) {
-                  sms = new Simulation::StoresMgr();
-                  Basic::Pair* pair = new Basic::Pair("storesMgr", sms);
+                  sms = new simulation::StoresMgr();
+                  basic::Pair* pair = new basic::Pair("storesMgr", sms);
                   sms->unref();   // pair owns it
                   p->addComponent(pair);
                   pair->unref(); // player owns it
@@ -301,19 +301,19 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                // either in INACTIVE mode (not launched) or LAUNCHED mode (kind == 0)
                if (sms != nullptr) {
 
-                  Simulation::Weapon* wpn = nullptr;
+                  simulation::Weapon* wpn = nullptr;
 
                   // find the weapon at station 'sta'
-                  Basic::PairStream* stores = sms->getStores();
+                  basic::PairStream* stores = sms->getStores();
                   if (stores != nullptr) {
-                     Basic::List::Item* item = stores->getFirstItem();
+                     basic::List::Item* item = stores->getFirstItem();
                      while (item != nullptr && wpn == nullptr) {
                         unsigned int s = 0;
-                        Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
-                        const Basic::Identifier* slot = pair->slot();
+                        basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
+                        const basic::Identifier* slot = pair->slot();
                         if (slot->isNumber()) s = static_cast<unsigned int>(slot->getNumber());
                         if (s == sta) {
-                           wpn = static_cast<Simulation::Weapon*>(pair->object());  // Found it
+                           wpn = static_cast<simulation::Weapon*>(pair->object());  // Found it
                         }
                         item = item->getNext();
                      }
@@ -339,15 +339,15 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                               ap->parameterValue.entityType.extra
                            );
                         if (ntm != nullptr) {
-                           const Simulation::Player* tp = ntm->getTemplatePlayer();
-                           if (tp != nullptr && tp->isClassType(typeid(Simulation::Weapon)) ) {
+                           const simulation::Player* tp = ntm->getTemplatePlayer();
+                           if (tp != nullptr && tp->isClassType(typeid(simulation::Weapon)) ) {
                               // We've found the weapon that matches the entity type,
                               // so clone it and add it to the SMS with the correct
                               // station number
-                              wpn = static_cast<Simulation::Weapon*>(tp->clone());  // clone and cast to a Weapon
+                              wpn = static_cast<simulation::Weapon*>(tp->clone());  // clone and cast to a Weapon
                               char cbuf[20];
                               std::sprintf(cbuf,"%i",sta);
-                              Basic::Pair* pair = new Basic::Pair(cbuf, wpn);
+                              basic::Pair* pair = new basic::Pair(cbuf, wpn);
                               wpn->unref();   // pair owns it
                               sms->addComponent(pair);
                               pair->unref(); // sms owns it
@@ -356,13 +356,13 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                      }
 
                      // If we have the weapon then set it INACTIVE (not launched)
-                     if (wpn != nullptr) wpn->setMode(Simulation::Player::INACTIVE);
+                     if (wpn != nullptr) wpn->setMode(simulation::Player::INACTIVE);
 
                   }
 
                   // No weapon attached, so set our weapon (if any) to launched!
                   else if (wpn != nullptr) {
-                     wpn->setMode(Simulation::Player::LAUNCHED);
+                     wpn->setMode(simulation::Player::LAUNCHED);
                   }
 
                } // end of SMS != 0 check
@@ -385,11 +385,11 @@ bool Nib::entityStateManager(const LCreal curExecTime)
    bool ok = false;
 
    // Get the player pointer
-   const Simulation::Player* player = getPlayer();
+   const simulation::Player* player = getPlayer();
    if (player == nullptr) return ok;
 
    // Dummy weapon?
-   const Simulation::Weapon* ww = dynamic_cast<const Simulation::Weapon*>( player );
+   const simulation::Weapon* ww = dynamic_cast<const simulation::Weapon*>( player );
    if (ww != nullptr) {
       if (ww->isDummy()) return ok;
    }
@@ -405,7 +405,7 @@ bool Nib::entityStateManager(const LCreal curExecTime)
 
       // Get our NetIO and the main simulation
       NetIO* disIO = static_cast<NetIO*>(getNetIO());
-      Simulation::Simulation* sim = disIO->getSimulation();
+      simulation::Simulation* sim = disIO->getSimulation();
 
       // Capture the player data, reset the dead reckoning and
       // mark the current time.
@@ -447,7 +447,7 @@ bool Nib::entityStateManager(const LCreal curExecTime)
       pdu->header.PDUType = NetIO::PDU_ENTITY_STATE;
       pdu->header.protocolFamily = NetIO::PDU_FAMILY_ENTITY_INFO;
       //
-      if (disIO->getTimeline() == Simulation::NetIO::UTC)
+      if (disIO->getTimeline() == simulation::NetIO::UTC)
          pdu->header.timeStamp = disIO->makeTimeStamp( getTimeUtc(), true );
       else
          pdu->header.timeStamp = disIO->makeTimeStamp( getTimeExec(), false );
@@ -465,15 +465,15 @@ bool Nib::entityStateManager(const LCreal curExecTime)
       // ---
       // Force ID: When mapping Player side to force IDs ...
       // ---
-      if (getSide() == Simulation::Player::BLUE) {
+      if (getSide() == simulation::Player::BLUE) {
          // blue's are friendly, ...
          pdu->forceID = NetIO::FRIENDLY_FORCE;
       }
-      else if (getSide() == Simulation::Player::RED) {
+      else if (getSide() == simulation::Player::RED) {
          // red's are not, ...
          pdu->forceID = NetIO::OPPOSING_FORCE;
       }
-      else if (getSide() == Simulation::Player::WHITE) {
+      else if (getSide() == simulation::Player::WHITE) {
          // white is neutral, ...
          pdu->forceID = NetIO::NEUTRAL_FORCE;
       }
@@ -523,17 +523,17 @@ bool Nib::entityStateManager(const LCreal curExecTime)
          // Entity location (WorldCoordinates)
          // ---
          osg::Vec3d geocPos = getDrPosition();
-         pdu->entityLocation.X_coord = geocPos[Basic::Nav::IX];
-         pdu->entityLocation.Y_coord = geocPos[Basic::Nav::IY];
-         pdu->entityLocation.Z_coord = geocPos[Basic::Nav::IZ];
+         pdu->entityLocation.X_coord = geocPos[basic::Nav::IX];
+         pdu->entityLocation.Y_coord = geocPos[basic::Nav::IY];
+         pdu->entityLocation.Z_coord = geocPos[basic::Nav::IZ];
 
          // ---
          // Entity orientation (EulerAngles)
          // ---
          osg::Vec3d geocAngles = getDrEulerAngles();
-         pdu->entityOrientation.phi   = static_cast<float>(geocAngles[Basic::Nav::IPHI]);
-         pdu->entityOrientation.theta = static_cast<float>(geocAngles[Basic::Nav::ITHETA]);
-         pdu->entityOrientation.psi   = static_cast<float>(geocAngles[Basic::Nav::IPSI]);
+         pdu->entityOrientation.phi   = static_cast<float>(geocAngles[basic::Nav::IPHI]);
+         pdu->entityOrientation.theta = static_cast<float>(geocAngles[basic::Nav::ITHETA]);
+         pdu->entityOrientation.psi   = static_cast<float>(geocAngles[basic::Nav::IPSI]);
       }
 
       // ---
@@ -551,7 +551,7 @@ bool Nib::entityStateManager(const LCreal curExecTime)
 
          // Deactive this entity?
          {
-            if (isMode(Simulation::Player::DELETE_REQUEST) || player->isDead() )
+            if (isMode(simulation::Player::DELETE_REQUEST) || player->isDead() )
                pdu->appearance |= DEACTIVATE_BIT;
          }
 
@@ -575,7 +575,7 @@ bool Nib::entityStateManager(const LCreal curExecTime)
                pdu->appearance |= CAMOUFLAGE_BIT;
 
                // Land based camouflage bits
-               if (player->isMajorType(Simulation::Player::GROUND_VEHICLE)) {
+               if (player->isMajorType(simulation::Player::GROUND_VEHICLE)) {
                   // Subtract one to match DIS camouflage bits.
                   // Our camouflage type for DIS is the camouflage appearance bits
                   // plus one because our camouflage type of zero is no camouflage.
@@ -586,8 +586,8 @@ bool Nib::entityStateManager(const LCreal curExecTime)
          }
 
          // Life forms appearance bits
-         if (player->isMajorType(Simulation::Player::LIFE_FORM)) {
-            const Simulation::LifeForm* lf = dynamic_cast<const Simulation::LifeForm*>(player);
+         if (player->isMajorType(simulation::Player::LIFE_FORM)) {
+            const simulation::LifeForm* lf = dynamic_cast<const simulation::LifeForm*>(player);
             if (lf != nullptr) {
                // Health (aka damaged for other domains) same bits (3-4) - this is from the NIB, because it IS
                // updated
@@ -599,21 +599,21 @@ bool Nib::entityStateManager(const LCreal curExecTime)
                // data is from the player, because NIB doesn't have actions associated with it
                {
                   unsigned int bits = 1;      // upright, standing still
-                  if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_STANDING) bits = 1;       // standing
-                  else if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_WALKING) bits = 2;   // walking
-                  else if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_RUNNING) bits = 3;   // running
-                  else if (lf->getActionState() == Simulation::LifeForm::KNEELING) bits = 4;          // kneeling
-                  else if (lf->getActionState() == Simulation::LifeForm::PRONE) bits = 5;             // prone
-                  else if (lf->getActionState() == Simulation::LifeForm::CRAWLING) bits = 6;          // crawling
-                  else if (lf->getActionState() == Simulation::LifeForm::SWIMMING) bits = 7;          // swimming
-                  else if (lf->getActionState() == Simulation::LifeForm::PARACHUTING) bits = 8;       // parachuting
-                  else if (lf->getActionState() == Simulation::LifeForm::JUMPING) bits = 9;           // jumping
-                  else if (lf->getActionState() == Simulation::LifeForm::SITTING) bits = 10;          // sitting
-                  else if (lf->getActionState() == Simulation::LifeForm::SQUATTING) bits = 11;        // squatting
-                  else if (lf->getActionState() == Simulation::LifeForm::CROUCHING) bits = 12;        // crouching
-                  else if (lf->getActionState() == Simulation::LifeForm::WADING) bits = 13;           // wading
-                  else if (lf->getActionState() == Simulation::LifeForm::SURRENDER) bits = 14;        // surrender
-                  else if (lf->getActionState() == Simulation::LifeForm::DETAINED) bits = 15;         // detained
+                  if (lf->getActionState() == simulation::LifeForm::UPRIGHT_STANDING) bits = 1;       // standing
+                  else if (lf->getActionState() == simulation::LifeForm::UPRIGHT_WALKING) bits = 2;   // walking
+                  else if (lf->getActionState() == simulation::LifeForm::UPRIGHT_RUNNING) bits = 3;   // running
+                  else if (lf->getActionState() == simulation::LifeForm::KNEELING) bits = 4;          // kneeling
+                  else if (lf->getActionState() == simulation::LifeForm::PRONE) bits = 5;             // prone
+                  else if (lf->getActionState() == simulation::LifeForm::CRAWLING) bits = 6;          // crawling
+                  else if (lf->getActionState() == simulation::LifeForm::SWIMMING) bits = 7;          // swimming
+                  else if (lf->getActionState() == simulation::LifeForm::PARACHUTING) bits = 8;       // parachuting
+                  else if (lf->getActionState() == simulation::LifeForm::JUMPING) bits = 9;           // jumping
+                  else if (lf->getActionState() == simulation::LifeForm::SITTING) bits = 10;          // sitting
+                  else if (lf->getActionState() == simulation::LifeForm::SQUATTING) bits = 11;        // squatting
+                  else if (lf->getActionState() == simulation::LifeForm::CROUCHING) bits = 12;        // crouching
+                  else if (lf->getActionState() == simulation::LifeForm::WADING) bits = 13;           // wading
+                  else if (lf->getActionState() == simulation::LifeForm::SURRENDER) bits = 14;        // surrender
+                  else if (lf->getActionState() == simulation::LifeForm::DETAINED) bits = 15;         // detained
                   else bits = 1;
                   pdu->appearance |= (bits << 16);
                }
@@ -679,9 +679,9 @@ bool Nib::entityStateManager(const LCreal curExecTime)
          // Dead reckoning angular velocity (AngularVelocityVectorDIS)
          // ---
          osg::Vec3d geocAngVel = getDrAngularVelocities();
-         pdu->DRentityAngularVelocity.x_axis = static_cast<float>(geocAngVel[Basic::Nav::IX]);
-         pdu->DRentityAngularVelocity.y_axis = static_cast<float>(geocAngVel[Basic::Nav::IY]);
-         pdu->DRentityAngularVelocity.z_axis = static_cast<float>(geocAngVel[Basic::Nav::IZ]);
+         pdu->DRentityAngularVelocity.x_axis = static_cast<float>(geocAngVel[basic::Nav::IX]);
+         pdu->DRentityAngularVelocity.y_axis = static_cast<float>(geocAngVel[basic::Nav::IY]);
+         pdu->DRentityAngularVelocity.z_axis = static_cast<float>(geocAngVel[basic::Nav::IZ]);
       }
 
       // ---
@@ -715,7 +715,7 @@ bool Nib::entityStateManager(const LCreal curExecTime)
       unsigned short length = sizeof(EntityStatePDU) + (pdu->numberOfArticulationParameters * sizeof(VpArticulatedPart));
       pdu->header.length = length;
 
-      if (Basic::NetHandler::isNotNetworkByteOrder()) pdu->swapBytes();
+      if (basic::NetHandler::isNotNetworkByteOrder()) pdu->swapBytes();
       ok = disIO->sendData( reinterpret_cast<char*>(pdu), length );
    }
    return ok;
@@ -736,7 +736,7 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
    // ---
    // Air Vehicle articulated parts and attachments
    // ---
-   if ( getPlayer()->isMajorType(Simulation::Player::AIR_VEHICLE) ) {
+   if ( getPlayer()->isMajorType(simulation::Player::AIR_VEHICLE) ) {
 
       // Check wing sweep angle.
       if (getAPartWingSweepCnt() > 0) {
@@ -800,7 +800,7 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
    // ---
    // Ground Vehicle articulated parts and attachments
    // ---
-   else if ( getPlayer()->isMajorType(Simulation::Player::GROUND_VEHICLE) ) {
+   else if ( getPlayer()->isMajorType(simulation::Player::GROUND_VEHICLE) ) {
 
       // Check launcher elevation angle
       if (getAPartLauncherElevationCnt() > 0) {
@@ -820,7 +820,7 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
       unsigned int n = getAPartNumberAttachedNumMissiles();
       for (unsigned int i = 0; i < n; i++) {
 
-         const Simulation::Missile* msl = getAPartAttachedMissile(i+1);
+         const simulation::Missile* msl = getAPartAttachedMissile(i+1);
 
          // Find the missile's entity type
          if (apartMslTypes[i] == nullptr) {
@@ -843,7 +843,7 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
             ap->changeIndicator = static_cast<unsigned char>(getAPartAttacheMissileChangeCnt(i+1) & 0xff);
             ap->id = 1;                   // ATTACHED to LAUNCHER (above)
             ap->parameterType = (i+1);    // Station number
-            if (msl->isMode(Simulation::Player::LAUNCHED)) {
+            if (msl->isMode(simulation::Player::LAUNCHED)) {
                ap->parameterValue.entityType.kind = 0;
                ap->parameterValue.entityType.domain = 0;
                ap->parameterValue.entityType.country = 0;
@@ -872,6 +872,6 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
    return cnt;
 }
 
-} // End Dis namespace
+} // End dis namespace
 } // End Network namespace
-} // End Eaagles namespace
+} // End oe namespace

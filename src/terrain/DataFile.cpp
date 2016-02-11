@@ -10,8 +10,8 @@
 #include "openeaagles/basic/units/Angles.h"
 #include "openeaagles/basic/units/Distances.h"
 
-namespace Eaagles {
-namespace Terrain {
+namespace oe {
+namespace terrain {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(DataFile,"DataFile")
 EMPTY_SLOTTABLE(DataFile)
@@ -178,11 +178,11 @@ unsigned int DataFile::getElevations(
 
    // Spacing between points (in each direction)
    double deltaPoint = maxRng / (n - 1);
-   double dirR = direction * Basic::Angle::D2RCC;
-   double deltaNorth = deltaPoint * std::cos(dirR) * Basic::Distance::M2NM;  // (NM)
-   double deltaEast  = deltaPoint * std::sin(dirR) * Basic::Distance::M2NM;
+   double dirR = direction * basic::Angle::D2RCC;
+   double deltaNorth = deltaPoint * std::cos(dirR) * basic::Distance::M2NM;  // (NM)
+   double deltaEast  = deltaPoint * std::sin(dirR) * basic::Distance::M2NM;
    double deltaLat = deltaNorth/60.0;
-   double deltaLon = deltaEast/(60.0 * std::cos(lat * Basic::Angle::D2RCC));
+   double deltaLon = deltaEast/(60.0 * std::cos(lat * basic::Angle::D2RCC));
    double deltaPointsLat = deltaLat / latSpacing;
    double deltaPointsLon = deltaLon / lonSpacing;
 
@@ -458,5 +458,5 @@ void DataFile::clearData()
    setMaxElevation(0);
 }
 
-}// end Terrain namespace
-}// end Eaagles namespace
+}// end terrain namespace
+}// end oe namespace

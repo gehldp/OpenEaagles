@@ -3,20 +3,20 @@
 // Icosahedron, Octahedron, Teapot
 //
 // Description:  3-dimensional shapes that can be drawn.  NOTE - these shapes
-// all use GLUT or GLU, so you have to call the basicGlutFF to serialize them
+// all use GLUT or GLU, so you have to call the factory to serialize them
 // from the input, and you also have to link to glut or freeglut to draw them.
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Glut_Shapes3D_H__
-#define __Eaagles_Glut_Shapes3D_H__
+#ifndef __oe_glut_Shapes3D_H__
+#define __oe_glut_Shapes3D_H__
 
-#include "openeaagles/basicGL/Shapes.h"
+#include "openeaagles/graphics/Shapes.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
     class Number;
 }
 
-namespace Glut {
+namespace glut {
 
 //------------------------------------------------------------------------------
 // Class: Circle -> Sphere
@@ -29,8 +29,8 @@ namespace Glut {
 // Note - all sphere and derived classes are automatically normalized at
 // rendering (GLU does it)
 //------------------------------------------------------------------------------
-class Sphere : public BasicGL::Circle {
-    DECLARE_SUBCLASS(Sphere, BasicGL::Circle)
+class Sphere : public graphics::Circle {
+    DECLARE_SUBCLASS(Sphere, graphics::Circle)
 
 public:
     Sphere();
@@ -41,7 +41,7 @@ public:
     int getStacks()                           { return stacks; }
 
 protected:
-    bool setSlotStacks(const Basic::Number* const x);
+    bool setSlotStacks(const basic::Number* const x);
 
 private:
     int stacks;
@@ -69,8 +69,8 @@ public:
     LCreal getHeight()                          { return height; }
 
 protected:
-    bool setSlotTopRadius(const Basic::Number* const x);
-    bool setSlotHeight(const Basic::Number* const x);
+    bool setSlotTopRadius(const basic::Number* const x);
+    bool setSlotHeight(const basic::Number* const x);
 
 private:
     LCreal topRadius;
@@ -101,8 +101,8 @@ public:
 //    size    <Number>    ! Size you want the cube to be (default: 1)
 //
 //------------------------------------------------------------------------------
-class Cube : public BasicGL::Circle {
-    DECLARE_SUBCLASS(Cube, BasicGL::Circle)
+class Cube : public graphics::Circle {
+    DECLARE_SUBCLASS(Cube, graphics::Circle)
 public:
     Cube();
     void drawFunc() override;
@@ -111,7 +111,7 @@ public:
     LCreal getSize()                       { return size; }
 
 protected:
-    bool setSlotSize(const Basic::Number* const srobj);
+    bool setSlotSize(const basic::Number* const srobj);
 
 private:
     LCreal size;
@@ -137,7 +137,7 @@ public:
     LCreal getOuterRadius()                        { return oRadius; }
 
 protected:
-    bool setSlotOuterRadius(const Basic::Number* const x);
+    bool setSlotOuterRadius(const basic::Number* const x);
 
 private:
     LCreal oRadius;
@@ -151,8 +151,8 @@ private:
 // Factory name: Dodecahedron
 //
 //------------------------------------------------------------------------------
-class Dodecahedron : public BasicGL::Circle {
-    DECLARE_SUBCLASS(Dodecahedron, BasicGL::Circle)
+class Dodecahedron : public graphics::Circle {
+    DECLARE_SUBCLASS(Dodecahedron, graphics::Circle)
 public:
     Dodecahedron();
     void drawFunc() override;
@@ -165,8 +165,8 @@ public:
 // Factory name: Tetrahedron
 //
 //------------------------------------------------------------------------------
-class Tetrahedron : public BasicGL::Circle {
-    DECLARE_SUBCLASS(Tetrahedron, BasicGL::Circle)
+class Tetrahedron : public graphics::Circle {
+    DECLARE_SUBCLASS(Tetrahedron, graphics::Circle)
 public:
     Tetrahedron();
     void drawFunc() override;
@@ -179,8 +179,8 @@ public:
 // Factory name: Icosahedron
 //
 //------------------------------------------------------------------------------
-class Icosahedron : public BasicGL::Circle {
-    DECLARE_SUBCLASS(Icosahedron, BasicGL::Circle)
+class Icosahedron : public graphics::Circle {
+    DECLARE_SUBCLASS(Icosahedron, graphics::Circle)
 public:
     Icosahedron();
     void drawFunc() override;
@@ -193,8 +193,8 @@ public:
 // Factory name: Octahedron
 //
 //------------------------------------------------------------------------------
-class Octahedron : public BasicGL::Circle {
-    DECLARE_SUBCLASS(Octahedron, BasicGL::Circle)
+class Octahedron : public graphics::Circle {
+    DECLARE_SUBCLASS(Octahedron, graphics::Circle)
 public:
     Octahedron();
     void drawFunc() override;
@@ -214,7 +214,7 @@ public:
     void drawFunc() override;
 };
 
-} // End BasicGL namespace
-} // End Eaagles namespace
+} // End glut namespace
+} // End oe namespace
 
 #endif

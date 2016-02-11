@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: Waypoint
-// Base class: Basic::Object -> Basic::String -> Record -> Waypoint
+// Base class: basic::Object -> basic::String -> Record -> Waypoint
 //
 // Description: Access to the DAFIF Waypoint records.
 //
@@ -13,13 +13,13 @@
 //    Length of a DAFIF Waypoint record.
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Dafif_Waypoint_H__
-#define __Eaagles_Dafif_Waypoint_H__
+#ifndef __oe_dafif_Waypoint_H__
+#define __oe_dafif_Waypoint_H__
 
 #include "Record.h"
 
-namespace Eaagles {
-namespace Dafif {
+namespace oe {
+namespace dafif {
 
 class Waypoint : public Record
 {
@@ -39,7 +39,7 @@ private:
 
 };
 
-} // End Dafif namespace
-} // End Eaagles namespace
+} // End dafif namespace
+} // End oe namespace
 
 #endif

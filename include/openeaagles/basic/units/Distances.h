@@ -62,13 +62,13 @@
 //       class.
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Distance_H__
-#define __Eaagles_Basic_Distance_H__
+#ifndef __oe_basic_Distance_H__
+#define __oe_basic_Distance_H__
 
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class:  Distance
@@ -324,7 +324,7 @@ public:
     LCreal fromDistance(const LCreal a) const override { return a * M2SM; }
 };
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 
 #endif

@@ -3,15 +3,15 @@
 //
 // The NAV radios are being updated and are not current fully functional!!!
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_NavRadio_H__
-#define __Eaagles_Simulation_NavRadio_H__
+#ifndef __oe_simulation_NavRadio_H__
+#define __oe_simulation_NavRadio_H__
 
 #include "openeaagles/simulation/Radio.h"
 
-namespace Eaagles {
-namespace Dafif { class AirportLoader; class NavaidLoader; }
+namespace oe {
+namespace dafif { class AirportLoader; class NavaidLoader; }
 
-namespace Simulation {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Class: NavRadio
@@ -30,8 +30,8 @@ protected:
    double getLongitude() const;
    double getAltitude() const;
 
-   Dafif::NavaidLoader* getNavaidLoader();
-   Dafif::AirportLoader* getAirportLoader();
+   dafif::NavaidLoader* getNavaidLoader();
+   dafif::AirportLoader* getAirportLoader();
 
    // Slave our position to our ownship
    virtual bool setPosition();
@@ -41,8 +41,8 @@ protected:
 private:
    void initData();
 
-   Basic::safe_ptr<Dafif::AirportLoader> apdb; // Pointer to Airport loader
-   Basic::safe_ptr<Dafif::NavaidLoader> nvdb;  // Pointer to Navaid loader
+   basic::safe_ptr<dafif::AirportLoader> apdb; // Pointer to Airport loader
+   basic::safe_ptr<dafif::NavaidLoader> nvdb;  // Pointer to Navaid loader
 
    double latitude;                 // Ownship Latitude
    double longitude;                // Ownship Longitude
@@ -151,7 +151,7 @@ private:
    LCreal ilsLocalizerBearing;
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

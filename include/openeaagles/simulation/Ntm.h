@@ -1,23 +1,23 @@
 //------------------------------------------------------------------------------
 // Class: Ntm
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Ntm_H__
-#define __Eaagles_Simulation_Ntm_H__
+#ifndef __oe_simulation_Ntm_H__
+#define __oe_simulation_Ntm_H__
 
 #include "openeaagles/simulation/NetIO.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 class Nib;
 
 //------------------------------------------------------------------------------
 // Class: Ntm
 // Description: Abstract Network Type Mapper (NTM) class
 //
-//    This class is used to map Eaagles player types to the entity type codes
+//    This class is used to map oe player types to the entity type codes
 //    that are unique to an interoperability network (i.e., DIS, HLA/FOM, etc).
 //
-//    The Eaagles player type is defined by providing an example Player using
+//    The oe player type is defined by providing an example Player using
 //    the 'template' slot.  On incoming entities, the 'template' player is cloned
 //    to create the surrogate, "Interoperability Player" (or IPlayer) that is
 //    added to the simulation players list.
@@ -59,9 +59,9 @@ class Nib;
 //          Best match is returned: #1 (best), #2, #5 and #6 (worst)
 //
 //------------------------------------------------------------------------------
-class Ntm : public Basic::Object
+class Ntm : public basic::Object
 {
-    DECLARE_SUBCLASS(Ntm,Basic::Object)
+    DECLARE_SUBCLASS(Ntm,basic::Object)
 
 public:
    Ntm();
@@ -77,10 +77,10 @@ public:
    virtual bool setSlotTemplatePlayer(const Player* const msg);     // Sets the template player
 
 private:
-   Basic::safe_ptr<const Player>  tPlayer; // Template player
+   basic::safe_ptr<const Player>  tPlayer; // Template player
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

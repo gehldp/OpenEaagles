@@ -23,8 +23,8 @@
 //    7.11.8   ActionResponsePDU_R
 //
 //--------------------------------------------------------------
-#ifndef __Eaagles_Network_Dis_Pdu_H__
-#define __Eaagles_Network_Dis_Pdu_H__
+#ifndef __oe_network_dis_Pdu_H__
+#define __oe_network_dis_Pdu_H__
 
 #include "openeaagles/dis/structs.h"
 #include "openeaagles/dis/enums.h"
@@ -33,9 +33,9 @@
 #include <string>
 #include <cstdint>
 
-namespace Eaagles {
-namespace Network {
-namespace Dis {
+namespace oe {
+namespace network {
+namespace dis {
 
 //-----------------------------------------------
 // EntityStatePDU (1152 + 128*n bits)
@@ -1164,8 +1164,8 @@ struct ActionResponsePDU_R {
    };
 };
 
-} // End Dis namespace
-} // End Network namespace
-} // End Eaagles namespace
+} // End dis namespace
+} // End network namespace
+} // End oe namespace
 
 #endif

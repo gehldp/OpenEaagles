@@ -14,8 +14,8 @@
 # pragma warning(disable: 4996)
 #endif
 
-namespace Eaagles {
-namespace Recorder {
+namespace oe {
+namespace recorder {
 
 
 //==============================================================================
@@ -32,7 +32,7 @@ END_SLOTTABLE(PrintPlayer)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(PrintPlayer)
-   ON_SLOT( 1, setName,        Basic::String)
+   ON_SLOT( 1, setName,        basic::String)
 END_SLOT_MAP()
 
 EMPTY_SERIALIZER(PrintPlayer)
@@ -60,7 +60,7 @@ void PrintPlayer::copyData(const PrintPlayer& org, const bool cc)
    if (cc) initData();
 
    { // clone player name
-      const Basic::String* clone = nullptr;
+      const basic::String* clone = nullptr;
       if (org.name != nullptr) clone = org.name->clone();
       setName(clone);
       if (clone != nullptr) clone->unref();
@@ -78,7 +78,7 @@ void PrintPlayer::deleteData()
 //------------------------------------------------------------------------------
 // setName
 //------------------------------------------------------------------------------
-bool PrintPlayer::setName(const Basic::String* const msg)
+bool PrintPlayer::setName(const basic::String* const msg)
 {
    if (name != nullptr) { name->unref(); }
    name = msg;
@@ -90,7 +90,7 @@ bool PrintPlayer::setName(const Basic::String* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* PrintPlayer::getSlotByIndex(const int si)
+basic::Object* PrintPlayer::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -101,11 +101,11 @@ Basic::Object* PrintPlayer::getSlotByIndex(const int si)
 void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
 {
    if (handle == nullptr) return;  // cannot continue
-   const Pb::DataRecord* dataRecord = handle->getRecord();
+   const pb::DataRecord* dataRecord = handle->getRecord();
    if (dataRecord == nullptr) return;  // cannot continue
 
    // Get the time msg
-   const Pb::Time* timeMsg = nullptr;
+   const pb::Time* timeMsg = nullptr;
    if (dataRecord->has_time()) {
       timeMsg = &dataRecord->time();
    }
@@ -116,8 +116,8 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
    MsgType msgType = UNKNOWN;
    std::string msgTypeStr = "";
 
-   const Pb::PlayerId* playerIdMsg = nullptr;
-   const Pb::PlayerState* playerStMsg = nullptr;
+   const pb::PlayerId* playerIdMsg = nullptr;
+   const pb::PlayerState* playerStMsg = nullptr;
 
    switch (messageId) {
 
@@ -126,7 +126,7 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_new_player_event_msg()) {
             msgType = NEW;
             msgTypeStr = "NEW";
-            const Pb::NewPlayerEventMsg* msg = &dataRecord->new_player_event_msg();
+            const pb::NewPlayerEventMsg* msg = &dataRecord->new_player_event_msg();
             playerIdMsg = &msg->id();
             playerStMsg = &msg->state();
             std::string playerName = playerIdMsg->name();  // example
@@ -138,7 +138,7 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_removed_event_msg()) {
             msgType = REMOVED;
             msgTypeStr = "REMOVED";
-            const Pb::PlayerRemovedEventMsg* msg = &dataRecord->player_removed_event_msg();
+            const pb::PlayerRemovedEventMsg* msg = &dataRecord->player_removed_event_msg();
             playerIdMsg = &msg->id();
             playerStMsg = &msg->state();
          }
@@ -149,7 +149,7 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_data_msg()) {
             msgType = DATA;
             msgTypeStr = "DATA";
-            const Pb::PlayerDataMsg* msg = &dataRecord->player_data_msg();
+            const pb::PlayerDataMsg* msg = &dataRecord->player_data_msg();
             playerIdMsg = &msg->id();
             playerStMsg = &msg->state();
          }
@@ -159,7 +159,7 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_damaged_event_msg()) {
             msgType = DAMAGE;
             msgTypeStr = "DAMAGE";
-            const Pb::PlayerDamagedEventMsg* msg = &dataRecord->player_damaged_event_msg();
+            const pb::PlayerDamagedEventMsg* msg = &dataRecord->player_damaged_event_msg();
             playerIdMsg = &msg->id();
             playerStMsg = &msg->state();
          }
@@ -169,7 +169,7 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_collision_event_msg()) {
             msgType = COLLISION;
             msgTypeStr = "COLLISION";
-            const Pb::PlayerCollisionEventMsg* msg = &dataRecord->player_collision_event_msg();
+            const pb::PlayerCollisionEventMsg* msg = &dataRecord->player_collision_event_msg();
             playerIdMsg = &msg->id();
             playerStMsg = &msg->state();
          }
@@ -179,7 +179,7 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_crash_event_msg()) {
             msgType = CRASH;
             msgTypeStr = "CRASH";
-            const Pb::PlayerCrashEventMsg* msg = &dataRecord->player_crash_event_msg();
+            const pb::PlayerCrashEventMsg* msg = &dataRecord->player_crash_event_msg();
             playerIdMsg = &msg->id();
             playerStMsg = &msg->state();
          }
@@ -189,7 +189,7 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_killed_event_msg()) {
             msgType = KILL;
             msgTypeStr = "KILL";
-            const Pb::PlayerCrashEventMsg* msg = &dataRecord->player_crash_event_msg();
+            const pb::PlayerCrashEventMsg* msg = &dataRecord->player_crash_event_msg();
             playerIdMsg = &msg->id();
             playerStMsg = &msg->state();
          }
@@ -264,5 +264,5 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
 }
 
 
-} // End Recorder namespace
-} // End Eaagles namespace
+} // End recorder namespace
+} // End oe namespace

@@ -11,21 +11,21 @@
 //        virtual int decompressSubframe(const int x, const int y, Subframe& subFrame);
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Maps_Rpf_CadrgFrame_H__
-#define __Eaagles_Maps_Rpf_CadrgFrame_H__
+#ifndef __oe_maps_rpf_CadrgFrame_H__
+#define __oe_maps_rpf_CadrgFrame_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/maps/rpfMap/Support.h"
 
-namespace Eaagles {
-namespace Maps {
-namespace Rpf {
+namespace oe {
+namespace maps {
+namespace rpf {
 
 class CadrgFrameEntry;
 
-class CadrgFrame : public Basic::Object
+class CadrgFrame : public basic::Object
 {
-    DECLARE_SUBCLASS(CadrgFrame, Basic::Object)
+    DECLARE_SUBCLASS(CadrgFrame, basic::Object)
 
 public:
     CadrgFrame();
@@ -44,9 +44,9 @@ private:
     unsigned char lookupTable[4096][4][4];          // Lookup table
 };
 
-} // End Rpf namespace
-} // End Maps namespace
-} // End Eaagles namespace
+} // End rpf namespace
+} // End maps namespace
+} // End oe namespace
 
 #endif
 

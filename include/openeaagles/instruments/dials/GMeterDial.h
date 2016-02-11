@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class: BasicGL::Graphic -> AnalogDial -> GMeterDial
+// Class: graphics::Graphic -> AnalogDial -> GMeterDial
 //
 // Description: G meter, which simply keeps track of min and max and actual G's
 //
@@ -7,13 +7,13 @@
 //      UPDATE_INSTRUMENTS (from instruments) -> g's
 //      RESET_EVENT -> resets min and max g's
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_GMeterDial_H__
-#define __Eaagles_Instruments_GMeterDial_H__
+#ifndef __oe_instruments_GMeterDial_H__
+#define __oe_instruments_GMeterDial_H__
 
 #include "openeaagles/instruments/dials/AnalogDial.h"
 
-namespace Eaagles {
-namespace Instruments {
+namespace oe {
+namespace instruments {
 
 class GMeterDial : public AnalogDial {
     DECLARE_SUBCLASS(GMeterDial,AnalogDial)
@@ -36,7 +36,7 @@ private:
     SendData maxGSD;    // max gs
 };
 
-}  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end instruments namespace
+}  // end oe namespace
 
 #endif

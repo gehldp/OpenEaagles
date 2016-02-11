@@ -2,8 +2,8 @@
 #include "openeaagles/simulation/Agm.h"
 #include "openeaagles/simulation/Track.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 //==============================================================================
 // Agm class -- Generic Air to Ground Missile
@@ -26,7 +26,7 @@ Agm::Agm()
 {
     STANDARD_CONSTRUCTOR()
 
-    static Basic::String generic("AGM");
+    static basic::String generic("AGM");
     setType(&generic);
 
    // Default guidance & dynamics for generic A/G missile
@@ -80,5 +80,5 @@ bool Agm::calculateVectors(const Player* const tgt, const Track* const trk, osg:
    return true;
 }
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace

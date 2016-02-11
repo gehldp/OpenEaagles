@@ -1,8 +1,8 @@
 
 #include "openeaagles/basic/IoAdapter.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 //==============================================================================
 // IoAdapter
@@ -15,5 +15,5 @@ EMPTY_COPYDATA(IoAdapter)
 EMPTY_DELETEDATA(IoAdapter)
 EMPTY_SERIALIZER(IoAdapter)
 
-} // end Basic
-} // end Eaagles namespace
+} // end basic
+} // end oe namespace

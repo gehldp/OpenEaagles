@@ -4,8 +4,8 @@
 #include "openeaagles/basic/osg/Matrix"
 #include "openeaagles/basic/units/Angles.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 //==============================================================================
 // class Ship
@@ -19,7 +19,7 @@ EMPTY_SERIALIZER(Ship)
 Ship::Ship()
 {
     STANDARD_CONSTRUCTOR()
-    static Basic::String generic("GenericShip");
+    static basic::String generic("GenericShip");
     setType(&generic);
 }
 
@@ -43,5 +43,5 @@ unsigned int Ship::getMajorType() const
     return SHIP;
 }
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace

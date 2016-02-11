@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: SlotTable
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_SlotTable_H__
-#define __Eaagles_Basic_SlotTable_H__
+#ifndef __oe_basic_SlotTable_H__
+#define __oe_basic_SlotTable_H__
 
 #include <iostream>
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class: SlotTable
@@ -54,8 +54,8 @@ private:
    unsigned int nslots1;   // Number of slots in table
 };
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 
 #endif
 

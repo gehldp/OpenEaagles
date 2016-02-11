@@ -1,9 +1,9 @@
 #include "openeaagles/instruments/buttons/Button.h"
 #include "openeaagles/basic/Number.h"
-#include "openeaagles/basicGL/Display.h"
+#include "openeaagles/graphics/Display.h"
 
-namespace Eaagles {
-namespace Instruments {
+namespace oe {
+namespace instruments {
 
 IMPLEMENT_SUBCLASS(Button,"Button")
 EMPTY_SERIALIZER(Button)
@@ -19,7 +19,7 @@ END_SLOTTABLE(Button)
 //  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Button)
-    ON_SLOT(1, setSlotEventId, Basic::Number)
+    ON_SLOT(1, setSlotEventId, basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ EMPTY_DELETEDATA(Button)
 //------------------------------------------------------------------------------
 // setSlotEventId() - sets our slot event Id
 //------------------------------------------------------------------------------
-bool Button::setSlotEventId(const Basic::Number* const newEvent)
+bool Button::setSlotEventId(const basic::Number* const newEvent)
 {
     bool ok = false;
     if (newEvent != nullptr) {
@@ -75,7 +75,7 @@ bool Button::onSingleClick()
     // when I am clicked, I will send an event to my container, we find out what
     // event Id we have, and send that eventId
     bool ok = false;
-    BasicGL::Display* myDisplay = (BasicGL::Display*)findContainerByType(typeid(BasicGL::Display));
+    graphics::Display* myDisplay = (graphics::Display*)findContainerByType(typeid(graphics::Display));
 
     if (myDisplay != nullptr) {
         myDisplay->buttonEvent(getEventId());
@@ -97,10 +97,10 @@ bool Button::onCancel()
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Button
 //------------------------------------------------------------------------------
-Basic::Object* Button::getSlotByIndex(const int si)
+basic::Object* Button::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
 
-}  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end instruments namespace
+}  // end oe namespace

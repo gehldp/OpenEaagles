@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: Terrain
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Terrain_H__
-#define __Eaagles_Basic_Terrain_H__
+#ifndef __oe_basic_terrain_H__
+#define __oe_basic_terrain_H__
 
 #include "openeaagles/basic/Component.h"
 
-namespace Eaagles {
+namespace oe {
 
-namespace Basic {
+namespace basic {
 
 class Hsva;
 class String;
@@ -200,7 +200,7 @@ private:
 };
 
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 
 #endif

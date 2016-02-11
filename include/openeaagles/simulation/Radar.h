@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: Radar
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Radar_H__
-#define __Eaagles_Simulation_Radar_H__
+#ifndef __oe_simulation_Radar_H__
+#define __oe_simulation_Radar_H__
 
 #include "openeaagles/simulation/RfSensor.h"
 #include "openeaagles/basic/safe_queue.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Class: Radar
@@ -18,8 +18,8 @@ namespace Simulation {
 //
 // Factory name: Radar
 // Slots:
-//    igain    <Basic::Number>     ! Integrator gain (no units; default: 1.0f)
-//             <Basic::Decibel>    ! Integrator gain (dB)
+//    igain    <basic::Number>     ! Integrator gain (no units; default: 1.0f)
+//             <basic::Decibel>    ! Integrator gain (dB)
 //
 //------------------------------------------------------------------------------
 class Radar : public RfSensor
@@ -28,7 +28,7 @@ class Radar : public RfSensor
 
 public:
    // Max number of reports (per scan)
-   static const unsigned int MAX_REPORTS = EAAGLES_CONFIG_MAX_REPORTS;
+   static const unsigned int MAX_REPORTS = OE_CONFIG_MAX_REPORTS;
 
    static const unsigned int NUM_SWEEPS = 121;          // Number of sweeps in Real-Beam display
    static const unsigned int PTRS_PER_SWEEP = 128;      // Number of points per sweep in RB display
@@ -63,7 +63,7 @@ public:
    virtual bool setIGain(const LCreal);
 
    // Slot functions
-   virtual bool setSlotIGain(Basic::Number* const msg);
+   virtual bool setSlotIGain(basic::Number* const msg);
 
    bool killedNotification(Player* const killedBy = 0) override;
 
@@ -71,7 +71,7 @@ public:
    void reset() override;
 
 protected:
-   bool onEndScanEvent(const Basic::Integer* const bar) override;
+   bool onEndScanEvent(const basic::Integer* const bar) override;
 
    void transmit(const LCreal dt) override;
    void receive(const LCreal dt) override;
@@ -85,8 +85,8 @@ protected: // (#temporary#) allow subclasses to access and use report queue
    mutable long myLock;
 
    // Queues
-   Basic::safe_queue<Emission*>   rptQueue;       // Reporting emission queue
-   Basic::safe_queue<LCreal>      rptSnQueue;     // Reporting Signal/Nose queue  (dB)
+   basic::safe_queue<Emission*>   rptQueue;       // Reporting emission queue
+   basic::safe_queue<LCreal>      rptSnQueue;     // Reporting Signal/Nose queue  (dB)
 
    // Reports
    Emission*   reports[MAX_REPORTS];   // Best emission for this report
@@ -113,7 +113,7 @@ private:
    LCreal      rfIGain;                // Integrator gain (default: 1.0) (no units)
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

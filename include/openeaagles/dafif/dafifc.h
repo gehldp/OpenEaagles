@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
 // DAFIF Support Utilities and Data 
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Dafif_dafifc_H__
-#define __Eaagles_Dafif_dafifc_H__
+#ifndef __oe_dafif_dafifc_H__
+#define __oe_dafif_dafifc_H__
 
-namespace Eaagles {
-namespace Dafif {
+namespace oe {
+namespace dafif {
 
 // Convert MHz to KHz and HHz/
 #define MHZ2KHZ(mhz) (mhz*1000.0f)
@@ -199,7 +199,7 @@ const int WP_LONGITUDE  = 71;
 const int WP_ELEVATION  = 0;
 const int WP_MAGVAR     = 106;
 
-} // End Dafif namespace
-} // End Eaagles namespace
+} // End dafif namespace
+} // End oe namespace
 
 #endif

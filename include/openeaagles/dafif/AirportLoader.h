@@ -37,8 +37,8 @@
 //       Range: 0 .. numberFound()-1
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Dafif_AirportLoader_H__
-#define __Eaagles_Dafif_AirportLoader_H__
+#ifndef __oe_dafif_AirportLoader_H__
+#define __oe_dafif_AirportLoader_H__
 
 #include "Database.h"
 #include "Airport.h"
@@ -49,8 +49,8 @@
 #include "AIParser.h"
 #endif
 
-namespace Eaagles {
-namespace Dafif {
+namespace oe {
+namespace dafif {
 
 class AirportLoader : public Database {
     DECLARE_SUBCLASS(AirportLoader,Database)
@@ -60,7 +60,7 @@ public:
    AirportLoader(
       const char* country,
       const char* file = "file0",
-      const char* path = "/eaagles3rdParty/dafif/fullall/"
+      const char* path = "/dafif/fullall/"
    );
 
    virtual Airport* airport(const int n);
@@ -200,7 +200,7 @@ private:
 
 };
 
-} // End Dafif namespace
-} // End Eaagles namespace
+} // End dafif namespace
+} // End oe namespace
 
 #endif

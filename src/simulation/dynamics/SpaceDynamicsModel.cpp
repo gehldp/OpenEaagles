@@ -1,8 +1,8 @@
 
 #include "openeaagles/simulation/dynamics/SpaceDynamicsModel.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 IMPLEMENT_SUBCLASS(SpaceDynamicsModel, "SpaceDynamicsModel")
 EMPTY_SLOTTABLE(SpaceDynamicsModel)
@@ -55,5 +55,5 @@ bool SpaceDynamicsModel::setTranslateZInput(const LCreal)
 }
 
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace

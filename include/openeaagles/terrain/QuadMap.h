@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: QuadMap
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Terrain_QuadMap_H__
-#define __Eaagles_Terrain_QuadMap_H__
+#ifndef __oe_terrain_QuadMap_H__
+#define __oe_terrain_QuadMap_H__
 
 #include "openeaagles/basic/Terrain.h"
 
-namespace Eaagles {
-namespace Terrain {
+namespace oe {
+namespace terrain {
    class DataFile;
 
 //------------------------------------------------------------------------------
@@ -15,19 +15,19 @@ namespace Terrain {
 // Description: Manage up to 4 elevation files in a 2x2 pattern
 // Factory name: QuadMap
 //------------------------------------------------------------------------------
-class QuadMap : public Basic::Terrain
+class QuadMap : public basic::Terrain
 {
-   DECLARE_SUBCLASS(QuadMap,Basic::Terrain)
+   DECLARE_SUBCLASS(QuadMap,basic::Terrain)
 
 public:
    QuadMap();
 
     unsigned int getNumDataFiles() const;
-    const Basic::Terrain* getDataFile(const unsigned int i) const;
-    bool setDataFile(const unsigned int i, Basic::Terrain* newDF);
+    const basic::Terrain* getDataFile(const unsigned int i) const;
+    bool setDataFile(const unsigned int i, basic::Terrain* newDF);
 
    // ---
-   // Basic::Terrain interface
+   // basic::Terrain interface
    // ---
 
    bool isDataLoaded() const override;
@@ -64,13 +64,13 @@ protected:
 private:
    static const unsigned int MAX_DATA_FILES = 4;    // Only 4 files (as in Quad!)
 
-   const Basic::Terrain* dataFiles[MAX_DATA_FILES]; // Terrain data files
+   const basic::Terrain* dataFiles[MAX_DATA_FILES]; // Terrain data files
    unsigned int numDataFiles;                       // Number of data files
 
    bool loadData() override;
 };
 
-} // End Terrain namespace
-} // End Eaagles namespace
+} // End terrain namespace
+} // End oe namespace
 
 #endif

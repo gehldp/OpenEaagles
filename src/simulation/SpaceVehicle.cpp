@@ -3,8 +3,8 @@
 
 #include "openeaagles/basic/units/Distances.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 //==============================================================================
 // class SpaceVehicle
@@ -22,7 +22,7 @@ SpaceVehicle::SpaceVehicle()
 {
    STANDARD_CONSTRUCTOR()
 
-   static Basic::String generic("GenericSpaceVehicle");
+   static basic::String generic("GenericSpaceVehicle");
    setType(&generic);
 }
 
@@ -158,7 +158,7 @@ EMPTY_DELETEDATA(BoosterSpaceVehicle)
 BoosterSpaceVehicle::BoosterSpaceVehicle()
 {
     STANDARD_CONSTRUCTOR()
-    static Basic::String generic("GenericBoosterSpaceVehicle");
+    static basic::String generic("GenericBoosterSpaceVehicle");
     setType(&generic);
 }
 
@@ -178,7 +178,7 @@ EMPTY_DELETEDATA(MannedSpaceVehicle)
 MannedSpaceVehicle::MannedSpaceVehicle()
 {
     STANDARD_CONSTRUCTOR()
-    static Basic::String generic("GenericMannedSpaceVehicle");
+    static basic::String generic("GenericMannedSpaceVehicle");
     setType(&generic);
 }
 
@@ -198,7 +198,7 @@ EMPTY_DELETEDATA(UnmannedSpaceVehicle)
 UnmannedSpaceVehicle::UnmannedSpaceVehicle()
 {
     STANDARD_CONSTRUCTOR()
-    static Basic::String generic("GenericUnmannedSpaceVehicle");
+    static basic::String generic("GenericUnmannedSpaceVehicle");
     setType(&generic);
 }
 
@@ -208,11 +208,11 @@ void UnmannedSpaceVehicle::dynamics(const LCreal dt)
    //osg::Vec3d p = getGeocPosition();
    //osg::Vec3d v = getGeocVelocity();
    //std::cout << "USV::Dyn(" << this << ")";
-   //std::cout << " lla=[ " << getLatitude() << ", " << getLongitude() << ", " << (getAltitudeAglM() * Basic::Distance::M2NM)  << " ]";
+   //std::cout << " lla=[ " << getLatitude() << ", " << getLongitude() << ", " << (getAltitudeAglM() * basic::Distance::M2NM)  << " ]";
    //std::cout << " pos=[ " << p[0] << ", " << p[1] << ", " << p[2] << " ]";
    //std::cout << " vec=[ " << v[0] << ", " << v[1] << ", " << v[2] << " ]";
    //std::cout << std::endl;
 }
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace

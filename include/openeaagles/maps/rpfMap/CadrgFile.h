@@ -39,21 +39,21 @@
 //
 //------------------------------------------------------------------------------
 
-#ifndef __Eaagles_Maps_Rpf_CadrgFile_H__
-#define __Eaagles_Maps_Rpf_CadrgFile_H__
+#ifndef __oe_maps_rpf_CadrgFile_H__
+#define __oe_maps_rpf_CadrgFile_H__
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
-namespace Basic { class String; }
-namespace Maps {
-namespace Rpf {
+namespace oe {
+namespace basic { class String; }
+namespace maps {
+namespace rpf {
 
 class CadrgTocEntry;
 
-class CadrgFile : public Basic::Object
+class CadrgFile : public basic::Object
 {
-    DECLARE_SUBCLASS(CadrgFile, Basic::Object)
+    DECLARE_SUBCLASS(CadrgFile, basic::Object)
 
 public:
     CadrgFile();
@@ -85,11 +85,11 @@ private:
     int numBoundaries;                          // How many boundaries are there?
     CadrgTocEntry* entries[MAX_TOC_ENTRIES];    // Holds our table of contents entries
     bool cib;                                   // CIB flag
-    Basic::String* originalDir;                 // directory of the file we are associated with
+    basic::String* originalDir;                 // directory of the file we are associated with
 };
 
-}  // End Rpf namespace
-}  // End Maps namespace
-}  // End Eaagles namespace
+}  // End rpf namespace
+}  // End maps namespace
+}  // End oe namespace
 
 #endif

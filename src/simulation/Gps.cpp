@@ -4,8 +4,8 @@
 
 #include "openeaagles/simulation/Gps.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 
 //==============================================================================
@@ -119,5 +119,5 @@ void Gps::setCryptoKeys(double ck[], const int week, const int num)
     }
 }
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace

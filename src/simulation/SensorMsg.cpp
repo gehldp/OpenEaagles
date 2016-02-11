@@ -4,8 +4,8 @@
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/basic/units/Distances.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 //==============================================================================
 // Class SensorMsg
@@ -74,8 +74,8 @@ void SensorMsg::copyData(const SensorMsg& org, const bool cc)
     const Player* pp = org.target;
     setTarget( const_cast<Player*>(static_cast<const Player*>(pp)) );
 
-    const Basic::Object* msg = org.dataMsg;
-    setDataMessage( const_cast<Basic::Object*>(static_cast<const Basic::Object*>(msg)) );
+    const basic::Object* msg = org.dataMsg;
+    setDataMessage( const_cast<basic::Object*>(static_cast<const basic::Object*>(msg)) );
 
     returnReq = org.returnReq;
     localOnly = org.localOnly;
@@ -115,12 +115,12 @@ void SensorMsg::setRange(const LCreal r)
 
 LCreal SensorMsg::getRangeRateFPS() const
 {
-   return getRangeRate() * Basic::Distance::M2FT;
+   return getRangeRate() * basic::Distance::M2FT;
 }
 
 LCreal SensorMsg::getRangeRateKts() const
 {
-   return getRangeRate() * Basic::Distance::M2NM * 3600.0f;
+   return getRangeRate() * basic::Distance::M2NM * 3600.0f;
 }
 
 
@@ -151,10 +151,10 @@ void SensorMsg::setTarget(Player* const p)
 //------------------------------------------------------------------------------
 // setDataMessage() -- Sets a pointer to an optional data message
 //------------------------------------------------------------------------------
-void SensorMsg::setDataMessage(Basic::Object* const msg)
+void SensorMsg::setDataMessage(basic::Object* const msg)
 {
    dataMsg = msg;
 }
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace

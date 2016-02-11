@@ -1,11 +1,10 @@
 #
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboeBasic.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboebasic.a
 
 OBJS =  \
 	$(LIB)(support.o) \
-	$(LIB)(basicFF.o) \
 	$(LIB)(Boolean.o) \
 	$(LIB)(Cie.o) \
 	$(LIB)(Cmy.o) \
@@ -14,7 +13,7 @@ OBJS =  \
 	$(LIB)(Component.o) \
 	$(LIB)(Decibel.o) \
 	$(LIB)(EarthModel.o) \
-	$(LIB)(Factory.o) \
+	$(LIB)(factory.o) \
 	$(LIB)(FileReader.o) \
 	$(LIB)(Float.o) \
 	$(LIB)(Function.o) \

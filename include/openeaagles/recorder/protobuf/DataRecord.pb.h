@@ -27,9 +27,9 @@
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
-namespace Eaagles {
-namespace Recorder {
-namespace Pb {
+namespace oe {
+namespace recorder {
+namespace pb {
 
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -164,14 +164,14 @@ class DataRecord : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .Eaagles.Recorder.Pb.Time time = 1;
+  // required .oe.Recorder.Pb.Time time = 1;
   inline bool has_time() const;
   inline void clear_time();
   static const int kTimeFieldNumber = 1;
-  inline const ::Eaagles::Recorder::Pb::Time& time() const;
-  inline ::Eaagles::Recorder::Pb::Time* mutable_time();
-  inline ::Eaagles::Recorder::Pb::Time* release_time();
-  inline void set_allocated_time(::Eaagles::Recorder::Pb::Time* time);
+  inline const ::oe::recorder::pb::Time& time() const;
+  inline ::oe::recorder::pb::Time* mutable_time();
+  inline ::oe::recorder::pb::Time* release_time();
+  inline void set_allocated_time(::oe::recorder::pb::Time* time);
 
   // required uint32 id = 2;
   inline bool has_id() const;
@@ -180,170 +180,170 @@ class DataRecord : public ::google::protobuf::Message {
   inline ::google::protobuf::uint32 id() const;
   inline void set_id(::google::protobuf::uint32 value);
 
-  // optional .Eaagles.Recorder.Pb.FileIdMsg file_id_msg = 11;
+  // optional .oe.Recorder.Pb.FileIdMsg file_id_msg = 11;
   inline bool has_file_id_msg() const;
   inline void clear_file_id_msg();
   static const int kFileIdMsgFieldNumber = 11;
-  inline const ::Eaagles::Recorder::Pb::FileIdMsg& file_id_msg() const;
-  inline ::Eaagles::Recorder::Pb::FileIdMsg* mutable_file_id_msg();
-  inline ::Eaagles::Recorder::Pb::FileIdMsg* release_file_id_msg();
-  inline void set_allocated_file_id_msg(::Eaagles::Recorder::Pb::FileIdMsg* file_id_msg);
+  inline const ::oe::recorder::pb::FileIdMsg& file_id_msg() const;
+  inline ::oe::recorder::pb::FileIdMsg* mutable_file_id_msg();
+  inline ::oe::recorder::pb::FileIdMsg* release_file_id_msg();
+  inline void set_allocated_file_id_msg(::oe::recorder::pb::FileIdMsg* file_id_msg);
 
-  // optional .Eaagles.Recorder.Pb.UnknownIdMsg unknown_id_msg = 13;
+  // optional .oe.Recorder.Pb.UnknownIdMsg unknown_id_msg = 13;
   inline bool has_unknown_id_msg() const;
   inline void clear_unknown_id_msg();
   static const int kUnknownIdMsgFieldNumber = 13;
-  inline const ::Eaagles::Recorder::Pb::UnknownIdMsg& unknown_id_msg() const;
-  inline ::Eaagles::Recorder::Pb::UnknownIdMsg* mutable_unknown_id_msg();
-  inline ::Eaagles::Recorder::Pb::UnknownIdMsg* release_unknown_id_msg();
-  inline void set_allocated_unknown_id_msg(::Eaagles::Recorder::Pb::UnknownIdMsg* unknown_id_msg);
+  inline const ::oe::recorder::pb::UnknownIdMsg& unknown_id_msg() const;
+  inline ::oe::recorder::pb::UnknownIdMsg* mutable_unknown_id_msg();
+  inline ::oe::recorder::pb::UnknownIdMsg* release_unknown_id_msg();
+  inline void set_allocated_unknown_id_msg(::oe::recorder::pb::UnknownIdMsg* unknown_id_msg);
 
-  // optional .Eaagles.Recorder.Pb.MarkerMsg marker_msg = 14;
+  // optional .oe.Recorder.Pb.MarkerMsg marker_msg = 14;
   inline bool has_marker_msg() const;
   inline void clear_marker_msg();
   static const int kMarkerMsgFieldNumber = 14;
-  inline const ::Eaagles::Recorder::Pb::MarkerMsg& marker_msg() const;
-  inline ::Eaagles::Recorder::Pb::MarkerMsg* mutable_marker_msg();
-  inline ::Eaagles::Recorder::Pb::MarkerMsg* release_marker_msg();
-  inline void set_allocated_marker_msg(::Eaagles::Recorder::Pb::MarkerMsg* marker_msg);
+  inline const ::oe::recorder::pb::MarkerMsg& marker_msg() const;
+  inline ::oe::recorder::pb::MarkerMsg* mutable_marker_msg();
+  inline ::oe::recorder::pb::MarkerMsg* release_marker_msg();
+  inline void set_allocated_marker_msg(::oe::recorder::pb::MarkerMsg* marker_msg);
 
-  // optional .Eaagles.Recorder.Pb.InputDeviceMsg input_device_msg = 15;
+  // optional .oe.Recorder.Pb.InputDeviceMsg input_device_msg = 15;
   inline bool has_input_device_msg() const;
   inline void clear_input_device_msg();
   static const int kInputDeviceMsgFieldNumber = 15;
-  inline const ::Eaagles::Recorder::Pb::InputDeviceMsg& input_device_msg() const;
-  inline ::Eaagles::Recorder::Pb::InputDeviceMsg* mutable_input_device_msg();
-  inline ::Eaagles::Recorder::Pb::InputDeviceMsg* release_input_device_msg();
-  inline void set_allocated_input_device_msg(::Eaagles::Recorder::Pb::InputDeviceMsg* input_device_msg);
+  inline const ::oe::recorder::pb::InputDeviceMsg& input_device_msg() const;
+  inline ::oe::recorder::pb::InputDeviceMsg* mutable_input_device_msg();
+  inline ::oe::recorder::pb::InputDeviceMsg* release_input_device_msg();
+  inline void set_allocated_input_device_msg(::oe::recorder::pb::InputDeviceMsg* input_device_msg);
 
-  // optional .Eaagles.Recorder.Pb.NewPlayerEventMsg new_player_event_msg = 31;
+  // optional .oe.Recorder.Pb.NewPlayerEventMsg new_player_event_msg = 31;
   inline bool has_new_player_event_msg() const;
   inline void clear_new_player_event_msg();
   static const int kNewPlayerEventMsgFieldNumber = 31;
-  inline const ::Eaagles::Recorder::Pb::NewPlayerEventMsg& new_player_event_msg() const;
-  inline ::Eaagles::Recorder::Pb::NewPlayerEventMsg* mutable_new_player_event_msg();
-  inline ::Eaagles::Recorder::Pb::NewPlayerEventMsg* release_new_player_event_msg();
-  inline void set_allocated_new_player_event_msg(::Eaagles::Recorder::Pb::NewPlayerEventMsg* new_player_event_msg);
+  inline const ::oe::recorder::pb::NewPlayerEventMsg& new_player_event_msg() const;
+  inline ::oe::recorder::pb::NewPlayerEventMsg* mutable_new_player_event_msg();
+  inline ::oe::recorder::pb::NewPlayerEventMsg* release_new_player_event_msg();
+  inline void set_allocated_new_player_event_msg(::oe::recorder::pb::NewPlayerEventMsg* new_player_event_msg);
 
-  // optional .Eaagles.Recorder.Pb.PlayerRemovedEventMsg player_removed_event_msg = 32;
+  // optional .oe.Recorder.Pb.PlayerRemovedEventMsg player_removed_event_msg = 32;
   inline bool has_player_removed_event_msg() const;
   inline void clear_player_removed_event_msg();
   static const int kPlayerRemovedEventMsgFieldNumber = 32;
-  inline const ::Eaagles::Recorder::Pb::PlayerRemovedEventMsg& player_removed_event_msg() const;
-  inline ::Eaagles::Recorder::Pb::PlayerRemovedEventMsg* mutable_player_removed_event_msg();
-  inline ::Eaagles::Recorder::Pb::PlayerRemovedEventMsg* release_player_removed_event_msg();
-  inline void set_allocated_player_removed_event_msg(::Eaagles::Recorder::Pb::PlayerRemovedEventMsg* player_removed_event_msg);
+  inline const ::oe::recorder::pb::PlayerRemovedEventMsg& player_removed_event_msg() const;
+  inline ::oe::recorder::pb::PlayerRemovedEventMsg* mutable_player_removed_event_msg();
+  inline ::oe::recorder::pb::PlayerRemovedEventMsg* release_player_removed_event_msg();
+  inline void set_allocated_player_removed_event_msg(::oe::recorder::pb::PlayerRemovedEventMsg* player_removed_event_msg);
 
-  // optional .Eaagles.Recorder.Pb.PlayerDataMsg player_data_msg = 33;
+  // optional .oe.Recorder.Pb.PlayerDataMsg player_data_msg = 33;
   inline bool has_player_data_msg() const;
   inline void clear_player_data_msg();
   static const int kPlayerDataMsgFieldNumber = 33;
-  inline const ::Eaagles::Recorder::Pb::PlayerDataMsg& player_data_msg() const;
-  inline ::Eaagles::Recorder::Pb::PlayerDataMsg* mutable_player_data_msg();
-  inline ::Eaagles::Recorder::Pb::PlayerDataMsg* release_player_data_msg();
-  inline void set_allocated_player_data_msg(::Eaagles::Recorder::Pb::PlayerDataMsg* player_data_msg);
+  inline const ::oe::recorder::pb::PlayerDataMsg& player_data_msg() const;
+  inline ::oe::recorder::pb::PlayerDataMsg* mutable_player_data_msg();
+  inline ::oe::recorder::pb::PlayerDataMsg* release_player_data_msg();
+  inline void set_allocated_player_data_msg(::oe::recorder::pb::PlayerDataMsg* player_data_msg);
 
-  // optional .Eaagles.Recorder.Pb.PlayerDamagedEventMsg player_damaged_event_msg = 34;
+  // optional .oe.Recorder.Pb.PlayerDamagedEventMsg player_damaged_event_msg = 34;
   inline bool has_player_damaged_event_msg() const;
   inline void clear_player_damaged_event_msg();
   static const int kPlayerDamagedEventMsgFieldNumber = 34;
-  inline const ::Eaagles::Recorder::Pb::PlayerDamagedEventMsg& player_damaged_event_msg() const;
-  inline ::Eaagles::Recorder::Pb::PlayerDamagedEventMsg* mutable_player_damaged_event_msg();
-  inline ::Eaagles::Recorder::Pb::PlayerDamagedEventMsg* release_player_damaged_event_msg();
-  inline void set_allocated_player_damaged_event_msg(::Eaagles::Recorder::Pb::PlayerDamagedEventMsg* player_damaged_event_msg);
+  inline const ::oe::recorder::pb::PlayerDamagedEventMsg& player_damaged_event_msg() const;
+  inline ::oe::recorder::pb::PlayerDamagedEventMsg* mutable_player_damaged_event_msg();
+  inline ::oe::recorder::pb::PlayerDamagedEventMsg* release_player_damaged_event_msg();
+  inline void set_allocated_player_damaged_event_msg(::oe::recorder::pb::PlayerDamagedEventMsg* player_damaged_event_msg);
 
-  // optional .Eaagles.Recorder.Pb.PlayerCollisionEventMsg player_collision_event_msg = 35;
+  // optional .oe.Recorder.Pb.PlayerCollisionEventMsg player_collision_event_msg = 35;
   inline bool has_player_collision_event_msg() const;
   inline void clear_player_collision_event_msg();
   static const int kPlayerCollisionEventMsgFieldNumber = 35;
-  inline const ::Eaagles::Recorder::Pb::PlayerCollisionEventMsg& player_collision_event_msg() const;
-  inline ::Eaagles::Recorder::Pb::PlayerCollisionEventMsg* mutable_player_collision_event_msg();
-  inline ::Eaagles::Recorder::Pb::PlayerCollisionEventMsg* release_player_collision_event_msg();
-  inline void set_allocated_player_collision_event_msg(::Eaagles::Recorder::Pb::PlayerCollisionEventMsg* player_collision_event_msg);
+  inline const ::oe::recorder::pb::PlayerCollisionEventMsg& player_collision_event_msg() const;
+  inline ::oe::recorder::pb::PlayerCollisionEventMsg* mutable_player_collision_event_msg();
+  inline ::oe::recorder::pb::PlayerCollisionEventMsg* release_player_collision_event_msg();
+  inline void set_allocated_player_collision_event_msg(::oe::recorder::pb::PlayerCollisionEventMsg* player_collision_event_msg);
 
-  // optional .Eaagles.Recorder.Pb.PlayerCrashEventMsg player_crash_event_msg = 36;
+  // optional .oe.Recorder.Pb.PlayerCrashEventMsg player_crash_event_msg = 36;
   inline bool has_player_crash_event_msg() const;
   inline void clear_player_crash_event_msg();
   static const int kPlayerCrashEventMsgFieldNumber = 36;
-  inline const ::Eaagles::Recorder::Pb::PlayerCrashEventMsg& player_crash_event_msg() const;
-  inline ::Eaagles::Recorder::Pb::PlayerCrashEventMsg* mutable_player_crash_event_msg();
-  inline ::Eaagles::Recorder::Pb::PlayerCrashEventMsg* release_player_crash_event_msg();
-  inline void set_allocated_player_crash_event_msg(::Eaagles::Recorder::Pb::PlayerCrashEventMsg* player_crash_event_msg);
+  inline const ::oe::recorder::pb::PlayerCrashEventMsg& player_crash_event_msg() const;
+  inline ::oe::recorder::pb::PlayerCrashEventMsg* mutable_player_crash_event_msg();
+  inline ::oe::recorder::pb::PlayerCrashEventMsg* release_player_crash_event_msg();
+  inline void set_allocated_player_crash_event_msg(::oe::recorder::pb::PlayerCrashEventMsg* player_crash_event_msg);
 
-  // optional .Eaagles.Recorder.Pb.PlayerKilledEventMsg player_killed_event_msg = 37;
+  // optional .oe.Recorder.Pb.PlayerKilledEventMsg player_killed_event_msg = 37;
   inline bool has_player_killed_event_msg() const;
   inline void clear_player_killed_event_msg();
   static const int kPlayerKilledEventMsgFieldNumber = 37;
-  inline const ::Eaagles::Recorder::Pb::PlayerKilledEventMsg& player_killed_event_msg() const;
-  inline ::Eaagles::Recorder::Pb::PlayerKilledEventMsg* mutable_player_killed_event_msg();
-  inline ::Eaagles::Recorder::Pb::PlayerKilledEventMsg* release_player_killed_event_msg();
-  inline void set_allocated_player_killed_event_msg(::Eaagles::Recorder::Pb::PlayerKilledEventMsg* player_killed_event_msg);
+  inline const ::oe::recorder::pb::PlayerKilledEventMsg& player_killed_event_msg() const;
+  inline ::oe::recorder::pb::PlayerKilledEventMsg* mutable_player_killed_event_msg();
+  inline ::oe::recorder::pb::PlayerKilledEventMsg* release_player_killed_event_msg();
+  inline void set_allocated_player_killed_event_msg(::oe::recorder::pb::PlayerKilledEventMsg* player_killed_event_msg);
 
-  // optional .Eaagles.Recorder.Pb.WeaponReleaseEventMsg weapon_release_event_msg = 51;
+  // optional .oe.Recorder.Pb.WeaponReleaseEventMsg weapon_release_event_msg = 51;
   inline bool has_weapon_release_event_msg() const;
   inline void clear_weapon_release_event_msg();
   static const int kWeaponReleaseEventMsgFieldNumber = 51;
-  inline const ::Eaagles::Recorder::Pb::WeaponReleaseEventMsg& weapon_release_event_msg() const;
-  inline ::Eaagles::Recorder::Pb::WeaponReleaseEventMsg* mutable_weapon_release_event_msg();
-  inline ::Eaagles::Recorder::Pb::WeaponReleaseEventMsg* release_weapon_release_event_msg();
-  inline void set_allocated_weapon_release_event_msg(::Eaagles::Recorder::Pb::WeaponReleaseEventMsg* weapon_release_event_msg);
+  inline const ::oe::recorder::pb::WeaponReleaseEventMsg& weapon_release_event_msg() const;
+  inline ::oe::recorder::pb::WeaponReleaseEventMsg* mutable_weapon_release_event_msg();
+  inline ::oe::recorder::pb::WeaponReleaseEventMsg* release_weapon_release_event_msg();
+  inline void set_allocated_weapon_release_event_msg(::oe::recorder::pb::WeaponReleaseEventMsg* weapon_release_event_msg);
 
-  // optional .Eaagles.Recorder.Pb.WeaponHungEventMsg weapon_hung_event_msg = 52;
+  // optional .oe.Recorder.Pb.WeaponHungEventMsg weapon_hung_event_msg = 52;
   inline bool has_weapon_hung_event_msg() const;
   inline void clear_weapon_hung_event_msg();
   static const int kWeaponHungEventMsgFieldNumber = 52;
-  inline const ::Eaagles::Recorder::Pb::WeaponHungEventMsg& weapon_hung_event_msg() const;
-  inline ::Eaagles::Recorder::Pb::WeaponHungEventMsg* mutable_weapon_hung_event_msg();
-  inline ::Eaagles::Recorder::Pb::WeaponHungEventMsg* release_weapon_hung_event_msg();
-  inline void set_allocated_weapon_hung_event_msg(::Eaagles::Recorder::Pb::WeaponHungEventMsg* weapon_hung_event_msg);
+  inline const ::oe::recorder::pb::WeaponHungEventMsg& weapon_hung_event_msg() const;
+  inline ::oe::recorder::pb::WeaponHungEventMsg* mutable_weapon_hung_event_msg();
+  inline ::oe::recorder::pb::WeaponHungEventMsg* release_weapon_hung_event_msg();
+  inline void set_allocated_weapon_hung_event_msg(::oe::recorder::pb::WeaponHungEventMsg* weapon_hung_event_msg);
 
-  // optional .Eaagles.Recorder.Pb.WeaponDetonationEventMsg weapon_detonation_event_msg = 53;
+  // optional .oe.Recorder.Pb.WeaponDetonationEventMsg weapon_detonation_event_msg = 53;
   inline bool has_weapon_detonation_event_msg() const;
   inline void clear_weapon_detonation_event_msg();
   static const int kWeaponDetonationEventMsgFieldNumber = 53;
-  inline const ::Eaagles::Recorder::Pb::WeaponDetonationEventMsg& weapon_detonation_event_msg() const;
-  inline ::Eaagles::Recorder::Pb::WeaponDetonationEventMsg* mutable_weapon_detonation_event_msg();
-  inline ::Eaagles::Recorder::Pb::WeaponDetonationEventMsg* release_weapon_detonation_event_msg();
-  inline void set_allocated_weapon_detonation_event_msg(::Eaagles::Recorder::Pb::WeaponDetonationEventMsg* weapon_detonation_event_msg);
+  inline const ::oe::recorder::pb::WeaponDetonationEventMsg& weapon_detonation_event_msg() const;
+  inline ::oe::recorder::pb::WeaponDetonationEventMsg* mutable_weapon_detonation_event_msg();
+  inline ::oe::recorder::pb::WeaponDetonationEventMsg* release_weapon_detonation_event_msg();
+  inline void set_allocated_weapon_detonation_event_msg(::oe::recorder::pb::WeaponDetonationEventMsg* weapon_detonation_event_msg);
 
-  // optional .Eaagles.Recorder.Pb.GunFiredEventMsg gun_fired_event_msg = 54;
+  // optional .oe.Recorder.Pb.GunFiredEventMsg gun_fired_event_msg = 54;
   inline bool has_gun_fired_event_msg() const;
   inline void clear_gun_fired_event_msg();
   static const int kGunFiredEventMsgFieldNumber = 54;
-  inline const ::Eaagles::Recorder::Pb::GunFiredEventMsg& gun_fired_event_msg() const;
-  inline ::Eaagles::Recorder::Pb::GunFiredEventMsg* mutable_gun_fired_event_msg();
-  inline ::Eaagles::Recorder::Pb::GunFiredEventMsg* release_gun_fired_event_msg();
-  inline void set_allocated_gun_fired_event_msg(::Eaagles::Recorder::Pb::GunFiredEventMsg* gun_fired_event_msg);
+  inline const ::oe::recorder::pb::GunFiredEventMsg& gun_fired_event_msg() const;
+  inline ::oe::recorder::pb::GunFiredEventMsg* mutable_gun_fired_event_msg();
+  inline ::oe::recorder::pb::GunFiredEventMsg* release_gun_fired_event_msg();
+  inline void set_allocated_gun_fired_event_msg(::oe::recorder::pb::GunFiredEventMsg* gun_fired_event_msg);
 
-  // optional .Eaagles.Recorder.Pb.NewTrackEventMsg new_track_event_msg = 71;
+  // optional .oe.Recorder.Pb.NewTrackEventMsg new_track_event_msg = 71;
   inline bool has_new_track_event_msg() const;
   inline void clear_new_track_event_msg();
   static const int kNewTrackEventMsgFieldNumber = 71;
-  inline const ::Eaagles::Recorder::Pb::NewTrackEventMsg& new_track_event_msg() const;
-  inline ::Eaagles::Recorder::Pb::NewTrackEventMsg* mutable_new_track_event_msg();
-  inline ::Eaagles::Recorder::Pb::NewTrackEventMsg* release_new_track_event_msg();
-  inline void set_allocated_new_track_event_msg(::Eaagles::Recorder::Pb::NewTrackEventMsg* new_track_event_msg);
+  inline const ::oe::recorder::pb::NewTrackEventMsg& new_track_event_msg() const;
+  inline ::oe::recorder::pb::NewTrackEventMsg* mutable_new_track_event_msg();
+  inline ::oe::recorder::pb::NewTrackEventMsg* release_new_track_event_msg();
+  inline void set_allocated_new_track_event_msg(::oe::recorder::pb::NewTrackEventMsg* new_track_event_msg);
 
-  // optional .Eaagles.Recorder.Pb.TrackRemovedEventMsg track_removed_event_msg = 72;
+  // optional .oe.Recorder.Pb.TrackRemovedEventMsg track_removed_event_msg = 72;
   inline bool has_track_removed_event_msg() const;
   inline void clear_track_removed_event_msg();
   static const int kTrackRemovedEventMsgFieldNumber = 72;
-  inline const ::Eaagles::Recorder::Pb::TrackRemovedEventMsg& track_removed_event_msg() const;
-  inline ::Eaagles::Recorder::Pb::TrackRemovedEventMsg* mutable_track_removed_event_msg();
-  inline ::Eaagles::Recorder::Pb::TrackRemovedEventMsg* release_track_removed_event_msg();
-  inline void set_allocated_track_removed_event_msg(::Eaagles::Recorder::Pb::TrackRemovedEventMsg* track_removed_event_msg);
+  inline const ::oe::recorder::pb::TrackRemovedEventMsg& track_removed_event_msg() const;
+  inline ::oe::recorder::pb::TrackRemovedEventMsg* mutable_track_removed_event_msg();
+  inline ::oe::recorder::pb::TrackRemovedEventMsg* release_track_removed_event_msg();
+  inline void set_allocated_track_removed_event_msg(::oe::recorder::pb::TrackRemovedEventMsg* track_removed_event_msg);
 
-  // optional .Eaagles.Recorder.Pb.TrackDataMsg track_data_msg = 73;
+  // optional .oe.Recorder.Pb.TrackDataMsg track_data_msg = 73;
   inline bool has_track_data_msg() const;
   inline void clear_track_data_msg();
   static const int kTrackDataMsgFieldNumber = 73;
-  inline const ::Eaagles::Recorder::Pb::TrackDataMsg& track_data_msg() const;
-  inline ::Eaagles::Recorder::Pb::TrackDataMsg* mutable_track_data_msg();
-  inline ::Eaagles::Recorder::Pb::TrackDataMsg* release_track_data_msg();
-  inline void set_allocated_track_data_msg(::Eaagles::Recorder::Pb::TrackDataMsg* track_data_msg);
+  inline const ::oe::recorder::pb::TrackDataMsg& track_data_msg() const;
+  inline ::oe::recorder::pb::TrackDataMsg* mutable_track_data_msg();
+  inline ::oe::recorder::pb::TrackDataMsg* release_track_data_msg();
+  inline void set_allocated_track_data_msg(::oe::recorder::pb::TrackDataMsg* track_data_msg);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(DataRecord)
-  // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.DataRecord)
+  // @@protoc_insertion_point(class_scope:oe.Recorder.Pb.DataRecord)
  private:
   inline void set_has_time();
   inline void clear_has_time();
@@ -392,25 +392,25 @@ class DataRecord : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::Eaagles::Recorder::Pb::Time* time_;
-  ::Eaagles::Recorder::Pb::FileIdMsg* file_id_msg_;
-  ::Eaagles::Recorder::Pb::UnknownIdMsg* unknown_id_msg_;
-  ::Eaagles::Recorder::Pb::MarkerMsg* marker_msg_;
-  ::Eaagles::Recorder::Pb::InputDeviceMsg* input_device_msg_;
-  ::Eaagles::Recorder::Pb::NewPlayerEventMsg* new_player_event_msg_;
-  ::Eaagles::Recorder::Pb::PlayerRemovedEventMsg* player_removed_event_msg_;
-  ::Eaagles::Recorder::Pb::PlayerDataMsg* player_data_msg_;
-  ::Eaagles::Recorder::Pb::PlayerDamagedEventMsg* player_damaged_event_msg_;
-  ::Eaagles::Recorder::Pb::PlayerCollisionEventMsg* player_collision_event_msg_;
-  ::Eaagles::Recorder::Pb::PlayerCrashEventMsg* player_crash_event_msg_;
-  ::Eaagles::Recorder::Pb::PlayerKilledEventMsg* player_killed_event_msg_;
-  ::Eaagles::Recorder::Pb::WeaponReleaseEventMsg* weapon_release_event_msg_;
-  ::Eaagles::Recorder::Pb::WeaponHungEventMsg* weapon_hung_event_msg_;
-  ::Eaagles::Recorder::Pb::WeaponDetonationEventMsg* weapon_detonation_event_msg_;
-  ::Eaagles::Recorder::Pb::GunFiredEventMsg* gun_fired_event_msg_;
-  ::Eaagles::Recorder::Pb::NewTrackEventMsg* new_track_event_msg_;
-  ::Eaagles::Recorder::Pb::TrackRemovedEventMsg* track_removed_event_msg_;
-  ::Eaagles::Recorder::Pb::TrackDataMsg* track_data_msg_;
+  ::oe::recorder::pb::Time* time_;
+  ::oe::recorder::pb::FileIdMsg* file_id_msg_;
+  ::oe::recorder::pb::UnknownIdMsg* unknown_id_msg_;
+  ::oe::recorder::pb::MarkerMsg* marker_msg_;
+  ::oe::recorder::pb::InputDeviceMsg* input_device_msg_;
+  ::oe::recorder::pb::NewPlayerEventMsg* new_player_event_msg_;
+  ::oe::recorder::pb::PlayerRemovedEventMsg* player_removed_event_msg_;
+  ::oe::recorder::pb::PlayerDataMsg* player_data_msg_;
+  ::oe::recorder::pb::PlayerDamagedEventMsg* player_damaged_event_msg_;
+  ::oe::recorder::pb::PlayerCollisionEventMsg* player_collision_event_msg_;
+  ::oe::recorder::pb::PlayerCrashEventMsg* player_crash_event_msg_;
+  ::oe::recorder::pb::PlayerKilledEventMsg* player_killed_event_msg_;
+  ::oe::recorder::pb::WeaponReleaseEventMsg* weapon_release_event_msg_;
+  ::oe::recorder::pb::WeaponHungEventMsg* weapon_hung_event_msg_;
+  ::oe::recorder::pb::WeaponDetonationEventMsg* weapon_detonation_event_msg_;
+  ::oe::recorder::pb::GunFiredEventMsg* gun_fired_event_msg_;
+  ::oe::recorder::pb::NewTrackEventMsg* new_track_event_msg_;
+  ::oe::recorder::pb::TrackRemovedEventMsg* track_removed_event_msg_;
+  ::oe::recorder::pb::TrackDataMsg* track_data_msg_;
   ::google::protobuf::uint32 id_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -548,7 +548,7 @@ class FileIdMsg : public ::google::protobuf::Message {
   inline void set_year(::google::protobuf::uint32 value);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(FileIdMsg)
-  // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.FileIdMsg)
+  // @@protoc_insertion_point(class_scope:oe.Recorder.Pb.FileIdMsg)
  private:
   inline void set_has_event_name();
   inline void clear_has_event_name();
@@ -653,7 +653,7 @@ class UnknownIdMsg : public ::google::protobuf::Message {
   inline ::google::protobuf::uint32 id() const;
   inline void set_id(::google::protobuf::uint32 value);
 
-  // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.UnknownIdMsg)
+  // @@protoc_insertion_point(class_scope:oe.Recorder.Pb.UnknownIdMsg)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -740,7 +740,7 @@ class MarkerMsg : public ::google::protobuf::Message {
   inline void set_source_id(::google::protobuf::uint32 value);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(MarkerMsg)
-  // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.MarkerMsg)
+  // @@protoc_insertion_point(class_scope:oe.Recorder.Pb.MarkerMsg)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -839,7 +839,7 @@ class InputDeviceMsg : public ::google::protobuf::Message {
   inline void set_value(float value);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(InputDeviceMsg)
-  // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.InputDeviceMsg)
+  // @@protoc_insertion_point(class_scope:oe.Recorder.Pb.InputDeviceMsg)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -919,26 +919,26 @@ class NewPlayerEventMsg : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+  // required .oe.Recorder.Pb.PlayerId id = 1;
   inline bool has_id() const;
   inline void clear_id();
   static const int kIdFieldNumber = 1;
-  inline const ::Eaagles::Recorder::Pb::PlayerId& id() const;
-  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_id();
-  inline ::Eaagles::Recorder::Pb::PlayerId* release_id();
-  inline void set_allocated_id(::Eaagles::Recorder::Pb::PlayerId* id);
+  inline const ::oe::recorder::pb::PlayerId& id() const;
+  inline ::oe::recorder::pb::PlayerId* mutable_id();
+  inline ::oe::recorder::pb::PlayerId* release_id();
+  inline void set_allocated_id(::oe::recorder::pb::PlayerId* id);
 
-  // required .Eaagles.Recorder.Pb.PlayerState state = 2;
+  // required .oe.Recorder.Pb.PlayerState state = 2;
   inline bool has_state() const;
   inline void clear_state();
   static const int kStateFieldNumber = 2;
-  inline const ::Eaagles::Recorder::Pb::PlayerState& state() const;
-  inline ::Eaagles::Recorder::Pb::PlayerState* mutable_state();
-  inline ::Eaagles::Recorder::Pb::PlayerState* release_state();
-  inline void set_allocated_state(::Eaagles::Recorder::Pb::PlayerState* state);
+  inline const ::oe::recorder::pb::PlayerState& state() const;
+  inline ::oe::recorder::pb::PlayerState* mutable_state();
+  inline ::oe::recorder::pb::PlayerState* release_state();
+  inline void set_allocated_state(::oe::recorder::pb::PlayerState* state);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(NewPlayerEventMsg)
-  // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.NewPlayerEventMsg)
+  // @@protoc_insertion_point(class_scope:oe.Recorder.Pb.NewPlayerEventMsg)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -951,8 +951,8 @@ class NewPlayerEventMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::Eaagles::Recorder::Pb::PlayerId* id_;
-  ::Eaagles::Recorder::Pb::PlayerState* state_;
+  ::oe::recorder::pb::PlayerId* id_;
+  ::oe::recorder::pb::PlayerState* state_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_ShutdownFile_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -1015,26 +1015,26 @@ class PlayerRemovedEventMsg : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+  // required .oe.Recorder.Pb.PlayerId id = 1;
   inline bool has_id() const;
   inline void clear_id();
   static const int kIdFieldNumber = 1;
-  inline const ::Eaagles::Recorder::Pb::PlayerId& id() const;
-  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_id();
-  inline ::Eaagles::Recorder::Pb::PlayerId* release_id();
-  inline void set_allocated_id(::Eaagles::Recorder::Pb::PlayerId* id);
+  inline const ::oe::recorder::pb::PlayerId& id() const;
+  inline ::oe::recorder::pb::PlayerId* mutable_id();
+  inline ::oe::recorder::pb::PlayerId* release_id();
+  inline void set_allocated_id(::oe::recorder::pb::PlayerId* id);
 
-  // optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+  // optional .oe.Recorder.Pb.PlayerState state = 2;
   inline bool has_state() const;
   inline void clear_state();
   static const int kStateFieldNumber = 2;
-  inline const ::Eaagles::Recorder::Pb::PlayerState& state() const;
-  inline ::Eaagles::Recorder::Pb::PlayerState* mutable_state();
-  inline ::Eaagles::Recorder::Pb::PlayerState* release_state();
-  inline void set_allocated_state(::Eaagles::Recorder::Pb::PlayerState* state);
+  inline const ::oe::recorder::pb::PlayerState& state() const;
+  inline ::oe::recorder::pb::PlayerState* mutable_state();
+  inline ::oe::recorder::pb::PlayerState* release_state();
+  inline void set_allocated_state(::oe::recorder::pb::PlayerState* state);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(PlayerRemovedEventMsg)
-  // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.PlayerRemovedEventMsg)
+  // @@protoc_insertion_point(class_scope:oe.Recorder.Pb.PlayerRemovedEventMsg)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -1047,8 +1047,8 @@ class PlayerRemovedEventMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::Eaagles::Recorder::Pb::PlayerId* id_;
-  ::Eaagles::Recorder::Pb::PlayerState* state_;
+  ::oe::recorder::pb::PlayerId* id_;
+  ::oe::recorder::pb::PlayerState* state_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_ShutdownFile_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -1111,23 +1111,23 @@ class PlayerDataMsg : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+  // required .oe.Recorder.Pb.PlayerId id = 1;
   inline bool has_id() const;
   inline void clear_id();
   static const int kIdFieldNumber = 1;
-  inline const ::Eaagles::Recorder::Pb::PlayerId& id() const;
-  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_id();
-  inline ::Eaagles::Recorder::Pb::PlayerId* release_id();
-  inline void set_allocated_id(::Eaagles::Recorder::Pb::PlayerId* id);
+  inline const ::oe::recorder::pb::PlayerId& id() const;
+  inline ::oe::recorder::pb::PlayerId* mutable_id();
+  inline ::oe::recorder::pb::PlayerId* release_id();
+  inline void set_allocated_id(::oe::recorder::pb::PlayerId* id);
 
-  // required .Eaagles.Recorder.Pb.PlayerState state = 2;
+  // required .oe.Recorder.Pb.PlayerState state = 2;
   inline bool has_state() const;
   inline void clear_state();
   static const int kStateFieldNumber = 2;
-  inline const ::Eaagles::Recorder::Pb::PlayerState& state() const;
-  inline ::Eaagles::Recorder::Pb::PlayerState* mutable_state();
-  inline ::Eaagles::Recorder::Pb::PlayerState* release_state();
-  inline void set_allocated_state(::Eaagles::Recorder::Pb::PlayerState* state);
+  inline const ::oe::recorder::pb::PlayerState& state() const;
+  inline ::oe::recorder::pb::PlayerState* mutable_state();
+  inline ::oe::recorder::pb::PlayerState* release_state();
+  inline void set_allocated_state(::oe::recorder::pb::PlayerState* state);
 
   // optional double alpha = 3;
   inline bool has_alpha() const;
@@ -1151,7 +1151,7 @@ class PlayerDataMsg : public ::google::protobuf::Message {
   inline void set_cas(double value);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(PlayerDataMsg)
-  // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.PlayerDataMsg)
+  // @@protoc_insertion_point(class_scope:oe.Recorder.Pb.PlayerDataMsg)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -1170,8 +1170,8 @@ class PlayerDataMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::Eaagles::Recorder::Pb::PlayerId* id_;
-  ::Eaagles::Recorder::Pb::PlayerState* state_;
+  ::oe::recorder::pb::PlayerId* id_;
+  ::oe::recorder::pb::PlayerState* state_;
   double alpha_;
   double beta_;
   double cas_;
@@ -1237,26 +1237,26 @@ class PlayerDamagedEventMsg : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+  // required .oe.Recorder.Pb.PlayerId id = 1;
   inline bool has_id() const;
   inline void clear_id();
   static const int kIdFieldNumber = 1;
-  inline const ::Eaagles::Recorder::Pb::PlayerId& id() const;
-  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_id();
-  inline ::Eaagles::Recorder::Pb::PlayerId* release_id();
-  inline void set_allocated_id(::Eaagles::Recorder::Pb::PlayerId* id);
+  inline const ::oe::recorder::pb::PlayerId& id() const;
+  inline ::oe::recorder::pb::PlayerId* mutable_id();
+  inline ::oe::recorder::pb::PlayerId* release_id();
+  inline void set_allocated_id(::oe::recorder::pb::PlayerId* id);
 
-  // optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+  // optional .oe.Recorder.Pb.PlayerState state = 2;
   inline bool has_state() const;
   inline void clear_state();
   static const int kStateFieldNumber = 2;
-  inline const ::Eaagles::Recorder::Pb::PlayerState& state() const;
-  inline ::Eaagles::Recorder::Pb::PlayerState* mutable_state();
-  inline ::Eaagles::Recorder::Pb::PlayerState* release_state();
-  inline void set_allocated_state(::Eaagles::Recorder::Pb::PlayerState* state);
+  inline const ::oe::recorder::pb::PlayerState& state() const;
+  inline ::oe::recorder::pb::PlayerState* mutable_state();
+  inline ::oe::recorder::pb::PlayerState* release_state();
+  inline void set_allocated_state(::oe::recorder::pb::PlayerState* state);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(PlayerDamagedEventMsg)
-  // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.PlayerDamagedEventMsg)
+  // @@protoc_insertion_point(class_scope:oe.Recorder.Pb.PlayerDamagedEventMsg)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -1269,8 +1269,8 @@ class PlayerDamagedEventMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::Eaagles::Recorder::Pb::PlayerId* id_;
-  ::Eaagles::Recorder::Pb::PlayerState* state_;
+  ::oe::recorder::pb::PlayerId* id_;
+  ::oe::recorder::pb::PlayerState* state_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_ShutdownFile_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -1333,35 +1333,35 @@ class PlayerCollisionEventMsg : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+  // required .oe.Recorder.Pb.PlayerId id = 1;
   inline bool has_id() const;
   inline void clear_id();
   static const int kIdFieldNumber = 1;
-  inline const ::Eaagles::Recorder::Pb::PlayerId& id() const;
-  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_id();
-  inline ::Eaagles::Recorder::Pb::PlayerId* release_id();
-  inline void set_allocated_id(::Eaagles::Recorder::Pb::PlayerId* id);
+  inline const ::oe::recorder::pb::PlayerId& id() const;
+  inline ::oe::recorder::pb::PlayerId* mutable_id();
+  inline ::oe::recorder::pb::PlayerId* release_id();
+  inline void set_allocated_id(::oe::recorder::pb::PlayerId* id);
 
-  // optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+  // optional .oe.Recorder.Pb.PlayerState state = 2;
   inline bool has_state() const;
   inline void clear_state();
   static const int kStateFieldNumber = 2;
-  inline const ::Eaagles::Recorder::Pb::PlayerState& state() const;
-  inline ::Eaagles::Recorder::Pb::PlayerState* mutable_state();
-  inline ::Eaagles::Recorder::Pb::PlayerState* release_state();
-  inline void set_allocated_state(::Eaagles::Recorder::Pb::PlayerState* state);
+  inline const ::oe::recorder::pb::PlayerState& state() const;
+  inline ::oe::recorder::pb::PlayerState* mutable_state();
+  inline ::oe::recorder::pb::PlayerState* release_state();
+  inline void set_allocated_state(::oe::recorder::pb::PlayerState* state);
 
-  // optional .Eaagles.Recorder.Pb.PlayerId other_player_id = 3;
+  // optional .oe.Recorder.Pb.PlayerId other_player_id = 3;
   inline bool has_other_player_id() const;
   inline void clear_other_player_id();
   static const int kOtherPlayerIdFieldNumber = 3;
-  inline const ::Eaagles::Recorder::Pb::PlayerId& other_player_id() const;
-  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_other_player_id();
-  inline ::Eaagles::Recorder::Pb::PlayerId* release_other_player_id();
-  inline void set_allocated_other_player_id(::Eaagles::Recorder::Pb::PlayerId* other_player_id);
+  inline const ::oe::recorder::pb::PlayerId& other_player_id() const;
+  inline ::oe::recorder::pb::PlayerId* mutable_other_player_id();
+  inline ::oe::recorder::pb::PlayerId* release_other_player_id();
+  inline void set_allocated_other_player_id(::oe::recorder::pb::PlayerId* other_player_id);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(PlayerCollisionEventMsg)
-  // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.PlayerCollisionEventMsg)
+  // @@protoc_insertion_point(class_scope:oe.Recorder.Pb.PlayerCollisionEventMsg)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -1376,9 +1376,9 @@ class PlayerCollisionEventMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::Eaagles::Recorder::Pb::PlayerId* id_;
-  ::Eaagles::Recorder::Pb::PlayerState* state_;
-  ::Eaagles::Recorder::Pb::PlayerId* other_player_id_;
+  ::oe::recorder::pb::PlayerId* id_;
+  ::oe::recorder::pb::PlayerState* state_;
+  ::oe::recorder::pb::PlayerId* other_player_id_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_ShutdownFile_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -1441,26 +1441,26 @@ class PlayerCrashEventMsg : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+  // required .oe.Recorder.Pb.PlayerId id = 1;
   inline bool has_id() const;
   inline void clear_id();
   static const int kIdFieldNumber = 1;
-  inline const ::Eaagles::Recorder::Pb::PlayerId& id() const;
-  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_id();
-  inline ::Eaagles::Recorder::Pb::PlayerId* release_id();
-  inline void set_allocated_id(::Eaagles::Recorder::Pb::PlayerId* id);
+  inline const ::oe::recorder::pb::PlayerId& id() const;
+  inline ::oe::recorder::pb::PlayerId* mutable_id();
+  inline ::oe::recorder::pb::PlayerId* release_id();
+  inline void set_allocated_id(::oe::recorder::pb::PlayerId* id);
 
-  // optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+  // optional .oe.Recorder.Pb.PlayerState state = 2;
   inline bool has_state() const;
   inline void clear_state();
   static const int kStateFieldNumber = 2;
-  inline const ::Eaagles::Recorder::Pb::PlayerState& state() const;
-  inline ::Eaagles::Recorder::Pb::PlayerState* mutable_state();
-  inline ::Eaagles::Recorder::Pb::PlayerState* release_state();
-  inline void set_allocated_state(::Eaagles::Recorder::Pb::PlayerState* state);
+  inline const ::oe::recorder::pb::PlayerState& state() const;
+  inline ::oe::recorder::pb::PlayerState* mutable_state();
+  inline ::oe::recorder::pb::PlayerState* release_state();
+  inline void set_allocated_state(::oe::recorder::pb::PlayerState* state);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(PlayerCrashEventMsg)
-  // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.PlayerCrashEventMsg)
+  // @@protoc_insertion_point(class_scope:oe.Recorder.Pb.PlayerCrashEventMsg)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -1473,8 +1473,8 @@ class PlayerCrashEventMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::Eaagles::Recorder::Pb::PlayerId* id_;
-  ::Eaagles::Recorder::Pb::PlayerState* state_;
+  ::oe::recorder::pb::PlayerId* id_;
+  ::oe::recorder::pb::PlayerState* state_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_ShutdownFile_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -1537,35 +1537,35 @@ class PlayerKilledEventMsg : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+  // required .oe.Recorder.Pb.PlayerId id = 1;
   inline bool has_id() const;
   inline void clear_id();
   static const int kIdFieldNumber = 1;
-  inline const ::Eaagles::Recorder::Pb::PlayerId& id() const;
-  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_id();
-  inline ::Eaagles::Recorder::Pb::PlayerId* release_id();
-  inline void set_allocated_id(::Eaagles::Recorder::Pb::PlayerId* id);
+  inline const ::oe::recorder::pb::PlayerId& id() const;
+  inline ::oe::recorder::pb::PlayerId* mutable_id();
+  inline ::oe::recorder::pb::PlayerId* release_id();
+  inline void set_allocated_id(::oe::recorder::pb::PlayerId* id);
 
-  // optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+  // optional .oe.Recorder.Pb.PlayerState state = 2;
   inline bool has_state() const;
   inline void clear_state();
   static const int kStateFieldNumber = 2;
-  inline const ::Eaagles::Recorder::Pb::PlayerState& state() const;
-  inline ::Eaagles::Recorder::Pb::PlayerState* mutable_state();
-  inline ::Eaagles::Recorder::Pb::PlayerState* release_state();
-  inline void set_allocated_state(::Eaagles::Recorder::Pb::PlayerState* state);
+  inline const ::oe::recorder::pb::PlayerState& state() const;
+  inline ::oe::recorder::pb::PlayerState* mutable_state();
+  inline ::oe::recorder::pb::PlayerState* release_state();
+  inline void set_allocated_state(::oe::recorder::pb::PlayerState* state);
 
-  // optional .Eaagles.Recorder.Pb.PlayerId shooter_id = 3;
+  // optional .oe.Recorder.Pb.PlayerId shooter_id = 3;
   inline bool has_shooter_id() const;
   inline void clear_shooter_id();
   static const int kShooterIdFieldNumber = 3;
-  inline const ::Eaagles::Recorder::Pb::PlayerId& shooter_id() const;
-  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_shooter_id();
-  inline ::Eaagles::Recorder::Pb::PlayerId* release_shooter_id();
-  inline void set_allocated_shooter_id(::Eaagles::Recorder::Pb::PlayerId* shooter_id);
+  inline const ::oe::recorder::pb::PlayerId& shooter_id() const;
+  inline ::oe::recorder::pb::PlayerId* mutable_shooter_id();
+  inline ::oe::recorder::pb::PlayerId* release_shooter_id();
+  inline void set_allocated_shooter_id(::oe::recorder::pb::PlayerId* shooter_id);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(PlayerKilledEventMsg)
-  // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.PlayerKilledEventMsg)
+  // @@protoc_insertion_point(class_scope:oe.Recorder.Pb.PlayerKilledEventMsg)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -1580,9 +1580,9 @@ class PlayerKilledEventMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::Eaagles::Recorder::Pb::PlayerId* id_;
-  ::Eaagles::Recorder::Pb::PlayerState* state_;
-  ::Eaagles::Recorder::Pb::PlayerId* shooter_id_;
+  ::oe::recorder::pb::PlayerId* id_;
+  ::oe::recorder::pb::PlayerState* state_;
+  ::oe::recorder::pb::PlayerId* shooter_id_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_ShutdownFile_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -1645,44 +1645,44 @@ class WeaponReleaseEventMsg : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .Eaagles.Recorder.Pb.PlayerId wpn_id = 1;
+  // required .oe.Recorder.Pb.PlayerId wpn_id = 1;
   inline bool has_wpn_id() const;
   inline void clear_wpn_id();
   static const int kWpnIdFieldNumber = 1;
-  inline const ::Eaagles::Recorder::Pb::PlayerId& wpn_id() const;
-  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_wpn_id();
-  inline ::Eaagles::Recorder::Pb::PlayerId* release_wpn_id();
-  inline void set_allocated_wpn_id(::Eaagles::Recorder::Pb::PlayerId* wpn_id);
+  inline const ::oe::recorder::pb::PlayerId& wpn_id() const;
+  inline ::oe::recorder::pb::PlayerId* mutable_wpn_id();
+  inline ::oe::recorder::pb::PlayerId* release_wpn_id();
+  inline void set_allocated_wpn_id(::oe::recorder::pb::PlayerId* wpn_id);
 
-  // optional .Eaagles.Recorder.Pb.PlayerState wpn_state = 2;
+  // optional .oe.Recorder.Pb.PlayerState wpn_state = 2;
   inline bool has_wpn_state() const;
   inline void clear_wpn_state();
   static const int kWpnStateFieldNumber = 2;
-  inline const ::Eaagles::Recorder::Pb::PlayerState& wpn_state() const;
-  inline ::Eaagles::Recorder::Pb::PlayerState* mutable_wpn_state();
-  inline ::Eaagles::Recorder::Pb::PlayerState* release_wpn_state();
-  inline void set_allocated_wpn_state(::Eaagles::Recorder::Pb::PlayerState* wpn_state);
+  inline const ::oe::recorder::pb::PlayerState& wpn_state() const;
+  inline ::oe::recorder::pb::PlayerState* mutable_wpn_state();
+  inline ::oe::recorder::pb::PlayerState* release_wpn_state();
+  inline void set_allocated_wpn_state(::oe::recorder::pb::PlayerState* wpn_state);
 
-  // optional .Eaagles.Recorder.Pb.PlayerId shooter_id = 3;
+  // optional .oe.Recorder.Pb.PlayerId shooter_id = 3;
   inline bool has_shooter_id() const;
   inline void clear_shooter_id();
   static const int kShooterIdFieldNumber = 3;
-  inline const ::Eaagles::Recorder::Pb::PlayerId& shooter_id() const;
-  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_shooter_id();
-  inline ::Eaagles::Recorder::Pb::PlayerId* release_shooter_id();
-  inline void set_allocated_shooter_id(::Eaagles::Recorder::Pb::PlayerId* shooter_id);
+  inline const ::oe::recorder::pb::PlayerId& shooter_id() const;
+  inline ::oe::recorder::pb::PlayerId* mutable_shooter_id();
+  inline ::oe::recorder::pb::PlayerId* release_shooter_id();
+  inline void set_allocated_shooter_id(::oe::recorder::pb::PlayerId* shooter_id);
 
-  // optional .Eaagles.Recorder.Pb.PlayerId tgt_id = 4;
+  // optional .oe.Recorder.Pb.PlayerId tgt_id = 4;
   inline bool has_tgt_id() const;
   inline void clear_tgt_id();
   static const int kTgtIdFieldNumber = 4;
-  inline const ::Eaagles::Recorder::Pb::PlayerId& tgt_id() const;
-  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_tgt_id();
-  inline ::Eaagles::Recorder::Pb::PlayerId* release_tgt_id();
-  inline void set_allocated_tgt_id(::Eaagles::Recorder::Pb::PlayerId* tgt_id);
+  inline const ::oe::recorder::pb::PlayerId& tgt_id() const;
+  inline ::oe::recorder::pb::PlayerId* mutable_tgt_id();
+  inline ::oe::recorder::pb::PlayerId* release_tgt_id();
+  inline void set_allocated_tgt_id(::oe::recorder::pb::PlayerId* tgt_id);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(WeaponReleaseEventMsg)
-  // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.WeaponReleaseEventMsg)
+  // @@protoc_insertion_point(class_scope:oe.Recorder.Pb.WeaponReleaseEventMsg)
  private:
   inline void set_has_wpn_id();
   inline void clear_has_wpn_id();
@@ -1699,10 +1699,10 @@ class WeaponReleaseEventMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::Eaagles::Recorder::Pb::PlayerId* wpn_id_;
-  ::Eaagles::Recorder::Pb::PlayerState* wpn_state_;
-  ::Eaagles::Recorder::Pb::PlayerId* shooter_id_;
-  ::Eaagles::Recorder::Pb::PlayerId* tgt_id_;
+  ::oe::recorder::pb::PlayerId* wpn_id_;
+  ::oe::recorder::pb::PlayerState* wpn_state_;
+  ::oe::recorder::pb::PlayerId* shooter_id_;
+  ::oe::recorder::pb::PlayerId* tgt_id_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_ShutdownFile_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -1765,44 +1765,44 @@ class WeaponHungEventMsg : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .Eaagles.Recorder.Pb.PlayerId wpn_id = 1;
+  // required .oe.Recorder.Pb.PlayerId wpn_id = 1;
   inline bool has_wpn_id() const;
   inline void clear_wpn_id();
   static const int kWpnIdFieldNumber = 1;
-  inline const ::Eaagles::Recorder::Pb::PlayerId& wpn_id() const;
-  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_wpn_id();
-  inline ::Eaagles::Recorder::Pb::PlayerId* release_wpn_id();
-  inline void set_allocated_wpn_id(::Eaagles::Recorder::Pb::PlayerId* wpn_id);
+  inline const ::oe::recorder::pb::PlayerId& wpn_id() const;
+  inline ::oe::recorder::pb::PlayerId* mutable_wpn_id();
+  inline ::oe::recorder::pb::PlayerId* release_wpn_id();
+  inline void set_allocated_wpn_id(::oe::recorder::pb::PlayerId* wpn_id);
 
-  // optional .Eaagles.Recorder.Pb.PlayerState wpn_state = 2;
+  // optional .oe.Recorder.Pb.PlayerState wpn_state = 2;
   inline bool has_wpn_state() const;
   inline void clear_wpn_state();
   static const int kWpnStateFieldNumber = 2;
-  inline const ::Eaagles::Recorder::Pb::PlayerState& wpn_state() const;
-  inline ::Eaagles::Recorder::Pb::PlayerState* mutable_wpn_state();
-  inline ::Eaagles::Recorder::Pb::PlayerState* release_wpn_state();
-  inline void set_allocated_wpn_state(::Eaagles::Recorder::Pb::PlayerState* wpn_state);
+  inline const ::oe::recorder::pb::PlayerState& wpn_state() const;
+  inline ::oe::recorder::pb::PlayerState* mutable_wpn_state();
+  inline ::oe::recorder::pb::PlayerState* release_wpn_state();
+  inline void set_allocated_wpn_state(::oe::recorder::pb::PlayerState* wpn_state);
 
-  // optional .Eaagles.Recorder.Pb.PlayerId shooter_id = 3;
+  // optional .oe.Recorder.Pb.PlayerId shooter_id = 3;
   inline bool has_shooter_id() const;
   inline void clear_shooter_id();
   static const int kShooterIdFieldNumber = 3;
-  inline const ::Eaagles::Recorder::Pb::PlayerId& shooter_id() const;
-  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_shooter_id();
-  inline ::Eaagles::Recorder::Pb::PlayerId* release_shooter_id();
-  inline void set_allocated_shooter_id(::Eaagles::Recorder::Pb::PlayerId* shooter_id);
+  inline const ::oe::recorder::pb::PlayerId& shooter_id() const;
+  inline ::oe::recorder::pb::PlayerId* mutable_shooter_id();
+  inline ::oe::recorder::pb::PlayerId* release_shooter_id();
+  inline void set_allocated_shooter_id(::oe::recorder::pb::PlayerId* shooter_id);
 
-  // optional .Eaagles.Recorder.Pb.PlayerId tgt_id = 4;
+  // optional .oe.Recorder.Pb.PlayerId tgt_id = 4;
   inline bool has_tgt_id() const;
   inline void clear_tgt_id();
   static const int kTgtIdFieldNumber = 4;
-  inline const ::Eaagles::Recorder::Pb::PlayerId& tgt_id() const;
-  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_tgt_id();
-  inline ::Eaagles::Recorder::Pb::PlayerId* release_tgt_id();
-  inline void set_allocated_tgt_id(::Eaagles::Recorder::Pb::PlayerId* tgt_id);
+  inline const ::oe::recorder::pb::PlayerId& tgt_id() const;
+  inline ::oe::recorder::pb::PlayerId* mutable_tgt_id();
+  inline ::oe::recorder::pb::PlayerId* release_tgt_id();
+  inline void set_allocated_tgt_id(::oe::recorder::pb::PlayerId* tgt_id);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(WeaponHungEventMsg)
-  // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.WeaponHungEventMsg)
+  // @@protoc_insertion_point(class_scope:oe.Recorder.Pb.WeaponHungEventMsg)
  private:
   inline void set_has_wpn_id();
   inline void clear_has_wpn_id();
@@ -1819,10 +1819,10 @@ class WeaponHungEventMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::Eaagles::Recorder::Pb::PlayerId* wpn_id_;
-  ::Eaagles::Recorder::Pb::PlayerState* wpn_state_;
-  ::Eaagles::Recorder::Pb::PlayerId* shooter_id_;
-  ::Eaagles::Recorder::Pb::PlayerId* tgt_id_;
+  ::oe::recorder::pb::PlayerId* wpn_id_;
+  ::oe::recorder::pb::PlayerState* wpn_state_;
+  ::oe::recorder::pb::PlayerId* shooter_id_;
+  ::oe::recorder::pb::PlayerId* tgt_id_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_ShutdownFile_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -1914,48 +1914,48 @@ class WeaponDetonationEventMsg : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .Eaagles.Recorder.Pb.PlayerId wpn_id = 1;
+  // required .oe.Recorder.Pb.PlayerId wpn_id = 1;
   inline bool has_wpn_id() const;
   inline void clear_wpn_id();
   static const int kWpnIdFieldNumber = 1;
-  inline const ::Eaagles::Recorder::Pb::PlayerId& wpn_id() const;
-  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_wpn_id();
-  inline ::Eaagles::Recorder::Pb::PlayerId* release_wpn_id();
-  inline void set_allocated_wpn_id(::Eaagles::Recorder::Pb::PlayerId* wpn_id);
+  inline const ::oe::recorder::pb::PlayerId& wpn_id() const;
+  inline ::oe::recorder::pb::PlayerId* mutable_wpn_id();
+  inline ::oe::recorder::pb::PlayerId* release_wpn_id();
+  inline void set_allocated_wpn_id(::oe::recorder::pb::PlayerId* wpn_id);
 
-  // optional .Eaagles.Recorder.Pb.PlayerState wpn_state = 2;
+  // optional .oe.Recorder.Pb.PlayerState wpn_state = 2;
   inline bool has_wpn_state() const;
   inline void clear_wpn_state();
   static const int kWpnStateFieldNumber = 2;
-  inline const ::Eaagles::Recorder::Pb::PlayerState& wpn_state() const;
-  inline ::Eaagles::Recorder::Pb::PlayerState* mutable_wpn_state();
-  inline ::Eaagles::Recorder::Pb::PlayerState* release_wpn_state();
-  inline void set_allocated_wpn_state(::Eaagles::Recorder::Pb::PlayerState* wpn_state);
+  inline const ::oe::recorder::pb::PlayerState& wpn_state() const;
+  inline ::oe::recorder::pb::PlayerState* mutable_wpn_state();
+  inline ::oe::recorder::pb::PlayerState* release_wpn_state();
+  inline void set_allocated_wpn_state(::oe::recorder::pb::PlayerState* wpn_state);
 
-  // optional .Eaagles.Recorder.Pb.PlayerId shooter_id = 3;
+  // optional .oe.Recorder.Pb.PlayerId shooter_id = 3;
   inline bool has_shooter_id() const;
   inline void clear_shooter_id();
   static const int kShooterIdFieldNumber = 3;
-  inline const ::Eaagles::Recorder::Pb::PlayerId& shooter_id() const;
-  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_shooter_id();
-  inline ::Eaagles::Recorder::Pb::PlayerId* release_shooter_id();
-  inline void set_allocated_shooter_id(::Eaagles::Recorder::Pb::PlayerId* shooter_id);
+  inline const ::oe::recorder::pb::PlayerId& shooter_id() const;
+  inline ::oe::recorder::pb::PlayerId* mutable_shooter_id();
+  inline ::oe::recorder::pb::PlayerId* release_shooter_id();
+  inline void set_allocated_shooter_id(::oe::recorder::pb::PlayerId* shooter_id);
 
-  // optional .Eaagles.Recorder.Pb.PlayerId tgt_id = 4;
+  // optional .oe.Recorder.Pb.PlayerId tgt_id = 4;
   inline bool has_tgt_id() const;
   inline void clear_tgt_id();
   static const int kTgtIdFieldNumber = 4;
-  inline const ::Eaagles::Recorder::Pb::PlayerId& tgt_id() const;
-  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_tgt_id();
-  inline ::Eaagles::Recorder::Pb::PlayerId* release_tgt_id();
-  inline void set_allocated_tgt_id(::Eaagles::Recorder::Pb::PlayerId* tgt_id);
+  inline const ::oe::recorder::pb::PlayerId& tgt_id() const;
+  inline ::oe::recorder::pb::PlayerId* mutable_tgt_id();
+  inline ::oe::recorder::pb::PlayerId* release_tgt_id();
+  inline void set_allocated_tgt_id(::oe::recorder::pb::PlayerId* tgt_id);
 
-  // optional .Eaagles.Recorder.Pb.WeaponDetonationEventMsg.DetonationType det_type = 5;
+  // optional .oe.Recorder.Pb.WeaponDetonationEventMsg.DetonationType det_type = 5;
   inline bool has_det_type() const;
   inline void clear_det_type();
   static const int kDetTypeFieldNumber = 5;
-  inline ::Eaagles::Recorder::Pb::WeaponDetonationEventMsg_DetonationType det_type() const;
-  inline void set_det_type(::Eaagles::Recorder::Pb::WeaponDetonationEventMsg_DetonationType value);
+  inline ::oe::recorder::pb::WeaponDetonationEventMsg_DetonationType det_type() const;
+  inline void set_det_type(::oe::recorder::pb::WeaponDetonationEventMsg_DetonationType value);
 
   // optional double miss_dist = 6;
   inline bool has_miss_dist() const;
@@ -1965,7 +1965,7 @@ class WeaponDetonationEventMsg : public ::google::protobuf::Message {
   inline void set_miss_dist(double value);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(WeaponDetonationEventMsg)
-  // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.WeaponDetonationEventMsg)
+  // @@protoc_insertion_point(class_scope:oe.Recorder.Pb.WeaponDetonationEventMsg)
  private:
   inline void set_has_wpn_id();
   inline void clear_has_wpn_id();
@@ -1986,10 +1986,10 @@ class WeaponDetonationEventMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::Eaagles::Recorder::Pb::PlayerId* wpn_id_;
-  ::Eaagles::Recorder::Pb::PlayerState* wpn_state_;
-  ::Eaagles::Recorder::Pb::PlayerId* shooter_id_;
-  ::Eaagles::Recorder::Pb::PlayerId* tgt_id_;
+  ::oe::recorder::pb::PlayerId* wpn_id_;
+  ::oe::recorder::pb::PlayerState* wpn_state_;
+  ::oe::recorder::pb::PlayerId* shooter_id_;
+  ::oe::recorder::pb::PlayerId* tgt_id_;
   double miss_dist_;
   int det_type_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -2054,14 +2054,14 @@ class GunFiredEventMsg : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .Eaagles.Recorder.Pb.PlayerId shooter_id = 1;
+  // required .oe.Recorder.Pb.PlayerId shooter_id = 1;
   inline bool has_shooter_id() const;
   inline void clear_shooter_id();
   static const int kShooterIdFieldNumber = 1;
-  inline const ::Eaagles::Recorder::Pb::PlayerId& shooter_id() const;
-  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_shooter_id();
-  inline ::Eaagles::Recorder::Pb::PlayerId* release_shooter_id();
-  inline void set_allocated_shooter_id(::Eaagles::Recorder::Pb::PlayerId* shooter_id);
+  inline const ::oe::recorder::pb::PlayerId& shooter_id() const;
+  inline ::oe::recorder::pb::PlayerId* mutable_shooter_id();
+  inline ::oe::recorder::pb::PlayerId* release_shooter_id();
+  inline void set_allocated_shooter_id(::oe::recorder::pb::PlayerId* shooter_id);
 
   // optional uint32 rounds = 2;
   inline bool has_rounds() const;
@@ -2071,7 +2071,7 @@ class GunFiredEventMsg : public ::google::protobuf::Message {
   inline void set_rounds(::google::protobuf::uint32 value);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(GunFiredEventMsg)
-  // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.GunFiredEventMsg)
+  // @@protoc_insertion_point(class_scope:oe.Recorder.Pb.GunFiredEventMsg)
  private:
   inline void set_has_shooter_id();
   inline void clear_has_shooter_id();
@@ -2084,7 +2084,7 @@ class GunFiredEventMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::Eaagles::Recorder::Pb::PlayerId* shooter_id_;
+  ::oe::recorder::pb::PlayerId* shooter_id_;
   ::google::protobuf::uint32 rounds_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -2148,14 +2148,14 @@ class NewTrackEventMsg : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .Eaagles.Recorder.Pb.PlayerId player_id = 1;
+  // required .oe.Recorder.Pb.PlayerId player_id = 1;
   inline bool has_player_id() const;
   inline void clear_player_id();
   static const int kPlayerIdFieldNumber = 1;
-  inline const ::Eaagles::Recorder::Pb::PlayerId& player_id() const;
-  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_player_id();
-  inline ::Eaagles::Recorder::Pb::PlayerId* release_player_id();
-  inline void set_allocated_player_id(::Eaagles::Recorder::Pb::PlayerId* player_id);
+  inline const ::oe::recorder::pb::PlayerId& player_id() const;
+  inline ::oe::recorder::pb::PlayerId* mutable_player_id();
+  inline ::oe::recorder::pb::PlayerId* release_player_id();
+  inline void set_allocated_player_id(::oe::recorder::pb::PlayerId* player_id);
 
   // required string track_id = 2;
   inline bool has_track_id() const;
@@ -2169,53 +2169,53 @@ class NewTrackEventMsg : public ::google::protobuf::Message {
   inline ::std::string* release_track_id();
   inline void set_allocated_track_id(::std::string* track_id);
 
-  // optional .Eaagles.Recorder.Pb.TrackData track_data = 3;
+  // optional .oe.Recorder.Pb.TrackData track_data = 3;
   inline bool has_track_data() const;
   inline void clear_track_data();
   static const int kTrackDataFieldNumber = 3;
-  inline const ::Eaagles::Recorder::Pb::TrackData& track_data() const;
-  inline ::Eaagles::Recorder::Pb::TrackData* mutable_track_data();
-  inline ::Eaagles::Recorder::Pb::TrackData* release_track_data();
-  inline void set_allocated_track_data(::Eaagles::Recorder::Pb::TrackData* track_data);
+  inline const ::oe::recorder::pb::TrackData& track_data() const;
+  inline ::oe::recorder::pb::TrackData* mutable_track_data();
+  inline ::oe::recorder::pb::TrackData* release_track_data();
+  inline void set_allocated_track_data(::oe::recorder::pb::TrackData* track_data);
 
-  // optional .Eaagles.Recorder.Pb.PlayerState player_state = 4;
+  // optional .oe.Recorder.Pb.PlayerState player_state = 4;
   inline bool has_player_state() const;
   inline void clear_player_state();
   static const int kPlayerStateFieldNumber = 4;
-  inline const ::Eaagles::Recorder::Pb::PlayerState& player_state() const;
-  inline ::Eaagles::Recorder::Pb::PlayerState* mutable_player_state();
-  inline ::Eaagles::Recorder::Pb::PlayerState* release_player_state();
-  inline void set_allocated_player_state(::Eaagles::Recorder::Pb::PlayerState* player_state);
+  inline const ::oe::recorder::pb::PlayerState& player_state() const;
+  inline ::oe::recorder::pb::PlayerState* mutable_player_state();
+  inline ::oe::recorder::pb::PlayerState* release_player_state();
+  inline void set_allocated_player_state(::oe::recorder::pb::PlayerState* player_state);
 
-  // optional .Eaagles.Recorder.Pb.PlayerId trk_player_id = 5;
+  // optional .oe.Recorder.Pb.PlayerId trk_player_id = 5;
   inline bool has_trk_player_id() const;
   inline void clear_trk_player_id();
   static const int kTrkPlayerIdFieldNumber = 5;
-  inline const ::Eaagles::Recorder::Pb::PlayerId& trk_player_id() const;
-  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_trk_player_id();
-  inline ::Eaagles::Recorder::Pb::PlayerId* release_trk_player_id();
-  inline void set_allocated_trk_player_id(::Eaagles::Recorder::Pb::PlayerId* trk_player_id);
+  inline const ::oe::recorder::pb::PlayerId& trk_player_id() const;
+  inline ::oe::recorder::pb::PlayerId* mutable_trk_player_id();
+  inline ::oe::recorder::pb::PlayerId* release_trk_player_id();
+  inline void set_allocated_trk_player_id(::oe::recorder::pb::PlayerId* trk_player_id);
 
-  // optional .Eaagles.Recorder.Pb.PlayerState trk_player_state = 6;
+  // optional .oe.Recorder.Pb.PlayerState trk_player_state = 6;
   inline bool has_trk_player_state() const;
   inline void clear_trk_player_state();
   static const int kTrkPlayerStateFieldNumber = 6;
-  inline const ::Eaagles::Recorder::Pb::PlayerState& trk_player_state() const;
-  inline ::Eaagles::Recorder::Pb::PlayerState* mutable_trk_player_state();
-  inline ::Eaagles::Recorder::Pb::PlayerState* release_trk_player_state();
-  inline void set_allocated_trk_player_state(::Eaagles::Recorder::Pb::PlayerState* trk_player_state);
+  inline const ::oe::recorder::pb::PlayerState& trk_player_state() const;
+  inline ::oe::recorder::pb::PlayerState* mutable_trk_player_state();
+  inline ::oe::recorder::pb::PlayerState* release_trk_player_state();
+  inline void set_allocated_trk_player_state(::oe::recorder::pb::PlayerState* trk_player_state);
 
-  // optional .Eaagles.Recorder.Pb.EmissionData emission_data = 7;
+  // optional .oe.Recorder.Pb.EmissionData emission_data = 7;
   inline bool has_emission_data() const;
   inline void clear_emission_data();
   static const int kEmissionDataFieldNumber = 7;
-  inline const ::Eaagles::Recorder::Pb::EmissionData& emission_data() const;
-  inline ::Eaagles::Recorder::Pb::EmissionData* mutable_emission_data();
-  inline ::Eaagles::Recorder::Pb::EmissionData* release_emission_data();
-  inline void set_allocated_emission_data(::Eaagles::Recorder::Pb::EmissionData* emission_data);
+  inline const ::oe::recorder::pb::EmissionData& emission_data() const;
+  inline ::oe::recorder::pb::EmissionData* mutable_emission_data();
+  inline ::oe::recorder::pb::EmissionData* release_emission_data();
+  inline void set_allocated_emission_data(::oe::recorder::pb::EmissionData* emission_data);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(NewTrackEventMsg)
-  // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.NewTrackEventMsg)
+  // @@protoc_insertion_point(class_scope:oe.Recorder.Pb.NewTrackEventMsg)
  private:
   inline void set_has_player_id();
   inline void clear_has_player_id();
@@ -2238,13 +2238,13 @@ class NewTrackEventMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::Eaagles::Recorder::Pb::PlayerId* player_id_;
+  ::oe::recorder::pb::PlayerId* player_id_;
   ::std::string* track_id_;
-  ::Eaagles::Recorder::Pb::TrackData* track_data_;
-  ::Eaagles::Recorder::Pb::PlayerState* player_state_;
-  ::Eaagles::Recorder::Pb::PlayerId* trk_player_id_;
-  ::Eaagles::Recorder::Pb::PlayerState* trk_player_state_;
-  ::Eaagles::Recorder::Pb::EmissionData* emission_data_;
+  ::oe::recorder::pb::TrackData* track_data_;
+  ::oe::recorder::pb::PlayerState* player_state_;
+  ::oe::recorder::pb::PlayerId* trk_player_id_;
+  ::oe::recorder::pb::PlayerState* trk_player_state_;
+  ::oe::recorder::pb::EmissionData* emission_data_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_ShutdownFile_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -2307,14 +2307,14 @@ class TrackRemovedEventMsg : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .Eaagles.Recorder.Pb.PlayerId player_id = 1;
+  // required .oe.Recorder.Pb.PlayerId player_id = 1;
   inline bool has_player_id() const;
   inline void clear_player_id();
   static const int kPlayerIdFieldNumber = 1;
-  inline const ::Eaagles::Recorder::Pb::PlayerId& player_id() const;
-  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_player_id();
-  inline ::Eaagles::Recorder::Pb::PlayerId* release_player_id();
-  inline void set_allocated_player_id(::Eaagles::Recorder::Pb::PlayerId* player_id);
+  inline const ::oe::recorder::pb::PlayerId& player_id() const;
+  inline ::oe::recorder::pb::PlayerId* mutable_player_id();
+  inline ::oe::recorder::pb::PlayerId* release_player_id();
+  inline void set_allocated_player_id(::oe::recorder::pb::PlayerId* player_id);
 
   // required string track_id = 2;
   inline bool has_track_id() const;
@@ -2329,7 +2329,7 @@ class TrackRemovedEventMsg : public ::google::protobuf::Message {
   inline void set_allocated_track_id(::std::string* track_id);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(TrackRemovedEventMsg)
-  // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.TrackRemovedEventMsg)
+  // @@protoc_insertion_point(class_scope:oe.Recorder.Pb.TrackRemovedEventMsg)
  private:
   inline void set_has_player_id();
   inline void clear_has_player_id();
@@ -2342,7 +2342,7 @@ class TrackRemovedEventMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::Eaagles::Recorder::Pb::PlayerId* player_id_;
+  ::oe::recorder::pb::PlayerId* player_id_;
   ::std::string* track_id_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -2406,14 +2406,14 @@ class TrackDataMsg : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .Eaagles.Recorder.Pb.PlayerId player_id = 1;
+  // required .oe.Recorder.Pb.PlayerId player_id = 1;
   inline bool has_player_id() const;
   inline void clear_player_id();
   static const int kPlayerIdFieldNumber = 1;
-  inline const ::Eaagles::Recorder::Pb::PlayerId& player_id() const;
-  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_player_id();
-  inline ::Eaagles::Recorder::Pb::PlayerId* release_player_id();
-  inline void set_allocated_player_id(::Eaagles::Recorder::Pb::PlayerId* player_id);
+  inline const ::oe::recorder::pb::PlayerId& player_id() const;
+  inline ::oe::recorder::pb::PlayerId* mutable_player_id();
+  inline ::oe::recorder::pb::PlayerId* release_player_id();
+  inline void set_allocated_player_id(::oe::recorder::pb::PlayerId* player_id);
 
   // required string track_id = 2;
   inline bool has_track_id() const;
@@ -2427,53 +2427,53 @@ class TrackDataMsg : public ::google::protobuf::Message {
   inline ::std::string* release_track_id();
   inline void set_allocated_track_id(::std::string* track_id);
 
-  // optional .Eaagles.Recorder.Pb.TrackData track_data = 3;
+  // optional .oe.Recorder.Pb.TrackData track_data = 3;
   inline bool has_track_data() const;
   inline void clear_track_data();
   static const int kTrackDataFieldNumber = 3;
-  inline const ::Eaagles::Recorder::Pb::TrackData& track_data() const;
-  inline ::Eaagles::Recorder::Pb::TrackData* mutable_track_data();
-  inline ::Eaagles::Recorder::Pb::TrackData* release_track_data();
-  inline void set_allocated_track_data(::Eaagles::Recorder::Pb::TrackData* track_data);
+  inline const ::oe::recorder::pb::TrackData& track_data() const;
+  inline ::oe::recorder::pb::TrackData* mutable_track_data();
+  inline ::oe::recorder::pb::TrackData* release_track_data();
+  inline void set_allocated_track_data(::oe::recorder::pb::TrackData* track_data);
 
-  // optional .Eaagles.Recorder.Pb.PlayerState player_state = 4;
+  // optional .oe.Recorder.Pb.PlayerState player_state = 4;
   inline bool has_player_state() const;
   inline void clear_player_state();
   static const int kPlayerStateFieldNumber = 4;
-  inline const ::Eaagles::Recorder::Pb::PlayerState& player_state() const;
-  inline ::Eaagles::Recorder::Pb::PlayerState* mutable_player_state();
-  inline ::Eaagles::Recorder::Pb::PlayerState* release_player_state();
-  inline void set_allocated_player_state(::Eaagles::Recorder::Pb::PlayerState* player_state);
+  inline const ::oe::recorder::pb::PlayerState& player_state() const;
+  inline ::oe::recorder::pb::PlayerState* mutable_player_state();
+  inline ::oe::recorder::pb::PlayerState* release_player_state();
+  inline void set_allocated_player_state(::oe::recorder::pb::PlayerState* player_state);
 
-  // optional .Eaagles.Recorder.Pb.PlayerId trk_player_id = 5;
+  // optional .oe.Recorder.Pb.PlayerId trk_player_id = 5;
   inline bool has_trk_player_id() const;
   inline void clear_trk_player_id();
   static const int kTrkPlayerIdFieldNumber = 5;
-  inline const ::Eaagles::Recorder::Pb::PlayerId& trk_player_id() const;
-  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_trk_player_id();
-  inline ::Eaagles::Recorder::Pb::PlayerId* release_trk_player_id();
-  inline void set_allocated_trk_player_id(::Eaagles::Recorder::Pb::PlayerId* trk_player_id);
+  inline const ::oe::recorder::pb::PlayerId& trk_player_id() const;
+  inline ::oe::recorder::pb::PlayerId* mutable_trk_player_id();
+  inline ::oe::recorder::pb::PlayerId* release_trk_player_id();
+  inline void set_allocated_trk_player_id(::oe::recorder::pb::PlayerId* trk_player_id);
 
-  // optional .Eaagles.Recorder.Pb.PlayerState trk_player_state = 6;
+  // optional .oe.Recorder.Pb.PlayerState trk_player_state = 6;
   inline bool has_trk_player_state() const;
   inline void clear_trk_player_state();
   static const int kTrkPlayerStateFieldNumber = 6;
-  inline const ::Eaagles::Recorder::Pb::PlayerState& trk_player_state() const;
-  inline ::Eaagles::Recorder::Pb::PlayerState* mutable_trk_player_state();
-  inline ::Eaagles::Recorder::Pb::PlayerState* release_trk_player_state();
-  inline void set_allocated_trk_player_state(::Eaagles::Recorder::Pb::PlayerState* trk_player_state);
+  inline const ::oe::recorder::pb::PlayerState& trk_player_state() const;
+  inline ::oe::recorder::pb::PlayerState* mutable_trk_player_state();
+  inline ::oe::recorder::pb::PlayerState* release_trk_player_state();
+  inline void set_allocated_trk_player_state(::oe::recorder::pb::PlayerState* trk_player_state);
 
-  // optional .Eaagles.Recorder.Pb.EmissionData emission_data = 7;
+  // optional .oe.Recorder.Pb.EmissionData emission_data = 7;
   inline bool has_emission_data() const;
   inline void clear_emission_data();
   static const int kEmissionDataFieldNumber = 7;
-  inline const ::Eaagles::Recorder::Pb::EmissionData& emission_data() const;
-  inline ::Eaagles::Recorder::Pb::EmissionData* mutable_emission_data();
-  inline ::Eaagles::Recorder::Pb::EmissionData* release_emission_data();
-  inline void set_allocated_emission_data(::Eaagles::Recorder::Pb::EmissionData* emission_data);
+  inline const ::oe::recorder::pb::EmissionData& emission_data() const;
+  inline ::oe::recorder::pb::EmissionData* mutable_emission_data();
+  inline ::oe::recorder::pb::EmissionData* release_emission_data();
+  inline void set_allocated_emission_data(::oe::recorder::pb::EmissionData* emission_data);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(TrackDataMsg)
-  // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.TrackDataMsg)
+  // @@protoc_insertion_point(class_scope:oe.Recorder.Pb.TrackDataMsg)
  private:
   inline void set_has_player_id();
   inline void clear_has_player_id();
@@ -2496,13 +2496,13 @@ class TrackDataMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::Eaagles::Recorder::Pb::PlayerId* player_id_;
+  ::oe::recorder::pb::PlayerId* player_id_;
   ::std::string* track_id_;
-  ::Eaagles::Recorder::Pb::TrackData* track_data_;
-  ::Eaagles::Recorder::Pb::PlayerState* player_state_;
-  ::Eaagles::Recorder::Pb::PlayerId* trk_player_id_;
-  ::Eaagles::Recorder::Pb::PlayerState* trk_player_state_;
-  ::Eaagles::Recorder::Pb::EmissionData* emission_data_;
+  ::oe::recorder::pb::TrackData* track_data_;
+  ::oe::recorder::pb::PlayerState* player_state_;
+  ::oe::recorder::pb::PlayerId* trk_player_id_;
+  ::oe::recorder::pb::PlayerState* trk_player_state_;
+  ::oe::recorder::pb::EmissionData* emission_data_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_ShutdownFile_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -2593,7 +2593,7 @@ class Vector : public ::google::protobuf::Message {
   inline double w() const;
   inline void set_w(double value);
 
-  // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.Vector)
+  // @@protoc_insertion_point(class_scope:oe.Recorder.Pb.Vector)
  private:
   inline void set_has_x();
   inline void clear_has_x();
@@ -2696,7 +2696,7 @@ class Time : public ::google::protobuf::Message {
   inline void set_utc_time(double value);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(Time)
-  // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.Time)
+  // @@protoc_insertion_point(class_scope:oe.Recorder.Pb.Time)
  private:
   inline void set_has_sim_time();
   inline void clear_has_sim_time();
@@ -2834,7 +2834,7 @@ class PlayerId : public ::google::protobuf::Message {
   inline void set_allocated_ac_type(::std::string* ac_type);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(PlayerId)
-  // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.PlayerId)
+  // @@protoc_insertion_point(class_scope:oe.Recorder.Pb.PlayerId)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -2923,32 +2923,32 @@ class PlayerState : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .Eaagles.Recorder.Pb.Vector pos = 1;
+  // required .oe.Recorder.Pb.Vector pos = 1;
   inline bool has_pos() const;
   inline void clear_pos();
   static const int kPosFieldNumber = 1;
-  inline const ::Eaagles::Recorder::Pb::Vector& pos() const;
-  inline ::Eaagles::Recorder::Pb::Vector* mutable_pos();
-  inline ::Eaagles::Recorder::Pb::Vector* release_pos();
-  inline void set_allocated_pos(::Eaagles::Recorder::Pb::Vector* pos);
+  inline const ::oe::recorder::pb::Vector& pos() const;
+  inline ::oe::recorder::pb::Vector* mutable_pos();
+  inline ::oe::recorder::pb::Vector* release_pos();
+  inline void set_allocated_pos(::oe::recorder::pb::Vector* pos);
 
-  // required .Eaagles.Recorder.Pb.Vector angles = 2;
+  // required .oe.Recorder.Pb.Vector angles = 2;
   inline bool has_angles() const;
   inline void clear_angles();
   static const int kAnglesFieldNumber = 2;
-  inline const ::Eaagles::Recorder::Pb::Vector& angles() const;
-  inline ::Eaagles::Recorder::Pb::Vector* mutable_angles();
-  inline ::Eaagles::Recorder::Pb::Vector* release_angles();
-  inline void set_allocated_angles(::Eaagles::Recorder::Pb::Vector* angles);
+  inline const ::oe::recorder::pb::Vector& angles() const;
+  inline ::oe::recorder::pb::Vector* mutable_angles();
+  inline ::oe::recorder::pb::Vector* release_angles();
+  inline void set_allocated_angles(::oe::recorder::pb::Vector* angles);
 
-  // optional .Eaagles.Recorder.Pb.Vector vel = 3;
+  // optional .oe.Recorder.Pb.Vector vel = 3;
   inline bool has_vel() const;
   inline void clear_vel();
   static const int kVelFieldNumber = 3;
-  inline const ::Eaagles::Recorder::Pb::Vector& vel() const;
-  inline ::Eaagles::Recorder::Pb::Vector* mutable_vel();
-  inline ::Eaagles::Recorder::Pb::Vector* release_vel();
-  inline void set_allocated_vel(::Eaagles::Recorder::Pb::Vector* vel);
+  inline const ::oe::recorder::pb::Vector& vel() const;
+  inline ::oe::recorder::pb::Vector* mutable_vel();
+  inline ::oe::recorder::pb::Vector* release_vel();
+  inline void set_allocated_vel(::oe::recorder::pb::Vector* vel);
 
   // optional double damage = 4;
   inline bool has_damage() const;
@@ -2958,7 +2958,7 @@ class PlayerState : public ::google::protobuf::Message {
   inline void set_damage(double value);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(PlayerState)
-  // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.PlayerState)
+  // @@protoc_insertion_point(class_scope:oe.Recorder.Pb.PlayerState)
  private:
   inline void set_has_pos();
   inline void clear_has_pos();
@@ -2975,9 +2975,9 @@ class PlayerState : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::Eaagles::Recorder::Pb::Vector* pos_;
-  ::Eaagles::Recorder::Pb::Vector* angles_;
-  ::Eaagles::Recorder::Pb::Vector* vel_;
+  ::oe::recorder::pb::Vector* pos_;
+  ::oe::recorder::pb::Vector* angles_;
+  ::oe::recorder::pb::Vector* vel_;
   double damage_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -3104,23 +3104,23 @@ class TrackData : public ::google::protobuf::Message {
   inline double altitude() const;
   inline void set_altitude(double value);
 
-  // optional .Eaagles.Recorder.Pb.Vector position = 10;
+  // optional .oe.Recorder.Pb.Vector position = 10;
   inline bool has_position() const;
   inline void clear_position();
   static const int kPositionFieldNumber = 10;
-  inline const ::Eaagles::Recorder::Pb::Vector& position() const;
-  inline ::Eaagles::Recorder::Pb::Vector* mutable_position();
-  inline ::Eaagles::Recorder::Pb::Vector* release_position();
-  inline void set_allocated_position(::Eaagles::Recorder::Pb::Vector* position);
+  inline const ::oe::recorder::pb::Vector& position() const;
+  inline ::oe::recorder::pb::Vector* mutable_position();
+  inline ::oe::recorder::pb::Vector* release_position();
+  inline void set_allocated_position(::oe::recorder::pb::Vector* position);
 
-  // optional .Eaagles.Recorder.Pb.Vector velocity = 11;
+  // optional .oe.Recorder.Pb.Vector velocity = 11;
   inline bool has_velocity() const;
   inline void clear_velocity();
   static const int kVelocityFieldNumber = 11;
-  inline const ::Eaagles::Recorder::Pb::Vector& velocity() const;
-  inline ::Eaagles::Recorder::Pb::Vector* mutable_velocity();
-  inline ::Eaagles::Recorder::Pb::Vector* release_velocity();
-  inline void set_allocated_velocity(::Eaagles::Recorder::Pb::Vector* velocity);
+  inline const ::oe::recorder::pb::Vector& velocity() const;
+  inline ::oe::recorder::pb::Vector* mutable_velocity();
+  inline ::oe::recorder::pb::Vector* release_velocity();
+  inline void set_allocated_velocity(::oe::recorder::pb::Vector* velocity);
 
   // optional double avg_signal = 12;
   inline bool has_avg_signal() const;
@@ -3144,7 +3144,7 @@ class TrackData : public ::google::protobuf::Message {
   inline void set_wpn_rel(bool value);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(TrackData)
-  // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.TrackData)
+  // @@protoc_insertion_point(class_scope:oe.Recorder.Pb.TrackData)
  private:
   inline void set_has_type();
   inline void clear_has_type();
@@ -3191,8 +3191,8 @@ class TrackData : public ::google::protobuf::Message {
   ::google::protobuf::uint32 sl_index_;
   double longitude_;
   double altitude_;
-  ::Eaagles::Recorder::Pb::Vector* position_;
-  ::Eaagles::Recorder::Pb::Vector* velocity_;
+  ::oe::recorder::pb::Vector* position_;
+  ::oe::recorder::pb::Vector* velocity_;
   double avg_signal_;
   bool wpn_rel_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -3327,12 +3327,12 @@ class EmissionData : public ::google::protobuf::Message {
   inline double power() const;
   inline void set_power(double value);
 
-  // optional .Eaagles.Recorder.Pb.EmissionData.Polarization polarization = 7;
+  // optional .oe.Recorder.Pb.EmissionData.Polarization polarization = 7;
   inline bool has_polarization() const;
   inline void clear_polarization();
   static const int kPolarizationFieldNumber = 7;
-  inline ::Eaagles::Recorder::Pb::EmissionData_Polarization polarization() const;
-  inline void set_polarization(::Eaagles::Recorder::Pb::EmissionData_Polarization value);
+  inline ::oe::recorder::pb::EmissionData_Polarization polarization() const;
+  inline void set_polarization(::oe::recorder::pb::EmissionData_Polarization value);
 
   // optional double azimuth_aoi = 8;
   inline bool has_azimuth_aoi() const;
@@ -3348,26 +3348,26 @@ class EmissionData : public ::google::protobuf::Message {
   inline double elevation_aoi() const;
   inline void set_elevation_aoi(double value);
 
-  // optional .Eaagles.Recorder.Pb.PlayerId origin_id = 10;
+  // optional .oe.Recorder.Pb.PlayerId origin_id = 10;
   inline bool has_origin_id() const;
   inline void clear_origin_id();
   static const int kOriginIdFieldNumber = 10;
-  inline const ::Eaagles::Recorder::Pb::PlayerId& origin_id() const;
-  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_origin_id();
-  inline ::Eaagles::Recorder::Pb::PlayerId* release_origin_id();
-  inline void set_allocated_origin_id(::Eaagles::Recorder::Pb::PlayerId* origin_id);
+  inline const ::oe::recorder::pb::PlayerId& origin_id() const;
+  inline ::oe::recorder::pb::PlayerId* mutable_origin_id();
+  inline ::oe::recorder::pb::PlayerId* release_origin_id();
+  inline void set_allocated_origin_id(::oe::recorder::pb::PlayerId* origin_id);
 
-  // optional .Eaagles.Recorder.Pb.PlayerId target_id = 11;
+  // optional .oe.Recorder.Pb.PlayerId target_id = 11;
   inline bool has_target_id() const;
   inline void clear_target_id();
   static const int kTargetIdFieldNumber = 11;
-  inline const ::Eaagles::Recorder::Pb::PlayerId& target_id() const;
-  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_target_id();
-  inline ::Eaagles::Recorder::Pb::PlayerId* release_target_id();
-  inline void set_allocated_target_id(::Eaagles::Recorder::Pb::PlayerId* target_id);
+  inline const ::oe::recorder::pb::PlayerId& target_id() const;
+  inline ::oe::recorder::pb::PlayerId* mutable_target_id();
+  inline ::oe::recorder::pb::PlayerId* release_target_id();
+  inline void set_allocated_target_id(::oe::recorder::pb::PlayerId* target_id);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(EmissionData)
-  // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.EmissionData)
+  // @@protoc_insertion_point(class_scope:oe.Recorder.Pb.EmissionData)
  private:
   inline void set_has_frequency();
   inline void clear_has_frequency();
@@ -3406,8 +3406,8 @@ class EmissionData : public ::google::protobuf::Message {
   double power_;
   double azimuth_aoi_;
   double elevation_aoi_;
-  ::Eaagles::Recorder::Pb::PlayerId* origin_id_;
-  ::Eaagles::Recorder::Pb::PlayerId* target_id_;
+  ::oe::recorder::pb::PlayerId* origin_id_;
+  ::oe::recorder::pb::PlayerId* target_id_;
   int polarization_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -3423,7 +3423,7 @@ class EmissionData : public ::google::protobuf::Message {
 
 // DataRecord
 
-// required .Eaagles.Recorder.Pb.Time time = 1;
+// required .oe.Recorder.Pb.Time time = 1;
 inline bool DataRecord::has_time() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -3434,26 +3434,26 @@ inline void DataRecord::clear_has_time() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void DataRecord::clear_time() {
-  if (time_ != NULL) time_->::Eaagles::Recorder::Pb::Time::Clear();
+  if (time_ != NULL) time_->::oe::recorder::pb::Time::Clear();
   clear_has_time();
 }
-inline const ::Eaagles::Recorder::Pb::Time& DataRecord::time() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.DataRecord.time)
+inline const ::oe::recorder::pb::Time& DataRecord::time() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.DataRecord.time)
   return time_ != NULL ? *time_ : *default_instance_->time_;
 }
-inline ::Eaagles::Recorder::Pb::Time* DataRecord::mutable_time() {
+inline ::oe::recorder::pb::Time* DataRecord::mutable_time() {
   set_has_time();
-  if (time_ == NULL) time_ = new ::Eaagles::Recorder::Pb::Time;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.DataRecord.time)
+  if (time_ == NULL) time_ = new ::oe::recorder::pb::Time;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.DataRecord.time)
   return time_;
 }
-inline ::Eaagles::Recorder::Pb::Time* DataRecord::release_time() {
+inline ::oe::recorder::pb::Time* DataRecord::release_time() {
   clear_has_time();
-  ::Eaagles::Recorder::Pb::Time* temp = time_;
+  ::oe::recorder::pb::Time* temp = time_;
   time_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_time(::Eaagles::Recorder::Pb::Time* time) {
+inline void DataRecord::set_allocated_time(::oe::recorder::pb::Time* time) {
   delete time_;
   time_ = time;
   if (time) {
@@ -3461,7 +3461,7 @@ inline void DataRecord::set_allocated_time(::Eaagles::Recorder::Pb::Time* time) 
   } else {
     clear_has_time();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.DataRecord.time)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.DataRecord.time)
 }
 
 // required uint32 id = 2;
@@ -3479,16 +3479,16 @@ inline void DataRecord::clear_id() {
   clear_has_id();
 }
 inline ::google::protobuf::uint32 DataRecord::id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.DataRecord.id)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.DataRecord.id)
   return id_;
 }
 inline void DataRecord::set_id(::google::protobuf::uint32 value) {
   set_has_id();
   id_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.DataRecord.id)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.DataRecord.id)
 }
 
-// optional .Eaagles.Recorder.Pb.FileIdMsg file_id_msg = 11;
+// optional .oe.Recorder.Pb.FileIdMsg file_id_msg = 11;
 inline bool DataRecord::has_file_id_msg() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -3499,26 +3499,26 @@ inline void DataRecord::clear_has_file_id_msg() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void DataRecord::clear_file_id_msg() {
-  if (file_id_msg_ != NULL) file_id_msg_->::Eaagles::Recorder::Pb::FileIdMsg::Clear();
+  if (file_id_msg_ != NULL) file_id_msg_->::oe::recorder::pb::FileIdMsg::Clear();
   clear_has_file_id_msg();
 }
-inline const ::Eaagles::Recorder::Pb::FileIdMsg& DataRecord::file_id_msg() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.DataRecord.file_id_msg)
+inline const ::oe::recorder::pb::FileIdMsg& DataRecord::file_id_msg() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.DataRecord.file_id_msg)
   return file_id_msg_ != NULL ? *file_id_msg_ : *default_instance_->file_id_msg_;
 }
-inline ::Eaagles::Recorder::Pb::FileIdMsg* DataRecord::mutable_file_id_msg() {
+inline ::oe::recorder::pb::FileIdMsg* DataRecord::mutable_file_id_msg() {
   set_has_file_id_msg();
-  if (file_id_msg_ == NULL) file_id_msg_ = new ::Eaagles::Recorder::Pb::FileIdMsg;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.DataRecord.file_id_msg)
+  if (file_id_msg_ == NULL) file_id_msg_ = new ::oe::recorder::pb::FileIdMsg;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.DataRecord.file_id_msg)
   return file_id_msg_;
 }
-inline ::Eaagles::Recorder::Pb::FileIdMsg* DataRecord::release_file_id_msg() {
+inline ::oe::recorder::pb::FileIdMsg* DataRecord::release_file_id_msg() {
   clear_has_file_id_msg();
-  ::Eaagles::Recorder::Pb::FileIdMsg* temp = file_id_msg_;
+  ::oe::recorder::pb::FileIdMsg* temp = file_id_msg_;
   file_id_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_file_id_msg(::Eaagles::Recorder::Pb::FileIdMsg* file_id_msg) {
+inline void DataRecord::set_allocated_file_id_msg(::oe::recorder::pb::FileIdMsg* file_id_msg) {
   delete file_id_msg_;
   file_id_msg_ = file_id_msg;
   if (file_id_msg) {
@@ -3526,10 +3526,10 @@ inline void DataRecord::set_allocated_file_id_msg(::Eaagles::Recorder::Pb::FileI
   } else {
     clear_has_file_id_msg();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.DataRecord.file_id_msg)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.DataRecord.file_id_msg)
 }
 
-// optional .Eaagles.Recorder.Pb.UnknownIdMsg unknown_id_msg = 13;
+// optional .oe.Recorder.Pb.UnknownIdMsg unknown_id_msg = 13;
 inline bool DataRecord::has_unknown_id_msg() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
@@ -3540,26 +3540,26 @@ inline void DataRecord::clear_has_unknown_id_msg() {
   _has_bits_[0] &= ~0x00000008u;
 }
 inline void DataRecord::clear_unknown_id_msg() {
-  if (unknown_id_msg_ != NULL) unknown_id_msg_->::Eaagles::Recorder::Pb::UnknownIdMsg::Clear();
+  if (unknown_id_msg_ != NULL) unknown_id_msg_->::oe::recorder::pb::UnknownIdMsg::Clear();
   clear_has_unknown_id_msg();
 }
-inline const ::Eaagles::Recorder::Pb::UnknownIdMsg& DataRecord::unknown_id_msg() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.DataRecord.unknown_id_msg)
+inline const ::oe::recorder::pb::UnknownIdMsg& DataRecord::unknown_id_msg() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.DataRecord.unknown_id_msg)
   return unknown_id_msg_ != NULL ? *unknown_id_msg_ : *default_instance_->unknown_id_msg_;
 }
-inline ::Eaagles::Recorder::Pb::UnknownIdMsg* DataRecord::mutable_unknown_id_msg() {
+inline ::oe::recorder::pb::UnknownIdMsg* DataRecord::mutable_unknown_id_msg() {
   set_has_unknown_id_msg();
-  if (unknown_id_msg_ == NULL) unknown_id_msg_ = new ::Eaagles::Recorder::Pb::UnknownIdMsg;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.DataRecord.unknown_id_msg)
+  if (unknown_id_msg_ == NULL) unknown_id_msg_ = new ::oe::recorder::pb::UnknownIdMsg;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.DataRecord.unknown_id_msg)
   return unknown_id_msg_;
 }
-inline ::Eaagles::Recorder::Pb::UnknownIdMsg* DataRecord::release_unknown_id_msg() {
+inline ::oe::recorder::pb::UnknownIdMsg* DataRecord::release_unknown_id_msg() {
   clear_has_unknown_id_msg();
-  ::Eaagles::Recorder::Pb::UnknownIdMsg* temp = unknown_id_msg_;
+  ::oe::recorder::pb::UnknownIdMsg* temp = unknown_id_msg_;
   unknown_id_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_unknown_id_msg(::Eaagles::Recorder::Pb::UnknownIdMsg* unknown_id_msg) {
+inline void DataRecord::set_allocated_unknown_id_msg(::oe::recorder::pb::UnknownIdMsg* unknown_id_msg) {
   delete unknown_id_msg_;
   unknown_id_msg_ = unknown_id_msg;
   if (unknown_id_msg) {
@@ -3567,10 +3567,10 @@ inline void DataRecord::set_allocated_unknown_id_msg(::Eaagles::Recorder::Pb::Un
   } else {
     clear_has_unknown_id_msg();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.DataRecord.unknown_id_msg)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.DataRecord.unknown_id_msg)
 }
 
-// optional .Eaagles.Recorder.Pb.MarkerMsg marker_msg = 14;
+// optional .oe.Recorder.Pb.MarkerMsg marker_msg = 14;
 inline bool DataRecord::has_marker_msg() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
@@ -3581,26 +3581,26 @@ inline void DataRecord::clear_has_marker_msg() {
   _has_bits_[0] &= ~0x00000010u;
 }
 inline void DataRecord::clear_marker_msg() {
-  if (marker_msg_ != NULL) marker_msg_->::Eaagles::Recorder::Pb::MarkerMsg::Clear();
+  if (marker_msg_ != NULL) marker_msg_->::oe::recorder::pb::MarkerMsg::Clear();
   clear_has_marker_msg();
 }
-inline const ::Eaagles::Recorder::Pb::MarkerMsg& DataRecord::marker_msg() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.DataRecord.marker_msg)
+inline const ::oe::recorder::pb::MarkerMsg& DataRecord::marker_msg() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.DataRecord.marker_msg)
   return marker_msg_ != NULL ? *marker_msg_ : *default_instance_->marker_msg_;
 }
-inline ::Eaagles::Recorder::Pb::MarkerMsg* DataRecord::mutable_marker_msg() {
+inline ::oe::recorder::pb::MarkerMsg* DataRecord::mutable_marker_msg() {
   set_has_marker_msg();
-  if (marker_msg_ == NULL) marker_msg_ = new ::Eaagles::Recorder::Pb::MarkerMsg;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.DataRecord.marker_msg)
+  if (marker_msg_ == NULL) marker_msg_ = new ::oe::recorder::pb::MarkerMsg;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.DataRecord.marker_msg)
   return marker_msg_;
 }
-inline ::Eaagles::Recorder::Pb::MarkerMsg* DataRecord::release_marker_msg() {
+inline ::oe::recorder::pb::MarkerMsg* DataRecord::release_marker_msg() {
   clear_has_marker_msg();
-  ::Eaagles::Recorder::Pb::MarkerMsg* temp = marker_msg_;
+  ::oe::recorder::pb::MarkerMsg* temp = marker_msg_;
   marker_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_marker_msg(::Eaagles::Recorder::Pb::MarkerMsg* marker_msg) {
+inline void DataRecord::set_allocated_marker_msg(::oe::recorder::pb::MarkerMsg* marker_msg) {
   delete marker_msg_;
   marker_msg_ = marker_msg;
   if (marker_msg) {
@@ -3608,10 +3608,10 @@ inline void DataRecord::set_allocated_marker_msg(::Eaagles::Recorder::Pb::Marker
   } else {
     clear_has_marker_msg();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.DataRecord.marker_msg)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.DataRecord.marker_msg)
 }
 
-// optional .Eaagles.Recorder.Pb.InputDeviceMsg input_device_msg = 15;
+// optional .oe.Recorder.Pb.InputDeviceMsg input_device_msg = 15;
 inline bool DataRecord::has_input_device_msg() const {
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
@@ -3622,26 +3622,26 @@ inline void DataRecord::clear_has_input_device_msg() {
   _has_bits_[0] &= ~0x00000020u;
 }
 inline void DataRecord::clear_input_device_msg() {
-  if (input_device_msg_ != NULL) input_device_msg_->::Eaagles::Recorder::Pb::InputDeviceMsg::Clear();
+  if (input_device_msg_ != NULL) input_device_msg_->::oe::recorder::pb::InputDeviceMsg::Clear();
   clear_has_input_device_msg();
 }
-inline const ::Eaagles::Recorder::Pb::InputDeviceMsg& DataRecord::input_device_msg() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.DataRecord.input_device_msg)
+inline const ::oe::recorder::pb::InputDeviceMsg& DataRecord::input_device_msg() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.DataRecord.input_device_msg)
   return input_device_msg_ != NULL ? *input_device_msg_ : *default_instance_->input_device_msg_;
 }
-inline ::Eaagles::Recorder::Pb::InputDeviceMsg* DataRecord::mutable_input_device_msg() {
+inline ::oe::recorder::pb::InputDeviceMsg* DataRecord::mutable_input_device_msg() {
   set_has_input_device_msg();
-  if (input_device_msg_ == NULL) input_device_msg_ = new ::Eaagles::Recorder::Pb::InputDeviceMsg;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.DataRecord.input_device_msg)
+  if (input_device_msg_ == NULL) input_device_msg_ = new ::oe::recorder::pb::InputDeviceMsg;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.DataRecord.input_device_msg)
   return input_device_msg_;
 }
-inline ::Eaagles::Recorder::Pb::InputDeviceMsg* DataRecord::release_input_device_msg() {
+inline ::oe::recorder::pb::InputDeviceMsg* DataRecord::release_input_device_msg() {
   clear_has_input_device_msg();
-  ::Eaagles::Recorder::Pb::InputDeviceMsg* temp = input_device_msg_;
+  ::oe::recorder::pb::InputDeviceMsg* temp = input_device_msg_;
   input_device_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_input_device_msg(::Eaagles::Recorder::Pb::InputDeviceMsg* input_device_msg) {
+inline void DataRecord::set_allocated_input_device_msg(::oe::recorder::pb::InputDeviceMsg* input_device_msg) {
   delete input_device_msg_;
   input_device_msg_ = input_device_msg;
   if (input_device_msg) {
@@ -3649,10 +3649,10 @@ inline void DataRecord::set_allocated_input_device_msg(::Eaagles::Recorder::Pb::
   } else {
     clear_has_input_device_msg();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.DataRecord.input_device_msg)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.DataRecord.input_device_msg)
 }
 
-// optional .Eaagles.Recorder.Pb.NewPlayerEventMsg new_player_event_msg = 31;
+// optional .oe.Recorder.Pb.NewPlayerEventMsg new_player_event_msg = 31;
 inline bool DataRecord::has_new_player_event_msg() const {
   return (_has_bits_[0] & 0x00000040u) != 0;
 }
@@ -3663,26 +3663,26 @@ inline void DataRecord::clear_has_new_player_event_msg() {
   _has_bits_[0] &= ~0x00000040u;
 }
 inline void DataRecord::clear_new_player_event_msg() {
-  if (new_player_event_msg_ != NULL) new_player_event_msg_->::Eaagles::Recorder::Pb::NewPlayerEventMsg::Clear();
+  if (new_player_event_msg_ != NULL) new_player_event_msg_->::oe::recorder::pb::NewPlayerEventMsg::Clear();
   clear_has_new_player_event_msg();
 }
-inline const ::Eaagles::Recorder::Pb::NewPlayerEventMsg& DataRecord::new_player_event_msg() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.DataRecord.new_player_event_msg)
+inline const ::oe::recorder::pb::NewPlayerEventMsg& DataRecord::new_player_event_msg() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.DataRecord.new_player_event_msg)
   return new_player_event_msg_ != NULL ? *new_player_event_msg_ : *default_instance_->new_player_event_msg_;
 }
-inline ::Eaagles::Recorder::Pb::NewPlayerEventMsg* DataRecord::mutable_new_player_event_msg() {
+inline ::oe::recorder::pb::NewPlayerEventMsg* DataRecord::mutable_new_player_event_msg() {
   set_has_new_player_event_msg();
-  if (new_player_event_msg_ == NULL) new_player_event_msg_ = new ::Eaagles::Recorder::Pb::NewPlayerEventMsg;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.DataRecord.new_player_event_msg)
+  if (new_player_event_msg_ == NULL) new_player_event_msg_ = new ::oe::recorder::pb::NewPlayerEventMsg;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.DataRecord.new_player_event_msg)
   return new_player_event_msg_;
 }
-inline ::Eaagles::Recorder::Pb::NewPlayerEventMsg* DataRecord::release_new_player_event_msg() {
+inline ::oe::recorder::pb::NewPlayerEventMsg* DataRecord::release_new_player_event_msg() {
   clear_has_new_player_event_msg();
-  ::Eaagles::Recorder::Pb::NewPlayerEventMsg* temp = new_player_event_msg_;
+  ::oe::recorder::pb::NewPlayerEventMsg* temp = new_player_event_msg_;
   new_player_event_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_new_player_event_msg(::Eaagles::Recorder::Pb::NewPlayerEventMsg* new_player_event_msg) {
+inline void DataRecord::set_allocated_new_player_event_msg(::oe::recorder::pb::NewPlayerEventMsg* new_player_event_msg) {
   delete new_player_event_msg_;
   new_player_event_msg_ = new_player_event_msg;
   if (new_player_event_msg) {
@@ -3690,10 +3690,10 @@ inline void DataRecord::set_allocated_new_player_event_msg(::Eaagles::Recorder::
   } else {
     clear_has_new_player_event_msg();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.DataRecord.new_player_event_msg)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.DataRecord.new_player_event_msg)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerRemovedEventMsg player_removed_event_msg = 32;
+// optional .oe.Recorder.Pb.PlayerRemovedEventMsg player_removed_event_msg = 32;
 inline bool DataRecord::has_player_removed_event_msg() const {
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
@@ -3704,26 +3704,26 @@ inline void DataRecord::clear_has_player_removed_event_msg() {
   _has_bits_[0] &= ~0x00000080u;
 }
 inline void DataRecord::clear_player_removed_event_msg() {
-  if (player_removed_event_msg_ != NULL) player_removed_event_msg_->::Eaagles::Recorder::Pb::PlayerRemovedEventMsg::Clear();
+  if (player_removed_event_msg_ != NULL) player_removed_event_msg_->::oe::recorder::pb::PlayerRemovedEventMsg::Clear();
   clear_has_player_removed_event_msg();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerRemovedEventMsg& DataRecord::player_removed_event_msg() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.DataRecord.player_removed_event_msg)
+inline const ::oe::recorder::pb::PlayerRemovedEventMsg& DataRecord::player_removed_event_msg() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.DataRecord.player_removed_event_msg)
   return player_removed_event_msg_ != NULL ? *player_removed_event_msg_ : *default_instance_->player_removed_event_msg_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerRemovedEventMsg* DataRecord::mutable_player_removed_event_msg() {
+inline ::oe::recorder::pb::PlayerRemovedEventMsg* DataRecord::mutable_player_removed_event_msg() {
   set_has_player_removed_event_msg();
-  if (player_removed_event_msg_ == NULL) player_removed_event_msg_ = new ::Eaagles::Recorder::Pb::PlayerRemovedEventMsg;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.DataRecord.player_removed_event_msg)
+  if (player_removed_event_msg_ == NULL) player_removed_event_msg_ = new ::oe::recorder::pb::PlayerRemovedEventMsg;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.DataRecord.player_removed_event_msg)
   return player_removed_event_msg_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerRemovedEventMsg* DataRecord::release_player_removed_event_msg() {
+inline ::oe::recorder::pb::PlayerRemovedEventMsg* DataRecord::release_player_removed_event_msg() {
   clear_has_player_removed_event_msg();
-  ::Eaagles::Recorder::Pb::PlayerRemovedEventMsg* temp = player_removed_event_msg_;
+  ::oe::recorder::pb::PlayerRemovedEventMsg* temp = player_removed_event_msg_;
   player_removed_event_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_player_removed_event_msg(::Eaagles::Recorder::Pb::PlayerRemovedEventMsg* player_removed_event_msg) {
+inline void DataRecord::set_allocated_player_removed_event_msg(::oe::recorder::pb::PlayerRemovedEventMsg* player_removed_event_msg) {
   delete player_removed_event_msg_;
   player_removed_event_msg_ = player_removed_event_msg;
   if (player_removed_event_msg) {
@@ -3731,10 +3731,10 @@ inline void DataRecord::set_allocated_player_removed_event_msg(::Eaagles::Record
   } else {
     clear_has_player_removed_event_msg();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.DataRecord.player_removed_event_msg)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.DataRecord.player_removed_event_msg)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerDataMsg player_data_msg = 33;
+// optional .oe.Recorder.Pb.PlayerDataMsg player_data_msg = 33;
 inline bool DataRecord::has_player_data_msg() const {
   return (_has_bits_[0] & 0x00000100u) != 0;
 }
@@ -3745,26 +3745,26 @@ inline void DataRecord::clear_has_player_data_msg() {
   _has_bits_[0] &= ~0x00000100u;
 }
 inline void DataRecord::clear_player_data_msg() {
-  if (player_data_msg_ != NULL) player_data_msg_->::Eaagles::Recorder::Pb::PlayerDataMsg::Clear();
+  if (player_data_msg_ != NULL) player_data_msg_->::oe::recorder::pb::PlayerDataMsg::Clear();
   clear_has_player_data_msg();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerDataMsg& DataRecord::player_data_msg() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.DataRecord.player_data_msg)
+inline const ::oe::recorder::pb::PlayerDataMsg& DataRecord::player_data_msg() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.DataRecord.player_data_msg)
   return player_data_msg_ != NULL ? *player_data_msg_ : *default_instance_->player_data_msg_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerDataMsg* DataRecord::mutable_player_data_msg() {
+inline ::oe::recorder::pb::PlayerDataMsg* DataRecord::mutable_player_data_msg() {
   set_has_player_data_msg();
-  if (player_data_msg_ == NULL) player_data_msg_ = new ::Eaagles::Recorder::Pb::PlayerDataMsg;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.DataRecord.player_data_msg)
+  if (player_data_msg_ == NULL) player_data_msg_ = new ::oe::recorder::pb::PlayerDataMsg;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.DataRecord.player_data_msg)
   return player_data_msg_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerDataMsg* DataRecord::release_player_data_msg() {
+inline ::oe::recorder::pb::PlayerDataMsg* DataRecord::release_player_data_msg() {
   clear_has_player_data_msg();
-  ::Eaagles::Recorder::Pb::PlayerDataMsg* temp = player_data_msg_;
+  ::oe::recorder::pb::PlayerDataMsg* temp = player_data_msg_;
   player_data_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_player_data_msg(::Eaagles::Recorder::Pb::PlayerDataMsg* player_data_msg) {
+inline void DataRecord::set_allocated_player_data_msg(::oe::recorder::pb::PlayerDataMsg* player_data_msg) {
   delete player_data_msg_;
   player_data_msg_ = player_data_msg;
   if (player_data_msg) {
@@ -3772,10 +3772,10 @@ inline void DataRecord::set_allocated_player_data_msg(::Eaagles::Recorder::Pb::P
   } else {
     clear_has_player_data_msg();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.DataRecord.player_data_msg)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.DataRecord.player_data_msg)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerDamagedEventMsg player_damaged_event_msg = 34;
+// optional .oe.Recorder.Pb.PlayerDamagedEventMsg player_damaged_event_msg = 34;
 inline bool DataRecord::has_player_damaged_event_msg() const {
   return (_has_bits_[0] & 0x00000200u) != 0;
 }
@@ -3786,26 +3786,26 @@ inline void DataRecord::clear_has_player_damaged_event_msg() {
   _has_bits_[0] &= ~0x00000200u;
 }
 inline void DataRecord::clear_player_damaged_event_msg() {
-  if (player_damaged_event_msg_ != NULL) player_damaged_event_msg_->::Eaagles::Recorder::Pb::PlayerDamagedEventMsg::Clear();
+  if (player_damaged_event_msg_ != NULL) player_damaged_event_msg_->::oe::recorder::pb::PlayerDamagedEventMsg::Clear();
   clear_has_player_damaged_event_msg();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerDamagedEventMsg& DataRecord::player_damaged_event_msg() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.DataRecord.player_damaged_event_msg)
+inline const ::oe::recorder::pb::PlayerDamagedEventMsg& DataRecord::player_damaged_event_msg() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.DataRecord.player_damaged_event_msg)
   return player_damaged_event_msg_ != NULL ? *player_damaged_event_msg_ : *default_instance_->player_damaged_event_msg_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerDamagedEventMsg* DataRecord::mutable_player_damaged_event_msg() {
+inline ::oe::recorder::pb::PlayerDamagedEventMsg* DataRecord::mutable_player_damaged_event_msg() {
   set_has_player_damaged_event_msg();
-  if (player_damaged_event_msg_ == NULL) player_damaged_event_msg_ = new ::Eaagles::Recorder::Pb::PlayerDamagedEventMsg;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.DataRecord.player_damaged_event_msg)
+  if (player_damaged_event_msg_ == NULL) player_damaged_event_msg_ = new ::oe::recorder::pb::PlayerDamagedEventMsg;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.DataRecord.player_damaged_event_msg)
   return player_damaged_event_msg_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerDamagedEventMsg* DataRecord::release_player_damaged_event_msg() {
+inline ::oe::recorder::pb::PlayerDamagedEventMsg* DataRecord::release_player_damaged_event_msg() {
   clear_has_player_damaged_event_msg();
-  ::Eaagles::Recorder::Pb::PlayerDamagedEventMsg* temp = player_damaged_event_msg_;
+  ::oe::recorder::pb::PlayerDamagedEventMsg* temp = player_damaged_event_msg_;
   player_damaged_event_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_player_damaged_event_msg(::Eaagles::Recorder::Pb::PlayerDamagedEventMsg* player_damaged_event_msg) {
+inline void DataRecord::set_allocated_player_damaged_event_msg(::oe::recorder::pb::PlayerDamagedEventMsg* player_damaged_event_msg) {
   delete player_damaged_event_msg_;
   player_damaged_event_msg_ = player_damaged_event_msg;
   if (player_damaged_event_msg) {
@@ -3813,10 +3813,10 @@ inline void DataRecord::set_allocated_player_damaged_event_msg(::Eaagles::Record
   } else {
     clear_has_player_damaged_event_msg();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.DataRecord.player_damaged_event_msg)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.DataRecord.player_damaged_event_msg)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerCollisionEventMsg player_collision_event_msg = 35;
+// optional .oe.Recorder.Pb.PlayerCollisionEventMsg player_collision_event_msg = 35;
 inline bool DataRecord::has_player_collision_event_msg() const {
   return (_has_bits_[0] & 0x00000400u) != 0;
 }
@@ -3827,26 +3827,26 @@ inline void DataRecord::clear_has_player_collision_event_msg() {
   _has_bits_[0] &= ~0x00000400u;
 }
 inline void DataRecord::clear_player_collision_event_msg() {
-  if (player_collision_event_msg_ != NULL) player_collision_event_msg_->::Eaagles::Recorder::Pb::PlayerCollisionEventMsg::Clear();
+  if (player_collision_event_msg_ != NULL) player_collision_event_msg_->::oe::recorder::pb::PlayerCollisionEventMsg::Clear();
   clear_has_player_collision_event_msg();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerCollisionEventMsg& DataRecord::player_collision_event_msg() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.DataRecord.player_collision_event_msg)
+inline const ::oe::recorder::pb::PlayerCollisionEventMsg& DataRecord::player_collision_event_msg() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.DataRecord.player_collision_event_msg)
   return player_collision_event_msg_ != NULL ? *player_collision_event_msg_ : *default_instance_->player_collision_event_msg_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerCollisionEventMsg* DataRecord::mutable_player_collision_event_msg() {
+inline ::oe::recorder::pb::PlayerCollisionEventMsg* DataRecord::mutable_player_collision_event_msg() {
   set_has_player_collision_event_msg();
-  if (player_collision_event_msg_ == NULL) player_collision_event_msg_ = new ::Eaagles::Recorder::Pb::PlayerCollisionEventMsg;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.DataRecord.player_collision_event_msg)
+  if (player_collision_event_msg_ == NULL) player_collision_event_msg_ = new ::oe::recorder::pb::PlayerCollisionEventMsg;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.DataRecord.player_collision_event_msg)
   return player_collision_event_msg_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerCollisionEventMsg* DataRecord::release_player_collision_event_msg() {
+inline ::oe::recorder::pb::PlayerCollisionEventMsg* DataRecord::release_player_collision_event_msg() {
   clear_has_player_collision_event_msg();
-  ::Eaagles::Recorder::Pb::PlayerCollisionEventMsg* temp = player_collision_event_msg_;
+  ::oe::recorder::pb::PlayerCollisionEventMsg* temp = player_collision_event_msg_;
   player_collision_event_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_player_collision_event_msg(::Eaagles::Recorder::Pb::PlayerCollisionEventMsg* player_collision_event_msg) {
+inline void DataRecord::set_allocated_player_collision_event_msg(::oe::recorder::pb::PlayerCollisionEventMsg* player_collision_event_msg) {
   delete player_collision_event_msg_;
   player_collision_event_msg_ = player_collision_event_msg;
   if (player_collision_event_msg) {
@@ -3854,10 +3854,10 @@ inline void DataRecord::set_allocated_player_collision_event_msg(::Eaagles::Reco
   } else {
     clear_has_player_collision_event_msg();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.DataRecord.player_collision_event_msg)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.DataRecord.player_collision_event_msg)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerCrashEventMsg player_crash_event_msg = 36;
+// optional .oe.Recorder.Pb.PlayerCrashEventMsg player_crash_event_msg = 36;
 inline bool DataRecord::has_player_crash_event_msg() const {
   return (_has_bits_[0] & 0x00000800u) != 0;
 }
@@ -3868,26 +3868,26 @@ inline void DataRecord::clear_has_player_crash_event_msg() {
   _has_bits_[0] &= ~0x00000800u;
 }
 inline void DataRecord::clear_player_crash_event_msg() {
-  if (player_crash_event_msg_ != NULL) player_crash_event_msg_->::Eaagles::Recorder::Pb::PlayerCrashEventMsg::Clear();
+  if (player_crash_event_msg_ != NULL) player_crash_event_msg_->::oe::recorder::pb::PlayerCrashEventMsg::Clear();
   clear_has_player_crash_event_msg();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerCrashEventMsg& DataRecord::player_crash_event_msg() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.DataRecord.player_crash_event_msg)
+inline const ::oe::recorder::pb::PlayerCrashEventMsg& DataRecord::player_crash_event_msg() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.DataRecord.player_crash_event_msg)
   return player_crash_event_msg_ != NULL ? *player_crash_event_msg_ : *default_instance_->player_crash_event_msg_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerCrashEventMsg* DataRecord::mutable_player_crash_event_msg() {
+inline ::oe::recorder::pb::PlayerCrashEventMsg* DataRecord::mutable_player_crash_event_msg() {
   set_has_player_crash_event_msg();
-  if (player_crash_event_msg_ == NULL) player_crash_event_msg_ = new ::Eaagles::Recorder::Pb::PlayerCrashEventMsg;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.DataRecord.player_crash_event_msg)
+  if (player_crash_event_msg_ == NULL) player_crash_event_msg_ = new ::oe::recorder::pb::PlayerCrashEventMsg;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.DataRecord.player_crash_event_msg)
   return player_crash_event_msg_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerCrashEventMsg* DataRecord::release_player_crash_event_msg() {
+inline ::oe::recorder::pb::PlayerCrashEventMsg* DataRecord::release_player_crash_event_msg() {
   clear_has_player_crash_event_msg();
-  ::Eaagles::Recorder::Pb::PlayerCrashEventMsg* temp = player_crash_event_msg_;
+  ::oe::recorder::pb::PlayerCrashEventMsg* temp = player_crash_event_msg_;
   player_crash_event_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_player_crash_event_msg(::Eaagles::Recorder::Pb::PlayerCrashEventMsg* player_crash_event_msg) {
+inline void DataRecord::set_allocated_player_crash_event_msg(::oe::recorder::pb::PlayerCrashEventMsg* player_crash_event_msg) {
   delete player_crash_event_msg_;
   player_crash_event_msg_ = player_crash_event_msg;
   if (player_crash_event_msg) {
@@ -3895,10 +3895,10 @@ inline void DataRecord::set_allocated_player_crash_event_msg(::Eaagles::Recorder
   } else {
     clear_has_player_crash_event_msg();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.DataRecord.player_crash_event_msg)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.DataRecord.player_crash_event_msg)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerKilledEventMsg player_killed_event_msg = 37;
+// optional .oe.Recorder.Pb.PlayerKilledEventMsg player_killed_event_msg = 37;
 inline bool DataRecord::has_player_killed_event_msg() const {
   return (_has_bits_[0] & 0x00001000u) != 0;
 }
@@ -3909,26 +3909,26 @@ inline void DataRecord::clear_has_player_killed_event_msg() {
   _has_bits_[0] &= ~0x00001000u;
 }
 inline void DataRecord::clear_player_killed_event_msg() {
-  if (player_killed_event_msg_ != NULL) player_killed_event_msg_->::Eaagles::Recorder::Pb::PlayerKilledEventMsg::Clear();
+  if (player_killed_event_msg_ != NULL) player_killed_event_msg_->::oe::recorder::pb::PlayerKilledEventMsg::Clear();
   clear_has_player_killed_event_msg();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerKilledEventMsg& DataRecord::player_killed_event_msg() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.DataRecord.player_killed_event_msg)
+inline const ::oe::recorder::pb::PlayerKilledEventMsg& DataRecord::player_killed_event_msg() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.DataRecord.player_killed_event_msg)
   return player_killed_event_msg_ != NULL ? *player_killed_event_msg_ : *default_instance_->player_killed_event_msg_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerKilledEventMsg* DataRecord::mutable_player_killed_event_msg() {
+inline ::oe::recorder::pb::PlayerKilledEventMsg* DataRecord::mutable_player_killed_event_msg() {
   set_has_player_killed_event_msg();
-  if (player_killed_event_msg_ == NULL) player_killed_event_msg_ = new ::Eaagles::Recorder::Pb::PlayerKilledEventMsg;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.DataRecord.player_killed_event_msg)
+  if (player_killed_event_msg_ == NULL) player_killed_event_msg_ = new ::oe::recorder::pb::PlayerKilledEventMsg;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.DataRecord.player_killed_event_msg)
   return player_killed_event_msg_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerKilledEventMsg* DataRecord::release_player_killed_event_msg() {
+inline ::oe::recorder::pb::PlayerKilledEventMsg* DataRecord::release_player_killed_event_msg() {
   clear_has_player_killed_event_msg();
-  ::Eaagles::Recorder::Pb::PlayerKilledEventMsg* temp = player_killed_event_msg_;
+  ::oe::recorder::pb::PlayerKilledEventMsg* temp = player_killed_event_msg_;
   player_killed_event_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_player_killed_event_msg(::Eaagles::Recorder::Pb::PlayerKilledEventMsg* player_killed_event_msg) {
+inline void DataRecord::set_allocated_player_killed_event_msg(::oe::recorder::pb::PlayerKilledEventMsg* player_killed_event_msg) {
   delete player_killed_event_msg_;
   player_killed_event_msg_ = player_killed_event_msg;
   if (player_killed_event_msg) {
@@ -3936,10 +3936,10 @@ inline void DataRecord::set_allocated_player_killed_event_msg(::Eaagles::Recorde
   } else {
     clear_has_player_killed_event_msg();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.DataRecord.player_killed_event_msg)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.DataRecord.player_killed_event_msg)
 }
 
-// optional .Eaagles.Recorder.Pb.WeaponReleaseEventMsg weapon_release_event_msg = 51;
+// optional .oe.Recorder.Pb.WeaponReleaseEventMsg weapon_release_event_msg = 51;
 inline bool DataRecord::has_weapon_release_event_msg() const {
   return (_has_bits_[0] & 0x00002000u) != 0;
 }
@@ -3950,26 +3950,26 @@ inline void DataRecord::clear_has_weapon_release_event_msg() {
   _has_bits_[0] &= ~0x00002000u;
 }
 inline void DataRecord::clear_weapon_release_event_msg() {
-  if (weapon_release_event_msg_ != NULL) weapon_release_event_msg_->::Eaagles::Recorder::Pb::WeaponReleaseEventMsg::Clear();
+  if (weapon_release_event_msg_ != NULL) weapon_release_event_msg_->::oe::recorder::pb::WeaponReleaseEventMsg::Clear();
   clear_has_weapon_release_event_msg();
 }
-inline const ::Eaagles::Recorder::Pb::WeaponReleaseEventMsg& DataRecord::weapon_release_event_msg() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.DataRecord.weapon_release_event_msg)
+inline const ::oe::recorder::pb::WeaponReleaseEventMsg& DataRecord::weapon_release_event_msg() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.DataRecord.weapon_release_event_msg)
   return weapon_release_event_msg_ != NULL ? *weapon_release_event_msg_ : *default_instance_->weapon_release_event_msg_;
 }
-inline ::Eaagles::Recorder::Pb::WeaponReleaseEventMsg* DataRecord::mutable_weapon_release_event_msg() {
+inline ::oe::recorder::pb::WeaponReleaseEventMsg* DataRecord::mutable_weapon_release_event_msg() {
   set_has_weapon_release_event_msg();
-  if (weapon_release_event_msg_ == NULL) weapon_release_event_msg_ = new ::Eaagles::Recorder::Pb::WeaponReleaseEventMsg;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.DataRecord.weapon_release_event_msg)
+  if (weapon_release_event_msg_ == NULL) weapon_release_event_msg_ = new ::oe::recorder::pb::WeaponReleaseEventMsg;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.DataRecord.weapon_release_event_msg)
   return weapon_release_event_msg_;
 }
-inline ::Eaagles::Recorder::Pb::WeaponReleaseEventMsg* DataRecord::release_weapon_release_event_msg() {
+inline ::oe::recorder::pb::WeaponReleaseEventMsg* DataRecord::release_weapon_release_event_msg() {
   clear_has_weapon_release_event_msg();
-  ::Eaagles::Recorder::Pb::WeaponReleaseEventMsg* temp = weapon_release_event_msg_;
+  ::oe::recorder::pb::WeaponReleaseEventMsg* temp = weapon_release_event_msg_;
   weapon_release_event_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_weapon_release_event_msg(::Eaagles::Recorder::Pb::WeaponReleaseEventMsg* weapon_release_event_msg) {
+inline void DataRecord::set_allocated_weapon_release_event_msg(::oe::recorder::pb::WeaponReleaseEventMsg* weapon_release_event_msg) {
   delete weapon_release_event_msg_;
   weapon_release_event_msg_ = weapon_release_event_msg;
   if (weapon_release_event_msg) {
@@ -3977,10 +3977,10 @@ inline void DataRecord::set_allocated_weapon_release_event_msg(::Eaagles::Record
   } else {
     clear_has_weapon_release_event_msg();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.DataRecord.weapon_release_event_msg)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.DataRecord.weapon_release_event_msg)
 }
 
-// optional .Eaagles.Recorder.Pb.WeaponHungEventMsg weapon_hung_event_msg = 52;
+// optional .oe.Recorder.Pb.WeaponHungEventMsg weapon_hung_event_msg = 52;
 inline bool DataRecord::has_weapon_hung_event_msg() const {
   return (_has_bits_[0] & 0x00004000u) != 0;
 }
@@ -3991,26 +3991,26 @@ inline void DataRecord::clear_has_weapon_hung_event_msg() {
   _has_bits_[0] &= ~0x00004000u;
 }
 inline void DataRecord::clear_weapon_hung_event_msg() {
-  if (weapon_hung_event_msg_ != NULL) weapon_hung_event_msg_->::Eaagles::Recorder::Pb::WeaponHungEventMsg::Clear();
+  if (weapon_hung_event_msg_ != NULL) weapon_hung_event_msg_->::oe::recorder::pb::WeaponHungEventMsg::Clear();
   clear_has_weapon_hung_event_msg();
 }
-inline const ::Eaagles::Recorder::Pb::WeaponHungEventMsg& DataRecord::weapon_hung_event_msg() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.DataRecord.weapon_hung_event_msg)
+inline const ::oe::recorder::pb::WeaponHungEventMsg& DataRecord::weapon_hung_event_msg() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.DataRecord.weapon_hung_event_msg)
   return weapon_hung_event_msg_ != NULL ? *weapon_hung_event_msg_ : *default_instance_->weapon_hung_event_msg_;
 }
-inline ::Eaagles::Recorder::Pb::WeaponHungEventMsg* DataRecord::mutable_weapon_hung_event_msg() {
+inline ::oe::recorder::pb::WeaponHungEventMsg* DataRecord::mutable_weapon_hung_event_msg() {
   set_has_weapon_hung_event_msg();
-  if (weapon_hung_event_msg_ == NULL) weapon_hung_event_msg_ = new ::Eaagles::Recorder::Pb::WeaponHungEventMsg;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.DataRecord.weapon_hung_event_msg)
+  if (weapon_hung_event_msg_ == NULL) weapon_hung_event_msg_ = new ::oe::recorder::pb::WeaponHungEventMsg;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.DataRecord.weapon_hung_event_msg)
   return weapon_hung_event_msg_;
 }
-inline ::Eaagles::Recorder::Pb::WeaponHungEventMsg* DataRecord::release_weapon_hung_event_msg() {
+inline ::oe::recorder::pb::WeaponHungEventMsg* DataRecord::release_weapon_hung_event_msg() {
   clear_has_weapon_hung_event_msg();
-  ::Eaagles::Recorder::Pb::WeaponHungEventMsg* temp = weapon_hung_event_msg_;
+  ::oe::recorder::pb::WeaponHungEventMsg* temp = weapon_hung_event_msg_;
   weapon_hung_event_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_weapon_hung_event_msg(::Eaagles::Recorder::Pb::WeaponHungEventMsg* weapon_hung_event_msg) {
+inline void DataRecord::set_allocated_weapon_hung_event_msg(::oe::recorder::pb::WeaponHungEventMsg* weapon_hung_event_msg) {
   delete weapon_hung_event_msg_;
   weapon_hung_event_msg_ = weapon_hung_event_msg;
   if (weapon_hung_event_msg) {
@@ -4018,10 +4018,10 @@ inline void DataRecord::set_allocated_weapon_hung_event_msg(::Eaagles::Recorder:
   } else {
     clear_has_weapon_hung_event_msg();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.DataRecord.weapon_hung_event_msg)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.DataRecord.weapon_hung_event_msg)
 }
 
-// optional .Eaagles.Recorder.Pb.WeaponDetonationEventMsg weapon_detonation_event_msg = 53;
+// optional .oe.Recorder.Pb.WeaponDetonationEventMsg weapon_detonation_event_msg = 53;
 inline bool DataRecord::has_weapon_detonation_event_msg() const {
   return (_has_bits_[0] & 0x00008000u) != 0;
 }
@@ -4032,26 +4032,26 @@ inline void DataRecord::clear_has_weapon_detonation_event_msg() {
   _has_bits_[0] &= ~0x00008000u;
 }
 inline void DataRecord::clear_weapon_detonation_event_msg() {
-  if (weapon_detonation_event_msg_ != NULL) weapon_detonation_event_msg_->::Eaagles::Recorder::Pb::WeaponDetonationEventMsg::Clear();
+  if (weapon_detonation_event_msg_ != NULL) weapon_detonation_event_msg_->::oe::recorder::pb::WeaponDetonationEventMsg::Clear();
   clear_has_weapon_detonation_event_msg();
 }
-inline const ::Eaagles::Recorder::Pb::WeaponDetonationEventMsg& DataRecord::weapon_detonation_event_msg() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.DataRecord.weapon_detonation_event_msg)
+inline const ::oe::recorder::pb::WeaponDetonationEventMsg& DataRecord::weapon_detonation_event_msg() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.DataRecord.weapon_detonation_event_msg)
   return weapon_detonation_event_msg_ != NULL ? *weapon_detonation_event_msg_ : *default_instance_->weapon_detonation_event_msg_;
 }
-inline ::Eaagles::Recorder::Pb::WeaponDetonationEventMsg* DataRecord::mutable_weapon_detonation_event_msg() {
+inline ::oe::recorder::pb::WeaponDetonationEventMsg* DataRecord::mutable_weapon_detonation_event_msg() {
   set_has_weapon_detonation_event_msg();
-  if (weapon_detonation_event_msg_ == NULL) weapon_detonation_event_msg_ = new ::Eaagles::Recorder::Pb::WeaponDetonationEventMsg;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.DataRecord.weapon_detonation_event_msg)
+  if (weapon_detonation_event_msg_ == NULL) weapon_detonation_event_msg_ = new ::oe::recorder::pb::WeaponDetonationEventMsg;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.DataRecord.weapon_detonation_event_msg)
   return weapon_detonation_event_msg_;
 }
-inline ::Eaagles::Recorder::Pb::WeaponDetonationEventMsg* DataRecord::release_weapon_detonation_event_msg() {
+inline ::oe::recorder::pb::WeaponDetonationEventMsg* DataRecord::release_weapon_detonation_event_msg() {
   clear_has_weapon_detonation_event_msg();
-  ::Eaagles::Recorder::Pb::WeaponDetonationEventMsg* temp = weapon_detonation_event_msg_;
+  ::oe::recorder::pb::WeaponDetonationEventMsg* temp = weapon_detonation_event_msg_;
   weapon_detonation_event_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_weapon_detonation_event_msg(::Eaagles::Recorder::Pb::WeaponDetonationEventMsg* weapon_detonation_event_msg) {
+inline void DataRecord::set_allocated_weapon_detonation_event_msg(::oe::recorder::pb::WeaponDetonationEventMsg* weapon_detonation_event_msg) {
   delete weapon_detonation_event_msg_;
   weapon_detonation_event_msg_ = weapon_detonation_event_msg;
   if (weapon_detonation_event_msg) {
@@ -4059,10 +4059,10 @@ inline void DataRecord::set_allocated_weapon_detonation_event_msg(::Eaagles::Rec
   } else {
     clear_has_weapon_detonation_event_msg();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.DataRecord.weapon_detonation_event_msg)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.DataRecord.weapon_detonation_event_msg)
 }
 
-// optional .Eaagles.Recorder.Pb.GunFiredEventMsg gun_fired_event_msg = 54;
+// optional .oe.Recorder.Pb.GunFiredEventMsg gun_fired_event_msg = 54;
 inline bool DataRecord::has_gun_fired_event_msg() const {
   return (_has_bits_[0] & 0x00010000u) != 0;
 }
@@ -4073,26 +4073,26 @@ inline void DataRecord::clear_has_gun_fired_event_msg() {
   _has_bits_[0] &= ~0x00010000u;
 }
 inline void DataRecord::clear_gun_fired_event_msg() {
-  if (gun_fired_event_msg_ != NULL) gun_fired_event_msg_->::Eaagles::Recorder::Pb::GunFiredEventMsg::Clear();
+  if (gun_fired_event_msg_ != NULL) gun_fired_event_msg_->::oe::recorder::pb::GunFiredEventMsg::Clear();
   clear_has_gun_fired_event_msg();
 }
-inline const ::Eaagles::Recorder::Pb::GunFiredEventMsg& DataRecord::gun_fired_event_msg() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.DataRecord.gun_fired_event_msg)
+inline const ::oe::recorder::pb::GunFiredEventMsg& DataRecord::gun_fired_event_msg() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.DataRecord.gun_fired_event_msg)
   return gun_fired_event_msg_ != NULL ? *gun_fired_event_msg_ : *default_instance_->gun_fired_event_msg_;
 }
-inline ::Eaagles::Recorder::Pb::GunFiredEventMsg* DataRecord::mutable_gun_fired_event_msg() {
+inline ::oe::recorder::pb::GunFiredEventMsg* DataRecord::mutable_gun_fired_event_msg() {
   set_has_gun_fired_event_msg();
-  if (gun_fired_event_msg_ == NULL) gun_fired_event_msg_ = new ::Eaagles::Recorder::Pb::GunFiredEventMsg;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.DataRecord.gun_fired_event_msg)
+  if (gun_fired_event_msg_ == NULL) gun_fired_event_msg_ = new ::oe::recorder::pb::GunFiredEventMsg;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.DataRecord.gun_fired_event_msg)
   return gun_fired_event_msg_;
 }
-inline ::Eaagles::Recorder::Pb::GunFiredEventMsg* DataRecord::release_gun_fired_event_msg() {
+inline ::oe::recorder::pb::GunFiredEventMsg* DataRecord::release_gun_fired_event_msg() {
   clear_has_gun_fired_event_msg();
-  ::Eaagles::Recorder::Pb::GunFiredEventMsg* temp = gun_fired_event_msg_;
+  ::oe::recorder::pb::GunFiredEventMsg* temp = gun_fired_event_msg_;
   gun_fired_event_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_gun_fired_event_msg(::Eaagles::Recorder::Pb::GunFiredEventMsg* gun_fired_event_msg) {
+inline void DataRecord::set_allocated_gun_fired_event_msg(::oe::recorder::pb::GunFiredEventMsg* gun_fired_event_msg) {
   delete gun_fired_event_msg_;
   gun_fired_event_msg_ = gun_fired_event_msg;
   if (gun_fired_event_msg) {
@@ -4100,10 +4100,10 @@ inline void DataRecord::set_allocated_gun_fired_event_msg(::Eaagles::Recorder::P
   } else {
     clear_has_gun_fired_event_msg();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.DataRecord.gun_fired_event_msg)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.DataRecord.gun_fired_event_msg)
 }
 
-// optional .Eaagles.Recorder.Pb.NewTrackEventMsg new_track_event_msg = 71;
+// optional .oe.Recorder.Pb.NewTrackEventMsg new_track_event_msg = 71;
 inline bool DataRecord::has_new_track_event_msg() const {
   return (_has_bits_[0] & 0x00020000u) != 0;
 }
@@ -4114,26 +4114,26 @@ inline void DataRecord::clear_has_new_track_event_msg() {
   _has_bits_[0] &= ~0x00020000u;
 }
 inline void DataRecord::clear_new_track_event_msg() {
-  if (new_track_event_msg_ != NULL) new_track_event_msg_->::Eaagles::Recorder::Pb::NewTrackEventMsg::Clear();
+  if (new_track_event_msg_ != NULL) new_track_event_msg_->::oe::recorder::pb::NewTrackEventMsg::Clear();
   clear_has_new_track_event_msg();
 }
-inline const ::Eaagles::Recorder::Pb::NewTrackEventMsg& DataRecord::new_track_event_msg() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.DataRecord.new_track_event_msg)
+inline const ::oe::recorder::pb::NewTrackEventMsg& DataRecord::new_track_event_msg() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.DataRecord.new_track_event_msg)
   return new_track_event_msg_ != NULL ? *new_track_event_msg_ : *default_instance_->new_track_event_msg_;
 }
-inline ::Eaagles::Recorder::Pb::NewTrackEventMsg* DataRecord::mutable_new_track_event_msg() {
+inline ::oe::recorder::pb::NewTrackEventMsg* DataRecord::mutable_new_track_event_msg() {
   set_has_new_track_event_msg();
-  if (new_track_event_msg_ == NULL) new_track_event_msg_ = new ::Eaagles::Recorder::Pb::NewTrackEventMsg;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.DataRecord.new_track_event_msg)
+  if (new_track_event_msg_ == NULL) new_track_event_msg_ = new ::oe::recorder::pb::NewTrackEventMsg;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.DataRecord.new_track_event_msg)
   return new_track_event_msg_;
 }
-inline ::Eaagles::Recorder::Pb::NewTrackEventMsg* DataRecord::release_new_track_event_msg() {
+inline ::oe::recorder::pb::NewTrackEventMsg* DataRecord::release_new_track_event_msg() {
   clear_has_new_track_event_msg();
-  ::Eaagles::Recorder::Pb::NewTrackEventMsg* temp = new_track_event_msg_;
+  ::oe::recorder::pb::NewTrackEventMsg* temp = new_track_event_msg_;
   new_track_event_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_new_track_event_msg(::Eaagles::Recorder::Pb::NewTrackEventMsg* new_track_event_msg) {
+inline void DataRecord::set_allocated_new_track_event_msg(::oe::recorder::pb::NewTrackEventMsg* new_track_event_msg) {
   delete new_track_event_msg_;
   new_track_event_msg_ = new_track_event_msg;
   if (new_track_event_msg) {
@@ -4141,10 +4141,10 @@ inline void DataRecord::set_allocated_new_track_event_msg(::Eaagles::Recorder::P
   } else {
     clear_has_new_track_event_msg();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.DataRecord.new_track_event_msg)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.DataRecord.new_track_event_msg)
 }
 
-// optional .Eaagles.Recorder.Pb.TrackRemovedEventMsg track_removed_event_msg = 72;
+// optional .oe.Recorder.Pb.TrackRemovedEventMsg track_removed_event_msg = 72;
 inline bool DataRecord::has_track_removed_event_msg() const {
   return (_has_bits_[0] & 0x00040000u) != 0;
 }
@@ -4155,26 +4155,26 @@ inline void DataRecord::clear_has_track_removed_event_msg() {
   _has_bits_[0] &= ~0x00040000u;
 }
 inline void DataRecord::clear_track_removed_event_msg() {
-  if (track_removed_event_msg_ != NULL) track_removed_event_msg_->::Eaagles::Recorder::Pb::TrackRemovedEventMsg::Clear();
+  if (track_removed_event_msg_ != NULL) track_removed_event_msg_->::oe::recorder::pb::TrackRemovedEventMsg::Clear();
   clear_has_track_removed_event_msg();
 }
-inline const ::Eaagles::Recorder::Pb::TrackRemovedEventMsg& DataRecord::track_removed_event_msg() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.DataRecord.track_removed_event_msg)
+inline const ::oe::recorder::pb::TrackRemovedEventMsg& DataRecord::track_removed_event_msg() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.DataRecord.track_removed_event_msg)
   return track_removed_event_msg_ != NULL ? *track_removed_event_msg_ : *default_instance_->track_removed_event_msg_;
 }
-inline ::Eaagles::Recorder::Pb::TrackRemovedEventMsg* DataRecord::mutable_track_removed_event_msg() {
+inline ::oe::recorder::pb::TrackRemovedEventMsg* DataRecord::mutable_track_removed_event_msg() {
   set_has_track_removed_event_msg();
-  if (track_removed_event_msg_ == NULL) track_removed_event_msg_ = new ::Eaagles::Recorder::Pb::TrackRemovedEventMsg;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.DataRecord.track_removed_event_msg)
+  if (track_removed_event_msg_ == NULL) track_removed_event_msg_ = new ::oe::recorder::pb::TrackRemovedEventMsg;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.DataRecord.track_removed_event_msg)
   return track_removed_event_msg_;
 }
-inline ::Eaagles::Recorder::Pb::TrackRemovedEventMsg* DataRecord::release_track_removed_event_msg() {
+inline ::oe::recorder::pb::TrackRemovedEventMsg* DataRecord::release_track_removed_event_msg() {
   clear_has_track_removed_event_msg();
-  ::Eaagles::Recorder::Pb::TrackRemovedEventMsg* temp = track_removed_event_msg_;
+  ::oe::recorder::pb::TrackRemovedEventMsg* temp = track_removed_event_msg_;
   track_removed_event_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_track_removed_event_msg(::Eaagles::Recorder::Pb::TrackRemovedEventMsg* track_removed_event_msg) {
+inline void DataRecord::set_allocated_track_removed_event_msg(::oe::recorder::pb::TrackRemovedEventMsg* track_removed_event_msg) {
   delete track_removed_event_msg_;
   track_removed_event_msg_ = track_removed_event_msg;
   if (track_removed_event_msg) {
@@ -4182,10 +4182,10 @@ inline void DataRecord::set_allocated_track_removed_event_msg(::Eaagles::Recorde
   } else {
     clear_has_track_removed_event_msg();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.DataRecord.track_removed_event_msg)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.DataRecord.track_removed_event_msg)
 }
 
-// optional .Eaagles.Recorder.Pb.TrackDataMsg track_data_msg = 73;
+// optional .oe.Recorder.Pb.TrackDataMsg track_data_msg = 73;
 inline bool DataRecord::has_track_data_msg() const {
   return (_has_bits_[0] & 0x00080000u) != 0;
 }
@@ -4196,26 +4196,26 @@ inline void DataRecord::clear_has_track_data_msg() {
   _has_bits_[0] &= ~0x00080000u;
 }
 inline void DataRecord::clear_track_data_msg() {
-  if (track_data_msg_ != NULL) track_data_msg_->::Eaagles::Recorder::Pb::TrackDataMsg::Clear();
+  if (track_data_msg_ != NULL) track_data_msg_->::oe::recorder::pb::TrackDataMsg::Clear();
   clear_has_track_data_msg();
 }
-inline const ::Eaagles::Recorder::Pb::TrackDataMsg& DataRecord::track_data_msg() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.DataRecord.track_data_msg)
+inline const ::oe::recorder::pb::TrackDataMsg& DataRecord::track_data_msg() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.DataRecord.track_data_msg)
   return track_data_msg_ != NULL ? *track_data_msg_ : *default_instance_->track_data_msg_;
 }
-inline ::Eaagles::Recorder::Pb::TrackDataMsg* DataRecord::mutable_track_data_msg() {
+inline ::oe::recorder::pb::TrackDataMsg* DataRecord::mutable_track_data_msg() {
   set_has_track_data_msg();
-  if (track_data_msg_ == NULL) track_data_msg_ = new ::Eaagles::Recorder::Pb::TrackDataMsg;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.DataRecord.track_data_msg)
+  if (track_data_msg_ == NULL) track_data_msg_ = new ::oe::recorder::pb::TrackDataMsg;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.DataRecord.track_data_msg)
   return track_data_msg_;
 }
-inline ::Eaagles::Recorder::Pb::TrackDataMsg* DataRecord::release_track_data_msg() {
+inline ::oe::recorder::pb::TrackDataMsg* DataRecord::release_track_data_msg() {
   clear_has_track_data_msg();
-  ::Eaagles::Recorder::Pb::TrackDataMsg* temp = track_data_msg_;
+  ::oe::recorder::pb::TrackDataMsg* temp = track_data_msg_;
   track_data_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_track_data_msg(::Eaagles::Recorder::Pb::TrackDataMsg* track_data_msg) {
+inline void DataRecord::set_allocated_track_data_msg(::oe::recorder::pb::TrackDataMsg* track_data_msg) {
   delete track_data_msg_;
   track_data_msg_ = track_data_msg;
   if (track_data_msg) {
@@ -4223,7 +4223,7 @@ inline void DataRecord::set_allocated_track_data_msg(::Eaagles::Recorder::Pb::Tr
   } else {
     clear_has_track_data_msg();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.DataRecord.track_data_msg)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.DataRecord.track_data_msg)
 }
 
 // -------------------------------------------------------------------
@@ -4247,7 +4247,7 @@ inline void FileIdMsg::clear_event_name() {
   clear_has_event_name();
 }
 inline const ::std::string& FileIdMsg::event_name() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.FileIdMsg.event_name)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.FileIdMsg.event_name)
   return *event_name_;
 }
 inline void FileIdMsg::set_event_name(const ::std::string& value) {
@@ -4256,7 +4256,7 @@ inline void FileIdMsg::set_event_name(const ::std::string& value) {
     event_name_ = new ::std::string;
   }
   event_name_->assign(value);
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.FileIdMsg.event_name)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.FileIdMsg.event_name)
 }
 inline void FileIdMsg::set_event_name(const char* value) {
   set_has_event_name();
@@ -4264,7 +4264,7 @@ inline void FileIdMsg::set_event_name(const char* value) {
     event_name_ = new ::std::string;
   }
   event_name_->assign(value);
-  // @@protoc_insertion_point(field_set_char:Eaagles.Recorder.Pb.FileIdMsg.event_name)
+  // @@protoc_insertion_point(field_set_char:oe.Recorder.Pb.FileIdMsg.event_name)
 }
 inline void FileIdMsg::set_event_name(const char* value, size_t size) {
   set_has_event_name();
@@ -4272,14 +4272,14 @@ inline void FileIdMsg::set_event_name(const char* value, size_t size) {
     event_name_ = new ::std::string;
   }
   event_name_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:Eaagles.Recorder.Pb.FileIdMsg.event_name)
+  // @@protoc_insertion_point(field_set_pointer:oe.Recorder.Pb.FileIdMsg.event_name)
 }
 inline ::std::string* FileIdMsg::mutable_event_name() {
   set_has_event_name();
   if (event_name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     event_name_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.FileIdMsg.event_name)
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.FileIdMsg.event_name)
   return event_name_;
 }
 inline ::std::string* FileIdMsg::release_event_name() {
@@ -4303,7 +4303,7 @@ inline void FileIdMsg::set_allocated_event_name(::std::string* event_name) {
     clear_has_event_name();
     event_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.FileIdMsg.event_name)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.FileIdMsg.event_name)
 }
 
 // optional string application = 2;
@@ -4323,7 +4323,7 @@ inline void FileIdMsg::clear_application() {
   clear_has_application();
 }
 inline const ::std::string& FileIdMsg::application() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.FileIdMsg.application)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.FileIdMsg.application)
   return *application_;
 }
 inline void FileIdMsg::set_application(const ::std::string& value) {
@@ -4332,7 +4332,7 @@ inline void FileIdMsg::set_application(const ::std::string& value) {
     application_ = new ::std::string;
   }
   application_->assign(value);
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.FileIdMsg.application)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.FileIdMsg.application)
 }
 inline void FileIdMsg::set_application(const char* value) {
   set_has_application();
@@ -4340,7 +4340,7 @@ inline void FileIdMsg::set_application(const char* value) {
     application_ = new ::std::string;
   }
   application_->assign(value);
-  // @@protoc_insertion_point(field_set_char:Eaagles.Recorder.Pb.FileIdMsg.application)
+  // @@protoc_insertion_point(field_set_char:oe.Recorder.Pb.FileIdMsg.application)
 }
 inline void FileIdMsg::set_application(const char* value, size_t size) {
   set_has_application();
@@ -4348,14 +4348,14 @@ inline void FileIdMsg::set_application(const char* value, size_t size) {
     application_ = new ::std::string;
   }
   application_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:Eaagles.Recorder.Pb.FileIdMsg.application)
+  // @@protoc_insertion_point(field_set_pointer:oe.Recorder.Pb.FileIdMsg.application)
 }
 inline ::std::string* FileIdMsg::mutable_application() {
   set_has_application();
   if (application_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     application_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.FileIdMsg.application)
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.FileIdMsg.application)
   return application_;
 }
 inline ::std::string* FileIdMsg::release_application() {
@@ -4379,7 +4379,7 @@ inline void FileIdMsg::set_allocated_application(::std::string* application) {
     clear_has_application();
     application_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.FileIdMsg.application)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.FileIdMsg.application)
 }
 
 // optional uint32 case_num = 3;
@@ -4397,13 +4397,13 @@ inline void FileIdMsg::clear_case_num() {
   clear_has_case_num();
 }
 inline ::google::protobuf::uint32 FileIdMsg::case_num() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.FileIdMsg.case_num)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.FileIdMsg.case_num)
   return case_num_;
 }
 inline void FileIdMsg::set_case_num(::google::protobuf::uint32 value) {
   set_has_case_num();
   case_num_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.FileIdMsg.case_num)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.FileIdMsg.case_num)
 }
 
 // optional uint32 mission_num = 4;
@@ -4421,13 +4421,13 @@ inline void FileIdMsg::clear_mission_num() {
   clear_has_mission_num();
 }
 inline ::google::protobuf::uint32 FileIdMsg::mission_num() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.FileIdMsg.mission_num)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.FileIdMsg.mission_num)
   return mission_num_;
 }
 inline void FileIdMsg::set_mission_num(::google::protobuf::uint32 value) {
   set_has_mission_num();
   mission_num_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.FileIdMsg.mission_num)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.FileIdMsg.mission_num)
 }
 
 // optional uint32 subject_num = 5;
@@ -4445,13 +4445,13 @@ inline void FileIdMsg::clear_subject_num() {
   clear_has_subject_num();
 }
 inline ::google::protobuf::uint32 FileIdMsg::subject_num() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.FileIdMsg.subject_num)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.FileIdMsg.subject_num)
   return subject_num_;
 }
 inline void FileIdMsg::set_subject_num(::google::protobuf::uint32 value) {
   set_has_subject_num();
   subject_num_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.FileIdMsg.subject_num)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.FileIdMsg.subject_num)
 }
 
 // optional uint32 run_num = 6;
@@ -4469,13 +4469,13 @@ inline void FileIdMsg::clear_run_num() {
   clear_has_run_num();
 }
 inline ::google::protobuf::uint32 FileIdMsg::run_num() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.FileIdMsg.run_num)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.FileIdMsg.run_num)
   return run_num_;
 }
 inline void FileIdMsg::set_run_num(::google::protobuf::uint32 value) {
   set_has_run_num();
   run_num_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.FileIdMsg.run_num)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.FileIdMsg.run_num)
 }
 
 // optional uint32 day = 7;
@@ -4493,13 +4493,13 @@ inline void FileIdMsg::clear_day() {
   clear_has_day();
 }
 inline ::google::protobuf::uint32 FileIdMsg::day() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.FileIdMsg.day)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.FileIdMsg.day)
   return day_;
 }
 inline void FileIdMsg::set_day(::google::protobuf::uint32 value) {
   set_has_day();
   day_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.FileIdMsg.day)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.FileIdMsg.day)
 }
 
 // optional uint32 month = 8;
@@ -4517,13 +4517,13 @@ inline void FileIdMsg::clear_month() {
   clear_has_month();
 }
 inline ::google::protobuf::uint32 FileIdMsg::month() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.FileIdMsg.month)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.FileIdMsg.month)
   return month_;
 }
 inline void FileIdMsg::set_month(::google::protobuf::uint32 value) {
   set_has_month();
   month_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.FileIdMsg.month)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.FileIdMsg.month)
 }
 
 // optional uint32 year = 9;
@@ -4541,13 +4541,13 @@ inline void FileIdMsg::clear_year() {
   clear_has_year();
 }
 inline ::google::protobuf::uint32 FileIdMsg::year() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.FileIdMsg.year)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.FileIdMsg.year)
   return year_;
 }
 inline void FileIdMsg::set_year(::google::protobuf::uint32 value) {
   set_has_year();
   year_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.FileIdMsg.year)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.FileIdMsg.year)
 }
 
 // -------------------------------------------------------------------
@@ -4569,13 +4569,13 @@ inline void UnknownIdMsg::clear_id() {
   clear_has_id();
 }
 inline ::google::protobuf::uint32 UnknownIdMsg::id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.UnknownIdMsg.id)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.UnknownIdMsg.id)
   return id_;
 }
 inline void UnknownIdMsg::set_id(::google::protobuf::uint32 value) {
   set_has_id();
   id_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.UnknownIdMsg.id)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.UnknownIdMsg.id)
 }
 
 // -------------------------------------------------------------------
@@ -4597,13 +4597,13 @@ inline void MarkerMsg::clear_id() {
   clear_has_id();
 }
 inline ::google::protobuf::uint32 MarkerMsg::id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.MarkerMsg.id)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.MarkerMsg.id)
   return id_;
 }
 inline void MarkerMsg::set_id(::google::protobuf::uint32 value) {
   set_has_id();
   id_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.MarkerMsg.id)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.MarkerMsg.id)
 }
 
 // optional uint32 source_id = 2;
@@ -4621,13 +4621,13 @@ inline void MarkerMsg::clear_source_id() {
   clear_has_source_id();
 }
 inline ::google::protobuf::uint32 MarkerMsg::source_id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.MarkerMsg.source_id)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.MarkerMsg.source_id)
   return source_id_;
 }
 inline void MarkerMsg::set_source_id(::google::protobuf::uint32 value) {
   set_has_source_id();
   source_id_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.MarkerMsg.source_id)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.MarkerMsg.source_id)
 }
 
 // -------------------------------------------------------------------
@@ -4649,13 +4649,13 @@ inline void InputDeviceMsg::clear_id() {
   clear_has_id();
 }
 inline ::google::protobuf::uint32 InputDeviceMsg::id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.InputDeviceMsg.id)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.InputDeviceMsg.id)
   return id_;
 }
 inline void InputDeviceMsg::set_id(::google::protobuf::uint32 value) {
   set_has_id();
   id_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.InputDeviceMsg.id)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.InputDeviceMsg.id)
 }
 
 // optional uint32 source_id = 2;
@@ -4673,13 +4673,13 @@ inline void InputDeviceMsg::clear_source_id() {
   clear_has_source_id();
 }
 inline ::google::protobuf::uint32 InputDeviceMsg::source_id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.InputDeviceMsg.source_id)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.InputDeviceMsg.source_id)
   return source_id_;
 }
 inline void InputDeviceMsg::set_source_id(::google::protobuf::uint32 value) {
   set_has_source_id();
   source_id_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.InputDeviceMsg.source_id)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.InputDeviceMsg.source_id)
 }
 
 // optional float value = 3;
@@ -4697,20 +4697,20 @@ inline void InputDeviceMsg::clear_value() {
   clear_has_value();
 }
 inline float InputDeviceMsg::value() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.InputDeviceMsg.value)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.InputDeviceMsg.value)
   return value_;
 }
 inline void InputDeviceMsg::set_value(float value) {
   set_has_value();
   value_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.InputDeviceMsg.value)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.InputDeviceMsg.value)
 }
 
 // -------------------------------------------------------------------
 
 // NewPlayerEventMsg
 
-// required .Eaagles.Recorder.Pb.PlayerId id = 1;
+// required .oe.Recorder.Pb.PlayerId id = 1;
 inline bool NewPlayerEventMsg::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -4721,26 +4721,26 @@ inline void NewPlayerEventMsg::clear_has_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void NewPlayerEventMsg::clear_id() {
-  if (id_ != NULL) id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
   clear_has_id();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerId& NewPlayerEventMsg::id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.NewPlayerEventMsg.id)
+inline const ::oe::recorder::pb::PlayerId& NewPlayerEventMsg::id() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.NewPlayerEventMsg.id)
   return id_ != NULL ? *id_ : *default_instance_->id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* NewPlayerEventMsg::mutable_id() {
+inline ::oe::recorder::pb::PlayerId* NewPlayerEventMsg::mutable_id() {
   set_has_id();
-  if (id_ == NULL) id_ = new ::Eaagles::Recorder::Pb::PlayerId;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.NewPlayerEventMsg.id)
+  if (id_ == NULL) id_ = new ::oe::recorder::pb::PlayerId;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.NewPlayerEventMsg.id)
   return id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* NewPlayerEventMsg::release_id() {
+inline ::oe::recorder::pb::PlayerId* NewPlayerEventMsg::release_id() {
   clear_has_id();
-  ::Eaagles::Recorder::Pb::PlayerId* temp = id_;
+  ::oe::recorder::pb::PlayerId* temp = id_;
   id_ = NULL;
   return temp;
 }
-inline void NewPlayerEventMsg::set_allocated_id(::Eaagles::Recorder::Pb::PlayerId* id) {
+inline void NewPlayerEventMsg::set_allocated_id(::oe::recorder::pb::PlayerId* id) {
   delete id_;
   id_ = id;
   if (id) {
@@ -4748,10 +4748,10 @@ inline void NewPlayerEventMsg::set_allocated_id(::Eaagles::Recorder::Pb::PlayerI
   } else {
     clear_has_id();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.NewPlayerEventMsg.id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.NewPlayerEventMsg.id)
 }
 
-// required .Eaagles.Recorder.Pb.PlayerState state = 2;
+// required .oe.Recorder.Pb.PlayerState state = 2;
 inline bool NewPlayerEventMsg::has_state() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -4762,26 +4762,26 @@ inline void NewPlayerEventMsg::clear_has_state() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void NewPlayerEventMsg::clear_state() {
-  if (state_ != NULL) state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+  if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
   clear_has_state();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerState& NewPlayerEventMsg::state() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.NewPlayerEventMsg.state)
+inline const ::oe::recorder::pb::PlayerState& NewPlayerEventMsg::state() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.NewPlayerEventMsg.state)
   return state_ != NULL ? *state_ : *default_instance_->state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* NewPlayerEventMsg::mutable_state() {
+inline ::oe::recorder::pb::PlayerState* NewPlayerEventMsg::mutable_state() {
   set_has_state();
-  if (state_ == NULL) state_ = new ::Eaagles::Recorder::Pb::PlayerState;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.NewPlayerEventMsg.state)
+  if (state_ == NULL) state_ = new ::oe::recorder::pb::PlayerState;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.NewPlayerEventMsg.state)
   return state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* NewPlayerEventMsg::release_state() {
+inline ::oe::recorder::pb::PlayerState* NewPlayerEventMsg::release_state() {
   clear_has_state();
-  ::Eaagles::Recorder::Pb::PlayerState* temp = state_;
+  ::oe::recorder::pb::PlayerState* temp = state_;
   state_ = NULL;
   return temp;
 }
-inline void NewPlayerEventMsg::set_allocated_state(::Eaagles::Recorder::Pb::PlayerState* state) {
+inline void NewPlayerEventMsg::set_allocated_state(::oe::recorder::pb::PlayerState* state) {
   delete state_;
   state_ = state;
   if (state) {
@@ -4789,14 +4789,14 @@ inline void NewPlayerEventMsg::set_allocated_state(::Eaagles::Recorder::Pb::Play
   } else {
     clear_has_state();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.NewPlayerEventMsg.state)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.NewPlayerEventMsg.state)
 }
 
 // -------------------------------------------------------------------
 
 // PlayerRemovedEventMsg
 
-// required .Eaagles.Recorder.Pb.PlayerId id = 1;
+// required .oe.Recorder.Pb.PlayerId id = 1;
 inline bool PlayerRemovedEventMsg::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -4807,26 +4807,26 @@ inline void PlayerRemovedEventMsg::clear_has_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void PlayerRemovedEventMsg::clear_id() {
-  if (id_ != NULL) id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
   clear_has_id();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerId& PlayerRemovedEventMsg::id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerRemovedEventMsg.id)
+inline const ::oe::recorder::pb::PlayerId& PlayerRemovedEventMsg::id() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerRemovedEventMsg.id)
   return id_ != NULL ? *id_ : *default_instance_->id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* PlayerRemovedEventMsg::mutable_id() {
+inline ::oe::recorder::pb::PlayerId* PlayerRemovedEventMsg::mutable_id() {
   set_has_id();
-  if (id_ == NULL) id_ = new ::Eaagles::Recorder::Pb::PlayerId;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.PlayerRemovedEventMsg.id)
+  if (id_ == NULL) id_ = new ::oe::recorder::pb::PlayerId;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.PlayerRemovedEventMsg.id)
   return id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* PlayerRemovedEventMsg::release_id() {
+inline ::oe::recorder::pb::PlayerId* PlayerRemovedEventMsg::release_id() {
   clear_has_id();
-  ::Eaagles::Recorder::Pb::PlayerId* temp = id_;
+  ::oe::recorder::pb::PlayerId* temp = id_;
   id_ = NULL;
   return temp;
 }
-inline void PlayerRemovedEventMsg::set_allocated_id(::Eaagles::Recorder::Pb::PlayerId* id) {
+inline void PlayerRemovedEventMsg::set_allocated_id(::oe::recorder::pb::PlayerId* id) {
   delete id_;
   id_ = id;
   if (id) {
@@ -4834,10 +4834,10 @@ inline void PlayerRemovedEventMsg::set_allocated_id(::Eaagles::Recorder::Pb::Pla
   } else {
     clear_has_id();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.PlayerRemovedEventMsg.id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.PlayerRemovedEventMsg.id)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+// optional .oe.Recorder.Pb.PlayerState state = 2;
 inline bool PlayerRemovedEventMsg::has_state() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -4848,26 +4848,26 @@ inline void PlayerRemovedEventMsg::clear_has_state() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void PlayerRemovedEventMsg::clear_state() {
-  if (state_ != NULL) state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+  if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
   clear_has_state();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerState& PlayerRemovedEventMsg::state() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerRemovedEventMsg.state)
+inline const ::oe::recorder::pb::PlayerState& PlayerRemovedEventMsg::state() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerRemovedEventMsg.state)
   return state_ != NULL ? *state_ : *default_instance_->state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* PlayerRemovedEventMsg::mutable_state() {
+inline ::oe::recorder::pb::PlayerState* PlayerRemovedEventMsg::mutable_state() {
   set_has_state();
-  if (state_ == NULL) state_ = new ::Eaagles::Recorder::Pb::PlayerState;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.PlayerRemovedEventMsg.state)
+  if (state_ == NULL) state_ = new ::oe::recorder::pb::PlayerState;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.PlayerRemovedEventMsg.state)
   return state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* PlayerRemovedEventMsg::release_state() {
+inline ::oe::recorder::pb::PlayerState* PlayerRemovedEventMsg::release_state() {
   clear_has_state();
-  ::Eaagles::Recorder::Pb::PlayerState* temp = state_;
+  ::oe::recorder::pb::PlayerState* temp = state_;
   state_ = NULL;
   return temp;
 }
-inline void PlayerRemovedEventMsg::set_allocated_state(::Eaagles::Recorder::Pb::PlayerState* state) {
+inline void PlayerRemovedEventMsg::set_allocated_state(::oe::recorder::pb::PlayerState* state) {
   delete state_;
   state_ = state;
   if (state) {
@@ -4875,14 +4875,14 @@ inline void PlayerRemovedEventMsg::set_allocated_state(::Eaagles::Recorder::Pb::
   } else {
     clear_has_state();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.PlayerRemovedEventMsg.state)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.PlayerRemovedEventMsg.state)
 }
 
 // -------------------------------------------------------------------
 
 // PlayerDataMsg
 
-// required .Eaagles.Recorder.Pb.PlayerId id = 1;
+// required .oe.Recorder.Pb.PlayerId id = 1;
 inline bool PlayerDataMsg::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -4893,26 +4893,26 @@ inline void PlayerDataMsg::clear_has_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void PlayerDataMsg::clear_id() {
-  if (id_ != NULL) id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
   clear_has_id();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerId& PlayerDataMsg::id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerDataMsg.id)
+inline const ::oe::recorder::pb::PlayerId& PlayerDataMsg::id() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerDataMsg.id)
   return id_ != NULL ? *id_ : *default_instance_->id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* PlayerDataMsg::mutable_id() {
+inline ::oe::recorder::pb::PlayerId* PlayerDataMsg::mutable_id() {
   set_has_id();
-  if (id_ == NULL) id_ = new ::Eaagles::Recorder::Pb::PlayerId;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.PlayerDataMsg.id)
+  if (id_ == NULL) id_ = new ::oe::recorder::pb::PlayerId;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.PlayerDataMsg.id)
   return id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* PlayerDataMsg::release_id() {
+inline ::oe::recorder::pb::PlayerId* PlayerDataMsg::release_id() {
   clear_has_id();
-  ::Eaagles::Recorder::Pb::PlayerId* temp = id_;
+  ::oe::recorder::pb::PlayerId* temp = id_;
   id_ = NULL;
   return temp;
 }
-inline void PlayerDataMsg::set_allocated_id(::Eaagles::Recorder::Pb::PlayerId* id) {
+inline void PlayerDataMsg::set_allocated_id(::oe::recorder::pb::PlayerId* id) {
   delete id_;
   id_ = id;
   if (id) {
@@ -4920,10 +4920,10 @@ inline void PlayerDataMsg::set_allocated_id(::Eaagles::Recorder::Pb::PlayerId* i
   } else {
     clear_has_id();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.PlayerDataMsg.id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.PlayerDataMsg.id)
 }
 
-// required .Eaagles.Recorder.Pb.PlayerState state = 2;
+// required .oe.Recorder.Pb.PlayerState state = 2;
 inline bool PlayerDataMsg::has_state() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -4934,26 +4934,26 @@ inline void PlayerDataMsg::clear_has_state() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void PlayerDataMsg::clear_state() {
-  if (state_ != NULL) state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+  if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
   clear_has_state();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerState& PlayerDataMsg::state() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerDataMsg.state)
+inline const ::oe::recorder::pb::PlayerState& PlayerDataMsg::state() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerDataMsg.state)
   return state_ != NULL ? *state_ : *default_instance_->state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* PlayerDataMsg::mutable_state() {
+inline ::oe::recorder::pb::PlayerState* PlayerDataMsg::mutable_state() {
   set_has_state();
-  if (state_ == NULL) state_ = new ::Eaagles::Recorder::Pb::PlayerState;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.PlayerDataMsg.state)
+  if (state_ == NULL) state_ = new ::oe::recorder::pb::PlayerState;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.PlayerDataMsg.state)
   return state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* PlayerDataMsg::release_state() {
+inline ::oe::recorder::pb::PlayerState* PlayerDataMsg::release_state() {
   clear_has_state();
-  ::Eaagles::Recorder::Pb::PlayerState* temp = state_;
+  ::oe::recorder::pb::PlayerState* temp = state_;
   state_ = NULL;
   return temp;
 }
-inline void PlayerDataMsg::set_allocated_state(::Eaagles::Recorder::Pb::PlayerState* state) {
+inline void PlayerDataMsg::set_allocated_state(::oe::recorder::pb::PlayerState* state) {
   delete state_;
   state_ = state;
   if (state) {
@@ -4961,7 +4961,7 @@ inline void PlayerDataMsg::set_allocated_state(::Eaagles::Recorder::Pb::PlayerSt
   } else {
     clear_has_state();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.PlayerDataMsg.state)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.PlayerDataMsg.state)
 }
 
 // optional double alpha = 3;
@@ -4979,13 +4979,13 @@ inline void PlayerDataMsg::clear_alpha() {
   clear_has_alpha();
 }
 inline double PlayerDataMsg::alpha() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerDataMsg.alpha)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerDataMsg.alpha)
   return alpha_;
 }
 inline void PlayerDataMsg::set_alpha(double value) {
   set_has_alpha();
   alpha_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.PlayerDataMsg.alpha)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.PlayerDataMsg.alpha)
 }
 
 // optional double beta = 4;
@@ -5003,13 +5003,13 @@ inline void PlayerDataMsg::clear_beta() {
   clear_has_beta();
 }
 inline double PlayerDataMsg::beta() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerDataMsg.beta)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerDataMsg.beta)
   return beta_;
 }
 inline void PlayerDataMsg::set_beta(double value) {
   set_has_beta();
   beta_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.PlayerDataMsg.beta)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.PlayerDataMsg.beta)
 }
 
 // optional double cas = 5;
@@ -5027,20 +5027,20 @@ inline void PlayerDataMsg::clear_cas() {
   clear_has_cas();
 }
 inline double PlayerDataMsg::cas() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerDataMsg.cas)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerDataMsg.cas)
   return cas_;
 }
 inline void PlayerDataMsg::set_cas(double value) {
   set_has_cas();
   cas_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.PlayerDataMsg.cas)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.PlayerDataMsg.cas)
 }
 
 // -------------------------------------------------------------------
 
 // PlayerDamagedEventMsg
 
-// required .Eaagles.Recorder.Pb.PlayerId id = 1;
+// required .oe.Recorder.Pb.PlayerId id = 1;
 inline bool PlayerDamagedEventMsg::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -5051,26 +5051,26 @@ inline void PlayerDamagedEventMsg::clear_has_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void PlayerDamagedEventMsg::clear_id() {
-  if (id_ != NULL) id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
   clear_has_id();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerId& PlayerDamagedEventMsg::id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerDamagedEventMsg.id)
+inline const ::oe::recorder::pb::PlayerId& PlayerDamagedEventMsg::id() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerDamagedEventMsg.id)
   return id_ != NULL ? *id_ : *default_instance_->id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* PlayerDamagedEventMsg::mutable_id() {
+inline ::oe::recorder::pb::PlayerId* PlayerDamagedEventMsg::mutable_id() {
   set_has_id();
-  if (id_ == NULL) id_ = new ::Eaagles::Recorder::Pb::PlayerId;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.PlayerDamagedEventMsg.id)
+  if (id_ == NULL) id_ = new ::oe::recorder::pb::PlayerId;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.PlayerDamagedEventMsg.id)
   return id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* PlayerDamagedEventMsg::release_id() {
+inline ::oe::recorder::pb::PlayerId* PlayerDamagedEventMsg::release_id() {
   clear_has_id();
-  ::Eaagles::Recorder::Pb::PlayerId* temp = id_;
+  ::oe::recorder::pb::PlayerId* temp = id_;
   id_ = NULL;
   return temp;
 }
-inline void PlayerDamagedEventMsg::set_allocated_id(::Eaagles::Recorder::Pb::PlayerId* id) {
+inline void PlayerDamagedEventMsg::set_allocated_id(::oe::recorder::pb::PlayerId* id) {
   delete id_;
   id_ = id;
   if (id) {
@@ -5078,10 +5078,10 @@ inline void PlayerDamagedEventMsg::set_allocated_id(::Eaagles::Recorder::Pb::Pla
   } else {
     clear_has_id();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.PlayerDamagedEventMsg.id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.PlayerDamagedEventMsg.id)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+// optional .oe.Recorder.Pb.PlayerState state = 2;
 inline bool PlayerDamagedEventMsg::has_state() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -5092,26 +5092,26 @@ inline void PlayerDamagedEventMsg::clear_has_state() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void PlayerDamagedEventMsg::clear_state() {
-  if (state_ != NULL) state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+  if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
   clear_has_state();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerState& PlayerDamagedEventMsg::state() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerDamagedEventMsg.state)
+inline const ::oe::recorder::pb::PlayerState& PlayerDamagedEventMsg::state() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerDamagedEventMsg.state)
   return state_ != NULL ? *state_ : *default_instance_->state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* PlayerDamagedEventMsg::mutable_state() {
+inline ::oe::recorder::pb::PlayerState* PlayerDamagedEventMsg::mutable_state() {
   set_has_state();
-  if (state_ == NULL) state_ = new ::Eaagles::Recorder::Pb::PlayerState;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.PlayerDamagedEventMsg.state)
+  if (state_ == NULL) state_ = new ::oe::recorder::pb::PlayerState;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.PlayerDamagedEventMsg.state)
   return state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* PlayerDamagedEventMsg::release_state() {
+inline ::oe::recorder::pb::PlayerState* PlayerDamagedEventMsg::release_state() {
   clear_has_state();
-  ::Eaagles::Recorder::Pb::PlayerState* temp = state_;
+  ::oe::recorder::pb::PlayerState* temp = state_;
   state_ = NULL;
   return temp;
 }
-inline void PlayerDamagedEventMsg::set_allocated_state(::Eaagles::Recorder::Pb::PlayerState* state) {
+inline void PlayerDamagedEventMsg::set_allocated_state(::oe::recorder::pb::PlayerState* state) {
   delete state_;
   state_ = state;
   if (state) {
@@ -5119,14 +5119,14 @@ inline void PlayerDamagedEventMsg::set_allocated_state(::Eaagles::Recorder::Pb::
   } else {
     clear_has_state();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.PlayerDamagedEventMsg.state)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.PlayerDamagedEventMsg.state)
 }
 
 // -------------------------------------------------------------------
 
 // PlayerCollisionEventMsg
 
-// required .Eaagles.Recorder.Pb.PlayerId id = 1;
+// required .oe.Recorder.Pb.PlayerId id = 1;
 inline bool PlayerCollisionEventMsg::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -5137,26 +5137,26 @@ inline void PlayerCollisionEventMsg::clear_has_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void PlayerCollisionEventMsg::clear_id() {
-  if (id_ != NULL) id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
   clear_has_id();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerId& PlayerCollisionEventMsg::id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerCollisionEventMsg.id)
+inline const ::oe::recorder::pb::PlayerId& PlayerCollisionEventMsg::id() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerCollisionEventMsg.id)
   return id_ != NULL ? *id_ : *default_instance_->id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* PlayerCollisionEventMsg::mutable_id() {
+inline ::oe::recorder::pb::PlayerId* PlayerCollisionEventMsg::mutable_id() {
   set_has_id();
-  if (id_ == NULL) id_ = new ::Eaagles::Recorder::Pb::PlayerId;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.PlayerCollisionEventMsg.id)
+  if (id_ == NULL) id_ = new ::oe::recorder::pb::PlayerId;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.PlayerCollisionEventMsg.id)
   return id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* PlayerCollisionEventMsg::release_id() {
+inline ::oe::recorder::pb::PlayerId* PlayerCollisionEventMsg::release_id() {
   clear_has_id();
-  ::Eaagles::Recorder::Pb::PlayerId* temp = id_;
+  ::oe::recorder::pb::PlayerId* temp = id_;
   id_ = NULL;
   return temp;
 }
-inline void PlayerCollisionEventMsg::set_allocated_id(::Eaagles::Recorder::Pb::PlayerId* id) {
+inline void PlayerCollisionEventMsg::set_allocated_id(::oe::recorder::pb::PlayerId* id) {
   delete id_;
   id_ = id;
   if (id) {
@@ -5164,10 +5164,10 @@ inline void PlayerCollisionEventMsg::set_allocated_id(::Eaagles::Recorder::Pb::P
   } else {
     clear_has_id();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.PlayerCollisionEventMsg.id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.PlayerCollisionEventMsg.id)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+// optional .oe.Recorder.Pb.PlayerState state = 2;
 inline bool PlayerCollisionEventMsg::has_state() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -5178,26 +5178,26 @@ inline void PlayerCollisionEventMsg::clear_has_state() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void PlayerCollisionEventMsg::clear_state() {
-  if (state_ != NULL) state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+  if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
   clear_has_state();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerState& PlayerCollisionEventMsg::state() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerCollisionEventMsg.state)
+inline const ::oe::recorder::pb::PlayerState& PlayerCollisionEventMsg::state() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerCollisionEventMsg.state)
   return state_ != NULL ? *state_ : *default_instance_->state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* PlayerCollisionEventMsg::mutable_state() {
+inline ::oe::recorder::pb::PlayerState* PlayerCollisionEventMsg::mutable_state() {
   set_has_state();
-  if (state_ == NULL) state_ = new ::Eaagles::Recorder::Pb::PlayerState;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.PlayerCollisionEventMsg.state)
+  if (state_ == NULL) state_ = new ::oe::recorder::pb::PlayerState;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.PlayerCollisionEventMsg.state)
   return state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* PlayerCollisionEventMsg::release_state() {
+inline ::oe::recorder::pb::PlayerState* PlayerCollisionEventMsg::release_state() {
   clear_has_state();
-  ::Eaagles::Recorder::Pb::PlayerState* temp = state_;
+  ::oe::recorder::pb::PlayerState* temp = state_;
   state_ = NULL;
   return temp;
 }
-inline void PlayerCollisionEventMsg::set_allocated_state(::Eaagles::Recorder::Pb::PlayerState* state) {
+inline void PlayerCollisionEventMsg::set_allocated_state(::oe::recorder::pb::PlayerState* state) {
   delete state_;
   state_ = state;
   if (state) {
@@ -5205,10 +5205,10 @@ inline void PlayerCollisionEventMsg::set_allocated_state(::Eaagles::Recorder::Pb
   } else {
     clear_has_state();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.PlayerCollisionEventMsg.state)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.PlayerCollisionEventMsg.state)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerId other_player_id = 3;
+// optional .oe.Recorder.Pb.PlayerId other_player_id = 3;
 inline bool PlayerCollisionEventMsg::has_other_player_id() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -5219,26 +5219,26 @@ inline void PlayerCollisionEventMsg::clear_has_other_player_id() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void PlayerCollisionEventMsg::clear_other_player_id() {
-  if (other_player_id_ != NULL) other_player_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  if (other_player_id_ != NULL) other_player_id_->::oe::recorder::pb::PlayerId::Clear();
   clear_has_other_player_id();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerId& PlayerCollisionEventMsg::other_player_id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerCollisionEventMsg.other_player_id)
+inline const ::oe::recorder::pb::PlayerId& PlayerCollisionEventMsg::other_player_id() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerCollisionEventMsg.other_player_id)
   return other_player_id_ != NULL ? *other_player_id_ : *default_instance_->other_player_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* PlayerCollisionEventMsg::mutable_other_player_id() {
+inline ::oe::recorder::pb::PlayerId* PlayerCollisionEventMsg::mutable_other_player_id() {
   set_has_other_player_id();
-  if (other_player_id_ == NULL) other_player_id_ = new ::Eaagles::Recorder::Pb::PlayerId;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.PlayerCollisionEventMsg.other_player_id)
+  if (other_player_id_ == NULL) other_player_id_ = new ::oe::recorder::pb::PlayerId;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.PlayerCollisionEventMsg.other_player_id)
   return other_player_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* PlayerCollisionEventMsg::release_other_player_id() {
+inline ::oe::recorder::pb::PlayerId* PlayerCollisionEventMsg::release_other_player_id() {
   clear_has_other_player_id();
-  ::Eaagles::Recorder::Pb::PlayerId* temp = other_player_id_;
+  ::oe::recorder::pb::PlayerId* temp = other_player_id_;
   other_player_id_ = NULL;
   return temp;
 }
-inline void PlayerCollisionEventMsg::set_allocated_other_player_id(::Eaagles::Recorder::Pb::PlayerId* other_player_id) {
+inline void PlayerCollisionEventMsg::set_allocated_other_player_id(::oe::recorder::pb::PlayerId* other_player_id) {
   delete other_player_id_;
   other_player_id_ = other_player_id;
   if (other_player_id) {
@@ -5246,14 +5246,14 @@ inline void PlayerCollisionEventMsg::set_allocated_other_player_id(::Eaagles::Re
   } else {
     clear_has_other_player_id();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.PlayerCollisionEventMsg.other_player_id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.PlayerCollisionEventMsg.other_player_id)
 }
 
 // -------------------------------------------------------------------
 
 // PlayerCrashEventMsg
 
-// required .Eaagles.Recorder.Pb.PlayerId id = 1;
+// required .oe.Recorder.Pb.PlayerId id = 1;
 inline bool PlayerCrashEventMsg::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -5264,26 +5264,26 @@ inline void PlayerCrashEventMsg::clear_has_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void PlayerCrashEventMsg::clear_id() {
-  if (id_ != NULL) id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
   clear_has_id();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerId& PlayerCrashEventMsg::id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerCrashEventMsg.id)
+inline const ::oe::recorder::pb::PlayerId& PlayerCrashEventMsg::id() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerCrashEventMsg.id)
   return id_ != NULL ? *id_ : *default_instance_->id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* PlayerCrashEventMsg::mutable_id() {
+inline ::oe::recorder::pb::PlayerId* PlayerCrashEventMsg::mutable_id() {
   set_has_id();
-  if (id_ == NULL) id_ = new ::Eaagles::Recorder::Pb::PlayerId;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.PlayerCrashEventMsg.id)
+  if (id_ == NULL) id_ = new ::oe::recorder::pb::PlayerId;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.PlayerCrashEventMsg.id)
   return id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* PlayerCrashEventMsg::release_id() {
+inline ::oe::recorder::pb::PlayerId* PlayerCrashEventMsg::release_id() {
   clear_has_id();
-  ::Eaagles::Recorder::Pb::PlayerId* temp = id_;
+  ::oe::recorder::pb::PlayerId* temp = id_;
   id_ = NULL;
   return temp;
 }
-inline void PlayerCrashEventMsg::set_allocated_id(::Eaagles::Recorder::Pb::PlayerId* id) {
+inline void PlayerCrashEventMsg::set_allocated_id(::oe::recorder::pb::PlayerId* id) {
   delete id_;
   id_ = id;
   if (id) {
@@ -5291,10 +5291,10 @@ inline void PlayerCrashEventMsg::set_allocated_id(::Eaagles::Recorder::Pb::Playe
   } else {
     clear_has_id();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.PlayerCrashEventMsg.id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.PlayerCrashEventMsg.id)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+// optional .oe.Recorder.Pb.PlayerState state = 2;
 inline bool PlayerCrashEventMsg::has_state() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -5305,26 +5305,26 @@ inline void PlayerCrashEventMsg::clear_has_state() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void PlayerCrashEventMsg::clear_state() {
-  if (state_ != NULL) state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+  if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
   clear_has_state();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerState& PlayerCrashEventMsg::state() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerCrashEventMsg.state)
+inline const ::oe::recorder::pb::PlayerState& PlayerCrashEventMsg::state() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerCrashEventMsg.state)
   return state_ != NULL ? *state_ : *default_instance_->state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* PlayerCrashEventMsg::mutable_state() {
+inline ::oe::recorder::pb::PlayerState* PlayerCrashEventMsg::mutable_state() {
   set_has_state();
-  if (state_ == NULL) state_ = new ::Eaagles::Recorder::Pb::PlayerState;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.PlayerCrashEventMsg.state)
+  if (state_ == NULL) state_ = new ::oe::recorder::pb::PlayerState;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.PlayerCrashEventMsg.state)
   return state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* PlayerCrashEventMsg::release_state() {
+inline ::oe::recorder::pb::PlayerState* PlayerCrashEventMsg::release_state() {
   clear_has_state();
-  ::Eaagles::Recorder::Pb::PlayerState* temp = state_;
+  ::oe::recorder::pb::PlayerState* temp = state_;
   state_ = NULL;
   return temp;
 }
-inline void PlayerCrashEventMsg::set_allocated_state(::Eaagles::Recorder::Pb::PlayerState* state) {
+inline void PlayerCrashEventMsg::set_allocated_state(::oe::recorder::pb::PlayerState* state) {
   delete state_;
   state_ = state;
   if (state) {
@@ -5332,14 +5332,14 @@ inline void PlayerCrashEventMsg::set_allocated_state(::Eaagles::Recorder::Pb::Pl
   } else {
     clear_has_state();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.PlayerCrashEventMsg.state)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.PlayerCrashEventMsg.state)
 }
 
 // -------------------------------------------------------------------
 
 // PlayerKilledEventMsg
 
-// required .Eaagles.Recorder.Pb.PlayerId id = 1;
+// required .oe.Recorder.Pb.PlayerId id = 1;
 inline bool PlayerKilledEventMsg::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -5350,26 +5350,26 @@ inline void PlayerKilledEventMsg::clear_has_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void PlayerKilledEventMsg::clear_id() {
-  if (id_ != NULL) id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
   clear_has_id();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerId& PlayerKilledEventMsg::id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerKilledEventMsg.id)
+inline const ::oe::recorder::pb::PlayerId& PlayerKilledEventMsg::id() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerKilledEventMsg.id)
   return id_ != NULL ? *id_ : *default_instance_->id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* PlayerKilledEventMsg::mutable_id() {
+inline ::oe::recorder::pb::PlayerId* PlayerKilledEventMsg::mutable_id() {
   set_has_id();
-  if (id_ == NULL) id_ = new ::Eaagles::Recorder::Pb::PlayerId;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.PlayerKilledEventMsg.id)
+  if (id_ == NULL) id_ = new ::oe::recorder::pb::PlayerId;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.PlayerKilledEventMsg.id)
   return id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* PlayerKilledEventMsg::release_id() {
+inline ::oe::recorder::pb::PlayerId* PlayerKilledEventMsg::release_id() {
   clear_has_id();
-  ::Eaagles::Recorder::Pb::PlayerId* temp = id_;
+  ::oe::recorder::pb::PlayerId* temp = id_;
   id_ = NULL;
   return temp;
 }
-inline void PlayerKilledEventMsg::set_allocated_id(::Eaagles::Recorder::Pb::PlayerId* id) {
+inline void PlayerKilledEventMsg::set_allocated_id(::oe::recorder::pb::PlayerId* id) {
   delete id_;
   id_ = id;
   if (id) {
@@ -5377,10 +5377,10 @@ inline void PlayerKilledEventMsg::set_allocated_id(::Eaagles::Recorder::Pb::Play
   } else {
     clear_has_id();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.PlayerKilledEventMsg.id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.PlayerKilledEventMsg.id)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+// optional .oe.Recorder.Pb.PlayerState state = 2;
 inline bool PlayerKilledEventMsg::has_state() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -5391,26 +5391,26 @@ inline void PlayerKilledEventMsg::clear_has_state() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void PlayerKilledEventMsg::clear_state() {
-  if (state_ != NULL) state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+  if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
   clear_has_state();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerState& PlayerKilledEventMsg::state() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerKilledEventMsg.state)
+inline const ::oe::recorder::pb::PlayerState& PlayerKilledEventMsg::state() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerKilledEventMsg.state)
   return state_ != NULL ? *state_ : *default_instance_->state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* PlayerKilledEventMsg::mutable_state() {
+inline ::oe::recorder::pb::PlayerState* PlayerKilledEventMsg::mutable_state() {
   set_has_state();
-  if (state_ == NULL) state_ = new ::Eaagles::Recorder::Pb::PlayerState;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.PlayerKilledEventMsg.state)
+  if (state_ == NULL) state_ = new ::oe::recorder::pb::PlayerState;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.PlayerKilledEventMsg.state)
   return state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* PlayerKilledEventMsg::release_state() {
+inline ::oe::recorder::pb::PlayerState* PlayerKilledEventMsg::release_state() {
   clear_has_state();
-  ::Eaagles::Recorder::Pb::PlayerState* temp = state_;
+  ::oe::recorder::pb::PlayerState* temp = state_;
   state_ = NULL;
   return temp;
 }
-inline void PlayerKilledEventMsg::set_allocated_state(::Eaagles::Recorder::Pb::PlayerState* state) {
+inline void PlayerKilledEventMsg::set_allocated_state(::oe::recorder::pb::PlayerState* state) {
   delete state_;
   state_ = state;
   if (state) {
@@ -5418,10 +5418,10 @@ inline void PlayerKilledEventMsg::set_allocated_state(::Eaagles::Recorder::Pb::P
   } else {
     clear_has_state();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.PlayerKilledEventMsg.state)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.PlayerKilledEventMsg.state)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerId shooter_id = 3;
+// optional .oe.Recorder.Pb.PlayerId shooter_id = 3;
 inline bool PlayerKilledEventMsg::has_shooter_id() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -5432,26 +5432,26 @@ inline void PlayerKilledEventMsg::clear_has_shooter_id() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void PlayerKilledEventMsg::clear_shooter_id() {
-  if (shooter_id_ != NULL) shooter_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  if (shooter_id_ != NULL) shooter_id_->::oe::recorder::pb::PlayerId::Clear();
   clear_has_shooter_id();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerId& PlayerKilledEventMsg::shooter_id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerKilledEventMsg.shooter_id)
+inline const ::oe::recorder::pb::PlayerId& PlayerKilledEventMsg::shooter_id() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerKilledEventMsg.shooter_id)
   return shooter_id_ != NULL ? *shooter_id_ : *default_instance_->shooter_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* PlayerKilledEventMsg::mutable_shooter_id() {
+inline ::oe::recorder::pb::PlayerId* PlayerKilledEventMsg::mutable_shooter_id() {
   set_has_shooter_id();
-  if (shooter_id_ == NULL) shooter_id_ = new ::Eaagles::Recorder::Pb::PlayerId;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.PlayerKilledEventMsg.shooter_id)
+  if (shooter_id_ == NULL) shooter_id_ = new ::oe::recorder::pb::PlayerId;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.PlayerKilledEventMsg.shooter_id)
   return shooter_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* PlayerKilledEventMsg::release_shooter_id() {
+inline ::oe::recorder::pb::PlayerId* PlayerKilledEventMsg::release_shooter_id() {
   clear_has_shooter_id();
-  ::Eaagles::Recorder::Pb::PlayerId* temp = shooter_id_;
+  ::oe::recorder::pb::PlayerId* temp = shooter_id_;
   shooter_id_ = NULL;
   return temp;
 }
-inline void PlayerKilledEventMsg::set_allocated_shooter_id(::Eaagles::Recorder::Pb::PlayerId* shooter_id) {
+inline void PlayerKilledEventMsg::set_allocated_shooter_id(::oe::recorder::pb::PlayerId* shooter_id) {
   delete shooter_id_;
   shooter_id_ = shooter_id;
   if (shooter_id) {
@@ -5459,14 +5459,14 @@ inline void PlayerKilledEventMsg::set_allocated_shooter_id(::Eaagles::Recorder::
   } else {
     clear_has_shooter_id();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.PlayerKilledEventMsg.shooter_id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.PlayerKilledEventMsg.shooter_id)
 }
 
 // -------------------------------------------------------------------
 
 // WeaponReleaseEventMsg
 
-// required .Eaagles.Recorder.Pb.PlayerId wpn_id = 1;
+// required .oe.Recorder.Pb.PlayerId wpn_id = 1;
 inline bool WeaponReleaseEventMsg::has_wpn_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -5477,26 +5477,26 @@ inline void WeaponReleaseEventMsg::clear_has_wpn_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void WeaponReleaseEventMsg::clear_wpn_id() {
-  if (wpn_id_ != NULL) wpn_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  if (wpn_id_ != NULL) wpn_id_->::oe::recorder::pb::PlayerId::Clear();
   clear_has_wpn_id();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerId& WeaponReleaseEventMsg::wpn_id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.WeaponReleaseEventMsg.wpn_id)
+inline const ::oe::recorder::pb::PlayerId& WeaponReleaseEventMsg::wpn_id() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.WeaponReleaseEventMsg.wpn_id)
   return wpn_id_ != NULL ? *wpn_id_ : *default_instance_->wpn_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* WeaponReleaseEventMsg::mutable_wpn_id() {
+inline ::oe::recorder::pb::PlayerId* WeaponReleaseEventMsg::mutable_wpn_id() {
   set_has_wpn_id();
-  if (wpn_id_ == NULL) wpn_id_ = new ::Eaagles::Recorder::Pb::PlayerId;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.WeaponReleaseEventMsg.wpn_id)
+  if (wpn_id_ == NULL) wpn_id_ = new ::oe::recorder::pb::PlayerId;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.WeaponReleaseEventMsg.wpn_id)
   return wpn_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* WeaponReleaseEventMsg::release_wpn_id() {
+inline ::oe::recorder::pb::PlayerId* WeaponReleaseEventMsg::release_wpn_id() {
   clear_has_wpn_id();
-  ::Eaagles::Recorder::Pb::PlayerId* temp = wpn_id_;
+  ::oe::recorder::pb::PlayerId* temp = wpn_id_;
   wpn_id_ = NULL;
   return temp;
 }
-inline void WeaponReleaseEventMsg::set_allocated_wpn_id(::Eaagles::Recorder::Pb::PlayerId* wpn_id) {
+inline void WeaponReleaseEventMsg::set_allocated_wpn_id(::oe::recorder::pb::PlayerId* wpn_id) {
   delete wpn_id_;
   wpn_id_ = wpn_id;
   if (wpn_id) {
@@ -5504,10 +5504,10 @@ inline void WeaponReleaseEventMsg::set_allocated_wpn_id(::Eaagles::Recorder::Pb:
   } else {
     clear_has_wpn_id();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.WeaponReleaseEventMsg.wpn_id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.WeaponReleaseEventMsg.wpn_id)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerState wpn_state = 2;
+// optional .oe.Recorder.Pb.PlayerState wpn_state = 2;
 inline bool WeaponReleaseEventMsg::has_wpn_state() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -5518,26 +5518,26 @@ inline void WeaponReleaseEventMsg::clear_has_wpn_state() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void WeaponReleaseEventMsg::clear_wpn_state() {
-  if (wpn_state_ != NULL) wpn_state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+  if (wpn_state_ != NULL) wpn_state_->::oe::recorder::pb::PlayerState::Clear();
   clear_has_wpn_state();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerState& WeaponReleaseEventMsg::wpn_state() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.WeaponReleaseEventMsg.wpn_state)
+inline const ::oe::recorder::pb::PlayerState& WeaponReleaseEventMsg::wpn_state() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.WeaponReleaseEventMsg.wpn_state)
   return wpn_state_ != NULL ? *wpn_state_ : *default_instance_->wpn_state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* WeaponReleaseEventMsg::mutable_wpn_state() {
+inline ::oe::recorder::pb::PlayerState* WeaponReleaseEventMsg::mutable_wpn_state() {
   set_has_wpn_state();
-  if (wpn_state_ == NULL) wpn_state_ = new ::Eaagles::Recorder::Pb::PlayerState;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.WeaponReleaseEventMsg.wpn_state)
+  if (wpn_state_ == NULL) wpn_state_ = new ::oe::recorder::pb::PlayerState;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.WeaponReleaseEventMsg.wpn_state)
   return wpn_state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* WeaponReleaseEventMsg::release_wpn_state() {
+inline ::oe::recorder::pb::PlayerState* WeaponReleaseEventMsg::release_wpn_state() {
   clear_has_wpn_state();
-  ::Eaagles::Recorder::Pb::PlayerState* temp = wpn_state_;
+  ::oe::recorder::pb::PlayerState* temp = wpn_state_;
   wpn_state_ = NULL;
   return temp;
 }
-inline void WeaponReleaseEventMsg::set_allocated_wpn_state(::Eaagles::Recorder::Pb::PlayerState* wpn_state) {
+inline void WeaponReleaseEventMsg::set_allocated_wpn_state(::oe::recorder::pb::PlayerState* wpn_state) {
   delete wpn_state_;
   wpn_state_ = wpn_state;
   if (wpn_state) {
@@ -5545,10 +5545,10 @@ inline void WeaponReleaseEventMsg::set_allocated_wpn_state(::Eaagles::Recorder::
   } else {
     clear_has_wpn_state();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.WeaponReleaseEventMsg.wpn_state)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.WeaponReleaseEventMsg.wpn_state)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerId shooter_id = 3;
+// optional .oe.Recorder.Pb.PlayerId shooter_id = 3;
 inline bool WeaponReleaseEventMsg::has_shooter_id() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -5559,26 +5559,26 @@ inline void WeaponReleaseEventMsg::clear_has_shooter_id() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void WeaponReleaseEventMsg::clear_shooter_id() {
-  if (shooter_id_ != NULL) shooter_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  if (shooter_id_ != NULL) shooter_id_->::oe::recorder::pb::PlayerId::Clear();
   clear_has_shooter_id();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerId& WeaponReleaseEventMsg::shooter_id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.WeaponReleaseEventMsg.shooter_id)
+inline const ::oe::recorder::pb::PlayerId& WeaponReleaseEventMsg::shooter_id() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.WeaponReleaseEventMsg.shooter_id)
   return shooter_id_ != NULL ? *shooter_id_ : *default_instance_->shooter_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* WeaponReleaseEventMsg::mutable_shooter_id() {
+inline ::oe::recorder::pb::PlayerId* WeaponReleaseEventMsg::mutable_shooter_id() {
   set_has_shooter_id();
-  if (shooter_id_ == NULL) shooter_id_ = new ::Eaagles::Recorder::Pb::PlayerId;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.WeaponReleaseEventMsg.shooter_id)
+  if (shooter_id_ == NULL) shooter_id_ = new ::oe::recorder::pb::PlayerId;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.WeaponReleaseEventMsg.shooter_id)
   return shooter_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* WeaponReleaseEventMsg::release_shooter_id() {
+inline ::oe::recorder::pb::PlayerId* WeaponReleaseEventMsg::release_shooter_id() {
   clear_has_shooter_id();
-  ::Eaagles::Recorder::Pb::PlayerId* temp = shooter_id_;
+  ::oe::recorder::pb::PlayerId* temp = shooter_id_;
   shooter_id_ = NULL;
   return temp;
 }
-inline void WeaponReleaseEventMsg::set_allocated_shooter_id(::Eaagles::Recorder::Pb::PlayerId* shooter_id) {
+inline void WeaponReleaseEventMsg::set_allocated_shooter_id(::oe::recorder::pb::PlayerId* shooter_id) {
   delete shooter_id_;
   shooter_id_ = shooter_id;
   if (shooter_id) {
@@ -5586,10 +5586,10 @@ inline void WeaponReleaseEventMsg::set_allocated_shooter_id(::Eaagles::Recorder:
   } else {
     clear_has_shooter_id();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.WeaponReleaseEventMsg.shooter_id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.WeaponReleaseEventMsg.shooter_id)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerId tgt_id = 4;
+// optional .oe.Recorder.Pb.PlayerId tgt_id = 4;
 inline bool WeaponReleaseEventMsg::has_tgt_id() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
@@ -5600,26 +5600,26 @@ inline void WeaponReleaseEventMsg::clear_has_tgt_id() {
   _has_bits_[0] &= ~0x00000008u;
 }
 inline void WeaponReleaseEventMsg::clear_tgt_id() {
-  if (tgt_id_ != NULL) tgt_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  if (tgt_id_ != NULL) tgt_id_->::oe::recorder::pb::PlayerId::Clear();
   clear_has_tgt_id();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerId& WeaponReleaseEventMsg::tgt_id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.WeaponReleaseEventMsg.tgt_id)
+inline const ::oe::recorder::pb::PlayerId& WeaponReleaseEventMsg::tgt_id() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.WeaponReleaseEventMsg.tgt_id)
   return tgt_id_ != NULL ? *tgt_id_ : *default_instance_->tgt_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* WeaponReleaseEventMsg::mutable_tgt_id() {
+inline ::oe::recorder::pb::PlayerId* WeaponReleaseEventMsg::mutable_tgt_id() {
   set_has_tgt_id();
-  if (tgt_id_ == NULL) tgt_id_ = new ::Eaagles::Recorder::Pb::PlayerId;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.WeaponReleaseEventMsg.tgt_id)
+  if (tgt_id_ == NULL) tgt_id_ = new ::oe::recorder::pb::PlayerId;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.WeaponReleaseEventMsg.tgt_id)
   return tgt_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* WeaponReleaseEventMsg::release_tgt_id() {
+inline ::oe::recorder::pb::PlayerId* WeaponReleaseEventMsg::release_tgt_id() {
   clear_has_tgt_id();
-  ::Eaagles::Recorder::Pb::PlayerId* temp = tgt_id_;
+  ::oe::recorder::pb::PlayerId* temp = tgt_id_;
   tgt_id_ = NULL;
   return temp;
 }
-inline void WeaponReleaseEventMsg::set_allocated_tgt_id(::Eaagles::Recorder::Pb::PlayerId* tgt_id) {
+inline void WeaponReleaseEventMsg::set_allocated_tgt_id(::oe::recorder::pb::PlayerId* tgt_id) {
   delete tgt_id_;
   tgt_id_ = tgt_id;
   if (tgt_id) {
@@ -5627,14 +5627,14 @@ inline void WeaponReleaseEventMsg::set_allocated_tgt_id(::Eaagles::Recorder::Pb:
   } else {
     clear_has_tgt_id();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.WeaponReleaseEventMsg.tgt_id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.WeaponReleaseEventMsg.tgt_id)
 }
 
 // -------------------------------------------------------------------
 
 // WeaponHungEventMsg
 
-// required .Eaagles.Recorder.Pb.PlayerId wpn_id = 1;
+// required .oe.Recorder.Pb.PlayerId wpn_id = 1;
 inline bool WeaponHungEventMsg::has_wpn_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -5645,26 +5645,26 @@ inline void WeaponHungEventMsg::clear_has_wpn_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void WeaponHungEventMsg::clear_wpn_id() {
-  if (wpn_id_ != NULL) wpn_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  if (wpn_id_ != NULL) wpn_id_->::oe::recorder::pb::PlayerId::Clear();
   clear_has_wpn_id();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerId& WeaponHungEventMsg::wpn_id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.WeaponHungEventMsg.wpn_id)
+inline const ::oe::recorder::pb::PlayerId& WeaponHungEventMsg::wpn_id() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.WeaponHungEventMsg.wpn_id)
   return wpn_id_ != NULL ? *wpn_id_ : *default_instance_->wpn_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* WeaponHungEventMsg::mutable_wpn_id() {
+inline ::oe::recorder::pb::PlayerId* WeaponHungEventMsg::mutable_wpn_id() {
   set_has_wpn_id();
-  if (wpn_id_ == NULL) wpn_id_ = new ::Eaagles::Recorder::Pb::PlayerId;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.WeaponHungEventMsg.wpn_id)
+  if (wpn_id_ == NULL) wpn_id_ = new ::oe::recorder::pb::PlayerId;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.WeaponHungEventMsg.wpn_id)
   return wpn_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* WeaponHungEventMsg::release_wpn_id() {
+inline ::oe::recorder::pb::PlayerId* WeaponHungEventMsg::release_wpn_id() {
   clear_has_wpn_id();
-  ::Eaagles::Recorder::Pb::PlayerId* temp = wpn_id_;
+  ::oe::recorder::pb::PlayerId* temp = wpn_id_;
   wpn_id_ = NULL;
   return temp;
 }
-inline void WeaponHungEventMsg::set_allocated_wpn_id(::Eaagles::Recorder::Pb::PlayerId* wpn_id) {
+inline void WeaponHungEventMsg::set_allocated_wpn_id(::oe::recorder::pb::PlayerId* wpn_id) {
   delete wpn_id_;
   wpn_id_ = wpn_id;
   if (wpn_id) {
@@ -5672,10 +5672,10 @@ inline void WeaponHungEventMsg::set_allocated_wpn_id(::Eaagles::Recorder::Pb::Pl
   } else {
     clear_has_wpn_id();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.WeaponHungEventMsg.wpn_id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.WeaponHungEventMsg.wpn_id)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerState wpn_state = 2;
+// optional .oe.Recorder.Pb.PlayerState wpn_state = 2;
 inline bool WeaponHungEventMsg::has_wpn_state() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -5686,26 +5686,26 @@ inline void WeaponHungEventMsg::clear_has_wpn_state() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void WeaponHungEventMsg::clear_wpn_state() {
-  if (wpn_state_ != NULL) wpn_state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+  if (wpn_state_ != NULL) wpn_state_->::oe::recorder::pb::PlayerState::Clear();
   clear_has_wpn_state();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerState& WeaponHungEventMsg::wpn_state() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.WeaponHungEventMsg.wpn_state)
+inline const ::oe::recorder::pb::PlayerState& WeaponHungEventMsg::wpn_state() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.WeaponHungEventMsg.wpn_state)
   return wpn_state_ != NULL ? *wpn_state_ : *default_instance_->wpn_state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* WeaponHungEventMsg::mutable_wpn_state() {
+inline ::oe::recorder::pb::PlayerState* WeaponHungEventMsg::mutable_wpn_state() {
   set_has_wpn_state();
-  if (wpn_state_ == NULL) wpn_state_ = new ::Eaagles::Recorder::Pb::PlayerState;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.WeaponHungEventMsg.wpn_state)
+  if (wpn_state_ == NULL) wpn_state_ = new ::oe::recorder::pb::PlayerState;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.WeaponHungEventMsg.wpn_state)
   return wpn_state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* WeaponHungEventMsg::release_wpn_state() {
+inline ::oe::recorder::pb::PlayerState* WeaponHungEventMsg::release_wpn_state() {
   clear_has_wpn_state();
-  ::Eaagles::Recorder::Pb::PlayerState* temp = wpn_state_;
+  ::oe::recorder::pb::PlayerState* temp = wpn_state_;
   wpn_state_ = NULL;
   return temp;
 }
-inline void WeaponHungEventMsg::set_allocated_wpn_state(::Eaagles::Recorder::Pb::PlayerState* wpn_state) {
+inline void WeaponHungEventMsg::set_allocated_wpn_state(::oe::recorder::pb::PlayerState* wpn_state) {
   delete wpn_state_;
   wpn_state_ = wpn_state;
   if (wpn_state) {
@@ -5713,10 +5713,10 @@ inline void WeaponHungEventMsg::set_allocated_wpn_state(::Eaagles::Recorder::Pb:
   } else {
     clear_has_wpn_state();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.WeaponHungEventMsg.wpn_state)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.WeaponHungEventMsg.wpn_state)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerId shooter_id = 3;
+// optional .oe.Recorder.Pb.PlayerId shooter_id = 3;
 inline bool WeaponHungEventMsg::has_shooter_id() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -5727,26 +5727,26 @@ inline void WeaponHungEventMsg::clear_has_shooter_id() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void WeaponHungEventMsg::clear_shooter_id() {
-  if (shooter_id_ != NULL) shooter_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  if (shooter_id_ != NULL) shooter_id_->::oe::recorder::pb::PlayerId::Clear();
   clear_has_shooter_id();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerId& WeaponHungEventMsg::shooter_id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.WeaponHungEventMsg.shooter_id)
+inline const ::oe::recorder::pb::PlayerId& WeaponHungEventMsg::shooter_id() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.WeaponHungEventMsg.shooter_id)
   return shooter_id_ != NULL ? *shooter_id_ : *default_instance_->shooter_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* WeaponHungEventMsg::mutable_shooter_id() {
+inline ::oe::recorder::pb::PlayerId* WeaponHungEventMsg::mutable_shooter_id() {
   set_has_shooter_id();
-  if (shooter_id_ == NULL) shooter_id_ = new ::Eaagles::Recorder::Pb::PlayerId;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.WeaponHungEventMsg.shooter_id)
+  if (shooter_id_ == NULL) shooter_id_ = new ::oe::recorder::pb::PlayerId;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.WeaponHungEventMsg.shooter_id)
   return shooter_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* WeaponHungEventMsg::release_shooter_id() {
+inline ::oe::recorder::pb::PlayerId* WeaponHungEventMsg::release_shooter_id() {
   clear_has_shooter_id();
-  ::Eaagles::Recorder::Pb::PlayerId* temp = shooter_id_;
+  ::oe::recorder::pb::PlayerId* temp = shooter_id_;
   shooter_id_ = NULL;
   return temp;
 }
-inline void WeaponHungEventMsg::set_allocated_shooter_id(::Eaagles::Recorder::Pb::PlayerId* shooter_id) {
+inline void WeaponHungEventMsg::set_allocated_shooter_id(::oe::recorder::pb::PlayerId* shooter_id) {
   delete shooter_id_;
   shooter_id_ = shooter_id;
   if (shooter_id) {
@@ -5754,10 +5754,10 @@ inline void WeaponHungEventMsg::set_allocated_shooter_id(::Eaagles::Recorder::Pb
   } else {
     clear_has_shooter_id();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.WeaponHungEventMsg.shooter_id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.WeaponHungEventMsg.shooter_id)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerId tgt_id = 4;
+// optional .oe.Recorder.Pb.PlayerId tgt_id = 4;
 inline bool WeaponHungEventMsg::has_tgt_id() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
@@ -5768,26 +5768,26 @@ inline void WeaponHungEventMsg::clear_has_tgt_id() {
   _has_bits_[0] &= ~0x00000008u;
 }
 inline void WeaponHungEventMsg::clear_tgt_id() {
-  if (tgt_id_ != NULL) tgt_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  if (tgt_id_ != NULL) tgt_id_->::oe::recorder::pb::PlayerId::Clear();
   clear_has_tgt_id();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerId& WeaponHungEventMsg::tgt_id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.WeaponHungEventMsg.tgt_id)
+inline const ::oe::recorder::pb::PlayerId& WeaponHungEventMsg::tgt_id() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.WeaponHungEventMsg.tgt_id)
   return tgt_id_ != NULL ? *tgt_id_ : *default_instance_->tgt_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* WeaponHungEventMsg::mutable_tgt_id() {
+inline ::oe::recorder::pb::PlayerId* WeaponHungEventMsg::mutable_tgt_id() {
   set_has_tgt_id();
-  if (tgt_id_ == NULL) tgt_id_ = new ::Eaagles::Recorder::Pb::PlayerId;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.WeaponHungEventMsg.tgt_id)
+  if (tgt_id_ == NULL) tgt_id_ = new ::oe::recorder::pb::PlayerId;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.WeaponHungEventMsg.tgt_id)
   return tgt_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* WeaponHungEventMsg::release_tgt_id() {
+inline ::oe::recorder::pb::PlayerId* WeaponHungEventMsg::release_tgt_id() {
   clear_has_tgt_id();
-  ::Eaagles::Recorder::Pb::PlayerId* temp = tgt_id_;
+  ::oe::recorder::pb::PlayerId* temp = tgt_id_;
   tgt_id_ = NULL;
   return temp;
 }
-inline void WeaponHungEventMsg::set_allocated_tgt_id(::Eaagles::Recorder::Pb::PlayerId* tgt_id) {
+inline void WeaponHungEventMsg::set_allocated_tgt_id(::oe::recorder::pb::PlayerId* tgt_id) {
   delete tgt_id_;
   tgt_id_ = tgt_id;
   if (tgt_id) {
@@ -5795,14 +5795,14 @@ inline void WeaponHungEventMsg::set_allocated_tgt_id(::Eaagles::Recorder::Pb::Pl
   } else {
     clear_has_tgt_id();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.WeaponHungEventMsg.tgt_id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.WeaponHungEventMsg.tgt_id)
 }
 
 // -------------------------------------------------------------------
 
 // WeaponDetonationEventMsg
 
-// required .Eaagles.Recorder.Pb.PlayerId wpn_id = 1;
+// required .oe.Recorder.Pb.PlayerId wpn_id = 1;
 inline bool WeaponDetonationEventMsg::has_wpn_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -5813,26 +5813,26 @@ inline void WeaponDetonationEventMsg::clear_has_wpn_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void WeaponDetonationEventMsg::clear_wpn_id() {
-  if (wpn_id_ != NULL) wpn_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  if (wpn_id_ != NULL) wpn_id_->::oe::recorder::pb::PlayerId::Clear();
   clear_has_wpn_id();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerId& WeaponDetonationEventMsg::wpn_id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.WeaponDetonationEventMsg.wpn_id)
+inline const ::oe::recorder::pb::PlayerId& WeaponDetonationEventMsg::wpn_id() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.WeaponDetonationEventMsg.wpn_id)
   return wpn_id_ != NULL ? *wpn_id_ : *default_instance_->wpn_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* WeaponDetonationEventMsg::mutable_wpn_id() {
+inline ::oe::recorder::pb::PlayerId* WeaponDetonationEventMsg::mutable_wpn_id() {
   set_has_wpn_id();
-  if (wpn_id_ == NULL) wpn_id_ = new ::Eaagles::Recorder::Pb::PlayerId;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.WeaponDetonationEventMsg.wpn_id)
+  if (wpn_id_ == NULL) wpn_id_ = new ::oe::recorder::pb::PlayerId;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.WeaponDetonationEventMsg.wpn_id)
   return wpn_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* WeaponDetonationEventMsg::release_wpn_id() {
+inline ::oe::recorder::pb::PlayerId* WeaponDetonationEventMsg::release_wpn_id() {
   clear_has_wpn_id();
-  ::Eaagles::Recorder::Pb::PlayerId* temp = wpn_id_;
+  ::oe::recorder::pb::PlayerId* temp = wpn_id_;
   wpn_id_ = NULL;
   return temp;
 }
-inline void WeaponDetonationEventMsg::set_allocated_wpn_id(::Eaagles::Recorder::Pb::PlayerId* wpn_id) {
+inline void WeaponDetonationEventMsg::set_allocated_wpn_id(::oe::recorder::pb::PlayerId* wpn_id) {
   delete wpn_id_;
   wpn_id_ = wpn_id;
   if (wpn_id) {
@@ -5840,10 +5840,10 @@ inline void WeaponDetonationEventMsg::set_allocated_wpn_id(::Eaagles::Recorder::
   } else {
     clear_has_wpn_id();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.WeaponDetonationEventMsg.wpn_id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.WeaponDetonationEventMsg.wpn_id)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerState wpn_state = 2;
+// optional .oe.Recorder.Pb.PlayerState wpn_state = 2;
 inline bool WeaponDetonationEventMsg::has_wpn_state() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -5854,26 +5854,26 @@ inline void WeaponDetonationEventMsg::clear_has_wpn_state() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void WeaponDetonationEventMsg::clear_wpn_state() {
-  if (wpn_state_ != NULL) wpn_state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+  if (wpn_state_ != NULL) wpn_state_->::oe::recorder::pb::PlayerState::Clear();
   clear_has_wpn_state();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerState& WeaponDetonationEventMsg::wpn_state() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.WeaponDetonationEventMsg.wpn_state)
+inline const ::oe::recorder::pb::PlayerState& WeaponDetonationEventMsg::wpn_state() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.WeaponDetonationEventMsg.wpn_state)
   return wpn_state_ != NULL ? *wpn_state_ : *default_instance_->wpn_state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* WeaponDetonationEventMsg::mutable_wpn_state() {
+inline ::oe::recorder::pb::PlayerState* WeaponDetonationEventMsg::mutable_wpn_state() {
   set_has_wpn_state();
-  if (wpn_state_ == NULL) wpn_state_ = new ::Eaagles::Recorder::Pb::PlayerState;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.WeaponDetonationEventMsg.wpn_state)
+  if (wpn_state_ == NULL) wpn_state_ = new ::oe::recorder::pb::PlayerState;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.WeaponDetonationEventMsg.wpn_state)
   return wpn_state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* WeaponDetonationEventMsg::release_wpn_state() {
+inline ::oe::recorder::pb::PlayerState* WeaponDetonationEventMsg::release_wpn_state() {
   clear_has_wpn_state();
-  ::Eaagles::Recorder::Pb::PlayerState* temp = wpn_state_;
+  ::oe::recorder::pb::PlayerState* temp = wpn_state_;
   wpn_state_ = NULL;
   return temp;
 }
-inline void WeaponDetonationEventMsg::set_allocated_wpn_state(::Eaagles::Recorder::Pb::PlayerState* wpn_state) {
+inline void WeaponDetonationEventMsg::set_allocated_wpn_state(::oe::recorder::pb::PlayerState* wpn_state) {
   delete wpn_state_;
   wpn_state_ = wpn_state;
   if (wpn_state) {
@@ -5881,10 +5881,10 @@ inline void WeaponDetonationEventMsg::set_allocated_wpn_state(::Eaagles::Recorde
   } else {
     clear_has_wpn_state();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.WeaponDetonationEventMsg.wpn_state)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.WeaponDetonationEventMsg.wpn_state)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerId shooter_id = 3;
+// optional .oe.Recorder.Pb.PlayerId shooter_id = 3;
 inline bool WeaponDetonationEventMsg::has_shooter_id() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -5895,26 +5895,26 @@ inline void WeaponDetonationEventMsg::clear_has_shooter_id() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void WeaponDetonationEventMsg::clear_shooter_id() {
-  if (shooter_id_ != NULL) shooter_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  if (shooter_id_ != NULL) shooter_id_->::oe::recorder::pb::PlayerId::Clear();
   clear_has_shooter_id();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerId& WeaponDetonationEventMsg::shooter_id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.WeaponDetonationEventMsg.shooter_id)
+inline const ::oe::recorder::pb::PlayerId& WeaponDetonationEventMsg::shooter_id() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.WeaponDetonationEventMsg.shooter_id)
   return shooter_id_ != NULL ? *shooter_id_ : *default_instance_->shooter_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* WeaponDetonationEventMsg::mutable_shooter_id() {
+inline ::oe::recorder::pb::PlayerId* WeaponDetonationEventMsg::mutable_shooter_id() {
   set_has_shooter_id();
-  if (shooter_id_ == NULL) shooter_id_ = new ::Eaagles::Recorder::Pb::PlayerId;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.WeaponDetonationEventMsg.shooter_id)
+  if (shooter_id_ == NULL) shooter_id_ = new ::oe::recorder::pb::PlayerId;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.WeaponDetonationEventMsg.shooter_id)
   return shooter_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* WeaponDetonationEventMsg::release_shooter_id() {
+inline ::oe::recorder::pb::PlayerId* WeaponDetonationEventMsg::release_shooter_id() {
   clear_has_shooter_id();
-  ::Eaagles::Recorder::Pb::PlayerId* temp = shooter_id_;
+  ::oe::recorder::pb::PlayerId* temp = shooter_id_;
   shooter_id_ = NULL;
   return temp;
 }
-inline void WeaponDetonationEventMsg::set_allocated_shooter_id(::Eaagles::Recorder::Pb::PlayerId* shooter_id) {
+inline void WeaponDetonationEventMsg::set_allocated_shooter_id(::oe::recorder::pb::PlayerId* shooter_id) {
   delete shooter_id_;
   shooter_id_ = shooter_id;
   if (shooter_id) {
@@ -5922,10 +5922,10 @@ inline void WeaponDetonationEventMsg::set_allocated_shooter_id(::Eaagles::Record
   } else {
     clear_has_shooter_id();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.WeaponDetonationEventMsg.shooter_id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.WeaponDetonationEventMsg.shooter_id)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerId tgt_id = 4;
+// optional .oe.Recorder.Pb.PlayerId tgt_id = 4;
 inline bool WeaponDetonationEventMsg::has_tgt_id() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
@@ -5936,26 +5936,26 @@ inline void WeaponDetonationEventMsg::clear_has_tgt_id() {
   _has_bits_[0] &= ~0x00000008u;
 }
 inline void WeaponDetonationEventMsg::clear_tgt_id() {
-  if (tgt_id_ != NULL) tgt_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  if (tgt_id_ != NULL) tgt_id_->::oe::recorder::pb::PlayerId::Clear();
   clear_has_tgt_id();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerId& WeaponDetonationEventMsg::tgt_id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.WeaponDetonationEventMsg.tgt_id)
+inline const ::oe::recorder::pb::PlayerId& WeaponDetonationEventMsg::tgt_id() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.WeaponDetonationEventMsg.tgt_id)
   return tgt_id_ != NULL ? *tgt_id_ : *default_instance_->tgt_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* WeaponDetonationEventMsg::mutable_tgt_id() {
+inline ::oe::recorder::pb::PlayerId* WeaponDetonationEventMsg::mutable_tgt_id() {
   set_has_tgt_id();
-  if (tgt_id_ == NULL) tgt_id_ = new ::Eaagles::Recorder::Pb::PlayerId;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.WeaponDetonationEventMsg.tgt_id)
+  if (tgt_id_ == NULL) tgt_id_ = new ::oe::recorder::pb::PlayerId;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.WeaponDetonationEventMsg.tgt_id)
   return tgt_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* WeaponDetonationEventMsg::release_tgt_id() {
+inline ::oe::recorder::pb::PlayerId* WeaponDetonationEventMsg::release_tgt_id() {
   clear_has_tgt_id();
-  ::Eaagles::Recorder::Pb::PlayerId* temp = tgt_id_;
+  ::oe::recorder::pb::PlayerId* temp = tgt_id_;
   tgt_id_ = NULL;
   return temp;
 }
-inline void WeaponDetonationEventMsg::set_allocated_tgt_id(::Eaagles::Recorder::Pb::PlayerId* tgt_id) {
+inline void WeaponDetonationEventMsg::set_allocated_tgt_id(::oe::recorder::pb::PlayerId* tgt_id) {
   delete tgt_id_;
   tgt_id_ = tgt_id;
   if (tgt_id) {
@@ -5963,10 +5963,10 @@ inline void WeaponDetonationEventMsg::set_allocated_tgt_id(::Eaagles::Recorder::
   } else {
     clear_has_tgt_id();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.WeaponDetonationEventMsg.tgt_id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.WeaponDetonationEventMsg.tgt_id)
 }
 
-// optional .Eaagles.Recorder.Pb.WeaponDetonationEventMsg.DetonationType det_type = 5;
+// optional .oe.Recorder.Pb.WeaponDetonationEventMsg.DetonationType det_type = 5;
 inline bool WeaponDetonationEventMsg::has_det_type() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
@@ -5980,15 +5980,15 @@ inline void WeaponDetonationEventMsg::clear_det_type() {
   det_type_ = 0;
   clear_has_det_type();
 }
-inline ::Eaagles::Recorder::Pb::WeaponDetonationEventMsg_DetonationType WeaponDetonationEventMsg::det_type() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.WeaponDetonationEventMsg.det_type)
-  return static_cast< ::Eaagles::Recorder::Pb::WeaponDetonationEventMsg_DetonationType >(det_type_);
+inline ::oe::recorder::pb::WeaponDetonationEventMsg_DetonationType WeaponDetonationEventMsg::det_type() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.WeaponDetonationEventMsg.det_type)
+  return static_cast< ::oe::recorder::pb::WeaponDetonationEventMsg_DetonationType >(det_type_);
 }
-inline void WeaponDetonationEventMsg::set_det_type(::Eaagles::Recorder::Pb::WeaponDetonationEventMsg_DetonationType value) {
-  assert(::Eaagles::Recorder::Pb::WeaponDetonationEventMsg_DetonationType_IsValid(value));
+inline void WeaponDetonationEventMsg::set_det_type(::oe::recorder::pb::WeaponDetonationEventMsg_DetonationType value) {
+  assert(::oe::recorder::pb::WeaponDetonationEventMsg_DetonationType_IsValid(value));
   set_has_det_type();
   det_type_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.WeaponDetonationEventMsg.det_type)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.WeaponDetonationEventMsg.det_type)
 }
 
 // optional double miss_dist = 6;
@@ -6006,20 +6006,20 @@ inline void WeaponDetonationEventMsg::clear_miss_dist() {
   clear_has_miss_dist();
 }
 inline double WeaponDetonationEventMsg::miss_dist() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.WeaponDetonationEventMsg.miss_dist)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.WeaponDetonationEventMsg.miss_dist)
   return miss_dist_;
 }
 inline void WeaponDetonationEventMsg::set_miss_dist(double value) {
   set_has_miss_dist();
   miss_dist_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.WeaponDetonationEventMsg.miss_dist)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.WeaponDetonationEventMsg.miss_dist)
 }
 
 // -------------------------------------------------------------------
 
 // GunFiredEventMsg
 
-// required .Eaagles.Recorder.Pb.PlayerId shooter_id = 1;
+// required .oe.Recorder.Pb.PlayerId shooter_id = 1;
 inline bool GunFiredEventMsg::has_shooter_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -6030,26 +6030,26 @@ inline void GunFiredEventMsg::clear_has_shooter_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void GunFiredEventMsg::clear_shooter_id() {
-  if (shooter_id_ != NULL) shooter_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  if (shooter_id_ != NULL) shooter_id_->::oe::recorder::pb::PlayerId::Clear();
   clear_has_shooter_id();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerId& GunFiredEventMsg::shooter_id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.GunFiredEventMsg.shooter_id)
+inline const ::oe::recorder::pb::PlayerId& GunFiredEventMsg::shooter_id() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.GunFiredEventMsg.shooter_id)
   return shooter_id_ != NULL ? *shooter_id_ : *default_instance_->shooter_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* GunFiredEventMsg::mutable_shooter_id() {
+inline ::oe::recorder::pb::PlayerId* GunFiredEventMsg::mutable_shooter_id() {
   set_has_shooter_id();
-  if (shooter_id_ == NULL) shooter_id_ = new ::Eaagles::Recorder::Pb::PlayerId;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.GunFiredEventMsg.shooter_id)
+  if (shooter_id_ == NULL) shooter_id_ = new ::oe::recorder::pb::PlayerId;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.GunFiredEventMsg.shooter_id)
   return shooter_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* GunFiredEventMsg::release_shooter_id() {
+inline ::oe::recorder::pb::PlayerId* GunFiredEventMsg::release_shooter_id() {
   clear_has_shooter_id();
-  ::Eaagles::Recorder::Pb::PlayerId* temp = shooter_id_;
+  ::oe::recorder::pb::PlayerId* temp = shooter_id_;
   shooter_id_ = NULL;
   return temp;
 }
-inline void GunFiredEventMsg::set_allocated_shooter_id(::Eaagles::Recorder::Pb::PlayerId* shooter_id) {
+inline void GunFiredEventMsg::set_allocated_shooter_id(::oe::recorder::pb::PlayerId* shooter_id) {
   delete shooter_id_;
   shooter_id_ = shooter_id;
   if (shooter_id) {
@@ -6057,7 +6057,7 @@ inline void GunFiredEventMsg::set_allocated_shooter_id(::Eaagles::Recorder::Pb::
   } else {
     clear_has_shooter_id();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.GunFiredEventMsg.shooter_id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.GunFiredEventMsg.shooter_id)
 }
 
 // optional uint32 rounds = 2;
@@ -6075,20 +6075,20 @@ inline void GunFiredEventMsg::clear_rounds() {
   clear_has_rounds();
 }
 inline ::google::protobuf::uint32 GunFiredEventMsg::rounds() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.GunFiredEventMsg.rounds)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.GunFiredEventMsg.rounds)
   return rounds_;
 }
 inline void GunFiredEventMsg::set_rounds(::google::protobuf::uint32 value) {
   set_has_rounds();
   rounds_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.GunFiredEventMsg.rounds)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.GunFiredEventMsg.rounds)
 }
 
 // -------------------------------------------------------------------
 
 // NewTrackEventMsg
 
-// required .Eaagles.Recorder.Pb.PlayerId player_id = 1;
+// required .oe.Recorder.Pb.PlayerId player_id = 1;
 inline bool NewTrackEventMsg::has_player_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -6099,26 +6099,26 @@ inline void NewTrackEventMsg::clear_has_player_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void NewTrackEventMsg::clear_player_id() {
-  if (player_id_ != NULL) player_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  if (player_id_ != NULL) player_id_->::oe::recorder::pb::PlayerId::Clear();
   clear_has_player_id();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerId& NewTrackEventMsg::player_id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.NewTrackEventMsg.player_id)
+inline const ::oe::recorder::pb::PlayerId& NewTrackEventMsg::player_id() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.NewTrackEventMsg.player_id)
   return player_id_ != NULL ? *player_id_ : *default_instance_->player_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* NewTrackEventMsg::mutable_player_id() {
+inline ::oe::recorder::pb::PlayerId* NewTrackEventMsg::mutable_player_id() {
   set_has_player_id();
-  if (player_id_ == NULL) player_id_ = new ::Eaagles::Recorder::Pb::PlayerId;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.NewTrackEventMsg.player_id)
+  if (player_id_ == NULL) player_id_ = new ::oe::recorder::pb::PlayerId;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.NewTrackEventMsg.player_id)
   return player_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* NewTrackEventMsg::release_player_id() {
+inline ::oe::recorder::pb::PlayerId* NewTrackEventMsg::release_player_id() {
   clear_has_player_id();
-  ::Eaagles::Recorder::Pb::PlayerId* temp = player_id_;
+  ::oe::recorder::pb::PlayerId* temp = player_id_;
   player_id_ = NULL;
   return temp;
 }
-inline void NewTrackEventMsg::set_allocated_player_id(::Eaagles::Recorder::Pb::PlayerId* player_id) {
+inline void NewTrackEventMsg::set_allocated_player_id(::oe::recorder::pb::PlayerId* player_id) {
   delete player_id_;
   player_id_ = player_id;
   if (player_id) {
@@ -6126,7 +6126,7 @@ inline void NewTrackEventMsg::set_allocated_player_id(::Eaagles::Recorder::Pb::P
   } else {
     clear_has_player_id();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.NewTrackEventMsg.player_id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.NewTrackEventMsg.player_id)
 }
 
 // required string track_id = 2;
@@ -6146,7 +6146,7 @@ inline void NewTrackEventMsg::clear_track_id() {
   clear_has_track_id();
 }
 inline const ::std::string& NewTrackEventMsg::track_id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.NewTrackEventMsg.track_id)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.NewTrackEventMsg.track_id)
   return *track_id_;
 }
 inline void NewTrackEventMsg::set_track_id(const ::std::string& value) {
@@ -6155,7 +6155,7 @@ inline void NewTrackEventMsg::set_track_id(const ::std::string& value) {
     track_id_ = new ::std::string;
   }
   track_id_->assign(value);
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.NewTrackEventMsg.track_id)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.NewTrackEventMsg.track_id)
 }
 inline void NewTrackEventMsg::set_track_id(const char* value) {
   set_has_track_id();
@@ -6163,7 +6163,7 @@ inline void NewTrackEventMsg::set_track_id(const char* value) {
     track_id_ = new ::std::string;
   }
   track_id_->assign(value);
-  // @@protoc_insertion_point(field_set_char:Eaagles.Recorder.Pb.NewTrackEventMsg.track_id)
+  // @@protoc_insertion_point(field_set_char:oe.Recorder.Pb.NewTrackEventMsg.track_id)
 }
 inline void NewTrackEventMsg::set_track_id(const char* value, size_t size) {
   set_has_track_id();
@@ -6171,14 +6171,14 @@ inline void NewTrackEventMsg::set_track_id(const char* value, size_t size) {
     track_id_ = new ::std::string;
   }
   track_id_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:Eaagles.Recorder.Pb.NewTrackEventMsg.track_id)
+  // @@protoc_insertion_point(field_set_pointer:oe.Recorder.Pb.NewTrackEventMsg.track_id)
 }
 inline ::std::string* NewTrackEventMsg::mutable_track_id() {
   set_has_track_id();
   if (track_id_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     track_id_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.NewTrackEventMsg.track_id)
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.NewTrackEventMsg.track_id)
   return track_id_;
 }
 inline ::std::string* NewTrackEventMsg::release_track_id() {
@@ -6202,10 +6202,10 @@ inline void NewTrackEventMsg::set_allocated_track_id(::std::string* track_id) {
     clear_has_track_id();
     track_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.NewTrackEventMsg.track_id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.NewTrackEventMsg.track_id)
 }
 
-// optional .Eaagles.Recorder.Pb.TrackData track_data = 3;
+// optional .oe.Recorder.Pb.TrackData track_data = 3;
 inline bool NewTrackEventMsg::has_track_data() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -6216,26 +6216,26 @@ inline void NewTrackEventMsg::clear_has_track_data() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void NewTrackEventMsg::clear_track_data() {
-  if (track_data_ != NULL) track_data_->::Eaagles::Recorder::Pb::TrackData::Clear();
+  if (track_data_ != NULL) track_data_->::oe::recorder::pb::TrackData::Clear();
   clear_has_track_data();
 }
-inline const ::Eaagles::Recorder::Pb::TrackData& NewTrackEventMsg::track_data() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.NewTrackEventMsg.track_data)
+inline const ::oe::recorder::pb::TrackData& NewTrackEventMsg::track_data() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.NewTrackEventMsg.track_data)
   return track_data_ != NULL ? *track_data_ : *default_instance_->track_data_;
 }
-inline ::Eaagles::Recorder::Pb::TrackData* NewTrackEventMsg::mutable_track_data() {
+inline ::oe::recorder::pb::TrackData* NewTrackEventMsg::mutable_track_data() {
   set_has_track_data();
-  if (track_data_ == NULL) track_data_ = new ::Eaagles::Recorder::Pb::TrackData;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.NewTrackEventMsg.track_data)
+  if (track_data_ == NULL) track_data_ = new ::oe::recorder::pb::TrackData;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.NewTrackEventMsg.track_data)
   return track_data_;
 }
-inline ::Eaagles::Recorder::Pb::TrackData* NewTrackEventMsg::release_track_data() {
+inline ::oe::recorder::pb::TrackData* NewTrackEventMsg::release_track_data() {
   clear_has_track_data();
-  ::Eaagles::Recorder::Pb::TrackData* temp = track_data_;
+  ::oe::recorder::pb::TrackData* temp = track_data_;
   track_data_ = NULL;
   return temp;
 }
-inline void NewTrackEventMsg::set_allocated_track_data(::Eaagles::Recorder::Pb::TrackData* track_data) {
+inline void NewTrackEventMsg::set_allocated_track_data(::oe::recorder::pb::TrackData* track_data) {
   delete track_data_;
   track_data_ = track_data;
   if (track_data) {
@@ -6243,10 +6243,10 @@ inline void NewTrackEventMsg::set_allocated_track_data(::Eaagles::Recorder::Pb::
   } else {
     clear_has_track_data();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.NewTrackEventMsg.track_data)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.NewTrackEventMsg.track_data)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerState player_state = 4;
+// optional .oe.Recorder.Pb.PlayerState player_state = 4;
 inline bool NewTrackEventMsg::has_player_state() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
@@ -6257,26 +6257,26 @@ inline void NewTrackEventMsg::clear_has_player_state() {
   _has_bits_[0] &= ~0x00000008u;
 }
 inline void NewTrackEventMsg::clear_player_state() {
-  if (player_state_ != NULL) player_state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+  if (player_state_ != NULL) player_state_->::oe::recorder::pb::PlayerState::Clear();
   clear_has_player_state();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerState& NewTrackEventMsg::player_state() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.NewTrackEventMsg.player_state)
+inline const ::oe::recorder::pb::PlayerState& NewTrackEventMsg::player_state() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.NewTrackEventMsg.player_state)
   return player_state_ != NULL ? *player_state_ : *default_instance_->player_state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* NewTrackEventMsg::mutable_player_state() {
+inline ::oe::recorder::pb::PlayerState* NewTrackEventMsg::mutable_player_state() {
   set_has_player_state();
-  if (player_state_ == NULL) player_state_ = new ::Eaagles::Recorder::Pb::PlayerState;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.NewTrackEventMsg.player_state)
+  if (player_state_ == NULL) player_state_ = new ::oe::recorder::pb::PlayerState;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.NewTrackEventMsg.player_state)
   return player_state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* NewTrackEventMsg::release_player_state() {
+inline ::oe::recorder::pb::PlayerState* NewTrackEventMsg::release_player_state() {
   clear_has_player_state();
-  ::Eaagles::Recorder::Pb::PlayerState* temp = player_state_;
+  ::oe::recorder::pb::PlayerState* temp = player_state_;
   player_state_ = NULL;
   return temp;
 }
-inline void NewTrackEventMsg::set_allocated_player_state(::Eaagles::Recorder::Pb::PlayerState* player_state) {
+inline void NewTrackEventMsg::set_allocated_player_state(::oe::recorder::pb::PlayerState* player_state) {
   delete player_state_;
   player_state_ = player_state;
   if (player_state) {
@@ -6284,10 +6284,10 @@ inline void NewTrackEventMsg::set_allocated_player_state(::Eaagles::Recorder::Pb
   } else {
     clear_has_player_state();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.NewTrackEventMsg.player_state)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.NewTrackEventMsg.player_state)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerId trk_player_id = 5;
+// optional .oe.Recorder.Pb.PlayerId trk_player_id = 5;
 inline bool NewTrackEventMsg::has_trk_player_id() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
@@ -6298,26 +6298,26 @@ inline void NewTrackEventMsg::clear_has_trk_player_id() {
   _has_bits_[0] &= ~0x00000010u;
 }
 inline void NewTrackEventMsg::clear_trk_player_id() {
-  if (trk_player_id_ != NULL) trk_player_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  if (trk_player_id_ != NULL) trk_player_id_->::oe::recorder::pb::PlayerId::Clear();
   clear_has_trk_player_id();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerId& NewTrackEventMsg::trk_player_id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.NewTrackEventMsg.trk_player_id)
+inline const ::oe::recorder::pb::PlayerId& NewTrackEventMsg::trk_player_id() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.NewTrackEventMsg.trk_player_id)
   return trk_player_id_ != NULL ? *trk_player_id_ : *default_instance_->trk_player_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* NewTrackEventMsg::mutable_trk_player_id() {
+inline ::oe::recorder::pb::PlayerId* NewTrackEventMsg::mutable_trk_player_id() {
   set_has_trk_player_id();
-  if (trk_player_id_ == NULL) trk_player_id_ = new ::Eaagles::Recorder::Pb::PlayerId;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.NewTrackEventMsg.trk_player_id)
+  if (trk_player_id_ == NULL) trk_player_id_ = new ::oe::recorder::pb::PlayerId;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.NewTrackEventMsg.trk_player_id)
   return trk_player_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* NewTrackEventMsg::release_trk_player_id() {
+inline ::oe::recorder::pb::PlayerId* NewTrackEventMsg::release_trk_player_id() {
   clear_has_trk_player_id();
-  ::Eaagles::Recorder::Pb::PlayerId* temp = trk_player_id_;
+  ::oe::recorder::pb::PlayerId* temp = trk_player_id_;
   trk_player_id_ = NULL;
   return temp;
 }
-inline void NewTrackEventMsg::set_allocated_trk_player_id(::Eaagles::Recorder::Pb::PlayerId* trk_player_id) {
+inline void NewTrackEventMsg::set_allocated_trk_player_id(::oe::recorder::pb::PlayerId* trk_player_id) {
   delete trk_player_id_;
   trk_player_id_ = trk_player_id;
   if (trk_player_id) {
@@ -6325,10 +6325,10 @@ inline void NewTrackEventMsg::set_allocated_trk_player_id(::Eaagles::Recorder::P
   } else {
     clear_has_trk_player_id();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.NewTrackEventMsg.trk_player_id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.NewTrackEventMsg.trk_player_id)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerState trk_player_state = 6;
+// optional .oe.Recorder.Pb.PlayerState trk_player_state = 6;
 inline bool NewTrackEventMsg::has_trk_player_state() const {
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
@@ -6339,26 +6339,26 @@ inline void NewTrackEventMsg::clear_has_trk_player_state() {
   _has_bits_[0] &= ~0x00000020u;
 }
 inline void NewTrackEventMsg::clear_trk_player_state() {
-  if (trk_player_state_ != NULL) trk_player_state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+  if (trk_player_state_ != NULL) trk_player_state_->::oe::recorder::pb::PlayerState::Clear();
   clear_has_trk_player_state();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerState& NewTrackEventMsg::trk_player_state() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.NewTrackEventMsg.trk_player_state)
+inline const ::oe::recorder::pb::PlayerState& NewTrackEventMsg::trk_player_state() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.NewTrackEventMsg.trk_player_state)
   return trk_player_state_ != NULL ? *trk_player_state_ : *default_instance_->trk_player_state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* NewTrackEventMsg::mutable_trk_player_state() {
+inline ::oe::recorder::pb::PlayerState* NewTrackEventMsg::mutable_trk_player_state() {
   set_has_trk_player_state();
-  if (trk_player_state_ == NULL) trk_player_state_ = new ::Eaagles::Recorder::Pb::PlayerState;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.NewTrackEventMsg.trk_player_state)
+  if (trk_player_state_ == NULL) trk_player_state_ = new ::oe::recorder::pb::PlayerState;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.NewTrackEventMsg.trk_player_state)
   return trk_player_state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* NewTrackEventMsg::release_trk_player_state() {
+inline ::oe::recorder::pb::PlayerState* NewTrackEventMsg::release_trk_player_state() {
   clear_has_trk_player_state();
-  ::Eaagles::Recorder::Pb::PlayerState* temp = trk_player_state_;
+  ::oe::recorder::pb::PlayerState* temp = trk_player_state_;
   trk_player_state_ = NULL;
   return temp;
 }
-inline void NewTrackEventMsg::set_allocated_trk_player_state(::Eaagles::Recorder::Pb::PlayerState* trk_player_state) {
+inline void NewTrackEventMsg::set_allocated_trk_player_state(::oe::recorder::pb::PlayerState* trk_player_state) {
   delete trk_player_state_;
   trk_player_state_ = trk_player_state;
   if (trk_player_state) {
@@ -6366,10 +6366,10 @@ inline void NewTrackEventMsg::set_allocated_trk_player_state(::Eaagles::Recorder
   } else {
     clear_has_trk_player_state();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.NewTrackEventMsg.trk_player_state)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.NewTrackEventMsg.trk_player_state)
 }
 
-// optional .Eaagles.Recorder.Pb.EmissionData emission_data = 7;
+// optional .oe.Recorder.Pb.EmissionData emission_data = 7;
 inline bool NewTrackEventMsg::has_emission_data() const {
   return (_has_bits_[0] & 0x00000040u) != 0;
 }
@@ -6380,26 +6380,26 @@ inline void NewTrackEventMsg::clear_has_emission_data() {
   _has_bits_[0] &= ~0x00000040u;
 }
 inline void NewTrackEventMsg::clear_emission_data() {
-  if (emission_data_ != NULL) emission_data_->::Eaagles::Recorder::Pb::EmissionData::Clear();
+  if (emission_data_ != NULL) emission_data_->::oe::recorder::pb::EmissionData::Clear();
   clear_has_emission_data();
 }
-inline const ::Eaagles::Recorder::Pb::EmissionData& NewTrackEventMsg::emission_data() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.NewTrackEventMsg.emission_data)
+inline const ::oe::recorder::pb::EmissionData& NewTrackEventMsg::emission_data() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.NewTrackEventMsg.emission_data)
   return emission_data_ != NULL ? *emission_data_ : *default_instance_->emission_data_;
 }
-inline ::Eaagles::Recorder::Pb::EmissionData* NewTrackEventMsg::mutable_emission_data() {
+inline ::oe::recorder::pb::EmissionData* NewTrackEventMsg::mutable_emission_data() {
   set_has_emission_data();
-  if (emission_data_ == NULL) emission_data_ = new ::Eaagles::Recorder::Pb::EmissionData;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.NewTrackEventMsg.emission_data)
+  if (emission_data_ == NULL) emission_data_ = new ::oe::recorder::pb::EmissionData;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.NewTrackEventMsg.emission_data)
   return emission_data_;
 }
-inline ::Eaagles::Recorder::Pb::EmissionData* NewTrackEventMsg::release_emission_data() {
+inline ::oe::recorder::pb::EmissionData* NewTrackEventMsg::release_emission_data() {
   clear_has_emission_data();
-  ::Eaagles::Recorder::Pb::EmissionData* temp = emission_data_;
+  ::oe::recorder::pb::EmissionData* temp = emission_data_;
   emission_data_ = NULL;
   return temp;
 }
-inline void NewTrackEventMsg::set_allocated_emission_data(::Eaagles::Recorder::Pb::EmissionData* emission_data) {
+inline void NewTrackEventMsg::set_allocated_emission_data(::oe::recorder::pb::EmissionData* emission_data) {
   delete emission_data_;
   emission_data_ = emission_data;
   if (emission_data) {
@@ -6407,14 +6407,14 @@ inline void NewTrackEventMsg::set_allocated_emission_data(::Eaagles::Recorder::P
   } else {
     clear_has_emission_data();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.NewTrackEventMsg.emission_data)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.NewTrackEventMsg.emission_data)
 }
 
 // -------------------------------------------------------------------
 
 // TrackRemovedEventMsg
 
-// required .Eaagles.Recorder.Pb.PlayerId player_id = 1;
+// required .oe.Recorder.Pb.PlayerId player_id = 1;
 inline bool TrackRemovedEventMsg::has_player_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -6425,26 +6425,26 @@ inline void TrackRemovedEventMsg::clear_has_player_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void TrackRemovedEventMsg::clear_player_id() {
-  if (player_id_ != NULL) player_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  if (player_id_ != NULL) player_id_->::oe::recorder::pb::PlayerId::Clear();
   clear_has_player_id();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerId& TrackRemovedEventMsg::player_id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.TrackRemovedEventMsg.player_id)
+inline const ::oe::recorder::pb::PlayerId& TrackRemovedEventMsg::player_id() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.TrackRemovedEventMsg.player_id)
   return player_id_ != NULL ? *player_id_ : *default_instance_->player_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* TrackRemovedEventMsg::mutable_player_id() {
+inline ::oe::recorder::pb::PlayerId* TrackRemovedEventMsg::mutable_player_id() {
   set_has_player_id();
-  if (player_id_ == NULL) player_id_ = new ::Eaagles::Recorder::Pb::PlayerId;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.TrackRemovedEventMsg.player_id)
+  if (player_id_ == NULL) player_id_ = new ::oe::recorder::pb::PlayerId;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.TrackRemovedEventMsg.player_id)
   return player_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* TrackRemovedEventMsg::release_player_id() {
+inline ::oe::recorder::pb::PlayerId* TrackRemovedEventMsg::release_player_id() {
   clear_has_player_id();
-  ::Eaagles::Recorder::Pb::PlayerId* temp = player_id_;
+  ::oe::recorder::pb::PlayerId* temp = player_id_;
   player_id_ = NULL;
   return temp;
 }
-inline void TrackRemovedEventMsg::set_allocated_player_id(::Eaagles::Recorder::Pb::PlayerId* player_id) {
+inline void TrackRemovedEventMsg::set_allocated_player_id(::oe::recorder::pb::PlayerId* player_id) {
   delete player_id_;
   player_id_ = player_id;
   if (player_id) {
@@ -6452,7 +6452,7 @@ inline void TrackRemovedEventMsg::set_allocated_player_id(::Eaagles::Recorder::P
   } else {
     clear_has_player_id();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.TrackRemovedEventMsg.player_id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.TrackRemovedEventMsg.player_id)
 }
 
 // required string track_id = 2;
@@ -6472,7 +6472,7 @@ inline void TrackRemovedEventMsg::clear_track_id() {
   clear_has_track_id();
 }
 inline const ::std::string& TrackRemovedEventMsg::track_id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.TrackRemovedEventMsg.track_id)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.TrackRemovedEventMsg.track_id)
   return *track_id_;
 }
 inline void TrackRemovedEventMsg::set_track_id(const ::std::string& value) {
@@ -6481,7 +6481,7 @@ inline void TrackRemovedEventMsg::set_track_id(const ::std::string& value) {
     track_id_ = new ::std::string;
   }
   track_id_->assign(value);
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.TrackRemovedEventMsg.track_id)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.TrackRemovedEventMsg.track_id)
 }
 inline void TrackRemovedEventMsg::set_track_id(const char* value) {
   set_has_track_id();
@@ -6489,7 +6489,7 @@ inline void TrackRemovedEventMsg::set_track_id(const char* value) {
     track_id_ = new ::std::string;
   }
   track_id_->assign(value);
-  // @@protoc_insertion_point(field_set_char:Eaagles.Recorder.Pb.TrackRemovedEventMsg.track_id)
+  // @@protoc_insertion_point(field_set_char:oe.Recorder.Pb.TrackRemovedEventMsg.track_id)
 }
 inline void TrackRemovedEventMsg::set_track_id(const char* value, size_t size) {
   set_has_track_id();
@@ -6497,14 +6497,14 @@ inline void TrackRemovedEventMsg::set_track_id(const char* value, size_t size) {
     track_id_ = new ::std::string;
   }
   track_id_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:Eaagles.Recorder.Pb.TrackRemovedEventMsg.track_id)
+  // @@protoc_insertion_point(field_set_pointer:oe.Recorder.Pb.TrackRemovedEventMsg.track_id)
 }
 inline ::std::string* TrackRemovedEventMsg::mutable_track_id() {
   set_has_track_id();
   if (track_id_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     track_id_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.TrackRemovedEventMsg.track_id)
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.TrackRemovedEventMsg.track_id)
   return track_id_;
 }
 inline ::std::string* TrackRemovedEventMsg::release_track_id() {
@@ -6528,14 +6528,14 @@ inline void TrackRemovedEventMsg::set_allocated_track_id(::std::string* track_id
     clear_has_track_id();
     track_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.TrackRemovedEventMsg.track_id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.TrackRemovedEventMsg.track_id)
 }
 
 // -------------------------------------------------------------------
 
 // TrackDataMsg
 
-// required .Eaagles.Recorder.Pb.PlayerId player_id = 1;
+// required .oe.Recorder.Pb.PlayerId player_id = 1;
 inline bool TrackDataMsg::has_player_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -6546,26 +6546,26 @@ inline void TrackDataMsg::clear_has_player_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void TrackDataMsg::clear_player_id() {
-  if (player_id_ != NULL) player_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  if (player_id_ != NULL) player_id_->::oe::recorder::pb::PlayerId::Clear();
   clear_has_player_id();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerId& TrackDataMsg::player_id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.TrackDataMsg.player_id)
+inline const ::oe::recorder::pb::PlayerId& TrackDataMsg::player_id() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.TrackDataMsg.player_id)
   return player_id_ != NULL ? *player_id_ : *default_instance_->player_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* TrackDataMsg::mutable_player_id() {
+inline ::oe::recorder::pb::PlayerId* TrackDataMsg::mutable_player_id() {
   set_has_player_id();
-  if (player_id_ == NULL) player_id_ = new ::Eaagles::Recorder::Pb::PlayerId;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.TrackDataMsg.player_id)
+  if (player_id_ == NULL) player_id_ = new ::oe::recorder::pb::PlayerId;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.TrackDataMsg.player_id)
   return player_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* TrackDataMsg::release_player_id() {
+inline ::oe::recorder::pb::PlayerId* TrackDataMsg::release_player_id() {
   clear_has_player_id();
-  ::Eaagles::Recorder::Pb::PlayerId* temp = player_id_;
+  ::oe::recorder::pb::PlayerId* temp = player_id_;
   player_id_ = NULL;
   return temp;
 }
-inline void TrackDataMsg::set_allocated_player_id(::Eaagles::Recorder::Pb::PlayerId* player_id) {
+inline void TrackDataMsg::set_allocated_player_id(::oe::recorder::pb::PlayerId* player_id) {
   delete player_id_;
   player_id_ = player_id;
   if (player_id) {
@@ -6573,7 +6573,7 @@ inline void TrackDataMsg::set_allocated_player_id(::Eaagles::Recorder::Pb::Playe
   } else {
     clear_has_player_id();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.TrackDataMsg.player_id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.TrackDataMsg.player_id)
 }
 
 // required string track_id = 2;
@@ -6593,7 +6593,7 @@ inline void TrackDataMsg::clear_track_id() {
   clear_has_track_id();
 }
 inline const ::std::string& TrackDataMsg::track_id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.TrackDataMsg.track_id)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.TrackDataMsg.track_id)
   return *track_id_;
 }
 inline void TrackDataMsg::set_track_id(const ::std::string& value) {
@@ -6602,7 +6602,7 @@ inline void TrackDataMsg::set_track_id(const ::std::string& value) {
     track_id_ = new ::std::string;
   }
   track_id_->assign(value);
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.TrackDataMsg.track_id)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.TrackDataMsg.track_id)
 }
 inline void TrackDataMsg::set_track_id(const char* value) {
   set_has_track_id();
@@ -6610,7 +6610,7 @@ inline void TrackDataMsg::set_track_id(const char* value) {
     track_id_ = new ::std::string;
   }
   track_id_->assign(value);
-  // @@protoc_insertion_point(field_set_char:Eaagles.Recorder.Pb.TrackDataMsg.track_id)
+  // @@protoc_insertion_point(field_set_char:oe.Recorder.Pb.TrackDataMsg.track_id)
 }
 inline void TrackDataMsg::set_track_id(const char* value, size_t size) {
   set_has_track_id();
@@ -6618,14 +6618,14 @@ inline void TrackDataMsg::set_track_id(const char* value, size_t size) {
     track_id_ = new ::std::string;
   }
   track_id_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:Eaagles.Recorder.Pb.TrackDataMsg.track_id)
+  // @@protoc_insertion_point(field_set_pointer:oe.Recorder.Pb.TrackDataMsg.track_id)
 }
 inline ::std::string* TrackDataMsg::mutable_track_id() {
   set_has_track_id();
   if (track_id_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     track_id_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.TrackDataMsg.track_id)
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.TrackDataMsg.track_id)
   return track_id_;
 }
 inline ::std::string* TrackDataMsg::release_track_id() {
@@ -6649,10 +6649,10 @@ inline void TrackDataMsg::set_allocated_track_id(::std::string* track_id) {
     clear_has_track_id();
     track_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.TrackDataMsg.track_id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.TrackDataMsg.track_id)
 }
 
-// optional .Eaagles.Recorder.Pb.TrackData track_data = 3;
+// optional .oe.Recorder.Pb.TrackData track_data = 3;
 inline bool TrackDataMsg::has_track_data() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -6663,26 +6663,26 @@ inline void TrackDataMsg::clear_has_track_data() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void TrackDataMsg::clear_track_data() {
-  if (track_data_ != NULL) track_data_->::Eaagles::Recorder::Pb::TrackData::Clear();
+  if (track_data_ != NULL) track_data_->::oe::recorder::pb::TrackData::Clear();
   clear_has_track_data();
 }
-inline const ::Eaagles::Recorder::Pb::TrackData& TrackDataMsg::track_data() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.TrackDataMsg.track_data)
+inline const ::oe::recorder::pb::TrackData& TrackDataMsg::track_data() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.TrackDataMsg.track_data)
   return track_data_ != NULL ? *track_data_ : *default_instance_->track_data_;
 }
-inline ::Eaagles::Recorder::Pb::TrackData* TrackDataMsg::mutable_track_data() {
+inline ::oe::recorder::pb::TrackData* TrackDataMsg::mutable_track_data() {
   set_has_track_data();
-  if (track_data_ == NULL) track_data_ = new ::Eaagles::Recorder::Pb::TrackData;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.TrackDataMsg.track_data)
+  if (track_data_ == NULL) track_data_ = new ::oe::recorder::pb::TrackData;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.TrackDataMsg.track_data)
   return track_data_;
 }
-inline ::Eaagles::Recorder::Pb::TrackData* TrackDataMsg::release_track_data() {
+inline ::oe::recorder::pb::TrackData* TrackDataMsg::release_track_data() {
   clear_has_track_data();
-  ::Eaagles::Recorder::Pb::TrackData* temp = track_data_;
+  ::oe::recorder::pb::TrackData* temp = track_data_;
   track_data_ = NULL;
   return temp;
 }
-inline void TrackDataMsg::set_allocated_track_data(::Eaagles::Recorder::Pb::TrackData* track_data) {
+inline void TrackDataMsg::set_allocated_track_data(::oe::recorder::pb::TrackData* track_data) {
   delete track_data_;
   track_data_ = track_data;
   if (track_data) {
@@ -6690,10 +6690,10 @@ inline void TrackDataMsg::set_allocated_track_data(::Eaagles::Recorder::Pb::Trac
   } else {
     clear_has_track_data();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.TrackDataMsg.track_data)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.TrackDataMsg.track_data)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerState player_state = 4;
+// optional .oe.Recorder.Pb.PlayerState player_state = 4;
 inline bool TrackDataMsg::has_player_state() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
@@ -6704,26 +6704,26 @@ inline void TrackDataMsg::clear_has_player_state() {
   _has_bits_[0] &= ~0x00000008u;
 }
 inline void TrackDataMsg::clear_player_state() {
-  if (player_state_ != NULL) player_state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+  if (player_state_ != NULL) player_state_->::oe::recorder::pb::PlayerState::Clear();
   clear_has_player_state();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerState& TrackDataMsg::player_state() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.TrackDataMsg.player_state)
+inline const ::oe::recorder::pb::PlayerState& TrackDataMsg::player_state() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.TrackDataMsg.player_state)
   return player_state_ != NULL ? *player_state_ : *default_instance_->player_state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* TrackDataMsg::mutable_player_state() {
+inline ::oe::recorder::pb::PlayerState* TrackDataMsg::mutable_player_state() {
   set_has_player_state();
-  if (player_state_ == NULL) player_state_ = new ::Eaagles::Recorder::Pb::PlayerState;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.TrackDataMsg.player_state)
+  if (player_state_ == NULL) player_state_ = new ::oe::recorder::pb::PlayerState;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.TrackDataMsg.player_state)
   return player_state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* TrackDataMsg::release_player_state() {
+inline ::oe::recorder::pb::PlayerState* TrackDataMsg::release_player_state() {
   clear_has_player_state();
-  ::Eaagles::Recorder::Pb::PlayerState* temp = player_state_;
+  ::oe::recorder::pb::PlayerState* temp = player_state_;
   player_state_ = NULL;
   return temp;
 }
-inline void TrackDataMsg::set_allocated_player_state(::Eaagles::Recorder::Pb::PlayerState* player_state) {
+inline void TrackDataMsg::set_allocated_player_state(::oe::recorder::pb::PlayerState* player_state) {
   delete player_state_;
   player_state_ = player_state;
   if (player_state) {
@@ -6731,10 +6731,10 @@ inline void TrackDataMsg::set_allocated_player_state(::Eaagles::Recorder::Pb::Pl
   } else {
     clear_has_player_state();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.TrackDataMsg.player_state)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.TrackDataMsg.player_state)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerId trk_player_id = 5;
+// optional .oe.Recorder.Pb.PlayerId trk_player_id = 5;
 inline bool TrackDataMsg::has_trk_player_id() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
@@ -6745,26 +6745,26 @@ inline void TrackDataMsg::clear_has_trk_player_id() {
   _has_bits_[0] &= ~0x00000010u;
 }
 inline void TrackDataMsg::clear_trk_player_id() {
-  if (trk_player_id_ != NULL) trk_player_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  if (trk_player_id_ != NULL) trk_player_id_->::oe::recorder::pb::PlayerId::Clear();
   clear_has_trk_player_id();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerId& TrackDataMsg::trk_player_id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.TrackDataMsg.trk_player_id)
+inline const ::oe::recorder::pb::PlayerId& TrackDataMsg::trk_player_id() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.TrackDataMsg.trk_player_id)
   return trk_player_id_ != NULL ? *trk_player_id_ : *default_instance_->trk_player_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* TrackDataMsg::mutable_trk_player_id() {
+inline ::oe::recorder::pb::PlayerId* TrackDataMsg::mutable_trk_player_id() {
   set_has_trk_player_id();
-  if (trk_player_id_ == NULL) trk_player_id_ = new ::Eaagles::Recorder::Pb::PlayerId;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.TrackDataMsg.trk_player_id)
+  if (trk_player_id_ == NULL) trk_player_id_ = new ::oe::recorder::pb::PlayerId;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.TrackDataMsg.trk_player_id)
   return trk_player_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* TrackDataMsg::release_trk_player_id() {
+inline ::oe::recorder::pb::PlayerId* TrackDataMsg::release_trk_player_id() {
   clear_has_trk_player_id();
-  ::Eaagles::Recorder::Pb::PlayerId* temp = trk_player_id_;
+  ::oe::recorder::pb::PlayerId* temp = trk_player_id_;
   trk_player_id_ = NULL;
   return temp;
 }
-inline void TrackDataMsg::set_allocated_trk_player_id(::Eaagles::Recorder::Pb::PlayerId* trk_player_id) {
+inline void TrackDataMsg::set_allocated_trk_player_id(::oe::recorder::pb::PlayerId* trk_player_id) {
   delete trk_player_id_;
   trk_player_id_ = trk_player_id;
   if (trk_player_id) {
@@ -6772,10 +6772,10 @@ inline void TrackDataMsg::set_allocated_trk_player_id(::Eaagles::Recorder::Pb::P
   } else {
     clear_has_trk_player_id();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.TrackDataMsg.trk_player_id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.TrackDataMsg.trk_player_id)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerState trk_player_state = 6;
+// optional .oe.Recorder.Pb.PlayerState trk_player_state = 6;
 inline bool TrackDataMsg::has_trk_player_state() const {
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
@@ -6786,26 +6786,26 @@ inline void TrackDataMsg::clear_has_trk_player_state() {
   _has_bits_[0] &= ~0x00000020u;
 }
 inline void TrackDataMsg::clear_trk_player_state() {
-  if (trk_player_state_ != NULL) trk_player_state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+  if (trk_player_state_ != NULL) trk_player_state_->::oe::recorder::pb::PlayerState::Clear();
   clear_has_trk_player_state();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerState& TrackDataMsg::trk_player_state() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.TrackDataMsg.trk_player_state)
+inline const ::oe::recorder::pb::PlayerState& TrackDataMsg::trk_player_state() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.TrackDataMsg.trk_player_state)
   return trk_player_state_ != NULL ? *trk_player_state_ : *default_instance_->trk_player_state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* TrackDataMsg::mutable_trk_player_state() {
+inline ::oe::recorder::pb::PlayerState* TrackDataMsg::mutable_trk_player_state() {
   set_has_trk_player_state();
-  if (trk_player_state_ == NULL) trk_player_state_ = new ::Eaagles::Recorder::Pb::PlayerState;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.TrackDataMsg.trk_player_state)
+  if (trk_player_state_ == NULL) trk_player_state_ = new ::oe::recorder::pb::PlayerState;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.TrackDataMsg.trk_player_state)
   return trk_player_state_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerState* TrackDataMsg::release_trk_player_state() {
+inline ::oe::recorder::pb::PlayerState* TrackDataMsg::release_trk_player_state() {
   clear_has_trk_player_state();
-  ::Eaagles::Recorder::Pb::PlayerState* temp = trk_player_state_;
+  ::oe::recorder::pb::PlayerState* temp = trk_player_state_;
   trk_player_state_ = NULL;
   return temp;
 }
-inline void TrackDataMsg::set_allocated_trk_player_state(::Eaagles::Recorder::Pb::PlayerState* trk_player_state) {
+inline void TrackDataMsg::set_allocated_trk_player_state(::oe::recorder::pb::PlayerState* trk_player_state) {
   delete trk_player_state_;
   trk_player_state_ = trk_player_state;
   if (trk_player_state) {
@@ -6813,10 +6813,10 @@ inline void TrackDataMsg::set_allocated_trk_player_state(::Eaagles::Recorder::Pb
   } else {
     clear_has_trk_player_state();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.TrackDataMsg.trk_player_state)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.TrackDataMsg.trk_player_state)
 }
 
-// optional .Eaagles.Recorder.Pb.EmissionData emission_data = 7;
+// optional .oe.Recorder.Pb.EmissionData emission_data = 7;
 inline bool TrackDataMsg::has_emission_data() const {
   return (_has_bits_[0] & 0x00000040u) != 0;
 }
@@ -6827,26 +6827,26 @@ inline void TrackDataMsg::clear_has_emission_data() {
   _has_bits_[0] &= ~0x00000040u;
 }
 inline void TrackDataMsg::clear_emission_data() {
-  if (emission_data_ != NULL) emission_data_->::Eaagles::Recorder::Pb::EmissionData::Clear();
+  if (emission_data_ != NULL) emission_data_->::oe::recorder::pb::EmissionData::Clear();
   clear_has_emission_data();
 }
-inline const ::Eaagles::Recorder::Pb::EmissionData& TrackDataMsg::emission_data() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.TrackDataMsg.emission_data)
+inline const ::oe::recorder::pb::EmissionData& TrackDataMsg::emission_data() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.TrackDataMsg.emission_data)
   return emission_data_ != NULL ? *emission_data_ : *default_instance_->emission_data_;
 }
-inline ::Eaagles::Recorder::Pb::EmissionData* TrackDataMsg::mutable_emission_data() {
+inline ::oe::recorder::pb::EmissionData* TrackDataMsg::mutable_emission_data() {
   set_has_emission_data();
-  if (emission_data_ == NULL) emission_data_ = new ::Eaagles::Recorder::Pb::EmissionData;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.TrackDataMsg.emission_data)
+  if (emission_data_ == NULL) emission_data_ = new ::oe::recorder::pb::EmissionData;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.TrackDataMsg.emission_data)
   return emission_data_;
 }
-inline ::Eaagles::Recorder::Pb::EmissionData* TrackDataMsg::release_emission_data() {
+inline ::oe::recorder::pb::EmissionData* TrackDataMsg::release_emission_data() {
   clear_has_emission_data();
-  ::Eaagles::Recorder::Pb::EmissionData* temp = emission_data_;
+  ::oe::recorder::pb::EmissionData* temp = emission_data_;
   emission_data_ = NULL;
   return temp;
 }
-inline void TrackDataMsg::set_allocated_emission_data(::Eaagles::Recorder::Pb::EmissionData* emission_data) {
+inline void TrackDataMsg::set_allocated_emission_data(::oe::recorder::pb::EmissionData* emission_data) {
   delete emission_data_;
   emission_data_ = emission_data;
   if (emission_data) {
@@ -6854,7 +6854,7 @@ inline void TrackDataMsg::set_allocated_emission_data(::Eaagles::Recorder::Pb::E
   } else {
     clear_has_emission_data();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.TrackDataMsg.emission_data)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.TrackDataMsg.emission_data)
 }
 
 // -------------------------------------------------------------------
@@ -6876,13 +6876,13 @@ inline void Vector::clear_x() {
   clear_has_x();
 }
 inline double Vector::x() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.Vector.x)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.Vector.x)
   return x_;
 }
 inline void Vector::set_x(double value) {
   set_has_x();
   x_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.Vector.x)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.Vector.x)
 }
 
 // required double y = 2;
@@ -6900,13 +6900,13 @@ inline void Vector::clear_y() {
   clear_has_y();
 }
 inline double Vector::y() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.Vector.y)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.Vector.y)
   return y_;
 }
 inline void Vector::set_y(double value) {
   set_has_y();
   y_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.Vector.y)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.Vector.y)
 }
 
 // optional double z = 3;
@@ -6924,13 +6924,13 @@ inline void Vector::clear_z() {
   clear_has_z();
 }
 inline double Vector::z() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.Vector.z)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.Vector.z)
   return z_;
 }
 inline void Vector::set_z(double value) {
   set_has_z();
   z_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.Vector.z)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.Vector.z)
 }
 
 // optional double w = 4;
@@ -6948,13 +6948,13 @@ inline void Vector::clear_w() {
   clear_has_w();
 }
 inline double Vector::w() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.Vector.w)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.Vector.w)
   return w_;
 }
 inline void Vector::set_w(double value) {
   set_has_w();
   w_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.Vector.w)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.Vector.w)
 }
 
 // -------------------------------------------------------------------
@@ -6976,13 +6976,13 @@ inline void Time::clear_sim_time() {
   clear_has_sim_time();
 }
 inline double Time::sim_time() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.Time.sim_time)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.Time.sim_time)
   return sim_time_;
 }
 inline void Time::set_sim_time(double value) {
   set_has_sim_time();
   sim_time_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.Time.sim_time)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.Time.sim_time)
 }
 
 // optional double exec_time = 2;
@@ -7000,13 +7000,13 @@ inline void Time::clear_exec_time() {
   clear_has_exec_time();
 }
 inline double Time::exec_time() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.Time.exec_time)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.Time.exec_time)
   return exec_time_;
 }
 inline void Time::set_exec_time(double value) {
   set_has_exec_time();
   exec_time_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.Time.exec_time)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.Time.exec_time)
 }
 
 // optional double utc_time = 3;
@@ -7024,13 +7024,13 @@ inline void Time::clear_utc_time() {
   clear_has_utc_time();
 }
 inline double Time::utc_time() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.Time.utc_time)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.Time.utc_time)
   return utc_time_;
 }
 inline void Time::set_utc_time(double value) {
   set_has_utc_time();
   utc_time_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.Time.utc_time)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.Time.utc_time)
 }
 
 // -------------------------------------------------------------------
@@ -7052,13 +7052,13 @@ inline void PlayerId::clear_id() {
   clear_has_id();
 }
 inline ::google::protobuf::uint32 PlayerId::id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerId.id)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerId.id)
   return id_;
 }
 inline void PlayerId::set_id(::google::protobuf::uint32 value) {
   set_has_id();
   id_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.PlayerId.id)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.PlayerId.id)
 }
 
 // optional string name = 2;
@@ -7078,7 +7078,7 @@ inline void PlayerId::clear_name() {
   clear_has_name();
 }
 inline const ::std::string& PlayerId::name() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerId.name)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerId.name)
   return *name_;
 }
 inline void PlayerId::set_name(const ::std::string& value) {
@@ -7087,7 +7087,7 @@ inline void PlayerId::set_name(const ::std::string& value) {
     name_ = new ::std::string;
   }
   name_->assign(value);
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.PlayerId.name)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.PlayerId.name)
 }
 inline void PlayerId::set_name(const char* value) {
   set_has_name();
@@ -7095,7 +7095,7 @@ inline void PlayerId::set_name(const char* value) {
     name_ = new ::std::string;
   }
   name_->assign(value);
-  // @@protoc_insertion_point(field_set_char:Eaagles.Recorder.Pb.PlayerId.name)
+  // @@protoc_insertion_point(field_set_char:oe.Recorder.Pb.PlayerId.name)
 }
 inline void PlayerId::set_name(const char* value, size_t size) {
   set_has_name();
@@ -7103,14 +7103,14 @@ inline void PlayerId::set_name(const char* value, size_t size) {
     name_ = new ::std::string;
   }
   name_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:Eaagles.Recorder.Pb.PlayerId.name)
+  // @@protoc_insertion_point(field_set_pointer:oe.Recorder.Pb.PlayerId.name)
 }
 inline ::std::string* PlayerId::mutable_name() {
   set_has_name();
   if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     name_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.PlayerId.name)
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.PlayerId.name)
   return name_;
 }
 inline ::std::string* PlayerId::release_name() {
@@ -7134,7 +7134,7 @@ inline void PlayerId::set_allocated_name(::std::string* name) {
     clear_has_name();
     name_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.PlayerId.name)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.PlayerId.name)
 }
 
 // optional string fed_name = 3;
@@ -7154,7 +7154,7 @@ inline void PlayerId::clear_fed_name() {
   clear_has_fed_name();
 }
 inline const ::std::string& PlayerId::fed_name() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerId.fed_name)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerId.fed_name)
   return *fed_name_;
 }
 inline void PlayerId::set_fed_name(const ::std::string& value) {
@@ -7163,7 +7163,7 @@ inline void PlayerId::set_fed_name(const ::std::string& value) {
     fed_name_ = new ::std::string;
   }
   fed_name_->assign(value);
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.PlayerId.fed_name)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.PlayerId.fed_name)
 }
 inline void PlayerId::set_fed_name(const char* value) {
   set_has_fed_name();
@@ -7171,7 +7171,7 @@ inline void PlayerId::set_fed_name(const char* value) {
     fed_name_ = new ::std::string;
   }
   fed_name_->assign(value);
-  // @@protoc_insertion_point(field_set_char:Eaagles.Recorder.Pb.PlayerId.fed_name)
+  // @@protoc_insertion_point(field_set_char:oe.Recorder.Pb.PlayerId.fed_name)
 }
 inline void PlayerId::set_fed_name(const char* value, size_t size) {
   set_has_fed_name();
@@ -7179,14 +7179,14 @@ inline void PlayerId::set_fed_name(const char* value, size_t size) {
     fed_name_ = new ::std::string;
   }
   fed_name_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:Eaagles.Recorder.Pb.PlayerId.fed_name)
+  // @@protoc_insertion_point(field_set_pointer:oe.Recorder.Pb.PlayerId.fed_name)
 }
 inline ::std::string* PlayerId::mutable_fed_name() {
   set_has_fed_name();
   if (fed_name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     fed_name_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.PlayerId.fed_name)
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.PlayerId.fed_name)
   return fed_name_;
 }
 inline ::std::string* PlayerId::release_fed_name() {
@@ -7210,7 +7210,7 @@ inline void PlayerId::set_allocated_fed_name(::std::string* fed_name) {
     clear_has_fed_name();
     fed_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.PlayerId.fed_name)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.PlayerId.fed_name)
 }
 
 // optional uint32 side = 4;
@@ -7228,13 +7228,13 @@ inline void PlayerId::clear_side() {
   clear_has_side();
 }
 inline ::google::protobuf::uint32 PlayerId::side() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerId.side)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerId.side)
   return side_;
 }
 inline void PlayerId::set_side(::google::protobuf::uint32 value) {
   set_has_side();
   side_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.PlayerId.side)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.PlayerId.side)
 }
 
 // optional uint32 major_type = 5;
@@ -7252,13 +7252,13 @@ inline void PlayerId::clear_major_type() {
   clear_has_major_type();
 }
 inline ::google::protobuf::uint32 PlayerId::major_type() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerId.major_type)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerId.major_type)
   return major_type_;
 }
 inline void PlayerId::set_major_type(::google::protobuf::uint32 value) {
   set_has_major_type();
   major_type_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.PlayerId.major_type)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.PlayerId.major_type)
 }
 
 // optional string ac_type = 6;
@@ -7278,7 +7278,7 @@ inline void PlayerId::clear_ac_type() {
   clear_has_ac_type();
 }
 inline const ::std::string& PlayerId::ac_type() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerId.ac_type)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerId.ac_type)
   return *ac_type_;
 }
 inline void PlayerId::set_ac_type(const ::std::string& value) {
@@ -7287,7 +7287,7 @@ inline void PlayerId::set_ac_type(const ::std::string& value) {
     ac_type_ = new ::std::string;
   }
   ac_type_->assign(value);
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.PlayerId.ac_type)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.PlayerId.ac_type)
 }
 inline void PlayerId::set_ac_type(const char* value) {
   set_has_ac_type();
@@ -7295,7 +7295,7 @@ inline void PlayerId::set_ac_type(const char* value) {
     ac_type_ = new ::std::string;
   }
   ac_type_->assign(value);
-  // @@protoc_insertion_point(field_set_char:Eaagles.Recorder.Pb.PlayerId.ac_type)
+  // @@protoc_insertion_point(field_set_char:oe.Recorder.Pb.PlayerId.ac_type)
 }
 inline void PlayerId::set_ac_type(const char* value, size_t size) {
   set_has_ac_type();
@@ -7303,14 +7303,14 @@ inline void PlayerId::set_ac_type(const char* value, size_t size) {
     ac_type_ = new ::std::string;
   }
   ac_type_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:Eaagles.Recorder.Pb.PlayerId.ac_type)
+  // @@protoc_insertion_point(field_set_pointer:oe.Recorder.Pb.PlayerId.ac_type)
 }
 inline ::std::string* PlayerId::mutable_ac_type() {
   set_has_ac_type();
   if (ac_type_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     ac_type_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.PlayerId.ac_type)
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.PlayerId.ac_type)
   return ac_type_;
 }
 inline ::std::string* PlayerId::release_ac_type() {
@@ -7334,14 +7334,14 @@ inline void PlayerId::set_allocated_ac_type(::std::string* ac_type) {
     clear_has_ac_type();
     ac_type_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.PlayerId.ac_type)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.PlayerId.ac_type)
 }
 
 // -------------------------------------------------------------------
 
 // PlayerState
 
-// required .Eaagles.Recorder.Pb.Vector pos = 1;
+// required .oe.Recorder.Pb.Vector pos = 1;
 inline bool PlayerState::has_pos() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -7352,26 +7352,26 @@ inline void PlayerState::clear_has_pos() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void PlayerState::clear_pos() {
-  if (pos_ != NULL) pos_->::Eaagles::Recorder::Pb::Vector::Clear();
+  if (pos_ != NULL) pos_->::oe::recorder::pb::Vector::Clear();
   clear_has_pos();
 }
-inline const ::Eaagles::Recorder::Pb::Vector& PlayerState::pos() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerState.pos)
+inline const ::oe::recorder::pb::Vector& PlayerState::pos() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerState.pos)
   return pos_ != NULL ? *pos_ : *default_instance_->pos_;
 }
-inline ::Eaagles::Recorder::Pb::Vector* PlayerState::mutable_pos() {
+inline ::oe::recorder::pb::Vector* PlayerState::mutable_pos() {
   set_has_pos();
-  if (pos_ == NULL) pos_ = new ::Eaagles::Recorder::Pb::Vector;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.PlayerState.pos)
+  if (pos_ == NULL) pos_ = new ::oe::recorder::pb::Vector;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.PlayerState.pos)
   return pos_;
 }
-inline ::Eaagles::Recorder::Pb::Vector* PlayerState::release_pos() {
+inline ::oe::recorder::pb::Vector* PlayerState::release_pos() {
   clear_has_pos();
-  ::Eaagles::Recorder::Pb::Vector* temp = pos_;
+  ::oe::recorder::pb::Vector* temp = pos_;
   pos_ = NULL;
   return temp;
 }
-inline void PlayerState::set_allocated_pos(::Eaagles::Recorder::Pb::Vector* pos) {
+inline void PlayerState::set_allocated_pos(::oe::recorder::pb::Vector* pos) {
   delete pos_;
   pos_ = pos;
   if (pos) {
@@ -7379,10 +7379,10 @@ inline void PlayerState::set_allocated_pos(::Eaagles::Recorder::Pb::Vector* pos)
   } else {
     clear_has_pos();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.PlayerState.pos)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.PlayerState.pos)
 }
 
-// required .Eaagles.Recorder.Pb.Vector angles = 2;
+// required .oe.Recorder.Pb.Vector angles = 2;
 inline bool PlayerState::has_angles() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -7393,26 +7393,26 @@ inline void PlayerState::clear_has_angles() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void PlayerState::clear_angles() {
-  if (angles_ != NULL) angles_->::Eaagles::Recorder::Pb::Vector::Clear();
+  if (angles_ != NULL) angles_->::oe::recorder::pb::Vector::Clear();
   clear_has_angles();
 }
-inline const ::Eaagles::Recorder::Pb::Vector& PlayerState::angles() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerState.angles)
+inline const ::oe::recorder::pb::Vector& PlayerState::angles() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerState.angles)
   return angles_ != NULL ? *angles_ : *default_instance_->angles_;
 }
-inline ::Eaagles::Recorder::Pb::Vector* PlayerState::mutable_angles() {
+inline ::oe::recorder::pb::Vector* PlayerState::mutable_angles() {
   set_has_angles();
-  if (angles_ == NULL) angles_ = new ::Eaagles::Recorder::Pb::Vector;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.PlayerState.angles)
+  if (angles_ == NULL) angles_ = new ::oe::recorder::pb::Vector;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.PlayerState.angles)
   return angles_;
 }
-inline ::Eaagles::Recorder::Pb::Vector* PlayerState::release_angles() {
+inline ::oe::recorder::pb::Vector* PlayerState::release_angles() {
   clear_has_angles();
-  ::Eaagles::Recorder::Pb::Vector* temp = angles_;
+  ::oe::recorder::pb::Vector* temp = angles_;
   angles_ = NULL;
   return temp;
 }
-inline void PlayerState::set_allocated_angles(::Eaagles::Recorder::Pb::Vector* angles) {
+inline void PlayerState::set_allocated_angles(::oe::recorder::pb::Vector* angles) {
   delete angles_;
   angles_ = angles;
   if (angles) {
@@ -7420,10 +7420,10 @@ inline void PlayerState::set_allocated_angles(::Eaagles::Recorder::Pb::Vector* a
   } else {
     clear_has_angles();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.PlayerState.angles)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.PlayerState.angles)
 }
 
-// optional .Eaagles.Recorder.Pb.Vector vel = 3;
+// optional .oe.Recorder.Pb.Vector vel = 3;
 inline bool PlayerState::has_vel() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -7434,26 +7434,26 @@ inline void PlayerState::clear_has_vel() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void PlayerState::clear_vel() {
-  if (vel_ != NULL) vel_->::Eaagles::Recorder::Pb::Vector::Clear();
+  if (vel_ != NULL) vel_->::oe::recorder::pb::Vector::Clear();
   clear_has_vel();
 }
-inline const ::Eaagles::Recorder::Pb::Vector& PlayerState::vel() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerState.vel)
+inline const ::oe::recorder::pb::Vector& PlayerState::vel() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerState.vel)
   return vel_ != NULL ? *vel_ : *default_instance_->vel_;
 }
-inline ::Eaagles::Recorder::Pb::Vector* PlayerState::mutable_vel() {
+inline ::oe::recorder::pb::Vector* PlayerState::mutable_vel() {
   set_has_vel();
-  if (vel_ == NULL) vel_ = new ::Eaagles::Recorder::Pb::Vector;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.PlayerState.vel)
+  if (vel_ == NULL) vel_ = new ::oe::recorder::pb::Vector;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.PlayerState.vel)
   return vel_;
 }
-inline ::Eaagles::Recorder::Pb::Vector* PlayerState::release_vel() {
+inline ::oe::recorder::pb::Vector* PlayerState::release_vel() {
   clear_has_vel();
-  ::Eaagles::Recorder::Pb::Vector* temp = vel_;
+  ::oe::recorder::pb::Vector* temp = vel_;
   vel_ = NULL;
   return temp;
 }
-inline void PlayerState::set_allocated_vel(::Eaagles::Recorder::Pb::Vector* vel) {
+inline void PlayerState::set_allocated_vel(::oe::recorder::pb::Vector* vel) {
   delete vel_;
   vel_ = vel;
   if (vel) {
@@ -7461,7 +7461,7 @@ inline void PlayerState::set_allocated_vel(::Eaagles::Recorder::Pb::Vector* vel)
   } else {
     clear_has_vel();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.PlayerState.vel)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.PlayerState.vel)
 }
 
 // optional double damage = 4;
@@ -7479,13 +7479,13 @@ inline void PlayerState::clear_damage() {
   clear_has_damage();
 }
 inline double PlayerState::damage() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.PlayerState.damage)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.PlayerState.damage)
   return damage_;
 }
 inline void PlayerState::set_damage(double value) {
   set_has_damage();
   damage_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.PlayerState.damage)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.PlayerState.damage)
 }
 
 // -------------------------------------------------------------------
@@ -7507,13 +7507,13 @@ inline void TrackData::clear_type() {
   clear_has_type();
 }
 inline ::google::protobuf::uint32 TrackData::type() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.TrackData.type)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.TrackData.type)
   return type_;
 }
 inline void TrackData::set_type(::google::protobuf::uint32 value) {
   set_has_type();
   type_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.TrackData.type)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.TrackData.type)
 }
 
 // optional double quality = 2;
@@ -7531,13 +7531,13 @@ inline void TrackData::clear_quality() {
   clear_has_quality();
 }
 inline double TrackData::quality() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.TrackData.quality)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.TrackData.quality)
   return quality_;
 }
 inline void TrackData::set_quality(double value) {
   set_has_quality();
   quality_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.TrackData.quality)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.TrackData.quality)
 }
 
 // optional double true_az = 3;
@@ -7555,13 +7555,13 @@ inline void TrackData::clear_true_az() {
   clear_has_true_az();
 }
 inline double TrackData::true_az() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.TrackData.true_az)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.TrackData.true_az)
   return true_az_;
 }
 inline void TrackData::set_true_az(double value) {
   set_has_true_az();
   true_az_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.TrackData.true_az)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.TrackData.true_az)
 }
 
 // optional double rel_az = 4;
@@ -7579,13 +7579,13 @@ inline void TrackData::clear_rel_az() {
   clear_has_rel_az();
 }
 inline double TrackData::rel_az() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.TrackData.rel_az)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.TrackData.rel_az)
   return rel_az_;
 }
 inline void TrackData::set_rel_az(double value) {
   set_has_rel_az();
   rel_az_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.TrackData.rel_az)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.TrackData.rel_az)
 }
 
 // optional double elevation = 5;
@@ -7603,13 +7603,13 @@ inline void TrackData::clear_elevation() {
   clear_has_elevation();
 }
 inline double TrackData::elevation() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.TrackData.elevation)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.TrackData.elevation)
   return elevation_;
 }
 inline void TrackData::set_elevation(double value) {
   set_has_elevation();
   elevation_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.TrackData.elevation)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.TrackData.elevation)
 }
 
 // optional double range = 6;
@@ -7627,13 +7627,13 @@ inline void TrackData::clear_range() {
   clear_has_range();
 }
 inline double TrackData::range() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.TrackData.range)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.TrackData.range)
   return range_;
 }
 inline void TrackData::set_range(double value) {
   set_has_range();
   range_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.TrackData.range)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.TrackData.range)
 }
 
 // optional double latitude = 7;
@@ -7651,13 +7651,13 @@ inline void TrackData::clear_latitude() {
   clear_has_latitude();
 }
 inline double TrackData::latitude() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.TrackData.latitude)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.TrackData.latitude)
   return latitude_;
 }
 inline void TrackData::set_latitude(double value) {
   set_has_latitude();
   latitude_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.TrackData.latitude)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.TrackData.latitude)
 }
 
 // optional double longitude = 8;
@@ -7675,13 +7675,13 @@ inline void TrackData::clear_longitude() {
   clear_has_longitude();
 }
 inline double TrackData::longitude() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.TrackData.longitude)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.TrackData.longitude)
   return longitude_;
 }
 inline void TrackData::set_longitude(double value) {
   set_has_longitude();
   longitude_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.TrackData.longitude)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.TrackData.longitude)
 }
 
 // optional double altitude = 9;
@@ -7699,16 +7699,16 @@ inline void TrackData::clear_altitude() {
   clear_has_altitude();
 }
 inline double TrackData::altitude() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.TrackData.altitude)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.TrackData.altitude)
   return altitude_;
 }
 inline void TrackData::set_altitude(double value) {
   set_has_altitude();
   altitude_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.TrackData.altitude)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.TrackData.altitude)
 }
 
-// optional .Eaagles.Recorder.Pb.Vector position = 10;
+// optional .oe.Recorder.Pb.Vector position = 10;
 inline bool TrackData::has_position() const {
   return (_has_bits_[0] & 0x00000200u) != 0;
 }
@@ -7719,26 +7719,26 @@ inline void TrackData::clear_has_position() {
   _has_bits_[0] &= ~0x00000200u;
 }
 inline void TrackData::clear_position() {
-  if (position_ != NULL) position_->::Eaagles::Recorder::Pb::Vector::Clear();
+  if (position_ != NULL) position_->::oe::recorder::pb::Vector::Clear();
   clear_has_position();
 }
-inline const ::Eaagles::Recorder::Pb::Vector& TrackData::position() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.TrackData.position)
+inline const ::oe::recorder::pb::Vector& TrackData::position() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.TrackData.position)
   return position_ != NULL ? *position_ : *default_instance_->position_;
 }
-inline ::Eaagles::Recorder::Pb::Vector* TrackData::mutable_position() {
+inline ::oe::recorder::pb::Vector* TrackData::mutable_position() {
   set_has_position();
-  if (position_ == NULL) position_ = new ::Eaagles::Recorder::Pb::Vector;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.TrackData.position)
+  if (position_ == NULL) position_ = new ::oe::recorder::pb::Vector;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.TrackData.position)
   return position_;
 }
-inline ::Eaagles::Recorder::Pb::Vector* TrackData::release_position() {
+inline ::oe::recorder::pb::Vector* TrackData::release_position() {
   clear_has_position();
-  ::Eaagles::Recorder::Pb::Vector* temp = position_;
+  ::oe::recorder::pb::Vector* temp = position_;
   position_ = NULL;
   return temp;
 }
-inline void TrackData::set_allocated_position(::Eaagles::Recorder::Pb::Vector* position) {
+inline void TrackData::set_allocated_position(::oe::recorder::pb::Vector* position) {
   delete position_;
   position_ = position;
   if (position) {
@@ -7746,10 +7746,10 @@ inline void TrackData::set_allocated_position(::Eaagles::Recorder::Pb::Vector* p
   } else {
     clear_has_position();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.TrackData.position)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.TrackData.position)
 }
 
-// optional .Eaagles.Recorder.Pb.Vector velocity = 11;
+// optional .oe.Recorder.Pb.Vector velocity = 11;
 inline bool TrackData::has_velocity() const {
   return (_has_bits_[0] & 0x00000400u) != 0;
 }
@@ -7760,26 +7760,26 @@ inline void TrackData::clear_has_velocity() {
   _has_bits_[0] &= ~0x00000400u;
 }
 inline void TrackData::clear_velocity() {
-  if (velocity_ != NULL) velocity_->::Eaagles::Recorder::Pb::Vector::Clear();
+  if (velocity_ != NULL) velocity_->::oe::recorder::pb::Vector::Clear();
   clear_has_velocity();
 }
-inline const ::Eaagles::Recorder::Pb::Vector& TrackData::velocity() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.TrackData.velocity)
+inline const ::oe::recorder::pb::Vector& TrackData::velocity() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.TrackData.velocity)
   return velocity_ != NULL ? *velocity_ : *default_instance_->velocity_;
 }
-inline ::Eaagles::Recorder::Pb::Vector* TrackData::mutable_velocity() {
+inline ::oe::recorder::pb::Vector* TrackData::mutable_velocity() {
   set_has_velocity();
-  if (velocity_ == NULL) velocity_ = new ::Eaagles::Recorder::Pb::Vector;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.TrackData.velocity)
+  if (velocity_ == NULL) velocity_ = new ::oe::recorder::pb::Vector;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.TrackData.velocity)
   return velocity_;
 }
-inline ::Eaagles::Recorder::Pb::Vector* TrackData::release_velocity() {
+inline ::oe::recorder::pb::Vector* TrackData::release_velocity() {
   clear_has_velocity();
-  ::Eaagles::Recorder::Pb::Vector* temp = velocity_;
+  ::oe::recorder::pb::Vector* temp = velocity_;
   velocity_ = NULL;
   return temp;
 }
-inline void TrackData::set_allocated_velocity(::Eaagles::Recorder::Pb::Vector* velocity) {
+inline void TrackData::set_allocated_velocity(::oe::recorder::pb::Vector* velocity) {
   delete velocity_;
   velocity_ = velocity;
   if (velocity) {
@@ -7787,7 +7787,7 @@ inline void TrackData::set_allocated_velocity(::Eaagles::Recorder::Pb::Vector* v
   } else {
     clear_has_velocity();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.TrackData.velocity)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.TrackData.velocity)
 }
 
 // optional double avg_signal = 12;
@@ -7805,13 +7805,13 @@ inline void TrackData::clear_avg_signal() {
   clear_has_avg_signal();
 }
 inline double TrackData::avg_signal() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.TrackData.avg_signal)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.TrackData.avg_signal)
   return avg_signal_;
 }
 inline void TrackData::set_avg_signal(double value) {
   set_has_avg_signal();
   avg_signal_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.TrackData.avg_signal)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.TrackData.avg_signal)
 }
 
 // optional uint32 sl_index = 13;
@@ -7829,13 +7829,13 @@ inline void TrackData::clear_sl_index() {
   clear_has_sl_index();
 }
 inline ::google::protobuf::uint32 TrackData::sl_index() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.TrackData.sl_index)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.TrackData.sl_index)
   return sl_index_;
 }
 inline void TrackData::set_sl_index(::google::protobuf::uint32 value) {
   set_has_sl_index();
   sl_index_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.TrackData.sl_index)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.TrackData.sl_index)
 }
 
 // optional bool wpn_rel = 14;
@@ -7853,13 +7853,13 @@ inline void TrackData::clear_wpn_rel() {
   clear_has_wpn_rel();
 }
 inline bool TrackData::wpn_rel() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.TrackData.wpn_rel)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.TrackData.wpn_rel)
   return wpn_rel_;
 }
 inline void TrackData::set_wpn_rel(bool value) {
   set_has_wpn_rel();
   wpn_rel_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.TrackData.wpn_rel)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.TrackData.wpn_rel)
 }
 
 // -------------------------------------------------------------------
@@ -7881,13 +7881,13 @@ inline void EmissionData::clear_frequency() {
   clear_has_frequency();
 }
 inline double EmissionData::frequency() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.EmissionData.frequency)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.EmissionData.frequency)
   return frequency_;
 }
 inline void EmissionData::set_frequency(double value) {
   set_has_frequency();
   frequency_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.EmissionData.frequency)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.EmissionData.frequency)
 }
 
 // optional double wave_length = 2;
@@ -7905,13 +7905,13 @@ inline void EmissionData::clear_wave_length() {
   clear_has_wave_length();
 }
 inline double EmissionData::wave_length() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.EmissionData.wave_length)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.EmissionData.wave_length)
   return wave_length_;
 }
 inline void EmissionData::set_wave_length(double value) {
   set_has_wave_length();
   wave_length_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.EmissionData.wave_length)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.EmissionData.wave_length)
 }
 
 // optional double pulse_width = 3;
@@ -7929,13 +7929,13 @@ inline void EmissionData::clear_pulse_width() {
   clear_has_pulse_width();
 }
 inline double EmissionData::pulse_width() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.EmissionData.pulse_width)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.EmissionData.pulse_width)
   return pulse_width_;
 }
 inline void EmissionData::set_pulse_width(double value) {
   set_has_pulse_width();
   pulse_width_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.EmissionData.pulse_width)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.EmissionData.pulse_width)
 }
 
 // optional double bandwidth = 4;
@@ -7953,13 +7953,13 @@ inline void EmissionData::clear_bandwidth() {
   clear_has_bandwidth();
 }
 inline double EmissionData::bandwidth() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.EmissionData.bandwidth)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.EmissionData.bandwidth)
   return bandwidth_;
 }
 inline void EmissionData::set_bandwidth(double value) {
   set_has_bandwidth();
   bandwidth_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.EmissionData.bandwidth)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.EmissionData.bandwidth)
 }
 
 // optional double prf = 5;
@@ -7977,13 +7977,13 @@ inline void EmissionData::clear_prf() {
   clear_has_prf();
 }
 inline double EmissionData::prf() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.EmissionData.prf)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.EmissionData.prf)
   return prf_;
 }
 inline void EmissionData::set_prf(double value) {
   set_has_prf();
   prf_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.EmissionData.prf)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.EmissionData.prf)
 }
 
 // optional double power = 6;
@@ -8001,16 +8001,16 @@ inline void EmissionData::clear_power() {
   clear_has_power();
 }
 inline double EmissionData::power() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.EmissionData.power)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.EmissionData.power)
   return power_;
 }
 inline void EmissionData::set_power(double value) {
   set_has_power();
   power_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.EmissionData.power)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.EmissionData.power)
 }
 
-// optional .Eaagles.Recorder.Pb.EmissionData.Polarization polarization = 7;
+// optional .oe.Recorder.Pb.EmissionData.Polarization polarization = 7;
 inline bool EmissionData::has_polarization() const {
   return (_has_bits_[0] & 0x00000040u) != 0;
 }
@@ -8024,15 +8024,15 @@ inline void EmissionData::clear_polarization() {
   polarization_ = 0;
   clear_has_polarization();
 }
-inline ::Eaagles::Recorder::Pb::EmissionData_Polarization EmissionData::polarization() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.EmissionData.polarization)
-  return static_cast< ::Eaagles::Recorder::Pb::EmissionData_Polarization >(polarization_);
+inline ::oe::recorder::pb::EmissionData_Polarization EmissionData::polarization() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.EmissionData.polarization)
+  return static_cast< ::oe::recorder::pb::EmissionData_Polarization >(polarization_);
 }
-inline void EmissionData::set_polarization(::Eaagles::Recorder::Pb::EmissionData_Polarization value) {
-  assert(::Eaagles::Recorder::Pb::EmissionData_Polarization_IsValid(value));
+inline void EmissionData::set_polarization(::oe::recorder::pb::EmissionData_Polarization value) {
+  assert(::oe::recorder::pb::EmissionData_Polarization_IsValid(value));
   set_has_polarization();
   polarization_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.EmissionData.polarization)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.EmissionData.polarization)
 }
 
 // optional double azimuth_aoi = 8;
@@ -8050,13 +8050,13 @@ inline void EmissionData::clear_azimuth_aoi() {
   clear_has_azimuth_aoi();
 }
 inline double EmissionData::azimuth_aoi() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.EmissionData.azimuth_aoi)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.EmissionData.azimuth_aoi)
   return azimuth_aoi_;
 }
 inline void EmissionData::set_azimuth_aoi(double value) {
   set_has_azimuth_aoi();
   azimuth_aoi_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.EmissionData.azimuth_aoi)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.EmissionData.azimuth_aoi)
 }
 
 // optional double elevation_aoi = 9;
@@ -8074,16 +8074,16 @@ inline void EmissionData::clear_elevation_aoi() {
   clear_has_elevation_aoi();
 }
 inline double EmissionData::elevation_aoi() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.EmissionData.elevation_aoi)
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.EmissionData.elevation_aoi)
   return elevation_aoi_;
 }
 inline void EmissionData::set_elevation_aoi(double value) {
   set_has_elevation_aoi();
   elevation_aoi_ = value;
-  // @@protoc_insertion_point(field_set:Eaagles.Recorder.Pb.EmissionData.elevation_aoi)
+  // @@protoc_insertion_point(field_set:oe.Recorder.Pb.EmissionData.elevation_aoi)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerId origin_id = 10;
+// optional .oe.Recorder.Pb.PlayerId origin_id = 10;
 inline bool EmissionData::has_origin_id() const {
   return (_has_bits_[0] & 0x00000200u) != 0;
 }
@@ -8094,26 +8094,26 @@ inline void EmissionData::clear_has_origin_id() {
   _has_bits_[0] &= ~0x00000200u;
 }
 inline void EmissionData::clear_origin_id() {
-  if (origin_id_ != NULL) origin_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  if (origin_id_ != NULL) origin_id_->::oe::recorder::pb::PlayerId::Clear();
   clear_has_origin_id();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerId& EmissionData::origin_id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.EmissionData.origin_id)
+inline const ::oe::recorder::pb::PlayerId& EmissionData::origin_id() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.EmissionData.origin_id)
   return origin_id_ != NULL ? *origin_id_ : *default_instance_->origin_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* EmissionData::mutable_origin_id() {
+inline ::oe::recorder::pb::PlayerId* EmissionData::mutable_origin_id() {
   set_has_origin_id();
-  if (origin_id_ == NULL) origin_id_ = new ::Eaagles::Recorder::Pb::PlayerId;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.EmissionData.origin_id)
+  if (origin_id_ == NULL) origin_id_ = new ::oe::recorder::pb::PlayerId;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.EmissionData.origin_id)
   return origin_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* EmissionData::release_origin_id() {
+inline ::oe::recorder::pb::PlayerId* EmissionData::release_origin_id() {
   clear_has_origin_id();
-  ::Eaagles::Recorder::Pb::PlayerId* temp = origin_id_;
+  ::oe::recorder::pb::PlayerId* temp = origin_id_;
   origin_id_ = NULL;
   return temp;
 }
-inline void EmissionData::set_allocated_origin_id(::Eaagles::Recorder::Pb::PlayerId* origin_id) {
+inline void EmissionData::set_allocated_origin_id(::oe::recorder::pb::PlayerId* origin_id) {
   delete origin_id_;
   origin_id_ = origin_id;
   if (origin_id) {
@@ -8121,10 +8121,10 @@ inline void EmissionData::set_allocated_origin_id(::Eaagles::Recorder::Pb::Playe
   } else {
     clear_has_origin_id();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.EmissionData.origin_id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.EmissionData.origin_id)
 }
 
-// optional .Eaagles.Recorder.Pb.PlayerId target_id = 11;
+// optional .oe.Recorder.Pb.PlayerId target_id = 11;
 inline bool EmissionData::has_target_id() const {
   return (_has_bits_[0] & 0x00000400u) != 0;
 }
@@ -8135,26 +8135,26 @@ inline void EmissionData::clear_has_target_id() {
   _has_bits_[0] &= ~0x00000400u;
 }
 inline void EmissionData::clear_target_id() {
-  if (target_id_ != NULL) target_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  if (target_id_ != NULL) target_id_->::oe::recorder::pb::PlayerId::Clear();
   clear_has_target_id();
 }
-inline const ::Eaagles::Recorder::Pb::PlayerId& EmissionData::target_id() const {
-  // @@protoc_insertion_point(field_get:Eaagles.Recorder.Pb.EmissionData.target_id)
+inline const ::oe::recorder::pb::PlayerId& EmissionData::target_id() const {
+  // @@protoc_insertion_point(field_get:oe.Recorder.Pb.EmissionData.target_id)
   return target_id_ != NULL ? *target_id_ : *default_instance_->target_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* EmissionData::mutable_target_id() {
+inline ::oe::recorder::pb::PlayerId* EmissionData::mutable_target_id() {
   set_has_target_id();
-  if (target_id_ == NULL) target_id_ = new ::Eaagles::Recorder::Pb::PlayerId;
-  // @@protoc_insertion_point(field_mutable:Eaagles.Recorder.Pb.EmissionData.target_id)
+  if (target_id_ == NULL) target_id_ = new ::oe::recorder::pb::PlayerId;
+  // @@protoc_insertion_point(field_mutable:oe.Recorder.Pb.EmissionData.target_id)
   return target_id_;
 }
-inline ::Eaagles::Recorder::Pb::PlayerId* EmissionData::release_target_id() {
+inline ::oe::recorder::pb::PlayerId* EmissionData::release_target_id() {
   clear_has_target_id();
-  ::Eaagles::Recorder::Pb::PlayerId* temp = target_id_;
+  ::oe::recorder::pb::PlayerId* temp = target_id_;
   target_id_ = NULL;
   return temp;
 }
-inline void EmissionData::set_allocated_target_id(::Eaagles::Recorder::Pb::PlayerId* target_id) {
+inline void EmissionData::set_allocated_target_id(::oe::recorder::pb::PlayerId* target_id) {
   delete target_id_;
   target_id_ = target_id;
   if (target_id) {
@@ -8162,29 +8162,29 @@ inline void EmissionData::set_allocated_target_id(::Eaagles::Recorder::Pb::Playe
   } else {
     clear_has_target_id();
   }
-  // @@protoc_insertion_point(field_set_allocated:Eaagles.Recorder.Pb.EmissionData.target_id)
+  // @@protoc_insertion_point(field_set_allocated:oe.Recorder.Pb.EmissionData.target_id)
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace Pb
+}  // namespace pb
 }  // namespace Recorder
-}  // namespace Eaagles
+}  // namespace oe
 
 #ifndef SWIG
 namespace google {
 namespace protobuf {
 
-template <> struct is_proto_enum< ::Eaagles::Recorder::Pb::WeaponDetonationEventMsg_DetonationType> : ::google::protobuf::internal::true_type {};
+template <> struct is_proto_enum< ::oe::recorder::pb::WeaponDetonationEventMsg_DetonationType> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Eaagles::Recorder::Pb::WeaponDetonationEventMsg_DetonationType>() {
-  return ::Eaagles::Recorder::Pb::WeaponDetonationEventMsg_DetonationType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::oe::recorder::pb::WeaponDetonationEventMsg_DetonationType>() {
+  return ::oe::recorder::pb::WeaponDetonationEventMsg_DetonationType_descriptor();
 }
-template <> struct is_proto_enum< ::Eaagles::Recorder::Pb::EmissionData_Polarization> : ::google::protobuf::internal::true_type {};
+template <> struct is_proto_enum< ::oe::recorder::pb::EmissionData_Polarization> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Eaagles::Recorder::Pb::EmissionData_Polarization>() {
-  return ::Eaagles::Recorder::Pb::EmissionData_Polarization_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::oe::recorder::pb::EmissionData_Polarization>() {
+  return ::oe::recorder::pb::EmissionData_Polarization_descriptor();
 }
 
 }  // namespace google

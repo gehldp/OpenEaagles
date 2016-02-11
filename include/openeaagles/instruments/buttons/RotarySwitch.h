@@ -1,16 +1,16 @@
 //------------------------------------------------------------------------------
 // Class:       RotarySwitch
-// Base class:  Basic::Object -> Basic::Component -> BasicGL::Graphic -> Button -> RotarySwitch
+// Base class:  basic::Object -> basic::Component -> graphics::Graphic -> Button -> RotarySwitch
 // Description: Generic multi-position selector switch that knows when it is left or right
 //                mouse clicked and moves to next or previous switch position.
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_RotarySwitch_H__
-#define __Eaagles_Instruments_RotarySwitch_H__
+#ifndef __oe_instruments_RotarySwitch_H__
+#define __oe_instruments_RotarySwitch_H__
 
 #include "openeaagles/instruments/buttons/Button.h"
 
-namespace Eaagles {
-namespace Instruments {
+namespace oe {
+namespace instruments {
 
 class RotarySwitch : public Button
 {
@@ -27,8 +27,8 @@ public:
    void updateData(const LCreal dt = 0.0) override;
 
 protected:
-    bool setSlotAngles(const Basic::PairStream* const stream);
-    bool setSlotStartPosition(const Basic::Number* const x);
+    bool setSlotAngles(const basic::PairStream* const stream);
+    bool setSlotStartPosition(const basic::Number* const x);
 
 private:
     static const int MAX_ANGLES = 500;
@@ -40,7 +40,7 @@ private:
     SendData angleSD;       // angle to send to our rotator
 };
 
-}  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end instruments namespace
+}  // end oe namespace
 
 #endif

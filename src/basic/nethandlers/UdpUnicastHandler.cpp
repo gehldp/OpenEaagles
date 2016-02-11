@@ -32,8 +32,8 @@
 #include <cstdio>
 #include <cstring>
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 //==============================================================================
 // Class: UdpUnicastHandler
@@ -240,6 +240,6 @@ std::ostream& UdpUnicastHandler::serialize(std::ostream& sout, const int i, cons
     return sout;
 }
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 

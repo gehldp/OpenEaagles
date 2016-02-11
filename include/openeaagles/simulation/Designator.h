@@ -4,19 +4,19 @@
 // Description: General designator (e.g., laser)
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Designator_H__
-#define __Eaagles_Simulation_Designator_H__
+#ifndef __oe_simulation_Designator_H__
+#define __oe_simulation_Designator_H__
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 class Player;
 
-class Designator : public Basic::Object
+class Designator : public basic::Object
 {
-    DECLARE_SUBCLASS(Designator,Basic::Object)
+    DECLARE_SUBCLASS(Designator,basic::Object)
 
 public:
    // Since we're not using DIS Designator PDUs yet, use this to send
@@ -66,7 +66,7 @@ private:
    Data data;          // Designator data (see above)
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

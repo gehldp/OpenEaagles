@@ -39,23 +39,23 @@
 //
 // ------------------------------------------------------------------------------
 
-#ifndef __Eaagles_Maps_Rpf_TexturePager_H__
-#define __Eaagles_Maps_Rpf_TexturePager_H__
+#ifndef __oe_maps_rpf_TexturePager_H__
+#define __oe_maps_rpf_TexturePager_H__
 
 #include "openeaagles/basic/Object.h"
 #include "TextureTable.h"
 
-namespace Eaagles {
-namespace Basic { class List; }
-namespace Maps {
-namespace Rpf {
+namespace oe {
+namespace basic { class List; }
+namespace maps {
+namespace rpf {
 
 class CadrgMap;
 class CadrgTocEntry;
 
-class TexturePager : public Basic::Object
+class TexturePager : public basic::Object
 {
-    DECLARE_SUBCLASS(TexturePager, Basic::Object)
+    DECLARE_SUBCLASS(TexturePager, basic::Object)
 
 public:
     TexturePager();
@@ -79,7 +79,7 @@ private:
     void reuseTextures();
     void loadNewTextures();
 
-    Basic::List* stack;
+    basic::List* stack;
 
     TextureTable table;
     int maxTableSize;
@@ -91,9 +91,9 @@ private:
     CadrgTocEntry* toc;
 };
 
-} // End Rpf namespace
-} // End Maps namespace
-} // End Eaagles namespace
+} // End rpf namespace
+} // End maps namespace
+} // End oe namespace
 
 #endif
 

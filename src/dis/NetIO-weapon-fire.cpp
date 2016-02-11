@@ -15,9 +15,9 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
 
-namespace Eaagles {
-namespace Network {
-namespace Dis {
+namespace oe {
+namespace network {
+namespace dis {
 
 //------------------------------------------------------------------------------
 // processFirePDU() callback --
@@ -53,10 +53,10 @@ void NetIO::processFirePDU(const FirePDU* const pdu)
     // ---
     // 1) Find the target (local) player
     // ---
-    Simulation::Player* tPlayer = nullptr;
+    simulation::Player* tPlayer = nullptr;
     if (tSiteId == getSiteID() && tApplicationId == getApplicationID()) {
         // Must be local
-        Basic::safe_ptr<Basic::PairStream> players( getSimulation()->getPlayers() );
+        basic::safe_ptr<basic::PairStream> players( getSimulation()->getPlayers() );
         tPlayer = getSimulation()->findPlayer(tPlayerId);
     }
     //std::cout << "Net Fire(2) tPlayer = " << tPlayer << std::endl;
@@ -64,8 +64,8 @@ void NetIO::processFirePDU(const FirePDU* const pdu)
     // ---
     // 2) Find the firing player and munitions (networked) IPlayers
     // ---
-    Simulation::Nib* fNib = nullptr;
-    Simulation::Nib* mNib = nullptr;
+    simulation::Nib* fNib = nullptr;
+    simulation::Nib* mNib = nullptr;
     if (fSiteId != getSiteID() || fApplicationId != getApplicationID()) {
         // Must be networked players
         fNib = findDisNib(fPlayerId, fSiteId, fApplicationId, INPUT_NIB);
@@ -76,6 +76,6 @@ void NetIO::processFirePDU(const FirePDU* const pdu)
     // --- Nothing really needs to be done.
 }
 
-} // End Dis namespace
+} // End dis namespace
 } // End Network namespace
-} // End Eaagles namespace
+} // End oe namespace

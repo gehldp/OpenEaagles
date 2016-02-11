@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: IrAtmosphere
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_IrAtmosphere_H__
-#define __Eaagles_Simulation_IrAtmosphere_H__
+#ifndef __oe_simulation_IrAtmosphere_H__
+#define __oe_simulation_IrAtmosphere_H__
 
 #include "openeaagles/basic/Component.h"
 
-namespace Eaagles {
+namespace oe {
 
-   namespace Basic {
+   namespace basic {
       class Number;
       class Table1;
       class Table2;
@@ -18,12 +18,12 @@ namespace Eaagles {
       class Number;
    }
 
-namespace Simulation {
+namespace simulation {
 
 class IrQueryMsg;
 
 //------------------------------------------------------------------------------
-// Class:   Simulation::IrAtmosphere
+// Class:   simulation::IrAtmosphere
 //
 // Description: Manages the atmospheric data to determine transmissivity
 //              and background radiation for specific infrared wavelengths
@@ -88,9 +88,9 @@ class IrQueryMsg;
 //
 //------------------------------------------------------------------------------
 
-class IrAtmosphere : public Basic::Component
+class IrAtmosphere : public basic::Component
 {
-   DECLARE_SUBCLASS(IrAtmosphere,Basic::Component)
+   DECLARE_SUBCLASS(IrAtmosphere,basic::Component)
 
 public:
    IrAtmosphere();
@@ -130,10 +130,10 @@ public:
 protected:
 
    // slot operations 
-   virtual bool setSlotWaveBands(const Basic::Table1* const tbl);
-   virtual bool setSlotTransmissivityTable1(const Basic::Table1* const tbl);
-   virtual bool setSlotSkyRadiance(Basic::Number* const num);
-   virtual bool setSlotEarthRadiance(Basic::Number* const num);
+   virtual bool setSlotWaveBands(const basic::Table1* const tbl);
+   virtual bool setSlotTransmissivityTable1(const basic::Table1* const tbl);
+   virtual bool setSlotSkyRadiance(basic::Number* const num);
+   virtual bool setSlotEarthRadiance(basic::Number* const num);
 
    LCreal getTransmissivity(const unsigned int i, const LCreal range) const;
    LCreal getTransmissivity(const LCreal waveBandCenter, const LCreal range) const;
@@ -143,14 +143,14 @@ protected:
 private:
 
    unsigned int numWaveBands;
-   const Basic::Table1* waveBandTable;
-   const Basic::Table1* transmissivityTable1;
+   const basic::Table1* waveBandTable;
+   const basic::Table1* transmissivityTable1;
 
    LCreal skyRadiance;      // Simple background radiance for targets in sky
    LCreal earthRadiance;    // Simple background radiance for targets on ground
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

@@ -16,9 +16,9 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
-namespace Eaagles {
-namespace Recorder {
-namespace Pb {
+namespace oe {
+namespace recorder {
+namespace pb {
 
 namespace {
 
@@ -716,38 +716,38 @@ void protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto() {
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n.openeaagles/recorder/protobuf/DataReco"
-    "rd.proto\022\023Eaagles.Recorder.Pb\"\264\n\n\nDataRe"
-    "cord\022\'\n\004time\030\001 \002(\0132\031.Eaagles.Recorder.Pb"
+    "rd.proto\022\023oe.Recorder.Pb\"\264\n\n\nDataRe"
+    "cord\022\'\n\004time\030\001 \002(\0132\031.oe.Recorder.Pb"
     ".Time\022\n\n\002id\030\002 \002(\r\0223\n\013file_id_msg\030\013 \001(\0132\036"
-    ".Eaagles.Recorder.Pb.FileIdMsg\0229\n\016unknow"
-    "n_id_msg\030\r \001(\0132!.Eaagles.Recorder.Pb.Unk"
-    "nownIdMsg\0222\n\nmarker_msg\030\016 \001(\0132\036.Eaagles."
+    ".oe.Recorder.Pb.FileIdMsg\0229\n\016unknow"
+    "n_id_msg\030\r \001(\0132!.oe.Recorder.Pb.Unk"
+    "nownIdMsg\0222\n\nmarker_msg\030\016 \001(\0132\036.oe."
     "Recorder.Pb.MarkerMsg\022=\n\020input_device_ms"
-    "g\030\017 \001(\0132#.Eaagles.Recorder.Pb.InputDevic"
+    "g\030\017 \001(\0132#.oe.Recorder.Pb.InputDevic"
     "eMsg\022D\n\024new_player_event_msg\030\037 \001(\0132&.Eaa"
     "gles.Recorder.Pb.NewPlayerEventMsg\022L\n\030pl"
-    "ayer_removed_event_msg\030  \001(\0132*.Eaagles.R"
+    "ayer_removed_event_msg\030  \001(\0132*.oe.R"
     "ecorder.Pb.PlayerRemovedEventMsg\022;\n\017play"
-    "er_data_msg\030! \001(\0132\".Eaagles.Recorder.Pb."
+    "er_data_msg\030! \001(\0132\".oe.Recorder.Pb."
     "PlayerDataMsg\022L\n\030player_damaged_event_ms"
-    "g\030\" \001(\0132*.Eaagles.Recorder.Pb.PlayerDama"
+    "g\030\" \001(\0132*.oe.Recorder.Pb.PlayerDama"
     "gedEventMsg\022P\n\032player_collision_event_ms"
-    "g\030# \001(\0132,.Eaagles.Recorder.Pb.PlayerColl"
+    "g\030# \001(\0132,.oe.Recorder.Pb.PlayerColl"
     "isionEventMsg\022H\n\026player_crash_event_msg\030"
-    "$ \001(\0132(.Eaagles.Recorder.Pb.PlayerCrashE"
+    "$ \001(\0132(.oe.Recorder.Pb.PlayerCrashE"
     "ventMsg\022J\n\027player_killed_event_msg\030% \001(\013"
-    "2).Eaagles.Recorder.Pb.PlayerKilledEvent"
+    "2).oe.Recorder.Pb.PlayerKilledEvent"
     "Msg\022L\n\030weapon_release_event_msg\0303 \001(\0132*."
-    "Eaagles.Recorder.Pb.WeaponReleaseEventMs"
+    "oe.Recorder.Pb.WeaponReleaseEventMs"
     "g\022F\n\025weapon_hung_event_msg\0304 \001(\0132\'.Eaagl"
     "es.Recorder.Pb.WeaponHungEventMsg\022R\n\033wea"
-    "pon_detonation_event_msg\0305 \001(\0132-.Eaagles"
+    "pon_detonation_event_msg\0305 \001(\0132-.oe"
     ".Recorder.Pb.WeaponDetonationEventMsg\022B\n"
-    "\023gun_fired_event_msg\0306 \001(\0132%.Eaagles.Rec"
+    "\023gun_fired_event_msg\0306 \001(\0132%.oe.Rec"
     "order.Pb.GunFiredEventMsg\022B\n\023new_track_e"
-    "vent_msg\030G \001(\0132%.Eaagles.Recorder.Pb.New"
+    "vent_msg\030G \001(\0132%.oe.Recorder.Pb.New"
     "TrackEventMsg\022J\n\027track_removed_event_msg"
-    "\030H \001(\0132).Eaagles.Recorder.Pb.TrackRemove"
+    "\030H \001(\0132).oe.Recorder.Pb.TrackRemove"
     "dEventMsg\0229\n\016track_data_msg\030I \001(\0132!.Eaag"
     "les.Recorder.Pb.TrackDataMsg*\006\010\364\003\020\350\007*\006\010\350"
     "\007\020\220N\"\270\001\n\tFileIdMsg\022\022\n\nevent_name\030\001 \001(\t\022\023"
@@ -759,51 +759,51 @@ void protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto() {
     " \001(\r\022\021\n\tsource_id\030\002 \001(\r*\004\0102\020d*\005\010d\020\350\007\"K\n\016"
     "InputDeviceMsg\022\n\n\002id\030\001 \002(\r\022\021\n\tsource_id\030"
     "\002 \001(\r\022\r\n\005value\030\003 \001(\002*\004\0102\020d*\005\010d\020\350\007\"|\n\021New"
-    "PlayerEventMsg\022)\n\002id\030\001 \002(\0132\035.Eaagles.Rec"
+    "PlayerEventMsg\022)\n\002id\030\001 \002(\0132\035.oe.Rec"
     "order.Pb.PlayerId\022/\n\005state\030\002 \002(\0132 .Eaagl"
     "es.Recorder.Pb.PlayerState*\004\0102\020d*\005\010d\020\350\007\""
     "\200\001\n\025PlayerRemovedEventMsg\022)\n\002id\030\001 \002(\0132\035."
-    "Eaagles.Recorder.Pb.PlayerId\022/\n\005state\030\002 "
-    "\001(\0132 .Eaagles.Recorder.Pb.PlayerState*\004\010"
+    "oe.Recorder.Pb.PlayerId\022/\n\005state\030\002 "
+    "\001(\0132 .oe.Recorder.Pb.PlayerState*\004\010"
     "2\020d*\005\010d\020\350\007\"\242\001\n\rPlayerDataMsg\022)\n\002id\030\001 \002(\013"
-    "2\035.Eaagles.Recorder.Pb.PlayerId\022/\n\005state"
-    "\030\002 \002(\0132 .Eaagles.Recorder.Pb.PlayerState"
+    "2\035.oe.Recorder.Pb.PlayerId\022/\n\005state"
+    "\030\002 \002(\0132 .oe.Recorder.Pb.PlayerState"
     "\022\r\n\005alpha\030\003 \001(\001\022\014\n\004beta\030\004 \001(\001\022\013\n\003cas\030\005 \001"
     "(\001*\004\0102\020d*\005\010d\020\350\007\"\200\001\n\025PlayerDamagedEventMs"
-    "g\022)\n\002id\030\001 \002(\0132\035.Eaagles.Recorder.Pb.Play"
-    "erId\022/\n\005state\030\002 \001(\0132 .Eaagles.Recorder.P"
+    "g\022)\n\002id\030\001 \002(\0132\035.oe.Recorder.Pb.Play"
+    "erId\022/\n\005state\030\002 \001(\0132 .oe.Recorder.P"
     "b.PlayerState*\004\0102\020d*\005\010d\020\350\007\"\272\001\n\027PlayerCol"
-    "lisionEventMsg\022)\n\002id\030\001 \002(\0132\035.Eaagles.Rec"
+    "lisionEventMsg\022)\n\002id\030\001 \002(\0132\035.oe.Rec"
     "order.Pb.PlayerId\022/\n\005state\030\002 \001(\0132 .Eaagl"
     "es.Recorder.Pb.PlayerState\0226\n\017other_play"
-    "er_id\030\003 \001(\0132\035.Eaagles.Recorder.Pb.Player"
+    "er_id\030\003 \001(\0132\035.oe.Recorder.Pb.Player"
     "Id*\004\0102\020d*\005\010d\020\350\007\"~\n\023PlayerCrashEventMsg\022)"
-    "\n\002id\030\001 \002(\0132\035.Eaagles.Recorder.Pb.PlayerI"
-    "d\022/\n\005state\030\002 \001(\0132 .Eaagles.Recorder.Pb.P"
+    "\n\002id\030\001 \002(\0132\035.oe.Recorder.Pb.PlayerI"
+    "d\022/\n\005state\030\002 \001(\0132 .oe.Recorder.Pb.P"
     "layerState*\004\0102\020d*\005\010d\020\350\007\"\262\001\n\024PlayerKilled"
-    "EventMsg\022)\n\002id\030\001 \002(\0132\035.Eaagles.Recorder."
-    "Pb.PlayerId\022/\n\005state\030\002 \001(\0132 .Eaagles.Rec"
+    "EventMsg\022)\n\002id\030\001 \002(\0132\035.oe.Recorder."
+    "Pb.PlayerId\022/\n\005state\030\002 \001(\0132 .oe.Rec"
     "order.Pb.PlayerState\0221\n\nshooter_id\030\003 \001(\013"
-    "2\035.Eaagles.Recorder.Pb.PlayerId*\004\0102\020d*\005\010"
+    "2\035.oe.Recorder.Pb.PlayerId*\004\0102\020d*\005\010"
     "d\020\350\007\"\352\001\n\025WeaponReleaseEventMsg\022-\n\006wpn_id"
-    "\030\001 \002(\0132\035.Eaagles.Recorder.Pb.PlayerId\0223\n"
-    "\twpn_state\030\002 \001(\0132 .Eaagles.Recorder.Pb.P"
-    "layerState\0221\n\nshooter_id\030\003 \001(\0132\035.Eaagles"
+    "\030\001 \002(\0132\035.oe.Recorder.Pb.PlayerId\0223\n"
+    "\twpn_state\030\002 \001(\0132 .oe.Recorder.Pb.P"
+    "layerState\0221\n\nshooter_id\030\003 \001(\0132\035.oe"
     ".Recorder.Pb.PlayerId\022-\n\006tgt_id\030\004 \001(\0132\035."
-    "Eaagles.Recorder.Pb.PlayerId*\004\0102\020d*\005\010d\020\350"
+    "oe.Recorder.Pb.PlayerId*\004\0102\020d*\005\010d\020\350"
     "\007\"\347\001\n\022WeaponHungEventMsg\022-\n\006wpn_id\030\001 \002(\013"
-    "2\035.Eaagles.Recorder.Pb.PlayerId\0223\n\twpn_s"
-    "tate\030\002 \001(\0132 .Eaagles.Recorder.Pb.PlayerS"
-    "tate\0221\n\nshooter_id\030\003 \001(\0132\035.Eaagles.Recor"
-    "der.Pb.PlayerId\022-\n\006tgt_id\030\004 \001(\0132\035.Eaagle"
+    "2\035.oe.Recorder.Pb.PlayerId\0223\n\twpn_s"
+    "tate\030\002 \001(\0132 .oe.Recorder.Pb.PlayerS"
+    "tate\0221\n\nshooter_id\030\003 \001(\0132\035.oe.Recor"
+    "der.Pb.PlayerId\022-\n\006tgt_id\030\004 \001(\0132\035.oe"
     "s.Recorder.Pb.PlayerId*\004\0102\020d*\005\010d\020\350\007\"\257\004\n\030"
     "WeaponDetonationEventMsg\022-\n\006wpn_id\030\001 \002(\013"
-    "2\035.Eaagles.Recorder.Pb.PlayerId\0223\n\twpn_s"
-    "tate\030\002 \001(\0132 .Eaagles.Recorder.Pb.PlayerS"
-    "tate\0221\n\nshooter_id\030\003 \001(\0132\035.Eaagles.Recor"
+    "2\035.oe.Recorder.Pb.PlayerId\0223\n\twpn_s"
+    "tate\030\002 \001(\0132 .oe.Recorder.Pb.PlayerS"
+    "tate\0221\n\nshooter_id\030\003 \001(\0132\035.oe.Recor"
     "der.Pb.PlayerId\022-\n\006tgt_id\030\004 \001(\0132\035.Eaagle"
     "s.Recorder.Pb.PlayerId\022N\n\010det_type\030\005 \001(\016"
-    "2<.Eaagles.Recorder.Pb.WeaponDetonationE"
+    "2<.oe.Recorder.Pb.WeaponDetonationE"
     "ventMsg.DetonationType\022\021\n\tmiss_dist\030\006 \001("
     "\001\"\334\001\n\016DetonationType\022\022\n\016DETONATE_OTHER\020\000"
     "\022\032\n\026DETONATE_ENTITY_IMPACT\020\001\022(\n$DETONATE"
@@ -812,27 +812,27 @@ void protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto() {
     "OXIMATE_DETONATION\020\004\022\027\n\023DETONATE_DETONAT"
     "ION\020\005\022\021\n\rDETONATE_NONE\020\006*\004\0102\020d*\005\010d\020\350\007\"b\n"
     "\020GunFiredEventMsg\0221\n\nshooter_id\030\001 \002(\0132\035."
-    "Eaagles.Recorder.Pb.PlayerId\022\016\n\006rounds\030\002"
+    "oe.Recorder.Pb.PlayerId\022\016\n\006rounds\030\002"
     " \001(\r*\004\0102\020d*\005\010d\020\350\007\"\373\002\n\020NewTrackEventMsg\0220"
-    "\n\tplayer_id\030\001 \002(\0132\035.Eaagles.Recorder.Pb."
+    "\n\tplayer_id\030\001 \002(\0132\035.oe.Recorder.Pb."
     "PlayerId\022\020\n\010track_id\030\002 \002(\t\0222\n\ntrack_data"
-    "\030\003 \001(\0132\036.Eaagles.Recorder.Pb.TrackData\0226"
-    "\n\014player_state\030\004 \001(\0132 .Eaagles.Recorder."
+    "\030\003 \001(\0132\036.oe.Recorder.Pb.TrackData\0226"
+    "\n\014player_state\030\004 \001(\0132 .oe.Recorder."
     "Pb.PlayerState\0224\n\rtrk_player_id\030\005 \001(\0132\035."
-    "Eaagles.Recorder.Pb.PlayerId\022:\n\020trk_play"
-    "er_state\030\006 \001(\0132 .Eaagles.Recorder.Pb.Pla"
+    "oe.Recorder.Pb.PlayerId\022:\n\020trk_play"
+    "er_state\030\006 \001(\0132 .oe.Recorder.Pb.Pla"
     "yerState\0228\n\remission_data\030\007 \001(\0132!.Eaagle"
     "s.Recorder.Pb.EmissionData*\004\0102\020d*\005\010d\020\350\007\""
     "g\n\024TrackRemovedEventMsg\0220\n\tplayer_id\030\001 \002"
-    "(\0132\035.Eaagles.Recorder.Pb.PlayerId\022\020\n\010tra"
+    "(\0132\035.oe.Recorder.Pb.PlayerId\022\020\n\010tra"
     "ck_id\030\002 \002(\t*\004\0102\020d*\005\010d\020\350\007\"\367\002\n\014TrackDataMs"
-    "g\0220\n\tplayer_id\030\001 \002(\0132\035.Eaagles.Recorder."
+    "g\0220\n\tplayer_id\030\001 \002(\0132\035.oe.Recorder."
     "Pb.PlayerId\022\020\n\010track_id\030\002 \002(\t\0222\n\ntrack_d"
-    "ata\030\003 \001(\0132\036.Eaagles.Recorder.Pb.TrackDat"
-    "a\0226\n\014player_state\030\004 \001(\0132 .Eaagles.Record"
+    "ata\030\003 \001(\0132\036.oe.Recorder.Pb.TrackDat"
+    "a\0226\n\014player_state\030\004 \001(\0132 .oe.Record"
     "er.Pb.PlayerState\0224\n\rtrk_player_id\030\005 \001(\013"
-    "2\035.Eaagles.Recorder.Pb.PlayerId\022:\n\020trk_p"
-    "layer_state\030\006 \001(\0132 .Eaagles.Recorder.Pb."
+    "2\035.oe.Recorder.Pb.PlayerId\022:\n\020trk_p"
+    "layer_state\030\006 \001(\0132 .oe.Recorder.Pb."
     "PlayerState\0228\n\remission_data\030\007 \001(\0132!.Eaa"
     "gles.Recorder.Pb.EmissionData*\004\0102\020d*\005\010d\020"
     "\350\007\"4\n\006Vector\022\t\n\001x\030\001 \002(\001\022\t\n\001y\030\002 \002(\001\022\t\n\001z\030"
@@ -842,26 +842,26 @@ void protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto() {
     "name\030\002 \001(\t\022\020\n\010fed_name\030\003 \001(\t\022\014\n\004side\030\004 \001"
     "(\r\022\022\n\nmajor_type\030\005 \001(\r\022\017\n\007ac_type\030\006 \001(\t*"
     "\004\0102\020d*\005\010d\020\350\007\"\253\001\n\013PlayerState\022(\n\003pos\030\001 \002("
-    "\0132\033.Eaagles.Recorder.Pb.Vector\022+\n\006angles"
-    "\030\002 \002(\0132\033.Eaagles.Recorder.Pb.Vector\022(\n\003v"
-    "el\030\003 \001(\0132\033.Eaagles.Recorder.Pb.Vector\022\016\n"
+    "\0132\033.oe.Recorder.Pb.Vector\022+\n\006angles"
+    "\030\002 \002(\0132\033.oe.Recorder.Pb.Vector\022(\n\003v"
+    "el\030\003 \001(\0132\033.oe.Recorder.Pb.Vector\022\016\n"
     "\006damage\030\004 \001(\001*\004\0102\020d*\005\010d\020\350\007\"\306\002\n\tTrackData"
     "\022\014\n\004type\030\001 \001(\r\022\017\n\007quality\030\002 \001(\001\022\017\n\007true_"
     "az\030\003 \001(\001\022\016\n\006rel_az\030\004 \001(\001\022\021\n\televation\030\005 "
     "\001(\001\022\r\n\005range\030\006 \001(\001\022\020\n\010latitude\030\007 \001(\001\022\021\n\t"
     "longitude\030\010 \001(\001\022\020\n\010altitude\030\t \001(\001\022-\n\010pos"
-    "ition\030\n \001(\0132\033.Eaagles.Recorder.Pb.Vector"
-    "\022-\n\010velocity\030\013 \001(\0132\033.Eaagles.Recorder.Pb"
+    "ition\030\n \001(\0132\033.oe.Recorder.Pb.Vector"
+    "\022-\n\010velocity\030\013 \001(\0132\033.oe.Recorder.Pb"
     ".Vector\022\022\n\navg_signal\030\014 \001(\001\022\020\n\010sl_index\030"
     "\r \001(\r\022\017\n\007wpn_rel\030\016 \001(\010*\004\0102\020d*\005\010d\020\350\007\"\262\003\n\014"
     "EmissionData\022\021\n\tfrequency\030\001 \001(\001\022\023\n\013wave_"
     "length\030\002 \001(\001\022\023\n\013pulse_width\030\003 \001(\001\022\021\n\tban"
     "dwidth\030\004 \001(\001\022\013\n\003prf\030\005 \001(\001\022\r\n\005power\030\006 \001(\001"
-    "\022D\n\014polarization\030\007 \001(\0162..Eaagles.Recorde"
+    "\022D\n\014polarization\030\007 \001(\0162..oe.Recorde"
     "r.Pb.EmissionData.Polarization\022\023\n\013azimut"
     "h_aoi\030\010 \001(\001\022\025\n\relevation_aoi\030\t \001(\001\0220\n\tor"
-    "igin_id\030\n \001(\0132\035.Eaagles.Recorder.Pb.Play"
-    "erId\0220\n\ttarget_id\030\013 \001(\0132\035.Eaagles.Record"
+    "igin_id\030\n \001(\0132\035.oe.Recorder.Pb.Play"
+    "erId\0220\n\ttarget_id\030\013 \001(\0132\035.oe.Record"
     "er.Pb.PlayerId\"S\n\014Polarization\022\010\n\004NONE\020\000"
     "\022\014\n\010VERTICAL\020\001\022\016\n\nHORIZONTAL\020\002\022\t\n\005SLANT\020"
     "\003\022\007\n\003RHC\020\004\022\007\n\003LHC\020\005*\004\0102\020d*\005\010d\020\350\007", 5992);
@@ -955,36 +955,36 @@ const int DataRecord::kTrackDataMsgFieldNumber;
 DataRecord::DataRecord()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Eaagles.Recorder.Pb.DataRecord)
+  // @@protoc_insertion_point(constructor:oe.Recorder.Pb.DataRecord)
 }
 
 void DataRecord::InitAsDefaultInstance() {
-  time_ = const_cast< ::Eaagles::Recorder::Pb::Time*>(&::Eaagles::Recorder::Pb::Time::default_instance());
-  file_id_msg_ = const_cast< ::Eaagles::Recorder::Pb::FileIdMsg*>(&::Eaagles::Recorder::Pb::FileIdMsg::default_instance());
-  unknown_id_msg_ = const_cast< ::Eaagles::Recorder::Pb::UnknownIdMsg*>(&::Eaagles::Recorder::Pb::UnknownIdMsg::default_instance());
-  marker_msg_ = const_cast< ::Eaagles::Recorder::Pb::MarkerMsg*>(&::Eaagles::Recorder::Pb::MarkerMsg::default_instance());
-  input_device_msg_ = const_cast< ::Eaagles::Recorder::Pb::InputDeviceMsg*>(&::Eaagles::Recorder::Pb::InputDeviceMsg::default_instance());
-  new_player_event_msg_ = const_cast< ::Eaagles::Recorder::Pb::NewPlayerEventMsg*>(&::Eaagles::Recorder::Pb::NewPlayerEventMsg::default_instance());
-  player_removed_event_msg_ = const_cast< ::Eaagles::Recorder::Pb::PlayerRemovedEventMsg*>(&::Eaagles::Recorder::Pb::PlayerRemovedEventMsg::default_instance());
-  player_data_msg_ = const_cast< ::Eaagles::Recorder::Pb::PlayerDataMsg*>(&::Eaagles::Recorder::Pb::PlayerDataMsg::default_instance());
-  player_damaged_event_msg_ = const_cast< ::Eaagles::Recorder::Pb::PlayerDamagedEventMsg*>(&::Eaagles::Recorder::Pb::PlayerDamagedEventMsg::default_instance());
-  player_collision_event_msg_ = const_cast< ::Eaagles::Recorder::Pb::PlayerCollisionEventMsg*>(&::Eaagles::Recorder::Pb::PlayerCollisionEventMsg::default_instance());
-  player_crash_event_msg_ = const_cast< ::Eaagles::Recorder::Pb::PlayerCrashEventMsg*>(&::Eaagles::Recorder::Pb::PlayerCrashEventMsg::default_instance());
-  player_killed_event_msg_ = const_cast< ::Eaagles::Recorder::Pb::PlayerKilledEventMsg*>(&::Eaagles::Recorder::Pb::PlayerKilledEventMsg::default_instance());
-  weapon_release_event_msg_ = const_cast< ::Eaagles::Recorder::Pb::WeaponReleaseEventMsg*>(&::Eaagles::Recorder::Pb::WeaponReleaseEventMsg::default_instance());
-  weapon_hung_event_msg_ = const_cast< ::Eaagles::Recorder::Pb::WeaponHungEventMsg*>(&::Eaagles::Recorder::Pb::WeaponHungEventMsg::default_instance());
-  weapon_detonation_event_msg_ = const_cast< ::Eaagles::Recorder::Pb::WeaponDetonationEventMsg*>(&::Eaagles::Recorder::Pb::WeaponDetonationEventMsg::default_instance());
-  gun_fired_event_msg_ = const_cast< ::Eaagles::Recorder::Pb::GunFiredEventMsg*>(&::Eaagles::Recorder::Pb::GunFiredEventMsg::default_instance());
-  new_track_event_msg_ = const_cast< ::Eaagles::Recorder::Pb::NewTrackEventMsg*>(&::Eaagles::Recorder::Pb::NewTrackEventMsg::default_instance());
-  track_removed_event_msg_ = const_cast< ::Eaagles::Recorder::Pb::TrackRemovedEventMsg*>(&::Eaagles::Recorder::Pb::TrackRemovedEventMsg::default_instance());
-  track_data_msg_ = const_cast< ::Eaagles::Recorder::Pb::TrackDataMsg*>(&::Eaagles::Recorder::Pb::TrackDataMsg::default_instance());
+  time_ = const_cast< ::oe::recorder::pb::Time*>(&::oe::recorder::pb::Time::default_instance());
+  file_id_msg_ = const_cast< ::oe::recorder::pb::FileIdMsg*>(&::oe::recorder::pb::FileIdMsg::default_instance());
+  unknown_id_msg_ = const_cast< ::oe::recorder::pb::UnknownIdMsg*>(&::oe::recorder::pb::UnknownIdMsg::default_instance());
+  marker_msg_ = const_cast< ::oe::recorder::pb::MarkerMsg*>(&::oe::recorder::pb::MarkerMsg::default_instance());
+  input_device_msg_ = const_cast< ::oe::recorder::pb::InputDeviceMsg*>(&::oe::recorder::pb::InputDeviceMsg::default_instance());
+  new_player_event_msg_ = const_cast< ::oe::recorder::pb::NewPlayerEventMsg*>(&::oe::recorder::pb::NewPlayerEventMsg::default_instance());
+  player_removed_event_msg_ = const_cast< ::oe::recorder::pb::PlayerRemovedEventMsg*>(&::oe::recorder::pb::PlayerRemovedEventMsg::default_instance());
+  player_data_msg_ = const_cast< ::oe::recorder::pb::PlayerDataMsg*>(&::oe::recorder::pb::PlayerDataMsg::default_instance());
+  player_damaged_event_msg_ = const_cast< ::oe::recorder::pb::PlayerDamagedEventMsg*>(&::oe::recorder::pb::PlayerDamagedEventMsg::default_instance());
+  player_collision_event_msg_ = const_cast< ::oe::recorder::pb::PlayerCollisionEventMsg*>(&::oe::recorder::pb::PlayerCollisionEventMsg::default_instance());
+  player_crash_event_msg_ = const_cast< ::oe::recorder::pb::PlayerCrashEventMsg*>(&::oe::recorder::pb::PlayerCrashEventMsg::default_instance());
+  player_killed_event_msg_ = const_cast< ::oe::recorder::pb::PlayerKilledEventMsg*>(&::oe::recorder::pb::PlayerKilledEventMsg::default_instance());
+  weapon_release_event_msg_ = const_cast< ::oe::recorder::pb::WeaponReleaseEventMsg*>(&::oe::recorder::pb::WeaponReleaseEventMsg::default_instance());
+  weapon_hung_event_msg_ = const_cast< ::oe::recorder::pb::WeaponHungEventMsg*>(&::oe::recorder::pb::WeaponHungEventMsg::default_instance());
+  weapon_detonation_event_msg_ = const_cast< ::oe::recorder::pb::WeaponDetonationEventMsg*>(&::oe::recorder::pb::WeaponDetonationEventMsg::default_instance());
+  gun_fired_event_msg_ = const_cast< ::oe::recorder::pb::GunFiredEventMsg*>(&::oe::recorder::pb::GunFiredEventMsg::default_instance());
+  new_track_event_msg_ = const_cast< ::oe::recorder::pb::NewTrackEventMsg*>(&::oe::recorder::pb::NewTrackEventMsg::default_instance());
+  track_removed_event_msg_ = const_cast< ::oe::recorder::pb::TrackRemovedEventMsg*>(&::oe::recorder::pb::TrackRemovedEventMsg::default_instance());
+  track_data_msg_ = const_cast< ::oe::recorder::pb::TrackDataMsg*>(&::oe::recorder::pb::TrackDataMsg::default_instance());
 }
 
 DataRecord::DataRecord(const DataRecord& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Eaagles.Recorder.Pb.DataRecord)
+  // @@protoc_insertion_point(copy_constructor:oe.Recorder.Pb.DataRecord)
 }
 
 void DataRecord::SharedCtor() {
@@ -1013,7 +1013,7 @@ void DataRecord::SharedCtor() {
 }
 
 DataRecord::~DataRecord() {
-  // @@protoc_insertion_point(destructor:Eaagles.Recorder.Pb.DataRecord)
+  // @@protoc_insertion_point(destructor:oe.Recorder.Pb.DataRecord)
   SharedDtor();
 }
 
@@ -1066,66 +1066,66 @@ void DataRecord::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 255) {
     if (has_time()) {
-      if (time_ != NULL) time_->::Eaagles::Recorder::Pb::Time::Clear();
+      if (time_ != NULL) time_->::oe::recorder::pb::Time::Clear();
     }
     id_ = 0u;
     if (has_file_id_msg()) {
-      if (file_id_msg_ != NULL) file_id_msg_->::Eaagles::Recorder::Pb::FileIdMsg::Clear();
+      if (file_id_msg_ != NULL) file_id_msg_->::oe::recorder::pb::FileIdMsg::Clear();
     }
     if (has_unknown_id_msg()) {
-      if (unknown_id_msg_ != NULL) unknown_id_msg_->::Eaagles::Recorder::Pb::UnknownIdMsg::Clear();
+      if (unknown_id_msg_ != NULL) unknown_id_msg_->::oe::recorder::pb::UnknownIdMsg::Clear();
     }
     if (has_marker_msg()) {
-      if (marker_msg_ != NULL) marker_msg_->::Eaagles::Recorder::Pb::MarkerMsg::Clear();
+      if (marker_msg_ != NULL) marker_msg_->::oe::recorder::pb::MarkerMsg::Clear();
     }
     if (has_input_device_msg()) {
-      if (input_device_msg_ != NULL) input_device_msg_->::Eaagles::Recorder::Pb::InputDeviceMsg::Clear();
+      if (input_device_msg_ != NULL) input_device_msg_->::oe::recorder::pb::InputDeviceMsg::Clear();
     }
     if (has_new_player_event_msg()) {
-      if (new_player_event_msg_ != NULL) new_player_event_msg_->::Eaagles::Recorder::Pb::NewPlayerEventMsg::Clear();
+      if (new_player_event_msg_ != NULL) new_player_event_msg_->::oe::recorder::pb::NewPlayerEventMsg::Clear();
     }
     if (has_player_removed_event_msg()) {
-      if (player_removed_event_msg_ != NULL) player_removed_event_msg_->::Eaagles::Recorder::Pb::PlayerRemovedEventMsg::Clear();
+      if (player_removed_event_msg_ != NULL) player_removed_event_msg_->::oe::recorder::pb::PlayerRemovedEventMsg::Clear();
     }
   }
   if (_has_bits_[8 / 32] & 65280) {
     if (has_player_data_msg()) {
-      if (player_data_msg_ != NULL) player_data_msg_->::Eaagles::Recorder::Pb::PlayerDataMsg::Clear();
+      if (player_data_msg_ != NULL) player_data_msg_->::oe::recorder::pb::PlayerDataMsg::Clear();
     }
     if (has_player_damaged_event_msg()) {
-      if (player_damaged_event_msg_ != NULL) player_damaged_event_msg_->::Eaagles::Recorder::Pb::PlayerDamagedEventMsg::Clear();
+      if (player_damaged_event_msg_ != NULL) player_damaged_event_msg_->::oe::recorder::pb::PlayerDamagedEventMsg::Clear();
     }
     if (has_player_collision_event_msg()) {
-      if (player_collision_event_msg_ != NULL) player_collision_event_msg_->::Eaagles::Recorder::Pb::PlayerCollisionEventMsg::Clear();
+      if (player_collision_event_msg_ != NULL) player_collision_event_msg_->::oe::recorder::pb::PlayerCollisionEventMsg::Clear();
     }
     if (has_player_crash_event_msg()) {
-      if (player_crash_event_msg_ != NULL) player_crash_event_msg_->::Eaagles::Recorder::Pb::PlayerCrashEventMsg::Clear();
+      if (player_crash_event_msg_ != NULL) player_crash_event_msg_->::oe::recorder::pb::PlayerCrashEventMsg::Clear();
     }
     if (has_player_killed_event_msg()) {
-      if (player_killed_event_msg_ != NULL) player_killed_event_msg_->::Eaagles::Recorder::Pb::PlayerKilledEventMsg::Clear();
+      if (player_killed_event_msg_ != NULL) player_killed_event_msg_->::oe::recorder::pb::PlayerKilledEventMsg::Clear();
     }
     if (has_weapon_release_event_msg()) {
-      if (weapon_release_event_msg_ != NULL) weapon_release_event_msg_->::Eaagles::Recorder::Pb::WeaponReleaseEventMsg::Clear();
+      if (weapon_release_event_msg_ != NULL) weapon_release_event_msg_->::oe::recorder::pb::WeaponReleaseEventMsg::Clear();
     }
     if (has_weapon_hung_event_msg()) {
-      if (weapon_hung_event_msg_ != NULL) weapon_hung_event_msg_->::Eaagles::Recorder::Pb::WeaponHungEventMsg::Clear();
+      if (weapon_hung_event_msg_ != NULL) weapon_hung_event_msg_->::oe::recorder::pb::WeaponHungEventMsg::Clear();
     }
     if (has_weapon_detonation_event_msg()) {
-      if (weapon_detonation_event_msg_ != NULL) weapon_detonation_event_msg_->::Eaagles::Recorder::Pb::WeaponDetonationEventMsg::Clear();
+      if (weapon_detonation_event_msg_ != NULL) weapon_detonation_event_msg_->::oe::recorder::pb::WeaponDetonationEventMsg::Clear();
     }
   }
   if (_has_bits_[16 / 32] & 983040) {
     if (has_gun_fired_event_msg()) {
-      if (gun_fired_event_msg_ != NULL) gun_fired_event_msg_->::Eaagles::Recorder::Pb::GunFiredEventMsg::Clear();
+      if (gun_fired_event_msg_ != NULL) gun_fired_event_msg_->::oe::recorder::pb::GunFiredEventMsg::Clear();
     }
     if (has_new_track_event_msg()) {
-      if (new_track_event_msg_ != NULL) new_track_event_msg_->::Eaagles::Recorder::Pb::NewTrackEventMsg::Clear();
+      if (new_track_event_msg_ != NULL) new_track_event_msg_->::oe::recorder::pb::NewTrackEventMsg::Clear();
     }
     if (has_track_removed_event_msg()) {
-      if (track_removed_event_msg_ != NULL) track_removed_event_msg_->::Eaagles::Recorder::Pb::TrackRemovedEventMsg::Clear();
+      if (track_removed_event_msg_ != NULL) track_removed_event_msg_->::oe::recorder::pb::TrackRemovedEventMsg::Clear();
     }
     if (has_track_data_msg()) {
-      if (track_data_msg_ != NULL) track_data_msg_->::Eaagles::Recorder::Pb::TrackDataMsg::Clear();
+      if (track_data_msg_ != NULL) track_data_msg_->::oe::recorder::pb::TrackDataMsg::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -1136,13 +1136,13 @@ bool DataRecord::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Eaagles.Recorder.Pb.DataRecord)
+  // @@protoc_insertion_point(parse_start:oe.Recorder.Pb.DataRecord)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(16383);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .Eaagles.Recorder.Pb.Time time = 1;
+      // required .oe.Recorder.Pb.Time time = 1;
       case 1: {
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
@@ -1169,7 +1169,7 @@ bool DataRecord::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.FileIdMsg file_id_msg = 11;
+      // optional .oe.Recorder.Pb.FileIdMsg file_id_msg = 11;
       case 11: {
         if (tag == 90) {
          parse_file_id_msg:
@@ -1182,7 +1182,7 @@ bool DataRecord::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.UnknownIdMsg unknown_id_msg = 13;
+      // optional .oe.Recorder.Pb.UnknownIdMsg unknown_id_msg = 13;
       case 13: {
         if (tag == 106) {
          parse_unknown_id_msg:
@@ -1195,7 +1195,7 @@ bool DataRecord::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.MarkerMsg marker_msg = 14;
+      // optional .oe.Recorder.Pb.MarkerMsg marker_msg = 14;
       case 14: {
         if (tag == 114) {
          parse_marker_msg:
@@ -1208,7 +1208,7 @@ bool DataRecord::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.InputDeviceMsg input_device_msg = 15;
+      // optional .oe.Recorder.Pb.InputDeviceMsg input_device_msg = 15;
       case 15: {
         if (tag == 122) {
          parse_input_device_msg:
@@ -1221,7 +1221,7 @@ bool DataRecord::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.NewPlayerEventMsg new_player_event_msg = 31;
+      // optional .oe.Recorder.Pb.NewPlayerEventMsg new_player_event_msg = 31;
       case 31: {
         if (tag == 250) {
          parse_new_player_event_msg:
@@ -1234,7 +1234,7 @@ bool DataRecord::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerRemovedEventMsg player_removed_event_msg = 32;
+      // optional .oe.Recorder.Pb.PlayerRemovedEventMsg player_removed_event_msg = 32;
       case 32: {
         if (tag == 258) {
          parse_player_removed_event_msg:
@@ -1247,7 +1247,7 @@ bool DataRecord::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerDataMsg player_data_msg = 33;
+      // optional .oe.Recorder.Pb.PlayerDataMsg player_data_msg = 33;
       case 33: {
         if (tag == 266) {
          parse_player_data_msg:
@@ -1260,7 +1260,7 @@ bool DataRecord::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerDamagedEventMsg player_damaged_event_msg = 34;
+      // optional .oe.Recorder.Pb.PlayerDamagedEventMsg player_damaged_event_msg = 34;
       case 34: {
         if (tag == 274) {
          parse_player_damaged_event_msg:
@@ -1273,7 +1273,7 @@ bool DataRecord::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerCollisionEventMsg player_collision_event_msg = 35;
+      // optional .oe.Recorder.Pb.PlayerCollisionEventMsg player_collision_event_msg = 35;
       case 35: {
         if (tag == 282) {
          parse_player_collision_event_msg:
@@ -1286,7 +1286,7 @@ bool DataRecord::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerCrashEventMsg player_crash_event_msg = 36;
+      // optional .oe.Recorder.Pb.PlayerCrashEventMsg player_crash_event_msg = 36;
       case 36: {
         if (tag == 290) {
          parse_player_crash_event_msg:
@@ -1299,7 +1299,7 @@ bool DataRecord::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerKilledEventMsg player_killed_event_msg = 37;
+      // optional .oe.Recorder.Pb.PlayerKilledEventMsg player_killed_event_msg = 37;
       case 37: {
         if (tag == 298) {
          parse_player_killed_event_msg:
@@ -1312,7 +1312,7 @@ bool DataRecord::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.WeaponReleaseEventMsg weapon_release_event_msg = 51;
+      // optional .oe.Recorder.Pb.WeaponReleaseEventMsg weapon_release_event_msg = 51;
       case 51: {
         if (tag == 410) {
          parse_weapon_release_event_msg:
@@ -1325,7 +1325,7 @@ bool DataRecord::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.WeaponHungEventMsg weapon_hung_event_msg = 52;
+      // optional .oe.Recorder.Pb.WeaponHungEventMsg weapon_hung_event_msg = 52;
       case 52: {
         if (tag == 418) {
          parse_weapon_hung_event_msg:
@@ -1338,7 +1338,7 @@ bool DataRecord::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.WeaponDetonationEventMsg weapon_detonation_event_msg = 53;
+      // optional .oe.Recorder.Pb.WeaponDetonationEventMsg weapon_detonation_event_msg = 53;
       case 53: {
         if (tag == 426) {
          parse_weapon_detonation_event_msg:
@@ -1351,7 +1351,7 @@ bool DataRecord::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.GunFiredEventMsg gun_fired_event_msg = 54;
+      // optional .oe.Recorder.Pb.GunFiredEventMsg gun_fired_event_msg = 54;
       case 54: {
         if (tag == 434) {
          parse_gun_fired_event_msg:
@@ -1364,7 +1364,7 @@ bool DataRecord::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.NewTrackEventMsg new_track_event_msg = 71;
+      // optional .oe.Recorder.Pb.NewTrackEventMsg new_track_event_msg = 71;
       case 71: {
         if (tag == 570) {
          parse_new_track_event_msg:
@@ -1377,7 +1377,7 @@ bool DataRecord::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.TrackRemovedEventMsg track_removed_event_msg = 72;
+      // optional .oe.Recorder.Pb.TrackRemovedEventMsg track_removed_event_msg = 72;
       case 72: {
         if (tag == 578) {
          parse_track_removed_event_msg:
@@ -1390,7 +1390,7 @@ bool DataRecord::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.TrackDataMsg track_data_msg = 73;
+      // optional .oe.Recorder.Pb.TrackDataMsg track_data_msg = 73;
       case 73: {
         if (tag == 586) {
          parse_track_data_msg:
@@ -1423,18 +1423,18 @@ bool DataRecord::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Eaagles.Recorder.Pb.DataRecord)
+  // @@protoc_insertion_point(parse_success:oe.Recorder.Pb.DataRecord)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Eaagles.Recorder.Pb.DataRecord)
+  // @@protoc_insertion_point(parse_failure:oe.Recorder.Pb.DataRecord)
   return false;
 #undef DO_
 }
 
 void DataRecord::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Eaagles.Recorder.Pb.DataRecord)
-  // required .Eaagles.Recorder.Pb.Time time = 1;
+  // @@protoc_insertion_point(serialize_start:oe.Recorder.Pb.DataRecord)
+  // required .oe.Recorder.Pb.Time time = 1;
   if (has_time()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->time(), output);
@@ -1445,109 +1445,109 @@ void DataRecord::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->id(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.FileIdMsg file_id_msg = 11;
+  // optional .oe.Recorder.Pb.FileIdMsg file_id_msg = 11;
   if (has_file_id_msg()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       11, this->file_id_msg(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.UnknownIdMsg unknown_id_msg = 13;
+  // optional .oe.Recorder.Pb.UnknownIdMsg unknown_id_msg = 13;
   if (has_unknown_id_msg()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       13, this->unknown_id_msg(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.MarkerMsg marker_msg = 14;
+  // optional .oe.Recorder.Pb.MarkerMsg marker_msg = 14;
   if (has_marker_msg()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       14, this->marker_msg(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.InputDeviceMsg input_device_msg = 15;
+  // optional .oe.Recorder.Pb.InputDeviceMsg input_device_msg = 15;
   if (has_input_device_msg()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       15, this->input_device_msg(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.NewPlayerEventMsg new_player_event_msg = 31;
+  // optional .oe.Recorder.Pb.NewPlayerEventMsg new_player_event_msg = 31;
   if (has_new_player_event_msg()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       31, this->new_player_event_msg(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerRemovedEventMsg player_removed_event_msg = 32;
+  // optional .oe.Recorder.Pb.PlayerRemovedEventMsg player_removed_event_msg = 32;
   if (has_player_removed_event_msg()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       32, this->player_removed_event_msg(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerDataMsg player_data_msg = 33;
+  // optional .oe.Recorder.Pb.PlayerDataMsg player_data_msg = 33;
   if (has_player_data_msg()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       33, this->player_data_msg(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerDamagedEventMsg player_damaged_event_msg = 34;
+  // optional .oe.Recorder.Pb.PlayerDamagedEventMsg player_damaged_event_msg = 34;
   if (has_player_damaged_event_msg()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       34, this->player_damaged_event_msg(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerCollisionEventMsg player_collision_event_msg = 35;
+  // optional .oe.Recorder.Pb.PlayerCollisionEventMsg player_collision_event_msg = 35;
   if (has_player_collision_event_msg()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       35, this->player_collision_event_msg(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerCrashEventMsg player_crash_event_msg = 36;
+  // optional .oe.Recorder.Pb.PlayerCrashEventMsg player_crash_event_msg = 36;
   if (has_player_crash_event_msg()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       36, this->player_crash_event_msg(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerKilledEventMsg player_killed_event_msg = 37;
+  // optional .oe.Recorder.Pb.PlayerKilledEventMsg player_killed_event_msg = 37;
   if (has_player_killed_event_msg()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       37, this->player_killed_event_msg(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.WeaponReleaseEventMsg weapon_release_event_msg = 51;
+  // optional .oe.Recorder.Pb.WeaponReleaseEventMsg weapon_release_event_msg = 51;
   if (has_weapon_release_event_msg()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       51, this->weapon_release_event_msg(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.WeaponHungEventMsg weapon_hung_event_msg = 52;
+  // optional .oe.Recorder.Pb.WeaponHungEventMsg weapon_hung_event_msg = 52;
   if (has_weapon_hung_event_msg()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       52, this->weapon_hung_event_msg(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.WeaponDetonationEventMsg weapon_detonation_event_msg = 53;
+  // optional .oe.Recorder.Pb.WeaponDetonationEventMsg weapon_detonation_event_msg = 53;
   if (has_weapon_detonation_event_msg()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       53, this->weapon_detonation_event_msg(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.GunFiredEventMsg gun_fired_event_msg = 54;
+  // optional .oe.Recorder.Pb.GunFiredEventMsg gun_fired_event_msg = 54;
   if (has_gun_fired_event_msg()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       54, this->gun_fired_event_msg(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.NewTrackEventMsg new_track_event_msg = 71;
+  // optional .oe.Recorder.Pb.NewTrackEventMsg new_track_event_msg = 71;
   if (has_new_track_event_msg()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       71, this->new_track_event_msg(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.TrackRemovedEventMsg track_removed_event_msg = 72;
+  // optional .oe.Recorder.Pb.TrackRemovedEventMsg track_removed_event_msg = 72;
   if (has_track_removed_event_msg()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       72, this->track_removed_event_msg(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.TrackDataMsg track_data_msg = 73;
+  // optional .oe.Recorder.Pb.TrackDataMsg track_data_msg = 73;
   if (has_track_data_msg()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       73, this->track_data_msg(), output);
@@ -1565,13 +1565,13 @@ void DataRecord::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Eaagles.Recorder.Pb.DataRecord)
+  // @@protoc_insertion_point(serialize_end:oe.Recorder.Pb.DataRecord)
 }
 
 ::google::protobuf::uint8* DataRecord::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Eaagles.Recorder.Pb.DataRecord)
-  // required .Eaagles.Recorder.Pb.Time time = 1;
+  // @@protoc_insertion_point(serialize_to_array_start:oe.Recorder.Pb.DataRecord)
+  // required .oe.Recorder.Pb.Time time = 1;
   if (has_time()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -1583,126 +1583,126 @@ void DataRecord::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(2, this->id(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.FileIdMsg file_id_msg = 11;
+  // optional .oe.Recorder.Pb.FileIdMsg file_id_msg = 11;
   if (has_file_id_msg()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         11, this->file_id_msg(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.UnknownIdMsg unknown_id_msg = 13;
+  // optional .oe.Recorder.Pb.UnknownIdMsg unknown_id_msg = 13;
   if (has_unknown_id_msg()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         13, this->unknown_id_msg(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.MarkerMsg marker_msg = 14;
+  // optional .oe.Recorder.Pb.MarkerMsg marker_msg = 14;
   if (has_marker_msg()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         14, this->marker_msg(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.InputDeviceMsg input_device_msg = 15;
+  // optional .oe.Recorder.Pb.InputDeviceMsg input_device_msg = 15;
   if (has_input_device_msg()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         15, this->input_device_msg(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.NewPlayerEventMsg new_player_event_msg = 31;
+  // optional .oe.Recorder.Pb.NewPlayerEventMsg new_player_event_msg = 31;
   if (has_new_player_event_msg()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         31, this->new_player_event_msg(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerRemovedEventMsg player_removed_event_msg = 32;
+  // optional .oe.Recorder.Pb.PlayerRemovedEventMsg player_removed_event_msg = 32;
   if (has_player_removed_event_msg()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         32, this->player_removed_event_msg(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerDataMsg player_data_msg = 33;
+  // optional .oe.Recorder.Pb.PlayerDataMsg player_data_msg = 33;
   if (has_player_data_msg()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         33, this->player_data_msg(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerDamagedEventMsg player_damaged_event_msg = 34;
+  // optional .oe.Recorder.Pb.PlayerDamagedEventMsg player_damaged_event_msg = 34;
   if (has_player_damaged_event_msg()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         34, this->player_damaged_event_msg(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerCollisionEventMsg player_collision_event_msg = 35;
+  // optional .oe.Recorder.Pb.PlayerCollisionEventMsg player_collision_event_msg = 35;
   if (has_player_collision_event_msg()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         35, this->player_collision_event_msg(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerCrashEventMsg player_crash_event_msg = 36;
+  // optional .oe.Recorder.Pb.PlayerCrashEventMsg player_crash_event_msg = 36;
   if (has_player_crash_event_msg()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         36, this->player_crash_event_msg(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerKilledEventMsg player_killed_event_msg = 37;
+  // optional .oe.Recorder.Pb.PlayerKilledEventMsg player_killed_event_msg = 37;
   if (has_player_killed_event_msg()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         37, this->player_killed_event_msg(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.WeaponReleaseEventMsg weapon_release_event_msg = 51;
+  // optional .oe.Recorder.Pb.WeaponReleaseEventMsg weapon_release_event_msg = 51;
   if (has_weapon_release_event_msg()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         51, this->weapon_release_event_msg(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.WeaponHungEventMsg weapon_hung_event_msg = 52;
+  // optional .oe.Recorder.Pb.WeaponHungEventMsg weapon_hung_event_msg = 52;
   if (has_weapon_hung_event_msg()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         52, this->weapon_hung_event_msg(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.WeaponDetonationEventMsg weapon_detonation_event_msg = 53;
+  // optional .oe.Recorder.Pb.WeaponDetonationEventMsg weapon_detonation_event_msg = 53;
   if (has_weapon_detonation_event_msg()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         53, this->weapon_detonation_event_msg(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.GunFiredEventMsg gun_fired_event_msg = 54;
+  // optional .oe.Recorder.Pb.GunFiredEventMsg gun_fired_event_msg = 54;
   if (has_gun_fired_event_msg()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         54, this->gun_fired_event_msg(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.NewTrackEventMsg new_track_event_msg = 71;
+  // optional .oe.Recorder.Pb.NewTrackEventMsg new_track_event_msg = 71;
   if (has_new_track_event_msg()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         71, this->new_track_event_msg(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.TrackRemovedEventMsg track_removed_event_msg = 72;
+  // optional .oe.Recorder.Pb.TrackRemovedEventMsg track_removed_event_msg = 72;
   if (has_track_removed_event_msg()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         72, this->track_removed_event_msg(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.TrackDataMsg track_data_msg = 73;
+  // optional .oe.Recorder.Pb.TrackDataMsg track_data_msg = 73;
   if (has_track_data_msg()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -1721,7 +1721,7 @@ void DataRecord::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Eaagles.Recorder.Pb.DataRecord)
+  // @@protoc_insertion_point(serialize_to_array_end:oe.Recorder.Pb.DataRecord)
   return target;
 }
 
@@ -1729,7 +1729,7 @@ int DataRecord::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .Eaagles.Recorder.Pb.Time time = 1;
+    // required .oe.Recorder.Pb.Time time = 1;
     if (has_time()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -1743,42 +1743,42 @@ int DataRecord::ByteSize() const {
           this->id());
     }
 
-    // optional .Eaagles.Recorder.Pb.FileIdMsg file_id_msg = 11;
+    // optional .oe.Recorder.Pb.FileIdMsg file_id_msg = 11;
     if (has_file_id_msg()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->file_id_msg());
     }
 
-    // optional .Eaagles.Recorder.Pb.UnknownIdMsg unknown_id_msg = 13;
+    // optional .oe.Recorder.Pb.UnknownIdMsg unknown_id_msg = 13;
     if (has_unknown_id_msg()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->unknown_id_msg());
     }
 
-    // optional .Eaagles.Recorder.Pb.MarkerMsg marker_msg = 14;
+    // optional .oe.Recorder.Pb.MarkerMsg marker_msg = 14;
     if (has_marker_msg()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->marker_msg());
     }
 
-    // optional .Eaagles.Recorder.Pb.InputDeviceMsg input_device_msg = 15;
+    // optional .oe.Recorder.Pb.InputDeviceMsg input_device_msg = 15;
     if (has_input_device_msg()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->input_device_msg());
     }
 
-    // optional .Eaagles.Recorder.Pb.NewPlayerEventMsg new_player_event_msg = 31;
+    // optional .oe.Recorder.Pb.NewPlayerEventMsg new_player_event_msg = 31;
     if (has_new_player_event_msg()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->new_player_event_msg());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerRemovedEventMsg player_removed_event_msg = 32;
+    // optional .oe.Recorder.Pb.PlayerRemovedEventMsg player_removed_event_msg = 32;
     if (has_player_removed_event_msg()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -1787,56 +1787,56 @@ int DataRecord::ByteSize() const {
 
   }
   if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    // optional .Eaagles.Recorder.Pb.PlayerDataMsg player_data_msg = 33;
+    // optional .oe.Recorder.Pb.PlayerDataMsg player_data_msg = 33;
     if (has_player_data_msg()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->player_data_msg());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerDamagedEventMsg player_damaged_event_msg = 34;
+    // optional .oe.Recorder.Pb.PlayerDamagedEventMsg player_damaged_event_msg = 34;
     if (has_player_damaged_event_msg()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->player_damaged_event_msg());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerCollisionEventMsg player_collision_event_msg = 35;
+    // optional .oe.Recorder.Pb.PlayerCollisionEventMsg player_collision_event_msg = 35;
     if (has_player_collision_event_msg()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->player_collision_event_msg());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerCrashEventMsg player_crash_event_msg = 36;
+    // optional .oe.Recorder.Pb.PlayerCrashEventMsg player_crash_event_msg = 36;
     if (has_player_crash_event_msg()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->player_crash_event_msg());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerKilledEventMsg player_killed_event_msg = 37;
+    // optional .oe.Recorder.Pb.PlayerKilledEventMsg player_killed_event_msg = 37;
     if (has_player_killed_event_msg()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->player_killed_event_msg());
     }
 
-    // optional .Eaagles.Recorder.Pb.WeaponReleaseEventMsg weapon_release_event_msg = 51;
+    // optional .oe.Recorder.Pb.WeaponReleaseEventMsg weapon_release_event_msg = 51;
     if (has_weapon_release_event_msg()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->weapon_release_event_msg());
     }
 
-    // optional .Eaagles.Recorder.Pb.WeaponHungEventMsg weapon_hung_event_msg = 52;
+    // optional .oe.Recorder.Pb.WeaponHungEventMsg weapon_hung_event_msg = 52;
     if (has_weapon_hung_event_msg()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->weapon_hung_event_msg());
     }
 
-    // optional .Eaagles.Recorder.Pb.WeaponDetonationEventMsg weapon_detonation_event_msg = 53;
+    // optional .oe.Recorder.Pb.WeaponDetonationEventMsg weapon_detonation_event_msg = 53;
     if (has_weapon_detonation_event_msg()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -1845,28 +1845,28 @@ int DataRecord::ByteSize() const {
 
   }
   if (_has_bits_[16 / 32] & (0xffu << (16 % 32))) {
-    // optional .Eaagles.Recorder.Pb.GunFiredEventMsg gun_fired_event_msg = 54;
+    // optional .oe.Recorder.Pb.GunFiredEventMsg gun_fired_event_msg = 54;
     if (has_gun_fired_event_msg()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->gun_fired_event_msg());
     }
 
-    // optional .Eaagles.Recorder.Pb.NewTrackEventMsg new_track_event_msg = 71;
+    // optional .oe.Recorder.Pb.NewTrackEventMsg new_track_event_msg = 71;
     if (has_new_track_event_msg()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->new_track_event_msg());
     }
 
-    // optional .Eaagles.Recorder.Pb.TrackRemovedEventMsg track_removed_event_msg = 72;
+    // optional .oe.Recorder.Pb.TrackRemovedEventMsg track_removed_event_msg = 72;
     if (has_track_removed_event_msg()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->track_removed_event_msg());
     }
 
-    // optional .Eaagles.Recorder.Pb.TrackDataMsg track_data_msg = 73;
+    // optional .oe.Recorder.Pb.TrackDataMsg track_data_msg = 73;
     if (has_track_data_msg()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -1903,68 +1903,68 @@ void DataRecord::MergeFrom(const DataRecord& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_time()) {
-      mutable_time()->::Eaagles::Recorder::Pb::Time::MergeFrom(from.time());
+      mutable_time()->::oe::recorder::pb::Time::MergeFrom(from.time());
     }
     if (from.has_id()) {
       set_id(from.id());
     }
     if (from.has_file_id_msg()) {
-      mutable_file_id_msg()->::Eaagles::Recorder::Pb::FileIdMsg::MergeFrom(from.file_id_msg());
+      mutable_file_id_msg()->::oe::recorder::pb::FileIdMsg::MergeFrom(from.file_id_msg());
     }
     if (from.has_unknown_id_msg()) {
-      mutable_unknown_id_msg()->::Eaagles::Recorder::Pb::UnknownIdMsg::MergeFrom(from.unknown_id_msg());
+      mutable_unknown_id_msg()->::oe::recorder::pb::UnknownIdMsg::MergeFrom(from.unknown_id_msg());
     }
     if (from.has_marker_msg()) {
-      mutable_marker_msg()->::Eaagles::Recorder::Pb::MarkerMsg::MergeFrom(from.marker_msg());
+      mutable_marker_msg()->::oe::recorder::pb::MarkerMsg::MergeFrom(from.marker_msg());
     }
     if (from.has_input_device_msg()) {
-      mutable_input_device_msg()->::Eaagles::Recorder::Pb::InputDeviceMsg::MergeFrom(from.input_device_msg());
+      mutable_input_device_msg()->::oe::recorder::pb::InputDeviceMsg::MergeFrom(from.input_device_msg());
     }
     if (from.has_new_player_event_msg()) {
-      mutable_new_player_event_msg()->::Eaagles::Recorder::Pb::NewPlayerEventMsg::MergeFrom(from.new_player_event_msg());
+      mutable_new_player_event_msg()->::oe::recorder::pb::NewPlayerEventMsg::MergeFrom(from.new_player_event_msg());
     }
     if (from.has_player_removed_event_msg()) {
-      mutable_player_removed_event_msg()->::Eaagles::Recorder::Pb::PlayerRemovedEventMsg::MergeFrom(from.player_removed_event_msg());
+      mutable_player_removed_event_msg()->::oe::recorder::pb::PlayerRemovedEventMsg::MergeFrom(from.player_removed_event_msg());
     }
   }
   if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (from.has_player_data_msg()) {
-      mutable_player_data_msg()->::Eaagles::Recorder::Pb::PlayerDataMsg::MergeFrom(from.player_data_msg());
+      mutable_player_data_msg()->::oe::recorder::pb::PlayerDataMsg::MergeFrom(from.player_data_msg());
     }
     if (from.has_player_damaged_event_msg()) {
-      mutable_player_damaged_event_msg()->::Eaagles::Recorder::Pb::PlayerDamagedEventMsg::MergeFrom(from.player_damaged_event_msg());
+      mutable_player_damaged_event_msg()->::oe::recorder::pb::PlayerDamagedEventMsg::MergeFrom(from.player_damaged_event_msg());
     }
     if (from.has_player_collision_event_msg()) {
-      mutable_player_collision_event_msg()->::Eaagles::Recorder::Pb::PlayerCollisionEventMsg::MergeFrom(from.player_collision_event_msg());
+      mutable_player_collision_event_msg()->::oe::recorder::pb::PlayerCollisionEventMsg::MergeFrom(from.player_collision_event_msg());
     }
     if (from.has_player_crash_event_msg()) {
-      mutable_player_crash_event_msg()->::Eaagles::Recorder::Pb::PlayerCrashEventMsg::MergeFrom(from.player_crash_event_msg());
+      mutable_player_crash_event_msg()->::oe::recorder::pb::PlayerCrashEventMsg::MergeFrom(from.player_crash_event_msg());
     }
     if (from.has_player_killed_event_msg()) {
-      mutable_player_killed_event_msg()->::Eaagles::Recorder::Pb::PlayerKilledEventMsg::MergeFrom(from.player_killed_event_msg());
+      mutable_player_killed_event_msg()->::oe::recorder::pb::PlayerKilledEventMsg::MergeFrom(from.player_killed_event_msg());
     }
     if (from.has_weapon_release_event_msg()) {
-      mutable_weapon_release_event_msg()->::Eaagles::Recorder::Pb::WeaponReleaseEventMsg::MergeFrom(from.weapon_release_event_msg());
+      mutable_weapon_release_event_msg()->::oe::recorder::pb::WeaponReleaseEventMsg::MergeFrom(from.weapon_release_event_msg());
     }
     if (from.has_weapon_hung_event_msg()) {
-      mutable_weapon_hung_event_msg()->::Eaagles::Recorder::Pb::WeaponHungEventMsg::MergeFrom(from.weapon_hung_event_msg());
+      mutable_weapon_hung_event_msg()->::oe::recorder::pb::WeaponHungEventMsg::MergeFrom(from.weapon_hung_event_msg());
     }
     if (from.has_weapon_detonation_event_msg()) {
-      mutable_weapon_detonation_event_msg()->::Eaagles::Recorder::Pb::WeaponDetonationEventMsg::MergeFrom(from.weapon_detonation_event_msg());
+      mutable_weapon_detonation_event_msg()->::oe::recorder::pb::WeaponDetonationEventMsg::MergeFrom(from.weapon_detonation_event_msg());
     }
   }
   if (from._has_bits_[16 / 32] & (0xffu << (16 % 32))) {
     if (from.has_gun_fired_event_msg()) {
-      mutable_gun_fired_event_msg()->::Eaagles::Recorder::Pb::GunFiredEventMsg::MergeFrom(from.gun_fired_event_msg());
+      mutable_gun_fired_event_msg()->::oe::recorder::pb::GunFiredEventMsg::MergeFrom(from.gun_fired_event_msg());
     }
     if (from.has_new_track_event_msg()) {
-      mutable_new_track_event_msg()->::Eaagles::Recorder::Pb::NewTrackEventMsg::MergeFrom(from.new_track_event_msg());
+      mutable_new_track_event_msg()->::oe::recorder::pb::NewTrackEventMsg::MergeFrom(from.new_track_event_msg());
     }
     if (from.has_track_removed_event_msg()) {
-      mutable_track_removed_event_msg()->::Eaagles::Recorder::Pb::TrackRemovedEventMsg::MergeFrom(from.track_removed_event_msg());
+      mutable_track_removed_event_msg()->::oe::recorder::pb::TrackRemovedEventMsg::MergeFrom(from.track_removed_event_msg());
     }
     if (from.has_track_data_msg()) {
-      mutable_track_data_msg()->::Eaagles::Recorder::Pb::TrackDataMsg::MergeFrom(from.track_data_msg());
+      mutable_track_data_msg()->::oe::recorder::pb::TrackDataMsg::MergeFrom(from.track_data_msg());
     }
   }
   _extensions_.MergeFrom(from._extensions_);
@@ -2102,7 +2102,7 @@ const int FileIdMsg::kYearFieldNumber;
 FileIdMsg::FileIdMsg()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Eaagles.Recorder.Pb.FileIdMsg)
+  // @@protoc_insertion_point(constructor:oe.Recorder.Pb.FileIdMsg)
 }
 
 void FileIdMsg::InitAsDefaultInstance() {
@@ -2112,7 +2112,7 @@ FileIdMsg::FileIdMsg(const FileIdMsg& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Eaagles.Recorder.Pb.FileIdMsg)
+  // @@protoc_insertion_point(copy_constructor:oe.Recorder.Pb.FileIdMsg)
 }
 
 void FileIdMsg::SharedCtor() {
@@ -2131,7 +2131,7 @@ void FileIdMsg::SharedCtor() {
 }
 
 FileIdMsg::~FileIdMsg() {
-  // @@protoc_insertion_point(destructor:Eaagles.Recorder.Pb.FileIdMsg)
+  // @@protoc_insertion_point(destructor:oe.Recorder.Pb.FileIdMsg)
   SharedDtor();
 }
 
@@ -2205,7 +2205,7 @@ bool FileIdMsg::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Eaagles.Recorder.Pb.FileIdMsg)
+  // @@protoc_insertion_point(parse_start:oe.Recorder.Pb.FileIdMsg)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -2369,17 +2369,17 @@ bool FileIdMsg::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Eaagles.Recorder.Pb.FileIdMsg)
+  // @@protoc_insertion_point(parse_success:oe.Recorder.Pb.FileIdMsg)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Eaagles.Recorder.Pb.FileIdMsg)
+  // @@protoc_insertion_point(parse_failure:oe.Recorder.Pb.FileIdMsg)
   return false;
 #undef DO_
 }
 
 void FileIdMsg::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Eaagles.Recorder.Pb.FileIdMsg)
+  // @@protoc_insertion_point(serialize_start:oe.Recorder.Pb.FileIdMsg)
   // optional string event_name = 1;
   if (has_event_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -2447,12 +2447,12 @@ void FileIdMsg::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Eaagles.Recorder.Pb.FileIdMsg)
+  // @@protoc_insertion_point(serialize_end:oe.Recorder.Pb.FileIdMsg)
 }
 
 ::google::protobuf::uint8* FileIdMsg::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Eaagles.Recorder.Pb.FileIdMsg)
+  // @@protoc_insertion_point(serialize_to_array_start:oe.Recorder.Pb.FileIdMsg)
   // optional string event_name = 1;
   if (has_event_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -2522,7 +2522,7 @@ void FileIdMsg::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Eaagles.Recorder.Pb.FileIdMsg)
+  // @@protoc_insertion_point(serialize_to_array_end:oe.Recorder.Pb.FileIdMsg)
   return target;
 }
 
@@ -2712,7 +2712,7 @@ const int UnknownIdMsg::kIdFieldNumber;
 UnknownIdMsg::UnknownIdMsg()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Eaagles.Recorder.Pb.UnknownIdMsg)
+  // @@protoc_insertion_point(constructor:oe.Recorder.Pb.UnknownIdMsg)
 }
 
 void UnknownIdMsg::InitAsDefaultInstance() {
@@ -2722,7 +2722,7 @@ UnknownIdMsg::UnknownIdMsg(const UnknownIdMsg& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Eaagles.Recorder.Pb.UnknownIdMsg)
+  // @@protoc_insertion_point(copy_constructor:oe.Recorder.Pb.UnknownIdMsg)
 }
 
 void UnknownIdMsg::SharedCtor() {
@@ -2732,7 +2732,7 @@ void UnknownIdMsg::SharedCtor() {
 }
 
 UnknownIdMsg::~UnknownIdMsg() {
-  // @@protoc_insertion_point(destructor:Eaagles.Recorder.Pb.UnknownIdMsg)
+  // @@protoc_insertion_point(destructor:oe.Recorder.Pb.UnknownIdMsg)
   SharedDtor();
 }
 
@@ -2772,7 +2772,7 @@ bool UnknownIdMsg::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Eaagles.Recorder.Pb.UnknownIdMsg)
+  // @@protoc_insertion_point(parse_start:oe.Recorder.Pb.UnknownIdMsg)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -2806,17 +2806,17 @@ bool UnknownIdMsg::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Eaagles.Recorder.Pb.UnknownIdMsg)
+  // @@protoc_insertion_point(parse_success:oe.Recorder.Pb.UnknownIdMsg)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Eaagles.Recorder.Pb.UnknownIdMsg)
+  // @@protoc_insertion_point(parse_failure:oe.Recorder.Pb.UnknownIdMsg)
   return false;
 #undef DO_
 }
 
 void UnknownIdMsg::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Eaagles.Recorder.Pb.UnknownIdMsg)
+  // @@protoc_insertion_point(serialize_start:oe.Recorder.Pb.UnknownIdMsg)
   // required uint32 id = 1;
   if (has_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->id(), output);
@@ -2826,12 +2826,12 @@ void UnknownIdMsg::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Eaagles.Recorder.Pb.UnknownIdMsg)
+  // @@protoc_insertion_point(serialize_end:oe.Recorder.Pb.UnknownIdMsg)
 }
 
 ::google::protobuf::uint8* UnknownIdMsg::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Eaagles.Recorder.Pb.UnknownIdMsg)
+  // @@protoc_insertion_point(serialize_to_array_start:oe.Recorder.Pb.UnknownIdMsg)
   // required uint32 id = 1;
   if (has_id()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->id(), target);
@@ -2841,7 +2841,7 @@ void UnknownIdMsg::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Eaagles.Recorder.Pb.UnknownIdMsg)
+  // @@protoc_insertion_point(serialize_to_array_end:oe.Recorder.Pb.UnknownIdMsg)
   return target;
 }
 
@@ -2936,7 +2936,7 @@ const int MarkerMsg::kSourceIdFieldNumber;
 MarkerMsg::MarkerMsg()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Eaagles.Recorder.Pb.MarkerMsg)
+  // @@protoc_insertion_point(constructor:oe.Recorder.Pb.MarkerMsg)
 }
 
 void MarkerMsg::InitAsDefaultInstance() {
@@ -2946,7 +2946,7 @@ MarkerMsg::MarkerMsg(const MarkerMsg& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Eaagles.Recorder.Pb.MarkerMsg)
+  // @@protoc_insertion_point(copy_constructor:oe.Recorder.Pb.MarkerMsg)
 }
 
 void MarkerMsg::SharedCtor() {
@@ -2957,7 +2957,7 @@ void MarkerMsg::SharedCtor() {
 }
 
 MarkerMsg::~MarkerMsg() {
-  // @@protoc_insertion_point(destructor:Eaagles.Recorder.Pb.MarkerMsg)
+  // @@protoc_insertion_point(destructor:oe.Recorder.Pb.MarkerMsg)
   SharedDtor();
 }
 
@@ -3012,7 +3012,7 @@ bool MarkerMsg::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Eaagles.Recorder.Pb.MarkerMsg)
+  // @@protoc_insertion_point(parse_start:oe.Recorder.Pb.MarkerMsg)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -3067,17 +3067,17 @@ bool MarkerMsg::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Eaagles.Recorder.Pb.MarkerMsg)
+  // @@protoc_insertion_point(parse_success:oe.Recorder.Pb.MarkerMsg)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Eaagles.Recorder.Pb.MarkerMsg)
+  // @@protoc_insertion_point(parse_failure:oe.Recorder.Pb.MarkerMsg)
   return false;
 #undef DO_
 }
 
 void MarkerMsg::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Eaagles.Recorder.Pb.MarkerMsg)
+  // @@protoc_insertion_point(serialize_start:oe.Recorder.Pb.MarkerMsg)
   // optional uint32 id = 1;
   if (has_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->id(), output);
@@ -3100,12 +3100,12 @@ void MarkerMsg::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Eaagles.Recorder.Pb.MarkerMsg)
+  // @@protoc_insertion_point(serialize_end:oe.Recorder.Pb.MarkerMsg)
 }
 
 ::google::protobuf::uint8* MarkerMsg::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Eaagles.Recorder.Pb.MarkerMsg)
+  // @@protoc_insertion_point(serialize_to_array_start:oe.Recorder.Pb.MarkerMsg)
   // optional uint32 id = 1;
   if (has_id()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->id(), target);
@@ -3128,7 +3128,7 @@ void MarkerMsg::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Eaagles.Recorder.Pb.MarkerMsg)
+  // @@protoc_insertion_point(serialize_to_array_end:oe.Recorder.Pb.MarkerMsg)
   return target;
 }
 
@@ -3239,7 +3239,7 @@ const int InputDeviceMsg::kValueFieldNumber;
 InputDeviceMsg::InputDeviceMsg()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Eaagles.Recorder.Pb.InputDeviceMsg)
+  // @@protoc_insertion_point(constructor:oe.Recorder.Pb.InputDeviceMsg)
 }
 
 void InputDeviceMsg::InitAsDefaultInstance() {
@@ -3249,7 +3249,7 @@ InputDeviceMsg::InputDeviceMsg(const InputDeviceMsg& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Eaagles.Recorder.Pb.InputDeviceMsg)
+  // @@protoc_insertion_point(copy_constructor:oe.Recorder.Pb.InputDeviceMsg)
 }
 
 void InputDeviceMsg::SharedCtor() {
@@ -3261,7 +3261,7 @@ void InputDeviceMsg::SharedCtor() {
 }
 
 InputDeviceMsg::~InputDeviceMsg() {
-  // @@protoc_insertion_point(destructor:Eaagles.Recorder.Pb.InputDeviceMsg)
+  // @@protoc_insertion_point(destructor:oe.Recorder.Pb.InputDeviceMsg)
   SharedDtor();
 }
 
@@ -3316,7 +3316,7 @@ bool InputDeviceMsg::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Eaagles.Recorder.Pb.InputDeviceMsg)
+  // @@protoc_insertion_point(parse_start:oe.Recorder.Pb.InputDeviceMsg)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -3386,17 +3386,17 @@ bool InputDeviceMsg::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Eaagles.Recorder.Pb.InputDeviceMsg)
+  // @@protoc_insertion_point(parse_success:oe.Recorder.Pb.InputDeviceMsg)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Eaagles.Recorder.Pb.InputDeviceMsg)
+  // @@protoc_insertion_point(parse_failure:oe.Recorder.Pb.InputDeviceMsg)
   return false;
 #undef DO_
 }
 
 void InputDeviceMsg::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Eaagles.Recorder.Pb.InputDeviceMsg)
+  // @@protoc_insertion_point(serialize_start:oe.Recorder.Pb.InputDeviceMsg)
   // required uint32 id = 1;
   if (has_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->id(), output);
@@ -3424,12 +3424,12 @@ void InputDeviceMsg::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Eaagles.Recorder.Pb.InputDeviceMsg)
+  // @@protoc_insertion_point(serialize_end:oe.Recorder.Pb.InputDeviceMsg)
 }
 
 ::google::protobuf::uint8* InputDeviceMsg::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Eaagles.Recorder.Pb.InputDeviceMsg)
+  // @@protoc_insertion_point(serialize_to_array_start:oe.Recorder.Pb.InputDeviceMsg)
   // required uint32 id = 1;
   if (has_id()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->id(), target);
@@ -3457,7 +3457,7 @@ void InputDeviceMsg::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Eaagles.Recorder.Pb.InputDeviceMsg)
+  // @@protoc_insertion_point(serialize_to_array_end:oe.Recorder.Pb.InputDeviceMsg)
   return target;
 }
 
@@ -3577,19 +3577,19 @@ const int NewPlayerEventMsg::kStateFieldNumber;
 NewPlayerEventMsg::NewPlayerEventMsg()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Eaagles.Recorder.Pb.NewPlayerEventMsg)
+  // @@protoc_insertion_point(constructor:oe.Recorder.Pb.NewPlayerEventMsg)
 }
 
 void NewPlayerEventMsg::InitAsDefaultInstance() {
-  id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
-  state_ = const_cast< ::Eaagles::Recorder::Pb::PlayerState*>(&::Eaagles::Recorder::Pb::PlayerState::default_instance());
+  id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
 }
 
 NewPlayerEventMsg::NewPlayerEventMsg(const NewPlayerEventMsg& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Eaagles.Recorder.Pb.NewPlayerEventMsg)
+  // @@protoc_insertion_point(copy_constructor:oe.Recorder.Pb.NewPlayerEventMsg)
 }
 
 void NewPlayerEventMsg::SharedCtor() {
@@ -3600,7 +3600,7 @@ void NewPlayerEventMsg::SharedCtor() {
 }
 
 NewPlayerEventMsg::~NewPlayerEventMsg() {
-  // @@protoc_insertion_point(destructor:Eaagles.Recorder.Pb.NewPlayerEventMsg)
+  // @@protoc_insertion_point(destructor:oe.Recorder.Pb.NewPlayerEventMsg)
   SharedDtor();
 }
 
@@ -3636,10 +3636,10 @@ void NewPlayerEventMsg::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 3) {
     if (has_id()) {
-      if (id_ != NULL) id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+      if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_state()) {
-      if (state_ != NULL) state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+      if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -3650,13 +3650,13 @@ bool NewPlayerEventMsg::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Eaagles.Recorder.Pb.NewPlayerEventMsg)
+  // @@protoc_insertion_point(parse_start:oe.Recorder.Pb.NewPlayerEventMsg)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+      // required .oe.Recorder.Pb.PlayerId id = 1;
       case 1: {
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
@@ -3668,7 +3668,7 @@ bool NewPlayerEventMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // required .Eaagles.Recorder.Pb.PlayerState state = 2;
+      // required .oe.Recorder.Pb.PlayerState state = 2;
       case 2: {
         if (tag == 18) {
          parse_state:
@@ -3701,24 +3701,24 @@ bool NewPlayerEventMsg::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Eaagles.Recorder.Pb.NewPlayerEventMsg)
+  // @@protoc_insertion_point(parse_success:oe.Recorder.Pb.NewPlayerEventMsg)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Eaagles.Recorder.Pb.NewPlayerEventMsg)
+  // @@protoc_insertion_point(parse_failure:oe.Recorder.Pb.NewPlayerEventMsg)
   return false;
 #undef DO_
 }
 
 void NewPlayerEventMsg::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Eaagles.Recorder.Pb.NewPlayerEventMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+  // @@protoc_insertion_point(serialize_start:oe.Recorder.Pb.NewPlayerEventMsg)
+  // required .oe.Recorder.Pb.PlayerId id = 1;
   if (has_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->id(), output);
   }
 
-  // required .Eaagles.Recorder.Pb.PlayerState state = 2;
+  // required .oe.Recorder.Pb.PlayerState state = 2;
   if (has_state()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, this->state(), output);
@@ -3736,20 +3736,20 @@ void NewPlayerEventMsg::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Eaagles.Recorder.Pb.NewPlayerEventMsg)
+  // @@protoc_insertion_point(serialize_end:oe.Recorder.Pb.NewPlayerEventMsg)
 }
 
 ::google::protobuf::uint8* NewPlayerEventMsg::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Eaagles.Recorder.Pb.NewPlayerEventMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+  // @@protoc_insertion_point(serialize_to_array_start:oe.Recorder.Pb.NewPlayerEventMsg)
+  // required .oe.Recorder.Pb.PlayerId id = 1;
   if (has_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         1, this->id(), target);
   }
 
-  // required .Eaagles.Recorder.Pb.PlayerState state = 2;
+  // required .oe.Recorder.Pb.PlayerState state = 2;
   if (has_state()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -3768,7 +3768,7 @@ void NewPlayerEventMsg::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Eaagles.Recorder.Pb.NewPlayerEventMsg)
+  // @@protoc_insertion_point(serialize_to_array_end:oe.Recorder.Pb.NewPlayerEventMsg)
   return target;
 }
 
@@ -3776,14 +3776,14 @@ int NewPlayerEventMsg::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+    // required .oe.Recorder.Pb.PlayerId id = 1;
     if (has_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->id());
     }
 
-    // required .Eaagles.Recorder.Pb.PlayerState state = 2;
+    // required .oe.Recorder.Pb.PlayerState state = 2;
     if (has_state()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -3820,10 +3820,10 @@ void NewPlayerEventMsg::MergeFrom(const NewPlayerEventMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_id()) {
-      mutable_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.id());
+      mutable_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.id());
     }
     if (from.has_state()) {
-      mutable_state()->::Eaagles::Recorder::Pb::PlayerState::MergeFrom(from.state());
+      mutable_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.state());
     }
   }
   _extensions_.MergeFrom(from._extensions_);
@@ -3885,19 +3885,19 @@ const int PlayerRemovedEventMsg::kStateFieldNumber;
 PlayerRemovedEventMsg::PlayerRemovedEventMsg()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Eaagles.Recorder.Pb.PlayerRemovedEventMsg)
+  // @@protoc_insertion_point(constructor:oe.Recorder.Pb.PlayerRemovedEventMsg)
 }
 
 void PlayerRemovedEventMsg::InitAsDefaultInstance() {
-  id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
-  state_ = const_cast< ::Eaagles::Recorder::Pb::PlayerState*>(&::Eaagles::Recorder::Pb::PlayerState::default_instance());
+  id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
 }
 
 PlayerRemovedEventMsg::PlayerRemovedEventMsg(const PlayerRemovedEventMsg& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Eaagles.Recorder.Pb.PlayerRemovedEventMsg)
+  // @@protoc_insertion_point(copy_constructor:oe.Recorder.Pb.PlayerRemovedEventMsg)
 }
 
 void PlayerRemovedEventMsg::SharedCtor() {
@@ -3908,7 +3908,7 @@ void PlayerRemovedEventMsg::SharedCtor() {
 }
 
 PlayerRemovedEventMsg::~PlayerRemovedEventMsg() {
-  // @@protoc_insertion_point(destructor:Eaagles.Recorder.Pb.PlayerRemovedEventMsg)
+  // @@protoc_insertion_point(destructor:oe.Recorder.Pb.PlayerRemovedEventMsg)
   SharedDtor();
 }
 
@@ -3944,10 +3944,10 @@ void PlayerRemovedEventMsg::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 3) {
     if (has_id()) {
-      if (id_ != NULL) id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+      if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_state()) {
-      if (state_ != NULL) state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+      if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -3958,13 +3958,13 @@ bool PlayerRemovedEventMsg::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Eaagles.Recorder.Pb.PlayerRemovedEventMsg)
+  // @@protoc_insertion_point(parse_start:oe.Recorder.Pb.PlayerRemovedEventMsg)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+      // required .oe.Recorder.Pb.PlayerId id = 1;
       case 1: {
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
@@ -3976,7 +3976,7 @@ bool PlayerRemovedEventMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+      // optional .oe.Recorder.Pb.PlayerState state = 2;
       case 2: {
         if (tag == 18) {
          parse_state:
@@ -4009,24 +4009,24 @@ bool PlayerRemovedEventMsg::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Eaagles.Recorder.Pb.PlayerRemovedEventMsg)
+  // @@protoc_insertion_point(parse_success:oe.Recorder.Pb.PlayerRemovedEventMsg)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Eaagles.Recorder.Pb.PlayerRemovedEventMsg)
+  // @@protoc_insertion_point(parse_failure:oe.Recorder.Pb.PlayerRemovedEventMsg)
   return false;
 #undef DO_
 }
 
 void PlayerRemovedEventMsg::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Eaagles.Recorder.Pb.PlayerRemovedEventMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+  // @@protoc_insertion_point(serialize_start:oe.Recorder.Pb.PlayerRemovedEventMsg)
+  // required .oe.Recorder.Pb.PlayerId id = 1;
   if (has_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->id(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+  // optional .oe.Recorder.Pb.PlayerState state = 2;
   if (has_state()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, this->state(), output);
@@ -4044,20 +4044,20 @@ void PlayerRemovedEventMsg::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Eaagles.Recorder.Pb.PlayerRemovedEventMsg)
+  // @@protoc_insertion_point(serialize_end:oe.Recorder.Pb.PlayerRemovedEventMsg)
 }
 
 ::google::protobuf::uint8* PlayerRemovedEventMsg::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Eaagles.Recorder.Pb.PlayerRemovedEventMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+  // @@protoc_insertion_point(serialize_to_array_start:oe.Recorder.Pb.PlayerRemovedEventMsg)
+  // required .oe.Recorder.Pb.PlayerId id = 1;
   if (has_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         1, this->id(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+  // optional .oe.Recorder.Pb.PlayerState state = 2;
   if (has_state()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -4076,7 +4076,7 @@ void PlayerRemovedEventMsg::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Eaagles.Recorder.Pb.PlayerRemovedEventMsg)
+  // @@protoc_insertion_point(serialize_to_array_end:oe.Recorder.Pb.PlayerRemovedEventMsg)
   return target;
 }
 
@@ -4084,14 +4084,14 @@ int PlayerRemovedEventMsg::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+    // required .oe.Recorder.Pb.PlayerId id = 1;
     if (has_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->id());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+    // optional .oe.Recorder.Pb.PlayerState state = 2;
     if (has_state()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -4128,10 +4128,10 @@ void PlayerRemovedEventMsg::MergeFrom(const PlayerRemovedEventMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_id()) {
-      mutable_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.id());
+      mutable_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.id());
     }
     if (from.has_state()) {
-      mutable_state()->::Eaagles::Recorder::Pb::PlayerState::MergeFrom(from.state());
+      mutable_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.state());
     }
   }
   _extensions_.MergeFrom(from._extensions_);
@@ -4196,19 +4196,19 @@ const int PlayerDataMsg::kCasFieldNumber;
 PlayerDataMsg::PlayerDataMsg()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Eaagles.Recorder.Pb.PlayerDataMsg)
+  // @@protoc_insertion_point(constructor:oe.Recorder.Pb.PlayerDataMsg)
 }
 
 void PlayerDataMsg::InitAsDefaultInstance() {
-  id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
-  state_ = const_cast< ::Eaagles::Recorder::Pb::PlayerState*>(&::Eaagles::Recorder::Pb::PlayerState::default_instance());
+  id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
 }
 
 PlayerDataMsg::PlayerDataMsg(const PlayerDataMsg& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Eaagles.Recorder.Pb.PlayerDataMsg)
+  // @@protoc_insertion_point(copy_constructor:oe.Recorder.Pb.PlayerDataMsg)
 }
 
 void PlayerDataMsg::SharedCtor() {
@@ -4222,7 +4222,7 @@ void PlayerDataMsg::SharedCtor() {
 }
 
 PlayerDataMsg::~PlayerDataMsg() {
-  // @@protoc_insertion_point(destructor:Eaagles.Recorder.Pb.PlayerDataMsg)
+  // @@protoc_insertion_point(destructor:oe.Recorder.Pb.PlayerDataMsg)
   SharedDtor();
 }
 
@@ -4269,10 +4269,10 @@ void PlayerDataMsg::Clear() {
   if (_has_bits_[0 / 32] & 31) {
     ZR_(alpha_, cas_);
     if (has_id()) {
-      if (id_ != NULL) id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+      if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_state()) {
-      if (state_ != NULL) state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+      if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
     }
   }
 
@@ -4287,13 +4287,13 @@ bool PlayerDataMsg::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Eaagles.Recorder.Pb.PlayerDataMsg)
+  // @@protoc_insertion_point(parse_start:oe.Recorder.Pb.PlayerDataMsg)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+      // required .oe.Recorder.Pb.PlayerId id = 1;
       case 1: {
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
@@ -4305,7 +4305,7 @@ bool PlayerDataMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // required .Eaagles.Recorder.Pb.PlayerState state = 2;
+      // required .oe.Recorder.Pb.PlayerState state = 2;
       case 2: {
         if (tag == 18) {
          parse_state:
@@ -4383,24 +4383,24 @@ bool PlayerDataMsg::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Eaagles.Recorder.Pb.PlayerDataMsg)
+  // @@protoc_insertion_point(parse_success:oe.Recorder.Pb.PlayerDataMsg)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Eaagles.Recorder.Pb.PlayerDataMsg)
+  // @@protoc_insertion_point(parse_failure:oe.Recorder.Pb.PlayerDataMsg)
   return false;
 #undef DO_
 }
 
 void PlayerDataMsg::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Eaagles.Recorder.Pb.PlayerDataMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+  // @@protoc_insertion_point(serialize_start:oe.Recorder.Pb.PlayerDataMsg)
+  // required .oe.Recorder.Pb.PlayerId id = 1;
   if (has_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->id(), output);
   }
 
-  // required .Eaagles.Recorder.Pb.PlayerState state = 2;
+  // required .oe.Recorder.Pb.PlayerState state = 2;
   if (has_state()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, this->state(), output);
@@ -4433,20 +4433,20 @@ void PlayerDataMsg::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Eaagles.Recorder.Pb.PlayerDataMsg)
+  // @@protoc_insertion_point(serialize_end:oe.Recorder.Pb.PlayerDataMsg)
 }
 
 ::google::protobuf::uint8* PlayerDataMsg::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Eaagles.Recorder.Pb.PlayerDataMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+  // @@protoc_insertion_point(serialize_to_array_start:oe.Recorder.Pb.PlayerDataMsg)
+  // required .oe.Recorder.Pb.PlayerId id = 1;
   if (has_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         1, this->id(), target);
   }
 
-  // required .Eaagles.Recorder.Pb.PlayerState state = 2;
+  // required .oe.Recorder.Pb.PlayerState state = 2;
   if (has_state()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -4480,7 +4480,7 @@ void PlayerDataMsg::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Eaagles.Recorder.Pb.PlayerDataMsg)
+  // @@protoc_insertion_point(serialize_to_array_end:oe.Recorder.Pb.PlayerDataMsg)
   return target;
 }
 
@@ -4488,14 +4488,14 @@ int PlayerDataMsg::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+    // required .oe.Recorder.Pb.PlayerId id = 1;
     if (has_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->id());
     }
 
-    // required .Eaagles.Recorder.Pb.PlayerState state = 2;
+    // required .oe.Recorder.Pb.PlayerState state = 2;
     if (has_state()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -4547,10 +4547,10 @@ void PlayerDataMsg::MergeFrom(const PlayerDataMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_id()) {
-      mutable_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.id());
+      mutable_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.id());
     }
     if (from.has_state()) {
-      mutable_state()->::Eaagles::Recorder::Pb::PlayerState::MergeFrom(from.state());
+      mutable_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.state());
     }
     if (from.has_alpha()) {
       set_alpha(from.alpha());
@@ -4624,19 +4624,19 @@ const int PlayerDamagedEventMsg::kStateFieldNumber;
 PlayerDamagedEventMsg::PlayerDamagedEventMsg()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Eaagles.Recorder.Pb.PlayerDamagedEventMsg)
+  // @@protoc_insertion_point(constructor:oe.Recorder.Pb.PlayerDamagedEventMsg)
 }
 
 void PlayerDamagedEventMsg::InitAsDefaultInstance() {
-  id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
-  state_ = const_cast< ::Eaagles::Recorder::Pb::PlayerState*>(&::Eaagles::Recorder::Pb::PlayerState::default_instance());
+  id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
 }
 
 PlayerDamagedEventMsg::PlayerDamagedEventMsg(const PlayerDamagedEventMsg& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Eaagles.Recorder.Pb.PlayerDamagedEventMsg)
+  // @@protoc_insertion_point(copy_constructor:oe.Recorder.Pb.PlayerDamagedEventMsg)
 }
 
 void PlayerDamagedEventMsg::SharedCtor() {
@@ -4647,7 +4647,7 @@ void PlayerDamagedEventMsg::SharedCtor() {
 }
 
 PlayerDamagedEventMsg::~PlayerDamagedEventMsg() {
-  // @@protoc_insertion_point(destructor:Eaagles.Recorder.Pb.PlayerDamagedEventMsg)
+  // @@protoc_insertion_point(destructor:oe.Recorder.Pb.PlayerDamagedEventMsg)
   SharedDtor();
 }
 
@@ -4683,10 +4683,10 @@ void PlayerDamagedEventMsg::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 3) {
     if (has_id()) {
-      if (id_ != NULL) id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+      if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_state()) {
-      if (state_ != NULL) state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+      if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -4697,13 +4697,13 @@ bool PlayerDamagedEventMsg::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Eaagles.Recorder.Pb.PlayerDamagedEventMsg)
+  // @@protoc_insertion_point(parse_start:oe.Recorder.Pb.PlayerDamagedEventMsg)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+      // required .oe.Recorder.Pb.PlayerId id = 1;
       case 1: {
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
@@ -4715,7 +4715,7 @@ bool PlayerDamagedEventMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+      // optional .oe.Recorder.Pb.PlayerState state = 2;
       case 2: {
         if (tag == 18) {
          parse_state:
@@ -4748,24 +4748,24 @@ bool PlayerDamagedEventMsg::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Eaagles.Recorder.Pb.PlayerDamagedEventMsg)
+  // @@protoc_insertion_point(parse_success:oe.Recorder.Pb.PlayerDamagedEventMsg)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Eaagles.Recorder.Pb.PlayerDamagedEventMsg)
+  // @@protoc_insertion_point(parse_failure:oe.Recorder.Pb.PlayerDamagedEventMsg)
   return false;
 #undef DO_
 }
 
 void PlayerDamagedEventMsg::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Eaagles.Recorder.Pb.PlayerDamagedEventMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+  // @@protoc_insertion_point(serialize_start:oe.Recorder.Pb.PlayerDamagedEventMsg)
+  // required .oe.Recorder.Pb.PlayerId id = 1;
   if (has_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->id(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+  // optional .oe.Recorder.Pb.PlayerState state = 2;
   if (has_state()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, this->state(), output);
@@ -4783,20 +4783,20 @@ void PlayerDamagedEventMsg::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Eaagles.Recorder.Pb.PlayerDamagedEventMsg)
+  // @@protoc_insertion_point(serialize_end:oe.Recorder.Pb.PlayerDamagedEventMsg)
 }
 
 ::google::protobuf::uint8* PlayerDamagedEventMsg::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Eaagles.Recorder.Pb.PlayerDamagedEventMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+  // @@protoc_insertion_point(serialize_to_array_start:oe.Recorder.Pb.PlayerDamagedEventMsg)
+  // required .oe.Recorder.Pb.PlayerId id = 1;
   if (has_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         1, this->id(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+  // optional .oe.Recorder.Pb.PlayerState state = 2;
   if (has_state()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -4815,7 +4815,7 @@ void PlayerDamagedEventMsg::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Eaagles.Recorder.Pb.PlayerDamagedEventMsg)
+  // @@protoc_insertion_point(serialize_to_array_end:oe.Recorder.Pb.PlayerDamagedEventMsg)
   return target;
 }
 
@@ -4823,14 +4823,14 @@ int PlayerDamagedEventMsg::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+    // required .oe.Recorder.Pb.PlayerId id = 1;
     if (has_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->id());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+    // optional .oe.Recorder.Pb.PlayerState state = 2;
     if (has_state()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -4867,10 +4867,10 @@ void PlayerDamagedEventMsg::MergeFrom(const PlayerDamagedEventMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_id()) {
-      mutable_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.id());
+      mutable_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.id());
     }
     if (from.has_state()) {
-      mutable_state()->::Eaagles::Recorder::Pb::PlayerState::MergeFrom(from.state());
+      mutable_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.state());
     }
   }
   _extensions_.MergeFrom(from._extensions_);
@@ -4933,20 +4933,20 @@ const int PlayerCollisionEventMsg::kOtherPlayerIdFieldNumber;
 PlayerCollisionEventMsg::PlayerCollisionEventMsg()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Eaagles.Recorder.Pb.PlayerCollisionEventMsg)
+  // @@protoc_insertion_point(constructor:oe.Recorder.Pb.PlayerCollisionEventMsg)
 }
 
 void PlayerCollisionEventMsg::InitAsDefaultInstance() {
-  id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
-  state_ = const_cast< ::Eaagles::Recorder::Pb::PlayerState*>(&::Eaagles::Recorder::Pb::PlayerState::default_instance());
-  other_player_id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
+  id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
+  other_player_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
 }
 
 PlayerCollisionEventMsg::PlayerCollisionEventMsg(const PlayerCollisionEventMsg& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Eaagles.Recorder.Pb.PlayerCollisionEventMsg)
+  // @@protoc_insertion_point(copy_constructor:oe.Recorder.Pb.PlayerCollisionEventMsg)
 }
 
 void PlayerCollisionEventMsg::SharedCtor() {
@@ -4958,7 +4958,7 @@ void PlayerCollisionEventMsg::SharedCtor() {
 }
 
 PlayerCollisionEventMsg::~PlayerCollisionEventMsg() {
-  // @@protoc_insertion_point(destructor:Eaagles.Recorder.Pb.PlayerCollisionEventMsg)
+  // @@protoc_insertion_point(destructor:oe.Recorder.Pb.PlayerCollisionEventMsg)
   SharedDtor();
 }
 
@@ -4995,13 +4995,13 @@ void PlayerCollisionEventMsg::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 7) {
     if (has_id()) {
-      if (id_ != NULL) id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+      if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_state()) {
-      if (state_ != NULL) state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+      if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
     }
     if (has_other_player_id()) {
-      if (other_player_id_ != NULL) other_player_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+      if (other_player_id_ != NULL) other_player_id_->::oe::recorder::pb::PlayerId::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -5012,13 +5012,13 @@ bool PlayerCollisionEventMsg::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Eaagles.Recorder.Pb.PlayerCollisionEventMsg)
+  // @@protoc_insertion_point(parse_start:oe.Recorder.Pb.PlayerCollisionEventMsg)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+      // required .oe.Recorder.Pb.PlayerId id = 1;
       case 1: {
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
@@ -5030,7 +5030,7 @@ bool PlayerCollisionEventMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+      // optional .oe.Recorder.Pb.PlayerState state = 2;
       case 2: {
         if (tag == 18) {
          parse_state:
@@ -5043,7 +5043,7 @@ bool PlayerCollisionEventMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerId other_player_id = 3;
+      // optional .oe.Recorder.Pb.PlayerId other_player_id = 3;
       case 3: {
         if (tag == 26) {
          parse_other_player_id:
@@ -5076,30 +5076,30 @@ bool PlayerCollisionEventMsg::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Eaagles.Recorder.Pb.PlayerCollisionEventMsg)
+  // @@protoc_insertion_point(parse_success:oe.Recorder.Pb.PlayerCollisionEventMsg)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Eaagles.Recorder.Pb.PlayerCollisionEventMsg)
+  // @@protoc_insertion_point(parse_failure:oe.Recorder.Pb.PlayerCollisionEventMsg)
   return false;
 #undef DO_
 }
 
 void PlayerCollisionEventMsg::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Eaagles.Recorder.Pb.PlayerCollisionEventMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+  // @@protoc_insertion_point(serialize_start:oe.Recorder.Pb.PlayerCollisionEventMsg)
+  // required .oe.Recorder.Pb.PlayerId id = 1;
   if (has_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->id(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+  // optional .oe.Recorder.Pb.PlayerState state = 2;
   if (has_state()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, this->state(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerId other_player_id = 3;
+  // optional .oe.Recorder.Pb.PlayerId other_player_id = 3;
   if (has_other_player_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, this->other_player_id(), output);
@@ -5117,27 +5117,27 @@ void PlayerCollisionEventMsg::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Eaagles.Recorder.Pb.PlayerCollisionEventMsg)
+  // @@protoc_insertion_point(serialize_end:oe.Recorder.Pb.PlayerCollisionEventMsg)
 }
 
 ::google::protobuf::uint8* PlayerCollisionEventMsg::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Eaagles.Recorder.Pb.PlayerCollisionEventMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+  // @@protoc_insertion_point(serialize_to_array_start:oe.Recorder.Pb.PlayerCollisionEventMsg)
+  // required .oe.Recorder.Pb.PlayerId id = 1;
   if (has_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         1, this->id(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+  // optional .oe.Recorder.Pb.PlayerState state = 2;
   if (has_state()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         2, this->state(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerId other_player_id = 3;
+  // optional .oe.Recorder.Pb.PlayerId other_player_id = 3;
   if (has_other_player_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -5156,7 +5156,7 @@ void PlayerCollisionEventMsg::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Eaagles.Recorder.Pb.PlayerCollisionEventMsg)
+  // @@protoc_insertion_point(serialize_to_array_end:oe.Recorder.Pb.PlayerCollisionEventMsg)
   return target;
 }
 
@@ -5164,21 +5164,21 @@ int PlayerCollisionEventMsg::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+    // required .oe.Recorder.Pb.PlayerId id = 1;
     if (has_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->id());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+    // optional .oe.Recorder.Pb.PlayerState state = 2;
     if (has_state()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->state());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerId other_player_id = 3;
+    // optional .oe.Recorder.Pb.PlayerId other_player_id = 3;
     if (has_other_player_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -5215,13 +5215,13 @@ void PlayerCollisionEventMsg::MergeFrom(const PlayerCollisionEventMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_id()) {
-      mutable_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.id());
+      mutable_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.id());
     }
     if (from.has_state()) {
-      mutable_state()->::Eaagles::Recorder::Pb::PlayerState::MergeFrom(from.state());
+      mutable_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.state());
     }
     if (from.has_other_player_id()) {
-      mutable_other_player_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.other_player_id());
+      mutable_other_player_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.other_player_id());
     }
   }
   _extensions_.MergeFrom(from._extensions_);
@@ -5287,19 +5287,19 @@ const int PlayerCrashEventMsg::kStateFieldNumber;
 PlayerCrashEventMsg::PlayerCrashEventMsg()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Eaagles.Recorder.Pb.PlayerCrashEventMsg)
+  // @@protoc_insertion_point(constructor:oe.Recorder.Pb.PlayerCrashEventMsg)
 }
 
 void PlayerCrashEventMsg::InitAsDefaultInstance() {
-  id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
-  state_ = const_cast< ::Eaagles::Recorder::Pb::PlayerState*>(&::Eaagles::Recorder::Pb::PlayerState::default_instance());
+  id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
 }
 
 PlayerCrashEventMsg::PlayerCrashEventMsg(const PlayerCrashEventMsg& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Eaagles.Recorder.Pb.PlayerCrashEventMsg)
+  // @@protoc_insertion_point(copy_constructor:oe.Recorder.Pb.PlayerCrashEventMsg)
 }
 
 void PlayerCrashEventMsg::SharedCtor() {
@@ -5310,7 +5310,7 @@ void PlayerCrashEventMsg::SharedCtor() {
 }
 
 PlayerCrashEventMsg::~PlayerCrashEventMsg() {
-  // @@protoc_insertion_point(destructor:Eaagles.Recorder.Pb.PlayerCrashEventMsg)
+  // @@protoc_insertion_point(destructor:oe.Recorder.Pb.PlayerCrashEventMsg)
   SharedDtor();
 }
 
@@ -5346,10 +5346,10 @@ void PlayerCrashEventMsg::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 3) {
     if (has_id()) {
-      if (id_ != NULL) id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+      if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_state()) {
-      if (state_ != NULL) state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+      if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -5360,13 +5360,13 @@ bool PlayerCrashEventMsg::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Eaagles.Recorder.Pb.PlayerCrashEventMsg)
+  // @@protoc_insertion_point(parse_start:oe.Recorder.Pb.PlayerCrashEventMsg)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+      // required .oe.Recorder.Pb.PlayerId id = 1;
       case 1: {
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
@@ -5378,7 +5378,7 @@ bool PlayerCrashEventMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+      // optional .oe.Recorder.Pb.PlayerState state = 2;
       case 2: {
         if (tag == 18) {
          parse_state:
@@ -5411,24 +5411,24 @@ bool PlayerCrashEventMsg::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Eaagles.Recorder.Pb.PlayerCrashEventMsg)
+  // @@protoc_insertion_point(parse_success:oe.Recorder.Pb.PlayerCrashEventMsg)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Eaagles.Recorder.Pb.PlayerCrashEventMsg)
+  // @@protoc_insertion_point(parse_failure:oe.Recorder.Pb.PlayerCrashEventMsg)
   return false;
 #undef DO_
 }
 
 void PlayerCrashEventMsg::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Eaagles.Recorder.Pb.PlayerCrashEventMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+  // @@protoc_insertion_point(serialize_start:oe.Recorder.Pb.PlayerCrashEventMsg)
+  // required .oe.Recorder.Pb.PlayerId id = 1;
   if (has_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->id(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+  // optional .oe.Recorder.Pb.PlayerState state = 2;
   if (has_state()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, this->state(), output);
@@ -5446,20 +5446,20 @@ void PlayerCrashEventMsg::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Eaagles.Recorder.Pb.PlayerCrashEventMsg)
+  // @@protoc_insertion_point(serialize_end:oe.Recorder.Pb.PlayerCrashEventMsg)
 }
 
 ::google::protobuf::uint8* PlayerCrashEventMsg::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Eaagles.Recorder.Pb.PlayerCrashEventMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+  // @@protoc_insertion_point(serialize_to_array_start:oe.Recorder.Pb.PlayerCrashEventMsg)
+  // required .oe.Recorder.Pb.PlayerId id = 1;
   if (has_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         1, this->id(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+  // optional .oe.Recorder.Pb.PlayerState state = 2;
   if (has_state()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -5478,7 +5478,7 @@ void PlayerCrashEventMsg::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Eaagles.Recorder.Pb.PlayerCrashEventMsg)
+  // @@protoc_insertion_point(serialize_to_array_end:oe.Recorder.Pb.PlayerCrashEventMsg)
   return target;
 }
 
@@ -5486,14 +5486,14 @@ int PlayerCrashEventMsg::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+    // required .oe.Recorder.Pb.PlayerId id = 1;
     if (has_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->id());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+    // optional .oe.Recorder.Pb.PlayerState state = 2;
     if (has_state()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -5530,10 +5530,10 @@ void PlayerCrashEventMsg::MergeFrom(const PlayerCrashEventMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_id()) {
-      mutable_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.id());
+      mutable_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.id());
     }
     if (from.has_state()) {
-      mutable_state()->::Eaagles::Recorder::Pb::PlayerState::MergeFrom(from.state());
+      mutable_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.state());
     }
   }
   _extensions_.MergeFrom(from._extensions_);
@@ -5596,20 +5596,20 @@ const int PlayerKilledEventMsg::kShooterIdFieldNumber;
 PlayerKilledEventMsg::PlayerKilledEventMsg()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Eaagles.Recorder.Pb.PlayerKilledEventMsg)
+  // @@protoc_insertion_point(constructor:oe.Recorder.Pb.PlayerKilledEventMsg)
 }
 
 void PlayerKilledEventMsg::InitAsDefaultInstance() {
-  id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
-  state_ = const_cast< ::Eaagles::Recorder::Pb::PlayerState*>(&::Eaagles::Recorder::Pb::PlayerState::default_instance());
-  shooter_id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
+  id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
+  shooter_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
 }
 
 PlayerKilledEventMsg::PlayerKilledEventMsg(const PlayerKilledEventMsg& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Eaagles.Recorder.Pb.PlayerKilledEventMsg)
+  // @@protoc_insertion_point(copy_constructor:oe.Recorder.Pb.PlayerKilledEventMsg)
 }
 
 void PlayerKilledEventMsg::SharedCtor() {
@@ -5621,7 +5621,7 @@ void PlayerKilledEventMsg::SharedCtor() {
 }
 
 PlayerKilledEventMsg::~PlayerKilledEventMsg() {
-  // @@protoc_insertion_point(destructor:Eaagles.Recorder.Pb.PlayerKilledEventMsg)
+  // @@protoc_insertion_point(destructor:oe.Recorder.Pb.PlayerKilledEventMsg)
   SharedDtor();
 }
 
@@ -5658,13 +5658,13 @@ void PlayerKilledEventMsg::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 7) {
     if (has_id()) {
-      if (id_ != NULL) id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+      if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_state()) {
-      if (state_ != NULL) state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+      if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
     }
     if (has_shooter_id()) {
-      if (shooter_id_ != NULL) shooter_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+      if (shooter_id_ != NULL) shooter_id_->::oe::recorder::pb::PlayerId::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -5675,13 +5675,13 @@ bool PlayerKilledEventMsg::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Eaagles.Recorder.Pb.PlayerKilledEventMsg)
+  // @@protoc_insertion_point(parse_start:oe.Recorder.Pb.PlayerKilledEventMsg)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+      // required .oe.Recorder.Pb.PlayerId id = 1;
       case 1: {
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
@@ -5693,7 +5693,7 @@ bool PlayerKilledEventMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+      // optional .oe.Recorder.Pb.PlayerState state = 2;
       case 2: {
         if (tag == 18) {
          parse_state:
@@ -5706,7 +5706,7 @@ bool PlayerKilledEventMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerId shooter_id = 3;
+      // optional .oe.Recorder.Pb.PlayerId shooter_id = 3;
       case 3: {
         if (tag == 26) {
          parse_shooter_id:
@@ -5739,30 +5739,30 @@ bool PlayerKilledEventMsg::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Eaagles.Recorder.Pb.PlayerKilledEventMsg)
+  // @@protoc_insertion_point(parse_success:oe.Recorder.Pb.PlayerKilledEventMsg)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Eaagles.Recorder.Pb.PlayerKilledEventMsg)
+  // @@protoc_insertion_point(parse_failure:oe.Recorder.Pb.PlayerKilledEventMsg)
   return false;
 #undef DO_
 }
 
 void PlayerKilledEventMsg::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Eaagles.Recorder.Pb.PlayerKilledEventMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+  // @@protoc_insertion_point(serialize_start:oe.Recorder.Pb.PlayerKilledEventMsg)
+  // required .oe.Recorder.Pb.PlayerId id = 1;
   if (has_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->id(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+  // optional .oe.Recorder.Pb.PlayerState state = 2;
   if (has_state()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, this->state(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerId shooter_id = 3;
+  // optional .oe.Recorder.Pb.PlayerId shooter_id = 3;
   if (has_shooter_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, this->shooter_id(), output);
@@ -5780,27 +5780,27 @@ void PlayerKilledEventMsg::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Eaagles.Recorder.Pb.PlayerKilledEventMsg)
+  // @@protoc_insertion_point(serialize_end:oe.Recorder.Pb.PlayerKilledEventMsg)
 }
 
 ::google::protobuf::uint8* PlayerKilledEventMsg::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Eaagles.Recorder.Pb.PlayerKilledEventMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+  // @@protoc_insertion_point(serialize_to_array_start:oe.Recorder.Pb.PlayerKilledEventMsg)
+  // required .oe.Recorder.Pb.PlayerId id = 1;
   if (has_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         1, this->id(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+  // optional .oe.Recorder.Pb.PlayerState state = 2;
   if (has_state()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         2, this->state(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerId shooter_id = 3;
+  // optional .oe.Recorder.Pb.PlayerId shooter_id = 3;
   if (has_shooter_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -5819,7 +5819,7 @@ void PlayerKilledEventMsg::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Eaagles.Recorder.Pb.PlayerKilledEventMsg)
+  // @@protoc_insertion_point(serialize_to_array_end:oe.Recorder.Pb.PlayerKilledEventMsg)
   return target;
 }
 
@@ -5827,21 +5827,21 @@ int PlayerKilledEventMsg::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .Eaagles.Recorder.Pb.PlayerId id = 1;
+    // required .oe.Recorder.Pb.PlayerId id = 1;
     if (has_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->id());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerState state = 2;
+    // optional .oe.Recorder.Pb.PlayerState state = 2;
     if (has_state()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->state());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerId shooter_id = 3;
+    // optional .oe.Recorder.Pb.PlayerId shooter_id = 3;
     if (has_shooter_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -5878,13 +5878,13 @@ void PlayerKilledEventMsg::MergeFrom(const PlayerKilledEventMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_id()) {
-      mutable_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.id());
+      mutable_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.id());
     }
     if (from.has_state()) {
-      mutable_state()->::Eaagles::Recorder::Pb::PlayerState::MergeFrom(from.state());
+      mutable_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.state());
     }
     if (from.has_shooter_id()) {
-      mutable_shooter_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.shooter_id());
+      mutable_shooter_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.shooter_id());
     }
   }
   _extensions_.MergeFrom(from._extensions_);
@@ -5952,21 +5952,21 @@ const int WeaponReleaseEventMsg::kTgtIdFieldNumber;
 WeaponReleaseEventMsg::WeaponReleaseEventMsg()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Eaagles.Recorder.Pb.WeaponReleaseEventMsg)
+  // @@protoc_insertion_point(constructor:oe.Recorder.Pb.WeaponReleaseEventMsg)
 }
 
 void WeaponReleaseEventMsg::InitAsDefaultInstance() {
-  wpn_id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
-  wpn_state_ = const_cast< ::Eaagles::Recorder::Pb::PlayerState*>(&::Eaagles::Recorder::Pb::PlayerState::default_instance());
-  shooter_id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
-  tgt_id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
+  wpn_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  wpn_state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
+  shooter_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  tgt_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
 }
 
 WeaponReleaseEventMsg::WeaponReleaseEventMsg(const WeaponReleaseEventMsg& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Eaagles.Recorder.Pb.WeaponReleaseEventMsg)
+  // @@protoc_insertion_point(copy_constructor:oe.Recorder.Pb.WeaponReleaseEventMsg)
 }
 
 void WeaponReleaseEventMsg::SharedCtor() {
@@ -5979,7 +5979,7 @@ void WeaponReleaseEventMsg::SharedCtor() {
 }
 
 WeaponReleaseEventMsg::~WeaponReleaseEventMsg() {
-  // @@protoc_insertion_point(destructor:Eaagles.Recorder.Pb.WeaponReleaseEventMsg)
+  // @@protoc_insertion_point(destructor:oe.Recorder.Pb.WeaponReleaseEventMsg)
   SharedDtor();
 }
 
@@ -6017,16 +6017,16 @@ void WeaponReleaseEventMsg::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 15) {
     if (has_wpn_id()) {
-      if (wpn_id_ != NULL) wpn_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+      if (wpn_id_ != NULL) wpn_id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_wpn_state()) {
-      if (wpn_state_ != NULL) wpn_state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+      if (wpn_state_ != NULL) wpn_state_->::oe::recorder::pb::PlayerState::Clear();
     }
     if (has_shooter_id()) {
-      if (shooter_id_ != NULL) shooter_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+      if (shooter_id_ != NULL) shooter_id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_tgt_id()) {
-      if (tgt_id_ != NULL) tgt_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+      if (tgt_id_ != NULL) tgt_id_->::oe::recorder::pb::PlayerId::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -6037,13 +6037,13 @@ bool WeaponReleaseEventMsg::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Eaagles.Recorder.Pb.WeaponReleaseEventMsg)
+  // @@protoc_insertion_point(parse_start:oe.Recorder.Pb.WeaponReleaseEventMsg)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .Eaagles.Recorder.Pb.PlayerId wpn_id = 1;
+      // required .oe.Recorder.Pb.PlayerId wpn_id = 1;
       case 1: {
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
@@ -6055,7 +6055,7 @@ bool WeaponReleaseEventMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerState wpn_state = 2;
+      // optional .oe.Recorder.Pb.PlayerState wpn_state = 2;
       case 2: {
         if (tag == 18) {
          parse_wpn_state:
@@ -6068,7 +6068,7 @@ bool WeaponReleaseEventMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerId shooter_id = 3;
+      // optional .oe.Recorder.Pb.PlayerId shooter_id = 3;
       case 3: {
         if (tag == 26) {
          parse_shooter_id:
@@ -6081,7 +6081,7 @@ bool WeaponReleaseEventMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerId tgt_id = 4;
+      // optional .oe.Recorder.Pb.PlayerId tgt_id = 4;
       case 4: {
         if (tag == 34) {
          parse_tgt_id:
@@ -6114,36 +6114,36 @@ bool WeaponReleaseEventMsg::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Eaagles.Recorder.Pb.WeaponReleaseEventMsg)
+  // @@protoc_insertion_point(parse_success:oe.Recorder.Pb.WeaponReleaseEventMsg)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Eaagles.Recorder.Pb.WeaponReleaseEventMsg)
+  // @@protoc_insertion_point(parse_failure:oe.Recorder.Pb.WeaponReleaseEventMsg)
   return false;
 #undef DO_
 }
 
 void WeaponReleaseEventMsg::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Eaagles.Recorder.Pb.WeaponReleaseEventMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId wpn_id = 1;
+  // @@protoc_insertion_point(serialize_start:oe.Recorder.Pb.WeaponReleaseEventMsg)
+  // required .oe.Recorder.Pb.PlayerId wpn_id = 1;
   if (has_wpn_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->wpn_id(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerState wpn_state = 2;
+  // optional .oe.Recorder.Pb.PlayerState wpn_state = 2;
   if (has_wpn_state()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, this->wpn_state(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerId shooter_id = 3;
+  // optional .oe.Recorder.Pb.PlayerId shooter_id = 3;
   if (has_shooter_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, this->shooter_id(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerId tgt_id = 4;
+  // optional .oe.Recorder.Pb.PlayerId tgt_id = 4;
   if (has_tgt_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       4, this->tgt_id(), output);
@@ -6161,34 +6161,34 @@ void WeaponReleaseEventMsg::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Eaagles.Recorder.Pb.WeaponReleaseEventMsg)
+  // @@protoc_insertion_point(serialize_end:oe.Recorder.Pb.WeaponReleaseEventMsg)
 }
 
 ::google::protobuf::uint8* WeaponReleaseEventMsg::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Eaagles.Recorder.Pb.WeaponReleaseEventMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId wpn_id = 1;
+  // @@protoc_insertion_point(serialize_to_array_start:oe.Recorder.Pb.WeaponReleaseEventMsg)
+  // required .oe.Recorder.Pb.PlayerId wpn_id = 1;
   if (has_wpn_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         1, this->wpn_id(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerState wpn_state = 2;
+  // optional .oe.Recorder.Pb.PlayerState wpn_state = 2;
   if (has_wpn_state()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         2, this->wpn_state(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerId shooter_id = 3;
+  // optional .oe.Recorder.Pb.PlayerId shooter_id = 3;
   if (has_shooter_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         3, this->shooter_id(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerId tgt_id = 4;
+  // optional .oe.Recorder.Pb.PlayerId tgt_id = 4;
   if (has_tgt_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -6207,7 +6207,7 @@ void WeaponReleaseEventMsg::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Eaagles.Recorder.Pb.WeaponReleaseEventMsg)
+  // @@protoc_insertion_point(serialize_to_array_end:oe.Recorder.Pb.WeaponReleaseEventMsg)
   return target;
 }
 
@@ -6215,28 +6215,28 @@ int WeaponReleaseEventMsg::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .Eaagles.Recorder.Pb.PlayerId wpn_id = 1;
+    // required .oe.Recorder.Pb.PlayerId wpn_id = 1;
     if (has_wpn_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->wpn_id());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerState wpn_state = 2;
+    // optional .oe.Recorder.Pb.PlayerState wpn_state = 2;
     if (has_wpn_state()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->wpn_state());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerId shooter_id = 3;
+    // optional .oe.Recorder.Pb.PlayerId shooter_id = 3;
     if (has_shooter_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->shooter_id());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerId tgt_id = 4;
+    // optional .oe.Recorder.Pb.PlayerId tgt_id = 4;
     if (has_tgt_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -6273,16 +6273,16 @@ void WeaponReleaseEventMsg::MergeFrom(const WeaponReleaseEventMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_wpn_id()) {
-      mutable_wpn_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.wpn_id());
+      mutable_wpn_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.wpn_id());
     }
     if (from.has_wpn_state()) {
-      mutable_wpn_state()->::Eaagles::Recorder::Pb::PlayerState::MergeFrom(from.wpn_state());
+      mutable_wpn_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.wpn_state());
     }
     if (from.has_shooter_id()) {
-      mutable_shooter_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.shooter_id());
+      mutable_shooter_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.shooter_id());
     }
     if (from.has_tgt_id()) {
-      mutable_tgt_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.tgt_id());
+      mutable_tgt_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.tgt_id());
     }
   }
   _extensions_.MergeFrom(from._extensions_);
@@ -6354,21 +6354,21 @@ const int WeaponHungEventMsg::kTgtIdFieldNumber;
 WeaponHungEventMsg::WeaponHungEventMsg()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Eaagles.Recorder.Pb.WeaponHungEventMsg)
+  // @@protoc_insertion_point(constructor:oe.Recorder.Pb.WeaponHungEventMsg)
 }
 
 void WeaponHungEventMsg::InitAsDefaultInstance() {
-  wpn_id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
-  wpn_state_ = const_cast< ::Eaagles::Recorder::Pb::PlayerState*>(&::Eaagles::Recorder::Pb::PlayerState::default_instance());
-  shooter_id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
-  tgt_id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
+  wpn_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  wpn_state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
+  shooter_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  tgt_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
 }
 
 WeaponHungEventMsg::WeaponHungEventMsg(const WeaponHungEventMsg& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Eaagles.Recorder.Pb.WeaponHungEventMsg)
+  // @@protoc_insertion_point(copy_constructor:oe.Recorder.Pb.WeaponHungEventMsg)
 }
 
 void WeaponHungEventMsg::SharedCtor() {
@@ -6381,7 +6381,7 @@ void WeaponHungEventMsg::SharedCtor() {
 }
 
 WeaponHungEventMsg::~WeaponHungEventMsg() {
-  // @@protoc_insertion_point(destructor:Eaagles.Recorder.Pb.WeaponHungEventMsg)
+  // @@protoc_insertion_point(destructor:oe.Recorder.Pb.WeaponHungEventMsg)
   SharedDtor();
 }
 
@@ -6419,16 +6419,16 @@ void WeaponHungEventMsg::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 15) {
     if (has_wpn_id()) {
-      if (wpn_id_ != NULL) wpn_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+      if (wpn_id_ != NULL) wpn_id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_wpn_state()) {
-      if (wpn_state_ != NULL) wpn_state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+      if (wpn_state_ != NULL) wpn_state_->::oe::recorder::pb::PlayerState::Clear();
     }
     if (has_shooter_id()) {
-      if (shooter_id_ != NULL) shooter_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+      if (shooter_id_ != NULL) shooter_id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_tgt_id()) {
-      if (tgt_id_ != NULL) tgt_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+      if (tgt_id_ != NULL) tgt_id_->::oe::recorder::pb::PlayerId::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -6439,13 +6439,13 @@ bool WeaponHungEventMsg::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Eaagles.Recorder.Pb.WeaponHungEventMsg)
+  // @@protoc_insertion_point(parse_start:oe.Recorder.Pb.WeaponHungEventMsg)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .Eaagles.Recorder.Pb.PlayerId wpn_id = 1;
+      // required .oe.Recorder.Pb.PlayerId wpn_id = 1;
       case 1: {
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
@@ -6457,7 +6457,7 @@ bool WeaponHungEventMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerState wpn_state = 2;
+      // optional .oe.Recorder.Pb.PlayerState wpn_state = 2;
       case 2: {
         if (tag == 18) {
          parse_wpn_state:
@@ -6470,7 +6470,7 @@ bool WeaponHungEventMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerId shooter_id = 3;
+      // optional .oe.Recorder.Pb.PlayerId shooter_id = 3;
       case 3: {
         if (tag == 26) {
          parse_shooter_id:
@@ -6483,7 +6483,7 @@ bool WeaponHungEventMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerId tgt_id = 4;
+      // optional .oe.Recorder.Pb.PlayerId tgt_id = 4;
       case 4: {
         if (tag == 34) {
          parse_tgt_id:
@@ -6516,36 +6516,36 @@ bool WeaponHungEventMsg::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Eaagles.Recorder.Pb.WeaponHungEventMsg)
+  // @@protoc_insertion_point(parse_success:oe.Recorder.Pb.WeaponHungEventMsg)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Eaagles.Recorder.Pb.WeaponHungEventMsg)
+  // @@protoc_insertion_point(parse_failure:oe.Recorder.Pb.WeaponHungEventMsg)
   return false;
 #undef DO_
 }
 
 void WeaponHungEventMsg::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Eaagles.Recorder.Pb.WeaponHungEventMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId wpn_id = 1;
+  // @@protoc_insertion_point(serialize_start:oe.Recorder.Pb.WeaponHungEventMsg)
+  // required .oe.Recorder.Pb.PlayerId wpn_id = 1;
   if (has_wpn_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->wpn_id(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerState wpn_state = 2;
+  // optional .oe.Recorder.Pb.PlayerState wpn_state = 2;
   if (has_wpn_state()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, this->wpn_state(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerId shooter_id = 3;
+  // optional .oe.Recorder.Pb.PlayerId shooter_id = 3;
   if (has_shooter_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, this->shooter_id(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerId tgt_id = 4;
+  // optional .oe.Recorder.Pb.PlayerId tgt_id = 4;
   if (has_tgt_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       4, this->tgt_id(), output);
@@ -6563,34 +6563,34 @@ void WeaponHungEventMsg::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Eaagles.Recorder.Pb.WeaponHungEventMsg)
+  // @@protoc_insertion_point(serialize_end:oe.Recorder.Pb.WeaponHungEventMsg)
 }
 
 ::google::protobuf::uint8* WeaponHungEventMsg::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Eaagles.Recorder.Pb.WeaponHungEventMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId wpn_id = 1;
+  // @@protoc_insertion_point(serialize_to_array_start:oe.Recorder.Pb.WeaponHungEventMsg)
+  // required .oe.Recorder.Pb.PlayerId wpn_id = 1;
   if (has_wpn_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         1, this->wpn_id(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerState wpn_state = 2;
+  // optional .oe.Recorder.Pb.PlayerState wpn_state = 2;
   if (has_wpn_state()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         2, this->wpn_state(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerId shooter_id = 3;
+  // optional .oe.Recorder.Pb.PlayerId shooter_id = 3;
   if (has_shooter_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         3, this->shooter_id(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerId tgt_id = 4;
+  // optional .oe.Recorder.Pb.PlayerId tgt_id = 4;
   if (has_tgt_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -6609,7 +6609,7 @@ void WeaponHungEventMsg::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Eaagles.Recorder.Pb.WeaponHungEventMsg)
+  // @@protoc_insertion_point(serialize_to_array_end:oe.Recorder.Pb.WeaponHungEventMsg)
   return target;
 }
 
@@ -6617,28 +6617,28 @@ int WeaponHungEventMsg::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .Eaagles.Recorder.Pb.PlayerId wpn_id = 1;
+    // required .oe.Recorder.Pb.PlayerId wpn_id = 1;
     if (has_wpn_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->wpn_id());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerState wpn_state = 2;
+    // optional .oe.Recorder.Pb.PlayerState wpn_state = 2;
     if (has_wpn_state()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->wpn_state());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerId shooter_id = 3;
+    // optional .oe.Recorder.Pb.PlayerId shooter_id = 3;
     if (has_shooter_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->shooter_id());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerId tgt_id = 4;
+    // optional .oe.Recorder.Pb.PlayerId tgt_id = 4;
     if (has_tgt_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -6675,16 +6675,16 @@ void WeaponHungEventMsg::MergeFrom(const WeaponHungEventMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_wpn_id()) {
-      mutable_wpn_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.wpn_id());
+      mutable_wpn_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.wpn_id());
     }
     if (from.has_wpn_state()) {
-      mutable_wpn_state()->::Eaagles::Recorder::Pb::PlayerState::MergeFrom(from.wpn_state());
+      mutable_wpn_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.wpn_state());
     }
     if (from.has_shooter_id()) {
-      mutable_shooter_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.shooter_id());
+      mutable_shooter_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.shooter_id());
     }
     if (from.has_tgt_id()) {
-      mutable_tgt_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.tgt_id());
+      mutable_tgt_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.tgt_id());
     }
   }
   _extensions_.MergeFrom(from._extensions_);
@@ -6789,21 +6789,21 @@ const int WeaponDetonationEventMsg::kMissDistFieldNumber;
 WeaponDetonationEventMsg::WeaponDetonationEventMsg()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Eaagles.Recorder.Pb.WeaponDetonationEventMsg)
+  // @@protoc_insertion_point(constructor:oe.Recorder.Pb.WeaponDetonationEventMsg)
 }
 
 void WeaponDetonationEventMsg::InitAsDefaultInstance() {
-  wpn_id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
-  wpn_state_ = const_cast< ::Eaagles::Recorder::Pb::PlayerState*>(&::Eaagles::Recorder::Pb::PlayerState::default_instance());
-  shooter_id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
-  tgt_id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
+  wpn_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  wpn_state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
+  shooter_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  tgt_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
 }
 
 WeaponDetonationEventMsg::WeaponDetonationEventMsg(const WeaponDetonationEventMsg& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Eaagles.Recorder.Pb.WeaponDetonationEventMsg)
+  // @@protoc_insertion_point(copy_constructor:oe.Recorder.Pb.WeaponDetonationEventMsg)
 }
 
 void WeaponDetonationEventMsg::SharedCtor() {
@@ -6818,7 +6818,7 @@ void WeaponDetonationEventMsg::SharedCtor() {
 }
 
 WeaponDetonationEventMsg::~WeaponDetonationEventMsg() {
-  // @@protoc_insertion_point(destructor:Eaagles.Recorder.Pb.WeaponDetonationEventMsg)
+  // @@protoc_insertion_point(destructor:oe.Recorder.Pb.WeaponDetonationEventMsg)
   SharedDtor();
 }
 
@@ -6867,16 +6867,16 @@ void WeaponDetonationEventMsg::Clear() {
   if (_has_bits_[0 / 32] & 63) {
     ZR_(miss_dist_, det_type_);
     if (has_wpn_id()) {
-      if (wpn_id_ != NULL) wpn_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+      if (wpn_id_ != NULL) wpn_id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_wpn_state()) {
-      if (wpn_state_ != NULL) wpn_state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+      if (wpn_state_ != NULL) wpn_state_->::oe::recorder::pb::PlayerState::Clear();
     }
     if (has_shooter_id()) {
-      if (shooter_id_ != NULL) shooter_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+      if (shooter_id_ != NULL) shooter_id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_tgt_id()) {
-      if (tgt_id_ != NULL) tgt_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+      if (tgt_id_ != NULL) tgt_id_->::oe::recorder::pb::PlayerId::Clear();
     }
   }
 
@@ -6891,13 +6891,13 @@ bool WeaponDetonationEventMsg::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Eaagles.Recorder.Pb.WeaponDetonationEventMsg)
+  // @@protoc_insertion_point(parse_start:oe.Recorder.Pb.WeaponDetonationEventMsg)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .Eaagles.Recorder.Pb.PlayerId wpn_id = 1;
+      // required .oe.Recorder.Pb.PlayerId wpn_id = 1;
       case 1: {
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
@@ -6909,7 +6909,7 @@ bool WeaponDetonationEventMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerState wpn_state = 2;
+      // optional .oe.Recorder.Pb.PlayerState wpn_state = 2;
       case 2: {
         if (tag == 18) {
          parse_wpn_state:
@@ -6922,7 +6922,7 @@ bool WeaponDetonationEventMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerId shooter_id = 3;
+      // optional .oe.Recorder.Pb.PlayerId shooter_id = 3;
       case 3: {
         if (tag == 26) {
          parse_shooter_id:
@@ -6935,7 +6935,7 @@ bool WeaponDetonationEventMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerId tgt_id = 4;
+      // optional .oe.Recorder.Pb.PlayerId tgt_id = 4;
       case 4: {
         if (tag == 34) {
          parse_tgt_id:
@@ -6948,7 +6948,7 @@ bool WeaponDetonationEventMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.WeaponDetonationEventMsg.DetonationType det_type = 5;
+      // optional .oe.Recorder.Pb.WeaponDetonationEventMsg.DetonationType det_type = 5;
       case 5: {
         if (tag == 40) {
          parse_det_type:
@@ -6956,8 +6956,8 @@ bool WeaponDetonationEventMsg::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::Eaagles::Recorder::Pb::WeaponDetonationEventMsg_DetonationType_IsValid(value)) {
-            set_det_type(static_cast< ::Eaagles::Recorder::Pb::WeaponDetonationEventMsg_DetonationType >(value));
+          if (::oe::recorder::pb::WeaponDetonationEventMsg_DetonationType_IsValid(value)) {
+            set_det_type(static_cast< ::oe::recorder::pb::WeaponDetonationEventMsg_DetonationType >(value));
           } else {
             mutable_unknown_fields()->AddVarint(5, value);
           }
@@ -7003,42 +7003,42 @@ bool WeaponDetonationEventMsg::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Eaagles.Recorder.Pb.WeaponDetonationEventMsg)
+  // @@protoc_insertion_point(parse_success:oe.Recorder.Pb.WeaponDetonationEventMsg)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Eaagles.Recorder.Pb.WeaponDetonationEventMsg)
+  // @@protoc_insertion_point(parse_failure:oe.Recorder.Pb.WeaponDetonationEventMsg)
   return false;
 #undef DO_
 }
 
 void WeaponDetonationEventMsg::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Eaagles.Recorder.Pb.WeaponDetonationEventMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId wpn_id = 1;
+  // @@protoc_insertion_point(serialize_start:oe.Recorder.Pb.WeaponDetonationEventMsg)
+  // required .oe.Recorder.Pb.PlayerId wpn_id = 1;
   if (has_wpn_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->wpn_id(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerState wpn_state = 2;
+  // optional .oe.Recorder.Pb.PlayerState wpn_state = 2;
   if (has_wpn_state()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, this->wpn_state(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerId shooter_id = 3;
+  // optional .oe.Recorder.Pb.PlayerId shooter_id = 3;
   if (has_shooter_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, this->shooter_id(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerId tgt_id = 4;
+  // optional .oe.Recorder.Pb.PlayerId tgt_id = 4;
   if (has_tgt_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       4, this->tgt_id(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.WeaponDetonationEventMsg.DetonationType det_type = 5;
+  // optional .oe.Recorder.Pb.WeaponDetonationEventMsg.DetonationType det_type = 5;
   if (has_det_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       5, this->det_type(), output);
@@ -7061,41 +7061,41 @@ void WeaponDetonationEventMsg::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Eaagles.Recorder.Pb.WeaponDetonationEventMsg)
+  // @@protoc_insertion_point(serialize_end:oe.Recorder.Pb.WeaponDetonationEventMsg)
 }
 
 ::google::protobuf::uint8* WeaponDetonationEventMsg::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Eaagles.Recorder.Pb.WeaponDetonationEventMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId wpn_id = 1;
+  // @@protoc_insertion_point(serialize_to_array_start:oe.Recorder.Pb.WeaponDetonationEventMsg)
+  // required .oe.Recorder.Pb.PlayerId wpn_id = 1;
   if (has_wpn_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         1, this->wpn_id(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerState wpn_state = 2;
+  // optional .oe.Recorder.Pb.PlayerState wpn_state = 2;
   if (has_wpn_state()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         2, this->wpn_state(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerId shooter_id = 3;
+  // optional .oe.Recorder.Pb.PlayerId shooter_id = 3;
   if (has_shooter_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         3, this->shooter_id(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerId tgt_id = 4;
+  // optional .oe.Recorder.Pb.PlayerId tgt_id = 4;
   if (has_tgt_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         4, this->tgt_id(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.WeaponDetonationEventMsg.DetonationType det_type = 5;
+  // optional .oe.Recorder.Pb.WeaponDetonationEventMsg.DetonationType det_type = 5;
   if (has_det_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       5, this->det_type(), target);
@@ -7118,7 +7118,7 @@ void WeaponDetonationEventMsg::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Eaagles.Recorder.Pb.WeaponDetonationEventMsg)
+  // @@protoc_insertion_point(serialize_to_array_end:oe.Recorder.Pb.WeaponDetonationEventMsg)
   return target;
 }
 
@@ -7126,35 +7126,35 @@ int WeaponDetonationEventMsg::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .Eaagles.Recorder.Pb.PlayerId wpn_id = 1;
+    // required .oe.Recorder.Pb.PlayerId wpn_id = 1;
     if (has_wpn_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->wpn_id());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerState wpn_state = 2;
+    // optional .oe.Recorder.Pb.PlayerState wpn_state = 2;
     if (has_wpn_state()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->wpn_state());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerId shooter_id = 3;
+    // optional .oe.Recorder.Pb.PlayerId shooter_id = 3;
     if (has_shooter_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->shooter_id());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerId tgt_id = 4;
+    // optional .oe.Recorder.Pb.PlayerId tgt_id = 4;
     if (has_tgt_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->tgt_id());
     }
 
-    // optional .Eaagles.Recorder.Pb.WeaponDetonationEventMsg.DetonationType det_type = 5;
+    // optional .oe.Recorder.Pb.WeaponDetonationEventMsg.DetonationType det_type = 5;
     if (has_det_type()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->det_type());
@@ -7195,16 +7195,16 @@ void WeaponDetonationEventMsg::MergeFrom(const WeaponDetonationEventMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_wpn_id()) {
-      mutable_wpn_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.wpn_id());
+      mutable_wpn_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.wpn_id());
     }
     if (from.has_wpn_state()) {
-      mutable_wpn_state()->::Eaagles::Recorder::Pb::PlayerState::MergeFrom(from.wpn_state());
+      mutable_wpn_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.wpn_state());
     }
     if (from.has_shooter_id()) {
-      mutable_shooter_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.shooter_id());
+      mutable_shooter_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.shooter_id());
     }
     if (from.has_tgt_id()) {
-      mutable_tgt_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.tgt_id());
+      mutable_tgt_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.tgt_id());
     }
     if (from.has_det_type()) {
       set_det_type(from.det_type());
@@ -7282,18 +7282,18 @@ const int GunFiredEventMsg::kRoundsFieldNumber;
 GunFiredEventMsg::GunFiredEventMsg()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Eaagles.Recorder.Pb.GunFiredEventMsg)
+  // @@protoc_insertion_point(constructor:oe.Recorder.Pb.GunFiredEventMsg)
 }
 
 void GunFiredEventMsg::InitAsDefaultInstance() {
-  shooter_id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
+  shooter_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
 }
 
 GunFiredEventMsg::GunFiredEventMsg(const GunFiredEventMsg& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Eaagles.Recorder.Pb.GunFiredEventMsg)
+  // @@protoc_insertion_point(copy_constructor:oe.Recorder.Pb.GunFiredEventMsg)
 }
 
 void GunFiredEventMsg::SharedCtor() {
@@ -7304,7 +7304,7 @@ void GunFiredEventMsg::SharedCtor() {
 }
 
 GunFiredEventMsg::~GunFiredEventMsg() {
-  // @@protoc_insertion_point(destructor:Eaagles.Recorder.Pb.GunFiredEventMsg)
+  // @@protoc_insertion_point(destructor:oe.Recorder.Pb.GunFiredEventMsg)
   SharedDtor();
 }
 
@@ -7339,7 +7339,7 @@ void GunFiredEventMsg::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 3) {
     if (has_shooter_id()) {
-      if (shooter_id_ != NULL) shooter_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+      if (shooter_id_ != NULL) shooter_id_->::oe::recorder::pb::PlayerId::Clear();
     }
     rounds_ = 0u;
   }
@@ -7351,13 +7351,13 @@ bool GunFiredEventMsg::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Eaagles.Recorder.Pb.GunFiredEventMsg)
+  // @@protoc_insertion_point(parse_start:oe.Recorder.Pb.GunFiredEventMsg)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .Eaagles.Recorder.Pb.PlayerId shooter_id = 1;
+      // required .oe.Recorder.Pb.PlayerId shooter_id = 1;
       case 1: {
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
@@ -7404,18 +7404,18 @@ bool GunFiredEventMsg::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Eaagles.Recorder.Pb.GunFiredEventMsg)
+  // @@protoc_insertion_point(parse_success:oe.Recorder.Pb.GunFiredEventMsg)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Eaagles.Recorder.Pb.GunFiredEventMsg)
+  // @@protoc_insertion_point(parse_failure:oe.Recorder.Pb.GunFiredEventMsg)
   return false;
 #undef DO_
 }
 
 void GunFiredEventMsg::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Eaagles.Recorder.Pb.GunFiredEventMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId shooter_id = 1;
+  // @@protoc_insertion_point(serialize_start:oe.Recorder.Pb.GunFiredEventMsg)
+  // required .oe.Recorder.Pb.PlayerId shooter_id = 1;
   if (has_shooter_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->shooter_id(), output);
@@ -7438,13 +7438,13 @@ void GunFiredEventMsg::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Eaagles.Recorder.Pb.GunFiredEventMsg)
+  // @@protoc_insertion_point(serialize_end:oe.Recorder.Pb.GunFiredEventMsg)
 }
 
 ::google::protobuf::uint8* GunFiredEventMsg::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Eaagles.Recorder.Pb.GunFiredEventMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId shooter_id = 1;
+  // @@protoc_insertion_point(serialize_to_array_start:oe.Recorder.Pb.GunFiredEventMsg)
+  // required .oe.Recorder.Pb.PlayerId shooter_id = 1;
   if (has_shooter_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -7468,7 +7468,7 @@ void GunFiredEventMsg::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Eaagles.Recorder.Pb.GunFiredEventMsg)
+  // @@protoc_insertion_point(serialize_to_array_end:oe.Recorder.Pb.GunFiredEventMsg)
   return target;
 }
 
@@ -7476,7 +7476,7 @@ int GunFiredEventMsg::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .Eaagles.Recorder.Pb.PlayerId shooter_id = 1;
+    // required .oe.Recorder.Pb.PlayerId shooter_id = 1;
     if (has_shooter_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -7520,7 +7520,7 @@ void GunFiredEventMsg::MergeFrom(const GunFiredEventMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_shooter_id()) {
-      mutable_shooter_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.shooter_id());
+      mutable_shooter_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.shooter_id());
     }
     if (from.has_rounds()) {
       set_rounds(from.rounds());
@@ -7587,23 +7587,23 @@ const int NewTrackEventMsg::kEmissionDataFieldNumber;
 NewTrackEventMsg::NewTrackEventMsg()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Eaagles.Recorder.Pb.NewTrackEventMsg)
+  // @@protoc_insertion_point(constructor:oe.Recorder.Pb.NewTrackEventMsg)
 }
 
 void NewTrackEventMsg::InitAsDefaultInstance() {
-  player_id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
-  track_data_ = const_cast< ::Eaagles::Recorder::Pb::TrackData*>(&::Eaagles::Recorder::Pb::TrackData::default_instance());
-  player_state_ = const_cast< ::Eaagles::Recorder::Pb::PlayerState*>(&::Eaagles::Recorder::Pb::PlayerState::default_instance());
-  trk_player_id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
-  trk_player_state_ = const_cast< ::Eaagles::Recorder::Pb::PlayerState*>(&::Eaagles::Recorder::Pb::PlayerState::default_instance());
-  emission_data_ = const_cast< ::Eaagles::Recorder::Pb::EmissionData*>(&::Eaagles::Recorder::Pb::EmissionData::default_instance());
+  player_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  track_data_ = const_cast< ::oe::recorder::pb::TrackData*>(&::oe::recorder::pb::TrackData::default_instance());
+  player_state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
+  trk_player_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  trk_player_state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
+  emission_data_ = const_cast< ::oe::recorder::pb::EmissionData*>(&::oe::recorder::pb::EmissionData::default_instance());
 }
 
 NewTrackEventMsg::NewTrackEventMsg(const NewTrackEventMsg& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Eaagles.Recorder.Pb.NewTrackEventMsg)
+  // @@protoc_insertion_point(copy_constructor:oe.Recorder.Pb.NewTrackEventMsg)
 }
 
 void NewTrackEventMsg::SharedCtor() {
@@ -7620,7 +7620,7 @@ void NewTrackEventMsg::SharedCtor() {
 }
 
 NewTrackEventMsg::~NewTrackEventMsg() {
-  // @@protoc_insertion_point(destructor:Eaagles.Recorder.Pb.NewTrackEventMsg)
+  // @@protoc_insertion_point(destructor:oe.Recorder.Pb.NewTrackEventMsg)
   SharedDtor();
 }
 
@@ -7663,7 +7663,7 @@ void NewTrackEventMsg::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 127) {
     if (has_player_id()) {
-      if (player_id_ != NULL) player_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+      if (player_id_ != NULL) player_id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_track_id()) {
       if (track_id_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
@@ -7671,19 +7671,19 @@ void NewTrackEventMsg::Clear() {
       }
     }
     if (has_track_data()) {
-      if (track_data_ != NULL) track_data_->::Eaagles::Recorder::Pb::TrackData::Clear();
+      if (track_data_ != NULL) track_data_->::oe::recorder::pb::TrackData::Clear();
     }
     if (has_player_state()) {
-      if (player_state_ != NULL) player_state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+      if (player_state_ != NULL) player_state_->::oe::recorder::pb::PlayerState::Clear();
     }
     if (has_trk_player_id()) {
-      if (trk_player_id_ != NULL) trk_player_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+      if (trk_player_id_ != NULL) trk_player_id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_trk_player_state()) {
-      if (trk_player_state_ != NULL) trk_player_state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+      if (trk_player_state_ != NULL) trk_player_state_->::oe::recorder::pb::PlayerState::Clear();
     }
     if (has_emission_data()) {
-      if (emission_data_ != NULL) emission_data_->::Eaagles::Recorder::Pb::EmissionData::Clear();
+      if (emission_data_ != NULL) emission_data_->::oe::recorder::pb::EmissionData::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -7694,13 +7694,13 @@ bool NewTrackEventMsg::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Eaagles.Recorder.Pb.NewTrackEventMsg)
+  // @@protoc_insertion_point(parse_start:oe.Recorder.Pb.NewTrackEventMsg)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .Eaagles.Recorder.Pb.PlayerId player_id = 1;
+      // required .oe.Recorder.Pb.PlayerId player_id = 1;
       case 1: {
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
@@ -7729,7 +7729,7 @@ bool NewTrackEventMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.TrackData track_data = 3;
+      // optional .oe.Recorder.Pb.TrackData track_data = 3;
       case 3: {
         if (tag == 26) {
          parse_track_data:
@@ -7742,7 +7742,7 @@ bool NewTrackEventMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerState player_state = 4;
+      // optional .oe.Recorder.Pb.PlayerState player_state = 4;
       case 4: {
         if (tag == 34) {
          parse_player_state:
@@ -7755,7 +7755,7 @@ bool NewTrackEventMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerId trk_player_id = 5;
+      // optional .oe.Recorder.Pb.PlayerId trk_player_id = 5;
       case 5: {
         if (tag == 42) {
          parse_trk_player_id:
@@ -7768,7 +7768,7 @@ bool NewTrackEventMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerState trk_player_state = 6;
+      // optional .oe.Recorder.Pb.PlayerState trk_player_state = 6;
       case 6: {
         if (tag == 50) {
          parse_trk_player_state:
@@ -7781,7 +7781,7 @@ bool NewTrackEventMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.EmissionData emission_data = 7;
+      // optional .oe.Recorder.Pb.EmissionData emission_data = 7;
       case 7: {
         if (tag == 58) {
          parse_emission_data:
@@ -7814,18 +7814,18 @@ bool NewTrackEventMsg::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Eaagles.Recorder.Pb.NewTrackEventMsg)
+  // @@protoc_insertion_point(parse_success:oe.Recorder.Pb.NewTrackEventMsg)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Eaagles.Recorder.Pb.NewTrackEventMsg)
+  // @@protoc_insertion_point(parse_failure:oe.Recorder.Pb.NewTrackEventMsg)
   return false;
 #undef DO_
 }
 
 void NewTrackEventMsg::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Eaagles.Recorder.Pb.NewTrackEventMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId player_id = 1;
+  // @@protoc_insertion_point(serialize_start:oe.Recorder.Pb.NewTrackEventMsg)
+  // required .oe.Recorder.Pb.PlayerId player_id = 1;
   if (has_player_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->player_id(), output);
@@ -7841,31 +7841,31 @@ void NewTrackEventMsg::SerializeWithCachedSizes(
       2, this->track_id(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.TrackData track_data = 3;
+  // optional .oe.Recorder.Pb.TrackData track_data = 3;
   if (has_track_data()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, this->track_data(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerState player_state = 4;
+  // optional .oe.Recorder.Pb.PlayerState player_state = 4;
   if (has_player_state()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       4, this->player_state(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerId trk_player_id = 5;
+  // optional .oe.Recorder.Pb.PlayerId trk_player_id = 5;
   if (has_trk_player_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       5, this->trk_player_id(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerState trk_player_state = 6;
+  // optional .oe.Recorder.Pb.PlayerState trk_player_state = 6;
   if (has_trk_player_state()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       6, this->trk_player_state(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.EmissionData emission_data = 7;
+  // optional .oe.Recorder.Pb.EmissionData emission_data = 7;
   if (has_emission_data()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       7, this->emission_data(), output);
@@ -7883,13 +7883,13 @@ void NewTrackEventMsg::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Eaagles.Recorder.Pb.NewTrackEventMsg)
+  // @@protoc_insertion_point(serialize_end:oe.Recorder.Pb.NewTrackEventMsg)
 }
 
 ::google::protobuf::uint8* NewTrackEventMsg::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Eaagles.Recorder.Pb.NewTrackEventMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId player_id = 1;
+  // @@protoc_insertion_point(serialize_to_array_start:oe.Recorder.Pb.NewTrackEventMsg)
+  // required .oe.Recorder.Pb.PlayerId player_id = 1;
   if (has_player_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -7907,35 +7907,35 @@ void NewTrackEventMsg::SerializeWithCachedSizes(
         2, this->track_id(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.TrackData track_data = 3;
+  // optional .oe.Recorder.Pb.TrackData track_data = 3;
   if (has_track_data()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         3, this->track_data(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerState player_state = 4;
+  // optional .oe.Recorder.Pb.PlayerState player_state = 4;
   if (has_player_state()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         4, this->player_state(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerId trk_player_id = 5;
+  // optional .oe.Recorder.Pb.PlayerId trk_player_id = 5;
   if (has_trk_player_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         5, this->trk_player_id(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerState trk_player_state = 6;
+  // optional .oe.Recorder.Pb.PlayerState trk_player_state = 6;
   if (has_trk_player_state()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         6, this->trk_player_state(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.EmissionData emission_data = 7;
+  // optional .oe.Recorder.Pb.EmissionData emission_data = 7;
   if (has_emission_data()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -7954,7 +7954,7 @@ void NewTrackEventMsg::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Eaagles.Recorder.Pb.NewTrackEventMsg)
+  // @@protoc_insertion_point(serialize_to_array_end:oe.Recorder.Pb.NewTrackEventMsg)
   return target;
 }
 
@@ -7962,7 +7962,7 @@ int NewTrackEventMsg::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .Eaagles.Recorder.Pb.PlayerId player_id = 1;
+    // required .oe.Recorder.Pb.PlayerId player_id = 1;
     if (has_player_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -7976,35 +7976,35 @@ int NewTrackEventMsg::ByteSize() const {
           this->track_id());
     }
 
-    // optional .Eaagles.Recorder.Pb.TrackData track_data = 3;
+    // optional .oe.Recorder.Pb.TrackData track_data = 3;
     if (has_track_data()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->track_data());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerState player_state = 4;
+    // optional .oe.Recorder.Pb.PlayerState player_state = 4;
     if (has_player_state()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->player_state());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerId trk_player_id = 5;
+    // optional .oe.Recorder.Pb.PlayerId trk_player_id = 5;
     if (has_trk_player_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->trk_player_id());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerState trk_player_state = 6;
+    // optional .oe.Recorder.Pb.PlayerState trk_player_state = 6;
     if (has_trk_player_state()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->trk_player_state());
     }
 
-    // optional .Eaagles.Recorder.Pb.EmissionData emission_data = 7;
+    // optional .oe.Recorder.Pb.EmissionData emission_data = 7;
     if (has_emission_data()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -8041,25 +8041,25 @@ void NewTrackEventMsg::MergeFrom(const NewTrackEventMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_player_id()) {
-      mutable_player_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.player_id());
+      mutable_player_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.player_id());
     }
     if (from.has_track_id()) {
       set_track_id(from.track_id());
     }
     if (from.has_track_data()) {
-      mutable_track_data()->::Eaagles::Recorder::Pb::TrackData::MergeFrom(from.track_data());
+      mutable_track_data()->::oe::recorder::pb::TrackData::MergeFrom(from.track_data());
     }
     if (from.has_player_state()) {
-      mutable_player_state()->::Eaagles::Recorder::Pb::PlayerState::MergeFrom(from.player_state());
+      mutable_player_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.player_state());
     }
     if (from.has_trk_player_id()) {
-      mutable_trk_player_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.trk_player_id());
+      mutable_trk_player_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.trk_player_id());
     }
     if (from.has_trk_player_state()) {
-      mutable_trk_player_state()->::Eaagles::Recorder::Pb::PlayerState::MergeFrom(from.trk_player_state());
+      mutable_trk_player_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.trk_player_state());
     }
     if (from.has_emission_data()) {
-      mutable_emission_data()->::Eaagles::Recorder::Pb::EmissionData::MergeFrom(from.emission_data());
+      mutable_emission_data()->::oe::recorder::pb::EmissionData::MergeFrom(from.emission_data());
     }
   }
   _extensions_.MergeFrom(from._extensions_);
@@ -8138,18 +8138,18 @@ const int TrackRemovedEventMsg::kTrackIdFieldNumber;
 TrackRemovedEventMsg::TrackRemovedEventMsg()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Eaagles.Recorder.Pb.TrackRemovedEventMsg)
+  // @@protoc_insertion_point(constructor:oe.Recorder.Pb.TrackRemovedEventMsg)
 }
 
 void TrackRemovedEventMsg::InitAsDefaultInstance() {
-  player_id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
+  player_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
 }
 
 TrackRemovedEventMsg::TrackRemovedEventMsg(const TrackRemovedEventMsg& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Eaagles.Recorder.Pb.TrackRemovedEventMsg)
+  // @@protoc_insertion_point(copy_constructor:oe.Recorder.Pb.TrackRemovedEventMsg)
 }
 
 void TrackRemovedEventMsg::SharedCtor() {
@@ -8161,7 +8161,7 @@ void TrackRemovedEventMsg::SharedCtor() {
 }
 
 TrackRemovedEventMsg::~TrackRemovedEventMsg() {
-  // @@protoc_insertion_point(destructor:Eaagles.Recorder.Pb.TrackRemovedEventMsg)
+  // @@protoc_insertion_point(destructor:oe.Recorder.Pb.TrackRemovedEventMsg)
   SharedDtor();
 }
 
@@ -8199,7 +8199,7 @@ void TrackRemovedEventMsg::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 3) {
     if (has_player_id()) {
-      if (player_id_ != NULL) player_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+      if (player_id_ != NULL) player_id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_track_id()) {
       if (track_id_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
@@ -8215,13 +8215,13 @@ bool TrackRemovedEventMsg::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Eaagles.Recorder.Pb.TrackRemovedEventMsg)
+  // @@protoc_insertion_point(parse_start:oe.Recorder.Pb.TrackRemovedEventMsg)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .Eaagles.Recorder.Pb.PlayerId player_id = 1;
+      // required .oe.Recorder.Pb.PlayerId player_id = 1;
       case 1: {
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
@@ -8270,18 +8270,18 @@ bool TrackRemovedEventMsg::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Eaagles.Recorder.Pb.TrackRemovedEventMsg)
+  // @@protoc_insertion_point(parse_success:oe.Recorder.Pb.TrackRemovedEventMsg)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Eaagles.Recorder.Pb.TrackRemovedEventMsg)
+  // @@protoc_insertion_point(parse_failure:oe.Recorder.Pb.TrackRemovedEventMsg)
   return false;
 #undef DO_
 }
 
 void TrackRemovedEventMsg::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Eaagles.Recorder.Pb.TrackRemovedEventMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId player_id = 1;
+  // @@protoc_insertion_point(serialize_start:oe.Recorder.Pb.TrackRemovedEventMsg)
+  // required .oe.Recorder.Pb.PlayerId player_id = 1;
   if (has_player_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->player_id(), output);
@@ -8309,13 +8309,13 @@ void TrackRemovedEventMsg::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Eaagles.Recorder.Pb.TrackRemovedEventMsg)
+  // @@protoc_insertion_point(serialize_end:oe.Recorder.Pb.TrackRemovedEventMsg)
 }
 
 ::google::protobuf::uint8* TrackRemovedEventMsg::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Eaagles.Recorder.Pb.TrackRemovedEventMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId player_id = 1;
+  // @@protoc_insertion_point(serialize_to_array_start:oe.Recorder.Pb.TrackRemovedEventMsg)
+  // required .oe.Recorder.Pb.PlayerId player_id = 1;
   if (has_player_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -8345,7 +8345,7 @@ void TrackRemovedEventMsg::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Eaagles.Recorder.Pb.TrackRemovedEventMsg)
+  // @@protoc_insertion_point(serialize_to_array_end:oe.Recorder.Pb.TrackRemovedEventMsg)
   return target;
 }
 
@@ -8353,7 +8353,7 @@ int TrackRemovedEventMsg::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .Eaagles.Recorder.Pb.PlayerId player_id = 1;
+    // required .oe.Recorder.Pb.PlayerId player_id = 1;
     if (has_player_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -8397,7 +8397,7 @@ void TrackRemovedEventMsg::MergeFrom(const TrackRemovedEventMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_player_id()) {
-      mutable_player_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.player_id());
+      mutable_player_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.player_id());
     }
     if (from.has_track_id()) {
       set_track_id(from.track_id());
@@ -8464,23 +8464,23 @@ const int TrackDataMsg::kEmissionDataFieldNumber;
 TrackDataMsg::TrackDataMsg()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Eaagles.Recorder.Pb.TrackDataMsg)
+  // @@protoc_insertion_point(constructor:oe.Recorder.Pb.TrackDataMsg)
 }
 
 void TrackDataMsg::InitAsDefaultInstance() {
-  player_id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
-  track_data_ = const_cast< ::Eaagles::Recorder::Pb::TrackData*>(&::Eaagles::Recorder::Pb::TrackData::default_instance());
-  player_state_ = const_cast< ::Eaagles::Recorder::Pb::PlayerState*>(&::Eaagles::Recorder::Pb::PlayerState::default_instance());
-  trk_player_id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
-  trk_player_state_ = const_cast< ::Eaagles::Recorder::Pb::PlayerState*>(&::Eaagles::Recorder::Pb::PlayerState::default_instance());
-  emission_data_ = const_cast< ::Eaagles::Recorder::Pb::EmissionData*>(&::Eaagles::Recorder::Pb::EmissionData::default_instance());
+  player_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  track_data_ = const_cast< ::oe::recorder::pb::TrackData*>(&::oe::recorder::pb::TrackData::default_instance());
+  player_state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
+  trk_player_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  trk_player_state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
+  emission_data_ = const_cast< ::oe::recorder::pb::EmissionData*>(&::oe::recorder::pb::EmissionData::default_instance());
 }
 
 TrackDataMsg::TrackDataMsg(const TrackDataMsg& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Eaagles.Recorder.Pb.TrackDataMsg)
+  // @@protoc_insertion_point(copy_constructor:oe.Recorder.Pb.TrackDataMsg)
 }
 
 void TrackDataMsg::SharedCtor() {
@@ -8497,7 +8497,7 @@ void TrackDataMsg::SharedCtor() {
 }
 
 TrackDataMsg::~TrackDataMsg() {
-  // @@protoc_insertion_point(destructor:Eaagles.Recorder.Pb.TrackDataMsg)
+  // @@protoc_insertion_point(destructor:oe.Recorder.Pb.TrackDataMsg)
   SharedDtor();
 }
 
@@ -8540,7 +8540,7 @@ void TrackDataMsg::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 127) {
     if (has_player_id()) {
-      if (player_id_ != NULL) player_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+      if (player_id_ != NULL) player_id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_track_id()) {
       if (track_id_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
@@ -8548,19 +8548,19 @@ void TrackDataMsg::Clear() {
       }
     }
     if (has_track_data()) {
-      if (track_data_ != NULL) track_data_->::Eaagles::Recorder::Pb::TrackData::Clear();
+      if (track_data_ != NULL) track_data_->::oe::recorder::pb::TrackData::Clear();
     }
     if (has_player_state()) {
-      if (player_state_ != NULL) player_state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+      if (player_state_ != NULL) player_state_->::oe::recorder::pb::PlayerState::Clear();
     }
     if (has_trk_player_id()) {
-      if (trk_player_id_ != NULL) trk_player_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+      if (trk_player_id_ != NULL) trk_player_id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_trk_player_state()) {
-      if (trk_player_state_ != NULL) trk_player_state_->::Eaagles::Recorder::Pb::PlayerState::Clear();
+      if (trk_player_state_ != NULL) trk_player_state_->::oe::recorder::pb::PlayerState::Clear();
     }
     if (has_emission_data()) {
-      if (emission_data_ != NULL) emission_data_->::Eaagles::Recorder::Pb::EmissionData::Clear();
+      if (emission_data_ != NULL) emission_data_->::oe::recorder::pb::EmissionData::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -8571,13 +8571,13 @@ bool TrackDataMsg::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Eaagles.Recorder.Pb.TrackDataMsg)
+  // @@protoc_insertion_point(parse_start:oe.Recorder.Pb.TrackDataMsg)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .Eaagles.Recorder.Pb.PlayerId player_id = 1;
+      // required .oe.Recorder.Pb.PlayerId player_id = 1;
       case 1: {
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
@@ -8606,7 +8606,7 @@ bool TrackDataMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.TrackData track_data = 3;
+      // optional .oe.Recorder.Pb.TrackData track_data = 3;
       case 3: {
         if (tag == 26) {
          parse_track_data:
@@ -8619,7 +8619,7 @@ bool TrackDataMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerState player_state = 4;
+      // optional .oe.Recorder.Pb.PlayerState player_state = 4;
       case 4: {
         if (tag == 34) {
          parse_player_state:
@@ -8632,7 +8632,7 @@ bool TrackDataMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerId trk_player_id = 5;
+      // optional .oe.Recorder.Pb.PlayerId trk_player_id = 5;
       case 5: {
         if (tag == 42) {
          parse_trk_player_id:
@@ -8645,7 +8645,7 @@ bool TrackDataMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerState trk_player_state = 6;
+      // optional .oe.Recorder.Pb.PlayerState trk_player_state = 6;
       case 6: {
         if (tag == 50) {
          parse_trk_player_state:
@@ -8658,7 +8658,7 @@ bool TrackDataMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.EmissionData emission_data = 7;
+      // optional .oe.Recorder.Pb.EmissionData emission_data = 7;
       case 7: {
         if (tag == 58) {
          parse_emission_data:
@@ -8691,18 +8691,18 @@ bool TrackDataMsg::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Eaagles.Recorder.Pb.TrackDataMsg)
+  // @@protoc_insertion_point(parse_success:oe.Recorder.Pb.TrackDataMsg)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Eaagles.Recorder.Pb.TrackDataMsg)
+  // @@protoc_insertion_point(parse_failure:oe.Recorder.Pb.TrackDataMsg)
   return false;
 #undef DO_
 }
 
 void TrackDataMsg::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Eaagles.Recorder.Pb.TrackDataMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId player_id = 1;
+  // @@protoc_insertion_point(serialize_start:oe.Recorder.Pb.TrackDataMsg)
+  // required .oe.Recorder.Pb.PlayerId player_id = 1;
   if (has_player_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->player_id(), output);
@@ -8718,31 +8718,31 @@ void TrackDataMsg::SerializeWithCachedSizes(
       2, this->track_id(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.TrackData track_data = 3;
+  // optional .oe.Recorder.Pb.TrackData track_data = 3;
   if (has_track_data()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, this->track_data(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerState player_state = 4;
+  // optional .oe.Recorder.Pb.PlayerState player_state = 4;
   if (has_player_state()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       4, this->player_state(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerId trk_player_id = 5;
+  // optional .oe.Recorder.Pb.PlayerId trk_player_id = 5;
   if (has_trk_player_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       5, this->trk_player_id(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerState trk_player_state = 6;
+  // optional .oe.Recorder.Pb.PlayerState trk_player_state = 6;
   if (has_trk_player_state()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       6, this->trk_player_state(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.EmissionData emission_data = 7;
+  // optional .oe.Recorder.Pb.EmissionData emission_data = 7;
   if (has_emission_data()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       7, this->emission_data(), output);
@@ -8760,13 +8760,13 @@ void TrackDataMsg::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Eaagles.Recorder.Pb.TrackDataMsg)
+  // @@protoc_insertion_point(serialize_end:oe.Recorder.Pb.TrackDataMsg)
 }
 
 ::google::protobuf::uint8* TrackDataMsg::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Eaagles.Recorder.Pb.TrackDataMsg)
-  // required .Eaagles.Recorder.Pb.PlayerId player_id = 1;
+  // @@protoc_insertion_point(serialize_to_array_start:oe.Recorder.Pb.TrackDataMsg)
+  // required .oe.Recorder.Pb.PlayerId player_id = 1;
   if (has_player_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -8784,35 +8784,35 @@ void TrackDataMsg::SerializeWithCachedSizes(
         2, this->track_id(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.TrackData track_data = 3;
+  // optional .oe.Recorder.Pb.TrackData track_data = 3;
   if (has_track_data()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         3, this->track_data(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerState player_state = 4;
+  // optional .oe.Recorder.Pb.PlayerState player_state = 4;
   if (has_player_state()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         4, this->player_state(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerId trk_player_id = 5;
+  // optional .oe.Recorder.Pb.PlayerId trk_player_id = 5;
   if (has_trk_player_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         5, this->trk_player_id(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerState trk_player_state = 6;
+  // optional .oe.Recorder.Pb.PlayerState trk_player_state = 6;
   if (has_trk_player_state()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         6, this->trk_player_state(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.EmissionData emission_data = 7;
+  // optional .oe.Recorder.Pb.EmissionData emission_data = 7;
   if (has_emission_data()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -8831,7 +8831,7 @@ void TrackDataMsg::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Eaagles.Recorder.Pb.TrackDataMsg)
+  // @@protoc_insertion_point(serialize_to_array_end:oe.Recorder.Pb.TrackDataMsg)
   return target;
 }
 
@@ -8839,7 +8839,7 @@ int TrackDataMsg::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .Eaagles.Recorder.Pb.PlayerId player_id = 1;
+    // required .oe.Recorder.Pb.PlayerId player_id = 1;
     if (has_player_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -8853,35 +8853,35 @@ int TrackDataMsg::ByteSize() const {
           this->track_id());
     }
 
-    // optional .Eaagles.Recorder.Pb.TrackData track_data = 3;
+    // optional .oe.Recorder.Pb.TrackData track_data = 3;
     if (has_track_data()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->track_data());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerState player_state = 4;
+    // optional .oe.Recorder.Pb.PlayerState player_state = 4;
     if (has_player_state()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->player_state());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerId trk_player_id = 5;
+    // optional .oe.Recorder.Pb.PlayerId trk_player_id = 5;
     if (has_trk_player_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->trk_player_id());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerState trk_player_state = 6;
+    // optional .oe.Recorder.Pb.PlayerState trk_player_state = 6;
     if (has_trk_player_state()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->trk_player_state());
     }
 
-    // optional .Eaagles.Recorder.Pb.EmissionData emission_data = 7;
+    // optional .oe.Recorder.Pb.EmissionData emission_data = 7;
     if (has_emission_data()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -8918,25 +8918,25 @@ void TrackDataMsg::MergeFrom(const TrackDataMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_player_id()) {
-      mutable_player_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.player_id());
+      mutable_player_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.player_id());
     }
     if (from.has_track_id()) {
       set_track_id(from.track_id());
     }
     if (from.has_track_data()) {
-      mutable_track_data()->::Eaagles::Recorder::Pb::TrackData::MergeFrom(from.track_data());
+      mutable_track_data()->::oe::recorder::pb::TrackData::MergeFrom(from.track_data());
     }
     if (from.has_player_state()) {
-      mutable_player_state()->::Eaagles::Recorder::Pb::PlayerState::MergeFrom(from.player_state());
+      mutable_player_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.player_state());
     }
     if (from.has_trk_player_id()) {
-      mutable_trk_player_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.trk_player_id());
+      mutable_trk_player_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.trk_player_id());
     }
     if (from.has_trk_player_state()) {
-      mutable_trk_player_state()->::Eaagles::Recorder::Pb::PlayerState::MergeFrom(from.trk_player_state());
+      mutable_trk_player_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.trk_player_state());
     }
     if (from.has_emission_data()) {
-      mutable_emission_data()->::Eaagles::Recorder::Pb::EmissionData::MergeFrom(from.emission_data());
+      mutable_emission_data()->::oe::recorder::pb::EmissionData::MergeFrom(from.emission_data());
     }
   }
   _extensions_.MergeFrom(from._extensions_);
@@ -9017,7 +9017,7 @@ const int Vector::kWFieldNumber;
 Vector::Vector()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Eaagles.Recorder.Pb.Vector)
+  // @@protoc_insertion_point(constructor:oe.Recorder.Pb.Vector)
 }
 
 void Vector::InitAsDefaultInstance() {
@@ -9027,7 +9027,7 @@ Vector::Vector(const Vector& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Eaagles.Recorder.Pb.Vector)
+  // @@protoc_insertion_point(copy_constructor:oe.Recorder.Pb.Vector)
 }
 
 void Vector::SharedCtor() {
@@ -9040,7 +9040,7 @@ void Vector::SharedCtor() {
 }
 
 Vector::~Vector() {
-  // @@protoc_insertion_point(destructor:Eaagles.Recorder.Pb.Vector)
+  // @@protoc_insertion_point(destructor:oe.Recorder.Pb.Vector)
   SharedDtor();
 }
 
@@ -9094,7 +9094,7 @@ bool Vector::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Eaagles.Recorder.Pb.Vector)
+  // @@protoc_insertion_point(parse_start:oe.Recorder.Pb.Vector)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -9173,17 +9173,17 @@ bool Vector::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Eaagles.Recorder.Pb.Vector)
+  // @@protoc_insertion_point(parse_success:oe.Recorder.Pb.Vector)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Eaagles.Recorder.Pb.Vector)
+  // @@protoc_insertion_point(parse_failure:oe.Recorder.Pb.Vector)
   return false;
 #undef DO_
 }
 
 void Vector::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Eaagles.Recorder.Pb.Vector)
+  // @@protoc_insertion_point(serialize_start:oe.Recorder.Pb.Vector)
   // required double x = 1;
   if (has_x()) {
     ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->x(), output);
@@ -9208,12 +9208,12 @@ void Vector::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Eaagles.Recorder.Pb.Vector)
+  // @@protoc_insertion_point(serialize_end:oe.Recorder.Pb.Vector)
 }
 
 ::google::protobuf::uint8* Vector::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Eaagles.Recorder.Pb.Vector)
+  // @@protoc_insertion_point(serialize_to_array_start:oe.Recorder.Pb.Vector)
   // required double x = 1;
   if (has_x()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->x(), target);
@@ -9238,7 +9238,7 @@ void Vector::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Eaagles.Recorder.Pb.Vector)
+  // @@protoc_insertion_point(serialize_to_array_end:oe.Recorder.Pb.Vector)
   return target;
 }
 
@@ -9359,7 +9359,7 @@ const int Time::kUtcTimeFieldNumber;
 Time::Time()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Eaagles.Recorder.Pb.Time)
+  // @@protoc_insertion_point(constructor:oe.Recorder.Pb.Time)
 }
 
 void Time::InitAsDefaultInstance() {
@@ -9369,7 +9369,7 @@ Time::Time(const Time& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Eaagles.Recorder.Pb.Time)
+  // @@protoc_insertion_point(copy_constructor:oe.Recorder.Pb.Time)
 }
 
 void Time::SharedCtor() {
@@ -9381,7 +9381,7 @@ void Time::SharedCtor() {
 }
 
 Time::~Time() {
-  // @@protoc_insertion_point(destructor:Eaagles.Recorder.Pb.Time)
+  // @@protoc_insertion_point(destructor:oe.Recorder.Pb.Time)
   SharedDtor();
 }
 
@@ -9436,7 +9436,7 @@ bool Time::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Eaagles.Recorder.Pb.Time)
+  // @@protoc_insertion_point(parse_start:oe.Recorder.Pb.Time)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -9506,17 +9506,17 @@ bool Time::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Eaagles.Recorder.Pb.Time)
+  // @@protoc_insertion_point(parse_success:oe.Recorder.Pb.Time)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Eaagles.Recorder.Pb.Time)
+  // @@protoc_insertion_point(parse_failure:oe.Recorder.Pb.Time)
   return false;
 #undef DO_
 }
 
 void Time::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Eaagles.Recorder.Pb.Time)
+  // @@protoc_insertion_point(serialize_start:oe.Recorder.Pb.Time)
   // required double sim_time = 1;
   if (has_sim_time()) {
     ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->sim_time(), output);
@@ -9544,12 +9544,12 @@ void Time::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Eaagles.Recorder.Pb.Time)
+  // @@protoc_insertion_point(serialize_end:oe.Recorder.Pb.Time)
 }
 
 ::google::protobuf::uint8* Time::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Eaagles.Recorder.Pb.Time)
+  // @@protoc_insertion_point(serialize_to_array_start:oe.Recorder.Pb.Time)
   // required double sim_time = 1;
   if (has_sim_time()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->sim_time(), target);
@@ -9577,7 +9577,7 @@ void Time::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Eaagles.Recorder.Pb.Time)
+  // @@protoc_insertion_point(serialize_to_array_end:oe.Recorder.Pb.Time)
   return target;
 }
 
@@ -9697,7 +9697,7 @@ const int PlayerId::kAcTypeFieldNumber;
 PlayerId::PlayerId()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Eaagles.Recorder.Pb.PlayerId)
+  // @@protoc_insertion_point(constructor:oe.Recorder.Pb.PlayerId)
 }
 
 void PlayerId::InitAsDefaultInstance() {
@@ -9707,7 +9707,7 @@ PlayerId::PlayerId(const PlayerId& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Eaagles.Recorder.Pb.PlayerId)
+  // @@protoc_insertion_point(copy_constructor:oe.Recorder.Pb.PlayerId)
 }
 
 void PlayerId::SharedCtor() {
@@ -9723,7 +9723,7 @@ void PlayerId::SharedCtor() {
 }
 
 PlayerId::~PlayerId() {
-  // @@protoc_insertion_point(destructor:Eaagles.Recorder.Pb.PlayerId)
+  // @@protoc_insertion_point(destructor:oe.Recorder.Pb.PlayerId)
   SharedDtor();
 }
 
@@ -9805,7 +9805,7 @@ bool PlayerId::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Eaagles.Recorder.Pb.PlayerId)
+  // @@protoc_insertion_point(parse_start:oe.Recorder.Pb.PlayerId)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -9926,17 +9926,17 @@ bool PlayerId::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Eaagles.Recorder.Pb.PlayerId)
+  // @@protoc_insertion_point(parse_success:oe.Recorder.Pb.PlayerId)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Eaagles.Recorder.Pb.PlayerId)
+  // @@protoc_insertion_point(parse_failure:oe.Recorder.Pb.PlayerId)
   return false;
 #undef DO_
 }
 
 void PlayerId::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Eaagles.Recorder.Pb.PlayerId)
+  // @@protoc_insertion_point(serialize_start:oe.Recorder.Pb.PlayerId)
   // required uint32 id = 1;
   if (has_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->id(), output);
@@ -9994,12 +9994,12 @@ void PlayerId::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Eaagles.Recorder.Pb.PlayerId)
+  // @@protoc_insertion_point(serialize_end:oe.Recorder.Pb.PlayerId)
 }
 
 ::google::protobuf::uint8* PlayerId::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Eaagles.Recorder.Pb.PlayerId)
+  // @@protoc_insertion_point(serialize_to_array_start:oe.Recorder.Pb.PlayerId)
   // required uint32 id = 1;
   if (has_id()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->id(), target);
@@ -10060,7 +10060,7 @@ void PlayerId::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Eaagles.Recorder.Pb.PlayerId)
+  // @@protoc_insertion_point(serialize_to_array_end:oe.Recorder.Pb.PlayerId)
   return target;
 }
 
@@ -10217,20 +10217,20 @@ const int PlayerState::kDamageFieldNumber;
 PlayerState::PlayerState()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Eaagles.Recorder.Pb.PlayerState)
+  // @@protoc_insertion_point(constructor:oe.Recorder.Pb.PlayerState)
 }
 
 void PlayerState::InitAsDefaultInstance() {
-  pos_ = const_cast< ::Eaagles::Recorder::Pb::Vector*>(&::Eaagles::Recorder::Pb::Vector::default_instance());
-  angles_ = const_cast< ::Eaagles::Recorder::Pb::Vector*>(&::Eaagles::Recorder::Pb::Vector::default_instance());
-  vel_ = const_cast< ::Eaagles::Recorder::Pb::Vector*>(&::Eaagles::Recorder::Pb::Vector::default_instance());
+  pos_ = const_cast< ::oe::recorder::pb::Vector*>(&::oe::recorder::pb::Vector::default_instance());
+  angles_ = const_cast< ::oe::recorder::pb::Vector*>(&::oe::recorder::pb::Vector::default_instance());
+  vel_ = const_cast< ::oe::recorder::pb::Vector*>(&::oe::recorder::pb::Vector::default_instance());
 }
 
 PlayerState::PlayerState(const PlayerState& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Eaagles.Recorder.Pb.PlayerState)
+  // @@protoc_insertion_point(copy_constructor:oe.Recorder.Pb.PlayerState)
 }
 
 void PlayerState::SharedCtor() {
@@ -10243,7 +10243,7 @@ void PlayerState::SharedCtor() {
 }
 
 PlayerState::~PlayerState() {
-  // @@protoc_insertion_point(destructor:Eaagles.Recorder.Pb.PlayerState)
+  // @@protoc_insertion_point(destructor:oe.Recorder.Pb.PlayerState)
   SharedDtor();
 }
 
@@ -10280,13 +10280,13 @@ void PlayerState::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 15) {
     if (has_pos()) {
-      if (pos_ != NULL) pos_->::Eaagles::Recorder::Pb::Vector::Clear();
+      if (pos_ != NULL) pos_->::oe::recorder::pb::Vector::Clear();
     }
     if (has_angles()) {
-      if (angles_ != NULL) angles_->::Eaagles::Recorder::Pb::Vector::Clear();
+      if (angles_ != NULL) angles_->::oe::recorder::pb::Vector::Clear();
     }
     if (has_vel()) {
-      if (vel_ != NULL) vel_->::Eaagles::Recorder::Pb::Vector::Clear();
+      if (vel_ != NULL) vel_->::oe::recorder::pb::Vector::Clear();
     }
     damage_ = 0;
   }
@@ -10298,13 +10298,13 @@ bool PlayerState::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Eaagles.Recorder.Pb.PlayerState)
+  // @@protoc_insertion_point(parse_start:oe.Recorder.Pb.PlayerState)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .Eaagles.Recorder.Pb.Vector pos = 1;
+      // required .oe.Recorder.Pb.Vector pos = 1;
       case 1: {
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
@@ -10316,7 +10316,7 @@ bool PlayerState::MergePartialFromCodedStream(
         break;
       }
 
-      // required .Eaagles.Recorder.Pb.Vector angles = 2;
+      // required .oe.Recorder.Pb.Vector angles = 2;
       case 2: {
         if (tag == 18) {
          parse_angles:
@@ -10329,7 +10329,7 @@ bool PlayerState::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.Vector vel = 3;
+      // optional .oe.Recorder.Pb.Vector vel = 3;
       case 3: {
         if (tag == 26) {
          parse_vel:
@@ -10377,30 +10377,30 @@ bool PlayerState::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Eaagles.Recorder.Pb.PlayerState)
+  // @@protoc_insertion_point(parse_success:oe.Recorder.Pb.PlayerState)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Eaagles.Recorder.Pb.PlayerState)
+  // @@protoc_insertion_point(parse_failure:oe.Recorder.Pb.PlayerState)
   return false;
 #undef DO_
 }
 
 void PlayerState::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Eaagles.Recorder.Pb.PlayerState)
-  // required .Eaagles.Recorder.Pb.Vector pos = 1;
+  // @@protoc_insertion_point(serialize_start:oe.Recorder.Pb.PlayerState)
+  // required .oe.Recorder.Pb.Vector pos = 1;
   if (has_pos()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->pos(), output);
   }
 
-  // required .Eaagles.Recorder.Pb.Vector angles = 2;
+  // required .oe.Recorder.Pb.Vector angles = 2;
   if (has_angles()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, this->angles(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.Vector vel = 3;
+  // optional .oe.Recorder.Pb.Vector vel = 3;
   if (has_vel()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, this->vel(), output);
@@ -10423,27 +10423,27 @@ void PlayerState::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Eaagles.Recorder.Pb.PlayerState)
+  // @@protoc_insertion_point(serialize_end:oe.Recorder.Pb.PlayerState)
 }
 
 ::google::protobuf::uint8* PlayerState::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Eaagles.Recorder.Pb.PlayerState)
-  // required .Eaagles.Recorder.Pb.Vector pos = 1;
+  // @@protoc_insertion_point(serialize_to_array_start:oe.Recorder.Pb.PlayerState)
+  // required .oe.Recorder.Pb.Vector pos = 1;
   if (has_pos()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         1, this->pos(), target);
   }
 
-  // required .Eaagles.Recorder.Pb.Vector angles = 2;
+  // required .oe.Recorder.Pb.Vector angles = 2;
   if (has_angles()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         2, this->angles(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.Vector vel = 3;
+  // optional .oe.Recorder.Pb.Vector vel = 3;
   if (has_vel()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -10467,7 +10467,7 @@ void PlayerState::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Eaagles.Recorder.Pb.PlayerState)
+  // @@protoc_insertion_point(serialize_to_array_end:oe.Recorder.Pb.PlayerState)
   return target;
 }
 
@@ -10475,21 +10475,21 @@ int PlayerState::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .Eaagles.Recorder.Pb.Vector pos = 1;
+    // required .oe.Recorder.Pb.Vector pos = 1;
     if (has_pos()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->pos());
     }
 
-    // required .Eaagles.Recorder.Pb.Vector angles = 2;
+    // required .oe.Recorder.Pb.Vector angles = 2;
     if (has_angles()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->angles());
     }
 
-    // optional .Eaagles.Recorder.Pb.Vector vel = 3;
+    // optional .oe.Recorder.Pb.Vector vel = 3;
     if (has_vel()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -10531,13 +10531,13 @@ void PlayerState::MergeFrom(const PlayerState& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_pos()) {
-      mutable_pos()->::Eaagles::Recorder::Pb::Vector::MergeFrom(from.pos());
+      mutable_pos()->::oe::recorder::pb::Vector::MergeFrom(from.pos());
     }
     if (from.has_angles()) {
-      mutable_angles()->::Eaagles::Recorder::Pb::Vector::MergeFrom(from.angles());
+      mutable_angles()->::oe::recorder::pb::Vector::MergeFrom(from.angles());
     }
     if (from.has_vel()) {
-      mutable_vel()->::Eaagles::Recorder::Pb::Vector::MergeFrom(from.vel());
+      mutable_vel()->::oe::recorder::pb::Vector::MergeFrom(from.vel());
     }
     if (from.has_damage()) {
       set_damage(from.damage());
@@ -10619,19 +10619,19 @@ const int TrackData::kWpnRelFieldNumber;
 TrackData::TrackData()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Eaagles.Recorder.Pb.TrackData)
+  // @@protoc_insertion_point(constructor:oe.Recorder.Pb.TrackData)
 }
 
 void TrackData::InitAsDefaultInstance() {
-  position_ = const_cast< ::Eaagles::Recorder::Pb::Vector*>(&::Eaagles::Recorder::Pb::Vector::default_instance());
-  velocity_ = const_cast< ::Eaagles::Recorder::Pb::Vector*>(&::Eaagles::Recorder::Pb::Vector::default_instance());
+  position_ = const_cast< ::oe::recorder::pb::Vector*>(&::oe::recorder::pb::Vector::default_instance());
+  velocity_ = const_cast< ::oe::recorder::pb::Vector*>(&::oe::recorder::pb::Vector::default_instance());
 }
 
 TrackData::TrackData(const TrackData& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Eaagles.Recorder.Pb.TrackData)
+  // @@protoc_insertion_point(copy_constructor:oe.Recorder.Pb.TrackData)
 }
 
 void TrackData::SharedCtor() {
@@ -10654,7 +10654,7 @@ void TrackData::SharedCtor() {
 }
 
 TrackData::~TrackData() {
-  // @@protoc_insertion_point(destructor:Eaagles.Recorder.Pb.TrackData)
+  // @@protoc_insertion_point(destructor:oe.Recorder.Pb.TrackData)
   SharedDtor();
 }
 
@@ -10706,10 +10706,10 @@ void TrackData::Clear() {
     ZR_(avg_signal_, wpn_rel_);
     altitude_ = 0;
     if (has_position()) {
-      if (position_ != NULL) position_->::Eaagles::Recorder::Pb::Vector::Clear();
+      if (position_ != NULL) position_->::oe::recorder::pb::Vector::Clear();
     }
     if (has_velocity()) {
-      if (velocity_ != NULL) velocity_->::Eaagles::Recorder::Pb::Vector::Clear();
+      if (velocity_ != NULL) velocity_->::oe::recorder::pb::Vector::Clear();
     }
     sl_index_ = 0u;
   }
@@ -10725,7 +10725,7 @@ bool TrackData::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Eaagles.Recorder.Pb.TrackData)
+  // @@protoc_insertion_point(parse_start:oe.Recorder.Pb.TrackData)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -10865,7 +10865,7 @@ bool TrackData::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.Vector position = 10;
+      // optional .oe.Recorder.Pb.Vector position = 10;
       case 10: {
         if (tag == 82) {
          parse_position:
@@ -10878,7 +10878,7 @@ bool TrackData::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.Vector velocity = 11;
+      // optional .oe.Recorder.Pb.Vector velocity = 11;
       case 11: {
         if (tag == 90) {
          parse_velocity:
@@ -10956,17 +10956,17 @@ bool TrackData::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Eaagles.Recorder.Pb.TrackData)
+  // @@protoc_insertion_point(parse_success:oe.Recorder.Pb.TrackData)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Eaagles.Recorder.Pb.TrackData)
+  // @@protoc_insertion_point(parse_failure:oe.Recorder.Pb.TrackData)
   return false;
 #undef DO_
 }
 
 void TrackData::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Eaagles.Recorder.Pb.TrackData)
+  // @@protoc_insertion_point(serialize_start:oe.Recorder.Pb.TrackData)
   // optional uint32 type = 1;
   if (has_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->type(), output);
@@ -11012,13 +11012,13 @@ void TrackData::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteDouble(9, this->altitude(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.Vector position = 10;
+  // optional .oe.Recorder.Pb.Vector position = 10;
   if (has_position()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       10, this->position(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.Vector velocity = 11;
+  // optional .oe.Recorder.Pb.Vector velocity = 11;
   if (has_velocity()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       11, this->velocity(), output);
@@ -11051,12 +11051,12 @@ void TrackData::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Eaagles.Recorder.Pb.TrackData)
+  // @@protoc_insertion_point(serialize_end:oe.Recorder.Pb.TrackData)
 }
 
 ::google::protobuf::uint8* TrackData::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Eaagles.Recorder.Pb.TrackData)
+  // @@protoc_insertion_point(serialize_to_array_start:oe.Recorder.Pb.TrackData)
   // optional uint32 type = 1;
   if (has_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->type(), target);
@@ -11102,14 +11102,14 @@ void TrackData::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(9, this->altitude(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.Vector position = 10;
+  // optional .oe.Recorder.Pb.Vector position = 10;
   if (has_position()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         10, this->position(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.Vector velocity = 11;
+  // optional .oe.Recorder.Pb.Vector velocity = 11;
   if (has_velocity()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -11143,7 +11143,7 @@ void TrackData::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Eaagles.Recorder.Pb.TrackData)
+  // @@protoc_insertion_point(serialize_to_array_end:oe.Recorder.Pb.TrackData)
   return target;
 }
 
@@ -11200,14 +11200,14 @@ int TrackData::ByteSize() const {
       total_size += 1 + 8;
     }
 
-    // optional .Eaagles.Recorder.Pb.Vector position = 10;
+    // optional .oe.Recorder.Pb.Vector position = 10;
     if (has_position()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->position());
     }
 
-    // optional .Eaagles.Recorder.Pb.Vector velocity = 11;
+    // optional .oe.Recorder.Pb.Vector velocity = 11;
     if (has_velocity()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -11290,10 +11290,10 @@ void TrackData::MergeFrom(const TrackData& from) {
       set_altitude(from.altitude());
     }
     if (from.has_position()) {
-      mutable_position()->::Eaagles::Recorder::Pb::Vector::MergeFrom(from.position());
+      mutable_position()->::oe::recorder::pb::Vector::MergeFrom(from.position());
     }
     if (from.has_velocity()) {
-      mutable_velocity()->::Eaagles::Recorder::Pb::Vector::MergeFrom(from.velocity());
+      mutable_velocity()->::oe::recorder::pb::Vector::MergeFrom(from.velocity());
     }
     if (from.has_avg_signal()) {
       set_avg_signal(from.avg_signal());
@@ -11413,19 +11413,19 @@ const int EmissionData::kTargetIdFieldNumber;
 EmissionData::EmissionData()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Eaagles.Recorder.Pb.EmissionData)
+  // @@protoc_insertion_point(constructor:oe.Recorder.Pb.EmissionData)
 }
 
 void EmissionData::InitAsDefaultInstance() {
-  origin_id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
-  target_id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
+  origin_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  target_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
 }
 
 EmissionData::EmissionData(const EmissionData& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Eaagles.Recorder.Pb.EmissionData)
+  // @@protoc_insertion_point(copy_constructor:oe.Recorder.Pb.EmissionData)
 }
 
 void EmissionData::SharedCtor() {
@@ -11445,7 +11445,7 @@ void EmissionData::SharedCtor() {
 }
 
 EmissionData::~EmissionData() {
-  // @@protoc_insertion_point(destructor:Eaagles.Recorder.Pb.EmissionData)
+  // @@protoc_insertion_point(destructor:oe.Recorder.Pb.EmissionData)
   SharedDtor();
 }
 
@@ -11496,10 +11496,10 @@ void EmissionData::Clear() {
   if (_has_bits_[8 / 32] & 1792) {
     elevation_aoi_ = 0;
     if (has_origin_id()) {
-      if (origin_id_ != NULL) origin_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+      if (origin_id_ != NULL) origin_id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_target_id()) {
-      if (target_id_ != NULL) target_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+      if (target_id_ != NULL) target_id_->::oe::recorder::pb::PlayerId::Clear();
     }
   }
 
@@ -11514,7 +11514,7 @@ bool EmissionData::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Eaagles.Recorder.Pb.EmissionData)
+  // @@protoc_insertion_point(parse_start:oe.Recorder.Pb.EmissionData)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -11609,7 +11609,7 @@ bool EmissionData::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.EmissionData.Polarization polarization = 7;
+      // optional .oe.Recorder.Pb.EmissionData.Polarization polarization = 7;
       case 7: {
         if (tag == 56) {
          parse_polarization:
@@ -11617,8 +11617,8 @@ bool EmissionData::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::Eaagles::Recorder::Pb::EmissionData_Polarization_IsValid(value)) {
-            set_polarization(static_cast< ::Eaagles::Recorder::Pb::EmissionData_Polarization >(value));
+          if (::oe::recorder::pb::EmissionData_Polarization_IsValid(value)) {
+            set_polarization(static_cast< ::oe::recorder::pb::EmissionData_Polarization >(value));
           } else {
             mutable_unknown_fields()->AddVarint(7, value);
           }
@@ -11659,7 +11659,7 @@ bool EmissionData::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerId origin_id = 10;
+      // optional .oe.Recorder.Pb.PlayerId origin_id = 10;
       case 10: {
         if (tag == 82) {
          parse_origin_id:
@@ -11672,7 +11672,7 @@ bool EmissionData::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .Eaagles.Recorder.Pb.PlayerId target_id = 11;
+      // optional .oe.Recorder.Pb.PlayerId target_id = 11;
       case 11: {
         if (tag == 90) {
          parse_target_id:
@@ -11705,17 +11705,17 @@ bool EmissionData::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Eaagles.Recorder.Pb.EmissionData)
+  // @@protoc_insertion_point(parse_success:oe.Recorder.Pb.EmissionData)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Eaagles.Recorder.Pb.EmissionData)
+  // @@protoc_insertion_point(parse_failure:oe.Recorder.Pb.EmissionData)
   return false;
 #undef DO_
 }
 
 void EmissionData::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Eaagles.Recorder.Pb.EmissionData)
+  // @@protoc_insertion_point(serialize_start:oe.Recorder.Pb.EmissionData)
   // optional double frequency = 1;
   if (has_frequency()) {
     ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->frequency(), output);
@@ -11746,7 +11746,7 @@ void EmissionData::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteDouble(6, this->power(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.EmissionData.Polarization polarization = 7;
+  // optional .oe.Recorder.Pb.EmissionData.Polarization polarization = 7;
   if (has_polarization()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       7, this->polarization(), output);
@@ -11762,13 +11762,13 @@ void EmissionData::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteDouble(9, this->elevation_aoi(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerId origin_id = 10;
+  // optional .oe.Recorder.Pb.PlayerId origin_id = 10;
   if (has_origin_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       10, this->origin_id(), output);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerId target_id = 11;
+  // optional .oe.Recorder.Pb.PlayerId target_id = 11;
   if (has_target_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       11, this->target_id(), output);
@@ -11786,12 +11786,12 @@ void EmissionData::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Eaagles.Recorder.Pb.EmissionData)
+  // @@protoc_insertion_point(serialize_end:oe.Recorder.Pb.EmissionData)
 }
 
 ::google::protobuf::uint8* EmissionData::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Eaagles.Recorder.Pb.EmissionData)
+  // @@protoc_insertion_point(serialize_to_array_start:oe.Recorder.Pb.EmissionData)
   // optional double frequency = 1;
   if (has_frequency()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->frequency(), target);
@@ -11822,7 +11822,7 @@ void EmissionData::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(6, this->power(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.EmissionData.Polarization polarization = 7;
+  // optional .oe.Recorder.Pb.EmissionData.Polarization polarization = 7;
   if (has_polarization()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       7, this->polarization(), target);
@@ -11838,14 +11838,14 @@ void EmissionData::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(9, this->elevation_aoi(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerId origin_id = 10;
+  // optional .oe.Recorder.Pb.PlayerId origin_id = 10;
   if (has_origin_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         10, this->origin_id(), target);
   }
 
-  // optional .Eaagles.Recorder.Pb.PlayerId target_id = 11;
+  // optional .oe.Recorder.Pb.PlayerId target_id = 11;
   if (has_target_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -11864,7 +11864,7 @@ void EmissionData::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Eaagles.Recorder.Pb.EmissionData)
+  // @@protoc_insertion_point(serialize_to_array_end:oe.Recorder.Pb.EmissionData)
   return target;
 }
 
@@ -11902,7 +11902,7 @@ int EmissionData::ByteSize() const {
       total_size += 1 + 8;
     }
 
-    // optional .Eaagles.Recorder.Pb.EmissionData.Polarization polarization = 7;
+    // optional .oe.Recorder.Pb.EmissionData.Polarization polarization = 7;
     if (has_polarization()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->polarization());
@@ -11920,14 +11920,14 @@ int EmissionData::ByteSize() const {
       total_size += 1 + 8;
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerId origin_id = 10;
+    // optional .oe.Recorder.Pb.PlayerId origin_id = 10;
     if (has_origin_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->origin_id());
     }
 
-    // optional .Eaagles.Recorder.Pb.PlayerId target_id = 11;
+    // optional .oe.Recorder.Pb.PlayerId target_id = 11;
     if (has_target_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -11993,10 +11993,10 @@ void EmissionData::MergeFrom(const EmissionData& from) {
       set_elevation_aoi(from.elevation_aoi());
     }
     if (from.has_origin_id()) {
-      mutable_origin_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.origin_id());
+      mutable_origin_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.origin_id());
     }
     if (from.has_target_id()) {
-      mutable_target_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.target_id());
+      mutable_target_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.target_id());
     }
   }
   _extensions_.MergeFrom(from._extensions_);
@@ -12058,8 +12058,8 @@ void EmissionData::Swap(EmissionData* other) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace Pb
+}  // namespace pb
 }  // namespace Recorder
-}  // namespace Eaagles
+}  // namespace oe
 
 // @@protoc_insertion_point(global_scope)

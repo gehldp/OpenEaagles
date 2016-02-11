@@ -3,11 +3,11 @@
 // ------------------------------------------------------------------------------
 
 #include "openeaagles/maps/rpfMap/TextureTable.h"
-#include "openeaagles/basicGL/Texture.h"
+#include "openeaagles/graphics/Texture.h"
 
-namespace Eaagles {
-namespace Maps {
-namespace Rpf {
+namespace oe {
+namespace maps  {
+namespace rpf {
 
 IMPLEMENT_SUBCLASS(TextureTable, "TextureTable")
 EMPTY_SLOTTABLE(TextureTable)
@@ -147,7 +147,7 @@ bool TextureTable::setSize(const int newSize)
 //------------------------------------------------------------------------------
 // setTextureObject() - Sets the texture at the given row, column.
 //------------------------------------------------------------------------------
-bool TextureTable::setTextureObject(int row, int col, BasicGL::Texture* newObj)
+bool TextureTable::setTextureObject(int row, int col, graphics::Texture* newObj)
 {
     int x = row + centerTablePos;
     int y = col + centerTablePos;
@@ -168,12 +168,12 @@ bool TextureTable::setTextureObject(int row, int col, BasicGL::Texture* newObj)
 //------------------------------------------------------------------------------
 // getTexture() - Returns the texture object at the given row / column.
 //------------------------------------------------------------------------------
-BasicGL::Texture* TextureTable::getTexture(int row, int col)
+graphics::Texture* TextureTable::getTexture(int row, int col)
 {
     return texes[row + centerTablePos][col + centerTablePos];
 }
 
-} // End Rpf namespace
+} // End rpf namespace
 } // End Maps namespace
-} // End Eaagles namespace
+} // End oe namespace
 

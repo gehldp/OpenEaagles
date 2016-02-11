@@ -3,8 +3,8 @@
 //------------------------------------------------------------------------------
 #include "openeaagles/basic/Statistic.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Statistic,"Statistic")
 EMPTY_SERIALIZER(Statistic)
@@ -55,5 +55,5 @@ void Statistic::clear()
   value1 = 0.0;
 }
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace

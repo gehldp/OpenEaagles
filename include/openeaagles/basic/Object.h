@@ -1,14 +1,14 @@
 
-#ifndef __Eaagles_Basic_Object_H__
-#define __Eaagles_Basic_Object_H__
+#ifndef __oe_basic_Object_H__
+#define __oe_basic_Object_H__
 
 #include "openeaagles/basic/support.h"
 #include "openeaagles/basic/macros.h"
 #include "openeaagles/basic/SlotTable.h"
 #include "openeaagles/basic/safe_ptr.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class: Object
@@ -142,7 +142,7 @@ namespace Basic {
 //
 //    Typically an application will build its own application level factory,
 //    which in turn will call the various factory methods for the model libraries and
-//    OpenEaagles libraries that the application requires.  By ordering these factory
+//    Openoe libraries that the application requires.  By ordering these factory
 //    calls at the application level, the factory can search a library containing
 //    a few more specific models prior to searching a library of many generic models,
 //    and if a more specific model exists for a given factory name then it is used,
@@ -158,16 +158,7 @@ namespace Basic {
 //       const char* Foo::getFactoryName()
 //          Static function that returns the factory name of class Foo.
 //
-//    Depreciated form name support functions (use factory support functions instead)
-//
-//       bool isFormName(char* name)
-//          Returns true if this object's form name is 'name' or if it is
-//          derived from a form named 'name'.
-//
-//       const char* Foo::getFormName()
-//          Static function that returns the form name of class Foo.
-//
-//    (For examples of factory classes, see basic/Factory.cpp, basicGL/Factory.cpp,
+//    (For examples of factory classes, see basic/Factory.cpp, graphics/Factory.cpp,
 //     simulation/Factory.cpp, as well as the various OpenEaagles examples)
 //
 //
@@ -220,7 +211,7 @@ namespace Basic {
 //
 //    A serializer must be written for each derived class, or use EMPTY_SERIALIZER().
 //
-//    Serializes the object to 'sout' in the standard Eaagles Description
+//    Serializes the object to 'sout' in the standard oe Description
 //    Language (EDL) format, which includes the object's factory name and slots.
 //
 //       serialize(ostream& sout)
@@ -284,13 +275,13 @@ namespace Basic {
 //       (See macro STANDARD_CONSTRUCTOR())
 //
 //
-// Table of known OpenEaagles classes and object counters
+// Table of known Openoe classes and object counters
 //
-//    A list of 'known' OpenEaagles classes is maintained as a table of pointers
-//    to the _Static structure, which is contained in each OpenEaagles class.  The
+//    A list of 'known' Openoe classes is maintained as a table of pointers
+//    to the _Static structure, which is contained in each Openoe class.  The
 //    table is a private, static member variable.  The various IMPLEMENT_SUBCLASS
 //    macros register the class using the registerClass() function; therefore all
-//    OpenEaagles classes implemented in an application are known.
+//    Openoe classes implemented in an application are known.
 //
 //    The STANDARD_CONSTRUCTOR() and STANDARD_DESTRUCTOR() macros increment and
 //    decrement, respectively, a counter located in each class _Static structure.
@@ -299,7 +290,7 @@ namespace Basic {
 //    instantiated objects, is also maintained.
 //
 //       writeClassList(std::ostream& sout)
-//          Writes the table of known OpenEaagles classes, which includes the
+//          Writes the table of known Openoe classes, which includes the
 //          form name, object counters and full C++ class name for each class,
 //          to the 'sout' output stream.
 //
@@ -319,9 +310,7 @@ class Object
 
    public: virtual bool isClassType(const std::type_info& type) const;
    public: virtual bool isFactoryName(const char name[]) const;
-   public: virtual bool isFormName(const char name[]) const;               // depreciated
    public: static const char* getFactoryName();
-   public: static const char* getFormName();                               // depreciated
    public: static const char* getClassName();
    public: virtual std::ostream& serialize(std::ostream& sout, const int i = 0, const bool slotsOnly = false) const;
 
@@ -380,7 +369,7 @@ public:
    // ref(), unref() and getRefCount()
    #include "openeaagles/basic/refCount.h"
 
-   // Output the list of known Eaagles classes
+   // Output the list of known oe classes
    static void writeClassList(std::ostream& sout);
 
    // ---
@@ -431,13 +420,13 @@ private:
 
    // Table of registered classes:
    // --- pointers to the static member structure, _Static
-   static const unsigned int MAX_CLASSES = EAAGLES_CONFIG_MAX_CLASSES;
+   static const unsigned int MAX_CLASSES = OE_CONFIG_MAX_CLASSES;
    static const _Static* classes[MAX_CLASSES];
    static unsigned int numClasses;
 };
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 
 #endif
 

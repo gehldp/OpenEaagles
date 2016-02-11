@@ -1,11 +1,10 @@
 #
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboeMaps.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboemaps.a
 
 OBJS =  \
-	$(LIB)(Factory.o) \
-	$(LIB)(mapsFF.o)
+	$(LIB)(factory.o)
 
 SUBDIRS = rpfMap
 

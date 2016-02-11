@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: Pair
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Pair_H__
-#define __Eaagles_Basic_Pair_H__
+#ifndef __oe_basic_Pair_H__
+#define __oe_basic_Pair_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/basic/Identifier.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class: Pair
@@ -47,7 +47,7 @@ private:
    Object* obj;            // Object
 };
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 
 #endif

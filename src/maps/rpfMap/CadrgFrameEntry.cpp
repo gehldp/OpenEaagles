@@ -6,9 +6,9 @@
 #include "openeaagles/maps/rpfMap/CadrgFrame.h"
 #include <cstring>
 
-namespace Eaagles {
-namespace Maps {
-namespace Rpf {
+namespace oe {
+namespace maps {
+namespace rpf {
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
@@ -113,6 +113,6 @@ void CadrgFrameEntry::setFrame(CadrgFrame* newFrame)
     }
 }
 
-} // End Rpf namespace
-} // End Maps namespace
-} // End Eaagles namespace
+} // End rpf namespace
+} // End maps namespace
+} // End oe namespace

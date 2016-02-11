@@ -1,16 +1,16 @@
 //------------------------------------------------------------------------------
 // Class: PrintHandler
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Recorder_PrintHandler_H__
-#define __Eaagles_Recorder_PrintHandler_H__
+#ifndef __oe_recorder_PrintHandler_H__
+#define __oe_recorder_PrintHandler_H__
 
 #include "openeaagles/recorder/OutputHandler.h"
 #include <string>
 #include <sstream>
 #include <fstream>
 
-namespace Eaagles {
-namespace Recorder {
+namespace oe {
+namespace recorder {
 
 //------------------------------------------------------------------------------
 // Class:   PrintHandler
@@ -52,8 +52,8 @@ public:
                                           // (valid only while file is open)
 
    // File and path names; set before calling openFile()
-   virtual bool setFilename(const Basic::String* const msg);
-   virtual bool setPathName(const Basic::String* const msg);
+   virtual bool setFilename(const basic::String* const msg);
+   virtual bool setPathName(const basic::String* const msg);
 
 protected:
    void setFullFilename(const char* const name);
@@ -66,8 +66,8 @@ private:
    // from FileWriter.h:
    std::ofstream* sout;             // output file stream (pointer)
    char* fullFilename;              // Full file name of the output file
-   const Basic::String* filename;   // Output file name
-   const Basic::String* pathname;   // Path to the output file directory
+   const basic::String* filename;   // Output file name
+   const basic::String* pathname;   // Path to the output file directory
 
    bool fileOpened;                 // File opened
    bool fileFailed;                 // Open or write failed
@@ -75,7 +75,7 @@ private:
    bool fileEmpty;                  // Is the file opened and empty?
 };
 
-} // End Recorder namespace
-} // End Eaagles namespace
+} // End recorder namespace
+} // End oe namespace
 
 #endif

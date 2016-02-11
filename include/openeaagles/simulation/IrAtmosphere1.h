@@ -1,16 +1,16 @@
 //------------------------------------------------------------------------------
 // Class: IrAtmosphere1
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_IrAtmosphere1_H__
-#define __Eaagles_Simulation_IrAtmosphere1_H__
+#ifndef __oe_simulation_IrAtmosphere1_H__
+#define __oe_simulation_IrAtmosphere1_H__
 
 #include "openeaagles/basic/Component.h"
 
 #include "openeaagles/simulation/IrAtmosphere.h"
 
-namespace Eaagles {
+namespace oe {
 
-   namespace Basic {
+   namespace basic {
       class Number;
       class Table1;
       class Table2;
@@ -20,7 +20,7 @@ namespace Eaagles {
       class Number;
    }
 
-namespace Simulation {
+namespace simulation {
 
 class IrQueryMsg;
 
@@ -157,17 +157,17 @@ protected:
    ) const;
 
    //Slot functions
-   virtual bool setSlotSolarRadiationTable(const Basic::Table2* const tbl);
-   virtual bool setSlotBackgroundRadiationTable(const Basic::Table3* const tbl);
-   virtual bool setSlotTransmissivityTable(const Basic::Table4* const tbl);
+   virtual bool setSlotSolarRadiationTable(const basic::Table2* const tbl);
+   virtual bool setSlotBackgroundRadiationTable(const basic::Table3* const tbl);
+   virtual bool setSlotTransmissivityTable(const basic::Table4* const tbl);
 
 private:
-   const Basic::Table2* solarRadiationTable;
-   const Basic::Table3* backgroundRadiationTable;
-   const Basic::Table4* transmissivityTable;
+   const basic::Table2* solarRadiationTable;
+   const basic::Table3* backgroundRadiationTable;
+   const basic::Table4* transmissivityTable;
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

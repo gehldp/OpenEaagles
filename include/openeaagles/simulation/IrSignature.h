@@ -1,19 +1,19 @@
 //------------------------------------------------------------------------------
 // Class: IrSignature
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_IrSignature_H__
-#define __Eaagles_Simulation_IrSignature_H__
+#ifndef __oe_simulation_IrSignature_H__
+#define __oe_simulation_IrSignature_H__
 
 #include "openeaagles/basic/Component.h"
 
-namespace Eaagles {
-   namespace Basic {
+namespace oe {
+   namespace basic {
       class Number;
       class List;
       class Table1;
    }
 
-namespace Simulation {
+namespace simulation {
    class IrQueryMsg;
    class IrShape;
 
@@ -61,9 +61,9 @@ namespace Simulation {
 //   )
 //
 //------------------------------------------------------------------------------
-class IrSignature : public Basic::Component
+class IrSignature : public basic::Component
 {
-    DECLARE_SUBCLASS(IrSignature, Basic::Component)
+    DECLARE_SUBCLASS(IrSignature, basic::Component)
 
 public:
 
@@ -74,11 +74,11 @@ public:
    virtual LCreal getSignatureArea(IrQueryMsg*); 
 
    // slot operations 
-   virtual bool setSlotWaveBandSizes(const Basic::Table1* const);
+   virtual bool setSlotWaveBandSizes(const basic::Table1* const);
    virtual bool setSlotIrShapeSignature(IrShape* const);
-   virtual bool setSlotBaseHeatSignature(Basic::Number* const);
-   virtual bool setSlotEmissivity(Basic::Number* const);
-   virtual bool setSlotEffectiveArea(Basic::Number* const);
+   virtual bool setSlotBaseHeatSignature(basic::Number* const);
+   virtual bool setSlotEmissivity(basic::Number* const);
+   virtual bool setSlotEffectiveArea(basic::Number* const);
 
 protected:
 
@@ -134,7 +134,7 @@ protected:
 private:
 
    unsigned int numWaveBands;            // Total number of wavebands
-   const Basic::Table1* waveBandTable;   // Table of waveband centers and widths
+   const basic::Table1* waveBandTable;   // Table of waveband centers and widths
    IrShape* irShapeSignature;            // Shape of this IR signature
    LCreal baseHeatSignature;             // The base heat signature   (Watts per steradian)
    LCreal emissivity;                    // The emissivity for the player, what part of incident radiation
@@ -143,7 +143,7 @@ private:
    LCreal effectiveArea;                 // The effective area for heat calculations  (m^2)
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

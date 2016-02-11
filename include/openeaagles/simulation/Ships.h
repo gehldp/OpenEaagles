@@ -2,13 +2,13 @@
 // Class: Ship
 // Description: Generic ship models
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Ship_H__
-#define __Eaagles_Simulation_Ship_H__
+#ifndef __oe_simulation_Ship_H__
+#define __oe_simulation_Ship_H__
 
 #include "openeaagles/simulation/Player.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 //==============================================================================
 // Class Ship
@@ -25,7 +25,7 @@ public:
     unsigned int getMajorType() const override;
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

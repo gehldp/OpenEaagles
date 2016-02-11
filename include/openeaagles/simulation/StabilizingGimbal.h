@@ -1,26 +1,26 @@
 //------------------------------------------------------------------------------
 // Class: StabilizingGimbal
-// Base class: Basic::Object -> Basic::Component -> System -> Gimbal -> StabilizingGimbal
+// Base class: basic::Object -> basic::Component -> System -> Gimbal -> StabilizingGimbal
 //
 // Description: This gimbal tries to counter the player's roll, pitch and yaw movements.
 //
 // Public Member functions:
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_StabilizingGimbal_H__
-#define __Eaagles_Simulation_StabilizingGimbal_H__
+#ifndef __oe_simulation_StabilizingGimbal_H__
+#define __oe_simulation_StabilizingGimbal_H__
 
 #include "openeaagles/simulation/Gimbal.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Class: StabilizingGimbal
 // Description: This gimbal tries to counter the player's roll, pitch and yaw movements.
 // Factory name: StabilizingGimbal
 // Slots:
-//    stabilizingMode  <Basic::String>    ! Sets the type of stabilization we desire  (elevation, roll, horizon)
+//    stabilizingMode  <basic::String>    ! Sets the type of stabilization we desire  (elevation, roll, horizon)
 //                                        ! (default: HORIZON)
 //------------------------------------------------------------------------------
 class StabilizingGimbal : public Gimbal
@@ -40,8 +40,8 @@ public:
    MountPosition getMountPosition() const                      { return mountPosition; }
    virtual bool setMountPosition(const MountPosition m);
 
-   virtual bool setSlotStabilizingMode(Basic::String* const msg);
-   virtual bool setSlotMountPosition(Basic::String* const msg);
+   virtual bool setSlotStabilizingMode(basic::String* const msg);
+   virtual bool setSlotMountPosition(basic::String* const msg);
 
 protected:
    virtual void stabilizingController(const LCreal dt = 0.0);
@@ -55,7 +55,7 @@ private:
    MountPosition    mountPosition;   // Gimbal Mount position
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

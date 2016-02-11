@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: FuelTank
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_FuelTank_H__
-#define __Eaagles_Simulation_FuelTank_H__
+#ifndef __oe_simulation_FuelTank_H__
+#define __oe_simulation_FuelTank_H__
 
 #include "openeaagles/simulation/ExternalStore.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Class: FuelTank
@@ -40,8 +40,8 @@ public:
    void reset() override;
 
 protected:
-   virtual bool setSlotFuelWt(const Basic::Number* const msg);
-   virtual bool setSlotCapacity(const Basic::Number* const msg);
+   virtual bool setSlotFuelWt(const basic::Number* const msg);
+   virtual bool setSlotCapacity(const basic::Number* const msg);
 
 private:
    LCreal capacity;      // Fuel capacity (lb)
@@ -49,7 +49,7 @@ private:
    LCreal initFuelWt;    // Fuel contents at reset (lb)
 };
 
-} // end Simulation namespace
-} // end Eaagles namespace
+} // end simulation namespace
+} // end oe namespace
 
 #endif

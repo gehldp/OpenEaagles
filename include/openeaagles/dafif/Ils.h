@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: Ils
-// Base class: Basic::Object -> Basic::String -> Record -> Ils
+// Base class: basic::Object -> basic::String -> Record -> Ils
 //
 // Description: Access to the DAFIF ILS records.
 //
@@ -37,13 +37,13 @@
 //        Length of a DAFIF ILS record pair.
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Dafif_Ils_H__
-#define __Eaagles_Dafif_Ils_H__
+#ifndef __oe_dafif_Ils_H__
+#define __oe_dafif_Ils_H__
 
 #include "Record.h"
 
-namespace Eaagles {
-namespace Dafif {
+namespace oe {
+namespace dafif {
 
 class Ils : public Record
 {
@@ -124,7 +124,7 @@ inline void Ils::runwayEndIdent(char rwEndKey[]) const
    dsGetString( rwEndKey, makePointer(ILS_RW_ID_POS+AP_KEY_LEN), RW_XE_IDENT_LEN );
 }
 
-} // End Dafif namespace
-} // End Eaagles namespace
+} // End dafif namespace
+} // End oe namespace
 
 #endif

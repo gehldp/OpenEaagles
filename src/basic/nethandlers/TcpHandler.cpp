@@ -35,8 +35,8 @@
 
 #include <cstdio>
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 //==============================================================================
 // Class: TcpHandler
@@ -204,6 +204,6 @@ unsigned int TcpHandler::recvData(char* const packet, const int maxSize)
    return n;
 }
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 

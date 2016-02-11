@@ -1,20 +1,20 @@
 //------------------------------------------------------------------------------
 // Class: EngPage
-// Base class: ... -> BasicGL::Page -> EngPage
+// Base class: ... -> graphics::Page -> EngPage
 //
 // Description: Tests the secondary pfd page
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_EngPage_H__
-#define __Eaagles_Instruments_EngPage_H__
+#ifndef __oe_instruments_EngPage_H__
+#define __oe_instruments_EngPage_H__
 
-#include "openeaagles/basicGL/Page.h"
+#include "openeaagles/graphics/Page.h"
 
-namespace Eaagles {
-namespace Instruments {
+namespace oe {
+namespace instruments {
 
-class EngPage : public BasicGL::Page
+class EngPage : public graphics::Page
 {
-   DECLARE_SUBCLASS(EngPage,BasicGL::Page)
+   DECLARE_SUBCLASS(EngPage,graphics::Page)
 
 public:
     EngPage();
@@ -61,7 +61,7 @@ private:
     SendData ffROSD[NUM_ENG];
 };
 
-}  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end instruments namespace
+}  // end oe namespace
 
 #endif

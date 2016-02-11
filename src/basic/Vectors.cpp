@@ -5,8 +5,8 @@
 #include <iostream>
 #include <iomanip>
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 //==============================================================================
 // RVector
@@ -267,6 +267,6 @@ bool CVector::setFldWidth(const unsigned int FW)
 }
 
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 

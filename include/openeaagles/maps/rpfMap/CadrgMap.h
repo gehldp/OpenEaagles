@@ -37,17 +37,17 @@
 //       int CadrgMap::getNumberOfCadrgFiles()
 //
 // setSlotPathnames() - Pathnames to the CADRG A.toc files.
-//       bool CadrgMap::setSlotPathnames(const Basic::PairStream* const x)
+//       bool CadrgMap::setSlotPathnames(const basic::PairStream* const x)
 //
 // setSlotMaxTableSize() - Sets our max table size and array up
-//       bool CadrgMap::setSlotMaxTableSize(const Basic::Number* const x)
+//       bool CadrgMap::setSlotMaxTableSize(const basic::Number* const x)
 //
 // setPathName() - Set our path name, which will also initialize our cadrg file
 //       bool CadrgMap::setPathName(const char* aGenPathName)
 //
 // loadFrameToTexture() - Bring in a texture object, a color array, and the texture
 // pager, and from that we will setup the texture parameters and load the texture object.
-//       void CadrgMap::loadFrameToTexture(BasicGL::Texture* tex, void* pixels)
+//       void CadrgMap::loadFrameToTexture(graphics::Texture* tex, void* pixels)
 //
 // setMaxTableSize() - Sets up our Frame array
 //       bool CadrgMap::setMaxTableSize(const int x)
@@ -62,7 +62,7 @@
 //       bool CadrgMap::zoomOutMapLevel()
 //
 // setSlotMapLevel() - Initially sets our map resolution level
-//       bool CadrgMap::setSlotMapLevel(Basic::String* x)
+//       bool CadrgMap::setSlotMapLevel(basic::String* x)
 //
 // setMapLevel() - See if the given resolution level exists in our files, and if it does,
 // set it as the current cadrg file.
@@ -109,27 +109,27 @@
 //      void CadrgMap::updateData(LCreal dt)
 //
 // getSlotByIndex() - Get the slot data.
-//      Basic::Object* CadrgMap::getSlotByIndex(const int si)
+//      basic::Object* CadrgMap::getSlotByIndex(const int si)
 //
 // ---------------------------------------------------------------------------------
-#ifndef __Eaagles_Maps_Rpf_CadrgMap_H__
-#define __Eaagles_Maps_Rpf_CadrgMap_H__
+#ifndef __oe_maps_rpf_CadrgMap_H__
+#define __oe_maps_rpf_CadrgMap_H__
 
-#include "openeaagles/basicGL/MapPage.h"
+#include "openeaagles/graphics/MapPage.h"
 
-namespace Eaagles {
-namespace Basic { class List; }
-namespace BasicGL { class Texture; }
-namespace Maps {
-namespace Rpf {
+namespace oe {
+namespace basic { class List; }
+namespace graphics { class Texture; }
+namespace maps {
+namespace rpf {
 
 class CadrgFile;
 class TexturePager;
 class MapDrawer;
 
-class CadrgMap : public BasicGL::MapPage
+class CadrgMap : public graphics::MapPage
 {
-    DECLARE_SUBCLASS(CadrgMap, BasicGL::MapPage)
+    DECLARE_SUBCLASS(CadrgMap, graphics::MapPage)
 
 public:
     CadrgMap();
@@ -166,7 +166,7 @@ public:
 
     // Frame operations
     virtual void releaseFrame(const int row, const int column, TexturePager* tp);
-    virtual void loadFrameToTexture(BasicGL::Texture* tex, void* ptr);
+    virtual void loadFrameToTexture(graphics::Texture* tex, void* ptr);
 
     // Get pixels
     virtual void* getPixels(const int row, const int column, TexturePager* tp);
@@ -187,9 +187,9 @@ public:
 
 protected:
     // Slot functions
-    bool setSlotPathnames(const Basic::PairStream* const x);
-    bool setSlotMaxTableSize(const Basic::Number* const x);
-    bool setSlotMapLevel(Basic::String* x);
+    bool setSlotPathnames(const basic::PairStream* const x);
+    bool setSlotMaxTableSize(const basic::Number* const x);
+    bool setSlotMapLevel(basic::String* x);
 
 private:
     static const int MAX_FILES = 10;            // Holds the maximum number of cadrg files we can hold
@@ -197,17 +197,17 @@ private:
     CadrgFile* mergedCadrgFiles[MAX_FILES];     // Merged list of cadrg files from all paths
     int numFiles;                               // Number of CADRG files we are holding
     CadrgFile* curCadrgFile;                    // The current CADRG file we are using
-    Basic::PairStream* pathNames;               // Holds our path names for the directories of our files
+    basic::PairStream* pathNames;               // Holds our path names for the directories of our files
     int maxTableSize;                           // Our max table size
-    Basic::List* stack;                         // Stack of unused frames
+    basic::List* stack;                         // Stack of unused frames
     ColorArray outTile;                         // Holds the tile color information
-    Basic::String* mapLevel;                    // Our map "level" we are ("1:500K", etc..)
+    basic::String* mapLevel;                    // Our map "level" we are ("1:500K", etc..)
     bool initLevelLoaded;                       // Has our initial map level been loaded?
 };
 
-}  // End Rpf namespace
-}  // End Maps namespace
-}  // End Eaagles namespace
+}  // End rpf namespace
+}  // End maps namespace
+}  // End oe namespace
 
 #endif
 

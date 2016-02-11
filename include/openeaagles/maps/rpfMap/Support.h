@@ -18,8 +18,8 @@
 //
 //------------------------------------------------------------------------------
 
-#ifndef __Eaagles_Maps_Rpf_Support_H__
-#define __Eaagles_Maps_Rpf_Support_H__
+#ifndef __oe_maps_rpf_Support_H__
+#define __oe_maps_rpf_Support_H__
 
 #include <fstream>
 
@@ -27,9 +27,9 @@ typedef unsigned short ushort;
 typedef unsigned int uint;
 typedef unsigned char uchar;
 
-namespace Eaagles {
-namespace Maps {
-namespace Rpf {
+namespace oe {
+namespace maps {
+namespace rpf {
 
 // Swap bytes.
 void swap(unsigned char *ptr, int count);
@@ -146,8 +146,8 @@ struct Image {
 void parseLocations(std::ifstream& fin, Location* locs, int count);
 
 
-} // End Rpf namespace
-} // End Maps namespace
-} // End Eaagles namespace
+} // End rpf namespace
+} // End maps namespace
+} // End oe namespace
 
 #endif

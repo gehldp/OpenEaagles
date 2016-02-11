@@ -2,8 +2,8 @@
 #include "openeaagles/simulation/dynamics/AerodynamicsModel.h"
 #include "openeaagles/basic/units/Angles.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(AerodynamicsModel, "AerodynamicsModel")
 EMPTY_SERIALIZER(AerodynamicsModel)
@@ -39,7 +39,7 @@ LCreal AerodynamicsModel::getAngleOfAttackR() const
 
 LCreal AerodynamicsModel::getAngleOfAttackD() const
 { 
-   return ( static_cast<LCreal>(Basic::Angle::R2DCC) * getAngleOfAttack() );
+   return ( static_cast<LCreal>(basic::Angle::R2DCC) * getAngleOfAttack() );
 }
 
 LCreal AerodynamicsModel::getFlightPathR() const
@@ -49,7 +49,7 @@ LCreal AerodynamicsModel::getFlightPathR() const
 
 LCreal AerodynamicsModel::getFlightPathD() const
 { 
-   return ( static_cast<LCreal>(Basic::Angle::R2DCC) * getFlightPath() );
+   return ( static_cast<LCreal>(basic::Angle::R2DCC) * getFlightPath() );
 }
 
 LCreal AerodynamicsModel::getSideSlipR() const
@@ -59,7 +59,7 @@ LCreal AerodynamicsModel::getSideSlipR() const
 
 LCreal AerodynamicsModel::getSideSlipD() const
 { 
-   return ( static_cast<LCreal>(Basic::Angle::R2DCC) * getSideSlip() );
+   return ( static_cast<LCreal>(basic::Angle::R2DCC) * getSideSlip() );
 }
 
 //------------------------------------------------------------------------------
@@ -256,5 +256,5 @@ int AerodynamicsModel::getEngThrustAb(LCreal* const, const int) const
     return 0;
 }
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace

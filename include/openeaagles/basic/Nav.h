@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Nav
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Nav_H__
-#define __Eaagles_Basic_Nav_H__
+#ifndef __oe_basic_Nav_H__
+#define __oe_basic_Nav_H__
 
 #include "openeaagles/basic/EarthModel.h"
 #include "openeaagles/basic/osg/Vec3"
@@ -11,8 +11,8 @@
 #include "openeaagles/basic/units/Angles.h"
 #include "openeaagles/basic/units/Distances.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
    class EarthModel;
 
 //------------------------------------------------------------------------------
@@ -783,7 +783,7 @@ public:
 // inline functions
 #include "openeaagles/basic/Nav.inl"
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 
 #endif

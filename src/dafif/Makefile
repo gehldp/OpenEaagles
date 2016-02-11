@@ -1,15 +1,14 @@
 #
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboeDafif.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboedafif.a
 
 OBJS =  \
-	$(LIB)(dafifFF.o) \
 	$(LIB)(Airport.o) \
 	$(LIB)(AirportLoader.o) \
 	$(LIB)(Record.o) \
 	$(LIB)(Database.o) \
-	$(LIB)(Factory.o) \
+	$(LIB)(factory.o) \
 	$(LIB)(Ils.o) \
 	$(LIB)(Navaid.o) \
 	$(LIB)(NavaidLoader.o) \

@@ -12,9 +12,9 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
 
-namespace Eaagles {
-namespace Network {
-namespace Dis {
+namespace oe {
+namespace network {
+namespace dis {
 
 //------------------------------------------------------------------------------
 // IFF Change/Option bits
@@ -29,13 +29,13 @@ static const unsigned short ALTERNATE_MODE_C     = 0x0004;
 bool Nib::IffManager(const LCreal curExecTime)
 {
    NetIO* disIO = static_cast<NetIO*>(getNetIO());
-   const Basic::Pair* pair = getPlayer()->getRadioByType(typeid(Simulation::Iff));
+   const basic::Pair* pair = getPlayer()->getRadioByType(typeid(simulation::Iff));
 
    // OK if the player has an IFF transponder and we're the correct version.
    bool ok = (disIO->getVersion() >= NetIO::VERSION_1278_1A) && (pair != nullptr);
 
    if (ok) {
-      const Simulation::Iff* iffSystem = static_cast<const Simulation::Iff*>(pair->object());
+      const simulation::Iff* iffSystem = static_cast<const simulation::Iff*>(pair->object());
 
       if (isIffUpdateRequired(curExecTime, iffSystem)) {
 
@@ -83,7 +83,7 @@ bool Nib::IffManager(const LCreal curExecTime)
          pdu.eventID.eventNumber = disIO->getNewIffEventID();
 
          //pdu.dumpData();
-         if (Basic::NetHandler::isNotNetworkByteOrder()) pdu.swapBytes();
+         if (basic::NetHandler::isNotNetworkByteOrder()) pdu.swapBytes();
          ok = disIO->sendData(reinterpret_cast<char*>(&pdu), sizeof(pdu));
 
          iffLastExecTime = curExecTime;
@@ -98,7 +98,7 @@ bool Nib::IffManager(const LCreal curExecTime)
 //------------------------------------------------------------------------------
 // isIffUpdateRequired() -- check to see if an update is required
 //------------------------------------------------------------------------------
-bool Nib::isIffUpdateRequired(const LCreal curExecTime, const Simulation::Iff* const iffSystem)
+bool Nib::isIffUpdateRequired(const LCreal curExecTime, const simulation::Iff* const iffSystem)
 {
 
    // System status Bits
@@ -151,7 +151,7 @@ bool Nib::isIffUpdateRequired(const LCreal curExecTime, const Simulation::Iff* c
 
       // System Status
       opData.systemStatus = 0;
-      if (iffSystem->getPowerSwitch() >= Simulation::Iff::PWR_ON) {
+      if (iffSystem->getPowerSwitch() >= simulation::Iff::PWR_ON) {
          opData.systemStatus = SYSTEM_STATUS_ON;
       }
 
@@ -163,7 +163,7 @@ bool Nib::isIffUpdateRequired(const LCreal curExecTime, const Simulation::Iff* c
 
       // Modifier
       opData.modifier = 0;
-      if (iffSystem->getPowerSwitch() == Simulation::Iff::PWR_EMERGENCY) {
+      if (iffSystem->getPowerSwitch() == simulation::Iff::PWR_EMERGENCY) {
          opData.modifier = (opData.modifier | MODIFIER_EMERGENCY);
       }
 
@@ -257,6 +257,6 @@ bool Nib::isIffUpdateRequired(const LCreal curExecTime, const Simulation::Iff* c
    return (result == YES);
 }
 
-} // End Dis namespace
+} // End dis namespace
 } // End Network namespace
-} // End Eaagles namespace
+} // End oe namespace

@@ -18,7 +18,7 @@
 //
 // -----------------------------------------------------------------------------
 
-package Eaagles.Recorder.Pb;
+package oe.recorder.pb;
 
 // =============================================================================
 // Common data record used by all data messages being recorded.

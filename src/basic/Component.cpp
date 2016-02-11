@@ -21,8 +21,8 @@
  #pragma warning(disable: 4996)
 #endif
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 IMPLEMENT_SUBCLASS(Component,"Component")
 
@@ -1481,6 +1481,6 @@ Object* Component::SendData::getValue(const bool value)
     else return nullptr;
 }
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 

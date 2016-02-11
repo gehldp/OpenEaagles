@@ -1,8 +1,8 @@
 #include "openeaagles/basic/Stack.h"
 #include <stdlib.h>
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Stack,"Stack")
 
@@ -22,5 +22,5 @@ std::ostream& Stack::serialize(std::ostream& sout, const int, const bool) const
     return sout;
 }
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace

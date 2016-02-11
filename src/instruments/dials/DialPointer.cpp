@@ -1,8 +1,8 @@
 #include "openeaagles/instruments/dials/DialPointer.h"
 #include "openeaagles/basic/units/Angles.h"
 
-namespace Eaagles {
-namespace Instruments {
+namespace oe {
+namespace instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(DialPointer, "DialPointer")
 EMPTY_SERIALIZER(DialPointer)
@@ -33,10 +33,10 @@ void DialPointer::draw()
     LCreal pointerPos = getInstValue();
     LCreal startAngle = getStartAngle();
     lcSaveMatrix();
-        lcRotate((-pointerPos - startAngle) * static_cast<LCreal>(Basic::Angle::D2RCC));
-        BasicGL::Graphic::draw();
+        lcRotate((-pointerPos - startAngle) * static_cast<LCreal>(basic::Angle::D2RCC));
+        graphics::Graphic::draw();
     lcRestoreMatrix();
 }
 
 }  // end of Instruments namespace
-}  // end of Eaagles namespace
+}  // end of oe namespace

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: PrintPlayer
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Recorder_PrintPlayer_H__
-#define __Eaagles_Recorder_PrintPlayer_H__
+#ifndef __oe_recorder_PrintPlayer_H__
+#define __oe_recorder_PrintPlayer_H__
 
 #include "openeaagles/recorder/OutputHandler.h"
 #include "openeaagles/recorder/PrintHandler.h"
@@ -10,9 +10,9 @@
 #include <sstream>
 #include <fstream>
 
-namespace Eaagles {
-namespace Recorder {
-   namespace Pb {
+namespace oe {
+namespace recorder {
+   namespace pb {
       class Time; class FileIdMsg; class NewPlayerEventMsg; class PlayerRemovedEventMsg; class PlayerDataMsg;
       class PlayerDamagedEventMsg; class PlayerCollisionEventMsg; class PlayerCrashEventMsg;
       class PlayerKilledEventMsg; class WeaponReleaseEventMsg; class WeaponHungEventMsg;
@@ -27,7 +27,7 @@ namespace Recorder {
 //
 // Factory name: PrintPlayer
 // Slots:
-//   playerName  <Basic::String>  ! Player name
+//   playerName  <basic::String>  ! Player name
 //------------------------------------------------------------------------------
 class PrintPlayer : public PrintHandler
 {
@@ -39,17 +39,17 @@ public:
 
 protected:
 
-   virtual bool setName(const Basic::String* const msg);
+   virtual bool setName(const basic::String* const msg);
 
    void processRecordImp(const DataRecordHandle* const handle) override;
 
 private:
    void initData();
 
-   const Basic::String* name;    // Player name
+   const basic::String* name;    // Player name
 };
 
-} // End Recorder namespace
-} // End Eaagles namespace
+} // End recorder namespace
+} // End oe namespace
 
 #endif

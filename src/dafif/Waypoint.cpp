@@ -1,8 +1,8 @@
 #include "openeaagles/dafif/Waypoint.h"
 #include <iostream>
 
-namespace Eaagles {
-namespace Dafif {
+namespace oe {
+namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Waypoint,"Waypoint")
 EMPTY_SERIALIZER(Waypoint)
@@ -79,5 +79,5 @@ void Waypoint::printRecord(std::ostream& sout) const
    sout.precision(old);
 }
 
-} // End Dafif namespace
-} // End Eaagles namespace
+} // End dafif namespace
+} // End oe namespace

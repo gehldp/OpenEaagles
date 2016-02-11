@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class:       Knob
-// Base class:  Basic::Object -> Basic::Component -> BasicGL::Graphic -> Rotators -> Knob
+// Base class:  basic::Object -> basic::Component -> graphics::Graphic -> Rotators -> Knob
 // Description: Basic knob that will rotate from a starting fixed angle to a
 // given finish angle, and you can specify the values returned from those angles based on
 // start and finish value (Table1)
@@ -12,14 +12,14 @@
 //  )
 //  startAngle: 20      // angle from which to start rotation
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_Knob_H__
-#define __Eaagles_Instruments_Knob_H__
+#ifndef __oe_instruments_Knob_H__
+#define __oe_instruments_Knob_H__
 
 #include "openeaagles/instruments/buttons/Button.h"
 
-namespace Eaagles {
-namespace Basic { class Table1; }
-namespace Instruments {
+namespace oe {
+namespace basic { class Table1; }
+namespace instruments {
 
 class Knob : public Button{
     DECLARE_SUBCLASS(Knob,Button)
@@ -39,21 +39,21 @@ public:
     void draw() override;
 
     void updateData(const LCreal dt = 0.0) override;
-    bool event(const int event, Basic::Object* const obj = nullptr) override;
+    bool event(const int event, basic::Object* const obj = nullptr) override;
 
 protected:
     // Sets the Event ID to newEvent
-    bool setSlotValueTable(Basic::Table1* const x);
-    bool setSlotEndless(const Basic::Number* const x);
-    bool setSlotEndlessStart(const Basic::Number* const x);
-    bool setSlotEndlessLimit(const Basic::Number* const x);
+    bool setSlotValueTable(basic::Table1* const x);
+    bool setSlotEndless(const basic::Number* const x);
+    bool setSlotEndlessStart(const basic::Number* const x);
+    bool setSlotEndlessLimit(const basic::Number* const x);
 
     // event functions
     bool onMotion();
 
 private:
     void computeRotation();     // translate our x,y to rotation from 0 values
-    Basic::Table1* table;     // holds our values for rotation and value
+    basic::Table1* table;     // holds our values for rotation and value
     LCreal value;               // value we currently have
     int startX;                 // starting mouse x position (pixels) of the center of our graphic
     int startY;                 // starting mouse y position (pixels) of the center of our graphic
@@ -69,7 +69,7 @@ private:
     LCreal endlessLimit;        // end value of the endless knob (default to 360)
 };
 
-}  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end instruments namespace
+}  // end oe namespace
 
 #endif

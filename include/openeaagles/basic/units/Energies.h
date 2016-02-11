@@ -64,13 +64,13 @@
 //
 //------------------------------------------------------------------------------
 
-#ifndef __Eaagles_Energies_H__
-#define __Eaagles_Energies_H__
+#ifndef __oe_Energies_H__
+#define __oe_Energies_H__
 
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 // ----------------------------------------------------------------------------
 // Define Energy Conversion Constants:
@@ -240,7 +240,7 @@ public:
     LCreal fromEnergy(const LCreal a) const override  { return a * J2FP; }
 };
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 
 #endif

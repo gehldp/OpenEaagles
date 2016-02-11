@@ -2,8 +2,8 @@
 #include "openeaagles/dafif/Airport.h"
 #include <iostream>
 
-namespace Eaagles {
-namespace Dafif {
+namespace oe {
+namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Airport,"Airport")
 EMPTY_SERIALIZER(Airport)
@@ -120,5 +120,5 @@ void Airport::printRecord(std::ostream& sout) const
 
 }
 
-} // End Dafif namespace
-} // End Eaagles namespace
+} // End dafif namespace
+} // End oe namespace

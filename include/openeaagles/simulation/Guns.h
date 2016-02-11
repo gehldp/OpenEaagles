@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Classes: Gun, Bullet
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Gun_H__
-#define __Eaagles_Simulation_Gun_H__
+#ifndef __oe_simulation_Gun_H__
+#define __oe_simulation_Gun_H__
 
 #include "openeaagles/simulation/ExternalStore.h"
 #include "openeaagles/simulation/Weapon.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
    class Bullet;
 
 //==============================================================================
@@ -30,9 +30,9 @@ namespace Simulation {
 //
 //    The following are used to position the gun on the ownship player
 //    position    <List>     ! Position vector; relative to ownship axis [ nose right down ]  (meters)
-//    roll        <Number>   ! roll angle; relative to ownship axis (radians, Basic::Angle) (default: 0)
-//    pitch       <Number>   ! pitch; relative to ownship axis (radians, Basic::Angle) (default: 0)
-//    yaw         <Number>   ! heading; relative to ownship axis (radians, Basic::Angle) (default: 0)
+//    roll        <Number>   ! roll angle; relative to ownship axis (radians, basic::Angle) (default: 0)
+//    pitch       <Number>   ! pitch; relative to ownship axis (radians, basic::Angle) (default: 0)
+//    yaw         <Number>   ! heading; relative to ownship axis (radians, basic::Angle) (default: 0)
 //
 //==============================================================================
 class Gun : public ExternalStore
@@ -84,14 +84,14 @@ public:
    bool setAngles(const double r, const double p, const double y);
 
    // Slot functions
-   virtual bool setSlotNumRounds(const Basic::Number* const num);  // Number of rounds
-   virtual bool setSlotUnlimited(const Basic::Number* const num);  // Unlimited rounds flag
-   virtual bool setSlotRate(const Basic::Number* const num);       // Rate of fire (rds per min)
-   virtual bool setSlotBurstRate(const Basic::Number* const num);  // Burst rate
-   virtual bool setSlotPosition(Basic::List* const numList);       // Gun position relative to ownship
-   virtual bool setSlotRoll(const Basic::Number* const num);       // Gun roll angle to ownship
-   virtual bool setSlotPitch(const Basic::Number* const num);      // Gun pitch angle to ownship
-   virtual bool setSlotYaw(const Basic::Number* const num);        // Gun heading angle to ownship
+   virtual bool setSlotNumRounds(const basic::Number* const num);  // Number of rounds
+   virtual bool setSlotUnlimited(const basic::Number* const num);  // Unlimited rounds flag
+   virtual bool setSlotRate(const basic::Number* const num);       // Rate of fire (rds per min)
+   virtual bool setSlotBurstRate(const basic::Number* const num);  // Burst rate
+   virtual bool setSlotPosition(basic::List* const numList);       // Gun position relative to ownship
+   virtual bool setSlotRoll(const basic::Number* const num);       // Gun roll angle to ownship
+   virtual bool setSlotPitch(const basic::Number* const num);      // Gun pitch angle to ownship
+   virtual bool setSlotYaw(const basic::Number* const num);        // Gun heading angle to ownship
 
    void reset() override;
 
@@ -194,14 +194,14 @@ private:
    enum { MBT = 100 };        // Max number of burst trajectories
 
    LCreal   muzzleVel;                 // Muzzle velocity (m/s)
-   Basic::safe_ptr<Player> hitPlayer;  // Player we hit (if any)
+   basic::safe_ptr<Player> hitPlayer;  // Player we hit (if any)
 
    // Bullet trajectories
    int       nbt;             // Number of burst trajectories
    Burst bursts[MBT];         // Bursts
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

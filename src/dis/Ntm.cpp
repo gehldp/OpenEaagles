@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class: Dis::Ntm
+// Class: dis::Ntm
 //------------------------------------------------------------------------------
 
 #include "openeaagles/dis/Ntm.h"
@@ -8,9 +8,9 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
 
-namespace Eaagles {
-namespace Network {
-namespace Dis {
+namespace oe {
+namespace network {
+namespace dis {
 
 IMPLEMENT_SUBCLASS(Ntm,"DisNtm")
 
@@ -18,12 +18,12 @@ IMPLEMENT_SUBCLASS(Ntm,"DisNtm")
 // slot table for this class type
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Ntm)
-    "disEntityType", // 1) DIS Entity type (Basic::List -- number vector)  [ kind domain country category ... ]
+    "disEntityType", // 1) DIS Entity type (basic::List -- number vector)  [ kind domain country category ... ]
 END_SLOTTABLE(Ntm)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(Ntm)
-    ON_SLOT(1, setSlotDisEntityType, Basic::List)
+    ON_SLOT(1, setSlotDisEntityType, basic::List)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ void Ntm::deleteData()
 //------------------------------------------------------------------------------
 // This function will copy our DIS type codes to the target NIB, 'targetNib', object.
 //------------------------------------------------------------------------------
-bool Ntm::copyEntityType(Simulation::Nib* const targetNib) const
+bool Ntm::copyEntityType(simulation::Nib* const targetNib) const
 {
    bool ok = false;
    Nib* tgtNib = dynamic_cast<Nib*>(targetNib);
@@ -110,7 +110,7 @@ bool Ntm::setEntityType(
 //------------------------------------------------------------------------------
 // Set DIS entity type enumerations
 //------------------------------------------------------------------------------
-bool Ntm::setSlotDisEntityType(const Basic::List* const msg)
+bool Ntm::setSlotDisEntityType(const basic::List* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -203,7 +203,7 @@ bool Ntm::setSlotDisEntityType(const Basic::List* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* Ntm::getSlotByIndex(const int si)
+basic::Object* Ntm::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -241,6 +241,6 @@ std::ostream& Ntm::serialize(std::ostream& sout, const int i, const bool slotsOn
    return sout;
 }
 
-} // End Dis namespace
+} // End dis namespace
 } // End Network namespace
-} // End Eaagles namespace
+} // End oe namespace

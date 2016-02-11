@@ -47,15 +47,15 @@
 //       then no data is recorded
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_DataRecorder_H__
-#define __Eaagles_Simulation_DataRecorder_H__
+#ifndef __oe_simulation_DataRecorder_H__
+#define __oe_simulation_DataRecorder_H__
 
 #include "openeaagles/basic/Component.h"
 #include "openeaagles/simulation/dataRecorderTokens.h"
 
-namespace Eaagles {
-   namespace Basic { class List; }
-namespace Simulation {
+namespace oe {
+   namespace basic { class List; }
+namespace simulation {
    class Simulation;
    class Station;
 
@@ -80,9 +80,9 @@ namespace Simulation {
 //                               ! (default: no records are disabled)
 //
 //------------------------------------------------------------------------------
-class RecorderComponent : public Basic::Component
+class RecorderComponent : public basic::Component
 {
-   DECLARE_SUBCLASS(RecorderComponent, Basic::Component)
+   DECLARE_SUBCLASS(RecorderComponent, basic::Component)
 
 public:
    RecorderComponent();
@@ -99,8 +99,8 @@ public:
 
 protected:
    // Slot functions
-   bool setSlotEnabledList(const Basic::List* const list);
-   bool setSlotDisabledList(const Basic::List* const list);
+   bool setSlotEnabledList(const basic::List* const list);
+   bool setSlotDisabledList(const basic::List* const list);
 
 private:
    void initData();
@@ -124,7 +124,7 @@ private:
 //    for implementing the recording 'hooks' in the simulation code.
 //
 //    2) The actual data recorder is implemented by the derived class
-//    Eaagles::Recorder::DataRecorder (see "openeaagles/recorder/DataRecorder.h")
+//    oe::recorder::DataRecorder (see "openeaagles/recorder/DataRecorder.h")
 //
 //    3) Recorded data records are defined by their "recorder event id" tokens;
 //       (see openeaagles/simulation/dataRecorderTokens.h)
@@ -145,7 +145,7 @@ public:
    // Record Data function
    bool recordData(
       const unsigned int id,              // Recorder event Id
-      const Basic::Object* pObjects[4],   // Sample objects
+      const basic::Object* pObjects[4],   // Sample objects
       const double values[4]              // Sample values
    );
 
@@ -156,7 +156,7 @@ protected:
    // Implementation of the record data function
    virtual bool recordDataImp(
       const unsigned int id,              // Recorder event Id
-      const Basic::Object* pObjects[4],   // Sample objects
+      const basic::Object* pObjects[4],   // Sample objects
       const double values[4]              // Sample values
    );
 
@@ -174,8 +174,8 @@ private:
 
 #include "openeaagles/simulation/DataRecorder.inl"
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif
 

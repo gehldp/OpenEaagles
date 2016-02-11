@@ -5,8 +5,8 @@
 
 #include <cmath>
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Navigation constants
@@ -2008,5 +2008,5 @@ bool Nav::convertUtm2LL(
    return true;
 }
 
-}  // End Basic namespace
-}  // End Eaagles namespace
+}  // End basic namespace
+}  // End oe namespace

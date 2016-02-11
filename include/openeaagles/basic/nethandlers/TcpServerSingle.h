@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: TcpServerSingle
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_TcpServerSingle_H__
-#define __Eaagles_Basic_TcpServerSingle_H__
+#ifndef __oe_basic_TcpServerSingle_H__
+#define __oe_basic_TcpServerSingle_H__
 
 #include "openeaagles/basic/nethandlers/TcpHandler.h"
 
-namespace Eaagles {
-namespace Basic {
+namespace oe {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class: TcpServerSingle
@@ -41,8 +41,8 @@ protected:
    virtual bool acceptConnection();
 };
 
-} // End Basic namespace
-} // End Eaagles namespace
+} // End basic namespace
+} // End oe namespace
 
 #endif
 

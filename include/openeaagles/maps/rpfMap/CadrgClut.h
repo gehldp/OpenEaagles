@@ -10,20 +10,20 @@
 //     const CadrgClut::Rgb& getColor(unsigned int index) const;
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Maps_Rpf_CadrgClut_H__
-#define __Eaagles_Maps_Rpf_CadrgClut_H__
+#ifndef __oe_maps_rpf_CadrgClut_H__
+#define __oe_maps_rpf_CadrgClut_H__
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
-namespace Maps {
-namespace Rpf {
+namespace oe {
+namespace maps {
+namespace rpf {
 
 class CadrgFrameEntry;
 
-class CadrgClut: public Basic::Object
+class CadrgClut: public basic::Object
 {
-    DECLARE_SUBCLASS(CadrgClut, Basic::Object)
+    DECLARE_SUBCLASS(CadrgClut, basic::Object)
 
 public:
     CadrgClut();
@@ -55,8 +55,8 @@ private:
     Rgb colorTable[255];                    // Holds our individual colors
 };
 
-} // end Rpf namespace
-} // end Maps namespace
-} // end Eaagles namespace
+} // end rpf namespace
+} // end maps namespace
+} // end oe namespace
 
 #endif

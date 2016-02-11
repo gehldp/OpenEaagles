@@ -7,9 +7,9 @@
 #include <cctype>
 #include <cstring>
 
-namespace Eaagles {
-namespace Maps {
-namespace Rpf {
+namespace oe {
+namespace maps  {
+namespace rpf {
 
 // -----------------------------------------------------------
 // swap() - Simple static function to swap bytes.
@@ -111,7 +111,7 @@ void parseLocations(std::ifstream& fin, Location* locs, int count)
     }
 }
 
-} // End Rpf namespace
+} // End rpf namespace
 } // End Maps namespace
-} // End Eaagles namespace
+} // End oe namespace
 

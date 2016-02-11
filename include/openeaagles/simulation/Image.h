@@ -3,17 +3,17 @@
 // Factory name: SarImage
 // Description: SAR image structure
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Image_H__
-#define __Eaagles_Simulation_Image_H__
+#ifndef __oe_simulation_Image_H__
+#define __oe_simulation_Image_H__
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
-class Image : public Basic::Object
+class Image : public basic::Object
 {
-    DECLARE_SUBCLASS(Image,Basic::Object)
+    DECLARE_SUBCLASS(Image,basic::Object)
 
 public:
     Image();
@@ -76,7 +76,7 @@ private:
     bool            origCompressed; // Original image is compressed
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

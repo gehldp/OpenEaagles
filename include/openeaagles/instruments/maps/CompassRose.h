@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: CompassRose
-// Base Class: Basic::Object -> BasicGL::Graphic -> CompassRose
+// Base Class: basic::Object -> graphics::Graphic -> CompassRose
 //
 // Description: Generic compass used as a direction indicator.  It will
 // rotate about a heading either by someone telling it through a member function.
@@ -12,18 +12,18 @@
 //      UPDATE_VALUE5 -> displacement
 //      UPDATE_VALUE6 -> centered or not
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_CompassRose_H__
-#define __Eaagles_Instruments_CompassRose_H__
+#ifndef __oe_instruments_CompassRose_H__
+#define __oe_instruments_CompassRose_H__
 
-#include "openeaagles/basicGL/Graphic.h"
+#include "openeaagles/graphics/Graphic.h"
 #include "openeaagles/basic/units/Angles.h"
 
-namespace Eaagles {
-namespace Instruments {
+namespace oe {
+namespace instruments {
 
-class CompassRose : public BasicGL::Graphic
+class CompassRose : public graphics::Graphic
 {
-    DECLARE_SUBCLASS(CompassRose, BasicGL::Graphic)
+    DECLARE_SUBCLASS(CompassRose, graphics::Graphic)
 
 public:
     CompassRose();
@@ -35,7 +35,7 @@ public:
     virtual bool setDisplacement(const LCreal newD);
     virtual bool setCentered(const bool newC);
 
-    LCreal getRotationDeg() const      { return rot * static_cast<LCreal>(Basic::Angle::R2DCC); }
+    LCreal getRotationDeg() const      { return rot * static_cast<LCreal>(basic::Angle::R2DCC); }
     LCreal getRotationRad() const      { return rot; }
     LCreal getCenteredRadius() const   { return cenRadius; }
     LCreal getDeCenteredRadius() const { return decRadius; }
@@ -45,21 +45,21 @@ public:
     void draw() override;
 
     void updateData(const LCreal dt = 0.0) override;
-    bool event(const int event, Basic::Object* const obj = nullptr) override;
+    bool event(const int event, basic::Object* const obj = nullptr) override;
 
 protected:
     // slot functions
-    bool setSlotCenteredRadius(const Basic::Number* const newR);
-    bool setSlotDeCenteredRadius(const Basic::Number* const newR);
-    bool setSlotDisplacement(const Basic::Number* const newD);
+    bool setSlotCenteredRadius(const basic::Number* const newR);
+    bool setSlotDeCenteredRadius(const basic::Number* const newR);
+    bool setSlotDisplacement(const basic::Number* const newD);
 
     // event functions
-    bool onUpdateRotDeg(const Basic::Number* const x);
-    bool onUpdateRadius(const Basic::Number* const x);
-    bool onUpdateCenRad(const Basic::Number* const x);
-    bool onUpdateDecRadius(const Basic::Number* const x);
-    bool onUpdateDisplacement(const Basic::Number* const x);
-    bool onUpdateCentered(const Basic::Number* const x);
+    bool onUpdateRotDeg(const basic::Number* const x);
+    bool onUpdateRadius(const basic::Number* const x);
+    bool onUpdateCenRad(const basic::Number* const x);
+    bool onUpdateDecRadius(const basic::Number* const x);
+    bool onUpdateDisplacement(const basic::Number* const x);
+    bool onUpdateCentered(const basic::Number* const x);
 
 private:
     LCreal rot;         // rotation angle (rads)
@@ -73,7 +73,7 @@ private:
     SendData dialSD;
 };
 
-}  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end instruments namespace
+}  // end oe namespace
 
 #endif

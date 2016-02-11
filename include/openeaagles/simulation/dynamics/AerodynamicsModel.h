@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: AerodynamicsModel
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_AerodynamicsModel_H__
-#define __Eaagles_Simulation_AerodynamicsModel_H__
+#ifndef __oe_simulation_AerodynamicsModel_H__
+#define __oe_simulation_AerodynamicsModel_H__
 
 #include "openeaagles/simulation/DynamicsModel.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 //==============================================================================
 // Class AerodynamicsModel
@@ -77,7 +77,7 @@ public:
 
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

@@ -2,8 +2,8 @@
 // Recorder macros and 
 // DataRecorder and RecorderComponent inline functions
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_DataRecorder_Inline__
-#define __Eaagles_Simulation_DataRecorder_Inline__
+#ifndef __oe_simulation_DataRecorder_Inline__
+#define __oe_simulation_DataRecorder_Inline__
 
 
 //==============================================================================
@@ -41,10 +41,10 @@
 
 #define BEGIN_RECORD_DATA_SAMPLE(pRecorder, token)             \
 {                                                              \
-   ::Eaagles::Simulation::DataRecorder* _p = pRecorder;        \
+   ::oe::simulation::DataRecorder* _p = pRecorder;        \
    if (pRecorder != 0)  {                                      \
       unsigned int _token = token;                             \
-      const ::Eaagles::Basic::Object* _obj[4] = { 0, 0, 0, 0 };  \
+      const ::oe::basic::Object* _obj[4] = { 0, 0, 0, 0 };  \
       double _val[4] = { 0, 0, 0, 0 };
 
 #define SAMPLE_1_OBJECT(P1)               _obj[0] = P1;
@@ -69,7 +69,7 @@
 // Record Data function
 inline bool DataRecorder::recordData(
       const unsigned int id,
-      const Basic::Object* pObjects[4],
+      const basic::Object* pObjects[4],
       const double values[4]
    )
 {

@@ -1,16 +1,16 @@
 //------------------------------------------------------------------------------
 // Class: IrQueryMsg
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_IrQueryMsg_H__
-#define __Eaagles_Simulation_IrQueryMsg_H__
+#ifndef __oe_simulation_IrQueryMsg_H__
+#define __oe_simulation_IrQueryMsg_H__
 
 #include "openeaagles/simulation/SensorMsg.h"
 
-namespace Eaagles {
+namespace oe {
 
-namespace Basic { class List; }
+namespace basic { class List; }
 
-namespace Simulation {
+namespace simulation {
 
 class IrSensor;
 
@@ -169,7 +169,7 @@ private:
    MergedQueryStatus mergedQueryStatus;      // Flags status of query merging   // FAB
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

@@ -1,18 +1,18 @@
 //------------------------------------------------------------------------------
 // Class:       Button
-// Base class:  Basic::Object -> Basic::Component -> BasicGL::Graphic -> Button
+// Base class:  basic::Object -> basic::Component -> graphics::Graphic -> Button
 // Description: Generic button that knows when it is clicked
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_Button_H__
-#define __Eaagles_Instruments_Button_H__
+#ifndef __oe_instruments_Button_H__
+#define __oe_instruments_Button_H__
 
-#include "openeaagles/basicGL/Graphic.h"
+#include "openeaagles/graphics/Graphic.h"
 
-namespace Eaagles {
-namespace Instruments {
+namespace oe {
+namespace instruments {
 
-class Button : public BasicGL::Graphic {
-    DECLARE_SUBCLASS(Button,BasicGL::Graphic)
+class Button : public graphics::Graphic {
+    DECLARE_SUBCLASS(Button,graphics::Graphic)
 
 public:
     Button();
@@ -30,17 +30,17 @@ public:
     // Cancel
     virtual bool onCancel();
 
-    bool event(const int event, Basic::Object* const obj = nullptr) override;
+    bool event(const int event, basic::Object* const obj = nullptr) override;
 
 protected:
     // Sets the Event ID to newEvent
-    virtual bool setSlotEventId(const Basic::Number* const newEvent);
+    virtual bool setSlotEventId(const basic::Number* const newEvent);
 
 private:
     int eventId;        // holds our event number
 };
 
-}  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end instruments namespace
+}  // end oe namespace
 
 #endif

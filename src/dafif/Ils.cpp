@@ -4,8 +4,8 @@
 #include "openeaagles/basic/units/Distances.h"
 #include <iostream>
 
-namespace Eaagles {
-namespace Dafif {
+namespace oe {
+namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Ils,"Ils")
 EMPTY_SERIALIZER(Ils)
@@ -66,7 +66,7 @@ int Ils::isIlsType(const Ils::IlsType tt) const
 void Ils::getGlideSlopeData(const double aclat, const double aclon, const double acelev, float* ilsGlideSlope, float* acGlideSlope, float* deltaGlideSlope)const
 {
    double bearing(0.0), range(0.0), grdrange(0.0), lookangle(0.0);
-   Basic::Nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &grdrange, &range, &lookangle);
+   basic::Nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &grdrange, &range, &lookangle);
    *ilsGlideSlope = glideSlopeAngle();
    *acGlideSlope = static_cast<float>(-lookangle);
    *deltaGlideSlope = *ilsGlideSlope - *acGlideSlope;
@@ -131,5 +131,5 @@ void Ils::printGlideSlopeData(std::ostream& sout, const double aclat, const doub
    sout << "  ILS glide slope " << ilsGlideSlope << "  aircraft_glide_slope " << acGlideSlope << " delta_angle " << deltaGlideSlope;
 }
 
-} // End Dafif namespace
-} // End Eaagles namespace
+} // End dafif namespace
+} // End oe namespace

@@ -15,8 +15,8 @@
 #include "openeaagles/basic/Nav.h"
 #include "openeaagles/basic/units/Distances.h"
 
-namespace Eaagles {
-namespace Simulation {
+namespace oe {
+namespace simulation {
 
 IMPLEMENT_SUBCLASS(IrAtmosphere1,"IrAtmosphere1")
 EMPTY_SERIALIZER(IrAtmosphere1)
@@ -30,9 +30,9 @@ END_SLOTTABLE(IrAtmosphere1)
 
 // slot map
 BEGIN_SLOT_MAP(IrAtmosphere1)
-   ON_SLOT(1,setSlotSolarRadiationTable,Basic::Table2)
-   ON_SLOT(2,setSlotBackgroundRadiationTable,Basic::Table3)
-   ON_SLOT(3,setSlotTransmissivityTable,Basic::Table4)
+   ON_SLOT(1,setSlotSolarRadiationTable,basic::Table2)
+   ON_SLOT(2,setSlotBackgroundRadiationTable,basic::Table3)
+   ON_SLOT(3,setSlotTransmissivityTable,basic::Table4)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ void IrAtmosphere1::deleteData()
 // Slot functions
 //------------------------------------------------------------------------------
 
-bool IrAtmosphere1::setSlotSolarRadiationTable(const Basic::Table2* const tbl)
+bool IrAtmosphere1::setSlotSolarRadiationTable(const basic::Table2* const tbl)
 {
    bool ok = false;
    // tbl->serialize(std::cout);
@@ -93,7 +93,7 @@ bool IrAtmosphere1::setSlotSolarRadiationTable(const Basic::Table2* const tbl)
    return ok;
 }
 
-bool IrAtmosphere1::setSlotBackgroundRadiationTable(const Basic::Table3* const tbl)
+bool IrAtmosphere1::setSlotBackgroundRadiationTable(const basic::Table3* const tbl)
 {
    bool ok = false;
    if (tbl != nullptr) {
@@ -105,7 +105,7 @@ bool IrAtmosphere1::setSlotBackgroundRadiationTable(const Basic::Table3* const t
    return ok;
 }
 
-bool IrAtmosphere1::setSlotTransmissivityTable(const Basic::Table4* const tbl)
+bool IrAtmosphere1::setSlotTransmissivityTable(const basic::Table4* const tbl)
 {
    bool ok = false;
    if (tbl != nullptr) {
@@ -360,10 +360,10 @@ void IrAtmosphere1::getSolarRadiationSignatures(
 }
 
 
-Basic::Object* IrAtmosphere1::getSlotByIndex(const int si)
+basic::Object* IrAtmosphere1::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace

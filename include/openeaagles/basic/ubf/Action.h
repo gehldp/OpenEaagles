@@ -1,17 +1,17 @@
 //------------------------------------------------------------------------------
 // Class: Action
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Ubf_Action_H__
-#define __Eaagles_Basic_Ubf_Action_H__
+#ifndef __oe_basic_ubf_Action_H__
+#define __oe_basic_ubf_Action_H__
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
+namespace oe {
 
-namespace Basic {
+namespace basic {
    class Component;
 
-namespace Ubf {
+namespace ubf {
 
 //------------------------------------------------------------------------------
 // Class: Action
@@ -22,9 +22,9 @@ namespace Ubf {
 //
 // Factory name: UbfAction
 //------------------------------------------------------------------------------
-class Action : public Basic::Object
+class Action : public basic::Object
 {
-   DECLARE_SUBCLASS(Action, Basic::Object)
+   DECLARE_SUBCLASS(Action, basic::Object)
 
 public:
    Action();
@@ -33,7 +33,7 @@ public:
    void setVote(const unsigned int x);
 
    // Execute the behavior
-   virtual bool execute(Basic::Component* actor)=0;
+   virtual bool execute(basic::Component* actor)=0;
 
 private:
    unsigned int vote;
@@ -42,9 +42,9 @@ private:
 inline void Action::setVote(const unsigned int x)      { vote = x; return; }
 inline unsigned int Action::getVote() const            { return vote; }
 
-} // End Ubf namespace
-} // End Basic namespace
-} // End Eaagles namespace
+} // End ubf namespace
+} // End basic namespace
+} // End oe namespace
 
 #endif
 

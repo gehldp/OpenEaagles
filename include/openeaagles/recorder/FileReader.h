@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: FileReader
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Recorder_FileReader_H__
-#define __Eaagles_Recorder_FileReader_H__
+#ifndef __oe_recorder_FileReader_H__
+#define __oe_recorder_FileReader_H__
 
 #include "openeaagles/recorder/InputHandler.h"
 
-namespace Eaagles {
-   namespace Basic { class String; }
-namespace Recorder {
+namespace oe {
+   namespace basic { class String; }
+namespace recorder {
 
 //------------------------------------------------------------------------------
 // Class:   FileReader
@@ -42,8 +42,8 @@ public:
    virtual void closeFile();        // Close the data file
 
    // File and path names; set before calling openFile()
-   virtual bool setFilename(const Basic::String* const msg);
-   virtual bool setPathName(const Basic::String* const msg);
+   virtual bool setFilename(const basic::String* const msg);
+   virtual bool setPathName(const basic::String* const msg);
 
 protected:
    const DataRecordHandle* readRecordImp() override;
@@ -54,14 +54,14 @@ private:
    char* ibuf;                      // Input data buffer
 
    std::ifstream* sin;              // Input stream
-   const Basic::String* filename;   // File name
-   const Basic::String* pathname;   // Path to the data file's directory
+   const basic::String* filename;   // File name
+   const basic::String* pathname;   // Path to the data file's directory
    bool fileOpened;                 // File opened
    bool fileFailed;                 // Open or read failed
    bool firstPassFlg;               // First pass flag
 };
 
-} // End Recorder namespace
-} // End Eaagles namespace
+} // End recorder namespace
+} // End oe namespace
 
 #endif

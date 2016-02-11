@@ -1,16 +1,16 @@
 //------------------------------------------------------------------------------
 // Class: OnboardComputer
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_OnboardComputer_H__
-#define __Eaagles_Simulation_OnboardComputer_H__
+#ifndef __oe_simulation_OnboardComputer_H__
+#define __oe_simulation_OnboardComputer_H__
 
 #include "openeaagles/simulation/System.h"
 
-namespace Eaagles {
-   namespace Basic {
+namespace oe {
+   namespace basic {
       class PairStream;
    }
-namespace Simulation {
+namespace simulation {
 
 class Action;
 class Track;
@@ -56,8 +56,8 @@ public:
    virtual void triggerAction(Action* const act);
 
    // Legacy function (will be removed in a future major release)
-   virtual int getShootList(Basic::safe_ptr<Track>* const tlist, const int max);
-   virtual int getShootList(Basic::safe_ptr<const Track>* const tlist, const int max) const;
+   virtual int getShootList(basic::safe_ptr<Track>* const tlist, const int max);
+   virtual int getShootList(basic::safe_ptr<const Track>* const tlist, const int max) const;
 
    void reset() override;
    void updateData(const LCreal dt = 0.0) override;
@@ -73,11 +73,11 @@ protected:
    bool shutdownNotification() override;
 
 private:
-   Basic::safe_ptr<Action> action;  // Current steerpoint action
+   basic::safe_ptr<Action> action;  // Current steerpoint action
    Track*         nextToShoot;      // Next to shoot track
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

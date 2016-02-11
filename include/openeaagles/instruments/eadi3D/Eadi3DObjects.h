@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class:  Eadi3DObjects
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_Eadi3DObjects_H__
-#define __Eaagles_Instruments_Eadi3DObjects_H__
+#ifndef __oe_instruments_Eadi3DObjects_H__
+#define __oe_instruments_Eadi3DObjects_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/instruments/eadi3D/IrisGLCompat.h"
 
-namespace Eaagles {
-namespace Instruments {
+namespace oe {
+namespace instruments {
 
 //------------------------------------------------------------------------------
 // Class:  Eadi3DObjects
@@ -23,8 +23,8 @@ namespace Instruments {
 //          Produces the stroke font map.
 //
 //------------------------------------------------------------------------------
-class Eadi3DObjects : public Basic::Object {
-    DECLARE_SUBCLASS(Eadi3DObjects,Basic::Object)
+class Eadi3DObjects : public basic::Object {
+    DECLARE_SUBCLASS(Eadi3DObjects,basic::Object)
 
 public:
     Eadi3DObjects(float radius = 1.625);
@@ -156,6 +156,6 @@ private:
 };
 
 } // End Instruments namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

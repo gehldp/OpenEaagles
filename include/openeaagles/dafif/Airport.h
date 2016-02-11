@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: Airport
-// Base class: Basic::Object -> Basic::String -> Record -> Airport
+// Base class: basic::Object -> basic::String -> Record -> Airport
 //
 // Description: DAFIF Airport record class
 //
@@ -25,13 +25,13 @@
 //        Length of a DAFIF Airport record.
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Dafif_Airport_H__
-#define __Eaagles_Dafif_Airport_H__
+#ifndef __oe_dafif_Airport_H__
+#define __oe_dafif_Airport_H__
 
 #include "Record.h"
 
-namespace Eaagles {
-namespace Dafif {
+namespace oe {
+namespace dafif {
 
 class Airport : public Record {
 
@@ -59,7 +59,7 @@ private:
 };
 
 
-} // End Dafif namespace
-} // End Eaagles namespace
+} // End dafif namespace
+} // End oe namespace
 
 #endif

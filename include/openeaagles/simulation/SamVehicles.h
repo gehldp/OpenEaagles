@@ -1,18 +1,18 @@
 //------------------------------------------------------------------------------
 // Classes: SamVehicle
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_SamVehicle_H__
-#define __Eaagles_Simulation_SamVehicle_H__
+#ifndef __oe_simulation_SamVehicle_H__
+#define __oe_simulation_SamVehicle_H__
 
 #include "openeaagles/simulation/GroundVehicle.h"
 
-namespace Eaagles {
-   namespace Basic {
+namespace oe {
+   namespace basic {
       class Distance;
       class Identifier;
       class Time;
    }
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class SamVehicle
@@ -20,9 +20,9 @@ namespace Simulation {
 //
 // Factory name: SamVehicle
 // Slots:
-//    minLaunchRange    <Basic::Distance>   ! Min launch range (Basic::Distance)
+//    minLaunchRange    <basic::Distance>   ! Min launch range (basic::Distance)
 //                                          ! (default: DEFAULT_MIN_LAUNCH_RANGE)
-//    maxLaunchRange    <Basic::Distance>   ! Max launch range (Basic::Distance)
+//    maxLaunchRange    <basic::Distance>   ! Max launch range (basic::Distance)
 //                                          ! (default: DEFAULT_MAX_LAUNCH_RANGE)
 //
 //==============================================================================
@@ -46,8 +46,8 @@ public:
    virtual bool setMinLaunchRange(const LCreal rng);
 
    // Slot functions
-   virtual bool setSlotMinLaunchRange(const Basic::Distance* const msg);
-   virtual bool setSlotMaxLaunchRange(const Basic::Distance* const msg);
+   virtual bool setSlotMinLaunchRange(const basic::Distance* const msg);
+   virtual bool setSlotMaxLaunchRange(const basic::Distance* const msg);
 
    void updateData(const LCreal dt = 0.0) override;
 
@@ -57,7 +57,7 @@ private:
    unsigned int      numMsl;           // Number of missile available
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif

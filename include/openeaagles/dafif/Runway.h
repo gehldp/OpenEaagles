@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: Runway
-// Base class: Basic::Object -> Basic::String -> Record -> Runway
+// Base class: basic::Object -> basic::String -> Record -> Runway
 //
 // Description: Access to the DAFIF Airport/Runway records.
 //
@@ -40,13 +40,13 @@
 //       Length of a DAFIF Runway record pair.
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Dafif_Runway_H__
-#define __Eaagles_Dafif_Runway_H__
+#ifndef __oe_dafif_Runway_H__
+#define __oe_dafif_Runway_H__
 
 #include "Record.h"
 
-namespace Eaagles {
-namespace Dafif {
+namespace oe {
+namespace dafif {
 
 class Runway : public Record {
     DECLARE_SUBCLASS(Runway,Record)
@@ -188,7 +188,7 @@ inline Runway::WhichEnd Runway::whichEnd(const char rwEndId[]) const
    return we;
 }
 
-} // End Dafif namespace
-} // End Eaagles namespace
+} // End dafif namespace
+} // End oe namespace
 
 #endif

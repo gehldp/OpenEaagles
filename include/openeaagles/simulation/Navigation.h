@@ -1,17 +1,17 @@
 //------------------------------------------------------------------------------
 // Class: Navigation
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Navigation_H__
-#define __Eaagles_Simulation_Navigation_H__
+#ifndef __oe_simulation_Navigation_H__
+#define __oe_simulation_Navigation_H__
 
 #include "openeaagles/simulation/System.h"
 #include "openeaagles/basic/osg/Vec2"
 
-namespace Eaagles {
+namespace oe {
 
-namespace Basic { class Time; }
+namespace basic { class Time; }
 
-namespace Simulation {
+namespace simulation {
 class Player;
 class Route;
 class Bullseye;
@@ -29,9 +29,9 @@ class Bullseye;
 // Slots:
 //    route    <Route>              ! Primary route (default: 0)
 //
-//    utc      <Basic::Time>        ! initial UTC time (default: 0)
+//    utc      <basic::Time>        ! initial UTC time (default: 0)
 //
-//    feba     <Basic::PairStream>  ! Forward edge battle area (FEBA):
+//    feba     <basic::PairStream>  ! Forward edge battle area (FEBA):
 //                                  !   1) List of distance vectors [ North East ]
 //                                  !   from the gaming area reference point.
 //                                  !   2) Default unit is Nautical Miles
@@ -129,8 +129,8 @@ public:
 
     // Slot functions
     virtual bool setSlotRoute(const Route* const msg);  // and the initial route used by reset()
-    virtual bool setSlotUtc(const Basic::Time* const msg);
-    virtual bool setSlotFeba(const Basic::PairStream* const msg);
+    virtual bool setSlotUtc(const basic::Time* const msg);
+    virtual bool setSlotFeba(const basic::PairStream* const msg);
     virtual bool setSlotBullseye(Bullseye* const msg);
 
     void updateData(const LCreal dt = 0.0) override;
@@ -188,9 +188,9 @@ protected:
 private:
    void initData();
 
-   Basic::safe_ptr<const Route> initRoute; // initial route (for reset purposes)
-   Basic::safe_ptr<Route> priRoute;        // Primary route
-   Basic::safe_ptr<Bullseye> bull;         // our bullseye (just one for now)
+   basic::safe_ptr<const Route> initRoute; // initial route (for reset purposes)
+   basic::safe_ptr<Route> priRoute;        // Primary route
+   basic::safe_ptr<Bullseye> bull;         // our bullseye (just one for now)
 
    // Positional data
    double      latitude;       // System Latitude          (degs)
@@ -248,7 +248,7 @@ private:
    double  refLon;             // Ref longitude (deg)
 };
 
-} // End Simulation namespace
-} // End Eaagles namespace
+} // End simulation namespace
+} // End oe namespace
 
 #endif
