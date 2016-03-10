@@ -18,7 +18,7 @@
 
 namespace oe {
 
-namespace basic { class Identifier; }
+namespace base { class Identifier; }
 
 namespace simulation {
 
@@ -31,7 +31,7 @@ class Simulation;
 
 //------------------------------------------------------------------------------
 // Class:   TabLogger
-// Base class:  basic::Object -> basic::Component -> basic::Logger -> SimLogger -> TabLogger
+// Base class:  base::Object -> base::Component -> base::Logger -> SimLogger -> TabLogger
 // Description: Simulation Event & Data Logger
 // Factory name: TabLogger
 //------------------------------------------------------------------------------
@@ -43,8 +43,8 @@ public:
 
     TabLogger();
 
-    void updateTC(const LCreal dt = 0.0) override;
-    void updateData(const LCreal dt = 0.0) override;
+    void updateTC(const double dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
 
     //==============================================================================
     // ######### Simulation Log Event Classes #########
@@ -91,7 +91,7 @@ public:
 
     //------------------------------------------------------------------------------
     // Class:   TabLogger::LogPlayerData
-    // Base class:  basic::Object -> basic::Logger::LogEvent -> SimLogEvent -> TabLogEvent -> LogPlayerData
+    // Base class:  base::Object -> base::Logger::LogEvent -> SimLogEvent -> TabLogEvent -> LogPlayerData
     // Description: Log player's data event
     // Factory name: LogPlayerData
     //------------------------------------------------------------------------------
@@ -105,23 +105,23 @@ public:
     private:
         void initData();
         int theType;
-        basic::safe_ptr<const Player> thePlayer;
-        basic::safe_ptr<const Player> theSource;   // source of damage, usually a weapon, always a player
+        base::safe_ptr<const Player> thePlayer;
+        base::safe_ptr<const Player> theSource;   // source of damage, usually a weapon, always a player
         osg::Vec3 pos;
         osg::Vec3 vel;
         osg::Vec3 angles;
         double    latitude;
         double    longitude;
-        LCreal    alpha;
-        LCreal    beta;
-        LCreal    ias;
-        LCreal    mach;
-        LCreal    pLoading;
+        double    alpha;
+        double    beta;
+        double    ias;
+        double    mach;
+        double    pLoading;
     };
 
     //------------------------------------------------------------------------------
     // Class: TabLogger::LogGunActivity
-    // Base class:  basic::Object -> basic::Logger::LogEvent -> SimLogEvent -> TabLogEvent -> LogGunActivity
+    // Base class:  base::Object -> base::Logger::LogEvent -> SimLogEvent -> TabLogEvent -> LogGunActivity
     // Description: Log a gun fire event; Player just fired a burst of 'n' rounds
     // Factory name: LogGunActivity
     //------------------------------------------------------------------------------
@@ -134,14 +134,14 @@ public:
     private:
         void initData();
         int theType;
-        basic::safe_ptr<const Player> thePlayer;
+        base::safe_ptr<const Player> thePlayer;
         int rounds;
     };
 
 
     //------------------------------------------------------------------------------
     // Class: TabLogger::LogWeaponActivity
-    // Base class:  basic::Object -> basic::Logger::LogEvent -> SimLogEvent -> TabLogEvent -> LogWeaponActivity
+    // Base class:  base::Object -> base::Logger::LogEvent -> SimLogEvent -> TabLogEvent -> LogWeaponActivity
     // Description: Log a detonation event
     //    (i.e., Target, 'tgt', killed by weapon, 'wpn', released from the 'player'.
     // Factory name: LogWeaponActivity
@@ -150,25 +150,25 @@ public:
         DECLARE_SUBCLASS(LogWeaponActivity,TabLogEvent)
     public:
         LogWeaponActivity(const int theType, const Player* const player, const Player* const wpn,
-                          const Player* const tgt, const unsigned int detType, const LCreal distance = -1.0f);
+                          const Player* const tgt, const unsigned int detType, const double distance = -1.0f);
         const char* getDescription() override;
         void captureData() override;
     private:
         void initData();
         int theType;
-        basic::safe_ptr<const Player> thePlayer;
-        basic::safe_ptr<const Player> theWeapon;
-        basic::safe_ptr<const Player> theTarget;
-        basic::safe_ptr<const Track> theTrack;
+        base::safe_ptr<const Player> thePlayer;
+        base::safe_ptr<const Player> theWeapon;
+        base::safe_ptr<const Player> theTarget;
+        base::safe_ptr<const Track> theTrack;
         unsigned short eventID;
         unsigned int detType;
-        LCreal missDist;
+        double missDist;
     };
 
 
     //------------------------------------------------------------------------------
     // Class: TabLogger::LogActiveTrack
-    // Base class:  basic::Object -> basic::Logger::LogEvent -> SimLogEvent -> TabLogEvent -> LogActiveTrack
+    // Base class:  base::Object -> base::Logger::LogEvent -> SimLogEvent -> TabLogEvent -> LogActiveTrack
     // Description: Log new, removed, or updated "active" track [not passive]
     // Factory name: LogActiveTrack
     //------------------------------------------------------------------------------
@@ -181,23 +181,23 @@ public:
     private:
         void initData();
         int theType;
-        basic::safe_ptr<const TrackManager> theManager;
-        basic::safe_ptr<const Track> theTrack;
-        basic::safe_ptr<const Player> thePlayer;
-        basic::safe_ptr<const Emission> theEmission;
+        base::safe_ptr<const TrackManager> theManager;
+        base::safe_ptr<const Track> theTrack;
+        base::safe_ptr<const Player> thePlayer;
+        base::safe_ptr<const Emission> theEmission;
         osg::Vec3 pos;
         osg::Vec3 vel;
         osg::Vec3 angles;
         osg::Vec3 tgtPos;
         osg::Vec3 tgtVel;
         osg::Vec3 tgtAngles;
-        LCreal sn;              // Signal/Noise
+        double sn;              // Signal/Noise
     };
 
 
     //------------------------------------------------------------------------------
     // Class: TabLogger::LogPassiveTrack
-    // Base class:  basic::Object -> basic::Logger::LogEvent -> SimLogEvent -> TabLogEvent -> LogPassiveTrack
+    // Base class:  base::Object -> base::Logger::LogEvent -> SimLogEvent -> TabLogEvent -> LogPassiveTrack
     // Description: Log passive track event (header, new, updated, removed) [RWR]
     // Factory name: LogPassiveTrack
     //------------------------------------------------------------------------------
@@ -210,17 +210,17 @@ public:
     private:
         void initData();
         int theType;
-        basic::safe_ptr<const TrackManager> theManager;
-        basic::safe_ptr<const Track> theTrack;
-        basic::safe_ptr<const Player> thePlayer;
-        basic::safe_ptr<const Emission> theEmission;
+        base::safe_ptr<const TrackManager> theManager;
+        base::safe_ptr<const Track> theTrack;
+        base::safe_ptr<const Player> thePlayer;
+        base::safe_ptr<const Emission> theEmission;
         osg::Vec3 pos;
         osg::Vec3 vel;
         osg::Vec3 angles;
         osg::Vec3 tgtPos;
         osg::Vec3 tgtVel;
         osg::Vec3 tgtAngles;
-        LCreal sn;              // Signal/Noise
+        double sn;              // Signal/Noise
     };
 };
 

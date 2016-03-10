@@ -4,7 +4,7 @@
 #ifndef __oe_graphics_Material_H__
 #define __oe_graphics_Material_H__
 
-#include "openeaagles/basic/Component.h"
+#include "openeaagles/base/Component.h"
 #include <GL/glu.h>
 
 namespace oe {
@@ -37,47 +37,47 @@ namespace graphics {
 //                                 (default: (0,0,0,1))
 //    shininess      <Number>      ! How shiny our material is (0 = dull, 128 = really shiny) (default: 0)
 //------------------------------------------------------------------------------
-class Material : public basic::Component {
-    DECLARE_SUBCLASS(Material,basic::Component)
+class Material : public base::Component {
+    DECLARE_SUBCLASS(Material,base::Component)
 
 public:
     Material();
 
     // set data
     virtual bool setAmbientColor(osg::Vec4 x);
-    virtual bool setAmbientColor(LCreal x, LCreal y, LCreal z, LCreal w = 1.0);
+    virtual bool setAmbientColor(double x, double y, double z, double w = 1.0);
     virtual bool setDiffuseColor(osg::Vec4 x);
-    virtual bool setDiffuseColor(LCreal x, LCreal y, LCreal z, LCreal w = 1.0);
+    virtual bool setDiffuseColor(double x, double y, double z, double w = 1.0);
     virtual bool setEmissiveColor(osg::Vec4 x);
-    virtual bool setEmissiveColor(LCreal x, LCreal y, LCreal z, LCreal w = 1.0);
+    virtual bool setEmissiveColor(double x, double y, double z, double w = 1.0);
     virtual bool setSpecularColor(osg::Vec4 x);
-    virtual bool setSpecularColor(LCreal x, LCreal y, LCreal z, LCreal w = 1.0);
-    virtual bool setShininess(LCreal x);
+    virtual bool setSpecularColor(double x, double y, double z, double w = 1.0);
+    virtual bool setShininess(double x);
 
     // get data
     osg::Vec4& getAmbientColor()        { return ambientColor; }
     osg::Vec4& getDiffuseColor()        { return diffuseColor; }
     osg::Vec4& getEmissiveColor()       { return emissiveColor; }
     osg::Vec4& getSpecularColor()       { return specularColor; }
-    LCreal     getShininess()           { return shininess; }
+    double     getShininess()           { return shininess; }
 
 protected:
-    bool setSlotAmbientColor(const basic::PairStream* const x);
-    bool setSlotAmbientColor(const basic::Number* const x);
-    bool setSlotDiffuseColor(const basic::PairStream* const x);
-    bool setSlotDiffuseColor(const basic::Number* const x);
-    bool setSlotEmissiveColor(const basic::PairStream* const x);
-    bool setSlotEmissiveColor(const basic::Number* const x);
-    bool setSlotSpecularColor(const basic::PairStream* const x);
-    bool setSlotSpecularColor(const basic::Number* const x);
-    bool setSlotShininess(const basic::Number*const x);
+    bool setSlotAmbientColor(const base::PairStream* const x);
+    bool setSlotAmbientColor(const base::Number* const x);
+    bool setSlotDiffuseColor(const base::PairStream* const x);
+    bool setSlotDiffuseColor(const base::Number* const x);
+    bool setSlotEmissiveColor(const base::PairStream* const x);
+    bool setSlotEmissiveColor(const base::Number* const x);
+    bool setSlotSpecularColor(const base::PairStream* const x);
+    bool setSlotSpecularColor(const base::Number* const x);
+    bool setSlotShininess(const base::Number*const x);
 
 private:
     osg::Vec4 ambientColor;     // ambient color
     osg::Vec4 diffuseColor;     // diffuse color
     osg::Vec4 emissiveColor;    // emissive color
     osg::Vec4 specularColor;    // specular color
-    LCreal shininess;           // shininess value
+    double shininess;           // shininess value
 };
 
 } // End graphics namespace

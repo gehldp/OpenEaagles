@@ -3,13 +3,15 @@
 #include "openeaagles/simulation/Emission.h"
 #include "openeaagles/simulation/Player.h"
 
-#include "openeaagles/basic/Decibel.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/functors/Tables.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Areas.h"
-#include "openeaagles/basic/units/Distances.h"
+#include "openeaagles/base/Decibel.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/functors/Tables.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Areas.h"
+#include "openeaagles/base/units/Distances.h"
+
+#include <cmath>
 
 namespace oe {
 namespace simulation {
@@ -56,12 +58,12 @@ EMPTY_SERIALIZER(SigConstant)
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(SigConstant)
     "rcs",          // 1 Constant Radar Cross Section value
-                    //   basic::Number(square meters) or basic::Decibel(square meters) or basic::Area()
+                    //   base::Number(square meters) or base::Decibel(square meters) or base::Area()
 END_SLOTTABLE(SigConstant)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(SigConstant)
-    ON_SLOT(1,setRCS,basic::Number)
+    ON_SLOT(1,setRCS,base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -73,13 +75,13 @@ SigConstant::SigConstant()
     rcs = 0.0;
 }
 
-SigConstant::SigConstant(const LCreal r)
+SigConstant::SigConstant(const double r)
 {
     STANDARD_CONSTRUCTOR()
     rcs = r;
 }
 
-SigConstant::SigConstant(const basic::Number* const c)
+SigConstant::SigConstant(const base::Number* const c)
 {
     STANDARD_CONSTRUCTOR()
     setRCS(c);
@@ -104,7 +106,7 @@ void SigConstant::deleteData()
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-LCreal SigConstant::getRCS(const Emission* const)
+double SigConstant::getRCS(const Emission* const)
 {
     return rcs;
 }
@@ -112,15 +114,15 @@ LCreal SigConstant::getRCS(const Emission* const)
 //------------------------------------------------------------------------------
 // setRCS() -- Set the RCS
 //------------------------------------------------------------------------------
-bool SigConstant::setRCS(const basic::Number* const num)
+bool SigConstant::setRCS(const base::Number* const num)
 {
     bool ok = false;
-    LCreal r = -1.0;
+    double r = -1.0;
 
-    const basic::Area* d = dynamic_cast<const basic::Area*>(num);
+    const base::Area* d = dynamic_cast<const base::Area*>(num);
     if (d != nullptr) {
         // Has area units and we need square meters
-        basic::SquareMeters m2;
+        base::SquareMeters m2;
         r = m2.convert(*d);
     }
     else if (num != nullptr) {
@@ -136,7 +138,7 @@ bool SigConstant::setRCS(const basic::Number* const num)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* SigConstant::getSlotByIndex(const int si)
+base::Object* SigConstant::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -156,7 +158,7 @@ END_SLOTTABLE(SigSphere)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(SigSphere)
-    ON_SLOT(1,setRadiusFromSlot,basic::Number)
+    ON_SLOT(1,setRadiusFromSlot,base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -168,7 +170,7 @@ SigSphere::SigSphere()
     setRadius(0);
 }
 
-SigSphere::SigSphere(const LCreal r)
+SigSphere::SigSphere(const double r)
 {
     STANDARD_CONSTRUCTOR()
     setRadius(r);
@@ -193,7 +195,7 @@ void SigSphere::deleteData()
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-LCreal SigSphere::getRCS(const Emission* const)
+double SigSphere::getRCS(const Emission* const)
 {
     return rcs;
 }
@@ -201,15 +203,15 @@ LCreal SigSphere::getRCS(const Emission* const)
 //------------------------------------------------------------------------------
 // setRadiusFromSlot() -- Set the radius from Slot table
 //------------------------------------------------------------------------------
-bool SigSphere::setRadiusFromSlot(basic::Number* const num)
+bool SigSphere::setRadiusFromSlot(base::Number* const num)
 {
     bool ok = false;
-    LCreal r = -1.0;
+    double r = -1.0;
 
-    basic::Distance* d = dynamic_cast<basic::Distance*>(num);
+    base::Distance* d = dynamic_cast<base::Distance*>(num);
     if (d != nullptr) {
         // Has distance units and we need meters
-        basic::Meters meters;
+        base::Meters meters;
         r = meters.convert(*d);
     }
     else if (num != nullptr) {
@@ -225,7 +227,7 @@ bool SigSphere::setRadiusFromSlot(basic::Number* const num)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* SigSphere::getSlotByIndex(const int si)
+base::Object* SigSphere::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -246,8 +248,8 @@ END_SLOTTABLE(SigPlate)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(SigPlate)
-    ON_SLOT(1,setA,basic::Number)
-    ON_SLOT(2,setB,basic::Number)
+    ON_SLOT(1,setA,base::Number)
+    ON_SLOT(2,setB,base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -260,7 +262,7 @@ SigPlate::SigPlate()
     b = 0.0;
 }
 
-SigPlate::SigPlate(const LCreal a1, const LCreal b1)
+SigPlate::SigPlate(const double a1, const double b1)
 {
     STANDARD_CONSTRUCTOR()
     a = a1;
@@ -287,7 +289,7 @@ void SigPlate::deleteData()
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-LCreal SigPlate::getRCS(const Emission* const em)
+double SigPlate::getRCS(const Emission* const em)
 {
     double rcs = 0.0;
     if (em != nullptr) {
@@ -295,24 +297,24 @@ LCreal SigPlate::getRCS(const Emission* const em)
         double area = a * b;
         if (lambda > 0.0 && area > 0.0) {
             // If we have lambda and the area of the plate, compute the RCS
-            rcs = (4.0 * PI * area * area) / (lambda * lambda);
+            rcs = (4.0 * base::PI * area * area) / (lambda * lambda);
         }
     }
-    return static_cast<LCreal>(rcs);
+    return static_cast<double>(rcs);
 }
 
 //------------------------------------------------------------------------------
 // setA() -- Set the length
 //------------------------------------------------------------------------------
-bool SigPlate::setA(basic::Number* const num)
+bool SigPlate::setA(base::Number* const num)
 {
     bool ok = false;
-    LCreal v = -1.0;
+    double v = -1.0;
 
-    basic::Distance* d = dynamic_cast<basic::Distance*>(num);
+    base::Distance* d = dynamic_cast<base::Distance*>(num);
     if (d != nullptr) {
         // Has distance units and we need meters
-        basic::Meters meters;
+        base::Meters meters;
         v = meters.convert(*d);
     }
     else if (num != nullptr) {
@@ -328,15 +330,15 @@ bool SigPlate::setA(basic::Number* const num)
 //------------------------------------------------------------------------------
 // setB() -- Set the width
 //------------------------------------------------------------------------------
-bool SigPlate::setB(basic::Number* const num)
+bool SigPlate::setB(base::Number* const num)
 {
     bool ok = false;
-    LCreal v = -1.0;
+    double v = -1.0;
 
-    basic::Distance* d = dynamic_cast<basic::Distance*>(num);
+    base::Distance* d = dynamic_cast<base::Distance*>(num);
     if (d != nullptr) {
         // Has distance units and we need meters
-        basic::Meters meters;
+        base::Meters meters;
         v = meters.convert(*d);
     }
     else if (num != nullptr) {
@@ -352,7 +354,7 @@ bool SigPlate::setB(basic::Number* const num)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* SigPlate::getSlotByIndex(const int si)
+base::Object* SigPlate::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -373,7 +375,7 @@ SigDihedralCR::SigDihedralCR()
     length = 0.0;
 }
 
-SigDihedralCR::SigDihedralCR(const LCreal a) : SigPlate(a, 0.0)
+SigDihedralCR::SigDihedralCR(const double a) : SigPlate(a, 0.0)
 {
     STANDARD_CONSTRUCTOR()
     length = 0.0;
@@ -397,7 +399,7 @@ void SigDihedralCR::deleteData()
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-LCreal SigDihedralCR::getRCS(const Emission* const em)
+double SigDihedralCR::getRCS(const Emission* const em)
 {
     double rcs = 0.0;
     if (em != nullptr) {
@@ -405,10 +407,10 @@ LCreal SigDihedralCR::getRCS(const Emission* const em)
         if (lambda > 0.0) {
             // If we have lambda and the area of the plate, compute the RCS
             const double a = getA();
-            rcs = (8.0 * PI * a*a*a*a) / (lambda*lambda);
+            rcs = (8.0 * base::PI * a*a*a*a) / (lambda*lambda);
         }
     }
-    return static_cast<LCreal>(rcs);
+    return static_cast<double>(rcs);
 }
 
 
@@ -426,7 +428,7 @@ SigTrihedralCR::SigTrihedralCR()
     STANDARD_CONSTRUCTOR()
 }
 
-SigTrihedralCR::SigTrihedralCR(const LCreal a) : SigDihedralCR(a)
+SigTrihedralCR::SigTrihedralCR(const double a) : SigDihedralCR(a)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -449,7 +451,7 @@ void SigTrihedralCR::deleteData()
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-LCreal SigTrihedralCR::getRCS(const Emission* const em)
+double SigTrihedralCR::getRCS(const Emission* const em)
 {
     double rcs = 0.0;
     if (em != nullptr) {
@@ -457,10 +459,10 @@ LCreal SigTrihedralCR::getRCS(const Emission* const em)
         if (lambda > 0.0) {
             // If we have lambda and the area of the plate, compute the RCS
             const double a = getA();
-            rcs = (12.0 * PI * a*a*a*a) / (lambda*lambda);
+            rcs = (12.0 * base::PI * a*a*a*a) / (lambda*lambda);
         }
     }
-    return static_cast<LCreal>(rcs);
+    return static_cast<double>(rcs);
 }
 
 //==============================================================================
@@ -497,9 +499,9 @@ void SigSwitch::deleteData()
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-LCreal SigSwitch::getRCS(const Emission* const em)
+double SigSwitch::getRCS(const Emission* const em)
 {
-   LCreal rcs = 0.0;
+   double rcs = 0.0;
 
    // Find our ownship player ...
    const Player* ownship = static_cast<const Player*>(findContainerByType(typeid(Player)));
@@ -510,7 +512,7 @@ LCreal SigSwitch::getRCS(const Emission* const em)
       camouflage++; // our components are one based
 
       // find a RfSignature with this index
-      basic::Pair* pair = findByIndex(camouflage);
+      base::Pair* pair = findByIndex(camouflage);
       if (pair != nullptr) {
          RfSignature* sig = dynamic_cast<RfSignature*>( pair->object() );
          if (sig != nullptr) {
@@ -538,7 +540,7 @@ EMPTY_SERIALIZER(SigAzEl)
 // Slot table
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(SigAzEl)
-    "table",            // 1: Table of RCS by target Az/El angles  (basic::Table2)
+    "table",            // 1: Table of RCS by target Az/El angles  (base::Table2)
     "swapOrder",        // 2: True if elevation is the table's first independent
                         //    variable and azimuth is the second.
     "inDegrees",        // 3: True if the table's independent variables az and
@@ -549,10 +551,10 @@ END_SLOTTABLE(SigAzEl)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(SigAzEl)
-    ON_SLOT(1, setSlotTable,        basic::Table2)
-    ON_SLOT(2, setSlotSwapOrder,    basic::Number)
-    ON_SLOT(3, setSlotInDegrees,    basic::Number)
-    ON_SLOT(4, setSlotDecibel,      basic::Number)
+    ON_SLOT(1, setSlotTable,        base::Table2)
+    ON_SLOT(2, setSlotSwapOrder,    base::Number)
+    ON_SLOT(3, setSlotInDegrees,    base::Number)
+    ON_SLOT(4, setSlotDecibel,      base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -568,7 +570,7 @@ SigAzEl::SigAzEl()
    dbFlg = false;
 }
 
-SigAzEl::SigAzEl(const basic::Table2* const tbl0)
+SigAzEl::SigAzEl(const base::Table2* const tbl0)
 {
    STANDARD_CONSTRUCTOR()
 
@@ -612,14 +614,14 @@ void SigAzEl::deleteData()
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-LCreal SigAzEl::getRCS(const Emission* const em)
+double SigAzEl::getRCS(const Emission* const em)
 {
-   LCreal rcs = 0.0;
+   double rcs = 0.0;
    if (em != nullptr && tbl != nullptr) {
 
       // angle of arrival (radians)
-      LCreal iv1 = em->getAzimuthAoi();
-      LCreal iv2 = em->getElevationAoi();
+      double iv1 = em->getAzimuthAoi();
+      double iv2 = em->getElevationAoi();
 
       // If the table's independent variable's order is swapped: (El, Az)
       if (isOrderSwapped()) {
@@ -629,15 +631,15 @@ LCreal SigAzEl::getRCS(const Emission* const em)
 
       // If the table's independent variables are in degrees ..
       if (isInDegrees()) {
-         iv1 *= static_cast<LCreal>(basic::Angle::R2DCC);
-         iv2 *= static_cast<LCreal>(basic::Angle::R2DCC);
+         iv1 *= static_cast<double>(base::Angle::R2DCC);
+         iv2 *= static_cast<double>(base::Angle::R2DCC);
       }
 
       rcs = tbl->lfi(iv1,iv2);
 
       // If the dependent data is in decibels ...
       if (isDecibel()) {
-         rcs = lcPow(static_cast<LCreal>(10.0), static_cast<LCreal>(rcs / 10.0));
+         rcs = std::pow(static_cast<double>(10.0), static_cast<double>(rcs / 10.0));
       }
    }
    return rcs;
@@ -682,7 +684,7 @@ bool SigAzEl::setDecibel(const bool flg)
 //------------------------------------------------------------------------------
 
 // Sets the signature table
-bool SigAzEl::setSlotTable(const basic::Table2* const msg)
+bool SigAzEl::setSlotTable(const base::Table2* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -694,7 +696,7 @@ bool SigAzEl::setSlotTable(const basic::Table2* const msg)
    return ok;
 }
 
-bool SigAzEl::setSlotSwapOrder(const basic::Number* const msg)
+bool SigAzEl::setSlotSwapOrder(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -703,7 +705,7 @@ bool SigAzEl::setSlotSwapOrder(const basic::Number* const msg)
    return ok;
 }
 
-bool SigAzEl::setSlotInDegrees(const basic::Number* const msg)
+bool SigAzEl::setSlotInDegrees(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -712,7 +714,7 @@ bool SigAzEl::setSlotInDegrees(const basic::Number* const msg)
    return ok;
 }
 
-bool SigAzEl::setSlotDecibel(const basic::Number* const msg)
+bool SigAzEl::setSlotDecibel(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -724,7 +726,7 @@ bool SigAzEl::setSlotDecibel(const basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* SigAzEl::getSlotByIndex(const int si)
+base::Object* SigAzEl::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

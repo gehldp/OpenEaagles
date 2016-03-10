@@ -4,7 +4,7 @@
 #ifndef __oe_instruments_IrisGLCompat_H__
 #define __oe_instruments_IrisGLCompat_H__
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 namespace oe {
 namespace instruments {
@@ -14,8 +14,8 @@ namespace instruments {
 // Description:  IrisGL compatibility
 //
 //------------------------------------------------------------------------------
-class IrisGLCompat : public basic::Object {
-    DECLARE_SUBCLASS(IrisGLCompat,basic::Object)
+class IrisGLCompat : public base::Object {
+    DECLARE_SUBCLASS(IrisGLCompat,base::Object)
 public:
     IrisGLCompat();
 

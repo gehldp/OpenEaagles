@@ -7,7 +7,7 @@
 #include "openeaagles/simulation/GroundVehicle.h"
 
 namespace oe {
-   namespace basic {
+   namespace base {
       class Distance;
       class Identifier;
       class Time;
@@ -20,9 +20,9 @@ namespace simulation {
 //
 // Factory name: SamVehicle
 // Slots:
-//    minLaunchRange    <basic::Distance>   ! Min launch range (basic::Distance)
+//    minLaunchRange    <base::Distance>   ! Min launch range (base::Distance)
 //                                          ! (default: DEFAULT_MIN_LAUNCH_RANGE)
-//    maxLaunchRange    <basic::Distance>   ! Max launch range (basic::Distance)
+//    maxLaunchRange    <base::Distance>   ! Max launch range (base::Distance)
 //                                          ! (default: DEFAULT_MAX_LAUNCH_RANGE)
 //
 //==============================================================================
@@ -36,24 +36,24 @@ public:
    // Access functions
    virtual unsigned int getNumberOfMissiles() const;  // Number of missiles
 
-   virtual LCreal getMaxLaunchRange() const;          // Max missile launch range (meters)
-   virtual LCreal getMinLaunchRange() const;          // Min missile launch range (meters)
+   virtual double getMaxLaunchRange() const;          // Max missile launch range (meters)
+   virtual double getMinLaunchRange() const;          // Min missile launch range (meters)
 
    virtual bool isLauncherReady() const;              // Return true if launcher is ready to fire.
 
    // Set functions
-   virtual bool setMaxLaunchRange(const LCreal rng);
-   virtual bool setMinLaunchRange(const LCreal rng);
+   virtual bool setMaxLaunchRange(const double rng);
+   virtual bool setMinLaunchRange(const double rng);
 
    // Slot functions
-   virtual bool setSlotMinLaunchRange(const basic::Distance* const msg);
-   virtual bool setSlotMaxLaunchRange(const basic::Distance* const msg);
+   virtual bool setSlotMinLaunchRange(const base::Distance* const msg);
+   virtual bool setSlotMaxLaunchRange(const base::Distance* const msg);
 
-   void updateData(const LCreal dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
 
 private:
-   LCreal            maxMslRng;        // Max Launch Range        (meters)
-   LCreal            minMslRng;        // Min Launch Range        (meters)
+   double            maxMslRng;        // Max Launch Range        (meters)
+   double            minMslRng;        // Min Launch Range        (meters)
    unsigned int      numMsl;           // Number of missile available
 };
 

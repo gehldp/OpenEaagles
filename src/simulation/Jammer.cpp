@@ -4,11 +4,11 @@
 #include "openeaagles/simulation/Emission.h"
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Frequencies.h"
-#include "openeaagles/basic/units/Powers.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Frequencies.h"
+#include "openeaagles/base/units/Powers.h"
 
 namespace oe {
 namespace simulation {
@@ -40,13 +40,13 @@ EMPTY_DELETEDATA(Jammer)
 //------------------------------------------------------------------------------
 // transmit() -- send jam emissions
 //------------------------------------------------------------------------------
-void Jammer::transmit(const LCreal)
+void Jammer::transmit(const double)
 {
     // Send the emission to the other player
     if ( !areEmissionsDisabled() && isTransmitting() ) {
         Emission* em = new Emission();
         em->setFrequency(getFrequency());
-        LCreal p = getPeakPower();
+        double p = getPeakPower();
         em->setPower(p);
         em->setTransmitLoss(getRfTransmitLoss());
         em->setMaxRangeNM(getRange());

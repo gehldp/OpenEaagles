@@ -2,11 +2,11 @@
 #ifndef __oe_iodevice_SignalGen_H__
 #define __oe_iodevice_SignalGen_H__
 
-#include "openeaagles/basic/IoAdapter.h"
+#include "openeaagles/base/IoAdapter.h"
 
 namespace oe {
 
-namespace basic { class Angle; class Frequency; class String; }
+namespace base { class Angle; class Frequency; class String; }
 
 namespace iodevice {
 
@@ -43,9 +43,9 @@ class IoData;
 //      channel   <Number>       ! Output device channel number (AO signal generator only)
 //
 //------------------------------------------------------------------------------
-class SignalGen : public basic::IoAdapter
+class SignalGen : public base::IoAdapter
 {
-   DECLARE_SUBCLASS(SignalGen, basic::IoAdapter)
+   DECLARE_SUBCLASS(SignalGen, base::IoAdapter)
 
 public:
    enum Signal { SINE, COSINE, SQUARE, SAW };
@@ -54,12 +54,12 @@ public:
    SignalGen();
 
    Signal getSignalType() const;
-   LCreal getFrequency() const;     // Hz
-   LCreal getPhase() const;         // Radians
+   double getFrequency() const;     // Hz
+   double getPhase() const;         // Radians
 
    bool setSignalType(const Signal);
-   bool setFrequency(const LCreal); // Hz
-   bool setPhase(const LCreal);     // Radians
+   bool setFrequency(const double); // Hz
+   bool setPhase(const double);     // Radians
 
    // IoData's AI channel (AI signal generator only)
    unsigned int getLocation() const;
@@ -69,21 +69,21 @@ public:
    unsigned int getChannel() const;
    bool setChannel(const unsigned int);
 
-   void processInputs(const LCreal dt, const basic::IoDevice* const device, basic::IoData* const inData) override;
-   void processOutputs(const LCreal dt, const basic::IoData* const outData, basic::IoDevice* const device) override;
+   void processInputs(const double dt, const base::IoDevice* const device, base::IoData* const inData) override;
+   void processOutputs(const double dt, const base::IoData* const outData, base::IoDevice* const device) override;
 
    void reset() override;
 
 protected:
    // AnalogOutput interface
-   LCreal calc(const LCreal dt);
+   double calc(const double dt);
 
    // Slot functions
-   virtual bool setSlotLocation(const basic::Number* const msg);
-   virtual bool setSlotChannel(const basic::Number* const msg);
-   virtual bool setSlotSignal(const basic::String* const msg);
-   virtual bool setSlotFrequency(const basic::Frequency* const msg);
-   virtual bool setSlotPhase(const basic::Angle* const msg);
+   virtual bool setSlotLocation(const base::Number* const msg);
+   virtual bool setSlotChannel(const base::Number* const msg);
+   virtual bool setSlotSignal(const base::String* const msg);
+   virtual bool setSlotFrequency(const base::Frequency* const msg);
+   virtual bool setSlotPhase(const base::Angle* const msg);
 
 private:
    void initData();
@@ -92,8 +92,8 @@ private:
    unsigned int channel;   // AO signal gen: Output device channel number
 
    Signal signal;          // Signal type
-   LCreal phase;           // Phase shift (rad)
-   LCreal freq;            // Frequency (rad/sec)
+   double phase;           // Phase shift (rad)
+   double freq;            // Frequency (rad/sec)
    double time;            // Time since last reset
 };
 

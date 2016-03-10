@@ -1,10 +1,10 @@
 
 #include "openeaagles/iodevice/Ai2DiSwitch.h"
 
-#include "openeaagles/basic/IoData.h"
-#include "openeaagles/basic/IoDevice.h"
-#include "openeaagles/basic/IoHandler.h"
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/IoData.h"
+#include "openeaagles/base/IoDevice.h"
+#include "openeaagles/base/IoHandler.h"
+#include "openeaagles/base/Number.h"
 
 namespace oe {
 namespace iodevice {
@@ -25,10 +25,10 @@ END_SLOTTABLE(Ai2DiSwitch)
 
 //  Map slot table to handles
 BEGIN_SLOT_MAP(Ai2DiSwitch)
-    ON_SLOT( 1, setSlotLocation, basic::Number)
-    ON_SLOT( 2, setSlotChannel,  basic::Number)
-    ON_SLOT( 3, setSlotLevel,    basic::Number)
-    ON_SLOT( 4, setSlotInverted, basic::Number)
+    ON_SLOT( 1, setSlotLocation, base::Number)
+    ON_SLOT( 2, setSlotChannel,  base::Number)
+    ON_SLOT( 3, setSlotLevel,    base::Number)
+    ON_SLOT( 4, setSlotInverted, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -89,7 +89,7 @@ unsigned int Ai2DiSwitch::getChannel() const
    return channel;
 }
 
-LCreal Ai2DiSwitch::getLevel() const
+double Ai2DiSwitch::getLevel() const
 {
    return level;
 }
@@ -115,7 +115,7 @@ bool Ai2DiSwitch::setChannel(const unsigned int v)
    return true;
 }
 
-bool Ai2DiSwitch::setLevel(const LCreal v)
+bool Ai2DiSwitch::setLevel(const double v)
 {
    level = v;
    return true;
@@ -130,10 +130,10 @@ bool Ai2DiSwitch::setInvertFlag(const bool f)
 //------------------------------------------------------------------------------
 // process inputs
 //------------------------------------------------------------------------------
-void Ai2DiSwitch::processInputs(const LCreal, const basic::IoDevice* const device, basic::IoData* const inData)
+void Ai2DiSwitch::processInputs(const double, const base::IoDevice* const device, base::IoData* const inData)
 {
    // Default is our initial value
-   LCreal vin(0.0);
+   double vin(0.0);
 
    // Get data from the AI device
    if (device != nullptr && devEnb) {
@@ -151,7 +151,7 @@ void Ai2DiSwitch::processInputs(const LCreal, const basic::IoDevice* const devic
 //------------------------------------------------------------------------------
 // process outputs
 //------------------------------------------------------------------------------
-void Ai2DiSwitch::processOutputs(const LCreal, const basic::IoData* const, basic::IoDevice* const)
+void Ai2DiSwitch::processOutputs(const double, const base::IoData* const, base::IoDevice* const)
 {
 }
 
@@ -160,7 +160,7 @@ void Ai2DiSwitch::processOutputs(const LCreal, const basic::IoData* const, basic
 //------------------------------------------------------------------------------
 
 // location: Input array index (location)
-bool Ai2DiSwitch::setSlotLocation(const basic::Number* const msg)
+bool Ai2DiSwitch::setSlotLocation(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -173,7 +173,7 @@ bool Ai2DiSwitch::setSlotLocation(const basic::Number* const msg)
 }
 
 // channel: Device's AI channel number
-bool Ai2DiSwitch::setSlotChannel(const basic::Number* const msg)
+bool Ai2DiSwitch::setSlotChannel(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -186,7 +186,7 @@ bool Ai2DiSwitch::setSlotChannel(const basic::Number* const msg)
 }
 
 // level: Level to switch DI (default: 0)
-bool Ai2DiSwitch::setSlotLevel(const basic::Number* const msg)
+bool Ai2DiSwitch::setSlotLevel(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -196,7 +196,7 @@ bool Ai2DiSwitch::setSlotLevel(const basic::Number* const msg)
 }
 
 // invert: Inverted bit flag (default: false)
-bool Ai2DiSwitch::setSlotInverted(const basic::Number* const msg)
+bool Ai2DiSwitch::setSlotInverted(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -209,7 +209,7 @@ bool Ai2DiSwitch::setSlotInverted(const basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component
 //------------------------------------------------------------------------------
-basic::Object* Ai2DiSwitch::getSlotByIndex(const int si)
+base::Object* Ai2DiSwitch::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

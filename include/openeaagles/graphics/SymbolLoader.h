@@ -136,28 +136,28 @@ public:
    virtual bool updateSymbolPositionXYScreen(const int idx, const double xPos, const double yPos);
 
    // Updates the symbols true heading
-   virtual bool updateSymbolHeading(const int idx, const LCreal hdg);
+   virtual bool updateSymbolHeading(const int idx, const double hdg);
 
    // Updates the symbol's value
-   virtual bool updateSymbolValue(const int idx, basic::Object* const value);
+   virtual bool updateSymbolValue(const int idx, base::Object* const value);
 
    // Updates the text of the named AsciiText type subcomponent
    virtual bool updateSymbolText(const int idx, const char* name, const char newString[]);
 
    // Updates the value of the named NumericReadout type subcomponent
-   virtual bool updateSymbolText(const int idx, const char* name, const LCreal newVal);
+   virtual bool updateSymbolText(const int idx, const char* name, const double newVal);
 
    // Sets the visibility flag for a symbol's subcomponent
    virtual bool setSymbolVisible(const int idx, const char* name, bool visibility);
 
    // Sets the flash rate (hz) for a symbol's subcomponent
-   virtual bool setSymbolFlashRate(const int idx, const char* name, const LCreal flashRate);
+   virtual bool setSymbolFlashRate(const int idx, const char* name, const double flashRate);
 
    // Change the color of a symbol (if 'name' == 0) or its subcomponent
-   virtual bool setSymbolColor(const int idx, const char* name, const basic::Color* cobj);
+   virtual bool setSymbolColor(const int idx, const char* name, const base::Color* cobj);
 
    // Change the color of a symbol (if 'name' == 0) or its subcomponent
-   virtual bool setSymbolColor(const int idx, const char* name, const basic::Identifier* cobj);
+   virtual bool setSymbolColor(const int idx, const char* name, const base::Identifier* cobj);
 
    // Update the symbol's "select name", which is used for pick() operations
    virtual bool updateSymbolSelectName(const int idx, const int newSN);
@@ -169,21 +169,21 @@ public:
    void draw() override;
    void drawFunc() override;
 
-   void updateTC(const LCreal dt = 0.0) override;
+   void updateTC(const double dt = 0.0) override;
 
 protected:
-   bool setSlotTemplates(basic::PairStream* myTemps);
-   bool setSlotShowInRangeOnly(const basic::Number* const x);
-   bool setSlotInterconnect(const basic::Number* const x);
+   bool setSlotTemplates(base::PairStream* myTemps);
+   bool setSlotShowInRangeOnly(const base::Number* const x);
+   bool setSlotInterconnect(const base::Number* const x);
 
    virtual SlSymbol* symbolFactory();  // Creates symbols objects
 
-   int getSymbols(basic::safe_ptr<SlSymbol>* const newSyms, const int max);
+   int getSymbols(base::safe_ptr<SlSymbol>* const newSyms, const int max);
 
 private:
    void initData();
 
-   basic::PairStream* templates;    // holds our pairstream of templates
+   base::PairStream* templates;    // holds our pairstream of templates
    SlSymbol* symbols[MAX_SYMBOLS];  // holds our array of symbols
    bool showInRangeOnly;            // only show the symbols within our range, else draw all the symbols if false
    bool interconnect;               // Connect our symbols with a line?
@@ -194,8 +194,8 @@ private:
 // Class: SlSymbol
 // Description: General symbol used by SymbolLoader
 //------------------------------------------------------------------------------
-class SlSymbol : public basic::Object {
-    DECLARE_SUBCLASS(SlSymbol,basic::Object)
+class SlSymbol : public base::Object {
+    DECLARE_SUBCLASS(SlSymbol,base::Object)
 
 public:
     // Max size of the symbol's ID
@@ -207,8 +207,8 @@ public:
    bool isVisible() const;                   // Visibility
    int getType() const;                      // Type code
    const char* getId() const;                // ID sting
-   basic::Pair* getSymbolPair() const;       // Graphical component
-   basic::Object* getValue() const;          // Returns user defined data item
+   base::Pair* getSymbolPair() const;       // Graphical component
+   base::Object* getValue() const;          // Returns user defined data item
 
    bool isPositionLL() const;                // Returns true if using at lat/lon position
    bool isPositionAC() const;                // Returns true if using at aircraft nose/wing position
@@ -222,9 +222,9 @@ public:
    double getScreenXPos() const;             // X screen position (inches)
    double getScreenYPos() const;             // Y screen position (inches)
 
-   LCreal getHeadingDeg() const;             // Returns heading (degs)
-   LCreal getHeadingRad() const;             // heading (rads)
-   basic::Degrees* getHdgAngleObj() const;   // basic::Angle object that holds the heading value
+   double getHeadingDeg() const;             // Returns heading (degs)
+   double getHeadingRad() const;             // heading (rads)
+   base::Degrees* getHdgAngleObj() const;   // base::Angle object that holds the heading value
    Graphic* getHdgGraphics() const;          // Graphic object named 'hdg' to handle heading rotation
 
    void setVisible(const bool x);            // set our visibility
@@ -233,16 +233,16 @@ public:
    void setScreenFlag(const bool flg);       // set the manual screen position override flag
    void setType(const int t);                // Sets the user defined type (must match templates)
    void setId(const char* const v);          // Sets the ID string
-   void setValue(basic::Object* const v);    // Sets the user defined value, which is set to the graphical component
+   void setValue(base::Object* const v);    // Sets the user defined value, which is set to the graphical component
 
    void setXPosition(const double v);        // Sets the X position ( latitude or NM north/south )
    void setYPosition(const double v);        // Sets the Y position { longitude or NM east/west )
    void setXScreenPos(const double v);       // Sets the X screen pos (inches)
    void setYScreenPos(const double v);       // Sets the Y screen pos (inches) (does not include displacement)
 
-   void setSymbolPair(basic::Pair* const p);     // Sets the graphical component
-   void setHeadingDeg(const LCreal h);           // Sets the (optional) heading (degrees)
-   void setHdgAngleObj(basic::Degrees* const p); // Sets the basic::Angle object that holds the heading value
+   void setSymbolPair(base::Pair* const p);     // Sets the graphical component
+   void setHeadingDeg(const double h);           // Sets the (optional) heading (degrees)
+   void setHdgAngleObj(base::Degrees* const p); // Sets the base::Angle object that holds the heading value
    void setHdgGraphics(Graphic* const p);        // Sets the graphic object named 'hdg' to handle heading rotation
 
 private:
@@ -255,8 +255,8 @@ private:
 
    int type;               // numeric type (for looking up in slottable)
    char id[MAX_ID_SIZE+1]; // ID (or name) sent to the '
-   basic::Object* value;   // optional value (sent to the symbol as an UPDATE_VALUE event)
-   basic::Pair* pntr;      // The graphical component
+   base::Object* value;   // optional value (sent to the symbol as an UPDATE_VALUE event)
+   base::Pair* pntr;      // The graphical component
 
    double xPos;            // X position ( latitude or NM north/south )
    double yPos;            // Y position { longitude or NM east/west )
@@ -264,10 +264,10 @@ private:
    double xScreenPos;      // x position: Screen
    double yScreenPos;      // y position: Screen
 
-   LCreal hdg;             // symbol heading (degrees)
+   double hdg;             // symbol heading (degrees)
    bool hdgValid;          // Heading valid flag
    Graphic* phdg;          // Object named 'hdg' to handle heading rotation
-   basic::Degrees* hdgAng; // Value sent to the heading 'hdg' object
+   base::Degrees* hdgAng; // Value sent to the heading 'hdg' object
 };
 
 // -------------------------------------------------------------------------------
@@ -306,8 +306,8 @@ inline bool SlSymbol::isPositionScreen() const           { return scrnFlg; }
 
 inline int SlSymbol::getType() const                     { return type; }
 inline const char* SlSymbol::getId() const               { return id; }
-inline basic::Object* SlSymbol::getValue() const         { return value; }
-inline basic::Pair* SlSymbol::getSymbolPair() const      { return pntr; }
+inline base::Object* SlSymbol::getValue() const         { return value; }
+inline base::Pair* SlSymbol::getSymbolPair() const      { return pntr; }
 
 inline double SlSymbol::getXPosition() const             { return xPos; }
 inline double SlSymbol::getYPosition() const             { return yPos; }
@@ -315,9 +315,9 @@ inline double SlSymbol::getYPosition() const             { return yPos; }
 inline double SlSymbol::getScreenXPos() const            { return xScreenPos; }
 inline double SlSymbol::getScreenYPos() const            { return yScreenPos; }
 
-inline LCreal SlSymbol::getHeadingDeg() const            { return hdg; }
-inline LCreal SlSymbol::getHeadingRad() const            { return static_cast<LCreal>(hdg * basic::Angle::D2RCC); }
-inline basic::Degrees* SlSymbol::getHdgAngleObj() const  { return hdgAng; }
+inline double SlSymbol::getHeadingDeg() const            { return hdg; }
+inline double SlSymbol::getHeadingRad() const            { return static_cast<double>(hdg * base::Angle::D2RCC); }
+inline base::Degrees* SlSymbol::getHdgAngleObj() const  { return hdgAng; }
 inline Graphic* SlSymbol::getHdgGraphics() const         { return phdg; }
 
 inline void SlSymbol::setXPosition(const double v)       { xPos = v; }

@@ -30,16 +30,16 @@
 #ifndef __oe_maps_rpf_TextureTable_H__
 #define __oe_maps_rpf_TextureTable_H__
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 namespace oe {
 namespace graphics { class Texture; }
 namespace maps {
 namespace rpf {
 
-class TextureTable : public basic::Object
+class TextureTable : public base::Object
 {
-    DECLARE_SUBCLASS(TextureTable, basic::Object)
+    DECLARE_SUBCLASS(TextureTable, base::Object)
 
 public:
     TextureTable();

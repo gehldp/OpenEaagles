@@ -5,7 +5,7 @@
 #define __oe_simulation_AngleOnlyTrackManager_H__
 
 #include "openeaagles/simulation/TrackManager.h"
-#include "openeaagles/basic/safe_queue.h"
+#include "openeaagles/base/safe_queue.h"
 
 namespace oe {
 namespace simulation {
@@ -29,37 +29,37 @@ class AngleOnlyTrackManager : public TrackManager
 public:
    AngleOnlyTrackManager();
 
-   virtual void newReport(IrQueryMsg* q, LCreal snDbl);
+   virtual void newReport(IrQueryMsg* q, double snDbl);
 
    void clearTracksAndQueues() override;
    bool addTrack(Track* const t) override;
 
 protected:
-   virtual IrQueryMsg* getQuery(LCreal* const sn);                     // Get the next 'new' report from the queue
+   virtual IrQueryMsg* getQuery(double* const sn);                     // Get the next 'new' report from the queue
 
-   virtual bool setSlotAzimuthBin(const basic::Number* const num);     // Sets azimuth bin
-   virtual bool setSlotElevationBin(const basic::Number* const num);   // Sets elevation bin
+   virtual bool setSlotAzimuthBin(const base::Number* const num);     // Sets azimuth bin
+   virtual bool setSlotElevationBin(const base::Number* const num);   // Sets elevation bin
 
-   bool setSlotAlpha(const basic::Number* const num) override;
-   bool setSlotBeta(const basic::Number* const num) override;
+   bool setSlotAlpha(const base::Number* const num) override;
+   bool setSlotBeta(const base::Number* const num) override;
 
    bool shutdownNotification() override;
 
    // Prediction parameters
-   LCreal              azimuthBin;         // Azimuth Bin
-   LCreal              elevationBin;       // Elevation Bin
-   LCreal              oneMinusAlpha;      // 1 - Alpha parameter
-   LCreal              oneMinusBeta;       // 1 - Beta parameter
+   double              azimuthBin;         // Azimuth Bin
+   double              elevationBin;       // Elevation Bin
+   double              oneMinusAlpha;      // 1 - Alpha parameter
+   double              oneMinusBeta;       // 1 - Beta parameter
 
 private:
-   basic::safe_queue<IrQueryMsg*> queryQueue;  // Emission input queue (used with the
+   base::safe_queue<IrQueryMsg*> queryQueue;  // Emission input queue (used with the
                                                //   TrackManager::queueLock semaphore)
 
 };
 
 //==============================================================================
 // Class: AirAngleOnlyTrkMgr
-// Base class: basic::Object -> basic::Component -> System -> TrackManager -> AirAngleOnlyTrkMgr
+// Base class: base::Object -> base::Component -> System -> TrackManager -> AirAngleOnlyTrkMgr
 //
 // Description: Track Manager for A/A modes (e.g., TWS, ACM, SST)
 // Factory name: AirAngleOnlyTrkMgr
@@ -72,13 +72,13 @@ public:
     AirAngleOnlyTrkMgr();
 
 protected:
-    void processTrackList(const LCreal dt) override;
+    void processTrackList(const double dt) override;
 };
 
 
 //==============================================================================
 // Class: AirAngleOnlyTrkMgrPT
-// Base class: basic::Object -> basic::Component -> System -> TrackManager -> AngleOnlyTrackManager -> AirAngleOnlyTrkMgrPT
+// Base class: base::Object -> base::Component -> System -> TrackManager -> AngleOnlyTrackManager -> AirAngleOnlyTrkMgrPT
 //
 // Description: AirAngleOnlyTrkMgr that uses perceived-truth az, el,
 // and (depending on usePerceivedPosVel) pos, vel from IR reports;
@@ -99,9 +99,9 @@ public:
     AirAngleOnlyTrkMgrPT();
 
 protected:
-   void processTrackList(const LCreal dt) override;
+   void processTrackList(const double dt) override;
 
-   virtual void updateTrackAges(const LCreal dt);
+   virtual void updateTrackAges(const double dt);
    virtual void removeAgedTracks();
 private:
    bool usePerceivedPosVel;

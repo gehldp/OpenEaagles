@@ -2,16 +2,16 @@
 #ifndef __oe_graphics_Graphic_H__
 #define __oe_graphics_Graphic_H__
 
-#include "openeaagles/basic/Component.h"
-#include "openeaagles/basic/osg/Vec2"
-#include "openeaagles/basic/osg/Vec3"
-#include "openeaagles/basic/osg/Vec4"
-#include "openeaagles/basic/osg/Matrix"
+#include "openeaagles/base/Component.h"
+#include "openeaagles/base/osg/Vec2"
+#include "openeaagles/base/osg/Vec3"
+#include "openeaagles/base/osg/Vec4"
+#include "openeaagles/base/osg/Matrix"
 #include <GL/gl.h>
 
 namespace oe {
 
-   namespace basic {
+   namespace base {
       class Color;
       class Identifier;
       class Transform;
@@ -123,16 +123,16 @@ class Material;
 //  osg::Matrix& getMatrix()
 //    Returns the transformation matrix.
 //
-//      lcRotate(LCreal a)
-//      lcRotate(LCreal x, LCreal y, LCreal z, LCreal a)
+//      lcRotate(double a)
+//      lcRotate(double x, double y, double z, double a)
 //          Rotate by 'a' radians about z, or about the x,y,z vector.
 //
-//      lcTranslate(LCreal x, LCreal y)
-//      lcTranslate(LCreal x, LCreal y, LCreal z)
+//      lcTranslate(double x, double y)
+//      lcTranslate(double x, double y, double z)
 //          Translate x, y, and z.
 //
-//      lcScale(LCreal s)
-//      lcScale(LCreal sx, LCreal sy)
+//      lcScale(double s)
+//      lcScale(double sx, double sy)
 //          Scale by s or by sx, sy.
 //
 //      lcSaveMatrix()
@@ -143,13 +143,13 @@ class Material;
 //      int isFlashing()
 //          Returns true if this object is flashing
 //
-//      LCreal getFlashRate()
-//      LCreal setFlashRate(LCreal r)
+//      double getFlashRate()
+//      double setFlashRate(double r)
 //      setFlashRate(Object* obj)
 //          Returns/Sets the object's flash rate.
 //
-//      LCreal flashTimer();
-//      LCreal flashTimer(const LCreal dt)
+//      double flashTimer();
+//      double flashTimer(const double dt)
 //          Static functions that Return/Update the flash timer.
 //
 //      int flashOn()
@@ -187,28 +187,28 @@ class Material;
 //    haveScissorBoxHave()
 //      Returns true if the scissor box has a height and width both greater than 0
 //
-//    LCreal getScissorX()
+//    double getScissorX()
 //      Returns scissor x value.
 //
-//    LCreal getScissorWidth()
+//    double getScissorWidth()
 //      Returns scissor width.
 //
-//    LCreal getScissorY()
+//    double getScissorY()
 //      Returns scissor y value.
 //
-//    LCreal getScissorHeight()
+//    double getScissorHeight()
 //      Returns scissor height.
 //
-//    setScissorx(LCreal newX)
+//    setScissorx(double newX)
 //      Sets the new scissor x value and returns true.
 //
-//    setScissorWidth(LCreal newWidth)
+//    setScissorWidth(double newWidth)
 //      Sets the scissor width to newWidth and returns true.
 //
-//    setScissorx(LCreal newY)
+//    setScissorx(double newY)
 //      Sets the new scissor y value and returns true.
 //
-//    setScissorHeight(LCreal newHeight)
+//    setScissorHeight(double newHeight)
 //      Sets the scissor height to newHeight and returns true.
 //
 ////Select (Pick) functions
@@ -227,9 +227,9 @@ class Material;
 //      lower than this, so there is no confusion in the pick() routine.
 //
 //------------------------------------------------------------------------------
-class Graphic : public basic::Component
+class Graphic : public base::Component
 {
-    DECLARE_SUBCLASS(Graphic, basic::Component)
+    DECLARE_SUBCLASS(Graphic, base::Component)
 
 public:
    Graphic();
@@ -257,28 +257,28 @@ public:
    bool setLineWidth(const GLfloat v);                                  // Sets the line width attribute.
 
    // Color functions
-   basic::Color* getColor()                                  { return color; }
-   const basic::Color* getColor() const                      { return color; }
-   const basic::Identifier* getColorName() const             { return colorName; }
-   virtual bool setColor(const basic::Color* const msg);
-   virtual bool setColor(const basic::Identifier* const msg);
-   virtual bool setColor(const basic::Number* const msg);
+   base::Color* getColor()                                  { return color; }
+   const base::Color* getColor() const                      { return color; }
+   const base::Identifier* getColorName() const             { return colorName; }
+   virtual bool setColor(const base::Color* const msg);
+   virtual bool setColor(const base::Identifier* const msg);
+   virtual bool setColor(const base::Number* const msg);
 
    // material functions
-   const basic::Identifier* getMaterialName() const { return materialName; } // returns a pointer to our material name
+   const base::Identifier* getMaterialName() const { return materialName; } // returns a pointer to our material name
    graphics::Material* getMaterial()                 { return materialObj; }  // returns our material object!
    const graphics::Material* getMaterial() const     { return materialObj; }
-   virtual bool setMaterial(const basic::Identifier* const msg);
+   virtual bool setMaterial(const base::Identifier* const msg);
    virtual bool setMaterial(const graphics::Material* const msg);
 
    // Flash rate functions
    bool flashOn() const;
    bool flashOff() const;
    bool isFlashing() const                          { return fRate > 0.0; }
-   LCreal getFlashRate() const                      { return fRate; }
-   bool setFlashRate(const LCreal r);
-   static LCreal flashTimer();
-   static LCreal flashTimer(const LCreal dt);
+   double getFlashRate() const                      { return fRate; }
+   bool setFlashRate(const double r);
+   static double flashTimer();
+   static double flashTimer(const double dt);
 
    // Display List functions
    GLuint getDisplayList() const                    { return dlist; }
@@ -290,12 +290,12 @@ public:
    // Matrix functions
    bool matrixIsActive()                            { return haveMatrix; }
    const osg::Matrix& getMatrix() const             { return m; }
-   void lcRotate(const LCreal a);
-   void lcRotate(const LCreal x, const LCreal y, const LCreal z, const LCreal a);
-   void lcTranslate(const LCreal, const LCreal);
-   void lcTranslate(const LCreal, const LCreal, const LCreal);
-   void lcScale(const LCreal);
-   void lcScale(const LCreal, const LCreal);
+   void lcRotate(const double a);
+   void lcRotate(const double x, const double y, const double z, const double a);
+   void lcTranslate(const double, const double);
+   void lcTranslate(const double, const double, const double);
+   void lcScale(const double);
+   void lcScale(const double, const double);
 
    void lcSaveMatrix();
    void lcRestoreMatrix();
@@ -313,14 +313,14 @@ public:
 
    // Scissor box functions
    bool haveScissorBoxHave() const                  { return (scissorWidth > 0 && scissorHeight > 0); }
-   LCreal getScissorX() const                       { return scissorX; }
-   LCreal getScissorWidth() const                   { return scissorY; }
-   LCreal getScissorY() const                       { return scissorWidth; }
-   LCreal getScissorHeight() const                  { return scissorHeight; }
-   bool setScissorX(const LCreal newX);
-   bool setScissorWidth(const LCreal newWidth);
-   bool setScissorY(const LCreal newY);
-   bool setScissorHeight(const LCreal newHeight);
+   double getScissorX() const                       { return scissorX; }
+   double getScissorWidth() const                   { return scissorY; }
+   double getScissorY() const                       { return scissorWidth; }
+   double getScissorHeight() const                  { return scissorHeight; }
+   bool setScissorX(const double newX);
+   bool setScissorWidth(const double newWidth);
+   bool setScissorY(const double newY);
+   bool setScissorHeight(const double newHeight);
 
    // Line stippling functions
    bool isStippling()                               { return stipple; }
@@ -331,7 +331,7 @@ public:
    bool setStipplePattern(const GLushort x);
 
    // Light functions
-   bool setLightPosition(const LCreal x, const LCreal y, const LCreal z = 1, const LCreal w = 0);
+   bool setLightPosition(const double x, const double y, const double z = 1, const double w = 0);
    bool setLightPosition(osg::Vec4& newPos);
    osg::Vec4 getLightPos()                          { return lightPos; }
 
@@ -339,7 +339,7 @@ public:
    // Select (pick) functions
    GLuint getSelectName() const                     { return selName; }
    bool setSelectName(const GLuint v);
-   virtual basic::Pair* findBySelectName(const GLuint name);
+   virtual base::Pair* findBySelectName(const GLuint name);
 
    // Subcomponent graphics
    bool isPostDrawComponents() const                { return postDraw; }
@@ -360,28 +360,28 @@ public:
    static bool clipLine2D(
          osg::Vec2* ep1,      // Line endpoint #1
          osg::Vec2* ep2,      // Line endpoint #2
-         const LCreal minX,   // Clip box min X value
-         const LCreal maxX,   // Clip box max X value
-         const LCreal minY,   // Clip box min Y value
-         const LCreal maxY);  // Clip box max Y value
+         const double minX,   // Clip box min X value
+         const double maxX,   // Clip box max X value
+         const double minY,   // Clip box min Y value
+         const double maxY);  // Clip box max Y value
 
-   // Functions for native LCreal resolutions
-   // Since LCreal is deprecated, we're only defining the double functions
-   static void lcVertex2(const LCreal x, const LCreal y)                 { glVertex2d(x,y); }
-   static void lcVertex3(const LCreal x, const LCreal y, const LCreal z) { glVertex3d(x,y,z); }
-   static void lcNormal3(const LCreal x, const LCreal y, const LCreal z) { glNormal3d(x,y,z); }
-   static void lcColor3(const LCreal r, const LCreal g, const LCreal b)  { glColor3d(r,g,b); }
-   static void lcColor4(const LCreal r, const LCreal g, const LCreal b, const LCreal a)  { glColor4d(r,g,b,a); }
+   // Functions for native double resolutions
+   // Since double is deprecated, we're only defining the double functions
+   static void lcVertex2(const double x, const double y)                 { glVertex2d(x,y); }
+   static void lcVertex3(const double x, const double y, const double z) { glVertex3d(x,y,z); }
+   static void lcNormal3(const double x, const double y, const double z) { glNormal3d(x,y,z); }
+   static void lcColor3(const double r, const double g, const double b)  { glColor3d(r,g,b); }
+   static void lcColor4(const double r, const double g, const double b, const double a)  { glColor4d(r,g,b,a); }
 
-   static void lcVertex2v(const LCreal* v)      { glVertex2dv(v); }
-   static void lcVertex3v(const LCreal* v)      { glVertex3dv(v); }
-   static void lcNormal3v(const LCreal* v)      { glNormal3dv(v); }
-   static void lcColor3v(const LCreal* v)       { glColor3dv(v); }
-   static void lcColor4v(const LCreal* v)       { glColor4dv(v); }
-   static void lcMultMatrix(const LCreal* m)    { glMultMatrixd(m); }
-   static void lcTexCoord2v(const LCreal* v)    { glTexCoord2dv(v); }
-   static void lcTexCoord3v(const LCreal* v)    { glTexCoord3dv(v); }
-   static void lcTexCoord4v(const LCreal* v)    { glTexCoord4dv(v); }
+   static void lcVertex2v(const double* v)      { glVertex2dv(v); }
+   static void lcVertex3v(const double* v)      { glVertex3dv(v); }
+   static void lcNormal3v(const double* v)      { glNormal3dv(v); }
+   static void lcColor3v(const double* v)       { glColor3dv(v); }
+   static void lcColor4v(const double* v)       { glColor4dv(v); }
+   static void lcMultMatrix(const double* m)    { glMultMatrixd(m); }
+   static void lcTexCoord2v(const double* v)    { glTexCoord2dv(v); }
+   static void lcTexCoord3v(const double* v)    { glTexCoord3dv(v); }
+   static void lcTexCoord4v(const double* v)    { glTexCoord4dv(v); }
 
 
    bool event(const int event, Object* const obj = nullptr) override;
@@ -397,39 +397,39 @@ public:
 protected:
 
    // event handlers
-   virtual bool onSetTextureId(const basic::Number* const msg);
-   virtual bool onSetLineWidthEvent(const basic::Number* const msg);
-   virtual bool onSetFlashRateEvent(const basic::Number* const msg);
-   virtual bool onSetVisibilityEvent(const basic::Number* const msg);
+   virtual bool onSetTextureId(const base::Number* const msg);
+   virtual bool onSetLineWidthEvent(const base::Number* const msg);
+   virtual bool onSetFlashRateEvent(const base::Number* const msg);
+   virtual bool onSetVisibilityEvent(const base::Number* const msg);
 
    // set slot functions
-   virtual bool setSlotFlashRate(const basic::Number* const msg);
-   virtual bool setSlotLineWidth(const basic::Number* const msg);
-   virtual bool setSlotSelectName(const basic::Number* const msg);
-   virtual bool setSlotTransformList(basic::PairStream* msg);      // Set the transformation list
-   virtual bool setSlotSingleTransform(basic::Transform* const msg);
-   virtual bool setSlotNoDisplayList(const basic::Number* const msg);
-   virtual bool setSlotSubcomponentsFirst(const basic::Number* const msg);
-   virtual bool setSlotVertices(const basic::PairStream* const msg);
-   virtual bool setSlotNormals(const basic::PairStream* const msg);
-   virtual bool setSlotTexCoord(const basic::PairStream* const msg);
-   virtual bool setSlotMask(const basic::Number* const msg);
-   virtual bool setSlotTextureName(basic::Identifier* msg);
-   virtual bool setSlotScissorX(const basic::Number* const msg);
-   virtual bool setSlotScissorY(const basic::Number* const msg);
-   virtual bool setSlotScissorWidth(const basic::Number* const msg);
-   virtual bool setSlotScissorHeight(const basic::Number* const msg);
-   virtual bool setSlotStippling(const basic::Number* const msg);
-   virtual bool setSlotStippleFactor(const basic::Number* const msg);
-   virtual bool setSlotStipplePattern(const basic::Number* const msg);
-   virtual bool setSlotVisibility(const basic::Number* const msg);
-   virtual bool setSlotTranslateLight(basic::PairStream* const msg);
+   virtual bool setSlotFlashRate(const base::Number* const msg);
+   virtual bool setSlotLineWidth(const base::Number* const msg);
+   virtual bool setSlotSelectName(const base::Number* const msg);
+   virtual bool setSlotTransformList(base::PairStream* msg);      // Set the transformation list
+   virtual bool setSlotSingleTransform(base::Transform* const msg);
+   virtual bool setSlotNoDisplayList(const base::Number* const msg);
+   virtual bool setSlotSubcomponentsFirst(const base::Number* const msg);
+   virtual bool setSlotVertices(const base::PairStream* const msg);
+   virtual bool setSlotNormals(const base::PairStream* const msg);
+   virtual bool setSlotTexCoord(const base::PairStream* const msg);
+   virtual bool setSlotMask(const base::Number* const msg);
+   virtual bool setSlotTextureName(base::Identifier* msg);
+   virtual bool setSlotScissorX(const base::Number* const msg);
+   virtual bool setSlotScissorY(const base::Number* const msg);
+   virtual bool setSlotScissorWidth(const base::Number* const msg);
+   virtual bool setSlotScissorHeight(const base::Number* const msg);
+   virtual bool setSlotStippling(const base::Number* const msg);
+   virtual bool setSlotStippleFactor(const base::Number* const msg);
+   virtual bool setSlotStipplePattern(const base::Number* const msg);
+   virtual bool setSlotVisibility(const base::Number* const msg);
+   virtual bool setSlotTranslateLight(base::PairStream* const msg);
 
    void processComponents(            // Process our subcomponent list (which should be other Graphics)
-        basic::PairStream* const list,        // Source list of components
+        base::PairStream* const list,        // Source list of components
         const std::type_info& filter,         // Type filter
-        basic::Pair* const add = 0,           // Optional pair to add
-        basic::Component* const remove = 0    // Optional subcomponent to remove
+        base::Pair* const add = 0,           // Optional pair to add
+        base::Component* const remove = 0    // Optional subcomponent to remove
    ) override;
 
 private:
@@ -437,7 +437,7 @@ private:
    void          setupMatrix();
    void          setupMaterial();
 
-   basic::PairStream* transforms;  // transformations
+   base::PairStream* transforms;  // transformations
    osg::Matrix   m;                // transformation matrix
    osg::Matrix   m1;               // saved 'm'
    bool          haveMatrix;       // Have a transformation matrix flag
@@ -445,15 +445,15 @@ private:
 
    bool          postDraw;                       // Post draw component (child) graphic
    GLuint        texture;                        // Texture
-   basic::safe_ptr<basic::Identifier> texName;   // Texture name
+   base::safe_ptr<base::Identifier> texName;   // Texture name
 
    bool          visible;          // True if this object is visible
    GLfloat       linewidth;        // Linewidth
    GLuint        selName;          // Select name
-   LCreal        fRate;            // Flash rate
+   double        fRate;            // Flash rate
 
-   basic::Color*  color;           // Color
-   basic::Identifier*  colorName;  // Color name (if from color table)
+   base::Color*  color;           // Color
+   base::Identifier*  colorName;  // Color name (if from color table)
 
    osg::Vec3*       vertices;      // Vertices
    unsigned int     nv;            // Number of vertices
@@ -469,19 +469,19 @@ private:
    GLuint         dlist;            // Possible Display list
    bool           noDisplayList;    // True to disable Display List
 
-   LCreal        scissorX;         // Left edge of the scissor box
-   LCreal        scissorY;         // Bottom edge of the scissor box
-   LCreal        scissorWidth;     // How far to extend the scissor horizontally
-   LCreal        scissorHeight;    // How far to extend the scissor vertically
+   double        scissorX;         // Left edge of the scissor box
+   double        scissorY;         // Bottom edge of the scissor box
+   double        scissorWidth;     // How far to extend the scissor horizontally
+   double        scissorHeight;    // How far to extend the scissor vertically
 
-   static LCreal fTimer;           // Flash control timer
+   static double fTimer;           // Flash control timer
    static GLuint autoSelName;      // our automatic select name counter
 
    bool          stipple;          // line stipple flag (line, lineloop, circle (not filled))
    GLuint        stippleFactor;    // line stipple factor (multiplier for each bit in line stipple pattern)
    GLushort      stipplePattern;   // line stipple pattern (16-bit pattern for which fragments of line to draw)
    bool          mask;             // are we masking?
-   basic::Identifier* materialName;   // our material name
+   base::Identifier* materialName;   // our material name
    graphics::Material* materialObj;   // material object, if we have one.
 
    osg::Vec4 lightPos;             // light position relative to us (default is leave it where it was)
@@ -505,7 +505,7 @@ inline void Graphic::lcRestoreMatrix()
    haveMatrix = haveMatrix1;
 }
 
-inline void Graphic::lcRotate(const LCreal a)
+inline void Graphic::lcRotate(const double a)
 {
    osg::Matrix rr;
    rr.makeRotate(a, 0.0f, 0.0f, 1.0f);
@@ -513,7 +513,7 @@ inline void Graphic::lcRotate(const LCreal a)
    haveMatrix = true;
 }
 
-inline void Graphic::lcRotate(const LCreal x, const LCreal y, const LCreal z, const LCreal a)
+inline void Graphic::lcRotate(const double x, const double y, const double z, const double a)
 {
    osg::Matrix rr;
    rr.makeRotate(a, x, y, z);
@@ -521,7 +521,7 @@ inline void Graphic::lcRotate(const LCreal x, const LCreal y, const LCreal z, co
    haveMatrix = true;
 }
 
-inline void Graphic::lcScale(const LCreal s)
+inline void Graphic::lcScale(const double s)
 {
    osg::Matrix ss;
    ss.makeScale(s,s,s);
@@ -529,7 +529,7 @@ inline void Graphic::lcScale(const LCreal s)
    haveMatrix = true;
 }
 
-inline void Graphic::lcScale(const LCreal sx, const LCreal sy)
+inline void Graphic::lcScale(const double sx, const double sy)
 {
    osg::Matrix ss;
    ss.makeScale(sx,sy,1.0f);
@@ -537,7 +537,7 @@ inline void Graphic::lcScale(const LCreal sx, const LCreal sy)
    haveMatrix = true;
 }
 
-inline void Graphic::lcTranslate(const LCreal x, const LCreal y)
+inline void Graphic::lcTranslate(const double x, const double y)
 {
    osg::Matrix tt;
    tt.makeTranslate(x,y,0.0f);
@@ -545,7 +545,7 @@ inline void Graphic::lcTranslate(const LCreal x, const LCreal y)
    haveMatrix = true;
 }
 
-inline void Graphic::lcTranslate(const LCreal x, const LCreal y, const LCreal z)
+inline void Graphic::lcTranslate(const double x, const double y, const double z)
 {
    osg::Matrix tt;
    tt.makeTranslate(x,y,z);

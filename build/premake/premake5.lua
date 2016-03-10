@@ -28,6 +28,20 @@ OEIncPath         = "../../include"
 OE3rdPartyIncPath = OE_3RD_PARTY_ROOT.."/include"
 
 --
+-- directory location for HLA include and library paths
+--
+--HLA_ROOT = "../../../portico-2.0.1"
+--HLAIncPath = HLA_ROOT.."/include/hla13"
+HLA_ROOT = "../../../OpenRTI-0.7.1"
+HLAIncPath = HLA_ROOT.."/include/RTI13"
+if (_ACTION == "vs2010") then
+  HLALibPath = HLA_ROOT.."/lib/vc10"
+end
+if (_ACTION == "vs2012") then
+  HLALibPath = HLA_ROOT.."/lib/vc11"
+end
+
+--
 -- determine target directories for project/solution files and 
 -- compiled libraries
 --
@@ -102,20 +116,20 @@ solution "oe"
    -- libraries
    --
 
-   -- basic library
-   project "basic"
+   -- base library
+   project "base"
       files {
-         "../../include/openeaagles/basic/**.h",
-         "../../include/openeaagles/basic/**.inl",
-         "../../include/openeaagles/basic/**.epp",
-         "../../include/openeaagles/basic/osg/*",
-         "../../src/basic/**.cpp"
+         "../../include/openeaagles/base/**.h",
+         "../../include/openeaagles/base/**.inl",
+         "../../include/openeaagles/base/**.epp",
+         "../../include/openeaagles/base/osg/*",
+         "../../src/base/**.cpp"
       }
       excludes {
-         "../../src/basic/osg/Matrix_implementation.cpp",
-         "../../src/basic/linux/**.*"
+         "../../src/base/osg/Matrix_implementation.cpp",
+         "../../src/base/linux/**.*"
       }
-      targetname "basic"
+      targetname "base"
 
    -- OpenGL-based graphics library
    project "graphics"
@@ -146,11 +160,21 @@ solution "oe"
    -- IEEE DIS interface library
    project "dis"
       files {
-         "../../include/openeaagles/dis/**.h",
-         "../../src/dis/**.cpp"
+         "../../include/openeaagles/networks/dis/**.h",
+         "../../src/networks/dis/**.cpp"
       }
       targetname "dis"
 
+   -- IEEE HLA interface library
+   project "hla"
+      files {
+         "../../include/openeaagles/networks/hla/**.h",
+         "../../src/networks/hla/**.cpp"
+      }
+      includedirs { HLAIncPath }
+      defines { "RTI_USES_STD_FSTREAM" }
+      targetname "hla"
+	  
    -- graphical instruments library
    project "instruments"
       files {

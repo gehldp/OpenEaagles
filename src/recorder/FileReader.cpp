@@ -2,7 +2,9 @@
 #include "openeaagles/recorder/FileReader.h"
 #include "openeaagles/recorder/protobuf/DataRecord.pb.h"
 #include "openeaagles/recorder/DataRecordHandle.h"
-#include "openeaagles/basic/String.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/util/string_utils.h"
+
 #include <fstream>
 #include <cstdlib>
 
@@ -28,8 +30,8 @@ END_SLOTTABLE(FileReader)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(FileReader)
-    ON_SLOT( 1, setFilename, basic::String)
-    ON_SLOT( 2, setPathName, basic::String)
+    ON_SLOT( 1, setFilename, base::String)
+    ON_SLOT( 2, setPathName, base::String)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -145,15 +147,15 @@ bool FileReader::openFile()
       // Create the (initial) full file name
       //---
       if (pathname != nullptr && pathname->len() > 0) {
-         lcStrcat(fullname, nameLength ,*pathname);
-         lcStrcat(fullname, nameLength, "/");
+         base::lcStrcat(fullname, nameLength ,*pathname);
+         base::lcStrcat(fullname, nameLength, "/");
       }
-      lcStrcat(fullname,nameLength,*filename);
+      base::lcStrcat(fullname,nameLength,*filename);
 
       //---
       // Make sure that it exists
       //---
-      bool validName = doesFileExist(fullname);
+      bool validName = base::doesFileExist(fullname);
 
       //---
       // When we have a valid file name ...
@@ -296,18 +298,18 @@ const DataRecordHandle* FileReader::readRecordImp()
 //------------------------------------------------------------------------------
 // Set functions
 //------------------------------------------------------------------------------
-bool FileReader::setFilename(const basic::String* const msg)
+bool FileReader::setFilename(const base::String* const msg)
 {
    if (filename != nullptr) { filename->unref(); filename = nullptr; }
-   if (msg != nullptr) filename = new basic::String(*msg);
+   if (msg != nullptr) filename = new base::String(*msg);
 
    return true;
 }
 
-bool FileReader::setPathName(const basic::String* const msg)
+bool FileReader::setPathName(const base::String* const msg)
 {
    if (pathname != nullptr) { pathname->unref(); pathname = nullptr; }
-   if (msg != nullptr) pathname = new basic::String(*msg);
+   if (msg != nullptr) pathname = new base::String(*msg);
 
    return true;
 }
@@ -315,7 +317,7 @@ bool FileReader::setPathName(const basic::String* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component
 //------------------------------------------------------------------------------
-basic::Object* FileReader::getSlotByIndex(const int si)
+base::Object* FileReader::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }

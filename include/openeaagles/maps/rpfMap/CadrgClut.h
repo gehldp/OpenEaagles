@@ -13,7 +13,7 @@
 #ifndef __oe_maps_rpf_CadrgClut_H__
 #define __oe_maps_rpf_CadrgClut_H__
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 namespace oe {
 namespace maps {
@@ -21,9 +21,9 @@ namespace rpf {
 
 class CadrgFrameEntry;
 
-class CadrgClut: public basic::Object
+class CadrgClut: public base::Object
 {
-    DECLARE_SUBCLASS(CadrgClut, basic::Object)
+    DECLARE_SUBCLASS(CadrgClut, base::Object)
 
 public:
     CadrgClut();

@@ -3,8 +3,8 @@
 #include "openeaagles/recorder/DataRecordHandle.h"
 #include "openeaagles/recorder/protobuf/DataRecord.pb.h"
 
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
 
 namespace oe {
 namespace recorder {
@@ -39,9 +39,9 @@ void OutputHandler::copyData(const OutputHandler& org, const bool cc)
    if (cc) initData();
 
    // Don't copy the queue
-   lcLock(semaphore);
+   base::lcLock(semaphore);
    queue.clear();
-   lcUnlock(semaphore);
+   base::lcUnlock(semaphore);
 }
 
 //------------------------------------------------------------------------------
@@ -50,9 +50,9 @@ void OutputHandler::copyData(const OutputHandler& org, const bool cc)
 void OutputHandler::deleteData()
 {
    // clear the queue
-   lcLock(semaphore);
+   base::lcLock(semaphore);
    queue.clear();
-   lcUnlock(semaphore);
+   base::lcUnlock(semaphore);
 }
 
 
@@ -62,10 +62,10 @@ void OutputHandler::deleteData()
 bool OutputHandler::shutdownNotification()
 {
    // Pass the shutdown notification to our subcomponent recorders
-   basic::PairStream* subcomponents = getComponents();
+   base::PairStream* subcomponents = getComponents();
    if (subcomponents != nullptr) {
-      for (basic::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
-         basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
+      for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
+         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
          OutputHandler* sc = static_cast<OutputHandler*>(pair->object());
          sc->event(SHUTDOWN_EVENT);
       }
@@ -91,11 +91,11 @@ void OutputHandler::processRecord(const DataRecordHandle* const dataRecord)
 
       // Next, pass the data record to our subcomponent OutputHandlers
       // for further processing
-      basic::PairStream* subcomponents = getComponents();
+      base::PairStream* subcomponents = getComponents();
       if (subcomponents != nullptr) {
-         for (basic::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
+         for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
 
-            basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
+            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
             OutputHandler* sc = static_cast<OutputHandler*>(pair->object());
 
             sc->processRecord(dataRecord);
@@ -114,10 +114,10 @@ void OutputHandler::processRecord(const DataRecordHandle* const dataRecord)
 void OutputHandler::addToQueue(const DataRecordHandle* const dataRecord)
 {
    if (dataRecord != nullptr) {
-      lcLock( semaphore );
+      base::lcLock( semaphore );
       // const cast away to put into the queue
       queue.put( const_cast<DataRecordHandle*>(static_cast<const DataRecordHandle*>(dataRecord)) );
-      lcUnlock( semaphore );
+      base::lcUnlock( semaphore );
    }
 }
 
@@ -128,9 +128,9 @@ void OutputHandler::addToQueue(const DataRecordHandle* const dataRecord)
 void OutputHandler::processQueue()
 {
    // Get the first record from the queue
-   lcLock( semaphore );
+   base::lcLock( semaphore );
    const DataRecordHandle* dataRecord = static_cast<const DataRecordHandle*>(queue.get());
-   lcUnlock( semaphore );
+   base::lcUnlock( semaphore );
 
    // While we have records ...
    while (dataRecord != nullptr) {
@@ -139,9 +139,9 @@ void OutputHandler::processQueue()
       dataRecord->unref();
 
       // and get the next one from the queue
-      lcLock( semaphore );
+      base::lcLock( semaphore );
       dataRecord = static_cast<const DataRecordHandle*>(queue.get());
-      lcUnlock( semaphore );
+      base::lcUnlock( semaphore );
    }
 }
 
@@ -168,10 +168,10 @@ bool OutputHandler::isDataTypeEnabled(const DataRecordHandle* const handle) cons
 //  make sure our subcomponents are all of type OutputHandler (or derived)
 //------------------------------------------------------------------------------
 void OutputHandler::processComponents(
-      basic::PairStream* const list,
+      base::PairStream* const list,
       const std::type_info&,
-      basic::Pair* const add,
-      basic::Component* const remove
+      base::Pair* const add,
+      base::Component* const remove
    )
 {
    BaseClass::processComponents(list,typeid(OutputHandler),add,remove);

@@ -1,12 +1,13 @@
 
+#include "openeaagles/terrain/ded/DedFile.h"
+#include "openeaagles/base/NetHandler.h"   // for byte-swapping only
+#include "openeaagles/base/util/string_utils.h"
+
 #include <fstream>
 #include <string>
 #include <stdlib.h>
 #include <iomanip>
 #include <cstring>
-
-#include "openeaagles/terrain/ded/DedFile.h"
-#include "openeaagles/basic/NetHandler.h"   // for byte-swapping only
 
 namespace oe {
 namespace terrain {
@@ -113,7 +114,7 @@ static const double DEG_TO_RAD   = 0.017453292;
 static const char* const SS_STDID = "SSYS";
 static const char* const PARTNO  = "DMA1";
 static const char* const REVNO   = "V1.0";
-static const LCreal NUM_SECS_PER_DEG_10 = 36000.0;    // # seconds in a degree * 10.0
+static const double NUM_SECS_PER_DEG_10 = 36000.0;    // # seconds in a degree * 10.0
 
 //------------------------------------------------------------------------------
 // Constructor
@@ -248,14 +249,14 @@ bool DedFile::getFileHeaders( std::istream& in )
       // Byte-swap
       //{
       //   long lTemp = 0;
-      //   basic::NetHandler::fromNetOrder(&lTemp, stdhdr->len);
+      //   base::NetHandler::fromNetOrder(&lTemp, stdhdr->len);
       //   stdhdr->len = lTemp;
       //}
 
       // Check ID of input file
       if ( std::strncmp(stdhdr->id,SS_STDID,4) != 0 ) {
          char id[5];
-         lcStrncpy(id,5,stdhdr->id,4);
+         base::lcStrncpy(id,5,stdhdr->id,4);
          id[4] = '\0';
          if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "DedFile::getFileHeaders: invalid id:";
@@ -269,7 +270,7 @@ bool DedFile::getFileHeaders( std::istream& in )
       // Check Part# of input file
       if ( std::strncmp(stdhdr->part,PARTNO,8) != 0 ) {
          char part[10];
-         lcStrncpy(part,10,stdhdr->part,8);
+         base::lcStrncpy(part,10,stdhdr->part,8);
          part[8] = '\0';
          if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "DedFile::getFileHeaders: invalid part number:";
@@ -282,7 +283,7 @@ bool DedFile::getFileHeaders( std::istream& in )
 
       if ( std::strncmp(stdhdr->rev,REVNO,8) != 0 ) {    // Check Rev of input file
          char rev[10];
-         lcStrncpy(rev,10,stdhdr->rev,8);
+         base::lcStrncpy(rev,10,stdhdr->rev,8);
          rev[8] = '\0';
          if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "DedFile::getFileHeaders: invalid revision number:";
@@ -309,11 +310,11 @@ bool DedFile::getFileHeaders( std::istream& in )
                // Byte-swap
                uint32_t lTemp = 0;
                int16_t sTemp = 0;
-               basic::NetHandler::fromNetOrder(&lTemp, fstat->ncell);
+               base::NetHandler::fromNetOrder(&lTemp, fstat->ncell);
                fstat->ncell = lTemp;
-               basic::NetHandler::fromNetOrder(&sTemp, fstat->maxz);
+               base::NetHandler::fromNetOrder(&sTemp, fstat->maxz);
                fstat->maxz = sTemp;
-               basic::NetHandler::fromNetOrder(&sTemp, fstat->minz);
+               base::NetHandler::fromNetOrder(&sTemp, fstat->minz);
                fstat->minz = sTemp;
             }
 
@@ -346,26 +347,26 @@ bool DedFile::getFileHeaders( std::istream& in )
                // Byte-swap
                if (ok) {
                   float fTemp = 0.0;
-                  basic::NetHandler::fromNetOrder(&fTemp, cells[i]->latstart);
+                  base::NetHandler::fromNetOrder(&fTemp, cells[i]->latstart);
                   cells[i]->latstart = fTemp;
-                  basic::NetHandler::fromNetOrder(&fTemp, cells[i]->latend);
+                  base::NetHandler::fromNetOrder(&fTemp, cells[i]->latend);
                   cells[i]->latend = fTemp;
-                  basic::NetHandler::fromNetOrder(&fTemp, cells[i]->longstart);
+                  base::NetHandler::fromNetOrder(&fTemp, cells[i]->longstart);
                   cells[i]->longstart = fTemp;
-                  basic::NetHandler::fromNetOrder(&fTemp, cells[i]->longend);
+                  base::NetHandler::fromNetOrder(&fTemp, cells[i]->longend);
                   cells[i]->longend = fTemp;
-                  basic::NetHandler::fromNetOrder(&fTemp, cells[i]->deltalat);
+                  base::NetHandler::fromNetOrder(&fTemp, cells[i]->deltalat);
                   cells[i]->deltalat = fTemp;
-                  basic::NetHandler::fromNetOrder(&fTemp, cells[i]->deltalong);
+                  base::NetHandler::fromNetOrder(&fTemp, cells[i]->deltalong);
                   cells[i]->deltalong = fTemp;
-                  basic::NetHandler::fromNetOrder(&fTemp, cells[i]->nptlat);
+                  base::NetHandler::fromNetOrder(&fTemp, cells[i]->nptlat);
                   cells[i]->nptlat = fTemp;
-                  basic::NetHandler::fromNetOrder(&fTemp, cells[i]->nptlong);
+                  base::NetHandler::fromNetOrder(&fTemp, cells[i]->nptlong);
                   cells[i]->nptlong = fTemp;
-                  basic::NetHandler::fromNetOrder(&fTemp, cells[i]->deltax);
+                  base::NetHandler::fromNetOrder(&fTemp, cells[i]->deltax);
                   cells[i]->deltax = fTemp;
 
-                  basic::NetHandler::fromNetOrder(&fTemp, cells[i]->deltay);
+                  base::NetHandler::fromNetOrder(&fTemp, cells[i]->deltay);
                   cells[i]->deltay = fTemp;
 
                   #ifdef PRINT
@@ -434,8 +435,8 @@ bool DedFile::getData( std::istream& in )
       }
 
       // reset min/max elevations
-      LCreal minElev0 = 99999.0;
-      LCreal maxElev0 = 0.0;
+      double minElev0 = 99999.0;
+      double maxElev0 = 0.0;
 
       // Read in the data
       const int NUM_BYTES_IN_COL = sizeof(short) * N;
@@ -458,7 +459,7 @@ bool DedFile::getData( std::istream& in )
             // Successful: Byte-swap
             short sTemp = 0;
             for (unsigned int j = 0; j < N; j++ ) {
-               basic::NetHandler::fromNetOrder(&sTemp, columns[i][j]);
+               base::NetHandler::fromNetOrder(&sTemp, columns[i][j]);
                columns[i][j] = sTemp;
 
                // Check for min/max

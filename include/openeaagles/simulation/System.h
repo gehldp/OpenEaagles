@@ -4,10 +4,10 @@
 #ifndef __oe_simulation_System_H__
 #define __oe_simulation_System_H__
 
-#include "openeaagles/basic/Component.h"
+#include "openeaagles/base/Component.h"
 
 namespace oe {
-   namespace basic { class String; }
+   namespace base { class String; }
 
 namespace simulation {
 
@@ -22,7 +22,7 @@ class Simulation;
 //
 // Factory name: System
 // Slots:
-//    powerSwitch    <basic::String>   ! Power switch position ("OFF", "STBY", "ON") (default: "ON")
+//    powerSwitch    <base::String>   ! Power switch position ("OFF", "STBY", "ON") (default: "ON")
 //
 //
 // Events:
@@ -35,10 +35,10 @@ class Simulation;
 //       are to be overridden by derived systems, as needed.  Each function is
 //       called one per frame during the corresponding phase.
 //
-//      virtual void dynamics(const LCreal dt);    // Phase 0
-//      virtual void transmit(const LCreal dt);    // Phase 1
-//      virtual void receive(const LCreal dt);     // Phase 2
-//      virtual void process(const LCreal dt);     // Phase 3
+//      virtual void dynamics(const double dt);    // Phase 0
+//      virtual void transmit(const double dt);    // Phase 1
+//      virtual void receive(const double dt);     // Phase 2
+//      virtual void process(const double dt);     // Phase 3
 //
 //    2) Power switch enums --
 //       a) Current switch enums are PWR_OFF, PWR_STBY and PWR_ON.
@@ -57,9 +57,9 @@ class Simulation;
 //       (e.g., circular references).  (see Component::shutdownNotification())
 //
 //------------------------------------------------------------------------------
-class System : public basic::Component
+class System : public base::Component
 {
-   DECLARE_SUBCLASS(System,basic::Component)
+   DECLARE_SUBCLASS(System,base::Component)
 
 public:
    // Power switch enumerations (can be expanded by derived classes)
@@ -85,22 +85,22 @@ public:
    // Event handler(s)
    virtual bool killedNotification(Player* const killedBy = 0); // Killed (KILL_EVENT) event handler
 
-   void updateData(const LCreal dt = 0.0) override;
-   void updateTC(const LCreal dt = 0.0) override;
-   bool event(const int event, basic::Object* const obj = nullptr) override;
+   void updateData(const double dt = 0.0) override;
+   void updateTC(const double dt = 0.0) override;
+   bool event(const int event, base::Object* const obj = nullptr) override;
    void reset() override;
    bool isFrozen() const override;
 
 protected:
    // Slot function(s)
-   virtual bool setSlotPowerSwitch(const basic::String* const msg);
+   virtual bool setSlotPowerSwitch(const base::String* const msg);
 
    // Time critical phase callbacks --
    // --- to be used by the derived classes, as needed
-   virtual void dynamics(const LCreal dt);    // Phase 0
-   virtual void transmit(const LCreal dt);    // Phase 1
-   virtual void receive(const LCreal dt);     // Phase 2
-   virtual void process(const LCreal dt);     // Phase 3
+   virtual void dynamics(const double dt);    // Phase 0
+   virtual void transmit(const double dt);    // Phase 1
+   virtual void receive(const double dt);     // Phase 2
+   virtual void process(const double dt);     // Phase 3
 
 private:
    bool findOwnship();

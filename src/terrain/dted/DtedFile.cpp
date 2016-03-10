@@ -34,7 +34,7 @@
 //==============================================================================
 
 #include "openeaagles/terrain/dted/DtedFile.h"
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/Number.h"
 #include <fstream>
 #include <cstdio>
 #include <cstring>
@@ -110,7 +110,7 @@ END_SLOTTABLE(DtedFile)
 
 // slot map
 BEGIN_SLOT_MAP(DtedFile)
-   ON_SLOT(1, setSlotVerifyChecksum, basic::Number)
+   ON_SLOT(1, setSlotVerifyChecksum, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -151,7 +151,7 @@ void DtedFile::deleteData()
 //------------------------------------------------------------------------------
 // Slot functions
 //------------------------------------------------------------------------------
-bool DtedFile::setSlotVerifyChecksum(const basic::Number* const msg)
+bool DtedFile::setSlotVerifyChecksum(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -354,8 +354,8 @@ bool DtedFile::readDtedData(std::istream& in)
         }
 
         // Read elevation values for record
-        LCreal minElev0 = 99999.0;
-        LCreal maxElev0 = 0.0;
+        double minElev0 = 99999.0;
+        double maxElev0 = 0.0;
         for(unsigned int lat=0; lat<nptlat; lat++)
         {
             unsigned char values[2];
@@ -451,7 +451,7 @@ long DtedFile::readValue(const unsigned char hbyte, const unsigned char byte1, c
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component
 //------------------------------------------------------------------------------
-basic::Object* DtedFile::getSlotByIndex(const int si)
+base::Object* DtedFile::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

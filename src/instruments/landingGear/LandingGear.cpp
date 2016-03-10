@@ -1,5 +1,5 @@
 #include "openeaagles/instruments/landingGear/LandingGear.h"
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/Number.h"
 
 namespace oe {
 namespace instruments {
@@ -18,8 +18,8 @@ END_SLOTTABLE(LandingGear)
 //  Map slot table to handles for LandingGear
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(LandingGear)
-    ON_SLOT(1, setSlotGearDownValue, basic::Number)
-    ON_SLOT(2, setSlotGearUpValue, basic::Number)
+    ON_SLOT(1, setSlotGearDownValue, base::Number)
+    ON_SLOT(2, setSlotGearUpValue, base::Number)
 END_SLOT_MAP()
 
 
@@ -62,7 +62,7 @@ EMPTY_DELETEDATA(LandingGear)
 //------------------------------------------------------------------------------
 // setSlotGearDownValue() -
 //------------------------------------------------------------------------------
-bool LandingGear::setSlotGearDownValue(const basic::Number* const newDV)
+bool LandingGear::setSlotGearDownValue(const base::Number* const newDV)
 {
     bool ok = false;
     if (newDV != nullptr) ok = setGearDownValue(newDV->getReal());
@@ -71,7 +71,7 @@ bool LandingGear::setSlotGearDownValue(const basic::Number* const newDV)
 //------------------------------------------------------------------------------
 // setSlotGearUpValue() -
 //------------------------------------------------------------------------------
-bool LandingGear::setSlotGearUpValue(const basic::Number* const newUV)
+bool LandingGear::setSlotGearUpValue(const base::Number* const newUV)
 {
     bool ok = false;
     if (newUV != nullptr) ok = setGearUpValue(newUV->getReal());
@@ -82,7 +82,7 @@ bool LandingGear::setSlotGearUpValue(const basic::Number* const newUV)
 //------------------------------------------------------------------------------
 // setGearDownValue() - set the value at which the gear goes down
 //------------------------------------------------------------------------------
-bool LandingGear::setGearDownValue(const LCreal newDV)
+bool LandingGear::setGearDownValue(const double newDV)
 {
     gearDV = newDV;
     return true;
@@ -91,7 +91,7 @@ bool LandingGear::setGearDownValue(const LCreal newDV)
 //------------------------------------------------------------------------------
 // setGearUpValue() -
 //------------------------------------------------------------------------------
-bool LandingGear::setGearUpValue(const LCreal newUV)
+bool LandingGear::setGearUpValue(const double newUV)
 {
     gearUV = newUV;
     return true;
@@ -100,12 +100,12 @@ bool LandingGear::setGearUpValue(const LCreal newUV)
 //------------------------------------------------------------------------------
 // updateData() - update non time-critical stuff here
 //------------------------------------------------------------------------------
-void LandingGear::updateData(const LCreal dt)
+void LandingGear::updateData(const double dt)
 {
     BaseClass::updateData(dt);
 
     // this will store our last value, so we know which way we are going
-    LCreal lastPos = gearPos;
+    double lastPos = gearPos;
     gearPos = getInstValue();
 
     if (gearPos == gearUV) {
@@ -136,7 +136,7 @@ void LandingGear::updateData(const LCreal dt)
     send("gearpos", SELECT, x, gearSelSD);
 
     // determine if we have a rotary
-    basic::Pair* pair = (basic::Pair*)findByName("gearpos");
+    base::Pair* pair = (base::Pair*)findByName("gearpos");
     if (pair != nullptr) haveRotary = true;
 }
 
@@ -235,7 +235,7 @@ void LandingGear::drawFunc()
 //------------------------------------------------------------------------------
 // getSlotByIndex() for LandingGear
 //------------------------------------------------------------------------------
-basic::Object* LandingGear::getSlotByIndex(const int si)
+base::Object* LandingGear::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

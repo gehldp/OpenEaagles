@@ -1,7 +1,7 @@
 
 #include "openeaagles/linearsystem/ScalerFunc.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/units/Frequencies.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/units/Frequencies.h"
 
 namespace oe {
 namespace linearsystem {
@@ -22,10 +22,10 @@ END_SLOTTABLE(ScalerFunc)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(ScalerFunc)
-   ON_SLOT( 1, setSlotRate, basic::Frequency)
-   ON_SLOT( 1, setSlotRate, basic::Number)
-   ON_SLOT( 2, setSlotX0,  basic::Number)
-   ON_SLOT( 3, setSlotY0, basic::Number)
+   ON_SLOT( 1, setSlotRate, base::Frequency)
+   ON_SLOT( 1, setSlotRate, base::Number)
+   ON_SLOT( 2, setSlotX0,  base::Number)
+   ON_SLOT( 3, setSlotY0, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -121,8 +121,8 @@ void ScalerFunc::allocateMemory(unsigned int n0)
       }
       // Allocate the new space
       if (n0 > 0) {
-         px = new LCreal[n0];
-         py = new LCreal[n0];
+         px = new double[n0];
+         py = new double[n0];
          n = n0;
       }
    }
@@ -143,7 +143,7 @@ void ScalerFunc::clearMemory()
 // Set functions
 //------------------------------------------------------------------------------
 
-bool ScalerFunc::setX0(const LCreal v)
+bool ScalerFunc::setX0(const double v)
 {
    x0 = v;
    if (px != nullptr) {
@@ -154,7 +154,7 @@ bool ScalerFunc::setX0(const LCreal v)
    return true;
 }
 
-bool ScalerFunc::setY0(const LCreal v)
+bool ScalerFunc::setY0(const double v)
 {
    y0 = v;
    if (py != nullptr) {
@@ -179,11 +179,11 @@ bool ScalerFunc::setRate(const unsigned int v)
 //------------------------------------------------------------------------------
 // Set slot functions
 //------------------------------------------------------------------------------
-bool ScalerFunc::setSlotRate(const basic::Frequency* const msg)
+bool ScalerFunc::setSlotRate(const base::Frequency* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      int v = static_cast<int>( basic::Hertz::convertStatic( *msg ) + 0.5f );
+      int v = static_cast<int>( base::Hertz::convertStatic( *msg ) + 0.5f );
       if (v > 0) {
          setRate( static_cast<unsigned int>(v) );
          ok = true;
@@ -192,7 +192,7 @@ bool ScalerFunc::setSlotRate(const basic::Frequency* const msg)
    return ok;
 }
 
-bool ScalerFunc::setSlotRate(const basic::Number* const msg)
+bool ScalerFunc::setSlotRate(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -205,7 +205,7 @@ bool ScalerFunc::setSlotRate(const basic::Number* const msg)
    return ok;
 }
 
-bool ScalerFunc::setSlotX0(const basic::Number* const msg)
+bool ScalerFunc::setSlotX0(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -215,7 +215,7 @@ bool ScalerFunc::setSlotX0(const basic::Number* const msg)
    return ok;
 }
 
-bool ScalerFunc::setSlotY0(const basic::Number* const msg)
+bool ScalerFunc::setSlotY0(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -228,7 +228,7 @@ bool ScalerFunc::setSlotY0(const basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for ScalerFunc
 //------------------------------------------------------------------------------
-basic::Object* ScalerFunc::getSlotByIndex(const int si)
+base::Object* ScalerFunc::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

@@ -2,11 +2,11 @@
 
 #include "openeaagles/iodevice/SignalGen.h"
 
-#include "openeaagles/basic/IoData.h"
-#include "openeaagles/basic/IoDevice.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Frequencies.h"
+#include "openeaagles/base/IoData.h"
+#include "openeaagles/base/IoDevice.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Frequencies.h"
 
 #include <cmath>
 
@@ -30,11 +30,11 @@ END_SLOTTABLE(SignalGen)
 
 //  Map slot table to handles
 BEGIN_SLOT_MAP(SignalGen)
-   ON_SLOT( 1, setSlotSignal,    basic::String)
-   ON_SLOT( 2, setSlotFrequency, basic::Frequency)
-   ON_SLOT( 3, setSlotPhase,     basic::Angle)
-   ON_SLOT( 4, setSlotLocation, basic::Number)
-   ON_SLOT( 5, setSlotChannel,  basic::Number)
+   ON_SLOT( 1, setSlotSignal,    base::String)
+   ON_SLOT( 2, setSlotFrequency, base::Frequency)
+   ON_SLOT( 3, setSlotPhase,     base::Angle)
+   ON_SLOT( 4, setSlotLocation, base::Number)
+   ON_SLOT( 5, setSlotChannel,  base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -100,12 +100,12 @@ SignalGen::Signal SignalGen::getSignalType() const
    return signal;
 }
 
-LCreal SignalGen::getPhase() const
+double SignalGen::getPhase() const
 {
    return phase;
 }
 
-LCreal SignalGen::getFrequency() const
+double SignalGen::getFrequency() const
 {
    return freq;
 }
@@ -129,13 +129,13 @@ bool SignalGen::setSignalType(const Signal s)
    return true;
 }
 
-bool SignalGen::setPhase(const LCreal p)
+bool SignalGen::setPhase(const double p)
 {
    phase = p;
    return true;
 }
 
-bool SignalGen::setFrequency(const LCreal f)
+bool SignalGen::setFrequency(const double f)
 {
    freq = f;
    return true;
@@ -157,9 +157,9 @@ bool SignalGen::setChannel(const unsigned int v)
 //------------------------------------------------------------------------------
 // process inputs
 //------------------------------------------------------------------------------
-void SignalGen::processInputs(const LCreal dt, const basic::IoDevice* const, basic::IoData* const inData)
+void SignalGen::processInputs(const double dt, const base::IoDevice* const, base::IoData* const inData)
 {
-   LCreal value = calc(dt);
+   double value = calc(dt);
 
    // Send the value to the input data buffer
    if (inData != nullptr) {
@@ -170,9 +170,9 @@ void SignalGen::processInputs(const LCreal dt, const basic::IoDevice* const, bas
 //------------------------------------------------------------------------------
 // process outputs
 //------------------------------------------------------------------------------
-void SignalGen::processOutputs(const LCreal dt, const basic::IoData* const, basic::IoDevice* const device)
+void SignalGen::processOutputs(const double dt, const base::IoData* const, base::IoDevice* const device)
 {
-   LCreal value = calc(dt);
+   double value = calc(dt);
 
    // Send the value to the AO card
    if (device != nullptr) {
@@ -183,7 +183,7 @@ void SignalGen::processOutputs(const LCreal dt, const basic::IoData* const, basi
 //------------------------------------------------------------------------------
 // Generate an input value (e.g., from the I/O device
 //------------------------------------------------------------------------------
-LCreal SignalGen::calc(const LCreal dt)
+double SignalGen::calc(const double dt)
 {
    // Default AI input value
    double value = 0;
@@ -192,10 +192,10 @@ LCreal SignalGen::calc(const LCreal dt)
    time += dt;
 
    // Current angle (radians)
-   double alpha = (2.0 * PI * freq * time) + phase;
+   double alpha = (2.0 * base::PI * freq * time) + phase;
 
    // Local cycle (-PI to PI)
-   double beta = basic::Angle::aepcdRad(alpha);
+   double beta = base::Angle::aepcdRad(alpha);
 
    switch (signal) {
       case SINE : {
@@ -207,12 +207,12 @@ LCreal SignalGen::calc(const LCreal dt)
          break;
       }
       case SQUARE : {
-         if (beta > 0 && beta < PI) value = 1.0;
+         if (beta > 0 && beta < base::PI) value = 1.0;
          else value = 0.0;
          break;
       }
       case SAW : {
-         value = (beta/PI) + 1.0;
+         value = (beta/base::PI) + 1.0;
          break;
       }
    }
@@ -220,7 +220,7 @@ LCreal SignalGen::calc(const LCreal dt)
    if (value > 1.0) value = 1.0;
    else if (value < -1.0) value = -1.0;
 
-   return static_cast<LCreal>(value);
+   return static_cast<double>(value);
 }
 
 //------------------------------------------------------------------------------
@@ -228,7 +228,7 @@ LCreal SignalGen::calc(const LCreal dt)
 //------------------------------------------------------------------------------
 
 // signal: Signal type { SINE, COSINE, SQUARE, SAW }
-bool SignalGen::setSlotSignal(const basic::String* const msg)
+bool SignalGen::setSlotSignal(const base::String* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -248,27 +248,27 @@ bool SignalGen::setSlotSignal(const basic::String* const msg)
 }
 
 // frequency: frequency
-bool SignalGen::setSlotFrequency(const basic::Frequency* const msg)
+bool SignalGen::setSlotFrequency(const base::Frequency* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      ok = setFrequency( basic::Hertz::convertStatic(*msg) );
+      ok = setFrequency( base::Hertz::convertStatic(*msg) );
    }
    return ok;
 }
 
 // phase: Phase shift
-bool SignalGen::setSlotPhase(const basic::Angle* const msg)
+bool SignalGen::setSlotPhase(const base::Angle* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      ok = setPhase( static_cast<LCreal>(basic::Radians::convertStatic(*msg)) );
+      ok = setPhase( static_cast<double>(base::Radians::convertStatic(*msg)) );
    }
    return ok;
 }
 
 // ai: IoData's AI channel (AI signal generator only)
-bool SignalGen::setSlotLocation(const basic::Number* const msg)
+bool SignalGen::setSlotLocation(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -281,7 +281,7 @@ bool SignalGen::setSlotLocation(const basic::Number* const msg)
 }
 
 // channel: Output device channel number (AO signal generator only)
-bool SignalGen::setSlotChannel(const basic::Number* const msg)
+bool SignalGen::setSlotChannel(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -296,7 +296,7 @@ bool SignalGen::setSlotChannel(const basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component
 //------------------------------------------------------------------------------
-basic::Object* SignalGen::getSlotByIndex(const int si)
+base::Object* SignalGen::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

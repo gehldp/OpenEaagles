@@ -1,7 +1,7 @@
 
 #include "openeaagles/iodevice/factory.h"
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 #include "openeaagles/iodevice/Ai2DiSwitch.h"
 #include "openeaagles/iodevice/AnalogInput.h"
@@ -22,9 +22,9 @@
 namespace oe {
 namespace iodevice {
 
-basic::Object* factory(const char* name)
+base::Object* factory(const char* name)
 {
-    basic::Object* obj = nullptr;
+    base::Object* obj = nullptr;
 
     // Data buffers
     if ( std::strcmp(name, IoData::getFactoryName()) == 0 ) {

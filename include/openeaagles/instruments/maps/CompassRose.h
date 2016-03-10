@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: CompassRose
-// Base Class: basic::Object -> graphics::Graphic -> CompassRose
+// Base Class: base::Object -> graphics::Graphic -> CompassRose
 //
 // Description: Generic compass used as a direction indicator.  It will
 // rotate about a heading either by someone telling it through a member function.
@@ -16,7 +16,7 @@
 #define __oe_instruments_CompassRose_H__
 
 #include "openeaagles/graphics/Graphic.h"
-#include "openeaagles/basic/units/Angles.h"
+#include "openeaagles/base/units/Angles.h"
 
 namespace oe {
 namespace instruments {
@@ -28,45 +28,45 @@ class CompassRose : public graphics::Graphic
 public:
     CompassRose();
 
-    virtual bool setRotationDeg(const LCreal newR);
-    virtual bool setRotationRad(const LCreal newR);
-    virtual bool setCenteredRadius(const LCreal newR);
-    virtual bool setDeCenteredRadius(const LCreal newDR);
-    virtual bool setDisplacement(const LCreal newD);
+    virtual bool setRotationDeg(const double newR);
+    virtual bool setRotationRad(const double newR);
+    virtual bool setCenteredRadius(const double newR);
+    virtual bool setDeCenteredRadius(const double newDR);
+    virtual bool setDisplacement(const double newD);
     virtual bool setCentered(const bool newC);
 
-    LCreal getRotationDeg() const      { return rot * static_cast<LCreal>(basic::Angle::R2DCC); }
-    LCreal getRotationRad() const      { return rot; }
-    LCreal getCenteredRadius() const   { return cenRadius; }
-    LCreal getDeCenteredRadius() const { return decRadius; }
+    double getRotationDeg() const      { return rot * static_cast<double>(base::Angle::R2DCC); }
+    double getRotationRad() const      { return rot; }
+    double getCenteredRadius() const   { return cenRadius; }
+    double getDeCenteredRadius() const { return decRadius; }
     bool isCentered() const            { return centered; }
-    LCreal getDisplacement() const     { return displacement; }
+    double getDisplacement() const     { return displacement; }
 
     void draw() override;
 
-    void updateData(const LCreal dt = 0.0) override;
-    bool event(const int event, basic::Object* const obj = nullptr) override;
+    void updateData(const double dt = 0.0) override;
+    bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
     // slot functions
-    bool setSlotCenteredRadius(const basic::Number* const newR);
-    bool setSlotDeCenteredRadius(const basic::Number* const newR);
-    bool setSlotDisplacement(const basic::Number* const newD);
+    bool setSlotCenteredRadius(const base::Number* const newR);
+    bool setSlotDeCenteredRadius(const base::Number* const newR);
+    bool setSlotDisplacement(const base::Number* const newD);
 
     // event functions
-    bool onUpdateRotDeg(const basic::Number* const x);
-    bool onUpdateRadius(const basic::Number* const x);
-    bool onUpdateCenRad(const basic::Number* const x);
-    bool onUpdateDecRadius(const basic::Number* const x);
-    bool onUpdateDisplacement(const basic::Number* const x);
-    bool onUpdateCentered(const basic::Number* const x);
+    bool onUpdateRotDeg(const base::Number* const x);
+    bool onUpdateRadius(const base::Number* const x);
+    bool onUpdateCenRad(const base::Number* const x);
+    bool onUpdateDecRadius(const base::Number* const x);
+    bool onUpdateDisplacement(const base::Number* const x);
+    bool onUpdateCentered(const base::Number* const x);
 
 private:
-    LCreal rot;         // rotation angle (rads)
-    LCreal cenRadius;   // our centered radius (inches)
-    LCreal decRadius;   // our decentered radius (inches)
+    double rot;         // rotation angle (rads)
+    double cenRadius;   // our centered radius (inches)
+    double decRadius;   // our decentered radius (inches)
     bool centered;      // centered flag
-    LCreal displacement;// how far to translate when we go decentered (inches)
+    double displacement;// how far to translate when we go decentered (inches)
 
     SendData lTicksSD;
     SendData sTicksSD;

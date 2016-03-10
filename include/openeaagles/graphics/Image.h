@@ -4,11 +4,11 @@
 #ifndef __oe_graphics_Image_H__
 #define __oe_graphics_Image_H__
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 #include <GL/gl.h>
 
 namespace oe {
-   namespace basic { class Number; }
+   namespace base { class Number; }
 
 namespace graphics {
    struct BITMAPINFOHEADER_X;
@@ -17,8 +17,8 @@ namespace graphics {
 // Class: Image
 // Description: Base class for images and textures
 //------------------------------------------------------------------------------
-class Image : public basic::Object {
-   DECLARE_SUBCLASS(Image,basic::Object)
+class Image : public base::Object {
+   DECLARE_SUBCLASS(Image,base::Object)
 
 public:
    // Max length of file name or directory path

@@ -4,11 +4,11 @@
 #ifndef __oe_simulation_IrShape_H__
 #define __oe_simulation_IrShape_H__
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 namespace oe {
 
-namespace basic { class Number; }
+namespace base { class Number; }
 
 namespace simulation {
 
@@ -19,17 +19,17 @@ class IrQueryMsg;
 // Description: Base class for infrared shape
 // Factory name: IrShape
 //------------------------------------------------------------------------------
-class IrShape : public basic::Object
+class IrShape : public base::Object
 {
-   DECLARE_SUBCLASS(IrShape,basic::Object)
+   DECLARE_SUBCLASS(IrShape,base::Object)
 public:
    IrShape();
 
-   virtual LCreal getArea();            // returns the effective area as a number in square meters
-   virtual LCreal getReflectorAreaInFieldOfView(const IrQueryMsg* const msg);
-   virtual bool setSlotIrShapeArea(const basic::Number* const s);
+   virtual double getArea();            // returns the effective area as a number in square meters
+   virtual double getReflectorAreaInFieldOfView(const IrQueryMsg* const msg);
+   virtual bool setSlotIrShapeArea(const base::Number* const s);
 private:
-   LCreal area;
+   double area;
 };
 
 //------------------------------------------------------------------------------
@@ -47,15 +47,15 @@ public:
 
    IrSphere();
 
-   LCreal getArea() override;
+   double getArea() override;
 
-   LCreal getRadius()              { return radius; }
+   double getRadius()              { return radius; }
 
-   virtual bool setSlotIrSphereRadius(const basic::Number* const s);
+   virtual bool setSlotIrSphereRadius(const base::Number* const s);
 
 private:
 
-   LCreal radius;
+   double radius;
 };
 
 //------------------------------------------------------------------------------
@@ -75,16 +75,16 @@ public:
 
    IrBox();
 
-   LCreal getArea() override;
-   LCreal getReflectorAreaInFieldOfView(const IrQueryMsg* const msg) override;
+   double getArea() override;
+   double getReflectorAreaInFieldOfView(const IrQueryMsg* const msg) override;
 
-   virtual bool setSlotIrBoxX(const basic::Number* const s);
-   virtual bool setSlotIrBoxY(const basic::Number* const s);
-   virtual bool setSlotIrBoxZ(const basic::Number* const s);
+   virtual bool setSlotIrBoxX(const base::Number* const s);
+   virtual bool setSlotIrBoxY(const base::Number* const s);
+   virtual bool setSlotIrBoxZ(const base::Number* const s);
 
 private:
 
-   LCreal x,y,z;
+   double x,y,z;
 };
 
 } // End simulation namespace

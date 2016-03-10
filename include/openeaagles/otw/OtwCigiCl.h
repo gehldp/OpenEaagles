@@ -28,7 +28,7 @@ class CigiOutgoingMsg;
 
 namespace oe {
 
-   namespace basic {
+   namespace base {
       class NetHandler;
       class Thread;
    }
@@ -133,16 +133,16 @@ public:
 
    // Set Slot functions
    virtual bool setSlotCigi(CigiCl* const msg);
-   virtual bool setSlotASyncMode(const basic::Number* const msg);
-   virtual bool setSlotHideOwnshipModel(const basic::Number* const msg);
-   virtual bool setSlotOwnshipModel(const basic::Number* const msg);
-   virtual bool setSlotMslTrailModel(const basic::Number* const msg);
-   virtual bool setSlotSmokePlumeModel(const basic::Number* const msg);
-   virtual bool setSlotAirExplosionModel(const basic::Number* const msg);
-   virtual bool setSlotGroundExplosionModel(const basic::Number* const msg);
-   virtual bool setSlotShipWakeModel(const basic::Number* const msg);
+   virtual bool setSlotASyncMode(const base::Number* const msg);
+   virtual bool setSlotHideOwnshipModel(const base::Number* const msg);
+   virtual bool setSlotOwnshipModel(const base::Number* const msg);
+   virtual bool setSlotMslTrailModel(const base::Number* const msg);
+   virtual bool setSlotSmokePlumeModel(const base::Number* const msg);
+   virtual bool setSlotAirExplosionModel(const base::Number* const msg);
+   virtual bool setSlotGroundExplosionModel(const base::Number* const msg);
+   virtual bool setSlotShipWakeModel(const base::Number* const msg);
 
-   void updateData(const LCreal dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
    void reset() override;
 
 protected:
@@ -183,7 +183,7 @@ protected:
       double* const lat,      // Point latitude         (deg)
       double* const lon,      // Point longitude        (deg)
       double* const alt,      // Point altitude         (m)
-      LCreal* const rng,      // Range to point         (m)
+      double* const rng,      // Range to point         (m)
       int* const material     // Material code - not used in Cigi V3, returns 0
       );
 
@@ -192,10 +192,10 @@ protected:
       const double lat,          // Source latitude         (deg)
       const double lon,          // Source longitude        (deg)
       const double alt,          // Source altitude         (m)
-      const LCreal hdg,          // Source heading          (deg)
-      const LCreal pitch,        // Source pitch            (deg)
-      const LCreal minRange,     // Request minimum range   (m)
-      const LCreal maxRange      // Request maximum range   (m)
+      const double hdg,          // Source heading          (deg)
+      const double pitch,        // Source pitch            (deg)
+      const double minRange,     // Request minimum range   (m)
+      const double maxRange      // Request maximum range   (m)
       );
 
    // Set functions
@@ -222,7 +222,7 @@ protected:
    virtual bool setCommonModelData(CigiEntityCtrlV3* const ec, const unsigned short entity, const simulation::Player* const p);
 
 private:
-   basic::safe_ptr<CigiCl> cigi;         // CIGI handler (direct, networked, ...)
+   base::safe_ptr<CigiCl> cigi;         // CIGI handler (direct, networked, ...)
    bool   asyncMode;                     // Running in ASYNC mode if true
    bool   hideOwn;                       // Hide ownship model flag
 
@@ -232,18 +232,18 @@ private:
 
    // Terrain elevation request data
    bool    elevReqFlg;                   // Elevation request flag
-   LCreal  elevReqTimer;                 // Elevation request timer
+   double  elevReqTimer;                 // Elevation request timer
 
    // Line of sight (LOS) data
    double  losRespLat;                   // LOS Response latitude intersection point (deg)
    double  losRespLon;                   // LOS Response longitude intersection point (deg)
    double  losRespAlt;                   // LOS Response altitude intersection point (m)
-   LCreal  losRespRange;                 // LOS response range (m)
+   double  losRespRange;                 // LOS response range (m)
    unsigned short losRespId;             // LOS Response ID
    bool    losRespDataValid;             // LOS response data is valid flag
    unsigned short losReqId;              // LOS Request ID
    bool    newLosReq;                    // New LOS request flag
-   LCreal  losReqTimer;                  // LOS request timer
+   double  losReqTimer;                  // LOS request timer
 
    // CIGI entity data buffers
    unsigned int iw;                      // Write buffer index
@@ -278,9 +278,9 @@ private:
 //
 // Factory name: CigiCl
 //------------------------------------------------------------------------------
-class CigiCl : public basic::Component
+class CigiCl : public base::Component
 {
-   DECLARE_SUBCLASS(CigiCl, basic::Component)
+   DECLARE_SUBCLASS(CigiCl, base::Component)
 
 public:
    CigiCl();
@@ -341,7 +341,7 @@ private:
 
 //------------------------------------------------------------------------------
 // Class: CigiClNetwork
-// Base class: basic::Object -> CigiCl -> CigiClNetwork
+// Base class: base::Object -> CigiCl -> CigiClNetwork
 //
 // Description: Networked CIGI interface to the IG system
 //
@@ -358,14 +358,14 @@ public:
    CigiClNetwork();
 
    // get a pre-ref'd pointer to the network input handler
-   virtual basic::NetHandler* getInputHandler();
+   virtual base::NetHandler* getInputHandler();
 
    // get a pre-ref'd pointer to the network output handler
-   virtual basic::NetHandler* getOutputHandler();
+   virtual base::NetHandler* getOutputHandler();
 
    // Set Slot functions
-   virtual bool setSlotNetInput(basic::NetHandler* const msg);
-   virtual bool setSlotNetOutput(basic::NetHandler* const msg);
+   virtual bool setSlotNetInput(base::NetHandler* const msg);
+   virtual bool setSlotNetOutput(base::NetHandler* const msg);
 
    // CIGI's (sync-mode) main network loop
    virtual void mainLoop();
@@ -391,9 +391,9 @@ protected:
    bool initCigiNetwork();          // Initialize the network
 
 private:
-   basic::safe_ptr<basic::NetHandler>  netInput;    // Input network handler
-   basic::safe_ptr<basic::NetHandler>  netOutput;   // Output network handler
-   basic::safe_ptr<basic::Thread>      thread;      // The thread
+   base::safe_ptr<base::NetHandler>  netInput;    // Input network handler
+   base::safe_ptr<base::NetHandler>  netOutput;   // Output network handler
+   base::safe_ptr<base::Thread>      thread;      // The thread
    bool networkInitialized;               // CIGI has been initialized
    bool networkInitFailed;                // CIGI initialization has failed
 
@@ -404,7 +404,7 @@ private:
 
 //------------------------------------------------------------------------------
 // Class: OtwModelCigiCl
-// Base class: basic::Object -> OtwModel -> OtwModelCigiCl
+// Base class: base::Object -> OtwModel -> OtwModelCigiCl
 // Description: CIGI OTW model
 //------------------------------------------------------------------------------
 class OtwModelCigiCl : public simulation::OtwModel
@@ -443,7 +443,7 @@ public:
    bool attachedCcActive;
 
    bool isGroundPlayer;
-   LCreal effectsTimer;
+   double effectsTimer;
 
 private:
    // Entity ID

@@ -5,7 +5,7 @@
 #define __oe_simulation_CollisionDetect_H__
 
 namespace oe {
-   namespace basic { class Angle; class Distance; class Number; class PairStream; }
+   namespace base { class Angle; class Distance; class Number; class PairStream; }
 }
 
 #include "openeaagles/simulation/System.h"
@@ -77,7 +77,7 @@ public:
    virtual bool setLocalOnly(const bool flg);
    virtual bool setSendCrashEventsEnabled(const bool flg);
 
-   void updateData(const LCreal dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
 
 protected:
    virtual bool resizePoiList(const unsigned int newSize);
@@ -87,20 +87,20 @@ protected:
    virtual void updatePoiList(Player* const target);
 
    // Slot functions
-   virtual bool setSlotCollisionRange(const basic::Distance* const msg);
-   virtual bool setSlotMaxPlayers(const basic::Number* const msg);
-   virtual bool setSlotPlayerTypes(const basic::PairStream* const msg);
-   virtual bool setSlotMaxRange2Players(const basic::Distance* const msg);
-   virtual bool setSlotMaxAngle2Players(const basic::Angle* const msg);
-   virtual bool setSlotUseWorldCoordinates(const basic::Number* const msg);
-   virtual bool setSlotLocalOnly(const basic::Number* const msg);
-   virtual bool setSlotSendCrashEvents(const basic::Number* const msg);
+   virtual bool setSlotCollisionRange(const base::Distance* const msg);
+   virtual bool setSlotMaxPlayers(const base::Number* const msg);
+   virtual bool setSlotPlayerTypes(const base::PairStream* const msg);
+   virtual bool setSlotMaxRange2Players(const base::Distance* const msg);
+   virtual bool setSlotMaxAngle2Players(const base::Angle* const msg);
+   virtual bool setSlotUseWorldCoordinates(const base::Number* const msg);
+   virtual bool setSlotLocalOnly(const base::Number* const msg);
+   virtual bool setSlotSendCrashEvents(const base::Number* const msg);
 
-   void process(const LCreal dt) override;     // Phase 3
+   void process(const double dt) override;     // Phase 3
 
 protected:
    struct PlayerOfInterest {
-      basic::safe_ptr<Player> player;    // The player
+      base::safe_ptr<Player> player;    // The player
       double range;           // Previous range (m)
       double rangeRate;       // Previous range rate (m/s)
       double distance;        // Distance at collision (m)

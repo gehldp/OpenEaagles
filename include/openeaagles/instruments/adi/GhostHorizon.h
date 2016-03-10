@@ -17,28 +17,28 @@ class GhostHorizon : public Adi {
 public:
     GhostHorizon();
 
-    virtual bool setWidth(const LCreal x)           { width = x; return true; }
-    virtual bool setHeight(const LCreal x)          { height = x; return true; }
+    virtual bool setWidth(const double x)           { width = x; return true; }
+    virtual bool setHeight(const double x)          { height = x; return true; }
 
     void drawFunc() override;
 
-    void updateData(const LCreal dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
 
 protected:
-    bool setSlotSkyColor(const basic::Color* const cobj);
-    bool setSlotSkyColor(const basic::String* const cname);
-    bool setSlotGroundColor(const basic::String* const cname);
-    bool setSlotGroundColor(const basic::Color* const cobj);
-    bool setSlotWidth(const basic::Number* const x);
-    bool setSlotHeight(const basic::Number* const x);
+    bool setSlotSkyColor(const base::Color* const cobj);
+    bool setSlotSkyColor(const base::String* const cname);
+    bool setSlotGroundColor(const base::String* const cname);
+    bool setSlotGroundColor(const base::Color* const cobj);
+    bool setSlotWidth(const base::Number* const x);
+    bool setSlotHeight(const base::Number* const x);
 
 private:
     osg::Vec3 skyColor;     // color of our sky
     osg::Vec3 groundColor;  // color of our ground
-    basic::String* gColorName;   // ground color name
-    basic::String* sColorName;   // sky color name
-    LCreal width;           // width of our polygon
-    LCreal height;          // height of our polygon
+    base::String* gColorName;   // ground color name
+    base::String* sColorName;   // sky color name
+    double width;           // width of our polygon
+    double height;          // height of our polygon
 };
 
 }; // end instruments namespace

@@ -2,11 +2,11 @@
 #ifndef __oe_iodevice_IoData_H__
 #define __oe_iodevice_IoData_H__
 
-#include "openeaagles/basic/IoData.h"
+#include "openeaagles/base/IoData.h"
 
 namespace oe {
 
-namespace basic { class Number; }
+namespace base { class Number; }
 
 namespace iodevice {
 
@@ -28,9 +28,9 @@ namespace iodevice {
 //    numDO    <Number>   ! Number of discrete outputs (DOs)
 //
 //------------------------------------------------------------------------------
-class IoData : public basic::IoData
+class IoData : public base::IoData
 {
-   DECLARE_SUBCLASS(IoData,basic::IoData)
+   DECLARE_SUBCLASS(IoData,base::IoData)
 
 public:
    IoData();
@@ -44,30 +44,30 @@ public:
    unsigned int getNumAnalogOutputChannels() const override;
    unsigned int getNumDiscreteInputChannels() const override;
    unsigned int getNumDiscreteOutputChannels() const override;
-   bool getAnalogInput(const unsigned int channel, LCreal* const value) const override;
-   bool getAnalogOutput(const unsigned int channel, LCreal* const value) const override;
+   bool getAnalogInput(const unsigned int channel, double* const value) const override;
+   bool getAnalogOutput(const unsigned int channel, double* const value) const override;
    bool getDiscreteInput(const unsigned int channel, bool* const value) const override;
    bool getDiscreteOutput(const unsigned int channel, bool* const value) const override;
-   bool setAnalogInput(const unsigned int channel, const LCreal value) override;
-   bool setAnalogOutput(const unsigned int channel, const LCreal value) override;
+   bool setAnalogInput(const unsigned int channel, const double value) override;
+   bool setAnalogOutput(const unsigned int channel, const double value) override;
    bool setDiscreteInput(const unsigned int channel, const bool value) override;
    bool setDiscreteOutput(const unsigned int channel, const bool value) override;
    void clear() override;
 
 protected:
-   bool setSlotNumAI(const basic::Number* const msg);
-   bool setSlotNumAO(const basic::Number* const msg);
-   bool setSlotNumDI(const basic::Number* const msg);
-   bool setSlotNumDO(const basic::Number* const msg);
+   bool setSlotNumAI(const base::Number* const msg);
+   bool setSlotNumAO(const base::Number* const msg);
+   bool setSlotNumDI(const base::Number* const msg);
+   bool setSlotNumDO(const base::Number* const msg);
 
 private:
    void initData();
 
    unsigned int numAI;  // Number of AIs
-   LCreal*  aiTable;    // AIs
+   double*  aiTable;    // AIs
 
    unsigned int numAO;  // Number of AOs
-   LCreal*  aoTable;    // AOs
+   double*  aoTable;    // AOs
 
    unsigned int numDI;  // Number of DIs
    bool*    diTable;    // DIs

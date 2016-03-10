@@ -1,8 +1,8 @@
 
 #include "openeaagles/simulation/Bomb.h"
 
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/units/Distances.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/units/Distances.h"
 
 #include <cmath>
 
@@ -27,13 +27,13 @@ END_SLOTTABLE(Bomb)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(Bomb)
-   ON_SLOT( 1, setSlotArmingOption, basic::Identifier)
-   ON_SLOT( 2, setSlotNoseFuze,     basic::Number)
-   ON_SLOT( 3, setSlotMidFuze,      basic::Number)
-   ON_SLOT( 4, setSlotTailFuze,     basic::Number)
-   ON_SLOT( 5, setSlotFuzeAltitude, basic::Number)
-   ON_SLOT( 6, setSlotFuzeTime,     basic::Number)
-   ON_SLOT( 7, setSlotDragIndex,    basic::Number)
+   ON_SLOT( 1, setSlotArmingOption, base::Identifier)
+   ON_SLOT( 2, setSlotNoseFuze,     base::Number)
+   ON_SLOT( 3, setSlotMidFuze,      base::Number)
+   ON_SLOT( 4, setSlotTailFuze,     base::Number)
+   ON_SLOT( 5, setSlotFuzeAltitude, base::Number)
+   ON_SLOT( 6, setSlotFuzeTime,     base::Number)
+   ON_SLOT( 7, setSlotDragIndex,    base::Number)
 END_SLOT_MAP()
 
 // Weapon data for general bomb
@@ -48,7 +48,7 @@ Bomb::Bomb()
 {
    STANDARD_CONSTRUCTOR()
 
-   static basic::String generic("Bomb");
+   static base::String generic("Bomb");
    setType(&generic);
 
    initData();
@@ -122,17 +122,17 @@ bool Bomb::isArmingOption(const unsigned int a) const
    return (a == arming);
 }
 
-LCreal Bomb::getFuzeAltitude() const
+double Bomb::getFuzeAltitude() const
 {
    return fuzeAlt;
 }
 
-LCreal Bomb::getFuzeTime() const
+double Bomb::getFuzeTime() const
 {
    return fuzeTime;
 }
 
-LCreal Bomb::getDragIndex() const
+double Bomb::getDragIndex() const
 {
    return dragIndex;
 }
@@ -179,19 +179,19 @@ bool Bomb::setArmingOption(const unsigned int a)
    return true;
 }
 
-bool Bomb::setFuzeAltitude(const LCreal v)
+bool Bomb::setFuzeAltitude(const double v)
 {
    fuzeAlt = v;
    return true;
 }
 
-bool Bomb::setFuzeTime(const LCreal v)
+bool Bomb::setFuzeTime(const double v)
 {
    fuzeTime = v;
    return true;
 }
 
-bool Bomb::setDragIndex(const LCreal v)
+bool Bomb::setDragIndex(const double v)
 {
    dragIndex = v;
    return true;
@@ -200,7 +200,7 @@ bool Bomb::setDragIndex(const LCreal v)
 //------------------------------------------------------------------------------
 // weaponGuidance() -- default guidance; using Robot Aircraft (RAC) guidance
 //------------------------------------------------------------------------------
-void Bomb::weaponGuidance(const LCreal)
+void Bomb::weaponGuidance(const double)
 {
    if (isGuidanceEnabled()) {
 
@@ -211,18 +211,18 @@ void Bomb::weaponGuidance(const LCreal)
       const osg::Vec3 vel = getVelocity();
 
       // weapon velocities (relative)
-      LCreal velG = lcSqrt (vel[0]*vel[0] + vel[1]*vel[1]);
+      double velG = std::sqrt (vel[0]*vel[0] + vel[1]*vel[1]);
       if (velG < 1.0f) velG = 1.0f;
 
       // Earth to platform sin/cos
-      const LCreal prcos = vel[0] / velG;
-      const LCreal prsin = vel[1] / velG;
+      const double prcos = vel[0] / velG;
+      const double prsin = vel[1] / velG;
 
       // Target position (platform)
       const osg::Vec3 tgtPosP = tgtPos - getPosition();
 
       // Target range distance
-      const LCreal tsrng = tgtPosP.length();
+      const double tsrng = tgtPosP.length();
 
       // Target position (relative)
       tgtRangeRef.set(
@@ -236,14 +236,14 @@ void Bomb::weaponGuidance(const LCreal)
       // ---
 
       // Inputs
-      osg::Vec3 initPos(0.0, 0.0, static_cast<LCreal>(-getAltitude()));
+      osg::Vec3 initPos(0.0, 0.0, static_cast<double>(-getAltitude()));
       osg::Vec3 initVel = vel;
-      LCreal groundPlane = tgtPos[2];
-      LCreal timeStep = 0.1;
-      LCreal maxTime = 60.0;
+      double groundPlane = tgtPos[2];
+      double timeStep = 0.1;
+      double maxTime = 60.0;
 
       // Outputs
-      LCreal tof = 0;
+      double tof = 0;
       osg::Vec3 ip;
 
       // Predict platform impact point
@@ -265,14 +265,14 @@ void Bomb::weaponGuidance(const LCreal)
          );
 
       // Azimuth & elevation steering
-      static const LCreal LIMITS = 1.0f;
-      static const LCreal GAIN = 5.0f;
-      LCreal caz = lcAtan2( missDistRef.y(), tsrng ) * GAIN;
+      static const double LIMITS = 1.0f;
+      static const double GAIN = 5.0f;
+      double caz = std::atan2( missDistRef.y(), tsrng ) * GAIN;
       if (caz >  LIMITS) caz =  LIMITS;
       if (caz < -LIMITS) caz = -LIMITS;
       cmdStrAz = caz;
 
-      LCreal cel = lcAtan2( missDistRef.x(), tsrng ) * GAIN;
+      double cel = std::atan2( missDistRef.x(), tsrng ) * GAIN;
       if (cel >  LIMITS) cel =  LIMITS;
       if (cel < -LIMITS) cel = -LIMITS;
       cmdStrEl = cel;
@@ -294,10 +294,10 @@ void Bomb::weaponGuidance(const LCreal)
 //------------------------------------------------------------------------------
 // weaponDynamics -- default dynamics; using Robot Aircraft (RAC) dynamics
 //------------------------------------------------------------------------------
-void Bomb::weaponDynamics(const LCreal dt)
+void Bomb::weaponDynamics(const double dt)
 {
    // Useful constant
-   static const LCreal g = ETHG * basic::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
+   static const double g = base::ETHG * base::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
 
    // ---
    // Compute & Set acceleration vector (earth)
@@ -312,7 +312,7 @@ void Bomb::weaponDynamics(const LCreal dt)
 
    // and the controls from guidance, if any
    if (guidanceValid) {
-      const LCreal h = g * 2.0f;
+      const double h = g * 2.0f;
       osg::Vec3 ab0(0, 0, 0); // body accelerations
 
       ab0[1] = h * cmdStrAz;  // body Y accel (m/s/s)
@@ -336,9 +336,9 @@ void Bomb::weaponDynamics(const LCreal dt)
    // ---
    // Compute Euler angles
    // ---
-   const LCreal vg = std::sqrt(ve1[INORTH]*ve1[INORTH] + ve1[IEAST]*ve1[IEAST]);
-   const LCreal newPsi   = lcAtan2(ve1[IEAST],ve1[INORTH]);
-   const LCreal newTheta = lcAtan2( -ve1[IDOWN], vg );
+   const double vg = std::sqrt(ve1[INORTH]*ve1[INORTH] + ve1[IEAST]*ve1[IEAST]);
+   const double newPsi   = std::atan2(ve1[IEAST],ve1[INORTH]);
+   const double newTheta = std::atan2( -ve1[IDOWN], vg );
 
 
    // ---
@@ -356,11 +356,11 @@ void Bomb::weaponDynamics(const LCreal dt)
 bool Bomb::impactPrediction(
       const osg::Vec3* const initPos,
       const osg::Vec3* const initVel,
-      const LCreal groundPlane,
-      const LCreal dt,
-      const LCreal maxTime,
+      const double groundPlane,
+      const double dt,
+      const double maxTime,
       osg::Vec3* const finalPos,
-      LCreal* const tof
+      double* const tof
    ) const
 {
    return weaponImpactPrediction(initPos, initVel, groundPlane, dt, maxTime, dragIndex, finalPos, tof);
@@ -372,16 +372,16 @@ bool Bomb::impactPrediction(
 bool Bomb::weaponImpactPrediction(
       const osg::Vec3* const initPos,
       const osg::Vec3* const initVel,
-      const LCreal groundPlane,
-      const LCreal dt,
-      const LCreal maxTime,
-      const LCreal dragIndex,
+      const double groundPlane,
+      const double dt,
+      const double maxTime,
+      const double dragIndex,
       osg::Vec3* const finalPos,
-      LCreal* const tof
+      double* const tof
    )
 {
    // Useful constant
-   static const LCreal g = ETHG * basic::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
+   static const double g = base::ETHG * base::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
 
    // Make sure we have all of our pointers
    if (initPos == nullptr || initVel == nullptr || finalPos == nullptr || tof == nullptr) return false;
@@ -391,7 +391,7 @@ bool Bomb::weaponImpactPrediction(
    osg::Vec3 vel = *initVel;
 
    // Run time
-   LCreal time = 0.0;
+   double time = 0.0;
 
    // ---
    // Simple ballistic extrapolate of the weapon's position
@@ -426,7 +426,7 @@ bool Bomb::weaponImpactPrediction(
 // Set Slot routines --
 //------------------------------------------------------------------------------
 
-bool Bomb::setSlotArmingOption(basic::Identifier* const p)
+bool Bomb::setSlotArmingOption(base::Identifier* const p)
 {
     bool ok = false;
     if (p != nullptr) {
@@ -443,42 +443,42 @@ bool Bomb::setSlotArmingOption(basic::Identifier* const p)
 }
 
 // noseFuze: Nose fuze flag
-bool Bomb::setSlotNoseFuze(basic::Number* const p)
+bool Bomb::setSlotNoseFuze(base::Number* const p)
 {
     setNoseFuze( p->getBoolean() );
     return true;
 }
 
 // midFuze: Middle fuze flag
-bool Bomb::setSlotMidFuze(basic::Number* const p)
+bool Bomb::setSlotMidFuze(base::Number* const p)
 {
     setMidFuze( p->getBoolean() );
     return true;
 }
 
 // tailFuze: Tail fuze flag
-bool Bomb::setSlotTailFuze(basic::Number* const p)
+bool Bomb::setSlotTailFuze(base::Number* const p)
 {
     setTailFuze( p->getBoolean() );
     return true;
 }
 
 // fuzeAltitude:  Fuze arming Altitude
-bool Bomb::setSlotFuzeAltitude(basic::Number* const p)
+bool Bomb::setSlotFuzeAltitude(base::Number* const p)
 {
     setFuzeAltitude( p->getFloat() );
     return true;
 }
 
 // fuzeTime:  Fuze Arming Time
-bool Bomb::setSlotFuzeTime(basic::Number* const p)
+bool Bomb::setSlotFuzeTime(base::Number* const p)
 {
     setFuzeTime( p->getFloat() );
     return true;
 }
 
 // dragIndex: drag index used by default dynamics
-bool Bomb::setSlotDragIndex(basic::Number* const p)
+bool Bomb::setSlotDragIndex(base::Number* const p)
 {
     setDragIndex( p->getReal() );
     return true;
@@ -487,7 +487,7 @@ bool Bomb::setSlotDragIndex(basic::Number* const p)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* Bomb::getSlotByIndex(const int si)
+base::Object* Bomb::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

@@ -1,7 +1,7 @@
 
 #include "openeaagles/gui/glut/factory.h"
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 #include "openeaagles/gui/glut/GlutDisplay.h"
 #include "openeaagles/gui/glut/Shapes3D.h"
@@ -11,9 +11,9 @@
 namespace oe {
 namespace glut {
 
-basic::Object* factory(const char* name)
+base::Object* factory(const char* name)
 {
-    basic::Object* obj = nullptr;
+    base::Object* obj = nullptr;
 
     // General graphics support
     if ( std::strcmp(name, GlutDisplay::getFactoryName()) == 0 ) {

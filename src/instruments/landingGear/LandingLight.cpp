@@ -1,5 +1,5 @@
 #include "openeaagles/instruments/landingGear/LandingLight.h"
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/Number.h"
 #include <GL/glu.h>
 
 namespace oe {
@@ -16,7 +16,7 @@ END_SLOTTABLE(LandingLight)
 //  Map slot table to handles for LandingGear
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(LandingLight)
-    ON_SLOT(1, setSlotLightRadius, basic::Number)
+    ON_SLOT(1, setSlotLightRadius, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -52,7 +52,7 @@ EMPTY_DELETEDATA(LandingLight)
 //------------------------------------------------------------------------------
 // setLightRadius() - how big is our light?
 //------------------------------------------------------------------------------
-bool LandingLight::setLightRadius(const LCreal newLR)
+bool LandingLight::setLightRadius(const double newLR)
 {
     lRadius = newLR;
     return true;
@@ -62,7 +62,7 @@ bool LandingLight::setLightRadius(const LCreal newLR)
 //------------------------------------------------------------------------------
 // setSlotLightRadius() - sets our light radius to be drawn
 //------------------------------------------------------------------------------
-bool LandingLight::setSlotLightRadius(const basic::Number* const newLR)
+bool LandingLight::setSlotLightRadius(const base::Number* const newLR)
 {
     bool ok = false;
     if (newLR != nullptr) ok = setLightRadius(newLR->getReal());
@@ -82,9 +82,9 @@ void LandingLight::drawFunc()
     glGetFloatv(GL_LINE_WIDTH, &lw);
 
     // all we need is the gear up value, and we can toggle accordingly
-    LCreal gearUpVal = getGearUpValue();
-    LCreal gearDownVal = getGearDownValue();
-    LCreal lastC = gearCurrent;
+    double gearUpVal = getGearUpValue();
+    double gearDownVal = getGearDownValue();
+    double lastC = gearCurrent;
     gearCurrent = getInstValue();
 
     glPushMatrix();
@@ -112,13 +112,13 @@ void LandingLight::drawFunc()
 //------------------------------------------------------------------------------
 // updateData() -
 //------------------------------------------------------------------------------
-void LandingLight::updateData(const LCreal dt)
+void LandingLight::updateData(const double dt)
 {
     BaseClass::updateData(dt);
 
-    LCreal gearUpVal = getGearUpValue();
-    LCreal gearDownVal = getGearDownValue();
-    LCreal lastC = gearCurrent;
+    double gearUpVal = getGearUpValue();
+    double gearDownVal = getGearDownValue();
+    double lastC = gearCurrent;
     gearCurrent = getInstValue();
 
     int x = 0;
@@ -140,7 +140,7 @@ void LandingLight::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for LandingLight
 //------------------------------------------------------------------------------
-basic::Object* LandingLight::getSlotByIndex(const int si)
+base::Object* LandingLight::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

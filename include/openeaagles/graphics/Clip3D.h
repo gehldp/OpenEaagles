@@ -4,7 +4,7 @@
 #ifndef __oe_graphics_Clip3D_H__
 #define __oe_graphics_Clip3D_H__
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 #include "Polygon.h"
 
 namespace oe {
@@ -18,8 +18,8 @@ namespace graphics {
 // Description: 3D polygon clipping
 //
 //------------------------------------------------------------------------------
-class Clip3D : public basic::Object {
-    DECLARE_SUBCLASS(Clip3D,basic::Object)
+class Clip3D : public base::Object {
+    DECLARE_SUBCLASS(Clip3D,base::Object)
 
 public:
    Clip3D();
@@ -28,9 +28,9 @@ public:
    // Sets the limits of the clipping box
    //------------------------------------------------------------------------------
    void setClippingBox(
-         const LCreal xmin, const LCreal xmax,
-         const LCreal ymin, const LCreal ymax,
-         const LCreal zmin = -FLT_MAX, const LCreal zmax = FLT_MAX
+         const double xmin, const double xmax,
+         const double ymin, const double ymax,
+         const double zmin = -FLT_MAX, const double zmax = FLT_MAX
       );
 
    //------------------------------------------------------------------------------
@@ -72,14 +72,14 @@ public:
       const osg::Vec2* const pt,    // (optional) Input polygon texture coordinates
       const unsigned int n,         // Number of vertices/normals
       const unsigned int index,     // Coordinate index: X -> 0; Y -> 1; and Z -> 2
-      const LCreal k,               // Value of the clipping plane
+      const double k,               // Value of the clipping plane
       const bool clipUpperPlane);   // if clipping against an upper plane, 
                                     //  else against a lower plane
 
 private:
-   LCreal x0, x1;     // left and right
-   LCreal y0, y1;     // top and bottom
-   LCreal z0, z1;     // near and far
+   double x0, x1;     // left and right
+   double y0, y1;     // top and bottom
+   double z0, z1;     // near and far
 };
 
 } // End graphics namespace

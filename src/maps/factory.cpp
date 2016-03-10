@@ -1,7 +1,7 @@
 
 #include "openeaagles/maps/factory.h"
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 #include "openeaagles/maps/rpfMap/MapDrawer.h"
 #include "openeaagles/maps/rpfMap/CadrgMap.h"
@@ -11,9 +11,9 @@
 namespace oe {
 namespace maps  {
 
-basic::Object* factory(const char* name)
+base::Object* factory(const char* name)
 {
-    basic::Object* obj = nullptr;
+    base::Object* obj = nullptr;
 
     // Map Drawer
     if ( std::strcmp(name, rpf::MapDrawer::getFactoryName()) == 0 ) {

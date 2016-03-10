@@ -7,7 +7,7 @@
 #include "openeaagles/simulation/Player.h"
 
 namespace oe {
-   namespace basic { class Angle; class Distance; class String; class Time; }
+   namespace base { class Angle; class Distance; class String; class Time; }
 
 namespace simulation {
    class Designator;
@@ -20,36 +20,36 @@ namespace simulation {
 //
 // Factory name: Weapon
 // Slots:
-//    released      <basic::Number>    ! Weapon has been released (default: false)
-//    failed        <basic::Number>    ! Weapon failed (e.g., reasonableness Test) (default: false)
-//    power         <basic::Number>    ! Weapon power flag (default: true)
-//    hang          <basic::Number>    ! Will be a hung store (default: false)
-//    hung          <basic::Number>    ! Hung store flag (default: false)
+//    released      <base::Number>    ! Weapon has been released (default: false)
+//    failed        <base::Number>    ! Weapon failed (e.g., reasonableness Test) (default: false)
+//    power         <base::Number>    ! Weapon power flag (default: true)
+//    hang          <base::Number>    ! Will be a hung store (default: false)
+//    hung          <base::Number>    ! Hung store flag (default: false)
 //
-//    maxTOF        <basic::Time>      ! max time of flight (seconds or basic::Time) (default: 60.0f)
-//    maxTOF        <basic::Number>    ! max time of flight (seconds or basic::Time)
+//    maxTOF        <base::Time>      ! max time of flight (seconds or base::Time) (default: 60.0f)
+//    maxTOF        <base::Number>    ! max time of flight (seconds or base::Time)
 //
-//    tsg           <basic::Time>      ! time to start guidance (seconds or basic::Time) (default: 9999.0f)
-//    tsg           <basic::Number>    ! time to start guidance (seconds or basic::Time)
+//    tsg           <base::Time>      ! time to start guidance (seconds or base::Time) (default: 9999.0f)
+//    tsg           <base::Number>    ! time to start guidance (seconds or base::Time)
 //
-//    maxBurstRng   <basic::Distance>  ! max burst range (meters or basic::Distance) (default: 500.0f)
-//    maxBurstRng   <basic::Number>    ! max burst range (meters or basic::Distance)
+//    maxBurstRng   <base::Distance>  ! max burst range (meters or base::Distance) (default: 500.0f)
+//    maxBurstRng   <base::Number>    ! max burst range (meters or base::Distance)
 //
-//    lethalRange   <basic::Distance>  ! lethal range (meters or basic::Distance) (default: 50.0f)
-//    lethalRange   <basic::Number>    ! lethal range (meters or basic::Distance)
+//    lethalRange   <base::Distance>  ! lethal range (meters or base::Distance) (default: 50.0f)
+//    lethalRange   <base::Number>    ! lethal range (meters or base::Distance)
 //
-//    sobt          <basic::Time>      ! start-of-burn time (seconds or basic::Time) (default: 9999.0f)
-//    sobt          <basic::Number>    ! start-of-burn time (seconds or basic::Time)
+//    sobt          <base::Time>      ! start-of-burn time (seconds or base::Time) (default: 9999.0f)
+//    sobt          <base::Number>    ! start-of-burn time (seconds or base::Time)
 //
-//    eobt          <basic::Time>      ! end-of-burn time (seconds or basic::Time) (default: 0.0f)
-//    eobt          <basic::Number>    ! end-of-burn time (seconds or basic::Time)
+//    eobt          <base::Time>      ! end-of-burn time (seconds or base::Time) (default: 0.0f)
+//    eobt          <base::Number>    ! end-of-burn time (seconds or base::Time)
 //
-//    maxGimbal     <basic::Angle>     ! max gimbal angle (default: 30.0f * D2RCC)
-//    tgtPos        <basic::List>      ! TEST target position [ n e d ] (meters) (default: 0, 0, 0)
-//    weaponID      <basic::Number>    ! Weapon type ID (optional: user defined number) (default: 0)
-//    dummy         <basic::Number>    ! Dummy store (launch, but don't flyout or detonate) (default: false)
-//    jettisonable  <basic::Number>    ! Weapon can be jettisoned (default: true)
-//    testTgtName   <basic::String>    ! TEST only: target player name (default: 0)
+//    maxGimbal     <base::Angle>     ! max gimbal angle (default: 30.0f * D2RCC)
+//    tgtPos        <base::List>      ! TEST target position [ n e d ] (meters) (default: 0, 0, 0)
+//    weaponID      <base::Number>    ! Weapon type ID (optional: user defined number) (default: 0)
+//    dummy         <base::Number>    ! Dummy store (launch, but don't flyout or detonate) (default: false)
+//    jettisonable  <base::Number>    ! Weapon can be jettisoned (default: true)
+//    testTgtName   <base::String>    ! TEST only: target player name (default: 0)
 //
 // Events:
 //      DESIGNATOR_EVENT    Designator (e.g., LASER) event
@@ -180,22 +180,22 @@ public:
    bool getWillHang() const;                       // True if the weapon will hang on release
    bool isDummy() const;                           // True if this is a dummy weapon (someone else with fly it out)
 
-   LCreal getTOF() const;                          // Time Of Flight (seconds) since release
-   LCreal getMaxTOF() const;                       // Max TOF (seconds)
-   LCreal getTSG() const;                          // Time-to-Start guidance (seconds since release)
-   LCreal getSOBT() const;                         // Start-Of-Burn time (seconds since release)
-   LCreal getEOBT() const;                         // End-Of-Burn time (seconds since release)
+   double getTOF() const;                          // Time Of Flight (seconds) since release
+   double getMaxTOF() const;                       // Max TOF (seconds)
+   double getTSG() const;                          // Time-to-Start guidance (seconds since release)
+   double getSOBT() const;                         // Start-Of-Burn time (seconds since release)
+   double getEOBT() const;                         // End-Of-Burn time (seconds since release)
    virtual bool isGuidanceEnabled() const;                  // Is weapon guidance enabled?
    virtual bool isEngineBurnEnabled() const;                // Weapon engine (rocket) on
-   LCreal getMaxBurstRng() const;                  // Max burst range (meters) -- most players will be damaged within this range
-   LCreal getLethalRange() const;                  // Lethal range (meters) -- most players will be killed within this range
-   LCreal getMaxGimbalAngle() const;               // Max gimbal angle (radians)
+   double getMaxBurstRng() const;                  // Max burst range (meters) -- most players will be damaged within this range
+   double getLethalRange() const;                  // Lethal range (meters) -- most players will be killed within this range
+   double getMaxGimbalAngle() const;               // Max gimbal angle (radians)
 
    Player* getLaunchVehicle();                     // Pointer to the player that launched us
    const Player* getLaunchVehicle() const;         // Pointer to the player that launched us (const version)
 
    Detonation getDetonationResults() const;        // Detonation result code (see 'Detonation' enum)
-   LCreal getDetonationRange() const;              // Range to target at detonation (meters)
+   double getDetonationRange() const;              // Range to target at detonation (meters)
    const osg::Vec3& getDetonationLocation() const; // Location of detonation in target player's coord (meters)
 
    bool isTargetPositionValid() const;             // True if we have the target position and is it valid
@@ -243,9 +243,9 @@ public:
    virtual bool setLaunchVehicle(Player* const lch);        // Sets the pointer to the player that launched us
    virtual bool setDetonationResults(const Detonation dr);  // Sets the detonation result code (see 'Detonation' enum)
    virtual bool setDetonationLocation(const osg::Vec3&);    // Sets the detonation location in target player's coord (meters)
-   virtual bool setMaxBurstRng(const LCreal v);             // Sets the max burst range (meters)
-   virtual bool setLethalRange(const LCreal v);             // Sets the lethal range (meters)
-   virtual bool setMaxGimbalAngle(const LCreal v);          // Sets the max gimbal angle( radians)
+   virtual bool setMaxBurstRng(const double v);             // Sets the max burst range (meters)
+   virtual bool setLethalRange(const double v);             // Sets the lethal range (meters)
+   virtual bool setMaxGimbalAngle(const double v);          // Sets the max gimbal angle( radians)
    virtual bool setWeaponID(const int n);                   // Sets the weapon's type ID number
    virtual bool setReleaseEventID(const unsigned short n);  // Sets the release event ID
 
@@ -275,50 +275,50 @@ public:
    virtual bool onJettisonEvent();
 
    // Slot functions
-   virtual bool setSlotReleased(const basic::Number* const p);
-   virtual bool setSlotFailed(const basic::Number* const p);
-   virtual bool setSlotPower(const basic::Number* const p);
-   virtual bool setSlotWillHang(const basic::Number* const p);
-   virtual bool setSlotHung(const basic::Number* const p);
-   virtual bool setSlotMaxTOF(const basic::Time* const p);
-   virtual bool setSlotMaxTOF(const basic::Number* const p);
-   virtual bool setSlotTSG(const basic::Time* const p);
-   virtual bool setSlotTSG(const basic::Number* const p);
-   virtual bool setSlotMaxBurstRng(const basic::Distance* const p);
-   virtual bool setSlotMaxBurstRng(const basic::Number* const p);
-   virtual bool setSlotLethalRange(const basic::Distance* const p);
-   virtual bool setSlotLethalRange(const basic::Number* const p);
-   virtual bool setSlotSOBT(const basic::Time* const p);
-   virtual bool setSlotSOBT(const basic::Number* const p);
-   virtual bool setSlotEOBT(const basic::Time* const p);
-   virtual bool setSlotEOBT(const basic::Number* const p);
-   virtual bool setSlotMaxGimbal(const basic::Angle* const p);
-   virtual bool setSlotTgtPos(const basic::List* const p);
-   virtual bool setSlotWeaponID(const basic::Number* const p);
-   virtual bool setSlotDummy(const basic::Number* const p);
-   virtual bool setSlotJettisonable(const basic::Number* const p);
-   virtual bool setSlotTestTgtName(const basic::String* const p);
+   virtual bool setSlotReleased(const base::Number* const p);
+   virtual bool setSlotFailed(const base::Number* const p);
+   virtual bool setSlotPower(const base::Number* const p);
+   virtual bool setSlotWillHang(const base::Number* const p);
+   virtual bool setSlotHung(const base::Number* const p);
+   virtual bool setSlotMaxTOF(const base::Time* const p);
+   virtual bool setSlotMaxTOF(const base::Number* const p);
+   virtual bool setSlotTSG(const base::Time* const p);
+   virtual bool setSlotTSG(const base::Number* const p);
+   virtual bool setSlotMaxBurstRng(const base::Distance* const p);
+   virtual bool setSlotMaxBurstRng(const base::Number* const p);
+   virtual bool setSlotLethalRange(const base::Distance* const p);
+   virtual bool setSlotLethalRange(const base::Number* const p);
+   virtual bool setSlotSOBT(const base::Time* const p);
+   virtual bool setSlotSOBT(const base::Number* const p);
+   virtual bool setSlotEOBT(const base::Time* const p);
+   virtual bool setSlotEOBT(const base::Number* const p);
+   virtual bool setSlotMaxGimbal(const base::Angle* const p);
+   virtual bool setSlotTgtPos(const base::List* const p);
+   virtual bool setSlotWeaponID(const base::Number* const p);
+   virtual bool setSlotDummy(const base::Number* const p);
+   virtual bool setSlotJettisonable(const base::Number* const p);
+   virtual bool setSlotTestTgtName(const base::String* const p);
 
    unsigned int getMajorType() const override;
    bool collisionNotification(Player* const p) override;
    bool crashNotification() override;
 
-   void updateTC(const LCreal dt = 0.0) override;
-   bool event(const int event, basic::Object* const obj = nullptr) override;
+   void updateTC(const double dt = 0.0) override;
+   bool event(const int event, base::Object* const obj = nullptr) override;
    void reset() override;
 
 protected:
-   virtual void weaponGuidance(const LCreal dt);
-   virtual void weaponDynamics(const LCreal dt);
+   virtual void weaponGuidance(const double dt);
+   virtual void weaponDynamics(const double dt);
    virtual void positionTracking();
 
-   virtual void updateTOF(const LCreal dt);
+   virtual void updateTOF(const double dt);
 
-   virtual void setTOF(const LCreal newTOF);
-   virtual bool setMaxTOF(const LCreal v);      // Sets the max TOF (seconds)
-   virtual bool setTSG(const LCreal v);         // Sets the Time-to-Start guidance (seconds since release)
-   virtual bool setSOBT(const LCreal v);        // Sets the "start of burn" time  (seconds since release)
-   virtual bool setEOBT(const LCreal v);        // Sets the "End-Of-Burn" time (seconds since release)
+   virtual void setTOF(const double newTOF);
+   virtual bool setMaxTOF(const double v);      // Sets the max TOF (seconds)
+   virtual bool setTSG(const double v);         // Sets the Time-to-Start guidance (seconds since release)
+   virtual bool setSOBT(const double v);        // Sets the "start of burn" time  (seconds since release)
+   virtual bool setEOBT(const double v);        // Sets the "End-Of-Burn" time (seconds since release)
 
    virtual bool setReleased(const bool f);      // Sets the weapon released flag
    virtual bool setHung(const bool f);          // Sets the hung weapon flag
@@ -342,35 +342,35 @@ protected:
    // At detonation: compute the location of the detonation relative to the target player
    bool setLocationOfDetonation();
 
-   void dynamics(const LCreal  dt = 0.0) override;
+   void dynamics(const double  dt = 0.0) override;
 
    bool shutdownNotification() override;
 
 private:
     void initData();
 
-    static const LCreal DEFAULT_MAX_TGT_RNG;     // meters
-    static const LCreal DEFAULT_MAX_TGT_LOS_ERR; // radians
+    static const double DEFAULT_MAX_TGT_RNG;     // meters
+    static const double DEFAULT_MAX_TGT_LOS_ERR; // radians
 
-    basic::safe_ptr<Weapon>  flyoutWpn;     // Initial weapon: points to the cloned flyout weapon
+    base::safe_ptr<Weapon>  flyoutWpn;     // Initial weapon: points to the cloned flyout weapon
                                             // Cloned flyout: weapon: points to self
 
-    basic::safe_ptr<Weapon>  initialWpn;    // Initial weapon: points to self
+    base::safe_ptr<Weapon>  initialWpn;    // Initial weapon: points to self
                                             // Cloned flyout: points to the initial weapon
 
     osg::Vec3  tgtPos;                      // Target Position -- platform coord (NED)
     bool       tgtPosValid;                 // If true, target position is valid
-    basic::safe_ptr<Player>  tgtPlayer;     // Target Player
-    basic::safe_ptr<Track>   tgtTrack;      // Target Track
+    base::safe_ptr<Player>  tgtPlayer;     // Target Player
+    base::safe_ptr<Track>   tgtTrack;      // Target Track
     osg::Vec3d    tgtVel;                   // Target/Track Velocity (m/s) relative to ownship velocity
-    basic::safe_ptr<Player>  launchVehicle; // Launching/Releasing Player
+    base::safe_ptr<Player>  launchVehicle; // Launching/Releasing Player
     bool       posTrkEnb;                   // If true, update tgtPos from the target/track
-    LCreal     maxTgtRng;                   // Max target range for default tgt selection      (meters)
-    LCreal     maxTgtLosErr;                // Max target LOS error for default tgt selection  (radians)
-    LCreal     detonationRange;             // Range to target at time of detonation           (meters)
+    double     maxTgtRng;                   // Max target range for default tgt selection      (meters)
+    double     maxTgtLosErr;                // Max target LOS error for default tgt selection  (radians)
+    double     detonationRange;             // Range to target at time of detonation           (meters)
     osg::Vec3  tgtDetLoc;                   // Detonation location in target player's coord    (meters)
 
-    basic::safe_ptr<Stores> launcher;   // Launcher
+    base::safe_ptr<Stores> launcher;   // Launcher
     int         station;                // Station number (on launcher)
 
     int         weaponID;               // Weapon type ID (user defined)
@@ -386,19 +386,19 @@ private:
     bool        jettisoned;             // Weapon has been jettisioned.
     bool        dummyFlg;               // Dummy (launch, but don't flyout or detonate)
     Detonation  results;                // Results of weapon detonation
-    basic::safe_ptr<const basic::String> tstTgtNam; // Test only: target player name
+    base::safe_ptr<const base::String> tstTgtNam; // Test only: target player name
 
     // ---
     // Default guidance & dynamics parameters
     // ---
-    LCreal tof;            // Current time of flight   (sec)   (tod)
-    LCreal maxTOF;         // max time of flight       (sec)
-    LCreal tsg;            // time to start guidance   (sec)
-    LCreal maxBurstRng;    // max burst range -- most entities are damaged within this range. (meters)
-    LCreal lethalRange;    // lethal range -- most entities are killed within this range.     (meters)
-    LCreal sobt;           // start-of-burn time       (sec)
-    LCreal eobt;           // end-of-burn time         (sec)
-    LCreal maxGimbal;      // max gimbal angle         (radians)
+    double tof;            // Current time of flight   (sec)   (tod)
+    double maxTOF;         // max time of flight       (sec)
+    double tsg;            // time to start guidance   (sec)
+    double maxBurstRng;    // max burst range -- most entities are damaged within this range. (meters)
+    double lethalRange;    // lethal range -- most entities are killed within this range.     (meters)
+    double sobt;           // start-of-burn time       (sec)
+    double eobt;           // end-of-burn time         (sec)
+    double maxGimbal;      // max gimbal angle         (radians)
 };
 
 } // End simulation namespace

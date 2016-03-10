@@ -4,7 +4,7 @@
 #ifndef __oe_graphics_Scanline_H__
 #define __oe_graphics_Scanline_H__
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 namespace oe {
 namespace graphics {
@@ -18,9 +18,9 @@ class Polygon;
 // Description:  (Abstract) 2D scan line engine.
 // Factory name: Scanline
 //------------------------------------------------------------------------------
-class Scanline : public basic::Object
+class Scanline : public base::Object
 {
-   DECLARE_SUBCLASS(Scanline,basic::Object)
+   DECLARE_SUBCLASS(Scanline,base::Object)
 
 public:
    Scanline();
@@ -30,7 +30,7 @@ public:
    void scan();
 
    // Defines the area that we're going to scan.
-   void setArea(const LCreal xCenter, const LCreal yCenter, const LCreal xSize, const LCreal ySize, const LCreal zRotDeg);
+   void setArea(const double xCenter, const double yCenter, const double xSize, const double ySize, const double zRotDeg);
 
    unsigned int getWidth() const          { return ix; }    // Viewport (image) width -- pixels
    unsigned int getHeight() const         { return iy; }    // viewport (image) height -- lines
@@ -44,41 +44,41 @@ public:
 
 protected:
    // PolyData Description
-   class PolyData : public basic::Object {
-      DECLARE_SUBCLASS(PolyData,basic::Object)
+   class PolyData : public base::Object {
+      DECLARE_SUBCLASS(PolyData,base::Object)
    public:
       PolyData();
-      void getNorm(osg::Vec3& lnorm, const LCreal x) const;
+      void getNorm(osg::Vec3& lnorm, const double x) const;
 
-      LCreal      x0;                    // X value at start
+      double      x0;                    // X value at start
       osg::Vec3   n0;                    // Initial Norm
       osg::Vec3   nslope;                // Norm slope
       bool        aptEdge2;              // reached second edge
-      basic::safe_ptr<Polygon> polygon;      // Clipped (working) polygon
-      basic::safe_ptr<const Polygon> orig;   // Original polygon
+      base::safe_ptr<Polygon> polygon;      // Clipped (working) polygon
+      base::safe_ptr<const Polygon> orig;   // Original polygon
    };
 
 protected:
    // Edge Description
-   class Edge : public basic::Object {
-      DECLARE_SUBCLASS(Edge,basic::Object)
+   class Edge : public base::Object {
+      DECLARE_SUBCLASS(Edge,base::Object)
    public:
       Edge();
-      Edge(const LCreal v0[2], const osg::Vec3& vn0, const LCreal v1[2], const osg::Vec3& vn1, PolyData* const p);
-      Edge(const LCreal v0[2], const LCreal v1[2], PolyData* const p);
+      Edge(const double v0[2], const osg::Vec3& vn0, const double v1[2], const osg::Vec3& vn1, PolyData* const p);
+      Edge(const double v0[2], const double v1[2], PolyData* const p);
 
       void incEdgeStart();
 
       osg::Vec2   lv;         // Lower Vertex
       osg::Vec2   uv;         // Upper Vertex
-      LCreal      x;          // Current X value
-      LCreal      slope;      // slope of the edge
+      double      x;          // Current X value
+      double      slope;      // slope of the edge
       osg::Vec3   lvn;        // Lower Vertex Norm
       osg::Vec3   cn;         // Current Norm
       osg::Vec3   nslope;     // Norm slope
       bool        valid;      // valid edge
       bool        pointLock;  // after incEdgeStart() edge became a point
-      basic::safe_ptr<PolyData> polygon;    // This edge belongs to this polygon
+      base::safe_ptr<PolyData> polygon;    // This edge belongs to this polygon
    };
 
 protected:
@@ -106,13 +106,13 @@ private:
 
    Clip3D*        clipper;                // clipping object
 
-   LCreal         angle;                  // area rotation angle     (radians)
-   LCreal         cx, cy;                 // area center (x,y)
-   LCreal         sx, sy;                 // area size (x,y)
+   double         angle;                  // area rotation angle     (radians)
+   double         cx, cy;                 // area center (x,y)
+   double         sx, sy;                 // area size (x,y)
    unsigned int   ix,iy;                  // number of pixels (x,y)
 
-   LCreal         curX;                   // current X value (pixel number)
-   LCreal         curY;                   // current Y value (scanline number)
+   double         curX;                   // current X value (pixel number)
+   double         curY;                   // current Y value (scanline number)
    PolyData*       curPoly;               // Current polygon (one on top)
 
    osg::Matrix    mat;                    // matrix used by scanner

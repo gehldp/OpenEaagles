@@ -1,9 +1,10 @@
 
 #include "openeaagles/graphics/BmpTexture.h"
 #include "openeaagles/graphics/Display.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/Identifier.h"
-#include "openeaagles/basic/String.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/Identifier.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/util/string_utils.h"
 
 #include <cstdio>
 
@@ -31,8 +32,8 @@ END_SLOTTABLE(BmpTexture)
 //  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(BmpTexture)
-    ON_SLOT(1, setSlotTexturePath, basic::String)
-    ON_SLOT(2, setSlotTextureFileName, basic::String)
+    ON_SLOT(1, setSlotTexturePath, base::String)
+    ON_SLOT(2, setSlotTextureFileName, base::String)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -59,8 +60,8 @@ void BmpTexture::copyData(const BmpTexture& org, const bool cc)
    BaseClass::copyData(org);
    if (cc) initData();
 
-   lcStrcpy(texPath, sizeof(texPath), org.texPath);
-   lcStrcpy(texFile, sizeof(texFile), org.texFile);
+   base::lcStrcpy(texPath, sizeof(texPath), org.texPath);
+   base::lcStrcpy(texFile, sizeof(texFile), org.texFile);
 }
 
 //------------------------------------------------------------------------------
@@ -69,7 +70,7 @@ void BmpTexture::copyData(const BmpTexture& org, const bool cc)
 bool BmpTexture::setTextureFileName(const char* const fileName)
 {
    if (fileName != nullptr) {
-      oe::lcStrcpy(texFile, sizeof(texFile), fileName);
+      base::lcStrcpy(texFile, sizeof(texFile), fileName);
    }
    else {
       texFile[0] = '\0';
@@ -80,7 +81,7 @@ bool BmpTexture::setTextureFileName(const char* const fileName)
 bool BmpTexture::setTexturePath(const char* const path)
 {
    if (path != nullptr) {
-      oe::lcStrcpy(texPath, sizeof(texPath), path);
+      base::lcStrcpy(texPath, sizeof(texPath), path);
    }
    else {
       texPath[0] = '\0';
@@ -121,7 +122,7 @@ bool BmpTexture::writeFile()
 //------------------------------------------------------------------------------
 
 // setSlotTexturePath() -- sets the path to the textures directory
-bool BmpTexture::setSlotTexturePath(basic::String* const s)
+bool BmpTexture::setSlotTexturePath(base::String* const s)
 {
    if (s != nullptr) setTexturePath(*s);
    else setTexturePath(nullptr);
@@ -129,7 +130,7 @@ bool BmpTexture::setSlotTexturePath(basic::String* const s)
 }
 
 // setSlotTextureFileName() -- sets the texture file name
-bool BmpTexture::setSlotTextureFileName(basic::String* const s)
+bool BmpTexture::setSlotTextureFileName(base::String* const s)
 {
    if (s != nullptr) setTextureFileName(*s);
    else setTextureFileName(nullptr);
@@ -139,7 +140,7 @@ bool BmpTexture::setSlotTextureFileName(basic::String* const s)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Page
 //------------------------------------------------------------------------------
-basic::Object* BmpTexture::getSlotByIndex(const int si)
+base::Object* BmpTexture::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

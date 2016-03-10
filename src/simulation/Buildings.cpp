@@ -1,8 +1,8 @@
 #include "openeaagles/simulation/Buildings.h"
 
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/osg/Matrix"
-#include "openeaagles/basic/units/Angles.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/units/Angles.h"
 
 namespace oe {
 namespace simulation {
@@ -19,7 +19,7 @@ EMPTY_SERIALIZER(Building)
 Building::Building()
 {
     STANDARD_CONSTRUCTOR()
-    static basic::String generic("GenericBuilding");
+    static base::String generic("GenericBuilding");
     setType(&generic);
 }
 

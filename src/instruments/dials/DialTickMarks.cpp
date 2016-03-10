@@ -1,5 +1,5 @@
 #include "openeaagles/instruments/dials/DialTickMarks.h"
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/Number.h"
 
 namespace oe {
 namespace instruments {
@@ -17,8 +17,8 @@ END_SLOTTABLE(DialTickMarks)
 //  Map slot table to handles for Analog Dial
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(DialTickMarks)
-    ON_SLOT(1, setSlotLength, basic::Number)
-    ON_SLOT(2, setSlotQuantity, basic::Number)
+    ON_SLOT(1, setSlotLength, base::Number)
+    ON_SLOT(2, setSlotQuantity, base::Number)
     ON_SLOT(3, setTickGraphic, graphics::Graphic)
 END_SLOT_MAP()
 
@@ -64,12 +64,12 @@ void DialTickMarks::drawFunc()
     glGetFloatv(GL_CURRENT_COLOR, currentColor);
 
     // get our data from our baseclass (AnalogDial)
-    LCreal sweepAngle = getSweepAngle();
-    LCreal startAngle = getStartAngle();
-    LCreal tRadius = getRadius();
+    double sweepAngle = getSweepAngle();
+    double startAngle = getStartAngle();
+    double tRadius = getRadius();
 
     // figure our rotation angle per tick mark (deg)
-    LCreal rotation = sweepAngle/quantity;
+    double rotation = sweepAngle/quantity;
 
     glPushMatrix();
         // rotate to our start angle
@@ -99,7 +99,7 @@ void DialTickMarks::drawFunc()
 //------------------------------------------------------------------------------
 // setSlotLength() -- sets our tick mark length
 //------------------------------------------------------------------------------
-bool DialTickMarks::setSlotLength(const basic::Number* const newLength)
+bool DialTickMarks::setSlotLength(const base::Number* const newLength)
 {
     bool ok = true;
     if (newLength != nullptr) ok = setLength(newLength->getReal());
@@ -109,7 +109,7 @@ bool DialTickMarks::setSlotLength(const basic::Number* const newLength)
 //------------------------------------------------------------------------------
 // setSlotQuantity() -- sets the number of tick marks
 //------------------------------------------------------------------------------
-bool DialTickMarks::setSlotQuantity(const basic::Number* const newQ)
+bool DialTickMarks::setSlotQuantity(const base::Number* const newQ)
 {
     bool ok = true;
     if (newQ != nullptr) ok = setQuantity(newQ->getInt());
@@ -138,7 +138,7 @@ bool DialTickMarks::setTickGraphic(const graphics::Graphic* const newGraphic)
 //------------------------------------------------------------------------------
 // setLength() -- sets tick mark length
 //------------------------------------------------------------------------------
-bool DialTickMarks::setLength(const LCreal newLength)
+bool DialTickMarks::setLength(const double newLength)
 {
     length = newLength;
     return true;
@@ -155,7 +155,7 @@ bool DialTickMarks::setQuantity(const int newQ)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for DialTickMarks
 //------------------------------------------------------------------------------
-basic::Object* DialTickMarks::getSlotByIndex(const int si)
+base::Object* DialTickMarks::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

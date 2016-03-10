@@ -3,6 +3,7 @@
 //------------------------------------------------------------------------------
 
 #include "openeaagles/maps/rpfMap/CadrgTocEntry.h"
+#include "openeaagles/base/util/string_utils.h"
 
 #include <cstdio>
 #include <cstring>
@@ -140,7 +141,7 @@ void CadrgTocEntry::generateItems(void)
 // -----------------------------------------------------------------------------------------
 void CadrgTocEntry::setType(const char* x, const int size)
 {
-    lcStrcpy(type, size, x);
+    base::lcStrcpy(type, size, x);
     type[size] = 0;
 }
 

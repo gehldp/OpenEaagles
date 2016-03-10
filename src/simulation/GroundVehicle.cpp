@@ -1,11 +1,11 @@
 #include "openeaagles/simulation/GroundVehicle.h"
 
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/osg/Matrix"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
-#include "openeaagles/basic/units/Times.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/units/Times.h"
 
 #include <cmath>
 
@@ -18,26 +18,26 @@ namespace simulation {
 IMPLEMENT_SUBCLASS(GroundVehicle,"GroundVehicle")
 EMPTY_SERIALIZER(GroundVehicle)
 
-static const LCreal DEFAULT_LAUNCHER_UP_ANGLE = static_cast<LCreal>(PI/2.0); // Default max launcher angle (rad)
-static const LCreal DEFAULT_LAUNCHER_DOWN_ANGLE = 0.0;                       // Default min launcher angle (rad)
-static const LCreal DEFAULT_LAUNCHER_MOVE_TIME  = 10.0f;                     // Default max launcher movement time (sec)
+static const double DEFAULT_LAUNCHER_UP_ANGLE = static_cast<double>(base::PI/2.0);  // Default max launcher angle (rad)
+static const double DEFAULT_LAUNCHER_DOWN_ANGLE = 0.0;                              // Default min launcher angle (rad)
+static const double DEFAULT_LAUNCHER_MOVE_TIME  = 10.0f;                            // Default max launcher movement time (sec)
 
 //------------------------------------------------------------------------------
 // Slot table
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(GroundVehicle)
-    "commandedPosition",      // 1: Launcher's init commanded position [ "up" "down" ] (basic::Identifier)
-    "launcherDownAngle",      // 2: Min (down) Launcher angle (basic::Angle)
-    "launcherUpAngle",        // 3: Max (up) Launcher angle (basic::Angle)
-    "launcherMoveTime",       // 4: Max time to move between 'down' and 'up' positions (basic::Time)
+    "commandedPosition",      // 1: Launcher's init commanded position [ "up" "down" ] (base::Identifier)
+    "launcherDownAngle",      // 2: Min (down) Launcher angle (base::Angle)
+    "launcherUpAngle",        // 3: Max (up) Launcher angle (base::Angle)
+    "launcherMoveTime",       // 4: Max time to move between 'down' and 'up' positions (base::Time)
 END_SLOTTABLE(GroundVehicle)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(GroundVehicle)
-    ON_SLOT(1, setSlotCommandedPosition, basic::Identifier)
-    ON_SLOT(2, setSlotLauncherDownAngle, basic::Angle)
-    ON_SLOT(3, setSlotLauncherUpAngle,   basic::Angle)
-    ON_SLOT(4, setSlotLauncherMoveTime,  basic::Time)
+    ON_SLOT(1, setSlotCommandedPosition, base::Identifier)
+    ON_SLOT(2, setSlotLauncherDownAngle, base::Angle)
+    ON_SLOT(3, setSlotLauncherUpAngle,   base::Angle)
+    ON_SLOT(4, setSlotLauncherMoveTime,  base::Time)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -46,7 +46,7 @@ END_SLOT_MAP()
 GroundVehicle::GroundVehicle()
 {
     STANDARD_CONSTRUCTOR()
-    static basic::String generic("GenericGroundVehicle");
+    static base::String generic("GenericGroundVehicle");
     setType(&generic);
 
    lnchrDownAngle = DEFAULT_LAUNCHER_DOWN_ANGLE;
@@ -117,7 +117,7 @@ void GroundVehicle::reset()
 //------------------------------------------------------------------------------
 // dynamics() -- update vehicle dynamics
 //------------------------------------------------------------------------------
-void GroundVehicle::dynamics(const LCreal dt)
+void GroundVehicle::dynamics(const double dt)
 {
    BaseClass::dynamics(dt);
    launcherDynamics(dt);
@@ -126,12 +126,12 @@ void GroundVehicle::dynamics(const LCreal dt)
 //------------------------------------------------------------------------------
 // Launcher dynamics -- moves launcher to its commanded position
 //------------------------------------------------------------------------------
-void GroundVehicle::launcherDynamics(const LCreal dt)
+void GroundVehicle::launcherDynamics(const double dt)
 {
    if (lnchrMoveTime > 0 && cmdLnchrPos != NONE) {
 
-      LCreal rate = (lnchrUpAngle - lnchrDownAngle) / lnchrMoveTime;
-      LCreal angle = lnchrAngle;
+      double rate = (lnchrUpAngle - lnchrDownAngle) / lnchrMoveTime;
+      double angle = lnchrAngle;
 
       if (cmdLnchrPos == UP && lnchrAngle != lnchrUpAngle) {
          angle = lnchrAngle + (rate * dt);
@@ -156,29 +156,29 @@ void GroundVehicle::launcherDynamics(const LCreal dt)
 //------------------------------------------------------------------------------
 // Access functions
 //------------------------------------------------------------------------------
-LCreal GroundVehicle::getGrossWeight() const
+double GroundVehicle::getGrossWeight() const
 {
     return 0.0;
 }
 
-LCreal GroundVehicle::getFuelWt() const
+double GroundVehicle::getFuelWt() const
 {
     return 0.0;
 }
 
-LCreal GroundVehicle::getFuelWtMax() const
+double GroundVehicle::getFuelWtMax() const
 {
     return 0.0;
 }
 
 // Launcher position (rad)
-LCreal GroundVehicle::getLauncherPosition() const
+double GroundVehicle::getLauncherPosition() const
 {
    return lnchrAngle;
 }
 
 // Launcher rate (rad/sec)
-LCreal GroundVehicle::getLauncherRate() const
+double GroundVehicle::getLauncherRate() const
 {
    return lnchrRate;
 }
@@ -201,7 +201,7 @@ bool GroundVehicle::commandLauncher(const LauncherCommand cmd)
 }
 
 // Sets the launcher elevation angle (rad), and removes the old position command
-bool GroundVehicle::setLauncherPosition(const LCreal rad)
+bool GroundVehicle::setLauncherPosition(const double rad)
 {
    lnchrAngle = rad;
    lnchrRate = 0.0;
@@ -213,8 +213,8 @@ bool GroundVehicle::setLauncherPosition(const LCreal rad)
 // Slot functions
 //------------------------------------------------------------------------------
 
-// commandedPosition: Launcher's init commanded position [ "up" "down" ] (basic::Identifier)
-bool GroundVehicle::setSlotCommandedPosition(const basic::Identifier* const msg)
+// commandedPosition: Launcher's init commanded position [ "up" "down" ] (base::Identifier)
+bool GroundVehicle::setSlotCommandedPosition(const base::Identifier* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -232,34 +232,34 @@ bool GroundVehicle::setSlotCommandedPosition(const basic::Identifier* const msg)
    return ok;
 }
 
-// launcherDownAngle: Min (down) Launcher angle (basic::Angle)
-bool GroundVehicle::setSlotLauncherDownAngle(const basic::Angle* const msg)
+// launcherDownAngle: Min (down) Launcher angle (base::Angle)
+bool GroundVehicle::setSlotLauncherDownAngle(const base::Angle* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      lnchrDownAngle = static_cast<LCreal>(basic::Radians::convertStatic( *msg ));
+      lnchrDownAngle = static_cast<double>(base::Radians::convertStatic( *msg ));
       ok = true;
    }
    return ok;
 }
 
-// launcherUpAngle: Max (up) Launcher angle (basic::Angle)
-bool GroundVehicle::setSlotLauncherUpAngle(const basic::Angle* const msg)
+// launcherUpAngle: Max (up) Launcher angle (base::Angle)
+bool GroundVehicle::setSlotLauncherUpAngle(const base::Angle* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      lnchrUpAngle = static_cast<LCreal>(basic::Radians::convertStatic( *msg ));
+      lnchrUpAngle = static_cast<double>(base::Radians::convertStatic( *msg ));
       ok = true;
    }
    return ok;
 }
 
-// launcherMoveTime: Max time to move between 'down' and 'up' positions (basic::Time)
-bool GroundVehicle::setSlotLauncherMoveTime(const basic::Time* const msg)
+// launcherMoveTime: Max time to move between 'down' and 'up' positions (base::Time)
+bool GroundVehicle::setSlotLauncherMoveTime(const base::Time* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      lnchrMoveTime = basic::Seconds::convertStatic( *msg );
+      lnchrMoveTime = base::Seconds::convertStatic( *msg );
       ok = true;
    }
    return ok;
@@ -268,7 +268,7 @@ bool GroundVehicle::setSlotLauncherMoveTime(const basic::Time* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* GroundVehicle::getSlotByIndex(const int si)
+base::Object* GroundVehicle::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -287,7 +287,7 @@ EMPTY_SERIALIZER(Tank)
 Tank::Tank()
 {
     STANDARD_CONSTRUCTOR()
-    static basic::String generic("GenericTank");
+    static base::String generic("GenericTank");
     setType(&generic);
 }
 
@@ -316,7 +316,7 @@ EMPTY_SERIALIZER(ArmoredVehicle)
 ArmoredVehicle::ArmoredVehicle()
 {
     STANDARD_CONSTRUCTOR()
-    static basic::String generic("GenericArmoredVehicle");
+    static base::String generic("GenericArmoredVehicle");
     setType(&generic);
 }
 
@@ -344,7 +344,7 @@ EMPTY_SERIALIZER(WheeledVehicle)
 WheeledVehicle::WheeledVehicle()
 {
     STANDARD_CONSTRUCTOR()
-    static basic::String generic("GenericWheeledVehicle");
+    static base::String generic("GenericWheeledVehicle");
     setType(&generic);
 }
 
@@ -372,7 +372,7 @@ EMPTY_SERIALIZER(Artillery)
 Artillery::Artillery()
 {
     STANDARD_CONSTRUCTOR()
-    static basic::String generic("GenericArtillery");
+    static base::String generic("GenericArtillery");
     setType(&generic);
 }
 
@@ -401,7 +401,7 @@ EMPTY_SERIALIZER(GroundStation)
 GroundStation::GroundStation()
 {
     STANDARD_CONSTRUCTOR()
-    static basic::String generic("GroundStation");
+    static base::String generic("GroundStation");
     setType(&generic);
 }
 
@@ -429,7 +429,7 @@ EMPTY_SERIALIZER(GroundStationRadar)
 GroundStationRadar::GroundStationRadar()
 {
     STANDARD_CONSTRUCTOR()
-    static basic::String generic("GroundStationRadar");
+    static base::String generic("GroundStationRadar");
     setType(&generic);
 }
 
@@ -457,7 +457,7 @@ EMPTY_SERIALIZER(GroundStationUav)
 GroundStationUav::GroundStationUav()
 {
     STANDARD_CONSTRUCTOR()
-    static basic::String generic("GroundStationUav");
+    static base::String generic("GroundStationUav");
     setType(&generic);
 }
 

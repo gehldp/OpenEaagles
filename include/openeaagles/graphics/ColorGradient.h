@@ -7,28 +7,28 @@
 #ifndef __oe_graphics_ColorGradient_H__
 #define __oe_graphics_ColorGradient_H__
 
-#include "openeaagles/basic/Color.h"
+#include "openeaagles/base/Color.h"
 
 namespace oe {
 
-namespace basic { class PairStream; }
+namespace base { class PairStream; }
 
 namespace graphics {
 
-class ColorGradient : public basic::Color {
-    DECLARE_SUBCLASS(ColorGradient,basic::Color)
+class ColorGradient : public base::Color {
+    DECLARE_SUBCLASS(ColorGradient,base::Color)
 
 public:
     ColorGradient();
 
-    basic::Color* getColorByIdx(const int idx);
+    base::Color* getColorByIdx(const int idx);
 
 protected:
-    bool setSlotColors(basic::PairStream* const newStream);
+    bool setSlotColors(base::PairStream* const newStream);
 
 private:
     static const int MAX_VALUES = 50;
-    basic::PairStream* myColors;
+    base::PairStream* myColors;
 };
 
 } // End graphics namespace

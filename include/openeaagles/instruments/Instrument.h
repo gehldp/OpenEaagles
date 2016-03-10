@@ -18,7 +18,7 @@
 #include "openeaagles/graphics/Graphic.h"
 
 namespace oe {
-   namespace basic { class Table1; }
+   namespace base { class Table1; }
 
 namespace instruments {
 
@@ -29,32 +29,32 @@ public:
     Instrument();
 
     // get functions
-    const basic::Table1* getScalingTable() const    { return myTable; }
-    LCreal  getInstValue() const                    { return instVal; }
-    LCreal  getPreScaleInstValue() const            { return preScaleInstVal; }
+    const base::Table1* getScalingTable() const    { return myTable; }
+    double  getInstValue() const                    { return instVal; }
+    double  getPreScaleInstValue() const            { return preScaleInstVal; }
     bool isPassingAllowed() const                   { return allowPassing; }
 
     // set functions
     virtual bool setAllowValPass(const bool newVP);
-    virtual bool setInstVal(const LCreal newPos);
+    virtual bool setInstVal(const double newPos);
 
-    bool event(const int event, basic::Object* const obj = nullptr) override;
-    void updateData(const LCreal dt = 0.0) override;
+    bool event(const int event, base::Object* const obj = nullptr) override;
+    void updateData(const double dt = 0.0) override;
 
 protected:
     // slot functions
-    bool setSlotScalingTable(const basic::Table1* const newTable);
-    bool setSlotInstVal(const basic::Number* const newVal);
-    bool setSlotAllowValPass(const basic::Number* const newAVP);
+    bool setSlotScalingTable(const base::Table1* const newTable);
+    bool setSlotInstVal(const base::Number* const newVal);
+    bool setSlotAllowValPass(const base::Number* const newAVP);
 
     // event functions
-    bool onUpdateInstVal(const basic::Number* const newPos);
+    bool onUpdateInstVal(const base::Number* const newPos);
 
 private:
     // member variables
-    const basic::Table1* myTable; // holds our scaling data
-    LCreal instVal;                 // our instrument value
-    LCreal preScaleInstVal;         // our pre-scaled instrument value (before linear interpolation)
+    const base::Table1* myTable; // holds our scaling data
+    double instVal;                 // our instrument value
+    double preScaleInstVal;         // our pre-scaled instrument value (before linear interpolation)
     bool allowPassing;              // do we pass our instrument value down to our components?
 };
 

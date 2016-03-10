@@ -1,7 +1,7 @@
 #include "openeaagles/dafif/Ils.h"
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
 #include <iostream>
 
 namespace oe {
@@ -66,7 +66,7 @@ int Ils::isIlsType(const Ils::IlsType tt) const
 void Ils::getGlideSlopeData(const double aclat, const double aclon, const double acelev, float* ilsGlideSlope, float* acGlideSlope, float* deltaGlideSlope)const
 {
    double bearing(0.0), range(0.0), grdrange(0.0), lookangle(0.0);
-   basic::Nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &grdrange, &range, &lookangle);
+   base::Nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &grdrange, &range, &lookangle);
    *ilsGlideSlope = glideSlopeAngle();
    *acGlideSlope = static_cast<float>(-lookangle);
    *deltaGlideSlope = *ilsGlideSlope - *acGlideSlope;

@@ -7,16 +7,16 @@
 #include "openeaagles/simulation/GroundVehicle.h"
 #include "openeaagles/simulation/Missile.h"
 #include "openeaagles/simulation/Weapon.h"
-#include "openeaagles/basic/NetHandler.h"
-#include "openeaagles/basic/SlotTable.h"
-#include "openeaagles/basic/Identifier.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/osg/Vec4"
-#include "openeaagles/basic/osg/Vec3"
-#include "openeaagles/basic/units/Distances.h"
-#include "openeaagles/basic/units/Angles.h"
+#include "openeaagles/base/NetHandler.h"
+#include "openeaagles/base/SlotTable.h"
+#include "openeaagles/base/Identifier.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/osg/Vec4"
+#include "openeaagles/base/osg/Vec3"
+#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/units/Angles.h"
 
 namespace oe {
 namespace otw {
@@ -33,7 +33,7 @@ END_SLOTTABLE(OtwPC)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(OtwPC)
-    ON_SLOT(1,setSlotNetOutput,basic::NetHandler)
+    ON_SLOT(1,setSlotNetOutput,base::NetHandler)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -177,7 +177,7 @@ bool OtwPC::initNetwork()
 //------------------------------------------------------------------------------
 
 // Net Network Output Handler
-bool OtwPC::setSlotNetOutput(basic::NetHandler* const msg)
+bool OtwPC::setSlotNetOutput(base::NetHandler* const msg)
 {
     netOutput = msg;
     return true;
@@ -186,7 +186,7 @@ bool OtwPC::setSlotNetOutput(basic::NetHandler* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* OtwPC::getSlotByIndex(const int si)
+base::Object* OtwPC::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -196,7 +196,7 @@ basic::Object* OtwPC::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 void OtwPC::sendPcData()
 {
-    //const LCreal DEG2MR = (PI / 180.0f * 1000.0f);
+    //const double DEG2MR = (PI / 180.0f * 1000.0f);
 
     // Ownship type air vehicle?
     const simulation::AirVehicle* av = dynamic_cast<const simulation::AirVehicle*>(getOwnship());
@@ -209,9 +209,9 @@ void OtwPC::sendPcData()
         fmd.m_z_cg = 0;          // altitude
 
         const osg::Vec3 pos = av->getPosition();
-        fmd.m_pilot_eye_x = pos[0] * basic::Distance::M2FT;
-        fmd.m_pilot_eye_y = pos[1] * basic::Distance::M2FT;
-        fmd.m_pilot_eye_z = -pos[2] * basic::Distance::M2FT;   // altitude
+        fmd.m_pilot_eye_x = pos[0] * base::Distance::M2FT;
+        fmd.m_pilot_eye_y = pos[1] * base::Distance::M2FT;
+        fmd.m_pilot_eye_z = -pos[2] * base::Distance::M2FT;   // altitude
 
         fmd.m_alphad = av->getAngleOfAttackD();
         fmd.m_betad = av->getSideSlipD();

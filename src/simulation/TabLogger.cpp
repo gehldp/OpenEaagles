@@ -20,8 +20,10 @@
 #include "openeaagles/simulation/TrackManager.h"
 #include "openeaagles/simulation/Weapon.h"
 
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Times.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Times.h"
+#include "openeaagles/base/util/string_utils.h"
+
 #include <string>
 #include <sstream>
 
@@ -104,7 +106,7 @@ void TabLogger::copyData(const TabLogger& org, const bool)
 //------------------------------------------------------------------------------
 // updateTC() -- Update the simulation log time
 //------------------------------------------------------------------------------
-void TabLogger::updateTC(const LCreal dt)
+void TabLogger::updateTC(const double dt)
 {
     BaseClass::updateTC(dt);
 }
@@ -113,7 +115,7 @@ void TabLogger::updateTC(const LCreal dt)
 // updateData() -- During background we'll build & send the descriptions of the
 //                 simulation events to the log file.
 //------------------------------------------------------------------------------
-void TabLogger::updateData(const LCreal dt)
+void TabLogger::updateData(const double dt)
 {
     BaseClass::updateData(dt);
 }
@@ -316,9 +318,9 @@ std::ostream& TabLogger::TabLogEvent::makePlayerDataMsg(  std::ostream& sout,
     sout << vel0[0]   << "\t"                                 // (3 fields)
          << vel0[1]   << "\t"
          << vel0[2]   << "\t" ;
-    sout << (angles0[0] * basic::Angle::R2DCC) << "\t"      // (3 fields)
-         << (angles0[1] * basic::Angle::R2DCC) << "\t"
-         << (angles0[2] * basic::Angle::R2DCC) << "\t" ;
+    sout << (angles0[0] * base::Angle::R2DCC) << "\t"      // (3 fields)
+         << (angles0[1] * base::Angle::R2DCC) << "\t"
+         << (angles0[2] * base::Angle::R2DCC) << "\t" ;
     return sout;
 }
 
@@ -512,8 +514,8 @@ std::ostream& TabLogger::TabLogEvent::makeEmissionDataMsg(std::ostream& sout, co
 {
     if (em != nullptr) {
 
-        sout << (basic::Angle::R2DCC * em->getAzimuthAoi())     << "\t";  // azimuth AOI    (1 field)
-        sout << (basic::Angle::R2DCC * em->getElevationAoi())   << "\t";  // elevation AOI  (1 field)
+        sout << (base::Angle::R2DCC * em->getAzimuthAoi())     << "\t";  // azimuth AOI    (1 field)
+        sout << (base::Angle::R2DCC * em->getElevationAoi())   << "\t";  // elevation AOI  (1 field)
         sout << (em->getFrequency())                            << "\t";  // frequency      (1 field)
         sout << (em->getWavelength())                           << "\t";  // wavelength     (1 field)
         sout << (em->getPulseWidth())                           << "\t";  // pulsewidth     (1 field)
@@ -695,7 +697,7 @@ const char* TabLogger::LogPlayerData::getDescription()
         // Complete the description
         const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
-        lcStrncpy(msg, (len+1), sout.str().c_str(), len);
+        base::lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
     return msg;
 }
@@ -802,7 +804,7 @@ const char* TabLogger::LogGunActivity::getDescription()
         // Complete the description
         const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
-        lcStrncpy(msg, (len+1), sout.str().c_str(), len);
+        base::lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
     return msg;
 }
@@ -821,7 +823,7 @@ EMPTY_SERIALIZER(TabLogger::LogWeaponActivity)
 
 // Constructor
 TabLogger::LogWeaponActivity::LogWeaponActivity(const int callType, const Player* const lancher, const Player* const wpn,
-                                                const Player* const tgt, const unsigned int t, const LCreal d)
+                                                const Player* const tgt, const unsigned int t, const double d)
 {
     STANDARD_CONSTRUCTOR()
     theType   = callType;
@@ -942,7 +944,7 @@ const char* TabLogger::LogWeaponActivity::getDescription()
         // Complete the description
         const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
-        lcStrncpy(msg, (len+1), sout.str().c_str(), len);
+        base::lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
     return msg;
 }
@@ -1098,7 +1100,7 @@ const char* TabLogger::LogActiveTrack::getDescription()
         // Complete the description
         const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
-        lcStrncpy(msg, (len+1), sout.str().c_str(), len);
+        base::lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
     return msg;
 }
@@ -1266,7 +1268,7 @@ const char* TabLogger::LogPassiveTrack::getDescription()
         // Complete the description
         const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
-        lcStrncpy(msg, (len+1), sout.str().c_str(), len);
+        base::lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
     return msg;
 }

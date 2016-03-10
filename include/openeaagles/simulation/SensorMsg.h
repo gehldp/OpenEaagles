@@ -4,7 +4,7 @@
 #ifndef __oe_simulation_SensorMsg_H__
 #define __oe_simulation_SensorMsg_H__
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 namespace oe {
 namespace simulation {
@@ -18,9 +18,9 @@ namespace simulation {
 //
 // Factory name: SensorMsg
 //------------------------------------------------------------------------------
-class SensorMsg : public basic::Object
+class SensorMsg : public base::Object
 {
-   DECLARE_SUBCLASS(SensorMsg,basic::Object)
+   DECLARE_SUBCLASS(SensorMsg,base::Object)
 
 public:
    SensorMsg();
@@ -42,44 +42,44 @@ public:
    // ---
 
    // Azimuth (radians)
-   LCreal getGimbalAzimuth() const              { return gaz; }
-   void setGimbalAzimuth(const LCreal a)        { gaz = a; }
+   double getGimbalAzimuth() const              { return gaz; }
+   void setGimbalAzimuth(const double a)        { gaz = a; }
 
    // Elevation (radians)
-   LCreal getGimbalElevation() const            { return gel; }
-   void setGimbalElevation(const LCreal a)      { gel = a; }
+   double getGimbalElevation() const            { return gel; }
+   void setGimbalElevation(const double a)      { gel = a; }
 
    // ---
    // Ranges
    // ---
 
    // Range from gimbal to target along LOS vector (meters)
-   LCreal getRange() const                      { return rng; }
+   double getRange() const                      { return rng; }
 
    // Max range of this sensor/message (NM)
-   LCreal getMaxRangeNM() const                 { return maxRng; }
+   double getMaxRangeNM() const                 { return maxRng; }
 
    // Sets the range to the target (meters)
-   virtual void setRange(const LCreal r);
+   virtual void setRange(const double r);
 
    // Sets the max range (NM)
-   void setMaxRangeNM(const LCreal r)           { maxRng = r; }
+   void setMaxRangeNM(const double r)           { maxRng = r; }
 
    // ---
    // Range rates (projected along the LOS vector)
    // ---
 
    // Range rate (player to target) along the LOS vector (m/s)
-   LCreal getRangeRate() const                  { return rngRate; }
+   double getRangeRate() const                  { return rngRate; }
 
    // Range rate (player to target) along the LOS vector (ft/s)
-   LCreal getRangeRateFPS() const;
+   double getRangeRateFPS() const;
 
    // Range rate (player to target) along the LOS vector (knots)
-   LCreal getRangeRateKts() const;
+   double getRangeRateKts() const;
 
    // Sets the target range rate (positive for increasing range) (m/s)
-   void setRangeRate(const LCreal v)            { rngRate = v; }
+   void setRangeRate(const double v)            { rngRate = v; }
 
    // ---
    // Target's Angle Of Incidence (AOI); computed by the target
@@ -87,19 +87,19 @@ public:
    // ---
 
    // Target's azimuth AOI (radians; target body coordinates)
-   LCreal getAzimuthAoi() const                 { return iaz; }
+   double getAzimuthAoi() const                 { return iaz; }
 
    // Target's elevation AOI (radians; target body coordinates)
-   LCreal getElevationAoi() const               { return iel; }
+   double getElevationAoi() const               { return iel; }
 
    // Target's normalized AOI vector
    const osg::Vec3d& getAoiVector() const       { return aoi; }
 
    // Sets the target's azimuth AOI (radians; target body coordinates)
-   void setAzimuthAoi(const LCreal a)           { iaz = a; }
+   void setAzimuthAoi(const double a)           { iaz = a; }
 
    // Sets the target's elevation AOI (radians; target body coordinates)
-   void setElevationAoi(const LCreal a)         { iel = a; }
+   void setElevationAoi(const double a)         { iel = a; }
 
    // Sets the target's normalized AOI vector
    void setAoiVector(const osg::Vec3d& v)       { aoi = v; }
@@ -139,8 +139,8 @@ public:
    const Player* getTarget() const              { return target; }
 
    // Optional: data message attached to sensor message
-   basic::Object* getDataMessage()              { return dataMsg; }
-   const basic::Object* getDataMessage() const  { return dataMsg; }
+   base::Object* getDataMessage()              { return dataMsg; }
+   const base::Object* getDataMessage() const  { return dataMsg; }
 
    // Sets the gimbal that generated this message
    void setGimbal(Gimbal* const t);
@@ -152,7 +152,7 @@ public:
    void setTarget(Player* const p);
 
    // Sets the optional data message attached to sensor message
-   void setDataMessage(basic::Object* const msg);
+   void setDataMessage(base::Object* const msg);
 
 
    // Clear data
@@ -161,20 +161,20 @@ public:
 private:
    void initData();
 
-   LCreal          maxRng;         // Maximum range                                (NM)
-   LCreal          rng;            // Range                                        (meters)
-   LCreal          rngRate;        // Range Rate                                   (m/s)
-   LCreal          gaz;            // Gimbal azimuth                               (rad)
-   LCreal          gel;            // Gimbal elevation                             (rad)
-   LCreal          iaz;            // Target's Angle Of Incidence (AOI) azimuth    (rad)
-   LCreal          iel;            // Target's AOI elevation                       (rad)
+   double          maxRng;         // Maximum range                                (NM)
+   double          rng;            // Range                                        (meters)
+   double          rngRate;        // Range Rate                                   (m/s)
+   double          gaz;            // Gimbal azimuth                               (rad)
+   double          gel;            // Gimbal elevation                             (rad)
+   double          iaz;            // Target's Angle Of Incidence (AOI) azimuth    (rad)
+   double          iel;            // Target's AOI elevation                       (rad)
    osg::Vec3d      losO2T;         // Normalized ownship to target LOS vector (ownship's NED)
    osg::Vec3d      losT2O;         // Normalized target to ownship LOS vector (target's NED)
    osg::Vec3d      aoi;            // Normalized target Angle Of Incidence (AOI) vector
    Gimbal*         gimbal;         // The gimbal that transmitted the message
-   basic::safe_ptr<Player>    ownship;     // The originating (ownship) player
-   basic::safe_ptr<Player>    target;      // The Target player
-   basic::safe_ptr<basic::Object> dataMsg; // Embedded data message (e.g., datalink, etc)
+   base::safe_ptr<Player>    ownship;     // The originating (ownship) player
+   base::safe_ptr<Player>    target;      // The Target player
+   base::safe_ptr<base::Object> dataMsg; // Embedded data message (e.g., datalink, etc)
    bool            returnReq;      // Return Request
    bool            localOnly;      // Local players only flag
 };

@@ -2,8 +2,8 @@
 #ifndef __oe_simulation_SynchronizedState_H__
 #define __oe_simulation_SynchronizedState_H__
 
-#include "openeaagles/basic/Object.h"
-#include "openeaagles/basic/osg/Vec3"
+#include "openeaagles/base/Object.h"
+#include "openeaagles/base/osg/Vec3"
 
 namespace oe {
 namespace simulation {
@@ -14,9 +14,9 @@ namespace simulation {
 // Description: A snapshot of position state at a given time
 //
 //------------------------------------------------------------------------------
-class SynchronizedState : public basic::Object
+class SynchronizedState : public base::Object
 {
-   DECLARE_SUBCLASS(SynchronizedState, basic::Object)
+   DECLARE_SUBCLASS(SynchronizedState, base::Object)
 
 public:
    SynchronizedState();

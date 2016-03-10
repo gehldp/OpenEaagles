@@ -7,13 +7,15 @@
 #include "openeaagles/simulation/Emission.h"
 #include "openeaagles/simulation/TrackManager.h"
 
-#include "openeaagles/basic/Integer.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
+#include "openeaagles/base/Integer.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
+
+#include <cmath>
 
 namespace oe {
 namespace simulation {
@@ -27,7 +29,7 @@ END_SLOTTABLE(Radar)
 
 //  Map slot table
 BEGIN_SLOT_MAP(Radar)
-    ON_SLOT(1,  setSlotIGain, basic::Number)
+    ON_SLOT(1,  setSlotIGain, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -135,7 +137,7 @@ bool Radar::shutdownNotification()
 void Radar::clearTracksAndQueues()
 {
    // Clear reports
-   lcLock(myLock);
+   base::lcLock(myLock);
    for (unsigned int i = 0; i < numReports && i < MAX_REPORTS; i++) {
       if (reports[i] != nullptr) {
          reports[i]->unref();
@@ -143,21 +145,21 @@ void Radar::clearTracksAndQueues()
       }
    }
    numReports = 0;
-   lcUnlock(myLock);
+   base::lcUnlock(myLock);
 
    // ---
    // Clear out the queues
    // ---
-   lcLock(myLock);
+   base::lcLock(myLock);
    for (Emission* em = rptQueue.get(); em != nullptr; em = rptQueue.get()) { em->unref(); }
    while (rptSnQueue.isNotEmpty()) { rptSnQueue.get(); }
-   lcUnlock(myLock);
+   base::lcUnlock(myLock);
 }
 
 //------------------------------------------------------------------------------
 // updateData() -- update background data here
 //------------------------------------------------------------------------------
-void Radar::updateData(const LCreal dt)
+void Radar::updateData(const double dt)
 {
    ageSweeps();
 
@@ -179,7 +181,7 @@ void Radar::reset()
 //------------------------------------------------------------------------------
 
 // Sets integration gain
-bool Radar::setIGain(const LCreal g)
+bool Radar::setIGain(const double g)
 {
    rfIGain = g;
    return true;
@@ -188,7 +190,7 @@ bool Radar::setIGain(const LCreal g)
 //------------------------------------------------------------------------------
 // transmit() -- send radar emissions
 //------------------------------------------------------------------------------
-void Radar::transmit(const LCreal dt)
+void Radar::transmit(const double dt)
 {
    BaseClass::transmit(dt);
 
@@ -198,12 +200,12 @@ void Radar::transmit(const LCreal dt)
       Emission* em = new Emission();
       em->setFrequency(getFrequency());
       em->setBandwidth(getBandwidth());
-      const LCreal prf1 = getPRF();
+      const double prf1 = getPRF();
       em->setPRF(prf1);
       int pulses = static_cast<int>(prf1 * dt + 0.5);
       if (pulses == 0) pulses = 1; // at least one
       em->setPulses(pulses);
-      const LCreal p = getPeakPower();
+      const double p = getPeakPower();
       em->setPower(p);
       em->setMaxRangeNM(getRange());
       em->setPulseWidth(getPulseWidth());
@@ -219,7 +221,7 @@ void Radar::transmit(const LCreal dt)
 //------------------------------------------------------------------------------
 // receive() -- process received emissions
 //------------------------------------------------------------------------------
-void Radar::receive(const LCreal dt)
+void Radar::receive(const double dt)
 {
    BaseClass::receive(dt);
 
@@ -227,7 +229,7 @@ void Radar::receive(const LCreal dt)
    if (getAntenna() == nullptr) return;
 
    // Clear the next sweep
-   csweep = computeSweepIndex( static_cast<LCreal>(basic::Angle::R2DCC * getAntenna()->getAzimuth()) );
+   csweep = computeSweepIndex( static_cast<double>(base::Angle::R2DCC * getAntenna()->getAzimuth()) );
    clearSweep(csweep);
 
    // Compute noise level
@@ -235,8 +237,8 @@ void Radar::receive(const LCreal dt)
    // Basically, we're simulation Hannen's S/I equation from page 356 of his notes.
    // Where I is N + J. J is noise from jamming.
    // Receiver Loss affects the total I, so we have to wait until this point to account for it.
-   const LCreal interference = (getRfRecvNoise() + jamSignal) * getRfReceiveLoss();
-   const LCreal noise = getRfRecvNoise() * getRfReceiveLoss();
+   const double interference = (getRfRecvNoise() + jamSignal) * getRfReceiveLoss();
+   const double noise = getRfRecvNoise() * getRfReceiveLoss();
    currentJamSignal = jamSignal * getRfReceiveLoss();
    int countNumJammedEm = 0;
 
@@ -245,16 +247,16 @@ void Radar::receive(const LCreal dt)
    // ---
 
    Emission* em = nullptr;
-   LCreal signal = 0;
+   double signal = 0;
 
    // Get an emission from the queue
-   lcLock(packetLock);
+   base::lcLock(packetLock);
    if (np > 0) {
       np--; // Decrement 'np', now the array index
       em = packets[np];
       signal = signals[np];
    }
-   lcUnlock(packetLock);
+   base::lcUnlock(packetLock);
 
    while (em != nullptr) {
 
@@ -264,23 +266,23 @@ void Radar::receive(const LCreal dt)
          // compute the return trip loss ...
 
          // Compute signal received
-         LCreal rcs = em->getRCS();
+         double rcs = em->getRCS();
 
          // Signal Equation (Equation 2-7)
-         LCreal rl = em->getRangeLoss();
+         double rl = em->getRangeLoss();
          signal *= (rcs * rl);
 
          // Integration gain
          signal *= rfIGain;
 
          // Range attenuation: we don't want the strong signal from short range targets
-         LCreal maxRng = getRange() * basic::Distance::NM2M;
-         //LCreal maxRng4 = (maxRng*maxRng*maxRng*maxRng);
-         //LCreal rng = (em->getRange());
+         double maxRng = getRange() * base::Distance::NM2M;
+         //double maxRng4 = (maxRng*maxRng*maxRng*maxRng);
+         //double rng = (em->getRange());
 
-         const LCreal s1 = 1.0;
+         const double s1 = 1.0;
          //if (rng > 0) {
-         //    LCreal rng4 = (rng*rng*rng*rng);
+         //    double rng4 = (rng*rng*rng*rng);
          //    s1 = (rng4/maxRng4);
          //    if (s1 > 1.0f) s1 = 1.0f;
          //}
@@ -289,10 +291,10 @@ void Radar::receive(const LCreal dt)
          if (signal > 0.0) {
 
             // Signal/Noise  (Equation 2-9)
-            const LCreal signalToInterferenceRatio = signal / interference;
-            const LCreal signalToInterferenceRatioDbl = 10.0f * lcLog10(signalToInterferenceRatio);
-            const LCreal signalToNoiseRatio = signal / noise;
-            const LCreal signalToNoiseRatioDbl = 10.0f * lcLog10(signalToNoiseRatio);
+            const double signalToInterferenceRatio = signal / interference;
+            const double signalToInterferenceRatioDbl = 10.0f * std::log10(signalToInterferenceRatio);
+            const double signalToNoiseRatio = signal / noise;
+            const double signalToNoiseRatioDbl = 10.0f * std::log10(signalToNoiseRatio);
 
             //std::cout << "Radar::receive(" << em->getTarget() << "): ";
             //std::cout << " pwr=" << em->getPower();
@@ -309,7 +311,7 @@ void Radar::receive(const LCreal dt)
             // Is S/N above receiver threshold and within 125% of max range?
             // CGB, if "signal <= 0.0", then "signalToInterferenceRatioDbl" is probably invalid
             // we should probably do something smart with "signalToInterferenceRatioDbl" above as well.
-            lcLock(myLock);
+            base::lcLock(myLock);
             if (signalToInterferenceRatioDbl >= getRfThreshold() && em->getRange() <= (maxRng*1.25) && rptQueue.isNotFull()) {
 
                // send the report to the track manager
@@ -328,7 +330,7 @@ void Radar::receive(const LCreal dt)
             } else if (signalToInterferenceRatioDbl < getRfThreshold() && signalToNoiseRatioDbl >= getRfThreshold()) {
                countNumJammedEm++;
             }
-            lcUnlock(myLock);
+            base::lcUnlock(myLock);
          }
       }
 
@@ -341,13 +343,13 @@ void Radar::receive(const LCreal dt)
       //}
 
       // Get another emission from the queue
-      lcLock(packetLock);
+      base::lcLock(packetLock);
       if (np > 0) {
          np--;
          em = packets[np];
          signal = signals[np];
       }
-      lcUnlock(packetLock);
+      base::lcUnlock(packetLock);
    }
    //std::cout << std::endl;
 
@@ -360,7 +362,7 @@ void Radar::receive(const LCreal dt)
 //------------------------------------------------------------------------------
 // process() -- process the TWS reports
 //------------------------------------------------------------------------------
-void Radar::process(const LCreal dt)
+void Radar::process(const double dt)
 {
    BaseClass::process(dt);
 
@@ -368,12 +370,12 @@ void Radar::process(const LCreal dt)
    TrackManager* tm = getTrackManager();
    if (tm == nullptr) {
       // No track manager! Then just flush the input queue.
-      lcLock(myLock);
+      base::lcLock(myLock);
       for (Emission* em = rptQueue.get(); em != nullptr; em = rptQueue.get()) {
          em->unref();
          rptSnQueue.get();
       }
-      lcUnlock(myLock);
+      base::lcUnlock(myLock);
    }
 
    // ---
@@ -383,7 +385,7 @@ void Radar::process(const LCreal dt)
 
       endOfScanFlg = false;
 
-      lcLock(myLock);
+      base::lcLock(myLock);
       for (unsigned int i = 0; i < numReports && i < MAX_REPORTS; i++) {
          if (tm != nullptr) {
             tm->newReport(reports[i], rptMaxSn[i]);
@@ -393,7 +395,7 @@ void Radar::process(const LCreal dt)
          rptMaxSn[i] = 0;
       }
       numReports = 0;
-      lcUnlock(myLock);
+      base::lcUnlock(myLock);
    }
 
 
@@ -404,12 +406,12 @@ void Radar::process(const LCreal dt)
    //      is greater than the report, use the new emission
    //   3) Create new reports for unmatched emissions
    // ---
-   lcLock(myLock);
+   base::lcLock(myLock);
    while (rptQueue.isNotEmpty()) {
 
       // Get the emission
       Emission* em = rptQueue.get();
-      LCreal snDbl = rptSnQueue.get();
+      double snDbl = rptSnQueue.get();
 
       if (em != nullptr) {
          // ---
@@ -453,7 +455,7 @@ void Radar::process(const LCreal dt)
          em->unref();
       }
    }
-   lcUnlock(myLock);
+   base::lcUnlock(myLock);
 }
 
 
@@ -464,14 +466,14 @@ unsigned int Radar::getReports(const Emission** list, const unsigned int max) co
 {
    unsigned int num = 0;
    if (list != nullptr && max > 0 && numReports > 0) {
-      lcLock(myLock);
+      base::lcLock(myLock);
       num = numReports;
       if (num > max) num = max;
       for (unsigned int i = 0; i < num; i++) {
          reports[i]->ref();
          list[i] = reports[i];
       }
-      lcUnlock(myLock);
+      base::lcUnlock(myLock);
    }
    return num;
 }
@@ -494,7 +496,7 @@ bool Radar::killedNotification(Player* const p)
 //------------------------------------------------------------------------------
 // onEndScanEvent() -- process the end of a scan
 //------------------------------------------------------------------------------
-bool Radar::onEndScanEvent(const basic::Integer* const bar)
+bool Radar::onEndScanEvent(const base::Integer* const bar)
 {
    endOfScanFlg = true;
    BaseClass::onEndScanEvent(bar);
@@ -519,10 +521,10 @@ void Radar::clearSweep(const unsigned int n)
 //------------------------------------------------------------------------------
 void Radar::ageSweeps()
 {
-   const LCreal aging = 0.002;
+   const double aging = 0.002;
    for (unsigned int i = 0; i < NUM_SWEEPS; i++) {
       for (unsigned int j = 0; j < PTRS_PER_SWEEP; j++) {
-         LCreal p = sweeps[i][j];
+         double p = sweeps[i][j];
          if (p > 0) {
             p -= aging;
             if (p < 0) p = 0;
@@ -535,11 +537,11 @@ void Radar::ageSweeps()
 //------------------------------------------------------------------------------
 // computeSweepIndex -- compute the sweep index
 //------------------------------------------------------------------------------
-unsigned int Radar::computeSweepIndex(const LCreal az)
+unsigned int Radar::computeSweepIndex(const double az)
 {
-   LCreal s = static_cast<LCreal>(NUM_SWEEPS-1)/60.0;      // sweeps per display scaling
+   double s = static_cast<double>(NUM_SWEEPS-1)/60.0;      // sweeps per display scaling
 
-   LCreal az1 = az + 30.0;                                 // Offset from left side (sweep 0)
+   double az1 = az + 30.0;                                 // Offset from left side (sweep 0)
    int n = static_cast<int>(az1*s + 0.5);                  // Compute index
    if (n >= NUM_SWEEPS) n = NUM_SWEEPS - 1;
    if (n < 0) n = 0;
@@ -549,15 +551,15 @@ unsigned int Radar::computeSweepIndex(const LCreal az)
 //------------------------------------------------------------------------------
 // computeRangeIndex -- compute the range index
 //------------------------------------------------------------------------------
-unsigned int Radar::computeRangeIndex(const LCreal rng)
+unsigned int Radar::computeRangeIndex(const double rng)
 {
    // range must be positive, if not, return return an index of 0
    if (rng < 0) return 0;
 
-   //LCreal maxRng = 40000.0;
-   LCreal maxRng = getRange() * basic::Distance::NM2M;
-   LCreal rng1 = (rng/ maxRng );
-   unsigned int n = static_cast<unsigned int>(rng1 * static_cast<LCreal>(PTRS_PER_SWEEP) + 0.5);
+   //double maxRng = 40000.0;
+   double maxRng = getRange() * base::Distance::NM2M;
+   double rng1 = (rng/ maxRng );
+   unsigned int n = static_cast<unsigned int>(rng1 * static_cast<double>(PTRS_PER_SWEEP) + 0.5);
    if (n >= PTRS_PER_SWEEP) n = PTRS_PER_SWEEP - 1;
    return n;
 }
@@ -567,11 +569,11 @@ unsigned int Radar::computeRangeIndex(const LCreal rng)
 //------------------------------------------------------------------------------
 
 // igain: Integrator gain (dB or no units; def: 1.0)
-bool Radar::setSlotIGain(basic::Number* const v)
+bool Radar::setSlotIGain(base::Number* const v)
 {
    bool ok = false;
    if (v != nullptr) {
-      LCreal g = v->getReal();
+      double g = v->getReal();
       if (g >= 1.0) {
          ok = setIGain(g);
       }
@@ -585,7 +587,7 @@ bool Radar::setSlotIGain(basic::Number* const v)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* Radar::getSlotByIndex(const int si)
+base::Object* Radar::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
@@ -618,5 +620,5 @@ std::ostream& Radar::serialize(std::ostream& sout, const int i, const bool slots
    return sout;
 }
 
-} // End simulation namespace
-} // End oe namespace
+}
+}

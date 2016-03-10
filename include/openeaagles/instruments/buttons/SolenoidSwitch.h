@@ -14,7 +14,7 @@
 #include "openeaagles/instruments/buttons/Button.h"
 
 namespace oe {
-namespace basic { class UpTimer; }
+namespace base { class UpTimer; }
 namespace instruments {
 
 class SolenoidSwitch : public graphics::Graphic
@@ -24,7 +24,7 @@ class SolenoidSwitch : public graphics::Graphic
 public:
     SolenoidSwitch();
 
-    virtual bool setHoldTimer(const LCreal x);
+    virtual bool setHoldTimer(const double x);
 
     // button enums
     enum { CENTER_BUTTON = 1, TOP_BUTTON = 2, BOTTOM_BUTTON = 3, NUM_BUTTONS = 3 };
@@ -42,17 +42,17 @@ public:
     void resetButton();
     // get function
     int getSwitchPosition()   { return currButtonId; }
-    basic::UpTimer* getTimer() { return timer; }
+    base::UpTimer* getTimer() { return timer; }
 
-    void updateData(const LCreal dt = 0.0) override;
-    bool event(const int event, basic::Object* const obj = nullptr) override;
+    void updateData(const double dt = 0.0) override;
+    bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
     // event function
-    bool selectLatch(const basic::Number* const x);
+    bool selectLatch(const base::Number* const x);
     // slot functions
-    bool setSlotHoldTimer(const basic::Number* const x);
-    bool setSlotEventMap(const basic::PairStream* const x);
+    bool setSlotHoldTimer(const base::Number* const x);
+    bool setSlotEventMap(const base::PairStream* const x);
 
 private:
     bool picked[NUM_BUTTONS];   // tells our buttons if they are currently picked or not
@@ -60,7 +60,7 @@ private:
     int eventMap[NUM_BUTTONS];  // actual event id we want to generate for each button hit
     int currButtonId;           // button ID of our current hold button (one being clicked)
     int lastButtonId;           // button ID of the last button that was "pushed"
-    basic::UpTimer* timer;      // our selection timer
+    base::UpTimer* timer;      // our selection timer
     bool latched;               // our latch flag, which, without a timer, will be a logical
                                 // flag to determine when to keep the switch up or down, or
                                 // make the switch return to it's starting position
@@ -81,10 +81,10 @@ public:
 
     // The left mouse button has been depressed
     virtual bool onMouseDown();
-    virtual bool onPicked(const basic::Number* const x);
+    virtual bool onPicked(const base::Number* const x);
 
-    bool event(const int event, basic::Object* const obj = nullptr) override;
-    void updateData(const LCreal dt = 0.0) override;
+    bool event(const int event, base::Object* const obj = nullptr) override;
+    void updateData(const double dt = 0.0) override;
 
 private:
     bool noTimer;    // this flag tells this button that we don't time, we simply switch

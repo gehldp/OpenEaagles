@@ -1,8 +1,11 @@
+
 #include "openeaagles/instruments/buttons/Knob.h"
-#include "openeaagles/basic/units/Angles.h"
+#include "openeaagles/base/units/Angles.h"
 #include "openeaagles/graphics/Display.h"
-#include "openeaagles/basic/functors/Tables.h"
+#include "openeaagles/base/functors/Tables.h"
+
 #include <GL/glu.h>
+#include <cmath>
 
 namespace oe {
 namespace instruments {
@@ -25,10 +28,10 @@ END_SLOTTABLE(Knob)
 //  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Knob)
-    ON_SLOT(1, setSlotValueTable, basic::Table1)
-    ON_SLOT(2, setSlotEndless, basic::Number)
-    ON_SLOT(3, setSlotEndlessStart, basic::Number)
-    ON_SLOT(4, setSlotEndlessLimit, basic::Number)
+    ON_SLOT(1, setSlotValueTable, base::Table1)
+    ON_SLOT(2, setSlotEndless, base::Number)
+    ON_SLOT(3, setSlotEndlessStart, base::Number)
+    ON_SLOT(4, setSlotEndlessLimit, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -94,7 +97,7 @@ void Knob::deleteData()
 //------------------------------------------------------------------------------
 // setSlotValueTable() - set the table for degrees rotation to value
 //------------------------------------------------------------------------------
-bool Knob::setSlotValueTable(basic::Table1* const x)
+bool Knob::setSlotValueTable(base::Table1* const x)
 {
     if (table != nullptr) table->unref();
     table = nullptr;
@@ -108,7 +111,7 @@ bool Knob::setSlotValueTable(basic::Table1* const x)
 //------------------------------------------------------------------------------
 // setSlotEndless() - set up our table to be endless or not
 //------------------------------------------------------------------------------
-bool Knob::setSlotEndless(const basic::Number* const x)
+bool Knob::setSlotEndless(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setEndless(x->getBoolean());
@@ -118,7 +121,7 @@ bool Knob::setSlotEndless(const basic::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotEndlessStart() - start value of endless knob
 //------------------------------------------------------------------------------
-bool Knob::setSlotEndlessStart(const basic::Number* const x)
+bool Knob::setSlotEndlessStart(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setEndlessStart(x->getReal());
@@ -128,7 +131,7 @@ bool Knob::setSlotEndlessStart(const basic::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotEndlessLimit() - limit value of endless knob
 //------------------------------------------------------------------------------
-bool Knob::setSlotEndlessLimit(const basic::Number* const x)
+bool Knob::setSlotEndlessLimit(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setEndlessLimit(x->getReal());
@@ -217,10 +220,10 @@ void Knob::computeRotation()
            angle = atan2f(static_cast<float>(posMoveY), static_cast<float>(-posMoveX));
         }
 
-        angle *= static_cast<LCreal>(basic::Angle::R2DCC);
+        angle *= static_cast<double>(base::Angle::R2DCC);
 
         if (start) {
-            startAngle = static_cast<LCreal>(degsRotation);
+            startAngle = static_cast<double>(degsRotation);
             running = 0;
         }
         start = false;
@@ -230,7 +233,7 @@ void Knob::computeRotation()
 
         // now get our difference
         if (lastAngle != angle) {
-            LCreal temp = 0;
+            double temp = 0;
             if (angle > 0 && lastAngle > 0) {
                 if (angle > lastAngle) {
                     temp = angle - lastAngle;
@@ -243,26 +246,26 @@ void Knob::computeRotation()
            }
             else if (angle < 0 && lastAngle < 0) {
                 if (angle < lastAngle) {
-                    temp =  lcAbs(angle - lastAngle);
+                    temp =  std::fabs(angle - lastAngle);
                     running += temp;
                 }
                 else {
-                    temp = lcAbs(lastAngle - angle);
+                    temp = std::fabs(lastAngle - angle);
                     running -= temp;
                 }
             }
         }
 
         if (table != nullptr) {
-            LCreal maxX = table->getMaxX();
-            LCreal minX = table->getMinX();
-            LCreal x = running + startAngle;
+            double maxX = table->getMaxX();
+            double minX = table->getMinX();
+            double x = running + startAngle;
             if (x > maxX) x = maxX;
             if (x < minX) x = minX;
             degsRotation = static_cast<int>(x);
             value = table->lfi(x);
             if (endless) {
-                LCreal minVal = 0, maxVal = 0;
+                double minVal = 0, maxVal = 0;
                 table->findMinMax(&minVal, &maxVal);
                 if (value == maxVal) {
                     value = minVal;
@@ -303,8 +306,8 @@ void Knob::draw()
 {
     // rotate our knob!
     lcSaveMatrix();
-    if (endless) lcRotate(angle * static_cast<LCreal>(basic::Angle::D2RCC));
-    else lcRotate(-degsRotation * static_cast<LCreal>(basic::Angle::D2RCC));
+    if (endless) lcRotate(angle * static_cast<double>(base::Angle::D2RCC));
+    else lcRotate(-degsRotation * static_cast<double>(base::Angle::D2RCC));
     Graphic::draw();
     lcRestoreMatrix();
 }
@@ -312,7 +315,7 @@ void Knob::draw()
 //------------------------------------------------------------------------------
 // updateData()
 //------------------------------------------------------------------------------
-void Knob::updateData(const LCreal dt)
+void Knob::updateData(const double dt)
 {
     BaseClass::updateData(dt);
 
@@ -322,7 +325,7 @@ void Knob::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Knob
 //------------------------------------------------------------------------------
-basic::Object* Knob::getSlotByIndex(const int si)
+base::Object* Knob::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

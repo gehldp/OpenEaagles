@@ -1,11 +1,11 @@
 
 #include "openeaagles/dafif/Database.h"
 #include "openeaagles/dafif/Record.h"
-#include "openeaagles/basic/FileReader.h"
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
+#include "openeaagles/base/FileReader.h"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
 
 #include <cstring>
 #include <cmath>
@@ -26,8 +26,8 @@ END_SLOTTABLE(Database)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(Database)
-    ON_SLOT(1,setSlotPathname,basic::String)
-    ON_SLOT(2,setSlotFilename,basic::String)
+    ON_SLOT(1,setSlotPathname,base::String)
+    ON_SLOT(2,setSlotFilename,base::String)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -37,7 +37,7 @@ Database::Database()
 {
    STANDARD_CONSTRUCTOR()
 
-   db = new basic::FileReader();
+   db = new base::FileReader();
 
    ncache = 0;
    rl = nullptr;
@@ -66,7 +66,7 @@ void Database::copyData(const Database& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) {
-      db = new basic::FileReader();
+      db = new base::FileReader();
    }
 
    ncache = 0;
@@ -149,7 +149,7 @@ void Database::setArea(const double lat, const double lon, const double mr)
 {
    refLat = lat;
    refLon = lon;
-   coslat = std::cos(lat * basic::Angle::D2RCC);
+   coslat = std::cos(lat * base::Angle::D2RCC);
    mrng   = mr;
 }
 
@@ -316,7 +316,7 @@ void Database::createIcaoList()
 //------------------------------------------------------------------------------
 // Set slot functions
 //------------------------------------------------------------------------------
-bool Database::setSlotPathname(basic::String* const msg)
+bool Database::setSlotPathname(base::String* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -325,7 +325,7 @@ bool Database::setSlotPathname(basic::String* const msg)
    return ok;
 }
 
-bool Database::setSlotFilename(basic::String* const msg)
+bool Database::setSlotFilename(base::String* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -521,7 +521,7 @@ void Database::printIcaoList(std::ostream& sout)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component
 //------------------------------------------------------------------------------
-basic::Object* Database::getSlotByIndex(const int si)
+base::Object* Database::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

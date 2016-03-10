@@ -30,9 +30,9 @@ namespace simulation {
 //
 //    The following are used to position the gun on the ownship player
 //    position    <List>     ! Position vector; relative to ownship axis [ nose right down ]  (meters)
-//    roll        <Number>   ! roll angle; relative to ownship axis (radians, basic::Angle) (default: 0)
-//    pitch       <Number>   ! pitch; relative to ownship axis (radians, basic::Angle) (default: 0)
-//    yaw         <Number>   ! heading; relative to ownship axis (radians, basic::Angle) (default: 0)
+//    roll        <Number>   ! roll angle; relative to ownship axis (radians, base::Angle) (default: 0)
+//    pitch       <Number>   ! pitch; relative to ownship axis (radians, base::Angle) (default: 0)
+//    yaw         <Number>   ! heading; relative to ownship axis (radians, base::Angle) (default: 0)
 //
 //==============================================================================
 class Gun : public ExternalStore
@@ -84,36 +84,36 @@ public:
    bool setAngles(const double r, const double p, const double y);
 
    // Slot functions
-   virtual bool setSlotNumRounds(const basic::Number* const num);  // Number of rounds
-   virtual bool setSlotUnlimited(const basic::Number* const num);  // Unlimited rounds flag
-   virtual bool setSlotRate(const basic::Number* const num);       // Rate of fire (rds per min)
-   virtual bool setSlotBurstRate(const basic::Number* const num);  // Burst rate
-   virtual bool setSlotPosition(basic::List* const numList);       // Gun position relative to ownship
-   virtual bool setSlotRoll(const basic::Number* const num);       // Gun roll angle to ownship
-   virtual bool setSlotPitch(const basic::Number* const num);      // Gun pitch angle to ownship
-   virtual bool setSlotYaw(const basic::Number* const num);        // Gun heading angle to ownship
+   virtual bool setSlotNumRounds(const base::Number* const num);  // Number of rounds
+   virtual bool setSlotUnlimited(const base::Number* const num);  // Unlimited rounds flag
+   virtual bool setSlotRate(const base::Number* const num);       // Rate of fire (rds per min)
+   virtual bool setSlotBurstRate(const base::Number* const num);  // Burst rate
+   virtual bool setSlotPosition(base::List* const numList);       // Gun position relative to ownship
+   virtual bool setSlotRoll(const base::Number* const num);       // Gun roll angle to ownship
+   virtual bool setSlotPitch(const base::Number* const num);      // Gun pitch angle to ownship
+   virtual bool setSlotYaw(const base::Number* const num);        // Gun heading angle to ownship
 
    void reset() override;
 
 protected:
-   virtual LCreal computeBulletRatePerSecond();
+   virtual double computeBulletRatePerSecond();
 
    virtual void initBullet();
    virtual void burstFrame();
    virtual osg::Vec3d computeInitBulletPosition();
    virtual osg::Vec3d computeInitBulletVelocity();
 
-   void process(const LCreal dt) override;
+   void process(const double dt) override;
 
    bool shutdownNotification() override;
 
 private:
    Bullet*  bullet;           // Type of bullet
-   LCreal   shortBurstTimer;  // Single short burst timer (when firing a single burst) (sec)
-   LCreal   shortBurstTime;   // Length of the single short burst                 (sec)
-   LCreal   burstFrameTimer;  // Timer used to generate small bursts bullets      (sec)
-   LCreal   burstFrameTime;   // Length of a small burst of bullets               (sec)
-   LCreal   rcount;           // Rounds being fired this burst
+   double   shortBurstTimer;  // Single short burst timer (when firing a single burst) (sec)
+   double   shortBurstTime;   // Length of the single short burst                 (sec)
+   double   burstFrameTimer;  // Timer used to generate small bursts bullets      (sec)
+   double   burstFrameTime;   // Length of a small burst of bullets               (sec)
+   double   rcount;           // Rounds being fired this burst
    int      rounds;           // Number of rounds remaining
    int      initRounds;       // Initial rounds
    int      rpm;              // Rounds per minute
@@ -141,13 +141,13 @@ class Bullet : public Weapon
     DECLARE_SUBCLASS(Bullet,Weapon)
 
 public:
-   static const LCreal DEFAULT_MUZZLE_VEL;         // Meters / second
-   static const LCreal DEFAULT_MAX_TOF;            // Seconds
+   static const double DEFAULT_MUZZLE_VEL;         // Meters / second
+   static const double DEFAULT_MAX_TOF;            // Seconds
 
 public:
    Bullet();
 
-   LCreal getMuzzleVelocity() const                { return muzzleVel; }
+   double getMuzzleVelocity() const                { return muzzleVel; }
 
    // Fire (add) a burst of bullets
    virtual bool burstOfBullets(
@@ -166,15 +166,15 @@ public:
 
 protected:
    virtual void resetBurstTrajectories();
-   virtual void updateBurstTrajectories(const LCreal dt);
+   virtual void updateBurstTrajectories(const double dt);
    virtual bool checkForTargetHit();
 
    Player* getHitPlayer()                 { return hitPlayer; }
    const Player* getHitPlayer() const     { return hitPlayer; }
    void setHitPlayer(Player* p);
 
-   void weaponDynamics(const LCreal dt) override;
-   void updateTOF(const LCreal dt) override;
+   void weaponDynamics(const double dt) override;
+   void updateTOF(const double dt) override;
 
    bool shutdownNotification() override;
 
@@ -183,7 +183,7 @@ protected:
       Burst() : bPos(0,0,0), bVel(0,0,0), bTof(0), bNum(0), bRate(0), bEvent(0), bStatus(ACTIVE) {}
       osg::Vec3 bPos;       // Burst positions -- world  (m)
       osg::Vec3 bVel;       // Burst velocities -- world (m)
-      LCreal    bTof;       // Burst time of flight      (sec)
+      double    bTof;       // Burst time of flight      (sec)
       int       bNum;       // Number of rounds in burst
       int       bRate;      // Round rate for this burst (rds per min)
       int       bEvent;     // Release event number for burst
@@ -193,8 +193,8 @@ protected:
 private:
    enum { MBT = 100 };        // Max number of burst trajectories
 
-   LCreal   muzzleVel;                 // Muzzle velocity (m/s)
-   basic::safe_ptr<Player> hitPlayer;  // Player we hit (if any)
+   double   muzzleVel;                 // Muzzle velocity (m/s)
+   base::safe_ptr<Player> hitPlayer;  // Player we hit (if any)
 
    // Bullet trajectories
    int       nbt;             // Number of burst trajectories

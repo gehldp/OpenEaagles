@@ -22,23 +22,23 @@ public:
 
     // set functions
     virtual bool setIsDynamic(const bool newID);
-    virtual bool setOuterRadius(const LCreal x);
+    virtual bool setOuterRadius(const double x);
     virtual bool setFilled(const bool x);
 
     void drawFunc() override;
 
-    void updateData(const LCreal dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
 
 protected:
-    bool setSlotIsDynamic(const basic::Number* const newD);
-    bool setSlotOuterRadius(const basic::Number* const x);
-    bool setSlotFilled(const basic::Number* const x);
+    bool setSlotIsDynamic(const base::Number* const newD);
+    bool setSlotOuterRadius(const base::Number* const x);
+    bool setSlotFilled(const base::Number* const x);
 
-    bool onUpdateRadius(const basic::Number* const x) override;
+    bool onUpdateRadius(const base::Number* const x) override;
 
 private:
     bool isDynamic;     // are we setting sweep angle based on value?
-    LCreal outerRadius;
+    double outerRadius;
     bool filled;
 };
 

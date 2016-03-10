@@ -1,7 +1,7 @@
 
 #include "openeaagles/models/factory.h"
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 // dynamics models
 #include "openeaagles/models/dynamics/JSBSimModel.h"
@@ -18,9 +18,9 @@
 namespace oe {
 namespace models {
 
-basic::Object* factory(const char* name)
+base::Object* factory(const char* name)
 {
-   basic::Object* obj = nullptr;
+   base::Object* obj = nullptr;
 
    // dynamics models
    if (std::strcmp(name, RacModel::getFactoryName()) == 0) {              // RAC

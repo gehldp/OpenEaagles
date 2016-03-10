@@ -56,7 +56,7 @@
 //==============================================================================
 
 #include "openeaagles/terrain/srtm/SrtmHgtFile.h"
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/Number.h"
 
 #include <string>
 #include <fstream>
@@ -256,8 +256,8 @@ bool SrtmHgtFile::readSrtmData(std::istream& in)
         //unsigned long checksum = 0;
 
         // Read elevation values for record
-        LCreal minElev0 = 99999.0;
-        LCreal maxElev0 = 0.0;
+        double minElev0 = 99999.0;
+        double maxElev0 = 0.0;
         for(unsigned int lon=0; lon<nptlong; lon++)
         {
             unsigned char values[2];

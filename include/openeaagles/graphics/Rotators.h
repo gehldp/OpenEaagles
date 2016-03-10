@@ -5,7 +5,7 @@
 #define __oe_graphics_Rotators_H__
 
 #include "Graphic.h"
-#include "openeaagles/basic/units/Angles.h"
+#include "openeaagles/base/units/Angles.h"
 
 namespace oe {
 namespace graphics {
@@ -37,43 +37,43 @@ public:
     Rotators();
 
     // Get functions
-    LCreal getXRotation()    const  { return xRot; }
-    LCreal getXRotationDeg() const  { return xRot * static_cast<LCreal>(basic::Angle::R2DCC); }
-    LCreal getYRotation()    const  { return yRot; }
-    LCreal getYRotationDeg() const  { return yRot * static_cast<LCreal>(basic::Angle::R2DCC); }
-    LCreal getZRotation()    const  { return zRot; }
-    LCreal getZRotationDeg() const  { return zRot * static_cast<LCreal>(basic::Angle::R2DCC); }
+    double getXRotation()    const  { return xRot; }
+    double getXRotationDeg() const  { return xRot * static_cast<double>(base::Angle::R2DCC); }
+    double getYRotation()    const  { return yRot; }
+    double getYRotationDeg() const  { return yRot * static_cast<double>(base::Angle::R2DCC); }
+    double getZRotation()    const  { return zRot; }
+    double getZRotationDeg() const  { return zRot * static_cast<double>(base::Angle::R2DCC); }
     // get all angles
-    void getRotationAngles(LCreal& x, LCreal& y, LCreal& z);
+    void getRotationAngles(double& x, double& y, double& z);
 
     // Set functions
-    bool setXRotation(const LCreal angle);
-    bool setXRotationDeg(const LCreal angle);
-    bool setYRotation(const LCreal angle);
-    bool setYRotationDeg(const LCreal angle);
-    bool setZRotation(const LCreal angle);
-    bool setZRotationDeg(const LCreal angle);
-    bool setRotations(const LCreal x, const LCreal y = 0, const LCreal z = 0);
-    bool setRotationsDeg(const LCreal x, const LCreal y = 0, const LCreal z = 0);
+    bool setXRotation(const double angle);
+    bool setXRotationDeg(const double angle);
+    bool setYRotation(const double angle);
+    bool setYRotationDeg(const double angle);
+    bool setZRotation(const double angle);
+    bool setZRotationDeg(const double angle);
+    bool setRotations(const double x, const double y = 0, const double z = 0);
+    bool setRotationsDeg(const double x, const double y = 0, const double z = 0);
 
     void draw() override;
-    bool event(const int event, basic::Object* const obj = nullptr) override;
+    bool event(const int event, base::Object* const obj = nullptr) override;
 
 private:
     // Event callbacks
-    bool onXRotate(const basic::Angle* const rotation);
-    bool onXRotate(const basic::Number* const rotation);
-    bool onXRotateDeg(const basic::Number* const rotation);
-    bool onYRotate(const basic::Angle* const rotation);
-    bool onYRotate(const basic::Number* const rotation);
-    bool onYRotateDeg(const basic::Number* const rotation);
-    bool onZRotate(const basic::Angle* const rotation);
-    bool onZRotate(const basic::Number* const rotation);
-    bool onZRotateDeg(const basic::Number* const rotation);
+    bool onXRotate(const base::Angle* const rotation);
+    bool onXRotate(const base::Number* const rotation);
+    bool onXRotateDeg(const base::Number* const rotation);
+    bool onYRotate(const base::Angle* const rotation);
+    bool onYRotate(const base::Number* const rotation);
+    bool onYRotateDeg(const base::Number* const rotation);
+    bool onZRotate(const base::Angle* const rotation);
+    bool onZRotate(const base::Number* const rotation);
+    bool onZRotateDeg(const base::Number* const rotation);
 
-    LCreal xRot;  // x axis rotation
-    LCreal yRot;  // y axis rotation
-    LCreal zRot;  // z axis rotation
+    double xRot;  // x axis rotation
+    double yRot;  // y axis rotation
+    double zRot;  // z axis rotation
 };
 
 } // End graphics namespace

@@ -9,16 +9,16 @@
 #include "openeaagles/simulation/Route.h"
 #include "openeaagles/simulation/Simulation.h"
 #include "openeaagles/simulation/Steerpoint.h"
-#include "openeaagles/basic/Identifier.h"
-#include "openeaagles/basic/LatLon.h"
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
-#include "openeaagles/basic/units/Times.h"
+#include "openeaagles/base/Identifier.h"
+#include "openeaagles/base/LatLon.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/units/Times.h"
 
 namespace oe {
 namespace simulation {
@@ -47,8 +47,8 @@ END_SLOTTABLE(Navigation)
 // Map slot table to handles
 BEGIN_SLOT_MAP(Navigation)
     ON_SLOT(1,setSlotRoute,Route)
-    ON_SLOT(2,setSlotUtc,basic::Time)
-    ON_SLOT(3,setSlotFeba,basic::PairStream)
+    ON_SLOT(2,setSlotUtc,base::Time)
+    ON_SLOT(3,setSlotFeba,base::PairStream)
     ON_SLOT(4,setSlotBullseye,Bullseye)
 END_SLOT_MAP()
 
@@ -241,7 +241,7 @@ void Navigation::reset()
 //------------------------------------------------------------------------------
 // updateData() -- update Non-time critical stuff here
 //------------------------------------------------------------------------------
-void Navigation::updateData(const LCreal dt)
+void Navigation::updateData(const double dt)
 {
    // ---
    // Update the BaseClass and our primary route
@@ -252,7 +252,7 @@ void Navigation::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // Process phase
 //------------------------------------------------------------------------------
-void Navigation::process(const LCreal dt)
+void Navigation::process(const double dt)
 {
    BaseClass::process(dt);
 
@@ -274,7 +274,7 @@ void Navigation::process(const LCreal dt)
 
    // Update UTC
    double v = utc + dt;
-   if (v >= basic::Time::D2S) v = (v - basic::Time::D2S);
+   if (v >= base::Time::D2S) v = (v - base::Time::D2S);
    setUTC(v);
 
    // ---
@@ -317,7 +317,7 @@ double Navigation::getLongitude() const
 // Returns system altitude (ft)
 double Navigation::getAltitudeFt() const
 {
-    return getAltitudeM() * basic::Distance::M2FT;
+    return getAltitudeM() * base::Distance::M2FT;
 }
 
 // Returns system altitude (m)
@@ -371,7 +371,7 @@ double Navigation::getMagVarDeg() const
 // Returns the mag heading
 double Navigation::getMagHeadingD() const
 {
-   return basic::Angle::aepcdDeg(getHeadingDeg() + getMagVarDeg());
+   return base::Angle::aepcdDeg(getHeadingDeg() + getMagVarDeg());
 }
 
 // Are the winds valid?
@@ -381,13 +381,13 @@ bool Navigation::areWindsValid() const
 }
 
 // Returns the wind 'from' direction (degs)
-LCreal Navigation::getWindDirD() const
+double Navigation::getWindDirD() const
 {
    return windDirD;
 }
 
 // Returns the wind speed (kts)
-LCreal Navigation::getWindSpeedKts() const
+double Navigation::getWindSpeedKts() const
 {
    return windSpdKts;
 }
@@ -411,19 +411,19 @@ bool Navigation::isVelocityDataValid() const
 }
 
 // Returns ground speed (kts)
-LCreal Navigation::getGroundSpeedKts() const
+double Navigation::getGroundSpeedKts() const
 {
    return gs;
 }
 
 // Returns true airspeed (kts)
-LCreal Navigation::getTrueAirspeedKts() const
+double Navigation::getTrueAirspeedKts() const
 {
    return tas;
 }
 
 // Returns true ground track (degs)
-LCreal Navigation::getGroundTrackDeg() const
+double Navigation::getGroundTrackDeg() const
 {
    return tk;
 }
@@ -447,49 +447,49 @@ bool Navigation::isNavSteeringValid() const
 }
 
 // Returns true bearing to dest (degs)
-LCreal Navigation::getTrueBrgDeg() const
+double Navigation::getTrueBrgDeg() const
 {
    return tbrg;
 }
 
 // Returns mag bearing to dest (degs)
-LCreal Navigation::getMagBrgDeg() const
+double Navigation::getMagBrgDeg() const
 {
    return mbrg;
 }
 
 // Returns distance to dest (NM)
-LCreal Navigation::getDistNM() const
+double Navigation::getDistNM() const
 {
    return dst;
 }
 
 // Returns true course to dest (degs)
-LCreal Navigation::getTrueCrsDeg() const
+double Navigation::getTrueCrsDeg() const
 {
    return tcrs;
 }
 
 // Returns mag course to dest (degs)
-LCreal Navigation::getMagCrsDeg() const
+double Navigation::getMagCrsDeg() const
 {
    return mcrs;
 }
 
 // Returns cross track error (NM)
-LCreal Navigation::getCrossTrackErrorNM() const
+double Navigation::getCrossTrackErrorNM() const
 {
    return xte;
 }
 
 // Returns Time-To-Go to dest (sec)
-LCreal Navigation::getTTG() const
+double Navigation::getTTG() const
 {
    return ttg;
 }
 
 // Returns Est-Time-of-Arrival at dest (sec)
-LCreal Navigation::getETA() const
+double Navigation::getETA() const
 {
    return eta;
 }
@@ -555,9 +555,9 @@ bool Navigation::setAttitude(const double roll0, const double pitch0, const doub
    roll = roll0;
    pitch = pitch0;
    heading = thdg0;
-   basic::Nav::computeRotationalMatrixDeg(roll0, pitch0, thdg0, &rm);
+   base::Nav::computeRotationalMatrixDeg(roll0, pitch0, thdg0, &rm);
 
-   if (magVarValid) mhdg = basic::Angle::aepcdDeg(heading - magvar);
+   if (magVarValid) mhdg = base::Angle::aepcdDeg(heading - magvar);
    else mhdg = heading;
 
    attValid = true;
@@ -574,7 +574,7 @@ bool Navigation::setAttitude(const bool flg)
 bool Navigation::setMagVar(const double mvDeg)
 {
    magvar = mvDeg;
-   if (attValid) mhdg = basic::Angle::aepcdDeg(heading - magvar);
+   if (attValid) mhdg = base::Angle::aepcdDeg(heading - magvar);
    magVarValid = true;
    return true;
 }
@@ -585,7 +585,7 @@ bool Navigation::setMagVar(const bool flg)
    return true;
 }
 
-bool Navigation::setWinds(const LCreal dirDeg, const LCreal speedKts)
+bool Navigation::setWinds(const double dirDeg, const double speedKts)
 {
    windDirD = dirDeg;
    windSpdKts = speedKts;
@@ -612,19 +612,19 @@ bool Navigation::setUTC(const bool flg)
    return true;
 }
 
-bool Navigation::setGroundSpeedKts(const LCreal kts)
+bool Navigation::setGroundSpeedKts(const double kts)
 {
    gs = kts;
    return true;
 }
 
-bool Navigation::setTrueAirspeedKts(const LCreal kts)
+bool Navigation::setTrueAirspeedKts(const double kts)
 {
    tas = kts;
    return true;
 }
 
-bool Navigation::setGroundTrackDeg(const LCreal degs)
+bool Navigation::setGroundTrackDeg(const double degs)
 {
    tk = degs;
    return true;
@@ -648,49 +648,49 @@ bool Navigation::setVelocityDataValid(const bool flg)
    return true;
 }
 
-bool Navigation::setTrueBrgDeg(const LCreal v)
+bool Navigation::setTrueBrgDeg(const double v)
 {
    tbrg = v;
    return true;
 }
 
-bool Navigation::setMagBrgDeg(const LCreal v)
+bool Navigation::setMagBrgDeg(const double v)
 {
    mbrg = v;
    return true;
 }
 
-bool Navigation::setDistNM(const LCreal v)
+bool Navigation::setDistNM(const double v)
 {
    dst = v;
    return true;
 }
 
-bool Navigation::setTrueCrsDeg(const LCreal v)
+bool Navigation::setTrueCrsDeg(const double v)
 {
    tcrs = v;
    return true;
 }
 
-bool Navigation::setMagCrsDeg(const LCreal v)
+bool Navigation::setMagCrsDeg(const double v)
 {
    mcrs = v;
    return true;
 }
 
-bool Navigation::setCrossTrackErrorNM(const LCreal v)
+bool Navigation::setCrossTrackErrorNM(const double v)
 {
    xte = v;
    return true;
 }
 
-bool Navigation::setTTG(const LCreal v)
+bool Navigation::setTTG(const double v)
 {
    ttg = v;
    return true;
 }
 
-bool Navigation::setETA(const LCreal v)
+bool Navigation::setETA(const double v)
 {
    eta = v;
    return true;
@@ -716,7 +716,7 @@ bool Navigation::updateSysPosition()
         double lat0 = 0;
         double lon0 = 0;
         double alt0 = 0;
-        ok = basic::Nav::convertPosVec2LL(refLat, refLon, getOwnship()->getPosition(), &lat0, &lon0, &alt0);
+        ok = base::Nav::convertPosVec2LL(refLat, refLon, getOwnship()->getPosition(), &lat0, &lon0, &alt0);
         setPosition(lat0, lon0, alt0);
     }
     return ok;
@@ -858,18 +858,18 @@ bool Navigation::setSlotRoute(const Route* const msg)
    return true;
 }
 
-bool Navigation::setSlotUtc(const basic::Time* const msg)
+bool Navigation::setSlotUtc(const base::Time* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        initUTC = basic::Seconds::convertStatic( *msg );
+        initUTC = base::Seconds::convertStatic( *msg );
         ok = true;
     }
     return ok;
 }
 
 // setSlotFeba() --- Sets the FEBA points
-bool Navigation::setSlotFeba(const basic::PairStream* const msg)
+bool Navigation::setSlotFeba(const base::PairStream* const msg)
 {
     bool ok = true;
 
@@ -880,27 +880,27 @@ bool Navigation::setSlotFeba(const basic::PairStream* const msg)
 
         // Get the points from the pair stream
         int np = 0;
-        const basic::List::Item* item = msg->getFirstItem();
+        const base::List::Item* item = msg->getFirstItem();
         while (item != nullptr && np < max && ok) {
             bool validFlg = false;
-            const basic::Pair* p = dynamic_cast<const basic::Pair*>(item->getValue());
+            const base::Pair* p = dynamic_cast<const base::Pair*>(item->getValue());
             if (p != nullptr) {
-                const basic::Object* obj2 = p->object();
-                const basic::List* msg2 = dynamic_cast<const basic::List*>(obj2);
+                const base::Object* obj2 = p->object();
+                const base::List* msg2 = dynamic_cast<const base::List*>(obj2);
                 if (msg2 != nullptr) {
-                    LCreal values[2];
+                    double values[2];
                     int n = 0;
 
                     { // Get the north (first) distance
-                        const basic::Number* pNum = nullptr;
-                        const basic::Pair* pair2 = dynamic_cast<const basic::Pair*>(msg2->getPosition(1));
-                        if (pair2 != nullptr) pNum = dynamic_cast<const basic::Number*>(pair2->object());
-                        else pNum = dynamic_cast<const basic::Number*>(msg2->getPosition(1));
+                        const base::Number* pNum = nullptr;
+                        const base::Pair* pair2 = dynamic_cast<const base::Pair*>(msg2->getPosition(1));
+                        if (pair2 != nullptr) pNum = dynamic_cast<const base::Number*>(pair2->object());
+                        else pNum = dynamic_cast<const base::Number*>(msg2->getPosition(1));
 
                         if (pNum != nullptr) {
-                            const basic::Distance* pDist = dynamic_cast<const basic::Distance*>(pNum);
+                            const base::Distance* pDist = dynamic_cast<const base::Distance*>(pNum);
                             if (pDist != nullptr) {
-                                values[n++] = basic::NauticalMiles::convertStatic(*pDist);
+                                values[n++] = base::NauticalMiles::convertStatic(*pDist);
                             }
                             else {
                                 values[n++] = pNum->getReal();
@@ -909,15 +909,15 @@ bool Navigation::setSlotFeba(const basic::PairStream* const msg)
                     }
 
                     { // Get the east (second) distance
-                        const basic::Number* pNum = nullptr;
-                        const basic::Pair* pair2 = dynamic_cast<const basic::Pair*>(msg2->getPosition(2));
-                        if (pair2 != nullptr) pNum = dynamic_cast<const basic::Number*>(pair2->object());
-                        else pNum = dynamic_cast<const basic::Number*>(msg2->getPosition(2));
+                        const base::Number* pNum = nullptr;
+                        const base::Pair* pair2 = dynamic_cast<const base::Pair*>(msg2->getPosition(2));
+                        if (pair2 != nullptr) pNum = dynamic_cast<const base::Number*>(pair2->object());
+                        else pNum = dynamic_cast<const base::Number*>(msg2->getPosition(2));
 
                         if (pNum != nullptr) {
-                            const basic::Distance* pDist = dynamic_cast<const basic::Distance*>(pNum);
+                            const base::Distance* pDist = dynamic_cast<const base::Distance*>(pNum);
                             if (pDist != nullptr) {
-                                values[n++] = basic::NauticalMiles::convertStatic(*pDist);
+                                values[n++] = base::NauticalMiles::convertStatic(*pDist);
                             }
                             else {
                                 values[n++] = pNum->getReal();
@@ -991,7 +991,7 @@ std::ostream& Navigation::serialize(std::ostream& sout, const int i, const bool 
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* Navigation::getSlotByIndex(const int si)
+base::Object* Navigation::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

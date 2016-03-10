@@ -4,10 +4,10 @@
 #ifndef __oe_linearsystem_ScalerFunc_H__
 #define __oe_linearsystem_ScalerFunc_H__
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 namespace oe {
-   namespace basic {
+   namespace base {
       class Frequency;
       class Number;
    }
@@ -41,35 +41,35 @@ namespace linearsystem {
 //    y0    <Number>     Initial (previous) output value: Y(0) (default: 0)
 //
 //------------------------------------------------------------------------------
-class ScalerFunc : public basic::Object
+class ScalerFunc : public base::Object
 {
-    DECLARE_SUBCLASS(ScalerFunc,basic::Object)
+    DECLARE_SUBCLASS(ScalerFunc,base::Object)
 
 public:
    ScalerFunc();
    ScalerFunc(const unsigned int rate);
 
    // one iteration of the system:  Y(n) = g(X(n))
-   virtual LCreal g(const LCreal x1) =0;
+   virtual double g(const double x1) =0;
 
-   LCreal getX0() const          { return x0; }       // Returns X(0)
-   LCreal getY0() const          { return y0; }       // Returns Y
+   double getX0() const          { return x0; }       // Returns X(0)
+   double getY0() const          { return y0; }       // Returns Y
    unsigned int getRate() const  { return rate; } // hz
 
    // Sets the initial X value, X(0), and all past X values, X(-1), X(-2) ,, X(-k+1)
-   virtual bool setX0(const LCreal v);
+   virtual bool setX0(const double v);
 
    // Sets the initial Y value, Y(0), and all past Y values, Y(-1), Y(-2) ,, Y(-k+1)
-   virtual bool setY0(const LCreal v);
+   virtual bool setY0(const double v);
 
    // Sets the master update rate (hz)
    virtual bool setRate(const unsigned int v);
 
    // Set slot functions
-   virtual bool setSlotRate(const basic::Frequency* const msg);
-   virtual bool setSlotRate(const basic::Number* const msg);
-   virtual bool setSlotX0(const basic::Number* const msg);
-   virtual bool setSlotY0(const basic::Number* const msg);
+   virtual bool setSlotRate(const base::Frequency* const msg);
+   virtual bool setSlotRate(const base::Number* const msg);
+   virtual bool setSlotX0(const base::Number* const msg);
+   virtual bool setSlotY0(const base::Number* const msg);
 
    bool isValid() const override;
 
@@ -84,13 +84,13 @@ protected:
    virtual void initialize();
 
    unsigned int n;   // Number coefficients (order)
-   LCreal* px;       // X input array
-   LCreal* py;       // Y output array
+   double* px;       // X input array
+   double* py;       // Y output array
 
    // Parameters and initial values
    unsigned int rate;
-   LCreal x0;
-   LCreal y0;
+   double x0;
+   double y0;
 
 private:
    void initData();  // Initialize our data

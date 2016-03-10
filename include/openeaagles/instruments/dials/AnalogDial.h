@@ -25,38 +25,38 @@ class AnalogDial : public Instrument
 public:
     AnalogDial();
 
-    virtual bool setOriginAngle(const LCreal na);
-    virtual bool setSweepAngle(const LCreal newSweepAngle);
-    virtual bool setRadius(const LCreal newR);
+    virtual bool setOriginAngle(const double na);
+    virtual bool setSweepAngle(const double newSweepAngle);
+    virtual bool setRadius(const double newR);
     virtual bool setMobile(const bool newM);
     virtual bool setSlices(const int x);
 
     // here are the get functions
-    LCreal getStartAngle() const    { return originAngle; }
-    LCreal getSweepAngle() const    { return sweepAngle; }
+    double getStartAngle() const    { return originAngle; }
+    double getSweepAngle() const    { return sweepAngle; }
     bool getMobile() const          { return isMobile; }
-    LCreal getRadius() const        { return radius; }
+    double getRadius() const        { return radius; }
     int getSlices() const           { return slices; }
 
     void drawFunc() override;
 
-    bool event(const int event, basic::Object* const obj = nullptr) override;
+    bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
     // slot functions
-    bool setSlotOriginAngle(const basic::Number* const newAngle);
-    bool setSlotMobile(const basic::Number* const newM);
-    bool setSlotSweepAngle(const basic::Number* const newSweepAngle);
-    bool setSlotRadius(const basic::Number* const newR);
-    bool setSlotSlices(const basic::Number* const x);
+    bool setSlotOriginAngle(const base::Number* const newAngle);
+    bool setSlotMobile(const base::Number* const newM);
+    bool setSlotSweepAngle(const base::Number* const newSweepAngle);
+    bool setSlotRadius(const base::Number* const newR);
+    bool setSlotSlices(const base::Number* const x);
     // event function
-    virtual bool onUpdateRadius(const basic::Number* const x);
+    virtual bool onUpdateRadius(const base::Number* const x);
 
 private:
-    LCreal originAngle;             // angle we start drawing ticks from (degrees, default is 0)
-    LCreal positionAngle;           // our position (if we are being rotated)
-    LCreal  sweepAngle;             // how far around the circle we sweep
-    LCreal   radius;                // radius of our background
+    double originAngle;             // angle we start drawing ticks from (degrees, default is 0)
+    double positionAngle;           // our position (if we are being rotated)
+    double  sweepAngle;             // how far around the circle we sweep
+    double   radius;                // radius of our background
     bool    isMobile;               // are we moving around on the dial, or just sending the value down (to our components)
     int slices;                     // number of slices to use while drawing
 };

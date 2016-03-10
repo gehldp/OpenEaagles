@@ -8,11 +8,11 @@
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
 
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/Decibel.h"
-#include "openeaagles/basic/units/Powers.h"
-#include "openeaagles/basic/units/Frequencies.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Decibel.h"
+#include "openeaagles/base/units/Powers.h"
+#include "openeaagles/base/units/Frequencies.h"
 
 namespace oe {
 namespace simulation {
@@ -21,9 +21,9 @@ IMPLEMENT_SUBCLASS(RfSystem,"RfSystem")
 
 // Slot table
 BEGIN_SLOTTABLE(RfSystem)
-   "antennaName",          //  1: Name of the requested Antenna  (basic::String)
-   "frequency",            //  2: Frequency     (Hz; def: 0)   (basic::Number or basic::Frequency)
-   "bandwidth",            //  3: Bandwidth     (Hz; def: 1)   (basic::Number or basic::Frequency)
+   "antennaName",          //  1: Name of the requested Antenna  (base::String)
+   "frequency",            //  2: Frequency     (Hz; def: 0)   (base::Number or base::Frequency)
+   "bandwidth",            //  3: Bandwidth     (Hz; def: 1)   (base::Number or base::Frequency)
    "powerPeak",            //  4: Peak Power (Watts; def: 0)
    "threshold",            //  5: RF: Receiver threshold above noise (dB, def: 0.0)
    "noiseFigure",          //  6: RF: Noise Figure (> 1)            (no units; def: 1.0)
@@ -32,23 +32,23 @@ BEGIN_SLOTTABLE(RfSystem)
    "lossRecv",             //  9: RF: Receive loss                  (dB or no units; def: 1.0)
    "lossSignalProcess",    // 10: RF: Signal Processing loss        (dB or no units; def: 1.0)
    "disableEmissions",     // 11: Disable sending emission packets flag (default: false)
-   "bandwidthNoise",       // 12: Bandwidth Noise (Hz; def: 'bandwidth') (basic::Number or basic::Frequency)
+   "bandwidthNoise",       // 12: Bandwidth Noise (Hz; def: 'bandwidth') (base::Number or base::Frequency)
 END_SLOTTABLE(RfSystem)
 
 //  Map slot table
 BEGIN_SLOT_MAP(RfSystem)
-    ON_SLOT(1,  setSlotAntennaName,  basic::String)
-    ON_SLOT(2,  setSlotFrequency,    basic::Number)
-    ON_SLOT(3,  setSlotBandwidth,    basic::Number)
-    ON_SLOT(4,  setSlotPeakPower,    basic::Number)
-    ON_SLOT(5,  setSlotRfThreshold,  basic::Decibel)
-    ON_SLOT(6,  setSlotRfNoiseFigure,basic::Number)
-    ON_SLOT(7,  setSlotRfSysTemp,    basic::Number)
-    ON_SLOT(8,  setSlotRfTransmitLoss, basic::Number)
-    ON_SLOT(9,  setSlotRfReceiveLoss,  basic::Number)
-    ON_SLOT(10, setSlotRfSignalProcessLoss, basic::Number)
-    ON_SLOT(11, setSlotDisableEmissions, basic::Number)
-    ON_SLOT(12, setSlotBandwidthNoise, basic::Number)
+    ON_SLOT(1,  setSlotAntennaName,  base::String)
+    ON_SLOT(2,  setSlotFrequency,    base::Number)
+    ON_SLOT(3,  setSlotBandwidth,    base::Number)
+    ON_SLOT(4,  setSlotPeakPower,    base::Number)
+    ON_SLOT(5,  setSlotRfThreshold,  base::Decibel)
+    ON_SLOT(6,  setSlotRfNoiseFigure,base::Number)
+    ON_SLOT(7,  setSlotRfSysTemp,    base::Number)
+    ON_SLOT(8,  setSlotRfTransmitLoss, base::Number)
+    ON_SLOT(9,  setSlotRfReceiveLoss,  base::Number)
+    ON_SLOT(10, setSlotRfSignalProcessLoss, base::Number)
+    ON_SLOT(11, setSlotDisableEmissions, base::Number)
+    ON_SLOT(12, setSlotBandwidthNoise, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -98,7 +98,7 @@ void RfSystem::copyData(const RfSystem& org, const bool cc)
 
    // No antenna yet
    setAntenna(nullptr);
-   basic::String* p = const_cast<basic::String*>(static_cast<const basic::String*>(org.getAntennaName()));
+   base::String* p = const_cast<base::String*>(static_cast<const base::String*>(org.getAntennaName()));
    setSlotAntennaName( p );
 
    xmitEnable = org.xmitEnable;
@@ -194,7 +194,7 @@ void RfSystem::reset()
 //------------------------------------------------------------------------------
 // updateData() -- update background data here
 //------------------------------------------------------------------------------
-void RfSystem::updateData(const LCreal dt)
+void RfSystem::updateData(const double dt)
 {
    // ---
    // Process our players of interest
@@ -210,7 +210,7 @@ void RfSystem::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // process() -- for test
 //------------------------------------------------------------------------------
-void RfSystem::process(const LCreal)
+void RfSystem::process(const double)
 {
 }
 
@@ -226,7 +226,7 @@ void RfSystem::processPlayersOfInterest()
    if (getAntenna() != nullptr) {
 
       // Pass our players of interest to the antenna for processing
-      basic::PairStream* poi = nullptr;
+      base::PairStream* poi = nullptr;
       Simulation* sim = getSimulation();
       if ( sim != nullptr && !areEmissionsDisabled() ) {
          poi = sim->getPlayers();
@@ -241,7 +241,7 @@ void RfSystem::processPlayersOfInterest()
 //------------------------------------------------------------------------------
 // rfReceivedEmission() -- process returned RF Emission
 //------------------------------------------------------------------------------
-void RfSystem::rfReceivedEmission(Emission* const em, Antenna* const, LCreal raGain)
+void RfSystem::rfReceivedEmission(Emission* const em, Antenna* const, double raGain)
 {
    // Queue up emissions for receive() to process
    if (em != nullptr && isReceiverEnabled()) {
@@ -250,23 +250,23 @@ void RfSystem::rfReceivedEmission(Emission* const em, Antenna* const, LCreal raG
       if (affectsRfSystem(em)) {
 
          // Pulses this radar frame (from emission)
-         //LCreal pulses = static_cast<LCreal>( em->getPulses() );
+         //double pulses = static_cast<double>( em->getPulses() );
          //if (pulses <= 0) pulses = 1.0f;
 
          // Compute signal losses
          //    Basically, we're simulating Hannen's S/I equation from page 356 of his notes.
          //    Where I is N + J. J is noise from jamming.
          //    Receiver Loss affects the total I, so we have to wait until J is added to N in Radar.
-         LCreal losses = getRfSignalProcessLoss() * em->getAtmosphericAttenuationLoss() * em->getTransmitLoss();
+         double losses = getRfSignalProcessLoss() * em->getAtmosphericAttenuationLoss() * em->getTransmitLoss();
          if (losses < 1.0) losses = 1.0;
 
          // Range loss
-         const LCreal rl = em->getRangeLoss();
+         const double rl = em->getRangeLoss();
 
          // Signal Equation (one way signal)
          // Signal Equation (Part of equation 2-7)
          // Signal (equation 3-3)
-         const LCreal signal = em->getPower() * rl * raGain / losses;
+         const double signal = em->getPower() * rl * raGain / losses;
 
          // Noise Jammer -- add this signal to the total interference signal (noise)
          if ( em->isECMType(Emission::ECM_NOISE) ) {
@@ -278,14 +278,14 @@ void RfSystem::rfReceivedEmission(Emission* const em, Antenna* const, LCreal raG
          }
 
          // Save packet and signal for receive()
-         lcLock(packetLock);
+         base::lcLock(packetLock);
          if (np < MAX_EMISSIONS) {
             em->ref();
             packets[np] = em;
             signals[np] = signal;
             np++;
          }
-         lcUnlock(packetLock);
+         base::lcUnlock(packetLock);
 
       }
    }
@@ -295,9 +295,9 @@ void RfSystem::rfReceivedEmission(Emission* const em, Antenna* const, LCreal raG
 //------------------------------------------------------------------------------
 // transmitPower() -- Compute transmitter power (Part of equation 2-1)
 //------------------------------------------------------------------------------
-LCreal RfSystem::transmitPower(const LCreal peakPwr) const
+double RfSystem::transmitPower(const double peakPwr) const
 {
-    LCreal pwr = peakPwr;
+    double pwr = peakPwr;
     if (rfLossXmit >= 1.0) pwr = peakPwr / rfLossXmit;
     return pwr;
 }
@@ -327,10 +327,10 @@ bool RfSystem::isTransmitting() const
 }
 
 // Returns true if the input frequency is within the frequency band of the R/F system
-bool RfSystem::isFrequencyInBand(LCreal hz) const
+bool RfSystem::isFrequencyInBand(double hz) const
 {
-    if ((frequency - bandwidth / static_cast<LCreal>(2.0)) <= hz
-         && (frequency + bandwidth / static_cast<LCreal>(2.0)) >= hz) {
+    if ((frequency - bandwidth / static_cast<double>(2.0)) <= hz
+         && (frequency + bandwidth / static_cast<double>(2.0)) >= hz) {
         return true;
     }
     return false;
@@ -344,67 +344,67 @@ bool RfSystem::areEmissionsDisabled() const
 
 
 // Returns the R/F system's frequency (hertz)
-LCreal RfSystem::getFrequency() const
+double RfSystem::getFrequency() const
 {
    return frequency;
 }
 
 // Returns the R/F system's bandwidth (hertz)
-LCreal RfSystem::getBandwidth() const
+double RfSystem::getBandwidth() const
 {
    return bandwidth;
 }
 
 // Returns the R/F system's bandwidth noise (hertz)
-LCreal RfSystem::getBandwidthNoise() const
+double RfSystem::getBandwidthNoise() const
 {
    return (bwNoiseSet ? bandwidthNoise : bandwidth);
 }
 
 // Returns the R/F system's transmitter's peak power (watts)
-LCreal RfSystem::getPeakPower() const
+double RfSystem::getPeakPower() const
 {
    return powerPeak;
 }
 
 // Returns system temperature (Kelvin)
-LCreal RfSystem::getRfSysTemp() const
+double RfSystem::getRfSysTemp() const
 {
    return rfSysTemp;
 }
 
 // Returns the receiver noise (watts)
-LCreal RfSystem::getRfRecvNoise() const
+double RfSystem::getRfRecvNoise() const
 {
    return rfRecvNoise;
 }
 
 // Returns the receiver threshold (over S/N) (dB)
-LCreal RfSystem::getRfThreshold() const
+double RfSystem::getRfThreshold() const
 {
    return rfThreshold;
 }
 
 // Returns the transmit loss (no units)
-LCreal RfSystem::getRfTransmitLoss() const
+double RfSystem::getRfTransmitLoss() const
 {
    return rfLossXmit;
 }
 
 // Returns the receive loss   (no units)
-LCreal RfSystem::getRfReceiveLoss() const
+double RfSystem::getRfReceiveLoss() const
 {
    return rfLossRecv;
 }
 
 // Returns the signal Processing loss (no units)
-LCreal RfSystem::getRfSignalProcessLoss() const
+double RfSystem::getRfSignalProcessLoss() const
 {
    return rfLossSignalProcess;
 }
 
 // Returns the receiver noise figure (no units)
-LCreal RfSystem::getRfNoiseFigure() const
+double RfSystem::getRfNoiseFigure() const
 {
    return rfNoiseFigure;
 }
@@ -421,12 +421,12 @@ const Antenna* RfSystem::getAntenna() const
 }
 
 // Name of the antenna model, or zero (0) if none
-basic::String* RfSystem::getAntennaName()
+base::String* RfSystem::getAntennaName()
 {
    return antennaName;
 }
 
-const basic::String* RfSystem::getAntennaName() const
+const base::String* RfSystem::getAntennaName() const
 {
    return antennaName;
 }
@@ -450,21 +450,21 @@ bool RfSystem::affectsRfSystem(Emission* const em) const
 //------------------------------------------------------------------------------
 
 // setPeakPower() -- set the peak power of the R/F transmitter
-bool RfSystem::setPeakPower(const LCreal watts)
+bool RfSystem::setPeakPower(const double watts)
 {
    powerPeak = watts;
    return true;
 }
 
 // setFrequency() -- set frequency
-bool RfSystem::setFrequency(const LCreal hz)
+bool RfSystem::setFrequency(const double hz)
 {
    frequency = hz;
    return true;
 }
 
 // setBandwidth() -- set the bandwidth; must be >= 1
-bool RfSystem::setBandwidth(const LCreal hz)
+bool RfSystem::setBandwidth(const double hz)
 {
    bool ok = false;
    // Bandwidth must be greater than or equal one!
@@ -477,7 +477,7 @@ bool RfSystem::setBandwidth(const LCreal hz)
 }
 
 // setBandwidthNoise() -- set the bandwidth noise; must be >= 1
-bool RfSystem::setBandwidthNoise(const LCreal hz)
+bool RfSystem::setBandwidthNoise(const double hz)
 {
    bool ok = false;
    // Bandwidth noise must be greater than or equal one!
@@ -490,13 +490,13 @@ bool RfSystem::setBandwidthNoise(const LCreal hz)
    return ok;
 }
 
-bool RfSystem::setRfThreshold(const LCreal v)
+bool RfSystem::setRfThreshold(const double v)
 {
    rfThreshold = v;
    return true;
 }
 
-bool RfSystem::setRfTransmitLoss(const LCreal v)
+bool RfSystem::setRfTransmitLoss(const double v)
 {
    bool ok = false;
    // Transmitter loss must be greater than or equal one!
@@ -507,7 +507,7 @@ bool RfSystem::setRfTransmitLoss(const LCreal v)
    return ok;
 }
 
-bool RfSystem::setRfReceiveLoss(const LCreal v)
+bool RfSystem::setRfReceiveLoss(const double v)
 {
    bool ok = false;
    // Receiver loss must be greater than or equal one!
@@ -518,7 +518,7 @@ bool RfSystem::setRfReceiveLoss(const LCreal v)
    return ok;
 }
 
-bool RfSystem::setRfSignalProcessLoss(const LCreal v)
+bool RfSystem::setRfSignalProcessLoss(const double v)
 {
    bool ok = false;
    // Signal processing loss must be greater than or equal one!
@@ -529,7 +529,7 @@ bool RfSystem::setRfSignalProcessLoss(const LCreal v)
    return ok;
 }
 
-bool RfSystem::setRfNoiseFigure(const LCreal v)
+bool RfSystem::setRfNoiseFigure(const double v)
 {
    bool ok = false;
    // Noise figure must be greater than or equal one!
@@ -541,7 +541,7 @@ bool RfSystem::setRfNoiseFigure(const LCreal v)
    return ok;
 }
 
-bool RfSystem::setRfSysTemp(const LCreal v)
+bool RfSystem::setRfSysTemp(const double v)
 {
    bool ok = false;
    // Temperature must be greater than zero!
@@ -554,7 +554,7 @@ bool RfSystem::setRfSysTemp(const LCreal v)
 }
 
 // Sets the receiver noise (Watts)
-bool RfSystem::setReceiverNoise(const LCreal v)
+bool RfSystem::setReceiverNoise(const double v)
 {
    bool ok = false;
    // noise must be greater than or equal zero!
@@ -603,15 +603,15 @@ bool RfSystem::setAntenna(Antenna* const p)
 // Compute receiver thermal noise (equation 2-8)
 bool RfSystem::computeReceiverNoise()
 {
-   return setReceiverNoise(rfNoiseFigure * static_cast<float>(BOLTZMANN) * rfSysTemp * getBandwidthNoise());
+   return setReceiverNoise(rfNoiseFigure * static_cast<float>(base::BOLTZMANN) * rfSysTemp * getBandwidthNoise());
 }
 
 //------------------------------------------------------------------------------
 // Slot Functions  (return 'true' if the slot was set, else 'false')
 //------------------------------------------------------------------------------
 
-// antennaName: Antenna name  (basic::String)
-bool RfSystem::setSlotAntennaName(basic::String* const p)
+// antennaName: Antenna name  (base::String)
+bool RfSystem::setSlotAntennaName(base::String* const p)
 {
    if (antennaName != nullptr) {
       antennaName->unref();
@@ -623,16 +623,16 @@ bool RfSystem::setSlotAntennaName(basic::String* const p)
    return true;
 }
 
-// setSlotFrequency() -- Set the Frequency (basic::Number or basic::Frequency)
-bool RfSystem::setSlotFrequency(basic::Number* const v)
+// setSlotFrequency() -- Set the Frequency (base::Number or base::Frequency)
+bool RfSystem::setSlotFrequency(base::Number* const v)
 {
     bool ok = false;
-    LCreal x = -1.0;
+    double x = -1.0;
 
-    const basic::Frequency* p = dynamic_cast<const basic::Frequency*>(v);
+    const base::Frequency* p = dynamic_cast<const base::Frequency*>(v);
     if (p != nullptr) {
         // Has frequency and we need hertz
-        x = basic::Hertz::convertStatic(*p);
+        x = base::Hertz::convertStatic(*p);
     }
     else if (v != nullptr) {
         // Just a Number
@@ -651,17 +651,17 @@ bool RfSystem::setSlotFrequency(basic::Number* const v)
 }
 
 // bandwidth: Bandwidth     (Hz)
-bool RfSystem::setSlotBandwidth(basic::Number* const num)
+bool RfSystem::setSlotBandwidth(base::Number* const num)
 {
     bool ok = false;
     if (num != nullptr) {
 
-        LCreal bw = -1.0f;
+        double bw = -1.0f;
 
-        const basic::Frequency* p = dynamic_cast<const basic::Frequency*>(num);
+        const base::Frequency* p = dynamic_cast<const base::Frequency*>(num);
         if (p != nullptr) {
             // Has frequency and we need hertz
-            bw = basic::Hertz::convertStatic(*p);
+            bw = base::Hertz::convertStatic(*p);
         }
         else {
             // Just a Number
@@ -679,17 +679,17 @@ bool RfSystem::setSlotBandwidth(basic::Number* const num)
 }
 
 // bandwidthNoise: Bandwidth Noise  (Hz)
-bool RfSystem::setSlotBandwidthNoise(basic::Number* const num)
+bool RfSystem::setSlotBandwidthNoise(base::Number* const num)
 {
     bool ok = false;
     if (num != nullptr) {
 
-        LCreal bw = -1.0f;
+        double bw = -1.0f;
 
-        const basic::Frequency* p = dynamic_cast<const basic::Frequency*>(num);
+        const base::Frequency* p = dynamic_cast<const base::Frequency*>(num);
         if (p != nullptr) {
             // Has frequency and we need hertz
-            bw = basic::Hertz::convertStatic(*p);
+            bw = base::Hertz::convertStatic(*p);
         }
         else {
             // Just a Number
@@ -706,16 +706,16 @@ bool RfSystem::setSlotBandwidthNoise(basic::Number* const num)
     return ok;
 }
 
-// setSlotPeakPower() -- set the peak power (basic::Number or basic::Watts)
-bool RfSystem::setSlotPeakPower(basic::Number* const v)
+// setSlotPeakPower() -- set the peak power (base::Number or base::Watts)
+bool RfSystem::setSlotPeakPower(base::Number* const v)
 {
     bool ok = false;
-    LCreal x = -1.0;
+    double x = -1.0;
 
-    basic::Power* p = dynamic_cast<basic::Power*>(v);
+    base::Power* p = dynamic_cast<base::Power*>(v);
     if (p != nullptr) {
         // Has power units and we need watts
-        basic::Watts watts;
+        base::Watts watts;
         x = watts.convert(*p);
     }
     else if (v != nullptr) {
@@ -735,7 +735,7 @@ bool RfSystem::setSlotPeakPower(basic::Number* const v)
 }
 
 // setSlotRfThreshold() -- set the receiver threshold (db over S/N)
-bool RfSystem::setSlotRfThreshold(basic::Decibel* const v)
+bool RfSystem::setSlotRfThreshold(base::Decibel* const v)
 {
     bool ok = false;
     if (v != nullptr) {
@@ -745,11 +745,11 @@ bool RfSystem::setSlotRfThreshold(basic::Decibel* const v)
 }
 
 // setSlotRfNoiseFigure() -- set the noise figure (no units)
-bool RfSystem::setSlotRfNoiseFigure(basic::Number* const v)
+bool RfSystem::setSlotRfNoiseFigure(base::Number* const v)
 {
     bool ok = false;
     if (v != nullptr) {
-        const LCreal fig = v->getReal();
+        const double fig = v->getReal();
         if (fig >= 1.0) {
             ok = setRfNoiseFigure( fig );
         }
@@ -761,11 +761,11 @@ bool RfSystem::setSlotRfNoiseFigure(basic::Number* const v)
 }
 
 // setSlotRfSysTemp() -- set the system temperature (kelvin)
-bool RfSystem::setSlotRfSysTemp(basic::Number* const v)
+bool RfSystem::setSlotRfSysTemp(base::Number* const v)
 {
     bool ok = false;
     if (v != nullptr) {
-        const LCreal tmp = v->getReal();
+        const double tmp = v->getReal();
         if (tmp > 0.0) {
             ok = setRfSysTemp( tmp );;
         }
@@ -777,11 +777,11 @@ bool RfSystem::setSlotRfSysTemp(basic::Number* const v)
 }
 
 // setSlotRfTransmitLoss() -- set the transmit loss
-bool RfSystem::setSlotRfTransmitLoss(basic::Number* const v)
+bool RfSystem::setSlotRfTransmitLoss(base::Number* const v)
 {
     bool ok = false;
     if (v != nullptr) {
-        const LCreal loss = v->getReal();
+        const double loss = v->getReal();
         if (loss >= 1.0) {
             ok = setRfTransmitLoss(loss);
         }
@@ -793,11 +793,11 @@ bool RfSystem::setSlotRfTransmitLoss(basic::Number* const v)
 }
 
 // setSlotRfReceiveLoss() -- set the receive loss
-bool RfSystem::setSlotRfReceiveLoss(basic::Number* const v)
+bool RfSystem::setSlotRfReceiveLoss(base::Number* const v)
 {
     bool ok = false;
     if (v != nullptr) {
-        const LCreal loss = v->getReal();
+        const double loss = v->getReal();
         if (loss >= 1.0) {
             ok = setRfReceiveLoss(loss);
         }
@@ -809,11 +809,11 @@ bool RfSystem::setSlotRfReceiveLoss(basic::Number* const v)
 }
 
 // setSlotRfSignalProcessLoss() -- set signal processing loss
-bool RfSystem::setSlotRfSignalProcessLoss(basic::Number* const v)
+bool RfSystem::setSlotRfSignalProcessLoss(base::Number* const v)
 {
     bool ok = false;
     if (v != nullptr) {
-        const LCreal loss = v->getReal();
+        const double loss = v->getReal();
         if (loss >= 1.0) {
             ok = setRfSignalProcessLoss(loss);
         }
@@ -825,7 +825,7 @@ bool RfSystem::setSlotRfSignalProcessLoss(basic::Number* const v)
 }
 
 // setSlotDisableEmissions() -- sets the disable sending emissions flag
-bool RfSystem::setSlotDisableEmissions(basic::Number* const msg)
+bool RfSystem::setSlotDisableEmissions(base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -838,7 +838,7 @@ bool RfSystem::setSlotDisableEmissions(basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* RfSystem::getSlotByIndex(const int si)
+base::Object* RfSystem::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -855,17 +855,17 @@ std::ostream& RfSystem::serialize(std::ostream& sout, const int i, const bool sl
         j = 4;
     }
 
-    //"antennaName",          //  Name of the requested Antenna  (basic::String)
+    //"antennaName",          //  Name of the requested Antenna  (base::String)
     if (antennaName != nullptr) {
         indent(sout,i+j);
         sout << "antenna: " << *antennaName << std::endl;
     }
 
-    //"frequency",            //  Frequency     (Hz; def: 0)        (basic::Number or LcFrequecy)
+    //"frequency",            //  Frequency     (Hz; def: 0)        (base::Number or LcFrequecy)
     indent(sout,i+j);
     sout << "frequency: ( Hertz " << frequency << std::endl;
 
-    //"bandwidth",            //  Bandwidth     (Hz; def: 0)        (basic::Number or LcFrequecy)
+    //"bandwidth",            //  Bandwidth     (Hz; def: 0)        (base::Number or LcFrequecy)
     indent(sout,i+j);
     sout << "bandwidth: ( Hertz " << bandwidth << std::endl;
 

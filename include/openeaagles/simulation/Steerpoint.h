@@ -4,11 +4,11 @@
 #ifndef __oe_simulation_Steerpoint_H__
 #define __oe_simulation_Steerpoint_H__
 
-#include "openeaagles/basic/Component.h"
-#include "openeaagles/basic/osg/Vec3"
+#include "openeaagles/base/Component.h"
+#include "openeaagles/base/osg/Vec3"
 
 namespace oe {
-   namespace basic {
+   namespace base {
       class Angle;
       class Distance;
       class Identifier;
@@ -30,48 +30,48 @@ class Action;
 //
 // Factory name: Steerpoint
 // Slots:
-//   stptType  <basic::Identifier>  ! Steerpoint type; default: DEST
+//   stptType  <base::Identifier>  ! Steerpoint type; default: DEST
 //                                  ! { ROUTE, DEST, MARK, FIX, OAP, TGT }
 //
-//   latitude  <basic::LatLon>      ! Steerpoint latitude  (default: 0)
-//             <basic::Number>      ! (or as degrees decimal)
+//   latitude  <base::LatLon>      ! Steerpoint latitude  (default: 0)
+//             <base::Number>      ! (or as degrees decimal)
 //
-//   longitude <basic::LatLon>      ! Steerpoint longitude (default: 0)
-//             <basic::Number>      ! (or as degrees decimal)
+//   longitude <base::LatLon>      ! Steerpoint longitude (default: 0)
+//             <base::Number>      ! (or as degrees decimal)
 //
-//   xPos      <basic::Distance>    ! X (north) distance from gaming area reference point
-//   yPos      <basic::Distance>    ! Y (east) distance from gaming area reference point
+//   xPos      <base::Distance>    ! X (north) distance from gaming area reference point
+//   yPos      <base::Distance>    ! Y (east) distance from gaming area reference point
 //                                  ! (default: 0, 0)
-//   elevation <basic::Distance>    ! Terrain elevation at steerpoint (default: 0)
-//             <basic::Number>      ! (or as meters)
+//   elevation <base::Distance>    ! Terrain elevation at steerpoint (default: 0)
+//             <base::Number>      ! (or as meters)
 //
-//   altitude  <basic::Distance>    ! Commanded altitude to steerpoint (default: 0)
-//             <basic::Number>      ! (or as meters)
+//   altitude  <base::Distance>    ! Commanded altitude to steerpoint (default: 0)
+//             <base::Number>      ! (or as meters)
 //
-//   airspeed  <basic::Number>      ! Commanded true airspeed (Kts) (default: 0)
+//   airspeed  <base::Number>      ! Commanded true airspeed (Kts) (default: 0)
 //
-//   pta       <basic::Distance>    ! Planned Time of Arrival (PTA)  (default: 0)
-//             <basic::Number>      ! (or as seconds)
+//   pta       <base::Distance>    ! Planned Time of Arrival (PTA)  (default: 0)
+//             <base::Number>      ! (or as seconds)
 //
-//   sca       <basic::Distance>    ! Safe Clearance Altitude (SCA) (default: 0)
-//             <basic::Number>      ! (or as feet)
+//   sca       <base::Distance>    ! Safe Clearance Altitude (SCA) (default: 0)
+//             <base::Number>      ! (or as feet)
 //
-//   description <basic::String>    ! Description of steerpoint (default: 0)
+//   description <base::String>    ! Description of steerpoint (default: 0)
 //
-//   magvar    <basic::Angle>       ! Magnetic Var at steerpoint (default: 0)
-//             <basic::Number>      ! (or as degrees)
+//   magvar    <base::Angle>       ! Magnetic Var at steerpoint (default: 0)
+//             <base::Number>      ! (or as degrees)
 //
-//   next      <basic::Number>      ! "Next" steerpoint number (default: 0)
-//             <basic::Identifier>  ! or by steerpoint name
+//   next      <base::Number>      ! "Next" steerpoint number (default: 0)
+//             <base::Identifier>  ! or by steerpoint name
 //
 //   action    <Action>             ! Action to be triggered at steerpoint crossing (auto only)
 //                                  !  Note: the "to" steerpoint will have sequenced to the
 //                                  !  next steerpoint when action is triggered. (default: 0)
 //
 //------------------------------------------------------------------------------
-class Steerpoint : public basic::Component
+class Steerpoint : public base::Component
 {
-   DECLARE_SUBCLASS(Steerpoint,basic::Component)
+   DECLARE_SUBCLASS(Steerpoint,base::Component)
 
 public:
    enum StptType { DEST, MARK, FIX, OAP, IP, TGT, TGT_GRP };
@@ -93,69 +93,69 @@ public:
     const osg::Vec3& getPosition() const        { return posVec; }
     double getLatitude() const;
     double getLongitude() const;
-    LCreal getElevation() const                 { return elevation; }
-    LCreal getElevationM() const                { return elevation; }
-    LCreal getElevationFt() const;
-    LCreal getSCA() const                       { return sca; }     // Feet
-    LCreal getPTA() const                       { return pta; }     // Seconds
+    double getElevation() const                 { return elevation; }
+    double getElevationM() const                { return elevation; }
+    double getElevationFt() const;
+    double getSCA() const                       { return sca; }     // Feet
+    double getPTA() const                       { return pta; }     // Seconds
     const char* getDescription() const;
-    LCreal getMagVarDeg() const                 { return magvar; }
-    LCreal getCmdAltitude() const               { return cmdAlt; }
-    LCreal getCmdAltitudeM() const              { return cmdAlt; }
-    LCreal getCmdAltitudeFt() const;
-    LCreal getCmdAirspeedKts() const            { return cmdAirspeed; }
+    double getMagVarDeg() const                 { return magvar; }
+    double getCmdAltitude() const               { return cmdAlt; }
+    double getCmdAltitudeM() const              { return cmdAlt; }
+    double getCmdAltitudeFt() const;
+    double getCmdAirspeedKts() const            { return cmdAirspeed; }
 
     // Nav Steering: 'direct-to' data
-    LCreal getTrueBrgDeg() const                { return tbrg; }
-    LCreal getMagBrgDeg() const                 { return mbrg; }
-    LCreal getDistNM() const                    { return dst; }
-    LCreal getTTG() const                       { return ttg; }
-    LCreal getCrossTrackErrNM() const           { return xte; }
+    double getTrueBrgDeg() const                { return tbrg; }
+    double getMagBrgDeg() const                 { return mbrg; }
+    double getDistNM() const                    { return dst; }
+    double getTTG() const                       { return ttg; }
+    double getCrossTrackErrNM() const           { return xte; }
 
     // Nav Steering: 'leg' data
-    LCreal getTrueCrsDeg() const                { return tcrs; }
-    LCreal getMagCrsDeg() const                 { return mcrs; }
-    LCreal getLegDistNM() const                 { return tld; }
-    LCreal getLegTime() const                   { return tlt; }
+    double getTrueCrsDeg() const                { return tcrs; }
+    double getMagCrsDeg() const                 { return mcrs; }
+    double getLegDistNM() const                 { return tld; }
+    double getLegTime() const                   { return tlt; }
 
     // Nav Steering: 'enroute' data
-    LCreal getDistEnrouteNM() const             { return tde; }
-    LCreal getETE() const                       { return ete; }
-    LCreal getETA() const                       { return eta; }
-    LCreal getELT() const                       { return elt; }
+    double getDistEnrouteNM() const             { return tde; }
+    double getETE() const                       { return ete; }
+    double getETA() const                       { return eta; }
+    double getELT() const                       { return elt; }
 
     // Set the ground elevation at the steerpoint from this terrain database
     // Interpolate between elevation posts if the optional 'interp' flag is true.
     // Returns true if successful.
-    virtual bool setElevation(const basic::Terrain* const terrain, const bool interp = false);
+    virtual bool setElevation(const base::Terrain* const terrain, const bool interp = false);
 
     // Set parameters
     virtual void setSteerpointType(const StptType t)    { stptType = t; }
-    virtual void setPosition(const LCreal x, const LCreal y, const LCreal z);
-    virtual void setElevation(const LCreal x);
+    virtual void setPosition(const double x, const double y, const double z);
+    virtual void setElevation(const double x);
     virtual void setPosition(const osg::Vec3& newPos);
     virtual void setLatitude(const double v);
     virtual void setLongitude(const double v);
-    virtual void setPTA(const LCreal v)                 { pta = v; }
-    virtual void setSCA(const LCreal v)                 { sca = v; }
-    virtual void setDescription(const basic::String* const d);
-    virtual void setCmdAltitude(const LCreal v);
-    virtual void setCmdAirspeedKts(const LCreal v);
+    virtual void setPTA(const double v)                 { pta = v; }
+    virtual void setSCA(const double v)                 { sca = v; }
+    virtual void setDescription(const base::String* const d);
+    virtual void setCmdAltitude(const double v);
+    virtual void setCmdAirspeedKts(const double v);
 
     // Set nav data
-    virtual void setTrueBrgDeg(const LCreal v)           { tbrg = v; }
-    virtual void setMagBrgDeg(const LCreal v)            { mbrg = v; }
-    virtual void setDistNM(const LCreal v)               { dst = v; }
-    virtual void setTTG(const LCreal v)                  { ttg = v; }
-    virtual void setCrossTrackErrNM(const LCreal v)      { xte = v; }
-    virtual void setTrueCrsDeg(const LCreal v)           { tcrs = v; }
-    virtual void setMagCrsDeg(const LCreal v)            { mcrs = v; }
-    virtual void setLegDistNM(const LCreal v)            { tld = v; }
-    virtual void setLegTime(const LCreal v)              { tlt = v; }
-    virtual void setDistEnrouteNM(const LCreal v)        { tde = v; }
-    virtual void setETE(const LCreal v)                  { ete = v; }
-    virtual void setETA(const LCreal v)                  { eta = v; }
-    virtual void setELT(const LCreal v)                  { elt = v; }
+    virtual void setTrueBrgDeg(const double v)           { tbrg = v; }
+    virtual void setMagBrgDeg(const double v)            { mbrg = v; }
+    virtual void setDistNM(const double v)               { dst = v; }
+    virtual void setTTG(const double v)                  { ttg = v; }
+    virtual void setCrossTrackErrNM(const double v)      { xte = v; }
+    virtual void setTrueCrsDeg(const double v)           { tcrs = v; }
+    virtual void setMagCrsDeg(const double v)            { mcrs = v; }
+    virtual void setLegDistNM(const double v)            { tld = v; }
+    virtual void setLegTime(const double v)              { tlt = v; }
+    virtual void setDistEnrouteNM(const double v)        { tde = v; }
+    virtual void setETE(const double v)                  { ete = v; }
+    virtual void setETA(const double v)                  { eta = v; }
+    virtual void setELT(const double v)                  { elt = v; }
 
     // Sets the initial lat/lon (reset()) values
     virtual void setInitLatitude(const double lat)    { initLatitude = lat; }
@@ -175,92 +175,92 @@ public:
 protected:
 
     // Slot functions
-    virtual bool setSlotSteerpointType(const basic::Identifier* const msg);
-    virtual bool setSlotLatitude(const basic::LatLon* const msg);
-    virtual bool setSlotLatitude(const basic::Number* const msg);
-    virtual bool setSlotLongitude(const basic::LatLon* const msg);
-    virtual bool setSlotLongitude(const basic::Number* const msg);
-    virtual bool setSlotPosition(const basic::List* const numList);
-    virtual bool setSlotXPos(const basic::Distance* const num);
-    virtual bool setSlotYPos(const basic::Distance* const num);
-    virtual bool setSlotElevation(const basic::Distance* const num);
-    virtual bool setSlotElevation(const basic::Number* const num);
-    virtual bool setSlotPTA(const basic::Time* const msg);
-    virtual bool setSlotPTA(const basic::Number* const msg);
-    virtual bool setSlotSCA(const basic::Distance* const msg);
-    virtual bool setSlotSCA(const basic::Number* const msg);
-    virtual bool setSlotDescription(const basic::String* const msg);
-    virtual bool setSlotMagVar(const basic::Angle* const msg);
-    virtual bool setSlotMagVar(const basic::Number* const msg);
-    virtual bool setSlotCmdAltitude(const basic::Distance* const num);
-    virtual bool setSlotCmdAltitude(const basic::Number* const num);
-    virtual bool setSlotCmdAirspeed(const basic::Number* const num);
-    virtual bool setSlotNext(const basic::Identifier* const num);
-    virtual bool setSlotNext(const basic::Number* const num);
+    virtual bool setSlotSteerpointType(const base::Identifier* const msg);
+    virtual bool setSlotLatitude(const base::LatLon* const msg);
+    virtual bool setSlotLatitude(const base::Number* const msg);
+    virtual bool setSlotLongitude(const base::LatLon* const msg);
+    virtual bool setSlotLongitude(const base::Number* const msg);
+    virtual bool setSlotPosition(const base::List* const numList);
+    virtual bool setSlotXPos(const base::Distance* const num);
+    virtual bool setSlotYPos(const base::Distance* const num);
+    virtual bool setSlotElevation(const base::Distance* const num);
+    virtual bool setSlotElevation(const base::Number* const num);
+    virtual bool setSlotPTA(const base::Time* const msg);
+    virtual bool setSlotPTA(const base::Number* const msg);
+    virtual bool setSlotSCA(const base::Distance* const msg);
+    virtual bool setSlotSCA(const base::Number* const msg);
+    virtual bool setSlotDescription(const base::String* const msg);
+    virtual bool setSlotMagVar(const base::Angle* const msg);
+    virtual bool setSlotMagVar(const base::Number* const msg);
+    virtual bool setSlotCmdAltitude(const base::Distance* const num);
+    virtual bool setSlotCmdAltitude(const base::Number* const num);
+    virtual bool setSlotCmdAirspeed(const base::Number* const num);
+    virtual bool setSlotNext(const base::Identifier* const num);
+    virtual bool setSlotNext(const base::Number* const num);
 
     void processComponents(   // Process our subcomponent list (which should be other steerpoints)
-         basic::PairStream* const list,        // Source list of components
+         base::PairStream* const list,        // Source list of components
          const std::type_info& filter,           // Type filter
-         basic::Pair* const add = 0,           // Optional pair to add
-         basic::Component* const remove = 0    // Optional subcomponent to remove
+         base::Pair* const add = 0,           // Optional pair to add
+         base::Component* const remove = 0    // Optional subcomponent to remove
        ) override;
 
 private:
     // Steerpoint parameters
     double      latitude;       // latitude
     double      longitude;      // Longitude
-    LCreal      elevation;      // Elevation                (m)
+    double      elevation;      // Elevation                (m)
     osg::Vec3   posVec;         // Position vector          (m)           [ x, y, z ] NED
     StptType    stptType;       // Steerpoint type
-    LCreal      pta;            // Planned Time of Arrival  (sec)
-    LCreal      sca;            // Safe Clearance Alt       (ft)
-    LCreal      magvar;         // Mag Var                  (degs)
-    basic::safe_ptr<const basic::String> description; // Description
+    double      pta;            // Planned Time of Arrival  (sec)
+    double      sca;            // Safe Clearance Alt       (ft)
+    double      magvar;         // Mag Var                  (degs)
+    base::safe_ptr<const base::String> description; // Description
     bool        needPosVec;     // Request calucaltion of 'posVec' from Lat/Lon
     bool        needLL;         // Request calucaltion of Lat/Lon from 'posVec'
-    LCreal      cmdAlt;         // Commanded Altitude       (m)
+    double      cmdAlt;         // Commanded Altitude       (m)
     bool        haveCmdAlt;     // Have commanded altitude
-    LCreal      cmdAirspeed;    // Commanded Airspeed       (kts)
+    double      cmdAirspeed;    // Commanded Airspeed       (kts)
     bool        haveCmdAs;      // Have commanded airspeed
-    basic::safe_ptr<basic::Pair> next;  // "next" Steerpoint pair [ name steerpoint ]
+    base::safe_ptr<base::Pair> next;  // "next" Steerpoint pair [ name steerpoint ]
 
     // Steerpoint action
-    basic::safe_ptr<Action> action;     // Action to be performed at this steerpoint
+    base::safe_ptr<Action> action;     // Action to be performed at this steerpoint
 
     // Initial (reset) data
     double      initLatitude;   // latitude
     double      initLongitude;  // Longitude
     osg::Vec3   initPosVec;     // Init Position vector (m)           [ x, y, z ] NED
-    LCreal      initMagVar;     // Mag Var entered for this point  (deg)
+    double      initMagVar;     // Mag Var entered for this point  (deg)
     bool        haveInitLat;    // Have initial latitude
     bool        haveInitLon;    // Have initial longitude
     bool        haveInitPos;    // Have initial pos vector
     bool        haveInitMagVar; // Have initial mag var
-    LCreal      initElev;       // Elevation                  (m)
+    double      initElev;       // Elevation                  (m)
     bool        haveInitElev;   // Have initial elevation
-    LCreal      initCmdAlt;     // Initial commanded altitude (m)
+    double      initCmdAlt;     // Initial commanded altitude (m)
     bool        haveInitCmdAlt; // Have initial cmd altitude
-    LCreal      initCmdAirspeed; // Initial commanded airspeed (kts)
+    double      initCmdAirspeed; // Initial commanded airspeed (kts)
     bool        haveInitCmdAs;   // Have commanded airspeed
-    basic::safe_ptr<const basic::String> initNextStptName; // Name of the inital "next" steerpoint
+    base::safe_ptr<const base::String> initNextStptName; // Name of the inital "next" steerpoint
     int         initNextStptIdx;    // Index of the initial "next" steerpoint
 
     // Computed data
-    LCreal      tbrg;           // True bearing direct-to point    (deg)
-    LCreal      mbrg;           // Mag bearing direct-to point     (deg)
-    LCreal      dst;            // Distance direct-to point (nm)
-    LCreal      ttg;            // Time-To-Go (direct)      (sec)
-    LCreal      xte;            // Cross-Track Error        (nm)
+    double      tbrg;           // True bearing direct-to point    (deg)
+    double      mbrg;           // Mag bearing direct-to point     (deg)
+    double      dst;            // Distance direct-to point (nm)
+    double      ttg;            // Time-To-Go (direct)      (sec)
+    double      xte;            // Cross-Track Error        (nm)
 
-    LCreal      tcrs;           // TRUE Course to point     (degs)
-    LCreal      mcrs;           // Mag Course to point      (degs)
-    LCreal      tlt;            // Total Time this Leg      (sec)
-    LCreal      tld;            // Total Leg Distance       (nm)
+    double      tcrs;           // TRUE Course to point     (degs)
+    double      mcrs;           // Mag Course to point      (degs)
+    double      tlt;            // Total Time this Leg      (sec)
+    double      tld;            // Total Leg Distance       (nm)
 
-    LCreal      tde;            // Total Distance Enroute   (nm)
-    LCreal      ete;            // Est Time Enroute         (sec)
-    LCreal      eta;            // Est Time of Arrival (UTC)(sec)
-    LCreal      elt;            // Early/Late time          (sec)
+    double      tde;            // Total Distance Enroute   (nm)
+    double      ete;            // Est Time Enroute         (sec)
+    double      eta;            // Est Time of Arrival (UTC)(sec)
+    double      elt;            // Early/Late time          (sec)
     bool        scaWarn;        // Safe clearance Alt warning flag
     bool        navDataValid;   // Nav data is valid
 };

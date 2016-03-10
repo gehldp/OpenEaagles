@@ -6,11 +6,13 @@
 #include "openeaagles/simulation/Track.h"
 #include "openeaagles/simulation/TrackManager.h"
 #include "openeaagles/simulation/TabLogger.h"
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/osg/Matrix"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
+
+#include <cmath>
 
 namespace oe {
 namespace simulation {
@@ -31,14 +33,14 @@ END_SLOTTABLE(Missile)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(Missile)
-   ON_SLOT(1, setSlotVpMin, basic::Number)
-   ON_SLOT(2, setSlotVpMax, basic::Number)
-   ON_SLOT(3, setSlotVpMaxG, basic::Number)
-   ON_SLOT(4, setSlotMaxG, basic::Number)
-   ON_SLOT(5, setSlotMaxAccel, basic::Number)
-   ON_SLOT(6, setSlotCmdPitch, basic::Number)
-   ON_SLOT(7, setSlotCmdHeading, basic::Number)
-   ON_SLOT(8, setSlotCmdVelocity, basic::Number)
+   ON_SLOT(1, setSlotVpMin, base::Number)
+   ON_SLOT(2, setSlotVpMax, base::Number)
+   ON_SLOT(3, setSlotVpMaxG, base::Number)
+   ON_SLOT(4, setSlotMaxG, base::Number)
+   ON_SLOT(5, setSlotMaxAccel, base::Number)
+   ON_SLOT(6, setSlotCmdPitch, base::Number)
+   ON_SLOT(7, setSlotCmdHeading, base::Number)
+   ON_SLOT(8, setSlotCmdVelocity, base::Number)
 END_SLOT_MAP()
 
 // Event() map
@@ -56,7 +58,7 @@ Missile::Missile()
 {
    STANDARD_CONSTRUCTOR()
 
-   static basic::String generic("GenericMissile");
+   static base::String generic("GenericMissile");
    setType(&generic);
 
    setMaxTOF(60.0);
@@ -125,8 +127,8 @@ void Missile::atReleaseInit()
 
    if (getDynamicsModel() == nullptr) {
       // set initial commands
-      cmdPitch = static_cast<LCreal>(getPitch());
-      cmdHeading = static_cast<LCreal>(getHeading());
+      cmdPitch = static_cast<double>(getPitch());
+      cmdHeading = static_cast<double>(getHeading());
       cmdVelocity = vpMax;
 
       if (getTargetTrack() != nullptr) {
@@ -182,7 +184,7 @@ bool Missile::calculateVectors(const Player* const tgt, const Track* const trk, 
 //------------------------------------------------------------------------------
 // Slot functions
 //------------------------------------------------------------------------------
-bool Missile::setSlotVpMin(const basic::Number* const msg)
+bool Missile::setSlotVpMin(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -192,7 +194,7 @@ bool Missile::setSlotVpMin(const basic::Number* const msg)
    return ok;
 }
 
-bool Missile::setSlotVpMax(const basic::Number* const msg)
+bool Missile::setSlotVpMax(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -202,7 +204,7 @@ bool Missile::setSlotVpMax(const basic::Number* const msg)
    return ok;
 }
 
-bool Missile::setSlotVpMaxG(const basic::Number* const msg)
+bool Missile::setSlotVpMaxG(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -212,7 +214,7 @@ bool Missile::setSlotVpMaxG(const basic::Number* const msg)
    return ok;
 }
 
-bool Missile::setSlotMaxG(const basic::Number* const msg)
+bool Missile::setSlotMaxG(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -222,7 +224,7 @@ bool Missile::setSlotMaxG(const basic::Number* const msg)
    return ok;
 }
 
-bool Missile::setSlotMaxAccel(const basic::Number* const msg)
+bool Missile::setSlotMaxAccel(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -232,7 +234,7 @@ bool Missile::setSlotMaxAccel(const basic::Number* const msg)
    return ok;
 }
 
-bool Missile::setSlotCmdPitch(const basic::Number* const msg)
+bool Missile::setSlotCmdPitch(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -242,7 +244,7 @@ bool Missile::setSlotCmdPitch(const basic::Number* const msg)
    return ok;
 }
 
-bool Missile::setSlotCmdHeading(const basic::Number* const msg)
+bool Missile::setSlotCmdHeading(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -252,7 +254,7 @@ bool Missile::setSlotCmdHeading(const basic::Number* const msg)
    return ok;
 }
 
-bool Missile::setSlotCmdVelocity(const basic::Number* const msg)
+bool Missile::setSlotCmdVelocity(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -288,7 +290,7 @@ bool Missile::setTargetTrack(Track* const trk, const bool pt)
 //------------------------------------------------------------------------------
 // weaponGuidance() -- default guidance; using Robot Aircraft (RAC) guidance
 //------------------------------------------------------------------------------
-void Missile::weaponGuidance(const LCreal dt)
+void Missile::weaponGuidance(const double dt)
 {
    // ---
    // Control velocity:  During burn time, accel to max velocity,
@@ -321,21 +323,21 @@ void Missile::weaponGuidance(const LCreal dt)
       calculateVectors(tgt, trk, &los, &vel, &posx);
 
       // compute range to target
-      const LCreal trng0 = trng;
+      const double trng0 = trng;
       trng = los.length();
 
       // compute range rate,
-      //LCreal trdot0 = trdot;
+      //double trdot0 = trdot;
       if (dt > 0)
          trdot = (trng - trng0)/dt;
       else
          trdot = 0.0;
 
       // Target total velocity
-      const LCreal totalVel = vel.length();
+      const double totalVel = vel.length();
 
       // compute target velocity parallel to LOS,
-      const LCreal vtplos = (los * vel/trng);
+      const double vtplos = (los * vel/trng);
 
       // ---
       // guidance - fly to intercept point
@@ -345,33 +347,33 @@ void Missile::weaponGuidance(const LCreal dt)
       if ( isGuidanceEnabled() && trng > 0) {
 
          // get missile velocity (must be faster than target),
-         LCreal v = vpMax;
+         double v = vpMax;
          if (v < totalVel) v = totalVel + 1;
 
          // compute target velocity normal to LOS squared,
-         const LCreal tgtVp = totalVel;
-         const LCreal vtnlos2 = tgtVp*tgtVp - vtplos*vtplos;
+         const double tgtVp = totalVel;
+         const double vtnlos2 = tgtVp*tgtVp - vtplos*vtplos;
 
          // and compute missile velocity parallex to LOS.
-         const LCreal vmplos = lcSqrt( v*v - vtnlos2 );
+         const double vmplos = std::sqrt( v*v - vtnlos2 );
 
          // Now, use both velocities parallel to LOS to compute
          //  closure rate.
-         const LCreal vclos = vmplos - vtplos;
+         const double vclos = vmplos - vtplos;
 
          // Use closure rate and range to compute time to intercept.
-         LCreal dt1 = 0;
+         double dt1 = 0;
          if (vclos > 0) dt1 = trng/vclos;
 
          // Use time to intercept to extrapolate target position.
          osg::Vec3 p1 = (los + (vel * dt1));
 
          // Compute missile commanded heading and
-         cmdHeading = lcAtan2(p1.y(),p1.x());
+         cmdHeading = std::atan2(p1.y(),p1.x());
 
          // commanded pitch.
-         const LCreal grng = lcSqrt(p1.x()*p1.x() + p1.y()*p1.y());
-         cmdPitch = -lcAtan2(p1.z(),grng);
+         const double grng = std::sqrt(p1.x()*p1.x() + p1.y()*p1.y());
+         cmdPitch = -std::atan2(p1.z(),grng);
 
       }
    }
@@ -391,11 +393,11 @@ void Missile::weaponGuidance(const LCreal dt)
       }
 
       // compute range to target
-      const LCreal trng0 = trngT;
+      const double trng0 = trngT;
       trngT = los.length();
 
       // compute range rate,
-      LCreal trdot0 = trdotT;
+      double trdot0 = trdotT;
       if (dt > 0)
          trdotT = (trngT - trng0)/dt;
       else
@@ -409,18 +411,18 @@ void Missile::weaponGuidance(const LCreal dt)
          const osg::Vec3 velRel = (vel - getVelocity());
 
          // compute missile velocity squared,
-         LCreal vm2 = velRel.length2();
+         double vm2 = velRel.length2();
          if (vm2 > 0) {
 
             // relative range (dot) relative velocity
-            const LCreal rdv = los * velRel;
+            const double rdv = los * velRel;
 
             // interpolate back to closest point
-            const LCreal ndt = -rdv/vm2;
+            const double ndt = -rdv/vm2;
             const osg::Vec3 p0 = los + (velRel*ndt);
 
             // range squared at closest point
-            const LCreal r2 = p0.length2();
+            const double r2 = p0.length2();
 
             // compare to burst radius squared
             if (r2 <= (getMaxBurstRng()*getMaxBurstRng()) ) {
@@ -439,7 +441,7 @@ void Missile::weaponGuidance(const LCreal dt)
                checkDetonationEffect();
 
                // Log the event
-               const LCreal detRange = getDetonationRange();
+               const double detRange = getDetonationRange();
                if (isMessageEnabled(MSG_INFO)) {
                   std::cout << "DETONATE_ENTITY_IMPACT rng = " << detRange << std::endl;
                }
@@ -469,7 +471,7 @@ void Missile::weaponGuidance(const LCreal dt)
             setTargetTrack(nullptr,false);
 
             // Log the event
-            const LCreal detRange = trngT;
+            const double detRange = trngT;
             if (isMessageEnabled(MSG_INFO)) {
                std::cout << "DETONATE_OTHER rng = " << detRange << std::endl;
             }
@@ -494,66 +496,66 @@ void Missile::weaponGuidance(const LCreal dt)
 //------------------------------------------------------------------------------
 // weaponDynamics -- default missile dynamics; using Robot Aircraft (RAC) dynamics
 //------------------------------------------------------------------------------
-void Missile::weaponDynamics(const LCreal dt)
+void Missile::weaponDynamics(const double dt)
 {
-   static const LCreal g = ETHG;              // Acceleration of Gravity
+   static const double g = base::ETHG;              // Acceleration of Gravity
 
    // ---
    // Max turning G (Missiles: Use Gmax)
    // ---
-   const LCreal gmax = maxG;
+   const double gmax = maxG;
 
    // ---
    // Computer max turn rate, max/min pitch rates
    // ---
 
    // Turn rate base on vp and g,s
-   const LCreal ra_max = gmax * g / getTotalVelocity();
+   const double ra_max = gmax * g / getTotalVelocity();
 
    // Set max (pull up) pitch rate same as turn rate
-   const LCreal qa_max = ra_max;
+   const double qa_max = ra_max;
 
    // Set min (push down) pitch rate
-   const LCreal qa_min = -qa_max;
+   const double qa_min = -qa_max;
 
    // ---
    // Get old angular values
    // ---
    const osg::Vec3 oldRates = getAngularVelocities();
-   //LCreal pa1 = oldRates[IROLL];
-   const LCreal qa1 = oldRates[IPITCH];
-   const LCreal ra1 = oldRates[IYAW];
+   //double pa1 = oldRates[IROLL];
+   const double qa1 = oldRates[IPITCH];
+   const double ra1 = oldRates[IYAW];
 
    // ---
    // Find pitch rate and update pitch
    // ---
-   LCreal qa = lcAepcRad(cmdPitch - static_cast<LCreal>(getPitchR()));
+   double qa = base::Angle::aepcdRad(cmdPitch - static_cast<double>(getPitchR()));
    if(qa > qa_max) qa = qa_max;
    if(qa < qa_min) qa = qa_min;
 
    // Using Pitch rate, integrate pitch
-   const LCreal newTheta = static_cast<LCreal>(getPitch() + (qa + qa1) * dt / 2.0);
+   const double newTheta = static_cast<double>(getPitch() + (qa + qa1) * dt / 2.0);
 
    // Find turn rate
-   LCreal ra = lcAepcRad(cmdHeading - static_cast<LCreal>(getHeadingR()));
+   double ra = base::Angle::aepcdRad(cmdHeading - static_cast<double>(getHeadingR()));
    if(ra > ra_max) ra = ra_max;
    if(ra < -ra_max) ra = -ra_max;
 
    // Use turn rate integrate heading
-   LCreal newPsi = static_cast<LCreal>(getHeading() + (ra + ra1) * dt / 2.0);
-   if(newPsi > 2.0f*PI) newPsi -= static_cast<LCreal>(2.0*PI);
-   if(newPsi < 0.0f) newPsi += static_cast<LCreal>(2.0*PI);
+   double newPsi = static_cast<double>(getHeading() + (ra + ra1) * dt / 2.0);
+   if(newPsi > 2.0f*base::PI) newPsi -= static_cast<double>(2.0*base::PI);
+   if(newPsi < 0.0f) newPsi += static_cast<double>(2.0*base::PI);
 
    // Roll angle proportional to max turn rate - filtered
-   LCreal pa = 0.0;
-   const LCreal newPhi = static_cast<LCreal>( 0.98 * getRollR() + 0.02 * ((ra / ra_max) * (basic::Angle::D2RCC * 60.0)) );
+   double pa = 0.0;
+   const double newPhi = static_cast<double>( 0.98 * getRollR() + 0.02 * ((ra / ra_max) * (base::Angle::D2RCC * 60.0)) );
 
    // Sent angular values
    setEulerAngles(newPhi, newTheta, newPsi);
    setAngularVelocities(pa, qa, ra);
 
    // Find Acceleration
-   LCreal vpdot = (cmdVelocity - getTotalVelocity());
+   double vpdot = (cmdVelocity - getTotalVelocity());
    if(vpdot > maxAccel)  vpdot = maxAccel;
    if(vpdot < -maxAccel) vpdot = -maxAccel;
 
@@ -563,7 +565,7 @@ void Missile::weaponDynamics(const LCreal dt)
    setAcceleration(ae);
 
    // Compute new velocity
-   const LCreal newVP = getTotalVelocity() + vpdot * dt;
+   const double newVP = getTotalVelocity() + vpdot * dt;
 
    // Set acceleration vector
    //osg::Vec3 ve0 = getVelocity();
@@ -574,35 +576,35 @@ void Missile::weaponDynamics(const LCreal dt)
 }
 
 // setVpMin() -- set min Vp
-bool Missile::setVpMin(const LCreal v)
+bool Missile::setVpMin(const double v)
 {
    vpMin =  v;
    return true;
 }
 
 // setVpMax() -- set max Vp
-bool Missile::setVpMax(const LCreal v)
+bool Missile::setVpMax(const double v)
 {
    vpMax =  v;
    return true;
 }
 
 // setVpMaxG() -- Set Vp with max G's
-bool Missile::setVpMaxG(const LCreal v)
+bool Missile::setVpMaxG(const double v)
 {
    vpMaxG =  v;
    return true;
 }
 
 // setMaxG() -- Set max G's (g)
-bool Missile::setMaxG(const LCreal v)
+bool Missile::setMaxG(const double v)
 {
    maxG = v;
    return true;
 }
 
 // setMaxAccel() -- Max acceleration (m/s/s)
-bool Missile::setMaxAccel(const LCreal v)
+bool Missile::setMaxAccel(const double v)
 {
    maxAccel =  v;
    return true;
@@ -612,7 +614,7 @@ bool Missile::setMaxAccel(const LCreal v)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* Missile::getSlotByIndex(const int si)
+base::Object* Missile::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }

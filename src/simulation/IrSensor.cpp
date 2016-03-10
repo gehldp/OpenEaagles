@@ -20,9 +20,9 @@
 #include "openeaagles/simulation/OnboardComputer.h"
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/basic/Integer.h"
-#include "openeaagles/basic/units/Distances.h"
-#include "openeaagles/basic/units/Angles.h"
+#include "openeaagles/base/Integer.h"
+#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/units/Angles.h"
 
 #include <cmath>
 
@@ -45,22 +45,22 @@ BEGIN_SLOTTABLE(IrSensor)
    //"azimuthBin",      // 7: azimuthBin
    //"elevationBin",    // 8: elevationBin
    "maximumRange",      // 7: Maximum Range
-   "trackManagerName",  // 8: Name of the requested Track Manager (basic::String)
+   "trackManagerName",  // 8: Name of the requested Track Manager (base::String)
 END_SLOTTABLE(IrSensor)
 
 //  Map slot table
 BEGIN_SLOT_MAP(IrSensor)
-   ON_SLOT(1,setSlotLowerWavelength,basic::Number)
-   ON_SLOT(2,setSlotUpperWavelength,basic::Number)
-   ON_SLOT(3,setSlotNEI,basic::Number)
-   ON_SLOT(4,setSlotThreshold,basic::Number)
-   ON_SLOT(5,setSlotIFOV,basic::Number)
-   ON_SLOT(6,setSlotSensorType,basic::String)
-   //ON_SLOT(7,setSlotFieldOfRegard,basic::Number)
-   //ON_SLOT(7,setSlotAzimuthBin,basic::Number)
-   //ON_SLOT(8,setSlotElevationBin,basic::Number)
-   ON_SLOT(7,setSlotMaximumRange,basic::Number)
-   ON_SLOT(8,setSlotTrackManagerName,basic::String)
+   ON_SLOT(1,setSlotLowerWavelength,base::Number)
+   ON_SLOT(2,setSlotUpperWavelength,base::Number)
+   ON_SLOT(3,setSlotNEI,base::Number)
+   ON_SLOT(4,setSlotThreshold,base::Number)
+   ON_SLOT(5,setSlotIFOV,base::Number)
+   ON_SLOT(6,setSlotSensorType,base::String)
+   //ON_SLOT(7,setSlotFieldOfRegard,base::Number)
+   //ON_SLOT(7,setSlotAzimuthBin,base::Number)
+   //ON_SLOT(8,setSlotElevationBin,base::Number)
+   ON_SLOT(7,setSlotMaximumRange,base::Number)
+   ON_SLOT(8,setSlotTrackManagerName,base::String)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -126,7 +126,7 @@ void IrSensor::copyData(const IrSensor& org, const bool cc)
    maximumRange = org.maximumRange;
 
    if (org.tmName != nullptr) {
-      basic::String* copy = org.tmName->clone();
+      base::String* copy = org.tmName->clone();
       setTrackManagerName( copy );
       copy->unref();
    }
@@ -169,7 +169,7 @@ void IrSensor::reset()
    // ---
    // Do we need to find the track manager?
    // ---
-   lcLock(storedMessagesLock);
+   base::lcLock(storedMessagesLock);
    if (getTrackManager() == nullptr && getTrackManagerName() != nullptr && getOwnship() != nullptr) {
       // We have a name of the track manager, but not the track manager itself
       const char* name = *getTrackManagerName();
@@ -188,13 +188,13 @@ void IrSensor::reset()
          setTrackManagerName(nullptr);
       }
    }
-   lcUnlock(storedMessagesLock);
+   base::lcUnlock(storedMessagesLock);
 }
 
 //------------------------------------------------------------------------------
 // updateData() -- update background data here
 //------------------------------------------------------------------------------
-void IrSensor::updateData(const LCreal dt)
+void IrSensor::updateData(const double dt)
 {
     BaseClass::updateData(dt);
 
@@ -224,7 +224,7 @@ void IrSensor::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // transmit() -- send radar emissions
 //------------------------------------------------------------------------------
-void IrSensor::transmit(const LCreal dt)
+void IrSensor::transmit(const double dt)
 {
    BaseClass::transmit(dt);
 
@@ -239,7 +239,7 @@ void IrSensor::transmit(const LCreal dt)
          irQuery->setInstantaneousFieldOfView(getIFOV());
          irQuery->setSendingSensor(this);
          irQuery->setNEI(getNEI());
-         irQuery->setMaxRangeNM(getMaximumRange()* basic::Distance::M2NM);
+         irQuery->setMaxRangeNM(getMaximumRange()* base::Distance::M2NM);
          seeker->irRequestSignature(irQuery);
          irQuery->unref();
       } // If irQuery not null
@@ -256,8 +256,8 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
 {
    Player* ownship = getOwnship();
    IrAtmosphere* atmos = nullptr;
-   LCreal totalSignal = 0.0;
-   LCreal totalBackground = 0.0;
+   double totalSignal = 0.0;
+   double totalBackground = 0.0;
 
    if (msg->getSendingSensor() != this) {
       // this should not happen
@@ -279,14 +279,14 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
 
    if (totalSignal > 0.0) {
 
-      const LCreal targetRange = msg->getRange();
-      const LCreal rangeSquared =  targetRange * targetRange;
-      const LCreal reflectorArea = msg->getProjectedArea();
-      const LCreal ifov = msg->getInstantaneousFieldOfView();
+      const double targetRange = msg->getRange();
+      const double rangeSquared =  targetRange * targetRange;
+      const double reflectorArea = msg->getProjectedArea();
+      const double ifov = msg->getInstantaneousFieldOfView();
 
       // The relevant amount of background area is the field of view multiplied by the range squared
 
-      const LCreal backgroundArea =  ifov * rangeSquared;
+      const double backgroundArea =  ifov * rangeSquared;
 
       // The seeker detects by comparing the amount of signal present
       // with the target to the amount of signal there would be without the target.
@@ -297,7 +297,7 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
 
      // noiseBlockedByTarget is irradiance, in units of watts/m^2
 
-      LCreal noiseBlockedByTarget = totalBackground * ifov;
+      double noiseBlockedByTarget = totalBackground * ifov;
 
       // If the target is smaller than the field of view, it is the background power
       // in the effective field of view represented by the target, i.e. the
@@ -309,7 +309,7 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
       }
 
       // attenuatedPower is irradiance, in watts/m^2
-      const LCreal attenuatedPower = totalSignal / rangeSquared;
+      const double attenuatedPower = totalSignal / rangeSquared;
 
       // signalAboveNoise is the signal that the detector sees minus what it would see with
       // only the background radiation, and is just the amount of power subtracted by how much
@@ -317,7 +317,7 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
       // = (attenuatedPower + totalBackground*ifov - noiseBlockedByTarget) - totalBackground*ifov
       // signalAboveNoise is irradiance, in watts/m^2
 
-      LCreal signalAboveNoise = attenuatedPower - noiseBlockedByTarget;
+      double signalAboveNoise = attenuatedPower - noiseBlockedByTarget;
 
       // only Contrast seekers take absolute value in this equation.
       // Hotspot does not.
@@ -327,23 +327,23 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
          signalAboveNoise = -signalAboveNoise;
       }
 
-      const LCreal nei = msg->getNEI();
+      const double nei = msg->getNEI();
 
       // Determine the ratio between the signal above the noise as compared to the level of
       // radiation that would create a response at the same level as the sensor's internal noise.
       // if NEI is in watts/m^2, then SNR will be dimensionless.
       // if NEI is in watts/cm^2, then need to correct by 10^4.
 
-      const LCreal signalToNoiseRatio = signalAboveNoise / nei;
-      const LCreal backgroundNoiseRatio = noiseBlockedByTarget / nei;
-      //LCreal signalToNoiseThreshold = msg->getSendingSensor()->getThreshold();
+      const double signalToNoiseRatio = signalAboveNoise / nei;
+      const double backgroundNoiseRatio = noiseBlockedByTarget / nei;
+      //double signalToNoiseThreshold = msg->getSendingSensor()->getThreshold();
 
       // allow all signals to be returned; threshold test will be applied in process()
       {
          IrQueryMsg* outMsg = new IrQueryMsg();
          outMsg->setTarget(msg->getTarget());
-         outMsg->setGimbalAzimuth( static_cast<LCreal>(msg->getGimbal()->getAzimuth()) );
-         outMsg->setGimbalElevation( static_cast<LCreal>(msg->getGimbal()->getElevation()) );
+         outMsg->setGimbalAzimuth( static_cast<double>(msg->getGimbal()->getAzimuth()) );
+         outMsg->setGimbalElevation( static_cast<double>(msg->getGimbal()->getElevation()) );
          outMsg->setAzimuthAoi(msg->getAzimuthAoi());
          outMsg->setElevationAoi(msg->getElevationAoi());
 
@@ -353,9 +353,9 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
             // This is for non-ownHdgOnly-stabilized gimbal angles
             osg::Vec4 los0( los.x(), los.y(), los.z(), 0.0 );
             osg::Vec4 los_vec = ownship->getRotMat() * los0;
-            LCreal ra = lcSqrt(los_vec.x() * los_vec.x() + los_vec.y()*los_vec.y());
-            LCreal az = lcAtan2(los_vec.y(), los_vec.x());
-            LCreal el = lcAtan2(-los_vec.z(), ra);
+            double ra = std::sqrt(los_vec.x() * los_vec.x() + los_vec.y()*los_vec.y());
+            double az = std::atan2(los_vec.y(), los_vec.x());
+            double el = std::atan2(-los_vec.z(), ra);
             outMsg->setRelativeAzimuth(az);
             outMsg->setRelativeElevation(el);
          }
@@ -366,17 +366,17 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
          outMsg->setVelocityVec(msg->getTarget()->getVelocity());
          outMsg->setAccelVec(msg->getTarget()->getAcceleration());
 
-         LCreal angleAspect1 = outMsg->getPosVec().y() *
+         double angleAspect1 = outMsg->getPosVec().y() *
                                  outMsg->getVelocityVec().x() -
                                  outMsg->getPosVec().x() *
                                  outMsg->getVelocityVec().y();
 
-         LCreal angleAspect2 = outMsg->getPosVec().x() *
+         double angleAspect2 = outMsg->getPosVec().x() *
                                  outMsg->getVelocityVec().x() +
                                  outMsg->getPosVec().y() *
                                  outMsg->getVelocityVec().y();
 
-         outMsg->setAngleAspect(lcAtan2(-angleAspect1,angleAspect2));
+         outMsg->setAngleAspect(std::atan2(-angleAspect1,angleAspect2));
 
          outMsg->setSignalToNoiseRatio(signalToNoiseRatio);
          outMsg->setBackgroundNoiseRatio(backgroundNoiseRatio);
@@ -403,7 +403,7 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
 }
 
 
-void IrSensor::process(const LCreal dt)
+void IrSensor::process(const double dt)
 {
    BaseClass::process(dt);
 
@@ -411,7 +411,7 @@ void IrSensor::process(const LCreal dt)
    if (numRecords > 0) {
       AngleOnlyTrackManager* tm = static_cast<AngleOnlyTrackManager*>(getTrackManager());
       if (tm != nullptr) {
-         lcLock(storedMessagesLock);
+         base::lcLock(storedMessagesLock);
          numRecords = storedMessagesQueue.entries();
 
          // Send on all messages EXCEPT those with signal below threshold and those merged
@@ -425,7 +425,7 @@ void IrSensor::process(const LCreal dt)
             }
             msg->unref();
          }
-         lcUnlock(storedMessagesLock);
+         base::lcUnlock(storedMessagesLock);
       }
    }
 }
@@ -436,7 +436,7 @@ void IrSensor::process(const LCreal dt)
 //------------------------------------------------------------------------------
 
 // setLowerWavelength() - Sets the lower wavelength (microns; must be greater than or equal to 0)
-bool IrSensor::setLowerWavelength(const LCreal w)
+bool IrSensor::setLowerWavelength(const double w)
 {
    bool ok = false;
    if (w >= 0) {
@@ -448,7 +448,7 @@ bool IrSensor::setLowerWavelength(const LCreal w)
 }
 
 // setUpperWavelength() - Sets the upper wavelength (microns; must be greater than 0)
-bool IrSensor::setUpperWavelength(const LCreal w)
+bool IrSensor::setUpperWavelength(const double w)
 {
    bool ok = false;
    if (w > 0) {
@@ -459,7 +459,7 @@ bool IrSensor::setUpperWavelength(const LCreal w)
 }
 
 // setNEI() - Sets the Noise Equivalent Irradiance  (watts/str-cm^2); must be greater than or equal to 0)
-bool IrSensor::setNEI(const LCreal n)
+bool IrSensor::setNEI(const double n)
 {
    bool ok = false;
    if (n >= 0) {
@@ -470,7 +470,7 @@ bool IrSensor::setNEI(const LCreal n)
 }
 
 // setThreshold() - Sets the Signal to Noise Threshold
-bool IrSensor::setThreshold(const LCreal t)
+bool IrSensor::setThreshold(const double t)
 {
    bool ok = false;
    if (t >= 0) {
@@ -484,13 +484,13 @@ bool IrSensor::setThreshold(const LCreal t)
 // also sets ifovTheta (radians) -- planar angle.
 // FAB - solid angle = 2 * pi * (1-std::cos(theta/2)) -- formula below actually returns ifovtheta/2
 //   - but all IR code that references ifovtheta actually wants ifovtheta/2 anyway
-bool IrSensor::setIFOV(const LCreal i)
+bool IrSensor::setIFOV(const double i)
 {
    bool ok = false;
    if (i >= 0) {
       ifov = i;
       //calculate planar angle and set it as well.
-      ifovTheta =  static_cast<LCreal>(std::acos ((1 - (ifov / (2.0 * PI)))));
+      ifovTheta =  static_cast<double>(std::acos ((1 - (ifov / (2.0 * base::PI)))));
       ok = true;
    }
    return ok;
@@ -507,40 +507,40 @@ bool IrSensor::setSensorType(const SensorType st)
 // setFieldOfRegard() - Sets the Instantaneous Field of View  (steradians)
 // FAB - solid angle = 2 * pi * (1-std::cos(theta/2)) -- formula below actually returns fieldOfRegardTheta/2
 //     - but all IR code that references fieldOfRegardTheta actually wants fieldOfRegardTheta/2 anyway
-//bool IrSensor::setFieldOfRegard(const LCreal fov)
+//bool IrSensor::setFieldOfRegard(const double fov)
 //{
 //   bool ok = false;
 //   if (fov > 0) {
 //      fieldOfRegard = fov;
 //      //calculate planar angle and set it as well.
-//      fieldOfRegardTheta =  (LCreal) acos ((1 - (fieldOfRegard / (2.0 * PI))));
+//      fieldOfRegardTheta =  (double) acos ((1 - (fieldOfRegard / (2.0 * PI))));
 //      ok = true;
 //   }
 //   return ok;
 //}
 
 //// setAzimuthBin() - Sets the lower Azimuth Bin
-//bool IrSensor::setAzimuthBin(const LCreal w)
+//bool IrSensor::setAzimuthBin(const double w)
 //{
 //   azimuthBin = w;
 //   return true;
 //}
 //
 //// setElevationBin() - Sets the lower Elevation Bin
-//bool IrSensor::setElevationBin(const LCreal w)
+//bool IrSensor::setElevationBin(const double w)
 //{
 //   elevationBin = w;
 //   return true;
 //}
 //
-//bool IrSensor::setSlotAzimuthBin(const basic::Number* const msg)
+//bool IrSensor::setSlotAzimuthBin(const base::Number* const msg)
 //{
-//   LCreal value = 0.0f;
+//   double value = 0.0f;
 //
-//   const basic::Angle* a = dynamic_cast<const basic::Angle*>(msg);
+//   const base::Angle* a = dynamic_cast<const base::Angle*>(msg);
 //   if (a != 0) {
-//       basic::Radians r;
-//       value = (LCreal)r.convert(*a);
+//       base::Radians r;
+//       value = (double)r.convert(*a);
 //   }
 //   else if (msg != 0) {
 //      value = msg->getReal();
@@ -551,20 +551,20 @@ bool IrSensor::setSensorType(const SensorType st)
 //   return true;
 //}
 
-bool IrSensor::setMaximumRange(const LCreal w)
+bool IrSensor::setMaximumRange(const double w)
 {
    maximumRange = w;
    return true;
 }
 
-bool IrSensor::setSlotMaximumRange(const basic::Number* const msg)
+bool IrSensor::setSlotMaximumRange(const base::Number* const msg)
 {
-   LCreal value = 0.0;
+   double value = 0.0;
 
-   const basic::Distance* d = dynamic_cast<const basic::Distance*>(msg);
+   const base::Distance* d = dynamic_cast<const base::Distance*>(msg);
    if (d != nullptr) {
-       basic::Meters m;
-       value = static_cast<LCreal>(m.convert(*d));
+       base::Meters m;
+       value = static_cast<double>(m.convert(*d));
    }
    else if (msg != nullptr) {
       value = msg->getReal();
@@ -574,14 +574,14 @@ bool IrSensor::setSlotMaximumRange(const basic::Number* const msg)
    return true;
 }
 
-//bool IrSensor::setSlotElevationBin(const basic::Number* const msg)
+//bool IrSensor::setSlotElevationBin(const base::Number* const msg)
 //{
-//   LCreal value = 0.0f;
+//   double value = 0.0f;
 //
-//   const basic::Angle* a = dynamic_cast<const basic::Angle*>(msg);
+//   const base::Angle* a = dynamic_cast<const base::Angle*>(msg);
 //   if (a != 0) {
-//       basic::Radians r;
-//       value = (LCreal)r.convert(*a);
+//       base::Radians r;
+//       value = (double)r.convert(*a);
 //   }
 //   else if (msg != 0) {
 //      value = msg->getReal();
@@ -593,15 +593,15 @@ bool IrSensor::setSlotMaximumRange(const basic::Number* const msg)
 //}
 
 // setSlotLowerWavelength() - Sets lower wavelength
-bool IrSensor::setSlotLowerWavelength(const basic::Number* const msg)
+bool IrSensor::setSlotLowerWavelength(const base::Number* const msg)
 {
-   LCreal value = 0.0;
+   double value = 0.0;
    bool ok = false;
 
-   const basic::Distance* d = dynamic_cast<const basic::Distance*>(msg);
+   const base::Distance* d = dynamic_cast<const base::Distance*>(msg);
    if (d != nullptr) {
-       basic::MicroMeters mm;
-       value = static_cast<LCreal>(mm.convert(*d));
+       base::MicroMeters mm;
+       value = static_cast<double>(mm.convert(*d));
    }
    else if (msg != nullptr) {
       value = msg->getReal();
@@ -617,15 +617,15 @@ bool IrSensor::setSlotLowerWavelength(const basic::Number* const msg)
 }
 
 // setSlotUpperWavelength() - Sets upper wavelength
-bool IrSensor::setSlotUpperWavelength(const basic::Number* const msg)
+bool IrSensor::setSlotUpperWavelength(const base::Number* const msg)
 {
    bool ok = false;
-   LCreal value = 0.0;
+   double value = 0.0;
 
-   const basic::Distance* d = dynamic_cast<const basic::Distance*>(msg);
+   const base::Distance* d = dynamic_cast<const base::Distance*>(msg);
    if (d != nullptr) {
-       basic::MicroMeters mm;
-       value = static_cast<LCreal>(mm.convert(*d));
+       base::MicroMeters mm;
+       value = static_cast<double>(mm.convert(*d));
    }
    else if (msg != nullptr) {
       value = msg->getReal();
@@ -640,11 +640,11 @@ bool IrSensor::setSlotUpperWavelength(const basic::Number* const msg)
 }
 
 // setSlotNEI() - Sets Noise Equivalent Irradiance
-bool IrSensor::setSlotNEI(const basic::Number* const msg)
+bool IrSensor::setSlotNEI(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      LCreal x = msg->getReal();
+      double x = msg->getReal();
       ok = setNEI(x);
       if (!ok) {
          if (isMessageEnabled(MSG_ERROR)) {
@@ -656,11 +656,11 @@ bool IrSensor::setSlotNEI(const basic::Number* const msg)
 }
 
 // setSlotThreshold() - Sets Signal to Noise Threshold
-bool IrSensor::setSlotThreshold(const basic::Number* const msg)
+bool IrSensor::setSlotThreshold(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      LCreal x = msg->getReal();
+      double x = msg->getReal();
       ok = setThreshold(x);
       if (!ok) {
          if (isMessageEnabled(MSG_ERROR)) {
@@ -672,11 +672,11 @@ bool IrSensor::setSlotThreshold(const basic::Number* const msg)
 }
 
 // setSlotIFOV() - Sets Instantaneous Field of View
-bool IrSensor::setSlotIFOV(const basic::Number* const msg)
+bool IrSensor::setSlotIFOV(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      LCreal x = msg->getReal();
+      double x = msg->getReal();
       ok = setIFOV(x);
       if (!ok) {
          if (isMessageEnabled(MSG_ERROR)) {
@@ -688,7 +688,7 @@ bool IrSensor::setSlotIFOV(const basic::Number* const msg)
 }
 
 // setSlotSensorType() -- Sets the Sensor Type
-bool IrSensor::setSlotSensorType(const basic::String* const msg)
+bool IrSensor::setSlotSensorType(const base::String* const msg)
 {
    bool ok = false;
 
@@ -705,11 +705,11 @@ bool IrSensor::setSlotSensorType(const basic::String* const msg)
 }
 
 // setSlotFieldOfRegard() - Sets the field of regard
-//bool IrSensor::setSlotFieldOfRegard(const basic::Number* const msg)
+//bool IrSensor::setSlotFieldOfRegard(const base::Number* const msg)
 //{
 //   bool ok = false;
 //   if (msg != 0) {
-//      LCreal x = msg->getReal();
+//      double x = msg->getReal();
 //      ok = setFieldOfRegard(x);
 //      if (!ok) {
 //                if (isMessageEnabled(MSG_ERROR)) {
@@ -722,14 +722,14 @@ bool IrSensor::setSlotSensorType(const basic::String* const msg)
 //}
 // setSlotTrackManagerName() -- sets the name of the track manager;
 // we'll lookup the actual track manager in reset() later
-bool IrSensor::setSlotTrackManagerName(basic::String* const v)
+bool IrSensor::setSlotTrackManagerName(base::String* const v)
 {
     return setTrackManagerName(v);
 }
 //------------------------------------------------------------------------------
 // setTrackManagerName() -- Sets the track manager's name
 //------------------------------------------------------------------------------
-bool IrSensor::setTrackManagerName(basic::String* name)
+bool IrSensor::setTrackManagerName(base::String* name)
 {
     if (tmName != nullptr) {
         tmName->unref();
@@ -758,13 +758,13 @@ bool IrSensor::setTrackManager(TrackManager* tm)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* IrSensor::getSlotByIndex(const int si)
+base::Object* IrSensor::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
 
 // Returns the requested track manager's name
-const basic::String* IrSensor::getTrackManagerName() const
+const base::String* IrSensor::getTrackManagerName() const
 {
    return tmName;
 }
@@ -787,9 +787,9 @@ IrQueryMsg* IrSensor::getStoredMessage()
 {
    IrQueryMsg* msg = nullptr;
 
-   lcLock(storedMessagesLock);
+   base::lcLock(storedMessagesLock);
    msg = storedMessagesQueue.get();
-   lcUnlock(storedMessagesLock);
+   base::lcUnlock(storedMessagesLock);
 
    return msg;
 }
@@ -801,9 +801,9 @@ IrQueryMsg* IrSensor::peekStoredMessage(unsigned int i)
 {
    IrQueryMsg* msg = nullptr;
 
-   lcLock(storedMessagesLock);
+   base::lcLock(storedMessagesLock);
    msg = storedMessagesQueue.peek0(i);
-   lcUnlock(storedMessagesLock);
+   base::lcUnlock(storedMessagesLock);
 
    return msg;
 }
@@ -814,9 +814,9 @@ void IrSensor::addStoredMessage(IrQueryMsg* msg)
 {
    // Queue up emissions reports
    if (msg != nullptr) {
-      lcLock(storedMessagesLock);
+      base::lcLock(storedMessagesLock);
       storedMessagesQueue.put(msg);
-      lcUnlock(storedMessagesLock);
+      base::lcUnlock(storedMessagesLock);
    }
 }
 //------------------------------------------------------------------------------
@@ -827,11 +827,11 @@ void IrSensor::clearTracksAndQueues()
    // ---
    // Clear out the queues
    // ---
-   lcLock(storedMessagesLock);
+   base::lcLock(storedMessagesLock);
    for (IrQueryMsg* msg = storedMessagesQueue.get(); msg != nullptr; msg = storedMessagesQueue.get())  {
       msg->unref();
    }
-   lcUnlock(storedMessagesLock);
+   base::lcUnlock(storedMessagesLock);
 }
 
 }

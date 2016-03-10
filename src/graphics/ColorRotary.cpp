@@ -4,11 +4,11 @@
 
 #include "openeaagles/graphics/ColorRotary.h"
 
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/Identifier.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/osg/Vec4"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/Identifier.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/osg/Vec4"
 
 namespace oe {
 namespace graphics {
@@ -28,8 +28,8 @@ END_SLOTTABLE(ColorRotary)
 // Map the slots for this class type
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(ColorRotary)
-    ON_SLOT(1, setSlotColors, basic::PairStream)
-    ON_SLOT(2, setSlotValues, basic::PairStream)
+    ON_SLOT(1, setSlotColors, base::PairStream)
+    ON_SLOT(2, setSlotValues, base::PairStream)
 END_SLOT_MAP()
 
 ColorRotary::ColorRotary()
@@ -86,7 +86,7 @@ void ColorRotary::deleteData()
 //------------------------------------------------------------------------------
 
 // set our slot colors via a PairStream
-bool ColorRotary::setSlotColors(basic::PairStream* const newStream)
+bool ColorRotary::setSlotColors(base::PairStream* const newStream)
 {
     bool ok = false;
     if (newStream != nullptr) {
@@ -98,17 +98,17 @@ bool ColorRotary::setSlotColors(basic::PairStream* const newStream)
 }
 
 // set our slot values via a pairstream
-bool ColorRotary::setSlotValues(const basic::PairStream* const newStream)
+bool ColorRotary::setSlotValues(const base::PairStream* const newStream)
 {
     bool ok = false;
     numVals = 0;
     if (newStream != nullptr) {
-        basic::PairStream* a = newStream->clone();
-        basic::List::Item* item = a->getFirstItem();
+        base::PairStream* a = newStream->clone();
+        base::List::Item* item = a->getFirstItem();
         while (item != nullptr) {
-            basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
+            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
-                basic::Number* n = dynamic_cast<basic::Number*>(pair->object());
+                base::Number* n = dynamic_cast<base::Number*>(pair->object());
                 if (n != nullptr) {
                     myValues[numVals] = n->getReal();
                     numVals++;
@@ -126,7 +126,7 @@ bool ColorRotary::setSlotValues(const basic::PairStream* const newStream)
 // determineColors() - take our value, and look for a corresponding color
 // and breakpoint
 //------------------------------------------------------------------------------
-bool ColorRotary::determineColor(const LCreal value)
+bool ColorRotary::determineColor(const double value)
 {
     bool ok = false;
     int breakPoint = 0;
@@ -145,9 +145,9 @@ bool ColorRotary::determineColor(const LCreal value)
 
     // now set the proper color (using the breakpoint index)
     if (myColors != nullptr) {
-        basic::Pair* pair = myColors->getPosition(breakPoint);
+        base::Pair* pair = myColors->getPosition(breakPoint);
         if (pair != nullptr) {
-            basic::Color* listcolor = dynamic_cast<basic::Color*>(pair->object());
+            base::Color* listcolor = dynamic_cast<base::Color*>(pair->object());
             if (listcolor != nullptr) {
                const osg::Vec4* vec = static_cast<const osg::Vec4*>(listcolor->getRGBA());
                color = *vec;
@@ -161,7 +161,7 @@ bool ColorRotary::determineColor(const LCreal value)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for ColorRotary
 //------------------------------------------------------------------------------
-basic::Object* graphics::ColorRotary::getSlotByIndex(const int si)
+base::Object* graphics::ColorRotary::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

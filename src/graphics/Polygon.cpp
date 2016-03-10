@@ -1,9 +1,9 @@
 // Polygon
 
 #include "openeaagles/graphics/Polygon.h"
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/Number.h"
 #include "openeaagles/graphics/ColorGradient.h"
-#include "openeaagles/basic/PairStream.h"
+#include "openeaagles/base/PairStream.h"
 #include <GL/glu.h>
 
 namespace oe {
@@ -111,14 +111,14 @@ bool Polygon::calcPlaneCoeff()
 //------------------------------------------------------------------------------
 // compute the z value at point p using plane coefficients c.
 //------------------------------------------------------------------------------
-LCreal Polygon::calcZ(const osg::Vec2& p, const osg::Vec4& cc)
+double Polygon::calcZ(const osg::Vec2& p, const osg::Vec4& cc)
 {
-   LCreal zz = 0.0;
+   double zz = 0.0;
    zz = (-cc._v[D] - (cc._v[A] * p.x()) - (cc._v[B] * p.y()) )/cc._v[C];
    return zz;
 }
 
-LCreal Polygon::calcZ(const osg::Vec2& p) const
+double Polygon::calcZ(const osg::Vec2& p) const
 {
    return calcZ(p,*getPlaneCoeff());
 }
@@ -159,7 +159,7 @@ void Polygon::drawFunc()
             osg::Vec3* ptr = nullptr;
             for (unsigned int i = 0; i < nv; i++) {
                 if (colGradient != nullptr) {
-                    basic::Color* col = colGradient->getColorByIdx(i+1);
+                    base::Color* col = colGradient->getColorByIdx(i+1);
                     if (col != nullptr)
                        glColor4f(static_cast<GLfloat>(col->red()), static_cast<GLfloat>(col->green()),
                                  static_cast<GLfloat>(col->blue()), static_cast<GLfloat>(col->alpha()));

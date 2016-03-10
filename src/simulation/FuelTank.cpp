@@ -1,6 +1,6 @@
 #include "openeaagles/simulation/FuelTank.h"
 
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/Number.h"
 
 namespace oe {
 namespace simulation {
@@ -16,8 +16,8 @@ BEGIN_SLOTTABLE(FuelTank)
 END_SLOTTABLE(FuelTank)
 
 BEGIN_SLOT_MAP(FuelTank)
-    ON_SLOT(1, setSlotFuelWt, basic::Number)
-    ON_SLOT(2, setSlotCapacity, basic::Number)
+    ON_SLOT(1, setSlotFuelWt, base::Number)
+    ON_SLOT(2, setSlotCapacity, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -59,22 +59,22 @@ void FuelTank::reset()
 //------------------------------------------------------------------------------
 // Tank capacity (lb) functions
 //------------------------------------------------------------------------------
-LCreal FuelTank::getCapacity() const            { return capacity; }
-bool   FuelTank::setCapacity(const LCreal cap)  { capacity = cap; return true; }
+double FuelTank::getCapacity() const            { return capacity; }
+bool   FuelTank::setCapacity(const double cap)  { capacity = cap; return true; }
 bool   FuelTank::isCapacityValid() const        { return (capacity >= 0); }
 
 //------------------------------------------------------------------------------
 // Fuel weight (lb) functions
 //------------------------------------------------------------------------------
-LCreal FuelTank::getFuelWt() const              { return fuelWt;        }
-bool   FuelTank::setFuelWt(const LCreal wt)     { fuelWt = wt; return true; }
+double FuelTank::getFuelWt() const              { return fuelWt;        }
+bool   FuelTank::setFuelWt(const double wt)     { fuelWt = wt; return true; }
 bool   FuelTank::isFuelWtValid() const          { return (fuelWt >= 0 && fuelWt <= capacity); }
 
 //------------------------------------------------------------------------------
 // Slot functions
 //------------------------------------------------------------------------------
 
-bool FuelTank::setSlotFuelWt(const basic::Number* const msg)
+bool FuelTank::setSlotFuelWt(const base::Number* const msg)
 {
     if (msg == nullptr) return false;
     bool ok = setFuelWt( msg->getReal() );
@@ -82,7 +82,7 @@ bool FuelTank::setSlotFuelWt(const basic::Number* const msg)
     return ok;
 }
 
-bool FuelTank::setSlotCapacity(const basic::Number* const msg)
+bool FuelTank::setSlotCapacity(const base::Number* const msg)
 {
     if (msg == nullptr) return false;
     return setCapacity( msg->getReal() );
@@ -91,7 +91,7 @@ bool FuelTank::setSlotCapacity(const basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* FuelTank::getSlotByIndex(const int si)
+base::Object* FuelTank::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

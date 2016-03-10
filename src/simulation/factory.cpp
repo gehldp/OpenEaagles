@@ -1,7 +1,7 @@
 
 #include "openeaagles/simulation/factory.h"
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 #include "openeaagles/simulation/Aam.h"
 #include "openeaagles/simulation/Actions.h"
@@ -76,11 +76,11 @@
 namespace oe {
 namespace simulation {
 
-basic::Object* factory(const char* name)
+base::Object* factory(const char* name)
 {
-    basic::Object* obj = nullptr;
+    base::Object* obj = nullptr;
 
-    // Basic Simulations
+    // Simulation
     if ( std::strcmp(name, Simulation::getFactoryName()) == 0 ) {
         obj = new Simulation();
     }
@@ -88,7 +88,7 @@ basic::Object* factory(const char* name)
         obj = new Station();
     }
 
-    // Basic Player types
+    // Players
     else if ( std::strcmp(name, Player::getFactoryName()) == 0 ) {
         obj = new Player();
     }
@@ -111,7 +111,7 @@ basic::Object* factory(const char* name)
         obj = new SpaceVehicle();
     }
 
-    // General Air Vehicles
+    // Air Vehicles
     else if ( std::strcmp(name, Aircraft::getFactoryName()) == 0 ) {
         obj = new Aircraft();
     }
@@ -122,7 +122,7 @@ basic::Object* factory(const char* name)
         obj = new UnmannedAirVehicle();
     }
 
-    // General Ground Vehicles
+    // Ground Vehicles
     else if ( std::strcmp(name, Tank::getFactoryName()) == 0 ) {
         obj = new Tank();
     }
@@ -148,7 +148,7 @@ basic::Object* factory(const char* name)
         obj = new GroundStationUav();
     }
 
-    // General Space Vehicles
+    // Space Vehicles
     else if ( std::strcmp(name, MannedSpaceVehicle::getFactoryName()) == 0 ) {
         obj = new MannedSpaceVehicle();
     }

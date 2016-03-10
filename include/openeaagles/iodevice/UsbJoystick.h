@@ -2,11 +2,11 @@
 #ifndef __oe_iodevice_UsbJoystick_H__
 #define __oe_iodevice_UsbJoystick_H__
 
-#include "openeaagles/basic/IoDevice.h"
+#include "openeaagles/base/IoDevice.h"
 
 namespace oe {
 
-namespace basic { class Number; }
+namespace base { class Number; }
 
 namespace iodevice {
 
@@ -37,9 +37,9 @@ namespace iodevice {
 //    deviceIndex <Number>    Unit index
 //
 //------------------------------------------------------------------------------
-class UsbJoystick : public basic::IoDevice
+class UsbJoystick : public base::IoDevice
 {
-    DECLARE_SUBCLASS(UsbJoystick, basic::IoDevice)
+    DECLARE_SUBCLASS(UsbJoystick, base::IoDevice)
 
 public:
    UsbJoystick();
@@ -51,12 +51,12 @@ public:
    unsigned short getNumDiscreteInputPorts() const override;
    bool getDiscreteInput(bool* const value, const unsigned int channel, const unsigned int port) const override;
    unsigned short getNumAnalogInputs() const override;
-   bool getAnalogInput(LCreal* const value, const unsigned int channel) const override;
+   bool getAnalogInput(double* const value, const unsigned int channel) const override;
 
 protected:
 
    // Slot functions
-   virtual bool setSlotDeviceIndex(const basic::Number* const msg);
+   virtual bool setSlotDeviceIndex(const base::Number* const msg);
 
    unsigned int deviceIndex; // Device index
 
@@ -65,7 +65,7 @@ protected:
    // ---
    static const unsigned short MAX_AI = 16;
    unsigned short numAI;   // Number of analog channels
-   LCreal inData[MAX_AI];   // Input analog array
+   double inData[MAX_AI];   // Input analog array
 
    // ---
    // digital bits

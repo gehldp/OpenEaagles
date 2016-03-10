@@ -12,7 +12,7 @@
 
 namespace oe {
 
-namespace basic { class Integer; class Number; class String; }
+namespace base { class Integer; class Number; class String; }
 
 namespace simulation {
 
@@ -28,13 +28,13 @@ class MergingIrSensor : public IrSensor
 public:
    MergingIrSensor();
 
-   void receive(const LCreal dt) override;
+   void receive(const double dt) override;
 
-   virtual LCreal getAzimuthBin() const {return azimuthBin; };         // Returns min azimuth distance
-   virtual bool setAzimuthBin(const LCreal azimuthBin);                // Sets min Azimuth Distance
+   virtual double getAzimuthBin() const {return azimuthBin; };         // Returns min azimuth distance
+   virtual bool setAzimuthBin(const double azimuthBin);                // Sets min Azimuth Distance
 
-   virtual LCreal getElevationBin() const {return elevationBin; };     // Returns min azimuth distance
-   virtual bool setElevationBin(const LCreal elevationBin);            // Sets min Azimuth Distance
+   virtual double getElevationBin() const {return elevationBin; };     // Returns min azimuth distance
+   virtual bool setElevationBin(const double elevationBin);            // Sets min Azimuth Distance
 
    void reset() override;
 
@@ -42,14 +42,14 @@ protected:
    virtual void mergeIrReturns();
 
    // Slot functions
-   virtual bool setSlotAzimuthBin(const basic::Number* const msg);     // Sets the Azimuth Bin
-   virtual bool setSlotElevationBin(const basic::Number* const msg);   // Sets the Elevation Bin
+   virtual bool setSlotAzimuthBin(const base::Number* const msg);     // Sets the Azimuth Bin
+   virtual bool setSlotElevationBin(const base::Number* const msg);   // Sets the Elevation Bin
 
 private:
-   LCreal azimuthBin;         // minimum azimuth we can distinguish -- two signals whose
+   double azimuthBin;         // minimum azimuth we can distinguish -- two signals whose
                               // azimuth differs by less than this will be merged
 
-   LCreal elevationBin;       // minimum azimuth we can distinguish -- two signals whose
+   double elevationBin;       // minimum azimuth we can distinguish -- two signals whose
                               // azimuth differs by less than this will be merged
 };
 

@@ -29,15 +29,15 @@
 #define __oe_maps_rpf_CadrgTocEntry_H__
 
 #include "openeaagles/maps/rpfMap/CadrgFrameEntry.h"
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 namespace oe {
 namespace maps {
 namespace rpf {
 
-class CadrgTocEntry : public basic::Object
+class CadrgTocEntry : public base::Object
 {
-    DECLARE_SUBCLASS(CadrgTocEntry, basic::Object)
+    DECLARE_SUBCLASS(CadrgTocEntry, base::Object)
 
 public:
     CadrgTocEntry();

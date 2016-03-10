@@ -1,7 +1,8 @@
 
 #include "openeaagles/dafif/Record.h"
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/String.h"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/util/string_utils.h"
 
 #include <iostream>
 #include <cstring>
@@ -63,7 +64,7 @@ void Record::resetData()
 //------------------------------------------------------------------------------
 // setRecord() -- set our record string to 's'.
 //------------------------------------------------------------------------------
-void Record::setRecord(basic::String* const s)
+void Record::setRecord(base::String* const s)
 {
    setStr( *s );
 }
@@ -319,7 +320,7 @@ double Record::dsAtofn(const char* const s, const int n)
    const size_t BUF_LENGTH = 256;
    char buf[BUF_LENGTH];
 
-   lcStrncpy(buf, BUF_LENGTH, s, n);
+   base::lcStrncpy(buf, BUF_LENGTH, s, n);
    buf[n] = '\0';
 
    return atof(buf);
@@ -337,7 +338,7 @@ long Record::dsAtoln(const char* const s, const int n)
    const size_t BUF_LENGTH = 256;
    char buf[BUF_LENGTH];
 
-   lcStrncpy(buf, BUF_LENGTH, s, n);
+   base::lcStrncpy(buf, BUF_LENGTH, s, n);
    buf[n] = '\0';
 
    return std::atol(buf);
@@ -535,7 +536,7 @@ float Record::dsFrequency(const char* const p)
 void Record::printTrueBearingRange(std::ostream& sout, const double aclat, const double aclon, const double acelev)const
 {
    double bearing, range, grdrange;
-   basic::Nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &range, &grdrange);
+   base::Nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &range, &grdrange);
    sout << "  range " << range << "  grdrange " << grdrange << " true_bearing " << bearing;
 }
 

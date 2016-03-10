@@ -4,7 +4,7 @@
 
 #include "openeaagles/maps/rpfMap/CadrgClut.h"
 #include "openeaagles/maps/rpfMap/CadrgFrameEntry.h"
-#include "openeaagles/basic/String.h"
+#include "openeaagles/base/String.h"
 #include "openeaagles/maps/rpfMap/Support.h"
 
 #include <cstring>
@@ -95,7 +95,7 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
     // Found lookup table flag
     bool foundLut = false;
     // Temporary filename
-    basic::String* string = new basic::String(frame.getDirectory());
+    base::String* string = new base::String(frame.getDirectory());
     string->catStr(frame.getFileName());
 
     #if defined(WIN32)

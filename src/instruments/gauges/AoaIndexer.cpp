@@ -1,7 +1,7 @@
 #include "openeaagles/instruments/gauges/AoaIndexer.h"
 
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/units/Angles.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/units/Angles.h"
 #include <GL/glu.h>
 
 namespace oe {
@@ -23,12 +23,12 @@ END_SLOTTABLE(AoAIndexer)
 //  Map slot table to handles for Transform
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(AoAIndexer)
-    ON_SLOT(1, setSlotAoaRedMax, basic::Number)
-    ON_SLOT(2, setSlotAoaRedMin, basic::Number)
-    ON_SLOT(3, setSlotAoaGreenMax, basic::Number)
-    ON_SLOT(4, setSlotAoaGreenMin, basic::Number)
-    ON_SLOT(5, setSlotAoaYellowMax, basic::Number)
-    ON_SLOT(6, setSlotAoaYellowMin, basic::Number)
+    ON_SLOT(1, setSlotAoaRedMax, base::Number)
+    ON_SLOT(2, setSlotAoaRedMin, base::Number)
+    ON_SLOT(3, setSlotAoaGreenMax, base::Number)
+    ON_SLOT(4, setSlotAoaGreenMin, base::Number)
+    ON_SLOT(5, setSlotAoaYellowMax, base::Number)
+    ON_SLOT(6, setSlotAoaYellowMin, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -88,7 +88,7 @@ void AoAIndexer::deleteData()
 void AoAIndexer::drawFunc()
 {
     // if we have components, we are going to check for a ROTARY
-    basic::PairStream* subcomponents = getComponents();
+    base::PairStream* subcomponents = getComponents();
     if (subcomponents != nullptr) {
       subcomponents->unref();
       subcomponents = nullptr;
@@ -237,12 +237,12 @@ void AoAIndexer::drawFunc()
 //------------------------------------------------------------------------------
 // updateData() -- updates non-critical time threads
 //------------------------------------------------------------------------------
-void AoAIndexer::updateData(const LCreal dt)
+void AoAIndexer::updateData(const double dt)
 {
     // update our baseclass
     BaseClass::updateData(dt);
 
-    LCreal aoa = getInstValue();
+    double aoa = getInstValue();
 
     // let's get our values
     //std::cout << "AOA RED MAX = " << aoaRedMax << std::endl;
@@ -274,7 +274,7 @@ void AoAIndexer::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // setSlotAoaRedMax()
 //------------------------------------------------------------------------------
-bool AoAIndexer::setSlotAoaRedMax(const basic::Number* const newRMax)
+bool AoAIndexer::setSlotAoaRedMax(const base::Number* const newRMax)
 {
     bool ok = false;
     if (newRMax != nullptr) ok = setAoaRedMax(newRMax->getReal());
@@ -283,7 +283,7 @@ bool AoAIndexer::setSlotAoaRedMax(const basic::Number* const newRMax)
 //------------------------------------------------------------------------------
 // setSlotAoaRedMin()
 //------------------------------------------------------------------------------
-bool AoAIndexer::setSlotAoaRedMin(const basic::Number* const newRMin)
+bool AoAIndexer::setSlotAoaRedMin(const base::Number* const newRMin)
 {
     bool ok = false;
     if (newRMin != nullptr) ok = setAoaRedMin(newRMin->getReal());
@@ -292,7 +292,7 @@ bool AoAIndexer::setSlotAoaRedMin(const basic::Number* const newRMin)
 //------------------------------------------------------------------------------
 // setSlotAoaYellowMax()
 //------------------------------------------------------------------------------
-bool AoAIndexer::setSlotAoaYellowMax(const basic::Number* const newYMax)
+bool AoAIndexer::setSlotAoaYellowMax(const base::Number* const newYMax)
 {
     bool ok = false;
     if (newYMax != nullptr) ok = setAoaYellowMax(newYMax->getReal());
@@ -301,7 +301,7 @@ bool AoAIndexer::setSlotAoaYellowMax(const basic::Number* const newYMax)
 //------------------------------------------------------------------------------
 // setSlotAoaYellowMin()
 //------------------------------------------------------------------------------
-bool AoAIndexer::setSlotAoaYellowMin(const basic::Number* const newYMin)
+bool AoAIndexer::setSlotAoaYellowMin(const base::Number* const newYMin)
 {
     bool ok = false;
     if (newYMin != nullptr) ok = setAoaYellowMin(newYMin->getReal());
@@ -310,7 +310,7 @@ bool AoAIndexer::setSlotAoaYellowMin(const basic::Number* const newYMin)
 //------------------------------------------------------------------------------
 // setSlotAoaGreenMax()
 //------------------------------------------------------------------------------
-bool AoAIndexer::setSlotAoaGreenMax(const basic::Number* const newGMax)
+bool AoAIndexer::setSlotAoaGreenMax(const base::Number* const newGMax)
 {
     bool ok = false;
     if (newGMax != nullptr) ok = setAoaGreenMax(newGMax->getReal());
@@ -319,7 +319,7 @@ bool AoAIndexer::setSlotAoaGreenMax(const basic::Number* const newGMax)
 //------------------------------------------------------------------------------
 // setSlotAoaGreenMin()
 //------------------------------------------------------------------------------
-bool AoAIndexer::setSlotAoaGreenMin(const basic::Number* const newGMin)
+bool AoAIndexer::setSlotAoaGreenMin(const base::Number* const newGMin)
 {
     bool ok = false;
     if (newGMin != nullptr) ok = setAoaGreenMin(newGMin->getReal());
@@ -330,7 +330,7 @@ bool AoAIndexer::setSlotAoaGreenMin(const basic::Number* const newGMin)
 //------------------------------------------------------------------------------
 // setAoaRedMin() - set min "red" value
 //------------------------------------------------------------------------------
-bool AoAIndexer::setAoaRedMin(const LCreal a)
+bool AoAIndexer::setAoaRedMin(const double a)
 {
     aoaRedMin = a;
     return true;
@@ -339,7 +339,7 @@ bool AoAIndexer::setAoaRedMin(const LCreal a)
 //------------------------------------------------------------------------------
 // setAoaRedMax() - set the max "red" value
 //------------------------------------------------------------------------------
-bool AoAIndexer::setAoaRedMax(const LCreal b)
+bool AoAIndexer::setAoaRedMax(const double b)
 {
     aoaRedMax = b;
     return true;
@@ -348,7 +348,7 @@ bool AoAIndexer::setAoaRedMax(const LCreal b)
 //------------------------------------------------------------------------------
 // setAoaYellowMin() - set "yellow" minimum
 //------------------------------------------------------------------------------
-bool AoAIndexer::setAoaYellowMin(const LCreal a)
+bool AoAIndexer::setAoaYellowMin(const double a)
 {
     aoaYellowMin = a;
     return true;
@@ -357,7 +357,7 @@ bool AoAIndexer::setAoaYellowMin(const LCreal a)
 //------------------------------------------------------------------------------
 // setAoaYellowMax() - set "yellow" max
 //------------------------------------------------------------------------------
-bool AoAIndexer::setAoaYellowMax(const LCreal b)
+bool AoAIndexer::setAoaYellowMax(const double b)
 {
     aoaYellowMax = b;
     return true;
@@ -366,7 +366,7 @@ bool AoAIndexer::setAoaYellowMax(const LCreal b)
 //------------------------------------------------------------------------------
 // setAoaGreenMin() - set "green" min
 //------------------------------------------------------------------------------
-bool AoAIndexer::setAoaGreenMin(const LCreal a)
+bool AoAIndexer::setAoaGreenMin(const double a)
 {
     aoaGreenMin = a;
     return true;
@@ -375,7 +375,7 @@ bool AoAIndexer::setAoaGreenMin(const LCreal a)
 //------------------------------------------------------------------------------
 // setAoaGreenMax() - set "green" max
 //------------------------------------------------------------------------------
-bool AoAIndexer::setAoaGreenMax(const LCreal b)
+bool AoAIndexer::setAoaGreenMax(const double b)
 {
     aoaGreenMax = b;
     return true;
@@ -384,7 +384,7 @@ bool AoAIndexer::setAoaGreenMax(const LCreal b)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for AoAIndexer
 //------------------------------------------------------------------------------
-basic::Object* AoAIndexer::getSlotByIndex(const int si)
+base::Object* AoAIndexer::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

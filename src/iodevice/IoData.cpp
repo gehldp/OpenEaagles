@@ -2,7 +2,7 @@
 
 #include "openeaagles/iodevice/IoData.h"
 
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/Number.h"
 
 namespace oe {
 namespace iodevice {
@@ -22,10 +22,10 @@ END_SLOTTABLE(IoData)
 
 //  Map slot table to handles
 BEGIN_SLOT_MAP(IoData)
-   ON_SLOT( 1, setSlotNumAI,    basic::Number)
-   ON_SLOT( 2, setSlotNumAO,    basic::Number)
-   ON_SLOT( 3, setSlotNumDI,    basic::Number)
-   ON_SLOT( 4, setSlotNumDO,    basic::Number)
+   ON_SLOT( 1, setSlotNumAI,    base::Number)
+   ON_SLOT( 2, setSlotNumAO,    base::Number)
+   ON_SLOT( 3, setSlotNumDI,    base::Number)
+   ON_SLOT( 4, setSlotNumDO,    base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -108,7 +108,7 @@ unsigned int IoData::getNumDiscreteOutputChannels() const  { return numDO; }
 // -----------------------------------------------------------------------------
 // getAnalogInput() - default
 // -----------------------------------------------------------------------------
-bool IoData::getAnalogInput(const unsigned int channel, LCreal* const value) const
+bool IoData::getAnalogInput(const unsigned int channel, double* const value) const
 {
    bool ok = false;
    if (value != nullptr && aiTable != nullptr && channel > 0 && channel <= numAI) {
@@ -121,7 +121,7 @@ bool IoData::getAnalogInput(const unsigned int channel, LCreal* const value) con
 // -----------------------------------------------------------------------------
 // getAnalogOutput() -
 // -----------------------------------------------------------------------------
-bool IoData::getAnalogOutput(const unsigned int channel, LCreal* const value) const
+bool IoData::getAnalogOutput(const unsigned int channel, double* const value) const
 {
    bool ok = false;
    if (value != nullptr && aoTable != nullptr && channel > 0 && channel <= numAO) {
@@ -160,7 +160,7 @@ bool IoData::getDiscreteOutput(const unsigned int channel, bool* const value) co
 // -----------------------------------------------------------------------------
 // setAnalogInput() -
 // -----------------------------------------------------------------------------
-bool IoData::setAnalogInput(const unsigned int channel, const LCreal value)
+bool IoData::setAnalogInput(const unsigned int channel, const double value)
 {
    bool ok = false;
    if (aiTable != nullptr && channel > 0 && channel <= numAI) {
@@ -173,7 +173,7 @@ bool IoData::setAnalogInput(const unsigned int channel, const LCreal value)
 // -----------------------------------------------------------------------------
 // setAnalogOutput() -
 // -----------------------------------------------------------------------------
-bool IoData::setAnalogOutput(const unsigned int channel, const LCreal value)
+bool IoData::setAnalogOutput(const unsigned int channel, const double value)
 {
    bool ok = false;
    if (aoTable != nullptr && channel > 0 && channel <= numAO) {
@@ -256,7 +256,7 @@ bool IoData::setNumAI(const unsigned int num)
 
       // Allocate and clear the new
       if (num > 0) {
-         aiTable = new LCreal[num];
+         aiTable = new double[num];
          for (unsigned int i = 0; i < num; i++) aiTable[i] = 0.0;
          numAI = num;
       }
@@ -280,7 +280,7 @@ bool IoData::setNumAO(const unsigned int num)
 
       // Allocate and clear the new
       if (num > 0) {
-         aoTable = new LCreal[num];
+         aoTable = new double[num];
          for (unsigned int i = 0; i < num; i++) aoTable[i] = 0.0;
          numAO = num;
       }
@@ -343,7 +343,7 @@ bool IoData::setNumDO(const unsigned int num)
 // -----------------------------------------------------------------------------
 
 // numAI: Number of analog inputs (AIs)
-bool IoData::setSlotNumAI(const basic::Number* const msg)
+bool IoData::setSlotNumAI(const base::Number* const msg)
 {
    // Null 'msg' is ok, but the value of 'msg' must
    // be greater than or equal to zero.
@@ -362,7 +362,7 @@ bool IoData::setSlotNumAI(const basic::Number* const msg)
 }
 
 // numAO: Number of analog outputs (AOs)
-bool IoData::setSlotNumAO(const basic::Number* const msg)
+bool IoData::setSlotNumAO(const base::Number* const msg)
 {
    // Null 'msg' is ok, but the value of 'msg' must
    // be greater than or equal to zero.
@@ -381,7 +381,7 @@ bool IoData::setSlotNumAO(const basic::Number* const msg)
 }
 
 // numDI: Number of discrete inputs (DIs)
-bool IoData::setSlotNumDI(const basic::Number* const msg)
+bool IoData::setSlotNumDI(const base::Number* const msg)
 {
    // Null 'msg' is ok, but the value of 'msg' must
    // be greater than or equal to zero.
@@ -400,7 +400,7 @@ bool IoData::setSlotNumDI(const basic::Number* const msg)
 }
 
 // numDO: Number of discrete outputs (DOs)
-bool IoData::setSlotNumDO(const basic::Number* const msg)
+bool IoData::setSlotNumDO(const base::Number* const msg)
 {
    // Null 'msg' is ok, but the value of 'msg' must
    // be greater than or equal to zero.
@@ -421,7 +421,7 @@ bool IoData::setSlotNumDO(const basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component
 //------------------------------------------------------------------------------
-basic::Object* IoData::getSlotByIndex(const int si)
+base::Object* IoData::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

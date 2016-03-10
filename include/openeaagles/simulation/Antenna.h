@@ -5,11 +5,11 @@
 #define __oe_simulation_Antenna_H__
 
 #include "openeaagles/simulation/ScanGimbal.h"
-#include "openeaagles/basic/safe_queue.h"
-#include "openeaagles/basic/safe_stack.h"
+#include "openeaagles/base/safe_queue.h"
+#include "openeaagles/base/safe_stack.h"
 
 namespace oe {
-   namespace basic {
+   namespace base {
       class Function;
       class Power;
    }
@@ -26,22 +26,22 @@ class RfSystem;
 //
 // Factory name: Antenna
 // Slots:
-//      polarization    <basic::String>  ! Antenna Polarization  { none, vertical, horizontal, slant, RHC, LHC }
+//      polarization    <base::String>  ! Antenna Polarization  { none, vertical, horizontal, slant, RHC, LHC }
 //                                       ! (default: NONE)
 //
-//      threshold       <basic::Power>   ! Antenna threshold  (default: 0.0)
+//      threshold       <base::Power>   ! Antenna threshold  (default: 0.0)
 //
-//      gain            <basic::Number>  ! Gain (default: 1.0)              (no units)
+//      gain            <base::Number>  ! Gain (default: 1.0)              (no units)
 //
-//      gainPattern     <basic::Function> ! Gain pattern (basic::Func1 or basic::Func2) (db)
+//      gainPattern     <base::Function> ! Gain pattern (base::Func1 or base::Func2) (db)
 //                                       ! (default: 0)
 //
-//      gainPatternDeg  <basic::Boolean> ! Gain pattern is in degrees (true) or radians (false) (default: false)
+//      gainPatternDeg  <base::Boolean> ! Gain pattern is in degrees (true) or radians (false) (default: false)
 //
-//      recycle         <basic::Boolean> ! Recycle emissions flag (default: true)
+//      recycle         <base::Boolean> ! Recycle emissions flag (default: true)
 //
-//      beamWidth       <basic::Angle>   ! Beam Width  (must be greater than zero) (default: 3.5 degrees)
-//                      <basic::Number>  ! Beam width in radians
+//      beamWidth       <base::Angle>   ! Beam Width  (must be greater than zero) (default: 3.5 degrees)
+//                      <base::Number>  ! Beam width in radians
 //
 //
 // Note
@@ -81,7 +81,7 @@ public:
    virtual double getGain() const              { return gain; }
 
    // Gain pattern
-   const basic::Function* gainPatternTable() const { return gainPattern; }
+   const base::Function* gainPatternTable() const { return gainPattern; }
    bool isGainPatternDegrees() const           { return gainPatternDeg; }
 
    // Antenna threshold (watts)
@@ -89,7 +89,7 @@ public:
 
    // Antenna effective area (m^2)
    static double getEffectiveArea(const double gain, const double lambda) {
-      return (gain * lambda * lambda)/(4.0 * PI);
+      return (gain * lambda * lambda)/(4.0 * base::PI);
    }
 
    // Recycle emissions flag (reuse old emission structure instead of creating new ones)
@@ -106,37 +106,37 @@ public:
    virtual bool setBeamWidth(const double radians);
 
    // slot functions that need public access because there is no corresponding member function
-   virtual bool setSlotPolarization(basic::String* const v);
-   virtual bool setSlotThreshold(basic::Power* const p);
-   virtual bool setSlotGain(const basic::Number* const g);
-   virtual bool setSlotGainPattern(basic::Function* const func);
-   virtual bool setSlotGainPatternDeg(const basic::Number* const g);
-   virtual bool setSlotRecycleFlg(const basic::Number* const);
-   virtual bool setSlotBeamWidth(const basic::Angle* const msg);
-   virtual bool setSlotBeamWidth(const basic::Number* const msg);
+   virtual bool setSlotPolarization(base::String* const v);
+   virtual bool setSlotThreshold(base::Power* const p);
+   virtual bool setSlotGain(const base::Number* const g);
+   virtual bool setSlotGainPattern(base::Function* const func);
+   virtual bool setSlotGainPatternDeg(const base::Number* const g);
+   virtual bool setSlotRecycleFlg(const base::Number* const);
+   virtual bool setSlotBeamWidth(const base::Angle* const msg);
+   virtual bool setSlotBeamWidth(const base::Number* const msg);
 
    // Event handler(s)
    virtual bool onRfEmissionReturnEventAntenna(Emission* const);
 
-   bool onStartScanEvent(basic::Integer* const bar) override;
-   bool onEndScanEvent(basic::Integer* const bar) override;
+   bool onStartScanEvent(base::Integer* const bar) override;
+   bool onEndScanEvent(base::Integer* const bar) override;
 
    bool onRfEmissionEvent(Emission* const) override;
 
-   bool event(const int event, basic::Object* const obj = nullptr) override;
+   bool event(const int event, base::Object* const obj = nullptr) override;
    void reset() override;
 
 protected:
    void clearQueues();
 
-   void process(const LCreal dt) override;     // Phase 3
+   void process(const double dt) override;     // Phase 3
 
    bool shutdownNotification() override;
 
-   basic::safe_stack<Emission*> freeEmStack;  // Free emission stack
+   base::safe_stack<Emission*> freeEmStack;  // Free emission stack
    mutable long      freeEmLock;              // Semaphore to protect 'freeEmStack'
 
-   basic::safe_queue<Emission*> inUseEmQueue; // In use emission queue
+   base::safe_queue<Emission*> inUseEmQueue; // In use emission queue
    mutable long      inUseEmLock;             // Semaphore to protect 'inUseEmQueue'
 
 private:
@@ -149,7 +149,7 @@ private:
    // Antenna parameters
    Polarization polar;             // Polarization                 (enum)
    double      gain;               // Gain                         (no units)
-   basic::Function* gainPattern;   // Gain pattern                 (Function)
+   base::Function* gainPattern;   // Gain pattern                 (Function)
 
    double      threshold;          // Antenna threshold; don't send emission if
                                    // power is below this threshold (watts)

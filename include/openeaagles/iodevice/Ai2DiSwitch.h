@@ -2,11 +2,11 @@
 #ifndef __oe_iodevice_Ai2DiSwitch_H__
 #define __oe_iodevice_Ai2DiSwitch_H__
 
-#include "openeaagles/basic/IoAdapter.h"
+#include "openeaagles/base/IoAdapter.h"
 
 namespace oe {
 
-namespace basic { class Number; }
+namespace base { class Number; }
 
 namespace iodevice {
 
@@ -38,32 +38,32 @@ class IoDevice;
 //      inverted     <Boolean>   Inverted bit flag (default: false)
 //
 //------------------------------------------------------------------------------
-class Ai2DiSwitch : public basic::IoAdapter
+class Ai2DiSwitch : public base::IoAdapter
 {
-   DECLARE_SUBCLASS(Ai2DiSwitch, basic::IoAdapter)
+   DECLARE_SUBCLASS(Ai2DiSwitch, base::IoAdapter)
 
 public:
    Ai2DiSwitch();
 
    unsigned int getLocation() const;
    unsigned int getChannel() const;
-   LCreal getLevel() const;
+   double getLevel() const;
    bool getInvertFlag() const;
 
    bool setLocation(const unsigned int);
    bool setChannel(const unsigned int);
-   bool setLevel(const LCreal);
+   bool setLevel(const double);
    bool setInvertFlag(const bool);
 
-   void processInputs(const LCreal dt, const basic::IoDevice* const device, basic::IoData* const inData) override;
-   void processOutputs(const LCreal dt, const basic::IoData* const outData, basic::IoDevice* const device) override;
+   void processInputs(const double dt, const base::IoDevice* const device, base::IoData* const inData) override;
+   void processOutputs(const double dt, const base::IoData* const outData, base::IoDevice* const device) override;
 
 protected:
    // Slot functions
-   virtual bool setSlotLocation(const basic::Number* const msg);
-   virtual bool setSlotChannel(const basic::Number* const msg);
-   virtual bool setSlotLevel(const basic::Number* const msg);
-   virtual bool setSlotInverted(const basic::Number* const msg);
+   virtual bool setSlotLocation(const base::Number* const msg);
+   virtual bool setSlotChannel(const base::Number* const msg);
+   virtual bool setSlotLevel(const base::Number* const msg);
+   virtual bool setSlotInverted(const base::Number* const msg);
 
 private:
    void initData();
@@ -71,7 +71,7 @@ private:
    bool devEnb;            // Device enabled
    unsigned int location;     // IoData input bit location
    unsigned int channel;      // Port's channel (bit) number
-   LCreal        level;       // Switching level
+   double        level;       // Switching level
    bool         invert;       // Inverted bit flag
 };
 

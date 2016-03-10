@@ -5,7 +5,9 @@
 #define __oe_simulation_Radar_H__
 
 #include "openeaagles/simulation/RfSensor.h"
-#include "openeaagles/basic/safe_queue.h"
+#include "openeaagles/base/safe_queue.h"
+
+#include <cmath>
 
 namespace oe {
 namespace simulation {
@@ -18,8 +20,8 @@ namespace simulation {
 //
 // Factory name: Radar
 // Slots:
-//    igain    <basic::Number>     ! Integrator gain (no units; default: 1.0f)
-//             <basic::Decibel>    ! Integrator gain (dB)
+//    igain    <base::Number>     ! Integrator gain (no units; default: 1.0f)
+//             <base::Decibel>    ! Integrator gain (dB)
 //
 //------------------------------------------------------------------------------
 class Radar : public RfSensor
@@ -36,8 +38,8 @@ public:
 public:
    Radar();
 
-   const LCreal* getSweep(const unsigned int n) const     { return (n < NUM_SWEEPS ?  sweeps[n] : 0); }
-   const LCreal* getClosure(const unsigned int n) const   { return (n < NUM_SWEEPS ?  vclos[n]  : 0); }
+   const double* getSweep(const unsigned int n) const     { return (n < NUM_SWEEPS ?  sweeps[n] : 0); }
+   const double* getClosure(const unsigned int n) const   { return (n < NUM_SWEEPS ?  vclos[n]  : 0); }
    unsigned int getNumSweeps() const                      { return NUM_SWEEPS; }
    unsigned int getPtrsPerSweep() const                   { return PTRS_PER_SWEEP; }
 
@@ -50,32 +52,32 @@ public:
 
    // For debugging purposes
    // returns the amount of jamming signal to be considered, 0 if no jamming
-   LCreal getRecvJamSignal() const                 { return currentJamSignal; }
-   LCreal getRecvJamSignalDb() const               { return 10.0f * lcLog10(currentJamSignal); }
+   double getRecvJamSignal() const                 { return currentJamSignal; }
+   double getRecvJamSignalDb() const               { return 10.0f * std::log10(currentJamSignal); }
 
    // Returns integration gain
-   LCreal getIGain() const                         { return rfIGain; }
+   double getIGain() const                         { return rfIGain; }
 
    // return the current number of emissions that have been jammed.
    int getNumberOfJammedEmissions() const          { return numberOfJammedEmissions; }
 
    // Sets integration gain
-   virtual bool setIGain(const LCreal);
+   virtual bool setIGain(const double);
 
    // Slot functions
-   virtual bool setSlotIGain(basic::Number* const msg);
+   virtual bool setSlotIGain(base::Number* const msg);
 
    bool killedNotification(Player* const killedBy = 0) override;
 
-   void updateData(const LCreal dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
    void reset() override;
 
 protected:
-   bool onEndScanEvent(const basic::Integer* const bar) override;
+   bool onEndScanEvent(const base::Integer* const bar) override;
 
-   void transmit(const LCreal dt) override;
-   void receive(const LCreal dt) override;
-   void process(const LCreal dt) override;
+   void transmit(const double dt) override;
+   void receive(const double dt) override;
+   void process(const double dt) override;
 
    bool shutdownNotification() override;
 
@@ -85,12 +87,12 @@ protected: // (#temporary#) allow subclasses to access and use report queue
    mutable long myLock;
 
    // Queues
-   basic::safe_queue<Emission*>   rptQueue;       // Reporting emission queue
-   basic::safe_queue<LCreal>      rptSnQueue;     // Reporting Signal/Nose queue  (dB)
+   base::safe_queue<Emission*>   rptQueue;       // Reporting emission queue
+   base::safe_queue<double>      rptSnQueue;     // Reporting Signal/Nose queue  (dB)
 
    // Reports
    Emission*   reports[MAX_REPORTS];   // Best emission for this report
-   LCreal      rptMaxSn[MAX_REPORTS];  // Signal/Nose value            (dB)
+   double      rptMaxSn[MAX_REPORTS];  // Signal/Nose value            (dB)
    unsigned int numReports;            // Number of reports this sweep
 
 private:
@@ -98,19 +100,19 @@ private:
    void clearTracksAndQueues();
    void clearSweep(const unsigned int i);
    void ageSweeps();
-   unsigned int computeSweepIndex(const LCreal az);
-   unsigned int computeRangeIndex(const LCreal rng);
+   unsigned int computeSweepIndex(const double az);
+   unsigned int computeRangeIndex(const double rng);
 
    bool        endOfScanFlg;           // End of scan flag
 
-   LCreal      sweeps[NUM_SWEEPS][PTRS_PER_SWEEP];
-   LCreal      vclos[NUM_SWEEPS][PTRS_PER_SWEEP];
+   double      sweeps[NUM_SWEEPS][PTRS_PER_SWEEP];
+   double      vclos[NUM_SWEEPS][PTRS_PER_SWEEP];
    int         csweep;                     // Current sweep
 
-   LCreal      currentJamSignal;
+   double      currentJamSignal;
    int         numberOfJammedEmissions;
 
-   LCreal      rfIGain;                // Integrator gain (default: 1.0) (no units)
+   double      rfIGain;                // Integrator gain (default: 1.0) (no units)
 };
 
 } // End simulation namespace

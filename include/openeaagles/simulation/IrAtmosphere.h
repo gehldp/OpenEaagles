@@ -4,11 +4,11 @@
 #ifndef __oe_simulation_IrAtmosphere_H__
 #define __oe_simulation_IrAtmosphere_H__
 
-#include "openeaagles/basic/Component.h"
+#include "openeaagles/base/Component.h"
 
 namespace oe {
 
-   namespace basic {
+   namespace base {
       class Number;
       class Table1;
       class Table2;
@@ -37,29 +37,29 @@ class IrQueryMsg;
 //
 // Public Member Functions:
 //
-//     LCreal getTransmissivity(const LCreal lowerWavelength,   // The lower range of the wave band (microns)
-//                              const LCreal upperWavelength,   // The upper range of the wave band (microns)
-//                              const LCreal range)             // Ground range to the target (meters)
+//     double getTransmissivity(const double lowerWavelength,   // The lower range of the wave band (microns)
+//                              const double upperWavelength,   // The upper range of the wave band (microns)
+//                              const double range)             // Ground range to the target (meters)
 //        Return the fraction of infrared radiation transmitted in the region
 //        of the spectrum defined by the upper and lower wavelengths as a function 
 //        of the range from seeker to target. The return value is between 
 //        0.0 (no power gets through) and 1.0 (All power gets through)
 //
-//    LCreal getTransmissivity(const LCreal wavebandCenter,       // The waveband center (microns)
-//                             const LCreal range)                // Ground range to the target (meters)
+//    double getTransmissivity(const double wavebandCenter,       // The waveband center (microns)
+//                             const double range)                // Ground range to the target (meters)
 //        Return the fraction of infrared radiation transmitted in the region surrounded 
 //        by the center of the waveband as a function of the range from seeker to target.
 //        The routine does a table lookup in a 3-D table where the x-coordinate is the center of the
 //        user defined waveband, the y-coordinate is the range of the seeker. The return value is between 0.0 
 //        (no power gets through) and 1.0 (All power gets through)
 //
-//     LCreal getLowerEndOfWavelengthOverlap(const LCreal lowerRadiationWaveband,      // Lower end of the wavebands represented by the atmosphere (microns)
-//                                           const LCreal lowerSensorWaveband) const;  // Lower end of the sensor waveband (microns)
+//     double getLowerEndOfWavelengthOverlap(const double lowerRadiationWaveband,      // Lower end of the wavebands represented by the atmosphere (microns)
+//                                           const double lowerSensorWaveband) const;  // Lower end of the sensor waveband (microns)
 //        Return the lowest wavelength for which data for the atmosphere is required. It is higher of the bottom 
 //        sensor waveband and the lowest waveband represented by the atmosphere.
 //
-//     LCreal getUpperEndOfWavelengthOverlap(const LCreal upperRadiationWaveband,      // Upper end of the wavebands represented by the atmosphere (microns)
-//                                           const LCreal upperSensorWaveband) const;  // Upper end of the sensor waveband (microns)
+//     double getUpperEndOfWavelengthOverlap(const double upperRadiationWaveband,      // Upper end of the wavebands represented by the atmosphere (microns)
+//                                           const double upperSensorWaveband) const;  // Upper end of the sensor waveband (microns)
 //        Return the highest wavelength for which data for the atmosphere is required. It is lower of the top 
 //        of the sensor waveband and the highest waveband represented by the atmosphere.
 //
@@ -88,30 +88,30 @@ class IrQueryMsg;
 //
 //------------------------------------------------------------------------------
 
-class IrAtmosphere : public basic::Component
+class IrAtmosphere : public base::Component
 {
-   DECLARE_SUBCLASS(IrAtmosphere,basic::Component)
+   DECLARE_SUBCLASS(IrAtmosphere,base::Component)
 
 public:
    IrAtmosphere();
 
    // IrAtmosphere class interface
-   virtual bool calculateAtmosphereContribution(IrQueryMsg* const msg, LCreal* totalSignal, LCreal* totalBackground);
+   virtual bool calculateAtmosphereContribution(IrQueryMsg* const msg, double* totalSignal, double* totalBackground);
 
    //Get the number of waveband bins
    unsigned int getNumWaveBands() const              { return numWaveBands; }
 
    // getWaveBandCenters() -- Return center frequency of all wave bands
-   const LCreal* getWaveBandCenters() const;
+   const double* getWaveBandCenters() const;
 
    // getWaveBandWidths() -- Return widths for all wave band frequencies
-   const LCreal* getWaveBandWidths() const;
+   const double* getWaveBandWidths() const;
 
    // Return the lowest wavelength for which data for the atmosphere is required. 
    // It is higher of the bottom sensor waveband and the lowest waveband represented by the atmosphere.
-   LCreal getLowerEndOfWavelengthOverlap (
-      const LCreal lowerRadiationWaveband, // Lower end of the wavebands represented by the atmosphere (microns)
-      const LCreal lowerSensorWaveband     // Lower end of the sensor waveband (microns)
+   double getLowerEndOfWavelengthOverlap (
+      const double lowerRadiationWaveband, // Lower end of the wavebands represented by the atmosphere (microns)
+      const double lowerSensorWaveband     // Lower end of the sensor waveband (microns)
    ) const 
    {
       return ((lowerRadiationWaveband > lowerSensorWaveband) ? lowerRadiationWaveband : lowerSensorWaveband);
@@ -119,9 +119,9 @@ public:
 
    // Return the highest wavelength for which data for the atmosphere is required. 
    // It is lower of the top of the sensor waveband and the highest waveband represented by the atmosphere.
-   LCreal getUpperEndOfWavelengthOverlap(
-      const LCreal upperRadiationWaveband, // Upper end of the wavebands represented by the atmosphere (microns)
-      const LCreal upperSensorWaveband     // Upper end of the sensor waveband (microns)
+   double getUpperEndOfWavelengthOverlap(
+      const double upperRadiationWaveband, // Upper end of the wavebands represented by the atmosphere (microns)
+      const double upperSensorWaveband     // Upper end of the sensor waveband (microns)
    ) const
    {
       return ((upperRadiationWaveband < upperSensorWaveband) ? upperRadiationWaveband : upperSensorWaveband);
@@ -130,24 +130,24 @@ public:
 protected:
 
    // slot operations 
-   virtual bool setSlotWaveBands(const basic::Table1* const tbl);
-   virtual bool setSlotTransmissivityTable1(const basic::Table1* const tbl);
-   virtual bool setSlotSkyRadiance(basic::Number* const num);
-   virtual bool setSlotEarthRadiance(basic::Number* const num);
+   virtual bool setSlotWaveBands(const base::Table1* const tbl);
+   virtual bool setSlotTransmissivityTable1(const base::Table1* const tbl);
+   virtual bool setSlotSkyRadiance(base::Number* const num);
+   virtual bool setSlotEarthRadiance(base::Number* const num);
 
-   LCreal getTransmissivity(const unsigned int i, const LCreal range) const;
-   LCreal getTransmissivity(const LCreal waveBandCenter, const LCreal range) const;
-   LCreal getSkyRadiance() const {return skyRadiance;}
-   LCreal getEarthRadiance() const {return earthRadiance;}
+   double getTransmissivity(const unsigned int i, const double range) const;
+   double getTransmissivity(const double waveBandCenter, const double range) const;
+   double getSkyRadiance() const {return skyRadiance;}
+   double getEarthRadiance() const {return earthRadiance;}
 
 private:
 
    unsigned int numWaveBands;
-   const basic::Table1* waveBandTable;
-   const basic::Table1* transmissivityTable1;
+   const base::Table1* waveBandTable;
+   const base::Table1* transmissivityTable1;
 
-   LCreal skyRadiance;      // Simple background radiance for targets in sky
-   LCreal earthRadiance;    // Simple background radiance for targets on ground
+   double skyRadiance;      // Simple background radiance for targets in sky
+   double earthRadiance;    // Simple background radiance for targets on ground
 };
 
 } // End simulation namespace

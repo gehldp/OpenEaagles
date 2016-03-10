@@ -112,14 +112,14 @@
 #ifndef __oe_dafif_Record_H__
 #define __oe_dafif_Record_H__
 
-#include "openeaagles/basic/String.h"
+#include "openeaagles/base/String.h"
 #include "dafifc.h"
 
 namespace oe {
 namespace dafif {
 
-class Record : public basic::String {
-    DECLARE_SUBCLASS(Record,basic::String)
+class Record : public base::String {
+    DECLARE_SUBCLASS(Record,base::String)
 
 public:
    // record types
@@ -133,7 +133,7 @@ public:
    Record(const char* const s);
 
    void setRecord(const char* const s);
-   void setRecord(basic::String* const s);
+   void setRecord(base::String* const s);
 
    virtual void printRecord(std::ostream&) const    {}
 

@@ -2,7 +2,7 @@
 
 #include "openeaagles/simulation/Gimbal.h"
 #include "openeaagles/simulation/Player.h"
-#include "openeaagles/basic/units/Distances.h"
+#include "openeaagles/base/units/Distances.h"
 
 namespace oe {
 namespace simulation {
@@ -74,8 +74,8 @@ void SensorMsg::copyData(const SensorMsg& org, const bool cc)
     const Player* pp = org.target;
     setTarget( const_cast<Player*>(static_cast<const Player*>(pp)) );
 
-    const basic::Object* msg = org.dataMsg;
-    setDataMessage( const_cast<basic::Object*>(static_cast<const basic::Object*>(msg)) );
+    const base::Object* msg = org.dataMsg;
+    setDataMessage( const_cast<base::Object*>(static_cast<const base::Object*>(msg)) );
 
     returnReq = org.returnReq;
     localOnly = org.localOnly;
@@ -104,7 +104,7 @@ void SensorMsg::clear()
 //------------------------------------------------------------------------------
 // Sets the range to the target
 //------------------------------------------------------------------------------
-void SensorMsg::setRange(const LCreal r)
+void SensorMsg::setRange(const double r)
 {
    rng = r;
 }
@@ -113,14 +113,14 @@ void SensorMsg::setRange(const LCreal r)
 // Access functions
 //------------------------------------------------------------------------------
 
-LCreal SensorMsg::getRangeRateFPS() const
+double SensorMsg::getRangeRateFPS() const
 {
-   return getRangeRate() * basic::Distance::M2FT;
+   return getRangeRate() * base::Distance::M2FT;
 }
 
-LCreal SensorMsg::getRangeRateKts() const
+double SensorMsg::getRangeRateKts() const
 {
-   return getRangeRate() * basic::Distance::M2NM * 3600.0f;
+   return getRangeRate() * base::Distance::M2NM * 3600.0f;
 }
 
 
@@ -151,7 +151,7 @@ void SensorMsg::setTarget(Player* const p)
 //------------------------------------------------------------------------------
 // setDataMessage() -- Sets a pointer to an optional data message
 //------------------------------------------------------------------------------
-void SensorMsg::setDataMessage(basic::Object* const msg)
+void SensorMsg::setDataMessage(base::Object* const msg)
 {
    dataMsg = msg;
 }

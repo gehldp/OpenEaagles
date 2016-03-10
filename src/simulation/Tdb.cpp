@@ -3,12 +3,13 @@
 #include "openeaagles/simulation/Gimbal.h"
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/Terrain.h"
-#include "openeaagles/basic/units/Distances.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/Terrain.h"
+#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/util/osg_utils.h"
 
 #include <cmath>
 
@@ -218,7 +219,7 @@ bool Tdb::resizeArrays(const unsigned int newSize)
 // max angles, etc.
 // (Background task)
 //------------------------------------------------------------------------------
-unsigned int Tdb::processPlayers(basic::PairStream* const players)
+unsigned int Tdb::processPlayers(base::PairStream* const players)
 {
    // ---
    // Early out checks (no ownship, no players of interest, no target data arrays)
@@ -228,7 +229,7 @@ unsigned int Tdb::processPlayers(basic::PairStream* const players)
    // ---
    // Terrain occulting check setup
    // ---
-   const basic::Terrain* terrain = nullptr;
+   const base::Terrain* terrain = nullptr;
    if (gimbal->isTerrainOccultingEnabled()) {
       const Simulation* const sim = ownship->getSimulation();
       terrain = sim->getTerrain();
@@ -295,7 +296,7 @@ unsigned int Tdb::processPlayers(basic::PairStream* const players)
    // If we're using ECEF coordinates then we compute the distance
    // to the earth horizon and the tangent of the angle from our
    // local level to the earth horizon
-   double hDist = 1000000.0 * basic::Distance::NM2M;  // Distance to horizon (m) (default: really far away)
+   double hDist = 1000000.0 * base::Distance::NM2M;  // Distance to horizon (m) (default: really far away)
    double hTanAng = 0;                                // Tangent of the angle to horizon (positive down)
    if (usingEcefFlg) {
       // Our vertical offset from our ownship is the inverse of the 'z'
@@ -324,10 +325,10 @@ unsigned int Tdb::processPlayers(basic::PairStream* const players)
    // 1) Scan the player list ---
    // ---
    bool finished = false;
-   for (basic::List::Item* item = players->getFirstItem(); item != nullptr && numTgts < maxTargets && !finished; item = item->getNext()) {
+   for (base::List::Item* item = players->getFirstItem(); item != nullptr && numTgts < maxTargets && !finished; item = item->getNext()) {
 
       // Get the pointer to the target player
-      basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
+      base::Pair* pair = static_cast<base::Pair*>(item->getValue());
       Player* target = static_cast<Player*>(pair->object());
 
       // Did we complete the local only players?
@@ -406,18 +407,18 @@ unsigned int Tdb::processPlayers(basic::PairStream* const players)
                      if ( target->isMajorType(Player::SPACE_VEHICLE) ) {
                         // Get the true, great-circle bearing to the target
                         double tbrg(0), distNM(0);
-                        basic::Nav::vll2bd(osLat, osLon, tgtLat, tgtLon, &tbrg, &distNM);
+                        base::Nav::vll2bd(osLat, osLon, tgtLat, tgtLon, &tbrg, &distNM);
 
                         // Set the distance to check to 60 nm
-                        double dist = 60.0 * basic::Distance::NM2M;
+                        double dist = 60.0 * base::Distance::NM2M;
 
                         // Terrain occulting check toward the space vehicle
                         occulted = terrain->targetOcculting2(osLat, osLon, osAlt, tbrg, dist, -tanTgtAng);
                      }
                      else {
                         // Occulting check between two standard player
-                        occulted = terrain->targetOcculting(osLat, osLon, static_cast<LCreal>(osAlt),
-                                                            tgtLat, tgtLon, static_cast<LCreal>(tgtAlt));
+                        occulted = terrain->targetOcculting(osLat, osLon, static_cast<double>(osAlt),
+                                                            tgtLat, tgtLon, static_cast<double>(tgtAlt));
                      }
                   }
 
@@ -544,7 +545,7 @@ unsigned int Tdb::computeBoresightData()
       // 2) Transform the ownship to target LOS vector into gimbal coordinate system
       //       losG = mm * losO2T;
       // ---
-      postMultVec3Array(losO2T,mm,losG,numTgts);
+      base::postMultVec3Array(losO2T,mm,losG,numTgts);
    }
 
    // ---
@@ -560,22 +561,22 @@ unsigned int Tdb::computeBoresightData()
    // ---
    // Compute range along antenna x-y plane
    // ---
-   sqrtArray(ra2,ra,numTgts);
+   base::sqrtArray(ra2,ra,numTgts);
 
    // ---
    // Compute angle off antenna boresight
    // ---
-   acosArray(xa, aar, numTgts);
+   base::acosArray(xa, aar, numTgts);
 
    // ---
    // Compute azimuth off boresight
    // ---
-   atan2Array(ya,xa,aazr,numTgts);
+   base::atan2Array(ya,xa,aazr,numTgts);
 
    // ---
    // Compute elevation off boresight
    // ---
-   atan2Array(za,ra,aelr,numTgts);
+   base::atan2Array(za,ra,aelr,numTgts);
 
    return numTgts;
 }

@@ -1,7 +1,7 @@
 
 #include "openeaagles/linearsystem/LagFilter.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/units/Times.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/units/Times.h"
 
 namespace oe {
 namespace linearsystem {
@@ -20,8 +20,8 @@ END_SLOTTABLE(LagFilter)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(LagFilter)
-   ON_SLOT( 1, setSlotTau, basic::Time)
-   ON_SLOT( 1, setSlotTau, basic::Number)
+   ON_SLOT( 1, setSlotTau, base::Time)
+   ON_SLOT( 1, setSlotTau, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -34,7 +34,7 @@ LagFilter::LagFilter()
    tau = 1.0;
 }
 
-LagFilter::LagFilter(const unsigned int rate, const LCreal t)
+LagFilter::LagFilter(const unsigned int rate, const double t)
                         : FirstOrderTf(rate, 0.0f, 1.0f, t, 1.0f)
 {
    STANDARD_CONSTRUCTOR()
@@ -56,7 +56,7 @@ EMPTY_DELETEDATA(LagFilter)
 // Set functions
 //------------------------------------------------------------------------------
 
-bool LagFilter::setTau(const LCreal v)
+bool LagFilter::setTau(const double v)
 {
    tau = v;
 
@@ -73,11 +73,11 @@ bool LagFilter::setTau(const LCreal v)
 // Set slot functions
 //------------------------------------------------------------------------------
 
-bool LagFilter::setSlotTau(const basic::Time* const msg)
+bool LagFilter::setSlotTau(const base::Time* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      LCreal tsec = basic::Seconds::convertStatic(*msg);
+      double tsec = base::Seconds::convertStatic(*msg);
       if (tsec > 0) {
          setTau( tsec );
          ok = true;
@@ -91,11 +91,11 @@ bool LagFilter::setSlotTau(const basic::Time* const msg)
    return ok;
 }
 
-bool LagFilter::setSlotTau(const basic::Number* const msg)
+bool LagFilter::setSlotTau(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      LCreal tsec = msg->getReal();
+      double tsec = msg->getReal();
       if (tsec > 0) {
          setTau( tsec );
          ok = true;
@@ -113,7 +113,7 @@ bool LagFilter::setSlotTau(const basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for LagFilter
 //------------------------------------------------------------------------------
-basic::Object* LagFilter::getSlotByIndex(const int si)
+base::Object* LagFilter::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

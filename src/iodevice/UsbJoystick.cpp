@@ -4,7 +4,7 @@
 
 #include "openeaagles/iodevice/UsbJoystick.h"
 
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/Number.h"
 
 namespace oe {
 namespace iodevice {
@@ -19,7 +19,7 @@ END_SLOTTABLE(UsbJoystick)
 
 //  Map slot table to handles
 BEGIN_SLOT_MAP(UsbJoystick)
-    ON_SLOT( 1, setSlotDeviceIndex,  oe::basic::Number)
+    ON_SLOT( 1, setSlotDeviceIndex,  oe::base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -111,7 +111,7 @@ unsigned short UsbJoystick::getNumAnalogInputs() const
    return numAI;
 }
 
-bool UsbJoystick::getAnalogInput(LCreal* const value, const unsigned int channel) const
+bool UsbJoystick::getAnalogInput(double* const value, const unsigned int channel) const
 {
    bool ok = false;
    if (value != nullptr && channel < numAI) {
@@ -148,7 +148,7 @@ bool UsbJoystick::setDeviceIndex(const int v)
 //------------------------------------------------------------------------------
 
 // deviceIndex: device index
-bool UsbJoystick::setSlotDeviceIndex(const oe::basic::Number* const msg)
+bool UsbJoystick::setSlotDeviceIndex(const oe::base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -160,7 +160,7 @@ bool UsbJoystick::setSlotDeviceIndex(const oe::basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component
 //------------------------------------------------------------------------------
-oe::basic::Object* UsbJoystick::getSlotByIndex(const int si)
+oe::base::Object* UsbJoystick::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

@@ -2,8 +2,10 @@
 // Bitmap Font
 //------------------------------------------------------------------------------
 #include "openeaagles/graphics/BitmapFont.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/util/string_utils.h"
+
 #include <cstdio>
 #include <cmath>
 
@@ -34,7 +36,7 @@ END_SLOTTABLE(BitmapFont)
 //  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(BitmapFont)
-    ON_SLOT(1, setReverse, basic::Number)
+    ON_SLOT(1, setReverse, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -171,7 +173,7 @@ void BitmapFont::loadFont()
 //------------------------------------------------------------------------------
 // setReverse() -- sets text in reverse type
 //------------------------------------------------------------------------------
-bool BitmapFont::setReverse(const basic::Number* const rnumber)
+bool BitmapFont::setReverse(const base::Number* const rnumber)
 {
     if (rnumber != nullptr)
         reverse = rnumber->getBoolean();
@@ -182,7 +184,7 @@ bool BitmapFont::setReverse(const basic::Number* const rnumber)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Page
 //------------------------------------------------------------------------------
-basic::Object* BitmapFont::getSlotByIndex(const int si)
+base::Object* BitmapFont::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -527,10 +529,11 @@ GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
    const size_t FONTPATHNAME_LENGTH = 256;
    char fontPathname[FONTPATHNAME_LENGTH];
    if (fontDirectory() != nullptr)
-      lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
+      base::lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
    else
-      lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
-   lcStrcat(fontPathname, FONTPATHNAME_LENGTH, fontMap[index]);
+      base::lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
+
+   base::lcStrcat(fontPathname, FONTPATHNAME_LENGTH, fontMap[index]);
 
    // Open the font file
    FILE* fp = nullptr;

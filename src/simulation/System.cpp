@@ -6,8 +6,8 @@
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
 
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/PairStream.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/PairStream.h"
 
 namespace oe {
 namespace simulation {
@@ -23,7 +23,7 @@ END_SLOTTABLE(System)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(System)
-   ON_SLOT( 1, setSlotPowerSwitch, basic::String)
+   ON_SLOT( 1, setSlotPowerSwitch, base::String)
 END_SLOT_MAP()
 
 
@@ -91,7 +91,7 @@ void System::reset()
 //------------------------------------------------------------------------------
 // updateData() -- update background data here
 //------------------------------------------------------------------------------
-void System::updateData(const LCreal dt)
+void System::updateData(const double dt)
 {
    // We're nothing without an ownship ...
    if (ownship == nullptr && getOwnship() == nullptr) return;
@@ -102,7 +102,7 @@ void System::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // updateTC() -- update time critical stuff here
 //------------------------------------------------------------------------------
-void System::updateTC(const LCreal dt0)
+void System::updateTC(const double dt0)
 {
    // We're nothing without an ownship ...
    if (ownship == nullptr && getOwnship() == nullptr) return;
@@ -112,11 +112,11 @@ void System::updateTC(const LCreal dt0)
    // ---
 
    // real or frozen?
-   LCreal dt = dt0;
+   double dt = dt0;
    if (isFrozen()) dt = 0.0;
 
    // Delta time for methods that are running every fourth phase
-   LCreal dt4 = dt * 4.0f;
+   double dt4 = dt * 4.0f;
 
    // ---
    // Four phases per frame
@@ -153,19 +153,19 @@ void System::updateTC(const LCreal dt0)
 //------------------------------------------------------------------------------
 // Default phase callbacks
 //------------------------------------------------------------------------------
-void System::dynamics(const LCreal)
+void System::dynamics(const double)
 {
 }
 
-void System::transmit(const LCreal)
+void System::transmit(const double)
 {
 }
 
-void System::receive(const LCreal)
+void System::receive(const double)
 {
 }
 
-void System::process(const LCreal)
+void System::process(const double)
 {
 }
 
@@ -175,11 +175,11 @@ void System::process(const LCreal)
 bool System::killedNotification(Player* const p)
 {
    // Just let all of our subcomponents know that we were just killed
-   basic::PairStream* subcomponents = getComponents();
+   base::PairStream* subcomponents = getComponents();
    if(subcomponents != nullptr) {
-      for (basic::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
-         basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
-         basic::Component* sc = static_cast<basic::Component*>(pair->object());
+      for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
+         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
+         base::Component* sc = static_cast<base::Component*>(pair->object());
          sc->event(KILL_EVENT, p);
       }
       subcomponents->unref();
@@ -256,7 +256,7 @@ bool System::findOwnship()
 //-----------------------------------------------------------------------------
 // Set functions
 //-----------------------------------------------------------------------------
-bool System::setSlotPowerSwitch(const basic::String* const msg)
+bool System::setSlotPowerSwitch(const base::String* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -270,7 +270,7 @@ bool System::setSlotPowerSwitch(const basic::String* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* System::getSlotByIndex(const int si)
+base::Object* System::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }

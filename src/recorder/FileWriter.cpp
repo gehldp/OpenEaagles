@@ -2,8 +2,9 @@
 #include "openeaagles/recorder/FileWriter.h"
 #include "openeaagles/recorder/protobuf/DataRecord.pb.h"
 #include "openeaagles/recorder/DataRecordHandle.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/util/string_utils.h"
 
-#include "openeaagles/basic/String.h"
 #include <fstream>
 #include <cstring>
 
@@ -29,8 +30,8 @@ END_SLOTTABLE(FileWriter)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(FileWriter)
-    ON_SLOT( 1, setFilename, basic::String)
-    ON_SLOT( 2, setPathName, basic::String)
+    ON_SLOT( 1, setFilename, base::String)
+    ON_SLOT( 2, setPathName, base::String)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -188,25 +189,25 @@ bool FileWriter::openFile()
       // Create the (initial) full file name
       //---
       if (pathname != nullptr && pathname->len() > 0) {
-         lcStrcat(fullname, nameLength ,*pathname);
-         lcStrcat(fullname, nameLength, "/");
+         base::lcStrcat(fullname, nameLength ,*pathname);
+         base::lcStrcat(fullname, nameLength, "/");
       }
-      lcStrcat(fullname,nameLength,*filename);
+      base::lcStrcat(fullname,nameLength,*filename);
 
       //---
       // Make sure that it doesn't already exist (we don't want to over write good data).
       //---
-      bool validName = !doesFileExist(fullname);
+      bool validName = !base::doesFileExist(fullname);
       if ( !validName ) {
          // If the file already exists, try appending a version number "v99" ..
 
          char* origname = new char[nameLength];
-         lcStrcpy(origname, nameLength, fullname);
+         base::lcStrcpy(origname, nameLength, fullname);
 
          validName = false;
          for (unsigned int i = 1; i <= 99 && !validName; i++) {
             std::sprintf(fullname, "%s_v%02d", origname, i);
-            validName = !doesFileExist(fullname);
+            validName = !base::doesFileExist(fullname);
          }
 
          if ( !validName ) {
@@ -387,22 +388,22 @@ void FileWriter::setFullFilename(const char* const name)
    if (name != nullptr) {
       size_t n = std::strlen(name) + 1;
       fullFilename = new char[n];
-      lcStrcpy(fullFilename, n, name);
+      base::lcStrcpy(fullFilename, n, name);
    }
 }
 
-bool FileWriter::setFilename(const basic::String* const msg)
+bool FileWriter::setFilename(const base::String* const msg)
 {
    if (filename != nullptr) { filename->unref(); filename = nullptr; }
-   if (msg != nullptr) filename = new basic::String(*msg);
+   if (msg != nullptr) filename = new base::String(*msg);
 
     return true;
 }
 
-bool FileWriter::setPathName(const basic::String* const msg)
+bool FileWriter::setPathName(const base::String* const msg)
 {
    if (pathname != nullptr) { pathname->unref(); pathname = nullptr; }
-   if (msg != nullptr) pathname = new basic::String(*msg);
+   if (msg != nullptr) pathname = new base::String(*msg);
 
    return true;
 }
@@ -410,7 +411,7 @@ bool FileWriter::setPathName(const basic::String* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component
 //------------------------------------------------------------------------------
-basic::Object* FileWriter::getSlotByIndex(const int si)
+base::Object* FileWriter::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }

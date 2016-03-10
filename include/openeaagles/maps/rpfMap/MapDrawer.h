@@ -9,13 +9,13 @@
 // Subroutines:
 //
 // setSlotMapIntensity() -
-//      bool MapDrawer::setSlotMapIntensity(const basic::Number* const x)
+//      bool MapDrawer::setSlotMapIntensity(const base::Number* const x)
 //
 // setSlotDrawGridMode() -
-//      bool MapDrawer::setSlotDrawGridMode(const basic::Number* const x)
+//      bool MapDrawer::setSlotDrawGridMode(const base::Number* const x)
 //
 // setSlotShowMap() -
-//      bool MapDrawer::setSlotShowMap(const basic::Number* const x)
+//      bool MapDrawer::setSlotShowMap(const base::Number* const x)
 //
 // setGridSize() - does our initial setup.
 //      bool MapDrawer::setGridSize(const int aGridSize)
@@ -42,7 +42,7 @@
 //      void MapDrawer::drawTexture(const int row, const int column, const int idx)
 //
 // getSlotByIndex()
-//      basic::Object* MapDrawer::getSlotByIndex(const int si)
+//      base::Object* MapDrawer::getSlotByIndex(const int si)
 //
 // -------------------------------------------------------------------------------
 
@@ -52,7 +52,7 @@
 #include "openeaagles/graphics/MapPage.h"
 
 namespace oe {
-namespace basic { class String; }
+namespace base { class String; }
 namespace maps {
 namespace rpf {
 
@@ -68,24 +68,24 @@ public:
 
     // Set functions
     virtual bool setDrawGridMode(const bool dg)             { drawGrid = dg; return true; }
-    virtual bool setMapIntensity(const LCreal intensity)    { mapIntensity = intensity; return true; }
+    virtual bool setMapIntensity(const double intensity)    { mapIntensity = intensity; return true; }
     virtual bool setShowMap(const bool x);
     virtual void setMap(CadrgMap* map);
     // this function initializes our size
     virtual bool setGridSize(const int aGridSize);
 
     // Get functions
-    LCreal getMapIntensity() { return mapIntensity; }
+    double getMapIntensity() { return mapIntensity; }
     virtual void updateZone(int zone, int& selected, const int idx);
 
     void drawFunc() override;
 
-    void updateData(const LCreal dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
 
 protected:
-    bool setSlotMapIntensity(const basic::Number* const x);
-    bool setSlotDrawGridMode(const basic::Number* const x);
-    bool setSlotShowMap(const basic::Number* const x);
+    bool setSlotMapIntensity(const base::Number* const x);
+    bool setSlotDrawGridMode(const base::Number* const x);
+    bool setSlotShowMap(const base::Number* const x);
 
 private:
     static const int MAX_PAGERS = 2;
@@ -97,18 +97,18 @@ private:
     // Function to determine how to scale our non-center zones to line up with the center zone
     void determineScaling(const int idx);
     CadrgMap* myMap;                  // The map
-    LCreal pixPerTile;                // Number of pixels per tile
+    double pixPerTile;                // Number of pixels per tile
     int gridSize;                     // Size of the map grid 1x1 or 3x3 or NxN
     bool drawGrid;                    // Will the grid be drawn?
-    LCreal mapIntensity;              // Map brightness factor
+    double mapIntensity;              // Map brightness factor
 
-    LCreal sinAng;                    // SIN of heading
-    LCreal cosAng;                    // COS of heading
+    double sinAng;                    // SIN of heading
+    double cosAng;                    // COS of heading
 
     bool showMap;                       // Flag used to command the drawing of actual textures or not
 
-    LCreal vpWL;                        // Viewport width and height
-    LCreal vpHL;                        // Viewport width and height
+    double vpWL;                        // Viewport width and height
+    double vpHL;                        // Viewport width and height
 
 
     TexturePager* pagers[MAX_PAGERS];   // List of texture pagers

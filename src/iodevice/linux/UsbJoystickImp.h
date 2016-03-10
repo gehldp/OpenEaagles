@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: UsbJoystickImp -- Linux implementation
 //------------------------------------------------------------------------------
-#ifndef __oe_ioDevice_Linux_UsbJoystickImp_H__
-#define __oe_ioDevice_Linux_UsbJoystickImp_H__
+#ifndef __oe_iodevice_linux_UsbJoystickImp_H__
+#define __oe_iodevice_linux_UsbJoystickImp_H__
 
 #include "openeaagles/iodevice/UsbJoystick.h"
 
@@ -15,7 +15,7 @@ namespace iodevice {
 // Description:  Linux version of the USB Joystick device.
 //               (See IoDevice::UsbJoystick)
 //
-// Form Name: UsbJoystick
+// Factory name: UsbJoystick
 //
 //------------------------------------------------------------------------------
 class UsbJoystickImp : public UsbJoystick
@@ -25,10 +25,10 @@ class UsbJoystickImp : public UsbJoystick
 public:
    UsbJoystickImp();
 
-   // Basic::IoDevice functions
-   void processInputs(const LCreal dt, basic::IoData* const inData) override;
+   // base::IoDevice functions
+   void processInputs(const double dt, base::IoData* const inData) override;
 
-   // Basic::Component functions
+   // base::Component functions
    void reset() override;
 
 private:
@@ -38,8 +38,8 @@ private:
    char deviceName[128];
 };
 
-} // end ioDevice
-} // end oe namespace
+}
+}
 
 #endif
 

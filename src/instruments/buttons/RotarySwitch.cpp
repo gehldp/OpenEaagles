@@ -1,7 +1,7 @@
 #include "openeaagles/instruments/buttons/RotarySwitch.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/Number.h"
 
 namespace oe {
 namespace instruments {
@@ -21,8 +21,8 @@ END_SLOTTABLE(RotarySwitch)
 //  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(RotarySwitch)
-   ON_SLOT(1, setSlotAngles, basic::PairStream)
-   ON_SLOT(2, setSlotStartPosition, basic::Number)
+   ON_SLOT(1, setSlotAngles, base::PairStream)
+   ON_SLOT(2, setSlotStartPosition, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -59,18 +59,18 @@ EMPTY_DELETEDATA(RotarySwitch)
 //------------------------------------------------------------------------------
 // setSlotNumPositions() - sets number of positions for switch
 //------------------------------------------------------------------------------
-bool RotarySwitch::setSlotAngles(const basic::PairStream* const x)
+bool RotarySwitch::setSlotAngles(const base::PairStream* const x)
 {
     bool ok = false;
     numAngs = 0;
     for (int i = 0; i < MAX_ANGLES; i++) angles[i] = 0;
     if (x != nullptr) {
         ok = true;
-        const basic::List::Item* item = x->getFirstItem();
+        const base::List::Item* item = x->getFirstItem();
         while(item != nullptr) {
-            basic::Pair* pair = (basic::Pair*)item->getValue();
+            base::Pair* pair = (base::Pair*)item->getValue();
             if (pair != nullptr) {
-                basic::Number* n = dynamic_cast<basic::Number*>(pair->object());
+                base::Number* n = dynamic_cast<base::Number*>(pair->object());
                 if (n != nullptr) {
                     angles[numAngs++] = n->getReal();
                 }
@@ -84,7 +84,7 @@ bool RotarySwitch::setSlotAngles(const basic::PairStream* const x)
 //------------------------------------------------------------------------------
 // setSlotStartPosition() - set the position we start from
 //------------------------------------------------------------------------------
-bool RotarySwitch::setSlotStartPosition(const basic::Number* const x)
+bool RotarySwitch::setSlotStartPosition(const base::Number* const x)
 {
     if (x != nullptr) {
         startPosition = x->getInt();
@@ -115,7 +115,7 @@ bool RotarySwitch::onSingleClick()
 //------------------------------------------------------------------------------
 // updateData() -
 //------------------------------------------------------------------------------
-void RotarySwitch::updateData(const LCreal dt)
+void RotarySwitch::updateData(const double dt)
 {
     BaseClass::updateData(dt);
 
@@ -125,7 +125,7 @@ void RotarySwitch::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for RotarySwitch
 //------------------------------------------------------------------------------
-basic::Object* RotarySwitch::getSlotByIndex(const int si)
+base::Object* RotarySwitch::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

@@ -4,12 +4,12 @@
 #ifndef __oe_graphics_Font_H__
 #define __oe_graphics_Font_H__
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 #include <GL/gl.h>
 
 namespace oe {
 
-   namespace basic {
+   namespace base {
       class Number;
       class List;
       class String;
@@ -63,16 +63,16 @@ namespace graphics {
 //      setTextOrigin(const GLdouble x, const GLdouble y)
 //          Sets the upper left corner.
 //
-//      LCreal getCharacterSpacing()
+//      double getCharacterSpacing()
 //        Returns the character spacing.
 //
-//      setCharacterSpacing(LCreal v)
+//      setCharacterSpacing(double v)
 //        Sets the character spacing to v.
 //
-//      LCreal getLineSpacing()
+//      double getLineSpacing()
 //        Returns the line spacing.
 //
-//      setLineSpacing(LCreal v)
+//      setLineSpacing(double v)
 //        Sets the line spacing to v.
 //
 //      GLdouble getFontWidth()
@@ -135,8 +135,8 @@ namespace graphics {
 //
 //Comment section last updated: 2004.10.13 by MJK
 //------------------------------------------------------------------------------
-class Font : public basic::Object {
-    DECLARE_SUBCLASS(Font,basic::Object)
+class Font : public base::Object {
+    DECLARE_SUBCLASS(Font,base::Object)
 
 public:
     static const size_t MAX_MESSAGE_LENGTH = 256; // Max length of character buffers
@@ -150,11 +150,11 @@ public:
 
     virtual void setTextOrigin(const GLdouble x, const GLdouble y);
 
-    LCreal getCharacterSpacing() const                  { return charSpacing; }
-    void setCharacterSpacing(const LCreal v)            { charSpacing = v; }
+    double getCharacterSpacing() const                  { return charSpacing; }
+    void setCharacterSpacing(const double v)            { charSpacing = v; }
 
-    LCreal getLineSpacing() const                       { return lineSpacing; }
-    void setLineSpacing(const LCreal v)                 { lineSpacing = v; }
+    double getLineSpacing() const                       { return lineSpacing; }
+    void setLineSpacing(const double v)                 { lineSpacing = v; }
 
     GLdouble getFontWidth() const                       { return fWidth; }
     void setFontWidth(const GLdouble v)                 { fWidth = v; }
@@ -185,7 +185,7 @@ public:
 
 public:
     // Exceptions
-    class ExpInvalidFont : public basic::Object::Exception {
+    class ExpInvalidFont : public base::Object::Exception {
         public:
             ExpInvalidFont() : Exception() {}
             const char* getDescription() const override     { return "font is invalid"; }
@@ -193,16 +193,16 @@ public:
 
 protected:
     // Slot functions
-    bool setSlotFontWidth(const basic::Number* const sfwobj);
-    bool setSlotFontHeight (const basic::Number* const sfhobj);
-    bool setSlotFontPosition (const basic::List* const sfpobj);
-    bool setSlotBitmapWidth(const basic::Number* const sbwobj);
-    bool setSlotBitmapHeight(const basic::Number* const sbhobj);
-    bool setSlotFontPath(const basic::String* const sfpobj);
-    bool setSlotFTGLFontFileName(const basic::String* const sgffnobj);
-    bool setSlotLookupTable(const basic::List* const sltobj);
-    bool setSlotCharacterSpacing(const basic::Number* const newCharSpacing);
-    bool setSlotLineSpacing(const basic::Number* const newLineSpacing);
+    bool setSlotFontWidth(const base::Number* const sfwobj);
+    bool setSlotFontHeight (const base::Number* const sfhobj);
+    bool setSlotFontPosition (const base::List* const sfpobj);
+    bool setSlotBitmapWidth(const base::Number* const sbwobj);
+    bool setSlotBitmapHeight(const base::Number* const sbhobj);
+    bool setSlotFontPath(const base::String* const sfpobj);
+    bool setSlotFTGLFontFileName(const base::String* const sgffnobj);
+    bool setSlotLookupTable(const base::List* const sltobj);
+    bool setSlotCharacterSpacing(const base::Number* const newCharSpacing);
+    bool setSlotLineSpacing(const base::Number* const newLineSpacing);
 
 
     static const size_t MSG_BUF_LEN = (MAX_MESSAGE_LENGTH+1); // Max length of character buffers
@@ -224,8 +224,8 @@ private:
     char*     fontPath;                 // Path to font directory (FTGL & Bitmap fonts)
     char*     fontFile;                 // Font filename (FTGL)
     bool      loaded;                   // Font has been loaded
-    LCreal charSpacing;                 // holds our character spacing
-    LCreal lineSpacing;                 // holds our line spacing
+    double charSpacing;                 // holds our character spacing
+    double lineSpacing;                 // holds our line spacing
 
 };
 

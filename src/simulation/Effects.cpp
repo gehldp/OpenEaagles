@@ -1,12 +1,14 @@
 
 #include "openeaagles/simulation/Effects.h"
 
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/Identifier.h"
-#include "openeaagles/basic/osg/Vec2"
-#include "openeaagles/basic/osg/Matrix"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/Identifier.h"
+#include "openeaagles/base/osg/Vec2"
+#include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
+
+#include <cmath>
 
 namespace oe {
 namespace simulation {
@@ -24,7 +26,7 @@ END_SLOTTABLE(Effects)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(Effects)
-    ON_SLOT(1,setSlotDragIndex,basic::Number)
+    ON_SLOT(1,setSlotDragIndex,base::Number)
 END_SLOT_MAP()
 
 // Weapon data for general bomb
@@ -39,7 +41,7 @@ Effects::Effects()
 {
     STANDARD_CONSTRUCTOR()
 
-    static basic::String generic("Effects");
+    static base::String generic("Effects");
     setType(&generic);
 
     setDragIndex(0.0006f);
@@ -91,7 +93,7 @@ bool Effects::collisionNotification(Player* const p)
 //------------------------------------------------------------------------------
 // updateTOF -- default time of flight
 //------------------------------------------------------------------------------
-void Effects::updateTOF(const LCreal dt)
+void Effects::updateTOF(const double dt)
 {
    // As long as we're active ...
    if (isMode(ACTIVE)) {
@@ -111,10 +113,10 @@ void Effects::updateTOF(const LCreal dt)
 //------------------------------------------------------------------------------
 // weaponDynamics -- default dynamics; using Robot Aircraft (RAC) dynamics
 //------------------------------------------------------------------------------
-void Effects::weaponDynamics(const LCreal dt)
+void Effects::weaponDynamics(const double dt)
 {
    // Useful constant
-   static const LCreal g = ETHG * basic::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
+   static const double g = base::ETHG * base::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
 
    // ---
    // Compute & Set acceleration vector (earth)
@@ -138,8 +140,8 @@ void Effects::weaponDynamics(const LCreal dt)
    // ---
    // .. Only after setVelocity has been called ...
    // ---
-   LCreal vp = getTotalVelocity();
-   LCreal vg = getGroundSpeed();
+   double vp = getTotalVelocity();
+   double vg = getGroundSpeed();
 
    // ---
    // Set velocity vector (body)
@@ -150,8 +152,8 @@ void Effects::weaponDynamics(const LCreal dt)
    // ---
    // Sent angular values
    // ---
-   LCreal newPsi   = lcAtan2(ve1[IEAST],ve1[INORTH]);
-   LCreal newTheta = lcAtan2( -ve1[IDOWN], vg );
+   const double newPsi   = std::atan2(ve1[IEAST],ve1[INORTH]);
+   const double newTheta = std::atan2( -ve1[IDOWN], vg );
    setEulerAngles(0.0, newTheta, newPsi);
    setAngularVelocities(0.0, 0.0, 0.0);
 
@@ -163,7 +165,7 @@ void Effects::weaponDynamics(const LCreal dt)
 //------------------------------------------------------------------------------
 
 // dragIndex: drag index used by default dynamics
-bool Effects::setSlotDragIndex(basic::Number* const p)
+bool Effects::setSlotDragIndex(base::Number* const p)
 {
     setDragIndex( p->getReal() );
     return true;
@@ -172,7 +174,7 @@ bool Effects::setSlotDragIndex(basic::Number* const p)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* Effects::getSlotByIndex(const int si)
+base::Object* Effects::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -196,7 +198,7 @@ Chaff::Chaff()
 {
     STANDARD_CONSTRUCTOR()
 
-    static basic::String generic("Chaff");
+    static base::String generic("Chaff");
     setType(&generic);
 }
 
@@ -232,7 +234,7 @@ Flare::Flare()
 {
     STANDARD_CONSTRUCTOR()
 
-    static basic::String generic("Flare");
+    static base::String generic("Flare");
     setType(&generic);
 }
 
@@ -267,7 +269,7 @@ Decoy::Decoy()
 {
     STANDARD_CONSTRUCTOR()
 
-    static basic::String generic("Decoy");
+    static base::String generic("Decoy");
     setType(&generic);
 }
 

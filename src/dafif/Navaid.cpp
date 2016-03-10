@@ -1,6 +1,6 @@
 #include "openeaagles/dafif/Navaid.h"
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/units/Angles.h"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/units/Angles.h"
 #include <iostream>
 
 namespace oe {
@@ -153,7 +153,7 @@ void Navaid::printRecord(std::ostream& sout) const
 void Navaid::printTrueBearingRange(std::ostream& sout, const double aclat, const double aclon, const double acelev) const
 {
    double bearing(0.0), range(0.0), grdrange(0.0);
-   basic::Nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &range, &grdrange);
+   base::Nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &range, &grdrange);
 
    sout << "     range " << range << "  grdrange " << grdrange << " true_bearing " << bearing << std::endl;
 }

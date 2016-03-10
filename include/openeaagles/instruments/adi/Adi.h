@@ -17,7 +17,7 @@
 #define __oe_instruments_Adi_H__
 
 #include "openeaagles/instruments/Instrument.h"
-#include "openeaagles/basic/units/Angles.h"
+#include "openeaagles/base/units/Angles.h"
 
 namespace oe {
 namespace instruments {
@@ -28,40 +28,40 @@ class Adi : public Instrument {
 public:
     Adi();
 
-    LCreal getPitchInches() const       { return scaledPitch; }
-    LCreal getPitch() const             { return getPreScaleInstValue(); }
-    LCreal getRollDeg() const           { return curPhi * static_cast<LCreal>(basic::Angle::R2DCC); }
-    LCreal getRollRad() const           { return curPhi; }
-    LCreal getMaxRate() const           { return maxRate; }
+    double getPitchInches() const       { return scaledPitch; }
+    double getPitch() const             { return getPreScaleInstValue(); }
+    double getRollDeg() const           { return curPhi * static_cast<double>(base::Angle::R2DCC); }
+    double getRollRad() const           { return curPhi; }
+    double getMaxRate() const           { return maxRate; }
 
-    virtual bool setRollRad(const LCreal newR);
-    virtual bool setRollDeg(const LCreal newR);
-    virtual bool setPitch(const LCreal newP);
-    virtual bool setMaxRate(const LCreal newMR);
+    virtual bool setRollRad(const double newR);
+    virtual bool setRollDeg(const double newR);
+    virtual bool setPitch(const double newP);
+    virtual bool setMaxRate(const double newMR);
 
     void draw() override;
 
-    bool event(const int event, basic::Object* const obj = nullptr) override;
-    void updateData(const LCreal dt = 0) override;
+    bool event(const int event, base::Object* const obj = nullptr) override;
+    void updateData(const double dt = 0) override;
 
 protected:
     // slot functions
-    virtual bool setSlotMaxRate(const basic::Angle* const newMR);
-    virtual bool setSlotMaxRate(const basic::Number* const newMR);
+    virtual bool setSlotMaxRate(const base::Angle* const newMR);
+    virtual bool setSlotMaxRate(const base::Number* const newMR);
 
 private:
     // event function
-    bool onUpdatePitchAdi(const basic::Number* const newP);
-    bool onUpdateRollDegAdi(const basic::Number* const newR);
-    bool onUpdateRollRadAdi(const basic::Number* const newR);
-    bool onUpdateMaxRateAdi(const basic::Number* const newMR);
+    bool onUpdatePitchAdi(const base::Number* const newP);
+    bool onUpdateRollDegAdi(const base::Number* const newR);
+    bool onUpdateRollRadAdi(const base::Number* const newR);
+    bool onUpdateMaxRateAdi(const base::Number* const newMR);
 
-    LCreal pitch;       // actual pitch (degrees)
-    LCreal scaledPitch; // our pitch value (inches)
-    LCreal curTheta;    // our current pitch value (degrees)
-    LCreal curPhi;      // our current roll value (radians)
-    LCreal roll;        // our roll value (radians)
-    LCreal maxRate;     // maximum mechanical rate at which the adi can move pitch or roll
+    double pitch;       // actual pitch (degrees)
+    double scaledPitch; // our pitch value (inches)
+    double curTheta;    // our current pitch value (degrees)
+    double curPhi;      // our current roll value (radians)
+    double roll;        // our roll value (radians)
+    double maxRate;     // maximum mechanical rate at which the adi can move pitch or roll
 };
 
 }; // end instruments namespace

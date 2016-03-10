@@ -1,7 +1,7 @@
 
 #include "openeaagles/linearsystem/LowpassFilter.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/units/Frequencies.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/units/Frequencies.h"
 
 namespace oe {
 namespace linearsystem {
@@ -21,8 +21,8 @@ END_SLOTTABLE(LowpassFilter)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(LowpassFilter)
-   ON_SLOT( 1, setSlotWc, basic::Frequency)
-   ON_SLOT( 1, setSlotWc, basic::Number)
+   ON_SLOT( 1, setSlotWc, base::Frequency)
+   ON_SLOT( 1, setSlotWc, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -33,7 +33,7 @@ LowpassFilter::LowpassFilter() : wc(0.0)
    STANDARD_CONSTRUCTOR()
 }
 
-LowpassFilter::LowpassFilter(const unsigned int rate, const LCreal w)
+LowpassFilter::LowpassFilter(const unsigned int rate, const double w)
                         : FirstOrderTf(rate, 0.0f, w, 1.0f, w)
 {
    STANDARD_CONSTRUCTOR()
@@ -48,7 +48,7 @@ EMPTY_DELETEDATA(LowpassFilter)
 // Set functions
 //------------------------------------------------------------------------------
 
-bool LowpassFilter::setWc(const LCreal v)
+bool LowpassFilter::setWc(const double v)
 {
    wc = v;
 
@@ -65,12 +65,12 @@ bool LowpassFilter::setWc(const LCreal v)
 // Set slot functions
 //------------------------------------------------------------------------------
 
-bool LowpassFilter::setSlotWc(const basic::Frequency* const msg)
+bool LowpassFilter::setSlotWc(const base::Frequency* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      LCreal hz = basic::Hertz::convertStatic(*msg);
-      LCreal rps = static_cast<LCreal>( hz * 2.0 * PI);
+      double hz = base::Hertz::convertStatic(*msg);
+      double rps = static_cast<double>( hz * 2.0 * base::PI);
       if (rps > 0) {
          setWc( rps );
          ok = true;
@@ -84,11 +84,11 @@ bool LowpassFilter::setSlotWc(const basic::Frequency* const msg)
    return ok;
 }
 
-bool LowpassFilter::setSlotWc(const basic::Number* const msg)
+bool LowpassFilter::setSlotWc(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      LCreal rps = msg->getReal();
+      double rps = msg->getReal();
       if (rps > 0) {
          setWc( rps );
          ok = true;
@@ -105,7 +105,7 @@ bool LowpassFilter::setSlotWc(const basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for LowpassFilter
 //------------------------------------------------------------------------------
-basic::Object* LowpassFilter::getSlotByIndex(const int si)
+base::Object* LowpassFilter::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

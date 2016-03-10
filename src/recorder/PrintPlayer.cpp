@@ -3,8 +3,8 @@
 #include "openeaagles/recorder/protobuf/DataRecord.pb.h"
 #include "openeaagles/recorder/DataRecordHandle.h"
 
-#include "openeaagles/basic/units/Times.h"
-#include "openeaagles/basic/String.h"
+#include "openeaagles/base/units/Times.h"
+#include "openeaagles/base/String.h"
 
 #include <iomanip>
 
@@ -32,7 +32,7 @@ END_SLOTTABLE(PrintPlayer)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(PrintPlayer)
-   ON_SLOT( 1, setName,        basic::String)
+   ON_SLOT( 1, setName,        base::String)
 END_SLOT_MAP()
 
 EMPTY_SERIALIZER(PrintPlayer)
@@ -60,7 +60,7 @@ void PrintPlayer::copyData(const PrintPlayer& org, const bool cc)
    if (cc) initData();
 
    { // clone player name
-      const basic::String* clone = nullptr;
+      const base::String* clone = nullptr;
       if (org.name != nullptr) clone = org.name->clone();
       setName(clone);
       if (clone != nullptr) clone->unref();
@@ -78,7 +78,7 @@ void PrintPlayer::deleteData()
 //------------------------------------------------------------------------------
 // setName
 //------------------------------------------------------------------------------
-bool PrintPlayer::setName(const basic::String* const msg)
+bool PrintPlayer::setName(const base::String* const msg)
 {
    if (name != nullptr) { name->unref(); }
    name = msg;
@@ -90,7 +90,7 @@ bool PrintPlayer::setName(const basic::String* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* PrintPlayer::getSlotByIndex(const int si)
+base::Object* PrintPlayer::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

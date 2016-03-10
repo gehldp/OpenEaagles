@@ -6,13 +6,13 @@
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
 #include "openeaagles/simulation/TrackManager.h"
-#include "openeaagles/basic/Integer.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Powers.h"
-#include "openeaagles/basic/units/Times.h"
-#include "openeaagles/basic/units/Frequencies.h"
+#include "openeaagles/base/Integer.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Powers.h"
+#include "openeaagles/base/units/Times.h"
+#include "openeaagles/base/units/Frequencies.h"
 
 #include <cmath>
 
@@ -28,7 +28,7 @@ END_SLOTTABLE(Gmti)
 
 //  Map slot table
 BEGIN_SLOT_MAP(Gmti)
-    ON_SLOT(1,setSlotPoi,basic::List)
+    ON_SLOT(1,setSlotPoi,base::List)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -60,7 +60,7 @@ void Gmti::deleteData()
 //------------------------------------------------------------------------------
 // dynamics() --  Update dynamics
 //------------------------------------------------------------------------------
-void Gmti::dynamics(const LCreal dt)
+void Gmti::dynamics(const double dt)
 {
     BaseClass::dynamics(dt);
 
@@ -92,15 +92,15 @@ void Gmti::dynamics(const LCreal dt)
         getAntenna()->getScanVolume(&width, &height);
 
         // Limit to within search scan limits of antenna
-        if (az < basic::Angle::aepcdRad(leftLim + width/2.0))
-            az = basic::Angle::aepcdRad(leftLim + width/2.0);
-        else if (az > basic::Angle::aepcdRad(rightLim - width/2.0))
-            az = basic::Angle::aepcdRad(rightLim - width/2.0);
+        if (az < base::Angle::aepcdRad(leftLim + width/2.0))
+            az = base::Angle::aepcdRad(leftLim + width/2.0);
+        else if (az > base::Angle::aepcdRad(rightLim - width/2.0))
+            az = base::Angle::aepcdRad(rightLim - width/2.0);
 
-        if (el < basic::Angle::aepcdRad(lowerLim + height/2.0))
-            el = basic::Angle::aepcdRad(lowerLim + height/2.0);
-        else if (el > basic::Angle::aepcdRad(upperLim - height/2.0))
-            el = basic::Angle::aepcdRad(upperLim - height/2.0);
+        if (el < base::Angle::aepcdRad(lowerLim + height/2.0))
+            el = base::Angle::aepcdRad(lowerLim + height/2.0);
+        else if (el > base::Angle::aepcdRad(upperLim - height/2.0))
+            el = base::Angle::aepcdRad(upperLim - height/2.0);
 
         // Set the reference 'look' angles
         getAntenna()->setRefAzimuth(az);
@@ -113,7 +113,7 @@ void Gmti::dynamics(const LCreal dt)
 //------------------------------------------------------------------------------
 // setPoi() -- Gmti Point Of Interest
 //------------------------------------------------------------------------------
-void Gmti::setPoi(const LCreal x, const LCreal y, const LCreal z)
+void Gmti::setPoi(const double x, const double y, const double z)
 {
     poiVec.set(x, y, z);
 }
@@ -126,10 +126,10 @@ void Gmti::setPoi(const osg::Vec3& newPoi)
 //------------------------------------------------------------------------------
 // setSlotPoi:  Set Slot POI Vector [ north east down ]
 //------------------------------------------------------------------------------
-bool Gmti::setSlotPoi(basic::List* const numList)
+bool Gmti::setSlotPoi(base::List* const numList)
 {
     bool ok = false;
-    LCreal values[3];
+    double values[3];
     int n = numList->getNumberList(values, 3);
     if (n == 3) {
         setPoi(values[0], values[1], values[2]);
@@ -141,7 +141,7 @@ bool Gmti::setSlotPoi(basic::List* const numList)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* Gmti::getSlotByIndex(const int si)
+base::Object* Gmti::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

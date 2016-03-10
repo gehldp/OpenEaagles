@@ -1,8 +1,8 @@
 #include "openeaagles/simulation/Ships.h"
 
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/osg/Matrix"
-#include "openeaagles/basic/units/Angles.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/units/Angles.h"
 
 namespace oe {
 namespace simulation {
@@ -19,7 +19,7 @@ EMPTY_SERIALIZER(Ship)
 Ship::Ship()
 {
     STANDARD_CONSTRUCTOR()
-    static basic::String generic("GenericShip");
+    static base::String generic("GenericShip");
     setType(&generic);
 }
 

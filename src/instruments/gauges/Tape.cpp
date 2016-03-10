@@ -1,5 +1,5 @@
 #include "openeaagles/instruments/gauges/Tape.h"
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/Number.h"
 
 namespace oe {
 namespace instruments {
@@ -22,13 +22,13 @@ END_SLOTTABLE(Tape)
 //  Map slot table to handles for Analog Dial
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Tape)
-    ON_SLOT(1, setSlotRange, basic::Number)
-    ON_SLOT(2, setSlotHeight, basic::Number)
-    ON_SLOT(3, setSlotIncrement, basic::Number)
-    ON_SLOT(4, setSlotVertical, basic::Number)
-    ON_SLOT(5, setSlotMaxNum, basic::Number)
-    ON_SLOT(6, setSlotMinNum, basic::Number)
-    ON_SLOT(7, setSlotConvert, basic::Number)
+    ON_SLOT(1, setSlotRange, base::Number)
+    ON_SLOT(2, setSlotHeight, base::Number)
+    ON_SLOT(3, setSlotIncrement, base::Number)
+    ON_SLOT(4, setSlotVertical, base::Number)
+    ON_SLOT(5, setSlotMaxNum, base::Number)
+    ON_SLOT(6, setSlotMinNum, base::Number)
+    ON_SLOT(7, setSlotConvert, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ EMPTY_DELETEDATA(Tape)
 //------------------------------------------------------------------------------
 // setSlotRange() - set the range of our data
 //------------------------------------------------------------------------------
-bool Tape::setSlotRange(const basic::Number* const x)
+bool Tape::setSlotRange(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setRange(x->getInt());
@@ -111,7 +111,7 @@ bool Tape::setSlotRange(const basic::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotHeight() - set the height of our viewable tape area
 //------------------------------------------------------------------------------
-bool Tape::setSlotHeight(const basic::Number* const x)
+bool Tape::setSlotHeight(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setHeight(x->getReal());
@@ -121,7 +121,7 @@ bool Tape::setSlotHeight(const basic::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotIncrement() - increment of our tape
 //------------------------------------------------------------------------------
-bool Tape::setSlotIncrement(const basic::Number* const x)
+bool Tape::setSlotIncrement(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setIncrement(x->getInt());
@@ -131,7 +131,7 @@ bool Tape::setSlotIncrement(const basic::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotVertical() - vertical or horizontal tape
 //------------------------------------------------------------------------------
-bool Tape::setSlotVertical(const basic::Number* const x)
+bool Tape::setSlotVertical(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setVertical(x->getBoolean());
@@ -141,7 +141,7 @@ bool Tape::setSlotVertical(const basic::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotMaxNum() - set the tape's maximum value
 //------------------------------------------------------------------------------
-bool Tape::setSlotMaxNum(const basic::Number* const x)
+bool Tape::setSlotMaxNum(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setMaxNumber(x->getReal());
@@ -152,7 +152,7 @@ bool Tape::setSlotMaxNum(const basic::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotMinNum() - set the tape's minimum value
 //------------------------------------------------------------------------------
-bool Tape::setSlotMinNum(const basic::Number* const x)
+bool Tape::setSlotMinNum(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setMinNumber(x->getReal());
@@ -162,7 +162,7 @@ bool Tape::setSlotMinNum(const basic::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotConvert() - conver to degrees instead of units?  (for circular tapes)
 //------------------------------------------------------------------------------
-bool Tape::setSlotConvert(const basic::Number* const x)
+bool Tape::setSlotConvert(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setConvert(x->getBoolean());
@@ -172,21 +172,21 @@ bool Tape::setSlotConvert(const basic::Number* const x)
 //------------------------------------------------------------------------------
 // updateData()
 //------------------------------------------------------------------------------
-void Tape::updateData(const LCreal dt)
+void Tape::updateData(const double dt)
 {
    // update our base class
    BaseClass::updateData(dt);
 
     // std::cout << "INSTRUMENT VALUE = " << getInstValue() << std::endl;
-    LCreal x = getInstValue();
+    double x = getInstValue();
 
     // we take our range, add another for the 0, and then add 2 more for fillers
     int perRange = static_cast<int>(range / increment) + 3;
     // based on that we know how many numbers we have
 
     // we are diving by 100, so we need to find the nearest 100!
-    LCreal temp = x / increment;
-    int nearest = nint(temp);
+    double temp = x / increment;
+    int nearest = base::nint(temp);
 
     //std::cout << "NEAREST = " << nearest << std::endl;
     // we know we have 11 total number vals, and we start at the low side
@@ -197,7 +197,7 @@ void Tape::updateData(const LCreal dt)
 
     //std::cout << "PER RANGE = " << perRange << std::endl;
     // this if for the hundreds
-    LCreal tempVal = 0;
+    double tempVal = 0;
     int vis = 0;
     for (int i = 0; i < MAX_NUMBERS; i++) {
         vis = 0;
@@ -230,7 +230,7 @@ void Tape::updateData(const LCreal dt)
 
         // no max and min, we show everything!
         // now determine our thousands values
-        tempVal = (static_cast<LCreal>(val) / 1000);
+        tempVal = (static_cast<double>(val) / 1000);
         //if (tempVal < 1 && !showNegative) numberValsThousVis[i] = 0;
         //else numberValsThousVis[i] = 0;
         numberValsThousVis[i] = vis;
@@ -243,8 +243,8 @@ void Tape::updateData(const LCreal dt)
     send("number%dhunds", SET_VISIBILITY, numberValsHundsVis, numberValsHundsVisSD, MAX_NUMBERS);
     send("number%dthous", SET_VISIBILITY, numberValsThousVis, numberValsThousVisSD, MAX_NUMBERS);
 
-    LCreal unitsOfHeightPerRange = height/range;
-    LCreal newVal = (nearest * increment) - x;
+    double unitsOfHeightPerRange = height/range;
+    double newVal = (nearest * increment) - x;
     newVal *= unitsOfHeightPerRange;
         //std::cout << "NEW VALUE = " << newVal << std::endl;
 
@@ -256,7 +256,7 @@ void Tape::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Tape
 //------------------------------------------------------------------------------
-basic::Object* Tape::getSlotByIndex(const int si)
+base::Object* Tape::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

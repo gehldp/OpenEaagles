@@ -4,7 +4,7 @@
 #ifndef __oe_recorder_DataRecordHandle_H__
 #define __oe_recorder_DataRecordHandle_H__
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 namespace oe {
 namespace recorder {
@@ -26,9 +26,9 @@ namespace recorder {
 //       of handle2's DataRecord will be copied into handle1's DataRecord.
 //
 //------------------------------------------------------------------------------
-class DataRecordHandle : public basic::Object
+class DataRecordHandle : public base::Object
 {
-    DECLARE_SUBCLASS(DataRecordHandle, basic::Object)
+    DECLARE_SUBCLASS(DataRecordHandle, base::Object)
 
 public:
    DataRecordHandle(pb::DataRecord* const record);

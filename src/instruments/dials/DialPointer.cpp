@@ -1,5 +1,5 @@
 #include "openeaagles/instruments/dials/DialPointer.h"
-#include "openeaagles/basic/units/Angles.h"
+#include "openeaagles/base/units/Angles.h"
 
 namespace oe {
 namespace instruments {
@@ -30,10 +30,10 @@ EMPTY_DELETEDATA(DialPointer)
 //------------------------------------------------------------------------------
 void DialPointer::draw()
 {
-    LCreal pointerPos = getInstValue();
-    LCreal startAngle = getStartAngle();
+    double pointerPos = getInstValue();
+    double startAngle = getStartAngle();
     lcSaveMatrix();
-        lcRotate((-pointerPos - startAngle) * static_cast<LCreal>(basic::Angle::D2RCC));
+        lcRotate((-pointerPos - startAngle) * static_cast<double>(base::Angle::D2RCC));
         graphics::Graphic::draw();
     lcRestoreMatrix();
 }

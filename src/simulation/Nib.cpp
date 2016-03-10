@@ -7,11 +7,13 @@
 #include "openeaagles/simulation/SamVehicles.h"
 #include "openeaagles/simulation/Simulation.h"
 #include "openeaagles/simulation/StoresMgr.h"
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
+
+#include "openeaagles/base/util/string_utils.h"
 
 #include <cmath>
 
@@ -43,7 +45,7 @@ void Nib::initData()
    ntm = nullptr;
    entityTypeChecked = false;
 
-   lcStrcpy(pname, PNAME_BUF_SIZE, "EAAGLES");
+   base::lcStrcpy(pname, PNAME_BUF_SIZE, "OPENEAAGLES");
    side = Player::BLUE;
    mode = Player::INACTIVE;
 
@@ -108,7 +110,7 @@ void Nib::copyData(const Nib& org, const bool cc)
 
    playerID = org.playerID;
 
-   lcStrcpy(pname, PNAME_BUF_SIZE, org.pname);
+   base::lcStrcpy(pname, PNAME_BUF_SIZE, org.pname);
    side = org.side;
    mode = org.mode;
 
@@ -229,7 +231,7 @@ bool Nib::setPlayer(Player* const p)
 void Nib::setPlayerName(const char* s)
 {
     if (s != nullptr) {
-        lcStrcpy(pname,PNAME_BUF_SIZE, s);
+        base::lcStrcpy(pname,PNAME_BUF_SIZE, s);
     }
     else {
         pname[0] = ' ';
@@ -240,7 +242,7 @@ void Nib::setPlayerName(const char* s)
 //------------------------------------------------------------------------------
 // Federate name as String
 //------------------------------------------------------------------------------
-const basic::String* Nib::getFederateName() const
+const base::String* Nib::getFederateName() const
 {
    return federateName;
 }
@@ -248,7 +250,7 @@ const basic::String* Nib::getFederateName() const
 //------------------------------------------------------------------------------
 // Sets our federate name
 //------------------------------------------------------------------------------
-bool Nib::setFederateName(const basic::String* const msg)
+bool Nib::setFederateName(const base::String* const msg)
 {
    federateName = msg;
    return true;
@@ -257,7 +259,7 @@ bool Nib::setFederateName(const basic::String* const msg)
 //------------------------------------------------------------------------------
 // entityStateManager() -- default entity state manager
 //------------------------------------------------------------------------------
-bool Nib::entityStateManager(const LCreal)
+bool Nib::entityStateManager(const double)
 {
    return true;
 }
@@ -265,7 +267,7 @@ bool Nib::entityStateManager(const LCreal)
 //------------------------------------------------------------------------------
 // weaponFireMsgFactory() -- default weapon fire message factory
 //------------------------------------------------------------------------------
-bool Nib::weaponFireMsgFactory(const LCreal)
+bool Nib::weaponFireMsgFactory(const double)
 {
    return true;
 }
@@ -273,7 +275,7 @@ bool Nib::weaponFireMsgFactory(const LCreal)
 //------------------------------------------------------------------------------
 // munitionDetonationMsgFactory() -- default munition detonation message factory
 //------------------------------------------------------------------------------
-bool Nib::munitionDetonationMsgFactory(const LCreal)
+bool Nib::munitionDetonationMsgFactory(const double)
 {
    return true;
 }
@@ -281,7 +283,7 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
 //------------------------------------------------------------------------------
 // networkOutputManagers() --  default networkOutputManagers()
 //------------------------------------------------------------------------------
-bool Nib::networkOutputManagers(const LCreal)
+bool Nib::networkOutputManagers(const double)
 {
     return true;
 }
@@ -335,12 +337,12 @@ bool Nib::setNetIO(NetIO* const p)
 // Player data set functions
 //------------------------------------------------------------------------------
 
-void Nib::setTimeExec(const LCreal t)
+void Nib::setTimeExec(const double t)
 {
     execTime = t;
 }
 
-void Nib::setTimeUtc(const LCreal t)
+void Nib::setTimeUtc(const double t)
 {
     utcTime = t;
 }
@@ -366,9 +368,9 @@ void Nib::setEntityTypeChecked(const bool f)
 }
 
 // Sets the damage for this player
-bool Nib::setDamage(const LCreal v)
+bool Nib::setDamage(const double v)
 {
-   LCreal x = v;
+   double x = v;
    if (x < 0) x = 0.0;
    if (x > 1) x = 1.0;
    damage = x;
@@ -376,9 +378,9 @@ bool Nib::setDamage(const LCreal v)
 }
 
 // Sets the smoke for this player
-bool Nib::setSmoke(const LCreal v)
+bool Nib::setSmoke(const double v)
 {
-   LCreal x = v;
+   double x = v;
    if (x < 0) x = 0.0;
    if (x > 1) x = 1.0;
    smoking = x;
@@ -386,9 +388,9 @@ bool Nib::setSmoke(const LCreal v)
 }
 
 // Sets the flames for this player
-bool Nib::setFlames(const LCreal v)
+bool Nib::setFlames(const double v)
 {
-   LCreal x = v;
+   double x = v;
    if (x < 0) x = 0.0;
    if (x > 1) x = 1.0;
    flames = x;
@@ -413,7 +415,7 @@ bool Nib::setDetonationMessageSent(const bool flg)
 //------------------------------------------------------------------------------
 // isPlayerStateUpdateRequired() -- check to see if an update is required
 //------------------------------------------------------------------------------
-bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
+bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
 {
    enum { NO, YES, UNSURE } result = UNSURE;
 
@@ -436,9 +438,9 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
    // ---
    if ( (result == UNSURE) && player->isLocalPlayer()) {
 
-      //LCreal drTime = curExecTime - getTimeExec();
+      //double drTime = curExecTime - getTimeExec();
       SynchronizedState playerState = player->getSynchronizedState();
-      const LCreal drTime = static_cast<LCreal>(playerState.getTimeExec()) - getTimeExec();
+      const double drTime = static_cast<double>(playerState.getTimeExec()) - getTimeExec();
 
       // 3-a) Freeze flag has changed
       if ( (player->isFrozen() && isNotFrozen()) || (!player->isFrozen() && isFrozen()) ) {
@@ -475,8 +477,8 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
          if (!player->isPositionFrozen() && !player->isAltitudeFrozen()) {
 
             // max position error (meters)
-            const LCreal maxPosErr = getNetIO()->getMaxPositionErr(this);
-            const LCreal maxPosErr2 = maxPosErr*maxPosErr;  // squared
+            const double maxPosErr = getNetIO()->getMaxPositionErr(this);
+            const double maxPosErr2 = maxPosErr*maxPosErr;  // squared
 
             // Check if the length of the position error (squared) is greater
             // than the max error (squared)
@@ -492,20 +494,20 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
          if (result == UNSURE && !player->isAttitudeFrozen()) {
 
             // max angle error (radians)
-            const LCreal maxAngleErr = getNetIO()->getMaxOrientationErr(this);
+            const double maxAngleErr = getNetIO()->getMaxOrientationErr(this);
 
             // Compute angular error
             //osg::Vec3 errAngles = drAngles - player->getGeocEulerAngles();
             osg::Vec3 errAngles = drAngles - playerState.getGeocEulerAngles();
 
             // Check if any angle error is greater than the max error
-            errAngles[0] = lcAbs( lcAepcDeg(errAngles[0]) );
+            errAngles[0] = std::fabs( base::Angle::aepcdDeg(errAngles[0]) );
             if (errAngles[0] >= maxAngleErr) result = YES;
 
-            errAngles[1] = lcAbs( lcAepcDeg(errAngles[1]) );
+            errAngles[1] = std::fabs( base::Angle::aepcdDeg(errAngles[1]) );
             if (errAngles[1] >= maxAngleErr) result = YES;
 
-            errAngles[2] = lcAbs( lcAepcDeg(errAngles[2]) );
+            errAngles[2] = std::fabs( base::Angle::aepcdDeg(errAngles[2]) );
             if (errAngles[2] >= maxAngleErr) result = YES;
          }
       }
@@ -522,7 +524,7 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
       // an part if the position is greater than zero or if we've previously been
       // sending the wing sweep (count > 0).
       {
-         const LCreal angle = av->getWingSweepAngle();  //  radians
+         const double angle = av->getWingSweepAngle();  //  radians
          if (angle > 0 || apartWingSweepCnt > 0) {
             // Check if the angle has changed.
             if (angle != apartWingSweep) {
@@ -537,7 +539,7 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
       // an part if the gear is not up (pos != 0) or if we've previously been
       // sending the gear position (count > 0).
       {
-         const LCreal pos = av->getLandingGearPosition(); // (0% up; 100% down)
+         const double pos = av->getLandingGearPosition(); // (0% up; 100% down)
          if (pos > 0 || apartGearPosCnt > 0) {
             // Check if the pos has changed.
             if (pos != apartLandingGear) {
@@ -552,7 +554,7 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
       // an part if the door is not closed (pos != 0) or if we've previously been
       // sending the door position (count > 0).
       {
-         const LCreal pos = av->getWeaponBayDoorPosition(); // % (0% closed; 100% open)
+         const double pos = av->getWeaponBayDoorPosition(); // % (0% closed; 100% open)
          if (pos > 0 || apartBayDoorCnt > 0) {
             // Check if the pos has changed.
             if (pos != apartBayDoor) {
@@ -576,7 +578,7 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
       //       (on SamVehicles and Artillery only)
       if ( gv->isClassType(typeid(SamVehicle)) || gv->isClassType(typeid(Artillery)) ) {
 
-         const LCreal angle = gv->getLauncherPosition();  //  (radians)
+         const double angle = gv->getLauncherPosition();  //  (radians)
 
          // First pass --
          if (apartLnchrElevCnt == 0) {
@@ -584,11 +586,11 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
             // find all missiles missiles
             const StoresMgr* sm = gv->getStoresManagement();
             if (sm != nullptr) {
-               const basic::PairStream* stores = sm->getStores();
+               const base::PairStream* stores = sm->getStores();
                if (stores != nullptr) {
-                  const basic::List::Item* item = stores->getFirstItem();
+                  const base::List::Item* item = stores->getFirstItem();
                   while (item != nullptr && apartNumMissiles < MAX_AMSL) {
-                     const basic::Pair* pair = static_cast<const basic::Pair*>(item->getValue());
+                     const base::Pair* pair = static_cast<const base::Pair*>(item->getValue());
                      if (pair != nullptr) {
                         const Missile* msl = dynamic_cast<const Missile*>( pair->object() );
                         if (msl != nullptr) {
@@ -665,10 +667,10 @@ void Nib::playerState2Nib()
    if (player != nullptr) {
       // Player name
       const char* cname = nullptr;
-      const basic::String* sname = player->getName();
+      const base::String* sname = player->getName();
       if (sname != nullptr) cname = *sname;
       if (cname != nullptr) setPlayerName(cname);
-      else setPlayerName("EAAGLES");
+      else setPlayerName("OPENEAAGLES");
 
       freeze( player->isFrozen() );
       if (!isMode(Player::DELETE_REQUEST)) setMode( player->getMode() );
@@ -699,10 +701,10 @@ void Nib::playerState2Nib()
 
       // mark the current times
       //Simulation* sim = getNetIO()->getSimulation();
-      //setTimeExec( static_cast<LCreal>(sim->getExecTimeSec()) );
-      setTimeExec( static_cast<LCreal>(player->getSynchronizedState().getTimeExec()) );
-      //setTimeUtc( static_cast<LCreal>(sim->getSysTimeOfDay()) );
-      setTimeUtc( static_cast<LCreal>(player->getSynchronizedState().getTimeUtc()) );
+      //setTimeExec( static_cast<double>(sim->getExecTimeSec()) );
+      setTimeExec( static_cast<double>(player->getSynchronizedState().getTimeExec()) );
+      //setTimeUtc( static_cast<double>(sim->getSysTimeOfDay()) );
+      setTimeUtc( static_cast<double>(player->getSynchronizedState().getTimeUtc()) );
 
       {
          //osg::Vec3d pos = player->getGeocPosition();
@@ -749,7 +751,7 @@ void Nib::nib2PlayerState()
 // update entity dead reckoning (incoming entities only)
 //------------------------------------------------------------------------------
 bool Nib::updateDeadReckoning(
-      const LCreal dt,
+      const double dt,
       osg::Vec3d* const pNewPos,
       osg::Vec3d* const pNewAngles
    )
@@ -826,7 +828,7 @@ bool Nib::resetDeadReckoning(
    if (ioType == NetIO::INPUT_NIB && drTime > 0) {
       err = drPosN1 - drP0;
       const double len = err.length();
-      if (len < (2.0 * basic::Distance::KM2M) ) {
+      if (len < (2.0 * base::Distance::KM2M) ) {
          smoothVel = err/drTime;
          smoothTime = drTime;
       }
@@ -886,7 +888,7 @@ bool Nib::mainDeadReckoning(
          osg::Matrixd DR;
          drComputeMatrixDR(dT, drAV0, drWwT, drOmega, &DR);
          osg::Matrixd Rwb = DR * drR0;
-         basic::Nav::computeEulerAngles(Rwb, pNewRPY);
+         base::Nav::computeEulerAngles(Rwb, pNewRPY);
 
          *pNewP0 = drP0 + drV0*dT;
       }
@@ -897,7 +899,7 @@ bool Nib::mainDeadReckoning(
          osg::Matrixd DR;
          drComputeMatrixDR(dT, drAV0, drWwT, drOmega, &DR);
          osg::Matrixd Rwb = DR * drR0;
-         basic::Nav::computeEulerAngles(Rwb, pNewRPY);
+         base::Nav::computeEulerAngles(Rwb, pNewRPY);
 
          *pNewP0 = drP0 + drV0*dT + drA0*(0.5*dT*dT);
       }
@@ -930,7 +932,7 @@ bool Nib::mainDeadReckoning(
          drComputeMatrixDR(dT, drAV0, drWwT, drOmega, &DR);
          osg::Matrixd Rwb = DR * drR0;
 
-         basic::Nav::computeEulerAngles(Rwb, pNewRPY);
+         base::Nav::computeEulerAngles(Rwb, pNewRPY);
 
          osg::Matrixd R1;
          drComputeMatrixR1(dT, drAV0, drWwT, drOmega, &R1);
@@ -946,7 +948,7 @@ bool Nib::mainDeadReckoning(
          drComputeMatrixDR(dT, drAV0, drWwT, drOmega, &DR);
          osg::Matrixd Rwb = DR * drR0;
 
-         basic::Nav::computeEulerAngles(Rwb, pNewRPY);
+         base::Nav::computeEulerAngles(Rwb, pNewRPY);
 
          osg::Matrixd R1;
          drComputeMatrixR1(dT, drAV0, drWwT, drOmega, &R1);

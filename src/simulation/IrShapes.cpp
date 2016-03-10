@@ -6,10 +6,10 @@
 #include "openeaagles/simulation/IrQueryMsg.h"
 #include "openeaagles/simulation/IrSensor.h"
 #include "openeaagles/simulation/Player.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/osg/Vec3"
-#include "openeaagles/basic/units/Areas.h"
-#include "openeaagles/basic/units/Distances.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/osg/Vec3"
+#include "openeaagles/base/units/Areas.h"
+#include "openeaagles/base/units/Distances.h"
 
 #include <cmath>
 
@@ -26,7 +26,7 @@ BEGIN_SLOTTABLE(IrShape)
 END_SLOTTABLE(IrShape)
 
 BEGIN_SLOT_MAP(IrShape)
-ON_SLOT(1,setSlotIrShapeArea,basic::Number)
+ON_SLOT(1,setSlotIrShapeArea,base::Number)
 END_SLOT_MAP()
 
 EMPTY_DELETEDATA(IrShape)
@@ -50,18 +50,18 @@ void IrShape::copyData(const IrShape& org, const bool)
    area = org.area;
 }
 
-basic::Object* IrShape::getSlotByIndex(const int si)
+base::Object* IrShape::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
 
-bool IrShape::setSlotIrShapeArea(const oe::basic::Number* const num)
+bool IrShape::setSlotIrShapeArea(const oe::base::Number* const num)
 {
-   LCreal value = 0.0;
-   const basic::Area* a = dynamic_cast<const basic::Area*>(num);
+   double value = 0.0;
+   const base::Area* a = dynamic_cast<const base::Area*>(num);
    if (a != nullptr) {
-      basic::SquareMeters sm;
-      value = static_cast<LCreal>(sm.convert(*a));
+      base::SquareMeters sm;
+      value = static_cast<double>(sm.convert(*a));
    }
    else if (num != nullptr) {
       value = num->getReal();
@@ -70,16 +70,16 @@ bool IrShape::setSlotIrShapeArea(const oe::basic::Number* const num)
    return true;
 }
 
-LCreal IrShape::getArea()
+double IrShape::getArea()
 {
    return area;
 }
 
-LCreal IrShape::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
+double IrShape::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
 {
-   LCreal angleOffBoresight = msg->getAngleOffBoresight();
+   double angleOffBoresight = msg->getAngleOffBoresight();
 
-   LCreal maxAngle = msg->getSendingSensor()->getIFOVTheta();
+   double maxAngle = msg->getSendingSensor()->getIFOVTheta();
 
    if (angleOffBoresight > maxAngle) return 0;
 
@@ -98,7 +98,7 @@ BEGIN_SLOTTABLE(IrSphere)
 END_SLOTTABLE(IrSphere)
 
 BEGIN_SLOT_MAP(IrSphere)
-ON_SLOT(1,setSlotIrSphereRadius,basic::Number)
+ON_SLOT(1,setSlotIrSphereRadius,base::Number)
 END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructor(s)
@@ -125,19 +125,19 @@ void IrSphere::deleteData()
 {
 }
 
-basic::Object* IrSphere::getSlotByIndex(const int si)
+base::Object* IrSphere::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
 
-bool IrSphere::setSlotIrSphereRadius(const oe::basic::Number* const s)
+bool IrSphere::setSlotIrSphereRadius(const oe::base::Number* const s)
 {
-   LCreal value = 0.0;
+   double value = 0.0;
 
-   const basic::Distance* d = dynamic_cast<const basic::Distance*>(s);
+   const base::Distance* d = dynamic_cast<const base::Distance*>(s);
    if (d != nullptr) {
-      basic::Meters m;
-      value = static_cast<LCreal>(m.convert(*d));
+      base::Meters m;
+      value = static_cast<double>(m.convert(*d));
    }
    else if (s != nullptr) {
       value = s->getReal();
@@ -146,11 +146,11 @@ bool IrSphere::setSlotIrSphereRadius(const oe::basic::Number* const s)
    return true;
 }
 
-LCreal IrSphere::getArea()
+double IrSphere::getArea()
 {
-   //return (LCreal) (radius * radius * 4.0 * PI);
+   //return (double) (radius * radius * 4.0 * PI);
    //Calculates the projected area of a sphere (projected area is a flat circle)
-   return static_cast<LCreal>(radius * radius * PI);
+   return static_cast<double>(radius * radius * base::PI);
 }
 
 
@@ -168,9 +168,9 @@ BEGIN_SLOTTABLE(IrBox)
 END_SLOTTABLE(IrBox)
 
 BEGIN_SLOT_MAP(IrBox)
-ON_SLOT(1,setSlotIrBoxX,basic::Number)
-ON_SLOT(2,setSlotIrBoxY,basic::Number)
-ON_SLOT(3,setSlotIrBoxZ,basic::Number)
+ON_SLOT(1,setSlotIrBoxX,base::Number)
+ON_SLOT(2,setSlotIrBoxY,base::Number)
+ON_SLOT(3,setSlotIrBoxZ,base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -202,19 +202,19 @@ void IrBox::deleteData()
 {
 }
 
-basic::Object* IrBox::getSlotByIndex(const int si)
+base::Object* IrBox::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
 
-bool IrBox::setSlotIrBoxX(const oe::basic::Number* const s)
+bool IrBox::setSlotIrBoxX(const oe::base::Number* const s)
 {
-   LCreal value = 0.0;
+   double value = 0.0;
 
-   const basic::Distance* d = dynamic_cast<const basic::Distance*>(s);
+   const base::Distance* d = dynamic_cast<const base::Distance*>(s);
    if (d != nullptr) {
-      basic::Meters m;
-      value = static_cast<LCreal>(m.convert(*d));
+      base::Meters m;
+      value = static_cast<double>(m.convert(*d));
    }
    else if (s != nullptr) {
       value = s->getReal();
@@ -223,14 +223,14 @@ bool IrBox::setSlotIrBoxX(const oe::basic::Number* const s)
    return true;
 }
 
-bool IrBox::setSlotIrBoxY(const oe::basic::Number* const s)
+bool IrBox::setSlotIrBoxY(const oe::base::Number* const s)
 {
-   LCreal value = 0.0;
+   double value = 0.0;
 
-   const basic::Distance* d = dynamic_cast<const basic::Distance*>(s);
+   const base::Distance* d = dynamic_cast<const base::Distance*>(s);
    if (d != nullptr) {
-      basic::Meters m;
-      value = static_cast<LCreal>(m.convert(*d));
+      base::Meters m;
+      value = static_cast<double>(m.convert(*d));
    }
    else if (s != nullptr) {
        value = s->getReal();
@@ -239,14 +239,14 @@ bool IrBox::setSlotIrBoxY(const oe::basic::Number* const s)
    return true;
 }
 
-bool IrBox::setSlotIrBoxZ(const oe::basic::Number* const s)
+bool IrBox::setSlotIrBoxZ(const oe::base::Number* const s)
 {
-   LCreal value = 0.0;
+   double value = 0.0;
 
-   const basic::Distance* d = dynamic_cast<const basic::Distance*>(s);
+   const base::Distance* d = dynamic_cast<const base::Distance*>(s);
    if (d != nullptr) {
-      basic::Meters m;
-      value = static_cast<LCreal>(m.convert(*d));
+      base::Meters m;
+      value = static_cast<double>(m.convert(*d));
    }
    else if (s != nullptr) {
        value = s->getReal();
@@ -255,29 +255,29 @@ bool IrBox::setSlotIrBoxZ(const oe::basic::Number* const s)
    return true;
 }
 
-LCreal IrBox::getArea()
+double IrBox::getArea()
 {
-   return static_cast<LCreal>((x*y * 2) + (2*x*z) + (2*y*z));
+   return static_cast<double>((x*y * 2) + (2*x*z) + (2*y*z));
 }
 
-LCreal IrBox::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
+double IrBox::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
 {
-   LCreal area = 0.0;
+   double area = 0.0;
 #if 1
    //retrieve the angle off of the gimbal boresight
-   const LCreal angleOffBoresight = msg->getAngleOffBoresight();
+   const double angleOffBoresight = msg->getAngleOffBoresight();
 
    //retrieve the planar angle of the IFOV of the IR sensor
-   const LCreal maxAngle = msg->getSendingSensor()->getIFOVTheta();
+   const double maxAngle = msg->getSendingSensor()->getIFOVTheta();
 
    //If the angle to the target is outside the IFOV, then return an area of 0.
    //This will cause the target to be discarded from further IR signature processing.
    if (angleOffBoresight > maxAngle){
-      //std::cout << angleOffBoresight * basic::Angle::R2DCC << " " << msg->getGimbalAzimuth() * basic::Angle::R2DCC << " " << msg->getGimbalElevation() * basic::Angle::R2DCC << " DETECTED" << std::endl;
+      //std::cout << angleOffBoresight * base::Angle::R2DCC << " " << msg->getGimbalAzimuth() * base::Angle::R2DCC << " " << msg->getGimbalElevation() * base::Angle::R2DCC << " DETECTED" << std::endl;
       return area;
    }
 
-   //std::cout << angleOffBoresight * basic::Angle::R2DCC << " " << msg->getGimbalAzimuth() * basic::Angle::R2DCC << " " << msg->getGimbalElevation() * basic::Angle::R2DCC << " DETECTED" << std::endl;
+   //std::cout << angleOffBoresight * base::Angle::R2DCC << " " << msg->getGimbalAzimuth() * base::Angle::R2DCC << " " << msg->getGimbalElevation() * base::Angle::R2DCC << " DETECTED" << std::endl;
 
    //Calculate the projected area of the box.
    const osg::Vec3d targetAoiVector = msg->getAoiVector();
@@ -297,9 +297,9 @@ LCreal IrBox::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
    return area;
 
 #else
-   LCreal angleOffBoresight = msg->getAngleOffBoresight();
+   double angleOffBoresight = msg->getAngleOffBoresight();
 
-   LCreal maxAngle = msg->getSendingSensor()->getIFOVTheta();
+   double maxAngle = msg->getSendingSensor()->getIFOVTheta();
 
    if (angleOffBoresight > maxAngle)
       return area;
@@ -317,21 +317,21 @@ LCreal IrBox::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
    normalizedTargetVelocityVector.normalize();
    osg::Vec3 targetXVector;
    targetXVector[0] = normalizedTargetVelocityVector[0]; // x
-   LCreal frontToSensor = targetXVector * normalizedDirectionToSensor;
+   double frontToSensor = targetXVector * normalizedDirectionToSensor;
    if (frontToSensor < 0) frontToSensor = -frontToSensor;
       area += frontToSensor * x * z; // x, z are members of this object corresponding to
                                      // width and height.
 
    osg::Vec3 targetYVector;
    targetYVector[1] = normalizedTargetVelocityVector[1]; // y
-   LCreal sideToSensor = targetYVector * normalizedDirectionToSensor;
+   double sideToSensor = targetYVector * normalizedDirectionToSensor;
    if (sideToSensor < 0) sideToSensor = -sideToSensor;
       area += sideToSensor * y * z; // y,z are members of this object corresponding to
                                     // length and height.
 
    osg::Vec3 targetZVector;
    targetZVector[2] = normalizedTargetVelocityVector[2]; // y
-   LCreal topToSensor = targetZVector * normalizedDirectionToSensor;
+   double topToSensor = targetZVector * normalizedDirectionToSensor;
    if (topToSensor < 0) topToSensor = -topToSensor;
       area += topToSensor * x * y; // x,y is a member of this object corresponding to
                                    // width and length.

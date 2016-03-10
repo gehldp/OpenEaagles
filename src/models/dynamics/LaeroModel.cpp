@@ -7,16 +7,16 @@
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/AirVehicle.h"
 
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
-#include "openeaagles/basic/units/Times.h"
-#include "openeaagles/basic/osg/Matrix"
-#include "openeaagles/basic/osg/Vec3"
-#include "openeaagles/basic/osg/Quat"
-#include "openeaagles/basic/osg/Math"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/units/Times.h"
+#include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/osg/Vec3"
+#include "openeaagles/base/osg/Quat"
+#include "openeaagles/base/osg/Math"
 
 #include <iostream>
 #include <iomanip>
@@ -32,7 +32,7 @@ EMPTY_DELETEDATA(LaeroModel)
 //----------------------------------------------------------
 // conversion constants
 //----------------------------------------------------------
-const double LaeroModel::HALF_PI    = PI / 2.0;
+const double LaeroModel::HALF_PI    = base::PI / 2.0;
 const double LaeroModel::EPSILON    = 1.0E-10;
 
 //----------------------------------------------------------
@@ -162,7 +162,7 @@ void LaeroModel::copyData(const LaeroModel& org, const bool cc)
 //----------------------------------------------------------
 // updateTC() -- update time critical stuff here
 //----------------------------------------------------------
-void LaeroModel::dynamics(const LCreal dt)
+void LaeroModel::dynamics(const double dt)
 {
     update4DofModel(dt);
     dT = dt;
@@ -177,15 +177,15 @@ void LaeroModel::reset()
 
    simulation::Player* pPlr = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
    if (pPlr != nullptr) {
-      LCreal initVel = pPlr->getInitVelocity();
-      u = initVel * basic::Distance::NM2M / basic::Time::H2S;
+      double initVel = pPlr->getInitVelocity();
+      u = initVel * base::Distance::NM2M / base::Time::H2S;
    }
 }
 
 //----------------------------------------------------------
 // update4DofModel -- update equations of motion
 //----------------------------------------------------------
-void LaeroModel::update4DofModel(const LCreal dt)
+void LaeroModel::update4DofModel(const double dt)
 {
    //-------------------------------------------------------
    // get data pointers
@@ -202,16 +202,16 @@ void LaeroModel::update4DofModel(const LCreal dt)
       // integrate Euler angles using Adams-Bashforth
       //----------------------------------------------------
       phi += 0.5 * (3.0 * phiDot - phiDot1) * dT;
-      if (phi >  PI) phi = -PI;
-      if (phi < -PI) phi =  PI;
+      if (phi >  base::PI) phi = -base::PI;
+      if (phi < -base::PI) phi =  base::PI;
 
       tht += 0.5 * (3.0 * thtDot - thtDot1) * dT;
       if (tht >=  HALF_PI) tht =  (HALF_PI - EPSILON);
       if (tht <= -HALF_PI) tht = -(HALF_PI - EPSILON);
 
       psi += 0.5 * (3.0 * psiDot - psiDot1) * dT;
-      if (psi >  PI) psi = -PI;
-      if (psi < -PI) psi =  PI;
+      if (psi >  base::PI) psi = -base::PI;
+      if (psi < -base::PI) psi =  base::PI;
 
       //----------------------------------------------------
       // update Euler angles
@@ -319,8 +319,8 @@ bool LaeroModel::flyPhi(const double phiCmdDeg, const double phiDotCmdDps)
       //-------------------------------------------------------
       // convert argument units (deg -> rad)
       //-------------------------------------------------------
-      double phiCmdRad    = phiCmdDeg * basic::Angle::D2RCC;
-      double phiDotCmdRps = phiDotCmdDps * basic::Angle::D2RCC;
+      double phiCmdRad    = phiCmdDeg * base::Angle::D2RCC;
+      double phiDotCmdRps = phiDotCmdDps * base::Angle::D2RCC;
 
       //-------------------------------------------------------
       // current phi error (rad)
@@ -337,7 +337,7 @@ bool LaeroModel::flyPhi(const double phiCmdDeg, const double phiDotCmdDps)
       //-------------------------------------------------------
       // control signal for commanded phi (rps)
       //-------------------------------------------------------
-      double phiDotRps = sign(phiErrRad) * phiDotCmdRps;
+      double phiDotRps = base::sign(phiErrRad) * phiDotCmdRps;
       if (std::abs(phiErrRad) < phiErrBrkRad) {
          phiDotRps = (phiErrRad / phiErrBrkRad) * phiDotCmdRps;
       }
@@ -363,8 +363,8 @@ bool LaeroModel::flyTht(const double thtCmdDeg, const double thtDotCmdDps)
       //-------------------------------------------------------
       // convert argument units (deg -> rad)
       //-------------------------------------------------------
-      double thtCmdRad    = thtCmdDeg * basic::Angle::D2RCC;
-      double thtDotCmdRps = thtDotCmdDps * basic::Angle::D2RCC;
+      double thtCmdRad    = thtCmdDeg * base::Angle::D2RCC;
+      double thtDotCmdRps = thtDotCmdDps * base::Angle::D2RCC;
 
       //-------------------------------------------------------
       // current tht error (rad)
@@ -381,7 +381,7 @@ bool LaeroModel::flyTht(const double thtCmdDeg, const double thtDotCmdDps)
       //-------------------------------------------------------
       // control signal for commanded tht (rps)
       //-------------------------------------------------------
-      double thtDotRps = sign(thtErrRad) * thtDotCmdRps;
+      double thtDotRps = base::sign(thtErrRad) * thtDotCmdRps;
       if (std::abs(thtErrRad) < thtErrBrkRad) {
          thtDotRps = (thtErrRad / thtErrBrkRad) * thtDotCmdRps;
       }
@@ -407,8 +407,8 @@ bool LaeroModel::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
       //-------------------------------------------------------
       // convert argument units (deg -> rad)
       //-------------------------------------------------------
-      double psiCmdRad    = psiCmdDeg * basic::Angle::D2RCC;
-      double psiDotCmdRps = psiDotCmdDps * basic::Angle::D2RCC;
+      double psiCmdRad    = psiCmdDeg * base::Angle::D2RCC;
+      double psiDotCmdRps = psiDotCmdDps * base::Angle::D2RCC;
 
       //-------------------------------------------------------
       // current psi error (rad)
@@ -425,7 +425,7 @@ bool LaeroModel::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
       //-------------------------------------------------------
       // control signal for commanded psi (rps)
       //-------------------------------------------------------
-      double psiDotRps = sign(psiErrRad) * psiDotCmdRps;
+      double psiDotRps = base::sign(psiErrRad) * psiDotCmdRps;
       if (std::abs(psiErrRad) < psiErrBrkRad) {
          psiDotRps = (psiErrRad / psiErrBrkRad) * psiDotCmdRps;
       }
@@ -452,7 +452,7 @@ bool LaeroModel::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
 //      //-------------------------------------------------------
 //      // define local constants
 //      //-------------------------------------------------------
-//      const double KTS2MPS = basic::Distance::NM2M / basic::Time::H2S;
+//      const double KTS2MPS = base::Distance::NM2M / base::Time::H2S;
 //
 //      //-------------------------------------------------------
 //      // convert argument units (deg -> rad)
@@ -507,7 +507,7 @@ bool LaeroModel::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
 //      double osLonDeg  = pPlr->getLongitude();
 //      double brgDeg = 0.0;
 //      double rngMtr = 0.0;
-//      basic::Nav::gll2bd(osLatDeg, osLonDeg, latDeg, lonDeg, &brgDeg,&rngMtr);
+//      base::Nav::gll2bd(osLatDeg, osLonDeg, latDeg, lonDeg, &brgDeg,&rngMtr);
 //
 //      //-------------------------------------------------------
 //      // fly to heading necessary to intercept lat/lon
@@ -533,7 +533,7 @@ bool LaeroModel::setCommandedHeadingD(const double h, const double hDps, const d
       //----------------------------------------------------
       // define local constants
       //----------------------------------------------------
-      const double MAX_BANK_RAD = maxBank * basic::Angle::D2RCC;
+      const double MAX_BANK_RAD = maxBank * base::Angle::D2RCC;
       //const double TAU = 2.0;  // time constant [sec]
       const double TAU = 1.0;  // time constant [sec]
 
@@ -542,14 +542,14 @@ bool LaeroModel::setCommandedHeadingD(const double h, const double hDps, const d
       //-------------------------------------------------------
       double velMps        = pPlr->getTotalVelocity();
       double hdgDeg        = pPlr->getHeadingD();
-      double hdgErrDeg     = basic::Angle::aepcdDeg(h - hdgDeg);
+      double hdgErrDeg     = base::Angle::aepcdDeg(h - hdgDeg);
       double hdgErrAbsDeg  = std::fabs(hdgErrDeg);
 
       //-------------------------------------------------------
       // get absolute heading rate of change (hdgDotAbsDps)
       //-------------------------------------------------------
-      double hdgDotMaxAbsRps = oe::ETHGM * std::tan(MAX_BANK_RAD) / velMps;
-      double hdgDotMaxAbsDps = hdgDotMaxAbsRps * basic::Angle::R2DCC;
+      double hdgDotMaxAbsRps = base::ETHGM * std::tan(MAX_BANK_RAD) / velMps;
+      double hdgDotMaxAbsDps = hdgDotMaxAbsRps * base::Angle::R2DCC;
 
       double hdgDotAbsDps = hDps;
       if (hdgDotAbsDps > hdgDotMaxAbsDps) {
@@ -564,13 +564,13 @@ bool LaeroModel::setCommandedHeadingD(const double h, const double hDps, const d
       //-------------------------------------------------------
       // define direction of heading rate of change (hdgDotDps)
       //-------------------------------------------------------
-      double hdgDotDps = sign(hdgErrDeg) * hdgDotAbsDps;
-      psiDot = hdgDotDps * basic::Angle::D2RCC;
+      double hdgDotDps = base::sign(hdgErrDeg) * hdgDotAbsDps;
+      psiDot = hdgDotDps * base::Angle::D2RCC;
 
       //-------------------------------------------------------
       // define bank angle as a function of turn rate
       //-------------------------------------------------------
-      double phiCmdDeg = std::atan2(psiDot * velMps, oe::ETHGM) * basic::Angle::R2DCC;
+      double phiCmdDeg = std::atan2(psiDot * velMps, base::ETHGM) * base::Angle::R2DCC;
       ok = flyPhi(phiCmdDeg);
    }
 
@@ -608,7 +608,7 @@ bool LaeroModel::setCommandedAltitude(const double a, const double aMps, const d
       //-------------------------------------------------------
       // get commanded altDot (mps)
       //-------------------------------------------------------
-      double altDotMps = sign(altErrMtr) * altDotCmdMps;
+      double altDotMps = base::sign(altErrMtr) * altDotCmdMps;
       if (std::abs(altErrMtr) < altErrBrkMtr) {
          altDotMps = altErrMtr * (altDotCmdMps / altErrBrkMtr);
       }
@@ -616,7 +616,7 @@ bool LaeroModel::setCommandedAltitude(const double a, const double aMps, const d
       //-------------------------------------------------------
       // assign result to altitude control
       //-------------------------------------------------------
-      double thtCmdDeg = (altDotMps / u) * basic::Angle::R2DCC;
+      double thtCmdDeg = (altDotMps / u) * base::Angle::R2DCC;
       // SLS - TO DO: Limit commanded pitch to max pitch angle as well.
       ok = flyTht(thtCmdDeg);
    }
@@ -637,7 +637,7 @@ bool LaeroModel::setCommandedVelocityKts(const double v, const double vNps)
       //-------------------------------------------------------
       // define local constants
       //-------------------------------------------------------
-      const double KTS2MPS = basic::Distance::NM2M / basic::Time::H2S;
+      const double KTS2MPS = base::Distance::NM2M / base::Time::H2S;
 
       //-------------------------------------------------------
       // convert argument units (deg -> rad)
@@ -660,7 +660,7 @@ bool LaeroModel::setCommandedVelocityKts(const double v, const double vNps)
       //-------------------------------------------------------
       // control signal for commanded vel (rps)
       //-------------------------------------------------------
-      double velDotMps2 = sign(velErrMps) * velDotCmdMps2;
+      double velDotMps2 = base::sign(velErrMps) * velDotCmdMps2;
       if (std::abs(velErrMps) < velErrBrkMps) {
          velDotMps2 = (velErrMps / velErrBrkMps) * velDotCmdMps2;
       }

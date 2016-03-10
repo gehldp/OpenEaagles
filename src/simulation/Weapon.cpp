@@ -14,15 +14,15 @@
 #include "openeaagles/simulation/Track.h"
 #include "openeaagles/simulation/TrackManager.h"
 
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/osg/Matrix"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
-#include "openeaagles/basic/units/Times.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/units/Times.h"
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
@@ -39,8 +39,8 @@ namespace simulation {
 IMPLEMENT_ABSTRACT_SUBCLASS(Weapon,"Weapon")
 
 // parameters
-const LCreal Weapon::DEFAULT_MAX_TGT_RNG = 2000.0f;    // meters
-const LCreal Weapon::DEFAULT_MAX_TGT_LOS_ERR = 1.0f;   // radians
+const double Weapon::DEFAULT_MAX_TGT_RNG = 2000.0f;    // meters
+const double Weapon::DEFAULT_MAX_TGT_LOS_ERR = 1.0f;   // radians
 
 // Slot table
 BEGIN_SLOTTABLE(Weapon)
@@ -55,7 +55,7 @@ BEGIN_SLOTTABLE(Weapon)
     "lethalRange",      //  9: lethal range              (meters)
     "sobt",             // 10: start-of-burn time        (sec - tof)
     "eobt",             // 11: end-of-burn time          (sec - tof)
-    "maxGimbal",        // 12: max gimbal angle          (basic::Angle)
+    "maxGimbal",        // 12: max gimbal angle          (base::Angle)
     "tgtPos",           // 13: TEST target position [ n e d ] (meters)
     "weaponID",         // 14: Weapon type ID (user defined number)
     "dummy",            // 15: Dummy store (launch, but don't flyout or detonate)
@@ -65,37 +65,37 @@ END_SLOTTABLE(Weapon)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(Weapon)
-    ON_SLOT( 1,  setSlotReleased,    basic::Number)
-    ON_SLOT( 2,  setSlotFailed,      basic::Number)
-    ON_SLOT( 3,  setSlotPower,       basic::Number)
-    ON_SLOT( 4,  setSlotWillHang,    basic::Number)
-    ON_SLOT( 5,  setSlotHung,        basic::Number)
+    ON_SLOT( 1,  setSlotReleased,    base::Number)
+    ON_SLOT( 2,  setSlotFailed,      base::Number)
+    ON_SLOT( 3,  setSlotPower,       base::Number)
+    ON_SLOT( 4,  setSlotWillHang,    base::Number)
+    ON_SLOT( 5,  setSlotHung,        base::Number)
 
-    ON_SLOT( 6,  setSlotMaxTOF,      basic::Time)
-    ON_SLOT( 6,  setSlotMaxTOF,      basic::Number)
+    ON_SLOT( 6,  setSlotMaxTOF,      base::Time)
+    ON_SLOT( 6,  setSlotMaxTOF,      base::Number)
 
-    ON_SLOT( 7,  setSlotTSG,         basic::Time)
-    ON_SLOT( 7,  setSlotTSG,         basic::Number)
+    ON_SLOT( 7,  setSlotTSG,         base::Time)
+    ON_SLOT( 7,  setSlotTSG,         base::Number)
 
-    ON_SLOT( 8,  setSlotMaxBurstRng, basic::Distance)
-    ON_SLOT( 8,  setSlotMaxBurstRng, basic::Number)
+    ON_SLOT( 8,  setSlotMaxBurstRng, base::Distance)
+    ON_SLOT( 8,  setSlotMaxBurstRng, base::Number)
 
-    ON_SLOT( 9, setSlotLethalRange, basic::Distance)
-    ON_SLOT( 9, setSlotLethalRange, basic::Number)
+    ON_SLOT( 9, setSlotLethalRange, base::Distance)
+    ON_SLOT( 9, setSlotLethalRange, base::Number)
 
-    ON_SLOT(10, setSlotSOBT,        basic::Time)
-    ON_SLOT(10, setSlotSOBT,        basic::Number)
+    ON_SLOT(10, setSlotSOBT,        base::Time)
+    ON_SLOT(10, setSlotSOBT,        base::Number)
 
-    ON_SLOT(11, setSlotEOBT,        basic::Time)
-    ON_SLOT(11, setSlotEOBT,        basic::Number)
+    ON_SLOT(11, setSlotEOBT,        base::Time)
+    ON_SLOT(11, setSlotEOBT,        base::Number)
 
-    ON_SLOT(12, setSlotMaxGimbal,   basic::Angle)
+    ON_SLOT(12, setSlotMaxGimbal,   base::Angle)
 
-    ON_SLOT(13, setSlotTgtPos,      basic::List)
-    ON_SLOT(14, setSlotWeaponID,    basic::Number)
-    ON_SLOT(15, setSlotDummy,       basic::Number)
-    ON_SLOT(16, setSlotJettisonable, basic::Number)
-    ON_SLOT(17, setSlotTestTgtName, basic::String)
+    ON_SLOT(13, setSlotTgtPos,      base::List)
+    ON_SLOT(14, setSlotWeaponID,    base::Number)
+    ON_SLOT(15, setSlotDummy,       base::Number)
+    ON_SLOT(16, setSlotJettisonable, base::Number)
+    ON_SLOT(17, setSlotTestTgtName, base::String)
 END_SLOT_MAP()
 
 // Event() map
@@ -111,7 +111,7 @@ Weapon::Weapon()
 {
    STANDARD_CONSTRUCTOR()
 
-   static basic::String generic("GenericWeapon");
+   static base::String generic("GenericWeapon");
    setType(&generic);
    setMode(INACTIVE);
    setInitMode(INACTIVE);
@@ -163,7 +163,7 @@ void Weapon::initData()
    setLethalRange(50.0);
    setSOBT(9999.0);
    setEOBT(0.0);
-   setMaxGimbalAngle(30.0 * static_cast<LCreal>(basic::Angle::D2RCC));
+   setMaxGimbalAngle(30.0 * static_cast<double>(base::Angle::D2RCC));
 }
 
 //------------------------------------------------------------------------------
@@ -279,7 +279,7 @@ void Weapon::reset()
 //------------------------------------------------------------------------------
 // updateTC() -- update time critical stuff here
 //------------------------------------------------------------------------------
-void Weapon::updateTC(const LCreal dt)
+void Weapon::updateTC(const double dt)
 {
    BaseClass::updateTC(dt);
 
@@ -307,7 +307,7 @@ void Weapon::updateTC(const LCreal dt)
 //------------------------------------------------------------------------------
 // dynamics() -- update vehicle dynamics
 //------------------------------------------------------------------------------
-void Weapon::dynamics(const LCreal dt)
+void Weapon::dynamics(const double dt)
 {
    if (isMode(PRE_RELEASE)) {
       // Weapon is on the same side as the launcher
@@ -330,7 +330,7 @@ void Weapon::dynamics(const LCreal dt)
       // Weapon's orientation at launch
       const osg::Vec3d ia = getInitAngles();
       osg::Matrixd rr;
-      basic::Nav::computeRotationalMatrix( ia[0], ia[1], ia[2], &rr);
+      base::Nav::computeRotationalMatrix( ia[0], ia[1], ia[2], &rr);
       rr *= lvM;
 
       setRotMat(rr);
@@ -443,7 +443,7 @@ void Weapon::checkDetonationEffect()
    Simulation* s = getSimulation();
    if (s != nullptr) {
       // Only local players within 10X max burst range
-      LCreal maxRng = 10.0 * getMaxBurstRng();
+      double maxRng = 10.0 * getMaxBurstRng();
 
       // Find our target (if any)
       const Player* tgt = getTargetPlayer();
@@ -452,19 +452,19 @@ void Weapon::checkDetonationEffect()
          if (trk != nullptr) tgt = trk->getTarget();
       }
 
-      basic::PairStream* plist = s->getPlayers();
+      base::PairStream* plist = s->getPlayers();
       if (plist != nullptr) {
-         basic::List::Item* item = plist->getFirstItem();
+         base::List::Item* item = plist->getFirstItem();
 
          // Process the detonation for all local, in-range players
          bool finished = false;
          while (item != nullptr && !finished) {
-            basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
+            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
             Player* p = static_cast<Player*>(pair->object());
             finished = p->isNetworkedPlayer();  // local only
             if (!finished && (p != this) ) {
                osg::Vec3 dpos = p->getPosition() - getPosition();
-               LCreal rng = dpos.length();
+               double rng = dpos.length();
                if ( (rng <= maxRng) || (p == tgt) ) p->processDetonation(rng, this);
             }
             item = item->getNext();
@@ -756,7 +756,7 @@ void Weapon::atReleaseInit()
 //------------------------------------------------------------------------------
 // setTOF() -- Set the time of flight
 //------------------------------------------------------------------------------
-void Weapon::setTOF(const LCreal newTOF)
+void Weapon::setTOF(const double newTOF)
 {
    tof = newTOF;
 }
@@ -764,21 +764,21 @@ void Weapon::setTOF(const LCreal newTOF)
 //------------------------------------------------------------------------------
 // weaponGuidance() -- default guidance
 //------------------------------------------------------------------------------
-void Weapon::weaponGuidance(const LCreal)
+void Weapon::weaponGuidance(const double)
 {
 }
 
 //------------------------------------------------------------------------------
 // weaponDynamics -- default dynamics
 //------------------------------------------------------------------------------
-void Weapon::weaponDynamics(const LCreal)
+void Weapon::weaponDynamics(const double)
 {
 }
 
 //------------------------------------------------------------------------------
 // updateTOF -- default time of flight
 //------------------------------------------------------------------------------
-void Weapon::updateTOF(const LCreal dt)
+void Weapon::updateTOF(const double dt)
 {
    // As long as we're active ...
    if (isMode(ACTIVE)) {
@@ -994,31 +994,31 @@ bool Weapon::isDummy() const
 }
 
 // Time Of Flight (seconds) since release
-LCreal Weapon::getTOF() const
+double Weapon::getTOF() const
 {
    return tof;
 }
 
 // Max TOF (seconds)
-LCreal Weapon::getMaxTOF() const
+double Weapon::getMaxTOF() const
 {
    return maxTOF;
 }
 
 // Time-to-Start guidance (seconds since release)
-LCreal Weapon::getTSG() const
+double Weapon::getTSG() const
 {
    return tsg;
 }
 
 // Start-Of-Burn time (seconds since release)
-LCreal Weapon::getSOBT() const
+double Weapon::getSOBT() const
 {
    return sobt;
 }
 
 // End-Of-Burn time (seconds since release)
-LCreal Weapon::getEOBT() const
+double Weapon::getEOBT() const
 {
    return eobt;
 }
@@ -1036,19 +1036,19 @@ bool Weapon::isEngineBurnEnabled() const
 }
 
 // Max burst range (meters) -- most players will be damaged within this range
-LCreal Weapon::getMaxBurstRng() const
+double Weapon::getMaxBurstRng() const
 {
    return maxBurstRng;
 }
 
 // Lethal range (meters) -- most players will be killed within this range
-LCreal Weapon::getLethalRange() const
+double Weapon::getLethalRange() const
 {
    return lethalRange;
 }
 
 // Max gimbal angle (radians)
-LCreal Weapon::getMaxGimbalAngle() const
+double Weapon::getMaxGimbalAngle() const
 {
    return maxGimbal;
 }
@@ -1144,7 +1144,7 @@ Weapon::Detonation Weapon::getDetonationResults() const
 }
 
 // Range to target at detonation (meters)
-LCreal Weapon::getDetonationRange() const
+double Weapon::getDetonationRange() const
 {
    return detonationRange;
 }
@@ -1241,14 +1241,14 @@ bool Weapon::setInitialWeapon(Weapon* const p)
 }
 
 // setMaxTOF() -- Set max Time-Of-Flight (seconds)
-bool Weapon::setMaxTOF(const LCreal v)
+bool Weapon::setMaxTOF(const double v)
 {
     maxTOF =  v;
     return true;
 }
 
 // setTSG() -- Set Time-to-Start-Guidance (seconds)
-bool Weapon::setTSG(const LCreal v)
+bool Weapon::setTSG(const double v)
 {
     tsg = v;
     return true;
@@ -1270,35 +1270,35 @@ bool Weapon::setDetonationLocation(const osg::Vec3& loc)
 }
 
 // setMaxGimbalAngle() -- Set max gimbal angle (radians)
-bool Weapon::setMaxGimbalAngle(const LCreal v)
+bool Weapon::setMaxGimbalAngle(const double v)
 {
     maxGimbal =  v;
     return true;
 }
 
 // setMaxBurstRng() -- Set max Burst Range (meters)
-bool Weapon::setMaxBurstRng(const LCreal v)
+bool Weapon::setMaxBurstRng(const double v)
 {
     maxBurstRng =  v;
     return true;
 }
 
 // setLethalRange() -- Set max kill Range (meters)
-bool Weapon::setLethalRange(const LCreal v)
+bool Weapon::setLethalRange(const double v)
 {
     lethalRange =  v;
     return true;
 }
 
 // setSOBT() -- Set Start-Of-Burn-Time (seconds)
-bool Weapon::setSOBT(const LCreal v)
+bool Weapon::setSOBT(const double v)
 {
     sobt =  v;
     return true;
 }
 
 // setEOBT() -- Set End-Of-Burn-Time (seconds)
-bool Weapon::setEOBT(const LCreal v)
+bool Weapon::setEOBT(const double v)
 {
    eobt =  v;
    return true;
@@ -1388,158 +1388,158 @@ bool Weapon::setDummy(const bool f)
 //------------------------------------------------------------------------------
 
 // released:  Weapon has been released
-bool Weapon::setSlotReleased(const basic::Number* const p)
+bool Weapon::setSlotReleased(const base::Number* const p)
 {
     setReleased( p->getBoolean() );
     return true;
 }
 
 // failed: Weapon failed (e.g., reasonableness Test)
-bool Weapon::setSlotFailed(const basic::Number* const p)
+bool Weapon::setSlotFailed(const base::Number* const p)
 {
     setFailed( p->getBoolean() );
     return true;
 }
 
 // Power: weapon power flag
-bool Weapon::setSlotPower(const basic::Number* const p)
+bool Weapon::setSlotPower(const base::Number* const p)
 {
     setPower( p->getBoolean() );
     return true;
 }
 
 // hang: Will be a hung store
-bool Weapon::setSlotWillHang(const basic::Number* const p)
+bool Weapon::setSlotWillHang(const base::Number* const p)
 {
     setWillHang( p->getBoolean() );
     return true;
 }
 
 // hung: Hung store
-bool Weapon::setSlotHung(const basic::Number* const p)
+bool Weapon::setSlotHung(const base::Number* const p)
 {
     setHung( p->getBoolean() );
     return true;
 }
 
 // dummy: Dummy store
-bool Weapon::setSlotDummy(const basic::Number* const p)
+bool Weapon::setSlotDummy(const base::Number* const p)
 {
     setDummy( p->getBoolean() );
     return true;
 }
 
-// maxTOF:  max time of flight      (basic::Time)
-bool Weapon::setSlotMaxTOF(const basic::Time* const p)
+// maxTOF:  max time of flight      (base::Time)
+bool Weapon::setSlotMaxTOF(const base::Time* const p)
 {
    bool ok = false;
    if (p != nullptr) {
-      ok = setMaxTOF( basic::Seconds::convertStatic( *p ) );
+      ok = setMaxTOF( base::Seconds::convertStatic( *p ) );
    }
    return ok;
 }
 
 // maxTOF:  max time of flight      (sec)
-bool Weapon::setSlotMaxTOF(const basic::Number* const p)
+bool Weapon::setSlotMaxTOF(const base::Number* const p)
 {
     return setMaxTOF( p->getReal() );
 }
 
-// tsg: time to start guidance    (basic::Time)
-bool Weapon::setSlotTSG(const basic::Time* const p)
+// tsg: time to start guidance    (base::Time)
+bool Weapon::setSlotTSG(const base::Time* const p)
 {
    bool ok = false;
    if (p != nullptr) {
-      ok = setTSG( basic::Seconds::convertStatic( *p ) );
+      ok = setTSG( base::Seconds::convertStatic( *p ) );
    }
    return ok;
 }
 
 // tsg: time to start guidance    (sec)
-bool Weapon::setSlotTSG(const basic::Number* const p)
+bool Weapon::setSlotTSG(const base::Number* const p)
 {
     return setTSG( p->getReal() );
 }
 
-// maxBurstRng: max burst range    (basic::Distance)
-bool Weapon::setSlotMaxBurstRng(const basic::Distance* const p)
+// maxBurstRng: max burst range    (base::Distance)
+bool Weapon::setSlotMaxBurstRng(const base::Distance* const p)
 {
    bool ok = false;
    if (p != nullptr) {
-      ok = setMaxBurstRng( basic::Meters::convertStatic( *p ) );
+      ok = setMaxBurstRng( base::Meters::convertStatic( *p ) );
    }
    return ok;
 }
 
 // maxBurstRng: max burst range    (meters)
-bool Weapon::setSlotMaxBurstRng(const basic::Number* const p)
+bool Weapon::setSlotMaxBurstRng(const base::Number* const p)
 {
     return setMaxBurstRng( p->getReal() );
 }
 
 
-// lethalRange: lethal range    (basic::Distance)
-bool Weapon::setSlotLethalRange(const basic::Distance* const p)
+// lethalRange: lethal range    (base::Distance)
+bool Weapon::setSlotLethalRange(const base::Distance* const p)
 {
    bool ok = false;
    if (p != nullptr) {
-      ok = setLethalRange( basic::Meters::convertStatic( *p ) );
+      ok = setLethalRange( base::Meters::convertStatic( *p ) );
    }
    return ok;
 }
 
 // lethalRange: lethal range    (meters)
-bool Weapon::setSlotLethalRange(const basic::Number* const p)
+bool Weapon::setSlotLethalRange(const base::Number* const p)
 {
     return setLethalRange( p->getReal() );
 }
 
-// sobt: start-of-burn time        (basic::Time)
-bool Weapon::setSlotSOBT(const basic::Time* const p)
+// sobt: start-of-burn time        (base::Time)
+bool Weapon::setSlotSOBT(const base::Time* const p)
 {
    bool ok = false;
    if (p != nullptr) {
-      ok = setSOBT( basic::Seconds::convertStatic( *p ) );
+      ok = setSOBT( base::Seconds::convertStatic( *p ) );
    }
    return ok;
 }
 
 // sobt: start-of-burn time        (sec)
-bool Weapon::setSlotSOBT(const basic::Number* const p)
+bool Weapon::setSlotSOBT(const base::Number* const p)
 {
     setSOBT( p->getReal() );
     return true;
 }
 
-// eobt: end-of-burn time        (basic::Time)
-bool Weapon::setSlotEOBT(const basic::Time* const p)
+// eobt: end-of-burn time        (base::Time)
+bool Weapon::setSlotEOBT(const base::Time* const p)
 {
    bool ok = false;
    if (p != nullptr) {
-      ok = setEOBT( basic::Seconds::convertStatic( *p ) );
+      ok = setEOBT( base::Seconds::convertStatic( *p ) );
    }
    return ok;
 }
 
 // eobt: end-of-burn time        (sec)
-bool Weapon::setSlotEOBT(const basic::Number* const p)
+bool Weapon::setSlotEOBT(const base::Number* const p)
 {
     setEOBT( p->getReal() );
     return true;
 }
 
 // maxBurstRng: max burst rng    (meters)
-bool Weapon::setSlotMaxGimbal(const basic::Angle* const p)
+bool Weapon::setSlotMaxGimbal(const base::Angle* const p)
 {
-    setMaxGimbalAngle( static_cast<LCreal>(basic::Radians::convertStatic(*p)) );
+    setMaxGimbalAngle( static_cast<double>(base::Radians::convertStatic(*p)) );
     return true;
 }
 
 // tgtPos: TEST
-bool Weapon::setSlotTgtPos(const basic::List* const numList)
+bool Weapon::setSlotTgtPos(const base::List* const numList)
 {
     bool ok = false;
-    LCreal values[3];
+    double values[3];
     const int n = numList->getNumberList(values, 3);
     if (n == 3) {
       osg::Vec3 tp(values[0], values[1], values[2]);
@@ -1550,21 +1550,21 @@ bool Weapon::setSlotTgtPos(const basic::List* const numList)
 }
 
 // weaponID: weapon type ID
-bool Weapon::setSlotWeaponID(const basic::Number* const p)
+bool Weapon::setSlotWeaponID(const base::Number* const p)
 {
     setWeaponID( p->getInt() );
     return true;
 }
 
 // jettisonable: weapon can be jettisoned
-bool Weapon::setSlotJettisonable(const basic::Number* const p)
+bool Weapon::setSlotJettisonable(const base::Number* const p)
 {
     setJettisonable( p->getBoolean() );
     return true;
 }
 
 // testTgtName: TEST only: target player name
-bool Weapon::setSlotTestTgtName(const basic::String* const p)
+bool Weapon::setSlotTestTgtName(const base::String* const p)
 {
    tstTgtNam = p;
    return true;
@@ -1573,7 +1573,7 @@ bool Weapon::setSlotTestTgtName(const basic::String* const p)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* Weapon::getSlotByIndex(const int si)
+base::Object* Weapon::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

@@ -2,7 +2,7 @@
 
 #include "openeaagles/simulation/IrSensor.h"
 
-#include "openeaagles/basic/List.h"
+#include "openeaagles/base/List.h"
 
 namespace oe {
 namespace simulation {
@@ -56,7 +56,7 @@ void IrQueryMsg::copyData(const IrQueryMsg& org, const bool cc)
    }
 
 //   if (org.signatureByWaveband != 0) {
-//      setSignatureByWaveband((Lcreal*) org.signatureByWaveband->clone());
+//      setSignatureByWaveband((double*) org.signatureByWaveband->clone());
 //   }
 //   else setSignatureByWaveband(0);
 
@@ -105,13 +105,13 @@ void IrQueryMsg::clearIrSignature()
 }
 
 // Sets the range to the target
-void IrQueryMsg::setRange(const LCreal r)
+void IrQueryMsg::setRange(const double r)
 {
    BaseClass::setRange(r);
 }
 
 //Set the signature by waveband
-void IrQueryMsg::setSignatureByWaveband(LCreal* const sig)
+void IrQueryMsg::setSignatureByWaveband(double* const sig)
 {
 //   if (signatureByWaveband != 0) signatureByWaveband->unref();
    signatureByWaveband = sig;

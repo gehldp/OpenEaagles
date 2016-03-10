@@ -42,18 +42,18 @@
 #ifndef __oe_maps_rpf_CadrgFile_H__
 #define __oe_maps_rpf_CadrgFile_H__
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 namespace oe {
-namespace basic { class String; }
+namespace base { class String; }
 namespace maps {
 namespace rpf {
 
 class CadrgTocEntry;
 
-class CadrgFile : public basic::Object
+class CadrgFile : public base::Object
 {
-    DECLARE_SUBCLASS(CadrgFile, basic::Object)
+    DECLARE_SUBCLASS(CadrgFile, base::Object)
 
 public:
     CadrgFile();
@@ -85,7 +85,7 @@ private:
     int numBoundaries;                          // How many boundaries are there?
     CadrgTocEntry* entries[MAX_TOC_ENTRIES];    // Holds our table of contents entries
     bool cib;                                   // CIB flag
-    basic::String* originalDir;                 // directory of the file we are associated with
+    base::String* originalDir;                 // directory of the file we are associated with
 };
 
 }  // End rpf namespace

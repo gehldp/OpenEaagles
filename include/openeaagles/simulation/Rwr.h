@@ -5,13 +5,13 @@
 #define __oe_simulation_Rwr_H__
 
 #include "openeaagles/simulation/RfSensor.h"
-#include "openeaagles/basic/safe_queue.h"
+#include "openeaagles/base/safe_queue.h"
 
 namespace oe {
 namespace simulation {
 //------------------------------------------------------------------------------
 // Class: Rwr
-// Base class: basic::Object -> ... -> RfSystem -> RfSensor -> Rwr
+// Base class: base::Object -> ... -> RfSystem -> RfSensor -> Rwr
 //
 // Description: General Radar Warning Receiver (RWR) Model
 // Factory name: Rwr
@@ -23,12 +23,12 @@ class Rwr : public RfSensor
 public:
     Rwr();
 
-    LCreal getDegreesPerRay() const         { return 360.0f / static_cast<LCreal>(NUM_RAYS); }
+    double getDegreesPerRay() const         { return 360.0f / static_cast<double>(NUM_RAYS); }
     int getNumberOfRays() const             { return NUM_RAYS; }
-    LCreal getRay(const int i) const        { return (i >= 0 && i < NUM_RAYS) ? rays[1][i] : 0.0f; }
+    double getRay(const int i) const        { return (i >= 0 && i < NUM_RAYS) ? rays[1][i] : 0.0f; }
 
-    int getRayIndex(const LCreal az) const;
-    LCreal getRayAzimuth(const int idx) const;
+    int getRayIndex(const double az) const;
+    double getRayAzimuth(const int idx) const;
 
     void clearRays(const int ibuff)
     {
@@ -44,8 +44,8 @@ protected:
    static const int MAX_EMISSIONS = 1000;
    static const int NUM_RAYS = 360;
 
-   void receive(const LCreal dt) override;
-   void process(const LCreal dt) override;
+   void receive(const double dt) override;
+   void process(const double dt) override;
 
    bool shutdownNotification() override;
 
@@ -59,9 +59,9 @@ protected:
 private:
    void initData();
 
-   basic::safe_queue<Emission*> rptQueue;   // Report queue
+   base::safe_queue<Emission*> rptQueue;   // Report queue
 
-   LCreal rays[2][NUM_RAYS];     // Back (sensor) buffer [0][*] and front (graphics) buffer [1][*]
+   double rays[2][NUM_RAYS];     // Back (sensor) buffer [0][*] and front (graphics) buffer [1][*]
 };
 
 } // End simulation namespace

@@ -10,12 +10,14 @@
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
 #include "openeaagles/simulation/TrackManager.h"
-#include "openeaagles/basic/Integer.h"
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/units/Distances.h"
-#include "openeaagles/basic/units/Angles.h"
+#include "openeaagles/base/Integer.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/units/Angles.h"
+
+#include <cmath>
 
 // Requirements:
 // An irSeeker can have multiple irSensors - so an irSeeker is not
@@ -111,7 +113,7 @@ void IrSeeker::reset()
 //------------------------------------------------------------------------------
 // Process the Players-Of-Interest (POI) list
 //------------------------------------------------------------------------------
-unsigned int IrSeeker::processPlayersOfInterest(basic::PairStream* const poi)
+unsigned int IrSeeker::processPlayersOfInterest(base::PairStream* const poi)
 {
    TdbIr* tdb0 = new TdbIr(getMaxPlayersOfInterest(), this);
 
@@ -126,14 +128,14 @@ unsigned int IrSeeker::processPlayersOfInterest(basic::PairStream* const poi)
 //------------------------------------------------------------------------------
 // process() -- Process phase
 //------------------------------------------------------------------------------
-void IrSeeker::process(const LCreal dt)
+void IrSeeker::process(const double dt)
 {
    BaseClass::process(dt);
 
    // ---
    // Update IR query queues: from 'in-use' to 'free'
    // ---
-   lcLock(inUseQueryLock);
+   base::lcLock(inUseQueryLock);
    int n = inUseQueryQueue.entries();
    for (int i = 0; i < n; i++) {
       IrQueryMsg* query = inUseQueryQueue.get();
@@ -141,14 +143,14 @@ void IrSeeker::process(const LCreal dt)
          if (query->getRefCount() <= 1) {
             // No one else is referencing the query, push on free stack
             query->clear();
-            lcLock(freeQueryLock);
+            base::lcLock(freeQueryLock);
             if (freeQueryStack.isNotFull()) {
                freeQueryStack.push(query);
             }
             else {
                query->unref();
             }
-            lcUnlock(freeQueryLock);
+            base::lcUnlock(freeQueryLock);
          }
          else {
             // Others are still referencing the query, put back on in-use queue
@@ -156,7 +158,7 @@ void IrSeeker::process(const LCreal dt)
          }
       }
    }
-   lcUnlock(inUseQueryLock);
+   base::lcUnlock(inUseQueryLock);
 }
 
 
@@ -165,21 +167,21 @@ void IrSeeker::process(const LCreal dt)
 //------------------------------------------------------------------------------
 void IrSeeker::clearQueues()
 {
-   lcLock(freeQueryLock);
+   base::lcLock(freeQueryLock);
    IrQueryMsg* query = freeQueryStack.pop();
    while (query != nullptr) {
       query->unref();
       query = freeQueryStack.pop();
    }
-   lcUnlock(freeQueryLock);
+   base::lcUnlock(freeQueryLock);
 
-   lcLock(inUseQueryLock);
+   base::lcLock(inUseQueryLock);
    query = inUseQueryQueue.get();
    while (query != nullptr) {
       query->unref();
       query = inUseQueryQueue.get();
    }
-   lcUnlock(inUseQueryLock);
+   base::lcUnlock(inUseQueryLock);
 }
 
 //------------------------------------------------------------------------------
@@ -222,7 +224,7 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
       const osg::Vec3d* losO2T = tdb0->getLosVectors();
       const osg::Vec3d* losT2O = tdb0->getTargetLosVectors();
       Player** targets = tdb0->getTargets();
-      const LCreal maximumRange = irQuery->getMaxRangeNM()*basic::Distance::NM2M;
+      const double maximumRange = irQuery->getMaxRangeNM()*base::Distance::NM2M;
 
       // ---
       // Send query packets to the targets
@@ -235,9 +237,9 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
             continue;
 
          // Get a free query packet
-         lcLock(freeQueryLock);
+         base::lcLock(freeQueryLock);
          IrQueryMsg* query = freeQueryStack.pop();
-         lcUnlock(freeQueryLock);
+         base::lcUnlock(freeQueryLock);
 
          if (query == nullptr) {
             query = new IrQueryMsg();
@@ -262,15 +264,15 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
             query->setGimbal(this);
             query->setOwnship(ownship);
 
-            query->setRange( static_cast<LCreal>(ranges[i]) );
+            query->setRange( static_cast<double>(ranges[i]) );
             query->setLosVec( losO2T[i] );
             query->setTgtLosVec( losT2O[i] );
-            query->setRangeRate( static_cast<LCreal>(rngRates[i]) );
+            query->setRangeRate( static_cast<double>(rngRates[i]) );
             query->setTarget(targets[i]);
-            query->setAngleOffBoresight( static_cast<LCreal>(anglesOffBoresight[i]) );
+            query->setAngleOffBoresight( static_cast<double>(anglesOffBoresight[i]) );
 
-            query->setGimbalAzimuth( static_cast<LCreal>(getAzimuth()) );
-            query->setGimbalElevation( static_cast<LCreal>(getElevation()) );
+            query->setGimbalAzimuth( static_cast<double>(getAzimuth()) );
+            query->setGimbalElevation( static_cast<double>(getElevation()) );
 
             // c) Send the query to the target
             targets[i]->event(IR_QUERY, query);
@@ -279,18 +281,18 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
             if (query->getRefCount() <= 1) {
                // Recycle the query packet
                query->clear();
-               lcLock(freeQueryLock);
+               base::lcLock(freeQueryLock);
                if (freeQueryStack.isNotFull()) {
                   freeQueryStack.push(query);
                }
                else {
                   query->unref();
                }
-               lcUnlock(freeQueryLock);
+               base::lcUnlock(freeQueryLock);
             }
             else {
                // Store for future reference
-               lcLock(inUseQueryLock);
+               base::lcLock(inUseQueryLock);
                if (inUseQueryQueue.isNotFull()) {
                   inUseQueryQueue.put(query);
                }
@@ -298,7 +300,7 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
                   // Just forget it
                   query->unref();
                }
-               lcUnlock(inUseQueryLock);
+               base::lcUnlock(inUseQueryLock);
             }
          }
          else {
@@ -370,7 +372,7 @@ void TdbIr::deleteData()
 // range rate, normalized Line-Of-Sight (LOS) vectors for each target player.
 // (Background task)
 //------------------------------------------------------------------------------
-unsigned int TdbIr::processPlayers(basic::PairStream* const players)
+unsigned int TdbIr::processPlayers(base::PairStream* const players)
 {
    // Clear the old data
    clearArrays();
@@ -380,7 +382,7 @@ unsigned int TdbIr::processPlayers(basic::PairStream* const players)
    // ---
    if (gimbal == 0 || ownship == nullptr || players == nullptr || maxTargets == 0) return 0;
 
-   //const basic::Pair* p = ((Player*)ownship)->getIrSystemByType( typeid(IrSensor) );
+   //const base::Pair* p = ((Player*)ownship)->getIrSystemByType( typeid(IrSensor) );
    //if (p == 0) return 0;
 
    // FAB - refactored
@@ -389,8 +391,8 @@ unsigned int TdbIr::processPlayers(basic::PairStream* const players)
       //return 0;
 
    // FAB - limit is +/- (1/2 FORtheta + 1/2 IFOVtheta) (but both get..Theta() actually return 1/2 Theta)
-   //LCreal fieldOfRegardTheta = irSensor->getFieldOfRegardTheta() + irSensor->getIFOVTheta();
-   //LCreal maxRange = irSensor->getMaximumRange();
+   //double fieldOfRegardTheta = irSensor->getFieldOfRegardTheta() + irSensor->getIFOVTheta();
+   //double maxRange = irSensor->getMaximumRange();
 
    // FAB - basically the same as TDB/gimbal version:
    const double maxRange = gimbal->getMaxRange2PlayersOfInterest();
@@ -407,11 +409,11 @@ unsigned int TdbIr::processPlayers(basic::PairStream* const players)
    // 1) Scan the player list --- compute the normalized Line-Of-Sight (LOS) vectors,
    // range, and range rate for each target.
    // ---
-   for (basic::List::Item* item = players->getFirstItem(); item != 0 && numTgts < maxTargets; item = item->getNext()) {
+   for (base::List::Item* item = players->getFirstItem(); item != 0 && numTgts < maxTargets; item = item->getNext()) {
 
 
       // Get the pointer to the target player
-      basic::Pair* pair = (basic::Pair*)(item->getValue());
+      base::Pair* pair = (base::Pair*)(item->getValue());
       Player* target = (Player*)(pair->object());
 
      // FAB - testing - exclude our launch vehicle in tdb
@@ -431,21 +433,21 @@ unsigned int TdbIr::processPlayers(basic::PairStream* const players)
          osg::Vec3 targetPosition = target->getPosition();
          osg::Vec3 losVector = targetPosition - p0;
          //osg::Vec3 xlos = -losVector;
-       LCreal aazr;
-       LCreal aelr;
-       LCreal ra;
+       double aazr;
+       double aelr;
+       double ra;
 
       if (irSensor->getSeeker()->getOwnHeadingOnly()) {
          // FAB - this calc for gimbal ownHeadingOnly true
          // compute ranges
-         LCreal gndRng2 = losVector.x()*losVector.x() + losVector.y()*losVector.y();
-         ra = lcSqrt(gndRng2);
+         double gndRng2 = losVector.x()*losVector.x() + losVector.y()*losVector.y();
+         ra = std::sqrt(gndRng2);
 
          // compute angles
-         LCreal los_az = lcAtan2(losVector.y(),losVector.x());
+         double los_az = std::atan2(losVector.y(),losVector.x());
          double hdng = ownship->getHeadingR();
-         aazr = lcAepcRad(los_az - static_cast<float>(hdng));
-         aelr = lcAtan2(-losVector.z(), ra);
+         aazr = base::Angle::aepcdRad(los_az - static_cast<float>(hdng));
+         aelr = std::atan2(-losVector.z(), ra);
       }
       else {
          // FAB - this calc for gimbal ownHeadingOnly false
@@ -455,30 +457,30 @@ unsigned int TdbIr::processPlayers(basic::PairStream* const players)
          // 3) Compute the azimuth and elevation angles of incidence (AOI)
 
          // 3-a) Get the aoi vector values & compute range squared
-         LCreal xa = aoi.x();
-         LCreal ya = aoi.y();
-         LCreal za = -aoi.z();
+         double xa = aoi.x();
+         double ya = aoi.y();
+         double za = -aoi.z();
 
-         ra = lcSqrt(xa*xa + ya*ya);
+         ra = std::sqrt(xa*xa + ya*ya);
          // 3-b) Compute azimuth: az = atan2(ya, xa)
-         aazr = lcAtan2(ya, xa);
+         aazr = std::atan2(ya, xa);
          // 3-c) Compute elevation: el = atan2(za, ra), where 'ra' is sqrt of xa*xa & ya*ya
-         aelr = lcAtan2(za,ra);
+         aelr = std::atan2(za,ra);
       }
 
-         LCreal absoluteAzimuth = aazr;
+         double absoluteAzimuth = aazr;
 
          if (aazr < 0) absoluteAzimuth = -aazr;
 
-         LCreal absoluteElevation = aelr;
+         double absoluteElevation = aelr;
          if (aelr < 0) absoluteElevation = -aelr;
 
          bool withinView = true;
 
-      //   LCreal fieldOfRegardTheta = 0;
-      //   LCreal sensorMaxRange = 0;
+      //   double fieldOfRegardTheta = 0;
+      //   double sensorMaxRange = 0;
       //   {
-      //      //const basic::Pair* p = ((Player*)ownship)->getIrSystemByType( typeid(IrSensor) );
+      //      //const base::Pair* p = ((Player*)ownship)->getIrSystemByType( typeid(IrSensor) );
       //      //if (p != 0) {
       //         //const IrSensor* irSensor = (const IrSensor*)( p->object() );
       //         // fieldOfRegardTheta = irSensor->getFieldOfRegardTheta();
@@ -509,7 +511,7 @@ unsigned int TdbIr::processPlayers(basic::PairStream* const players)
             //ranges[numTgts] = losO2T[numTgts].normalize();
 
             // Computer range rate (meters/sec)
-            //rngRates[numTgts] = (LCreal) ((target->getVelocity() - v0) * losO2T[numTgts]);
+            //rngRates[numTgts] = (double) ((target->getVelocity() - v0) * losO2T[numTgts]);
 
             // Save the target pointer (for quick access)
             numTgts++;
@@ -533,14 +535,14 @@ bool TdbIr::horizonCheck(const osg::Vec3& position1, const osg::Vec3& position2)
    //LET .FIRST.NODE.DISTANCE.TO.HORIZON
    //         = SQRT.F(MAX.F (2.0 * EARTH.RADIUS * .FIRST.NODE.POSITION(3), 1.0) )
 
-   LCreal distance1 = lcSqrt( static_cast<LCreal>(2.0f * basic::Nav::ERADM * -position1.z()) );
+   double distance1 = std::sqrt( static_cast<double>(2.0f * base::Nav::ERADM * -position1.z()) );
    if (distance1 < 1.0f) distance1 = 1.0f;
 
 
    //      LET .SECOND.NODE.DISTANCE.TO.HORIZON
    //         = SQRT.F(MAX.F (2.0 * EARTH.RADIUS * .SECOND.NODE.POSITION(3), 1.0) )
 
-   LCreal distance2 = lcSqrt( static_cast<LCreal>(2.0f * basic::Nav::ERADM * -position2.z()) );
+   double distance2 = std::sqrt( static_cast<double>(2.0f * base::Nav::ERADM * -position2.z()) );
    if (distance2 < 1.0f) distance2 = 1.0f;
 
    //LET .RELATIVE.POSITION(*)
@@ -552,7 +554,7 @@ bool TdbIr::horizonCheck(const osg::Vec3& position1, const osg::Vec3& position2)
 
    osg::Vec3 groundVec = position1 - position2;
 
-   LCreal gndRng = lcSqrt ((groundVec.x() * groundVec.x())
+   double gndRng = std::sqrt ((groundVec.x() * groundVec.x())
                      + (groundVec.y() * groundVec.y()));
 
    //IF .GROUND.TRACK.RANGE < .FIRST.NODE.DISTANCE.TO.HORIZON

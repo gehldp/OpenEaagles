@@ -13,6 +13,7 @@
 #include <linux/joystick.h>
 
 #include "UsbJoystickImp.h"
+#include "openeaagles/base/util/string_utils.h"
 
 namespace oe {
 namespace iodevice {
@@ -65,13 +66,13 @@ void UsbJoystickImp::reset()
          char cbuff[128];
          // search for device at "/dev/jsX" first
          std::sprintf(cbuff, "/dev/js%d", getDeviceIndex());
-         if (doesFileExist(cbuff)) {
-           lcStrcpy(deviceName, sizeof(deviceName), cbuff);
+         if (base::doesFileExist(cbuff)) {
+           base::lcStrcpy(deviceName, sizeof(deviceName), cbuff);
          } else {
             // search for device at "/dev/input/jsX" next
             std::sprintf(cbuff, "/dev/input/js%d", getDeviceIndex());
-            if (doesFileExist(cbuff)) {
-               lcStrcpy(deviceName, sizeof(deviceName), cbuff);
+            if (base::doesFileExist(cbuff)) {
+               base::lcStrcpy(deviceName, sizeof(deviceName), cbuff);
             }
          }
       }
@@ -136,7 +137,7 @@ void UsbJoystickImp::reset()
 //------------------------------------------------------------------------------
 // Go get our AIs and DIs here
 //------------------------------------------------------------------------------
-void UsbJoystickImp::processInputs(const oe::LCreal dt, basic::IoData* const pInData)
+void UsbJoystickImp::processInputs(const double dt, base::IoData* const pInData)
 {
    js_event js; // joystick event structure
 
@@ -177,6 +178,6 @@ void UsbJoystickImp::processInputs(const oe::LCreal dt, basic::IoData* const pIn
    BaseClass::processInputs(dt,pInData);
 }
 
-} // ioDevice namespace
-} // end oe namespace
+}
+}
 

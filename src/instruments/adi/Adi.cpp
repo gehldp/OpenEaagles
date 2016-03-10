@@ -1,4 +1,6 @@
+
 #include "openeaagles/instruments/adi/Adi.h"
+#include "openeaagles/base/units/Angles.h"
 
 namespace oe {
 namespace instruments {
@@ -17,8 +19,8 @@ END_SLOTTABLE(Adi)
 //  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Adi)
-    ON_SLOT(1, setSlotMaxRate, basic::Angle)     // we can be sent an angle (degrees or radians) / per second
-    ON_SLOT(1, setSlotMaxRate, basic::Number)    // or a number as degrees per second
+    ON_SLOT(1, setSlotMaxRate, base::Angle)     // we can be sent an angle (degrees or radians) / per second
+    ON_SLOT(1, setSlotMaxRate, base::Number)    // or a number as degrees per second
 END_SLOT_MAP()
 
 
@@ -27,10 +29,10 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(Adi)
     // override the instrument event, since we need to use it ourself
-    ON_EVENT_OBJ(UPDATE_INSTRUMENTS, onUpdatePitchAdi, basic::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE, onUpdateRollDegAdi, basic::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE2, onUpdateRollRadAdi, basic::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE3, onUpdateMaxRateAdi, basic::Number)
+    ON_EVENT_OBJ(UPDATE_INSTRUMENTS, onUpdatePitchAdi, base::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE, onUpdateRollDegAdi, base::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE2, onUpdateRollRadAdi, base::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE3, onUpdateMaxRateAdi, base::Number)
 END_EVENT_HANDLER()
 
 //------------------------------------------------------------------------------
@@ -81,20 +83,20 @@ void Adi::draw()
 //------------------------------------------------------------------------------
 // updateData() -
 //------------------------------------------------------------------------------
-void Adi::updateData(const LCreal dt)
+void Adi::updateData(const double dt)
 {
     // update our base class first
     BaseClass::updateData(dt);
 
     // drive our adi toward the actual pitch, from our current pitch, no faster
     // than our MAX_RATE (this allows for greater fidelity, simulates an analog adi)
-    LCreal delta = 0;
-    delta = alim (lcAepcDeg(pitch - curTheta), maxRate * dt);
-    curTheta = lcAepcDeg(curTheta + delta);
+    double delta = 0;
+    delta = base::alim (base::Angle::aepcdDeg(pitch - curTheta), maxRate * dt);
+    curTheta = base::Angle::aepcdDeg(curTheta + delta);
 
     // now do the same thing for roll
-    delta = alim (lcAepcRad(roll - curPhi), maxRate * dt);
-    curPhi = lcAepcRad(curPhi + delta);
+    delta = base::alim (base::Angle::aepcdRad(roll - curPhi), maxRate * dt);
+    curPhi = base::Angle::aepcdRad(curPhi + delta);
 
     // get our table, and do the linear interpolation ourself
     setInstVal(curTheta);
@@ -103,18 +105,18 @@ void Adi::updateData(const LCreal dt)
 
 // SLOT functions
 //------------------------------------------------------------------------------
-// setSlotMaxRate(basic::Angle)
+// setSlotMaxRate(base::Angle)
 //------------------------------------------------------------------------------
-bool Adi::setSlotMaxRate(const basic::Angle* const newMR)
+bool Adi::setSlotMaxRate(const base::Angle* const newMR)
 {
     bool ok = false;
-    if (newMR != nullptr) ok = setMaxRate( static_cast<LCreal>(basic::Degrees::convertStatic(*newMR)) );
+    if (newMR != nullptr) ok = setMaxRate( static_cast<double>(base::Degrees::convertStatic(*newMR)) );
     return ok;
 }
 //------------------------------------------------------------------------------
 // setSlotMaxRate() -
 //------------------------------------------------------------------------------
-bool Adi::setSlotMaxRate(const basic::Number* const newMR)
+bool Adi::setSlotMaxRate(const base::Number* const newMR)
 {
     bool ok = false;
     if (newMR != nullptr) ok = setMaxRate(newMR->getReal());
@@ -125,7 +127,7 @@ bool Adi::setSlotMaxRate(const basic::Number* const newMR)
 //------------------------------------------------------------------------------
 // onUpdateRollDegAdi() - update roll by degrees
 //------------------------------------------------------------------------------
-bool Adi::onUpdateRollDegAdi(const basic::Number* const newR)
+bool Adi::onUpdateRollDegAdi(const base::Number* const newR)
 {
     bool ok = false;
     if (newR != nullptr) ok = setRollDeg(newR->getReal());
@@ -134,7 +136,7 @@ bool Adi::onUpdateRollDegAdi(const basic::Number* const newR)
 //------------------------------------------------------------------------------
 // onUpdateRollRadAdi() - update roll by radians
 //------------------------------------------------------------------------------
-bool Adi::onUpdateRollRadAdi(const basic::Number* const newR)
+bool Adi::onUpdateRollRadAdi(const base::Number* const newR)
 {
     bool ok = false;
     if (newR != nullptr) ok = setRollRad(newR->getReal());
@@ -143,7 +145,7 @@ bool Adi::onUpdateRollRadAdi(const basic::Number* const newR)
 //------------------------------------------------------------------------------
 // onUpdatePitchAdi() - update pitch (degrees)
 //------------------------------------------------------------------------------
-bool Adi::onUpdatePitchAdi(const basic::Number* const newP)
+bool Adi::onUpdatePitchAdi(const base::Number* const newP)
 {
     bool ok = false;
     if (newP != nullptr) ok = setPitch(newP->getReal());
@@ -152,7 +154,7 @@ bool Adi::onUpdatePitchAdi(const basic::Number* const newP)
 //------------------------------------------------------------------------------
 // onUpdateMaxRateAdi() - set our max rate for the ADI
 //------------------------------------------------------------------------------
-bool Adi::onUpdateMaxRateAdi(const basic::Number* const newMR)
+bool Adi::onUpdateMaxRateAdi(const base::Number* const newMR)
 {
     bool ok = false;
     if (newMR != nullptr) ok = setMaxRate(newMR->getReal());
@@ -163,15 +165,15 @@ bool Adi::onUpdateMaxRateAdi(const basic::Number* const newMR)
 //------------------------------------------------------------------------------
 // setRollDeg() - set our amount of roll in degrees
 //------------------------------------------------------------------------------
-bool Adi::setRollDeg(const LCreal newR)
+bool Adi::setRollDeg(const double newR)
 {
-    roll = newR * static_cast<LCreal>(basic::Angle::D2RCC);
+    roll = newR * static_cast<double>(base::Angle::D2RCC);
     return true;
 }
 //------------------------------------------------------------------------------
 // setRollRad() - set roll in radians
 //------------------------------------------------------------------------------
-bool Adi::setRollRad(const LCreal newR)
+bool Adi::setRollRad(const double newR)
 {
     roll = newR;
     return true;
@@ -179,7 +181,7 @@ bool Adi::setRollRad(const LCreal newR)
 //------------------------------------------------------------------------------
 // setPitch() - set our pitch value (degrees)
 //------------------------------------------------------------------------------
-bool Adi::setPitch(const LCreal newP)
+bool Adi::setPitch(const double newP)
 {
     pitch = newP;
     return true;
@@ -187,7 +189,7 @@ bool Adi::setPitch(const LCreal newP)
 //------------------------------------------------------------------------------
 // setMaxRate() - set our max rate
 //------------------------------------------------------------------------------
-bool Adi::setMaxRate(const LCreal newMR)
+bool Adi::setMaxRate(const double newMR)
 {
     maxRate = newMR;
     return true;
@@ -196,7 +198,7 @@ bool Adi::setMaxRate(const LCreal newMR)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Adi
 //------------------------------------------------------------------------------
-basic::Object* Adi::getSlotByIndex(const int si)
+base::Object* Adi::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

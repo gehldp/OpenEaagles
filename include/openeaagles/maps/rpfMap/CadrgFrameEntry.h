@@ -21,7 +21,7 @@
 #define __oe_maps_rpf_CadrgFrameEntry_H__
 
 #include "openeaagles/maps/rpfMap/CadrgClut.h"
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 namespace oe {
 namespace maps {
@@ -29,9 +29,9 @@ namespace rpf {
 
 class CadrgFrame;
 
-class CadrgFrameEntry : public basic::Object
+class CadrgFrameEntry : public base::Object
 {
-    DECLARE_SUBCLASS(CadrgFrameEntry, basic::Object)
+    DECLARE_SUBCLASS(CadrgFrameEntry, base::Object)
 
 public:
     CadrgFrameEntry();

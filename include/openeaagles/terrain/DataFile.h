@@ -4,7 +4,7 @@
 #ifndef __oe_terrain_DataFile_H__
 #define __oe_terrain_DataFile_H__
 
-#include "openeaagles/basic/Terrain.h"
+#include "openeaagles/base/Terrain.h"
 
 namespace oe {
 namespace terrain {
@@ -19,9 +19,9 @@ namespace terrain {
 //    2) the final elevation point [n-1] is at the maximum range
 //    3) The size of all arrays, n, must contain at least 2 points (ref point & max range)
 //------------------------------------------------------------------------------
-class DataFile : public basic::Terrain
+class DataFile : public base::Terrain
 {
-   DECLARE_SUBCLASS(DataFile, basic::Terrain)
+   DECLARE_SUBCLASS(DataFile, base::Terrain)
 
 public:
    DataFile();
@@ -55,7 +55,7 @@ public:
    const short* getColumn(const unsigned int idx) const;
 
    // ---
-   // basic::Terrain interface
+   // base::Terrain interface
    // ---
 
    bool isDataLoaded() const override;
@@ -63,20 +63,20 @@ public:
    // Locates an array of (at least two) elevation points (and sets valid flags if found)
    // returns the number of points found within this DataFile
    virtual unsigned int getElevations(
-         LCreal* const elevations,     // The elevation array (meters)
+         double* const elevations,     // The elevation array (meters)
          bool* const validFlags,       // Valid elevation flag array (true if elevation was found)
          const unsigned int n,         // Size of elevation and valdFlags arrays
          const double lat,             // Starting latitude (degs)
          const double lon,             // Starting longitude (degs)
-         const LCreal direction,       // True direction (heading) angle of the data (degs)
-         const LCreal maxRng,          // Range to last elevation point (meters)
+         const double direction,       // True direction (heading) angle of the data (degs)
+         const double maxRng,          // Range to last elevation point (meters)
          const bool   interp = false   // Interpolate between elevation posts (default: false)
       ) const;
 
    // Locates an elevation value (meters) for a given reference point and returns
    // it in 'elev'.  Function returns true if successful, otherwise 'elev' is unchanged.
    virtual bool getElevation(
-         LCreal* const elev,           // The elevation value (meters)
+         double* const elev,           // The elevation value (meters)
          const double lat,             // Reference latitude (degs)
          const double lon,             // Reference longitude (degs)
          const bool interp = false     // Interpolate between elevation posts (default: false)
@@ -90,7 +90,7 @@ protected:
    unsigned int nptlong;            // Number of points in longitude (i.e., number of columns)
    short    voidValue;              // Value representing a void (missing) data point
 
-   // basic::Terrain protected interface
+   // base::Terrain protected interface
    void clearData() override;
 };
 

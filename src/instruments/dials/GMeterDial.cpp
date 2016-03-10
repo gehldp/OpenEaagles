@@ -1,6 +1,6 @@
 #include "openeaagles/instruments/dials/GMeterDial.h"
 
-#include "openeaagles/basic/PairStream.h"
+#include "openeaagles/base/PairStream.h"
 
 namespace oe {
 namespace instruments {
@@ -60,7 +60,7 @@ void GMeterDial::reset()
 //------------------------------------------------------------------------------
 void GMeterDial::drawFunc()
 {
-   basic::PairStream* subcomponents = getComponents();
+   base::PairStream* subcomponents = getComponents();
    if (subcomponents != nullptr) {
       subcomponents->unref();
       subcomponents = nullptr;
@@ -114,7 +114,7 @@ void GMeterDial::drawFunc()
 //------------------------------------------------------------------------------
 // updateData() -
 //------------------------------------------------------------------------------
-void GMeterDial::updateData(const LCreal dt)
+void GMeterDial::updateData(const double dt)
 {
     BaseClass::updateData(dt);
 
@@ -125,7 +125,7 @@ void GMeterDial::updateData(const LCreal dt)
     // update our values here
 
     {
-       basic::PairStream* subcomponents = getComponents();
+       base::PairStream* subcomponents = getComponents();
        if (subcomponents == nullptr) return;
        subcomponents->unref();
        subcomponents = nullptr;

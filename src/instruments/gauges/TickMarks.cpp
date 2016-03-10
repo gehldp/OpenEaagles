@@ -1,5 +1,5 @@
 #include "openeaagles/instruments/gauges/TickMarks.h"
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/Number.h"
 
 namespace oe {
 namespace instruments {
@@ -19,10 +19,10 @@ END_SLOTTABLE(TickMarks)
 //  Map slot table to handles for Analog Dial
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(TickMarks)
-    ON_SLOT(1, setSlotTickMarkLength, basic::Number)
-    ON_SLOT(2, setSlotQuantity, basic::Number)
-    ON_SLOT(3, setSlotGaugeLength, basic::Number)
-    ON_SLOT(4, setSlotFlip, basic::Number)
+    ON_SLOT(1, setSlotTickMarkLength, base::Number)
+    ON_SLOT(2, setSlotQuantity, base::Number)
+    ON_SLOT(3, setSlotGaugeLength, base::Number)
+    ON_SLOT(4, setSlotFlip, base::Number)
     ON_SLOT(5, setTickGraphic, graphics::Graphic)
 END_SLOT_MAP()
 
@@ -75,7 +75,7 @@ void TickMarks::drawFunc()
     glGetFloatv(GL_CURRENT_COLOR, currentColor);
 
     // determine our tick mark spacing (make sure our quantity != 0)
-    LCreal spacing = 0;
+    double spacing = 0;
     if (quantity != 1) spacing = gaugeLength/(quantity-1);
     // if we don't have any, return
     else if (quantity == 0) return;
@@ -127,7 +127,7 @@ void TickMarks::drawFunc()
 //------------------------------------------------------------------------------
 // setSlotTickMarkLength() -- sets our tick mark length
 //------------------------------------------------------------------------------
-bool TickMarks::setSlotTickMarkLength(const basic::Number* const newLength)
+bool TickMarks::setSlotTickMarkLength(const base::Number* const newLength)
 {
     bool ok = true;
     if (newLength != nullptr) ok = setTickMarkLength(newLength->getReal());
@@ -136,7 +136,7 @@ bool TickMarks::setSlotTickMarkLength(const basic::Number* const newLength)
 //------------------------------------------------------------------------------
 // setSlotQuantity() -- sets the number of tick marks
 //------------------------------------------------------------------------------
-bool TickMarks::setSlotQuantity(const basic::Number* const newQ)
+bool TickMarks::setSlotQuantity(const base::Number* const newQ)
 {
     bool ok = true;
     if (newQ != nullptr) ok = setQuantity(newQ->getInt());
@@ -145,7 +145,7 @@ bool TickMarks::setSlotQuantity(const basic::Number* const newQ)
 //------------------------------------------------------------------------------
 // setSlotGaugeLength()
 //------------------------------------------------------------------------------
-bool TickMarks::setSlotGaugeLength(const basic::Number* const newL)
+bool TickMarks::setSlotGaugeLength(const base::Number* const newL)
 {
     bool ok = true;
     if (newL != nullptr) ok = setGaugeLength(newL->getReal());
@@ -154,7 +154,7 @@ bool TickMarks::setSlotGaugeLength(const basic::Number* const newL)
 //------------------------------------------------------------------------------
 // setSlotFlit()
 //------------------------------------------------------------------------------
-bool TickMarks::setSlotFlip(const basic::Number* const x)
+bool TickMarks::setSlotFlip(const base::Number* const x)
 {
     bool ok = true;
     if (x != nullptr) ok = setFlip(x->getBoolean());
@@ -183,7 +183,7 @@ bool TickMarks::setTickGraphic(const graphics::Graphic* const newGraphic)
 //------------------------------------------------------------------------------
 // setTickMarkLength() -- sets tick mark length
 //------------------------------------------------------------------------------
-bool TickMarks::setTickMarkLength(const LCreal newLength)
+bool TickMarks::setTickMarkLength(const double newLength)
 {
     lengthTM = newLength;
     return true;
@@ -199,7 +199,7 @@ bool TickMarks::setQuantity(const int newQ)
 //------------------------------------------------------------------------------
 // setGaugeLength() -- sets our span to draw tick marks over
 //------------------------------------------------------------------------------
-bool TickMarks::setGaugeLength(const LCreal newL)
+bool TickMarks::setGaugeLength(const double newL)
 {
     gaugeLength = newL;
     return true;
@@ -216,7 +216,7 @@ bool TickMarks::setFlip(const bool x)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for TickMarks
 //------------------------------------------------------------------------------
-basic::Object* TickMarks::getSlotByIndex(const int si)
+base::Object* TickMarks::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

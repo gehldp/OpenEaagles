@@ -2,10 +2,12 @@
 #include "openeaagles/graphics/Readouts.h"
 
 #include "openeaagles/graphics/Display.h"
-#include "openeaagles/basic/Float.h"
-#include "openeaagles/basic/Integer.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/Pair.h"
+#include "openeaagles/base/Float.h"
+#include "openeaagles/base/Integer.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/util/string_utils.h"
+
 #include "Reformat.h"
 
 #include <cstdio>
@@ -34,13 +36,13 @@ BEGIN_SLOTTABLE(AsciiText)
 END_SLOTTABLE(AsciiText)
 
 BEGIN_SLOT_MAP(AsciiText)
-   ON_SLOT(1,setTextString, basic::String)
-   ON_SLOT(1,setTextList, basic::List)
+   ON_SLOT(1,setTextString, base::String)
+   ON_SLOT(1,setTextList, base::List)
 END_SLOT_MAP()
 
 // Event handlers for AsciiText events
 BEGIN_EVENT_HANDLER(AsciiText)
-   ON_EVENT_OBJ(UPDATE_VALUE,setTextString,basic::String)
+   ON_EVENT_OBJ(UPDATE_VALUE,setTextString,base::String)
 END_EVENT_HANDLER()
 
 //------------------------------------------------------------------------------
@@ -70,8 +72,8 @@ bool AsciiText::isValidInputPosition(const int)
 // Slot functions
 //------------------------------------------------------------------------------
 
-// setTextString() -- takes in a basic::String and sets it
-bool AsciiText::setTextString(const basic::String* const stsobj)
+// setTextString() -- takes in a base::String and sets it
+bool AsciiText::setTextString(const base::String* const stsobj)
 {
    bool ok = true;
    if (stsobj != nullptr) {
@@ -88,7 +90,7 @@ bool AsciiText::setTextString(const basic::String* const stsobj)
 }
 
 // setTextList() -- takes in alist of ascii numbers
-bool AsciiText::setTextList(const basic::List* const stlobj)
+bool AsciiText::setTextList(const base::List* const stlobj)
 {
    bool ok = true;
    if (stlobj != nullptr) {
@@ -118,7 +120,7 @@ bool AsciiText::setTextList(const basic::List* const stlobj)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* AsciiText::getSlotByIndex(const int si)
+base::Object* AsciiText::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
@@ -171,7 +173,7 @@ Cursor::Cursor()
 //------------------------------------------------------------------------------
 // updateData --
 //------------------------------------------------------------------------------
-void Cursor::updateData(const LCreal dt)
+void Cursor::updateData(const double dt)
 {
    int ln = 0;
    int cp = 0;
@@ -213,26 +215,26 @@ BEGIN_SLOTTABLE(NumericReadout)
 END_SLOTTABLE(NumericReadout)
 
 BEGIN_SLOT_MAP(NumericReadout)
-   ON_SLOT(1,setSlotFloatToBeDisplayed,basic::Float)
-   ON_SLOT(1,setSlotNumberToBeDisplayed,basic::Number)
-   ON_SLOT(2,setSlotFloatMaxValue,basic::Float)
-   ON_SLOT(2,setSlotNumberMaxValue,basic::Number)
-   ON_SLOT(3,setSlotExampleFormatText,basic::String)
-   ON_SLOT(4,setSlotPlusChar,basic::String)
-   ON_SLOT(5,setSlotMinusChar,basic::String)
-   ON_SLOT(6,setSlotDecimalPointChar,basic::String)
-   ON_SLOT(7,setSlotUndefinedChar,basic::String)
-   ON_SLOT(8,setSlotOverflowChar,basic::String)
-   ON_SLOT(9,setSlotMaxValid,basic::Number)
-   ON_SLOT(10,setSlotMinValid,basic::Number)
-   ON_SLOT(11,setSlotBlankZero,basic::Number)
+   ON_SLOT(1,setSlotFloatToBeDisplayed,base::Float)
+   ON_SLOT(1,setSlotNumberToBeDisplayed,base::Number)
+   ON_SLOT(2,setSlotFloatMaxValue,base::Float)
+   ON_SLOT(2,setSlotNumberMaxValue,base::Number)
+   ON_SLOT(3,setSlotExampleFormatText,base::String)
+   ON_SLOT(4,setSlotPlusChar,base::String)
+   ON_SLOT(5,setSlotMinusChar,base::String)
+   ON_SLOT(6,setSlotDecimalPointChar,base::String)
+   ON_SLOT(7,setSlotUndefinedChar,base::String)
+   ON_SLOT(8,setSlotOverflowChar,base::String)
+   ON_SLOT(9,setSlotMaxValid,base::Number)
+   ON_SLOT(10,setSlotMinValid,base::Number)
+   ON_SLOT(11,setSlotBlankZero,base::Number)
 END_SLOT_MAP()
 
 // Event handlers for NumericReadout events
 BEGIN_EVENT_HANDLER(NumericReadout)
-ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, basic::Float)
-ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, basic::Integer)
-ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, basic::Number)
+ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, base::Float)
+ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, base::Integer)
+ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, base::Number)
 END_EVENT_HANDLER()
 
 //------------------------------------------------------------------------------
@@ -243,19 +245,19 @@ NumericReadout::NumericReadout()
    STANDARD_CONSTRUCTOR()
 
    num  = 0.0;
-   maxNum = UNDEFINED_VALUE;
+   maxNum = base::UNDEFINED_VALUE;
    cbuf[0]   = '\0';
    format[0] = '\0';
-   lcStrcpy(format,FORMAT_LENGTH,"%.0f");
-   justification(basic::String::RIGHT);
+   base::lcStrcpy(format,FORMAT_LENGTH,"%.0f");
+   justification(base::String::RIGHT);
    plusChar = '\0';
    minusChar = '\0';
    dpChar    = '\0';
    undefinedChar = '-';
    overflowChar  = '*';
    postSign = false;
-   maxValid = UNDEFINED_VALUE;
-   minValid = UNDEFINED_VALUE;
+   maxValid = base::UNDEFINED_VALUE;
+   minValid = base::UNDEFINED_VALUE;
    blankZero = false;
 }
 
@@ -264,8 +266,8 @@ void NumericReadout::copyData(const NumericReadout& org, const bool)
    BaseClass::copyData(org);
 
    // copy the display buffer, example format, and the sprintf format
-   lcStrcpy(cbuf,CBUF_LENGTH,org.cbuf);
-   lcStrcpy(format,FORMAT_LENGTH,org.format);
+   base::lcStrcpy(cbuf,CBUF_LENGTH,org.cbuf);
+   base::lcStrcpy(format,FORMAT_LENGTH,org.format);
 
    // copy other member variables
    plusChar  = org.plusChar;
@@ -284,7 +286,7 @@ void NumericReadout::copyData(const NumericReadout& org, const bool)
 void NumericReadout::deleteData()
 {
    cbuf[0]   = '\0';
-   lcStrcpy(format,FORMAT_LENGTH,"%.0f");
+   base::lcStrcpy(format,FORMAT_LENGTH,"%.0f");
    plusChar  = '\0';
    minusChar = '\0';
    dpChar    = '\0';
@@ -298,7 +300,7 @@ void NumericReadout::deleteData()
 //------------------------------------------------------------------------------
 // updateData() -- Update non-time critical (background) stuff here
 //------------------------------------------------------------------------------
-void NumericReadout::updateData(const LCreal dt)
+void NumericReadout::updateData(const double dt)
 {
    BaseClass::updateData(dt);
 }
@@ -310,8 +312,8 @@ bool NumericReadout::isInputValueValid() const
 {
    bool ok = true;
    const double val = getInputValue();
-   if ( (minValid != UNDEFINED_VALUE && val < minValid) ||
-        (maxValid != UNDEFINED_VALUE && val > maxValid) ) {
+   if ( (minValid != base::UNDEFINED_VALUE && val < minValid) ||
+        (maxValid != base::UNDEFINED_VALUE && val > maxValid) ) {
       ok = false;
    }
    return ok;
@@ -355,7 +357,7 @@ double NumericReadout::getInputValue() const
    const size_t CBUFLOCAL_LEN = 100;
    char cbuf[CBUFLOCAL_LEN];
    const char* p = *this;
-   lcStrcpy(cbuf,CBUFLOCAL_LEN,p);
+   base::lcStrcpy(cbuf,CBUFLOCAL_LEN,p);
    if (cbuf[0] == plusChar)  cbuf[0] = '+';
    if (cbuf[0] == minusChar) cbuf[0] = '-';
 
@@ -400,7 +402,7 @@ void NumericReadout::redisplay()
    }
 
    // Check if we have an undefined value and should place dashes in the display
-   if (num == UNDEFINED_VALUE) {
+   if (num == base::UNDEFINED_VALUE) {
       size_t i;
       for (i = 0; i < width(); i++) {
          cbuf[i] = undefinedChar;
@@ -411,7 +413,7 @@ void NumericReadout::redisplay()
    }
 
    // Check if we have an undefined value and should place dashes in the display
-   if (maxNum != UNDEFINED_VALUE && num > maxNum) {
+   if (maxNum != base::UNDEFINED_VALUE && num > maxNum) {
       size_t i;
       for (i = 0; i < width(); i++) {
          cbuf[i] = overflowChar;
@@ -485,7 +487,7 @@ void NumericReadout::reformat(const char* const example)
 {
    if (reformatter->convertNumber(example) != Reformat::invalid) {
       setExample(example);
-      lcStrcpy(format,FORMAT_LENGTH,reformatter->getFormat());
+      base::lcStrcpy(format,FORMAT_LENGTH,reformatter->getFormat());
       postSign = reformatter->isPostSign();
       redisplay();
    }
@@ -495,8 +497,8 @@ void NumericReadout::reformat(const char* const example)
 // Event functions
 //------------------------------------------------------------------------------
 
-// onUpdateValue() - for basic::Float
-bool NumericReadout::onUpdateValue(const basic::Float* const ouvobj)
+// onUpdateValue() - for base::Float
+bool NumericReadout::onUpdateValue(const base::Float* const ouvobj)
 {
    if (ouvobj != nullptr) {
       setValue(ouvobj->getDouble());
@@ -504,8 +506,8 @@ bool NumericReadout::onUpdateValue(const basic::Float* const ouvobj)
    return true;
 }
 
-// onUpdateValue() - for basic::Integer
-bool NumericReadout::onUpdateValue(const basic::Integer* const ouvobj)
+// onUpdateValue() - for base::Integer
+bool NumericReadout::onUpdateValue(const base::Integer* const ouvobj)
 {
    if (ouvobj != nullptr) {
       setValue(ouvobj->getInt());
@@ -513,8 +515,8 @@ bool NumericReadout::onUpdateValue(const basic::Integer* const ouvobj)
    return true;
 }
 
-// onUpdateValue() - for basic::Number
-bool NumericReadout::onUpdateValue(const basic::Number* const ouvobj)
+// onUpdateValue() - for base::Number
+bool NumericReadout::onUpdateValue(const base::Number* const ouvobj)
 {
    if (ouvobj != nullptr) {
       setValue(ouvobj->getDouble());
@@ -527,7 +529,7 @@ bool NumericReadout::onUpdateValue(const basic::Number* const ouvobj)
 //------------------------------------------------------------------------------
 
 //  setSlotFloatToBeDisplayed() --
-bool NumericReadout::setSlotFloatToBeDisplayed(const basic::Float* const sftbdobj)
+bool NumericReadout::setSlotFloatToBeDisplayed(const base::Float* const sftbdobj)
 {
    bool ok = true;
    if (sftbdobj != nullptr) {
@@ -544,7 +546,7 @@ bool NumericReadout::setSlotFloatToBeDisplayed(const basic::Float* const sftbdob
 }
 
 //  setSlotNumberToBeDisplayed() --
-bool NumericReadout::setSlotNumberToBeDisplayed(const basic::Number* const sntbdobj)
+bool NumericReadout::setSlotNumberToBeDisplayed(const base::Number* const sntbdobj)
 {
    bool ok = true;
    if (sntbdobj != nullptr) {
@@ -560,7 +562,7 @@ bool NumericReadout::setSlotNumberToBeDisplayed(const basic::Number* const sntbd
 }
 
 //  setSlotFloatMaxValue() --
-bool NumericReadout::setSlotFloatMaxValue(const basic::Float* const sfmvobj)
+bool NumericReadout::setSlotFloatMaxValue(const base::Float* const sfmvobj)
 {
    bool ok = true;
    if (sfmvobj != nullptr) {
@@ -576,7 +578,7 @@ bool NumericReadout::setSlotFloatMaxValue(const basic::Float* const sfmvobj)
 }
 
 //  setSlotNumberMaxValue() --
-bool NumericReadout::setSlotNumberMaxValue(const basic::Number* const snmvobj)
+bool NumericReadout::setSlotNumberMaxValue(const base::Number* const snmvobj)
 {
    bool ok = true;
    if (snmvobj != nullptr) {
@@ -592,7 +594,7 @@ bool NumericReadout::setSlotNumberMaxValue(const basic::Number* const snmvobj)
 }
 
 //  setSlotExampleFormatText() --
-bool NumericReadout::setSlotExampleFormatText(const basic::String* const seftobj)
+bool NumericReadout::setSlotExampleFormatText(const base::String* const seftobj)
 {
    bool ok = true;
    if (seftobj != nullptr) {
@@ -609,7 +611,7 @@ bool NumericReadout::setSlotExampleFormatText(const basic::String* const seftobj
 }
 
 //  setSlotPlusChar() -- positive value character
-bool NumericReadout::setSlotPlusChar(const basic::String* const spcobj)
+bool NumericReadout::setSlotPlusChar(const base::String* const spcobj)
 {
    bool ok = true;
    if (spcobj != nullptr) {
@@ -627,7 +629,7 @@ bool NumericReadout::setSlotPlusChar(const basic::String* const spcobj)
 }
 
 //  setSlotMinusChar() -- negative value character
-bool NumericReadout::setSlotMinusChar(const basic::String* const smcobj)
+bool NumericReadout::setSlotMinusChar(const base::String* const smcobj)
 {
    bool ok = true;
    if (smcobj != nullptr) {
@@ -645,7 +647,7 @@ bool NumericReadout::setSlotMinusChar(const basic::String* const smcobj)
 }
 
 //  setSlotDecimalPointChar() -- decimal point character
-bool NumericReadout::setSlotDecimalPointChar(const basic::String* const sdpcobj)
+bool NumericReadout::setSlotDecimalPointChar(const base::String* const sdpcobj)
 {
    bool ok = true;
    if (sdpcobj != nullptr) {
@@ -663,7 +665,7 @@ bool NumericReadout::setSlotDecimalPointChar(const basic::String* const sdpcobj)
 }
 
 //  setSlotUndefinedChar() -- undefined value character
-bool NumericReadout::setSlotUndefinedChar(const basic::String* const sucobj)
+bool NumericReadout::setSlotUndefinedChar(const base::String* const sucobj)
 {
    bool ok = true;
    if (sucobj != nullptr) {
@@ -681,7 +683,7 @@ bool NumericReadout::setSlotUndefinedChar(const basic::String* const sucobj)
 }
 
 //  setSlotMaxValid() -- Maximum valid value
-bool NumericReadout::setSlotMaxValid(const basic::Number* const msg)
+bool NumericReadout::setSlotMaxValid(const base::Number* const msg)
 {
    bool ok = true;
    if (msg != nullptr) {
@@ -697,7 +699,7 @@ bool NumericReadout::setSlotMaxValid(const basic::Number* const msg)
 }
 
 //  setSlotMinValid() -- Minimum valid value
-bool NumericReadout::setSlotMinValid(const basic::Number* const msg)
+bool NumericReadout::setSlotMinValid(const base::Number* const msg)
 {
    bool ok = true;
    if (msg != nullptr) {
@@ -713,7 +715,7 @@ bool NumericReadout::setSlotMinValid(const basic::Number* const msg)
 }
 
 //  setSlotBlankZero() -- Display blank if value is zero
-bool NumericReadout::setSlotBlankZero(const basic::Number* const msg)
+bool NumericReadout::setSlotBlankZero(const base::Number* const msg)
 {
    bool ok = true;
    if (msg != nullptr) {
@@ -729,7 +731,7 @@ bool NumericReadout::setSlotBlankZero(const basic::Number* const msg)
 }
 
 //  setSlotOverflowChar() --overflow character
-bool NumericReadout::setSlotOverflowChar(const basic::String* const socobj)
+bool NumericReadout::setSlotOverflowChar(const base::String* const socobj)
 {
    bool ok = true;
    if (socobj != nullptr) {
@@ -749,7 +751,7 @@ bool NumericReadout::setSlotOverflowChar(const basic::String* const socobj)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* NumericReadout::getSlotByIndex(const int si)
+base::Object* NumericReadout::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
@@ -770,7 +772,7 @@ std::ostream& NumericReadout::serialize(std::ostream& sout, const int i, const b
       sout << "value: " << num << std::endl;
    }
 
-   if (maxNum != UNDEFINED_VALUE) {
+   if (maxNum != base::UNDEFINED_VALUE) {
       indent(sout,i+j);
       sout << "maxValue: " << maxNum << std::endl;
    }
@@ -805,12 +807,12 @@ std::ostream& NumericReadout::serialize(std::ostream& sout, const int i, const b
       sout << "overflowChar: " << '\"' << overflowChar << '\"' << std::endl;
    }
 
-   if (maxValid != UNDEFINED_VALUE) {
+   if (maxValid != base::UNDEFINED_VALUE) {
       indent(sout,i+j);
       sout << "maxValid: " << maxValid << std::endl;
    }
 
-   if (minValid != UNDEFINED_VALUE) {
+   if (minValid != base::UNDEFINED_VALUE) {
       indent(sout,i+j);
       sout << "minValid: " << minValid << std::endl;
    }
@@ -844,7 +846,7 @@ EMPTY_SERIALIZER(HexReadout)
 HexReadout::HexReadout()
 {
    STANDARD_CONSTRUCTOR()
-   lcStrcpy(format,FORMAT_LENGTH,"%X");
+   base::lcStrcpy(format,FORMAT_LENGTH,"%X");
 }
 
 //------------------------------------------------------------------------------
@@ -876,7 +878,7 @@ double HexReadout::getInputValue() const
    const size_t CBUFLOCAL_LEN = 100;
    char cbuf[CBUFLOCAL_LEN];
    const char* p = *this;
-   lcStrcpy(cbuf,CBUFLOCAL_LEN,p);
+   base::lcStrcpy(cbuf,CBUFLOCAL_LEN,p);
    if (cbuf[0] == plusChar)  cbuf[0] = '+';
    if (cbuf[0] == minusChar) cbuf[0] = '-';
 
@@ -899,7 +901,7 @@ void HexReadout::reformat(const char* const example)
 {
    if (reformatter->convertHex(example) != Reformat::invalid) {
       setExample(example);
-      lcStrcpy(format,FORMAT_LENGTH,reformatter->getFormat());
+      base::lcStrcpy(format,FORMAT_LENGTH,reformatter->getFormat());
       postSign = reformatter->isPostSign();
       redisplay();
    }
@@ -920,7 +922,7 @@ EMPTY_SERIALIZER(OctalReadout)
 OctalReadout::OctalReadout()
 {
    STANDARD_CONSTRUCTOR()
-   lcStrcpy(format,FORMAT_LENGTH,"%o");
+   base::lcStrcpy(format,FORMAT_LENGTH,"%o");
 }
 
 //------------------------------------------------------------------------------
@@ -952,7 +954,7 @@ double OctalReadout::getInputValue() const
    const size_t CBUFLOCAL_LEN = 100;
    char cbuf[CBUFLOCAL_LEN];
    const char* p = *this;
-   lcStrcpy(cbuf,CBUFLOCAL_LEN,p);
+   base::lcStrcpy(cbuf,CBUFLOCAL_LEN,p);
    if (cbuf[0] == plusChar)  cbuf[0] = '+';
    if (cbuf[0] == minusChar) cbuf[0] = '-';
 
@@ -975,7 +977,7 @@ void OctalReadout::reformat(const char* const example)
 {
    if (reformatter->convertOctal(example) != Reformat::invalid) {
       setExample(example);
-      lcStrcpy(format,FORMAT_LENGTH,reformatter->getFormat());
+      base::lcStrcpy(format,FORMAT_LENGTH,reformatter->getFormat());
       postSign = reformatter->isPostSign();
       redisplay();
    }
@@ -996,7 +998,7 @@ TimeReadout::TimeReadout()
 {
    STANDARD_CONSTRUCTOR()
 
-   lcStrcpy(format,FORMAT_LENGTH,"%02d:%02d:%04.1f");
+   base::lcStrcpy(format,FORMAT_LENGTH,"%02d:%02d:%04.1f");
    tmode = hhmmss;
 }
 
@@ -1036,7 +1038,7 @@ double TimeReadout::getInputValue() const
    const size_t CBUFLOCAL_LEN = 100;
    char cbuf[CBUFLOCAL_LEN];
    const char* p = *this;
-   lcStrcpy(cbuf,CBUFLOCAL_LEN,p);
+   base::lcStrcpy(cbuf,CBUFLOCAL_LEN,p);
    if (cbuf[0] == plusChar)  cbuf[0] = '+';
    if (cbuf[0] == minusChar) cbuf[0] = '-';
 
@@ -1208,7 +1210,7 @@ void TimeReadout::reformat(const char* const example)
    TimeMode results = reformatter->convertTime(example);
    if (results != invalid) {
       setExample(example);
-      lcStrcpy(format,FORMAT_LENGTH,reformatter->getFormat());
+      base::lcStrcpy(format,FORMAT_LENGTH,reformatter->getFormat());
       tmode = results;
       postSign = reformatter->isPostSign();
       redisplay();
@@ -1230,7 +1232,7 @@ DirectionReadout::DirectionReadout()
 {
    STANDARD_CONSTRUCTOR()
 
-   lcStrcpy(format,FORMAT_LENGTH,"%+07.2f");
+   base::lcStrcpy(format,FORMAT_LENGTH,"%+07.2f");
    tmode = dd;
 }
 
@@ -1282,7 +1284,7 @@ double DirectionReadout::getInputValue() const
    const size_t CBUFLOCAL_LEN = 100;
    char cbuf[CBUFLOCAL_LEN];
    const char* p = *this;
-   lcStrcpy(cbuf,CBUFLOCAL_LEN,p);
+   base::lcStrcpy(cbuf,CBUFLOCAL_LEN,p);
    if (cbuf[0] == plusChar)  cbuf[0] = '+';
    if (cbuf[0] == minusChar) cbuf[0] = '-';
 
@@ -1373,7 +1375,7 @@ void DirectionReadout::reformat(const char* const example)
    DirMode results = reformatter->convertDirection(example);
    if (results != invalid) {
       setExample(example);
-      lcStrcpy(format,FORMAT_LENGTH,reformatter->getFormat());
+      base::lcStrcpy(format,FORMAT_LENGTH,reformatter->getFormat());
       tmode = results;
       postSign = reformatter->isPostSign();
       redisplay();
@@ -1396,7 +1398,7 @@ LatitudeReadout::LatitudeReadout()
 {
    STANDARD_CONSTRUCTOR()
 
-   lcStrcpy(format,FORMAT_LENGTH,"%+03d@%04.1f");
+   base::lcStrcpy(format,FORMAT_LENGTH,"%+03d@%04.1f");
    tmode = ddmm;
    plusChar = 'N';
    minusChar = 'S';
@@ -1439,7 +1441,7 @@ LongitudeReadout::LongitudeReadout()
 {
    STANDARD_CONSTRUCTOR()
 
-   lcStrcpy(format,FORMAT_LENGTH,"%+04d@%04.1f");
+   base::lcStrcpy(format,FORMAT_LENGTH,"%+04d@%04.1f");
    tmode = ddmm;
    plusChar = 'E';
    minusChar = 'W';
@@ -1482,7 +1484,7 @@ Rotary::Rotary()
 {
    STANDARD_CONSTRUCTOR()
 
-   basic::Integer* p = new basic::Integer(1);    // default rotary item
+   base::Integer* p = new base::Integer(1);    // default rotary item
    setSelectionName(p);
    p->unref();
    preDrawSelectList = true;
@@ -1499,7 +1501,7 @@ void Rotary::draw()
 {
    if (preDrawSelectList) {
       int start = 1;
-      basic::Pair* p = findByIndex(start);
+      base::Pair* p = findByIndex(start);
       while (p != nullptr) {
          graphics::Graphic* g = dynamic_cast<graphics::Graphic*>(p->object());
          if (g != nullptr) g->draw();
@@ -1522,7 +1524,7 @@ EMPTY_SERIALIZER(Rotary2)
 
 // Event handler for Rotary2 events
 BEGIN_EVENT_HANDLER(Rotary2)
-ON_EVENT_OBJ(SELECT,onSelect,basic::Number)
+ON_EVENT_OBJ(SELECT,onSelect,base::Number)
 END_EVENT_HANDLER()
 
 //------------------------------------------------------------------------------
@@ -1532,7 +1534,7 @@ Rotary2::Rotary2()
 {
    STANDARD_CONSTRUCTOR()
 
-   basic::Integer* p = new basic::Integer(1);    // default rotary item
+   base::Integer* p = new base::Integer(1);    // default rotary item
    setSelectionName(p);
    p->unref();
 }
@@ -1542,17 +1544,17 @@ Rotary2::Rotary2()
 //------------------------------------------------------------------------------
 
 // onSelect() - Macro function for Rotary2
-bool Rotary2::onSelect(const basic::Number* const osobj)
+bool Rotary2::onSelect(const base::Number* const osobj)
 {
    if (osobj != nullptr) {
       if (osobj->getBoolean()){
          //if true, select the second component
-         basic::Integer two(2);
+         base::Integer two(2);
          select(&two);
       }
       else {
          //if false, select the first component
-         basic::Integer one(1);
+         base::Integer one(1);
          select(&one);
       }
    }

@@ -4,11 +4,11 @@
 #ifndef __oe_simulation_Action_H__
 #define __oe_simulation_Action_H__
 
-#include "openeaagles/basic/ubf/Action.h"
+#include "openeaagles/base/ubf/Action.h"
 
 namespace oe {
 
-   namespace basic { class Distance; class LatLon; class Number; }
+   namespace base { class Distance; class LatLon; class Number; }
 
 namespace simulation {
 
@@ -33,15 +33,15 @@ class Steerpoint;
 //  4) Any action that will take time to complete must have a manager
 //     passed via trigger().
 //
-//  5) Derived from an UBF action (see "openeaagles/basic/ubf/Action.h").
+//  5) Derived from an UBF action (see "openeaagles/base/ubf/Action.h").
 //  The execute() function's 'actor' must be our OnboardComputer or our
 //  ownship, which can be  used to find our OnboardComputer.  The execute()
 //  function will find the OnboardComputer and 'trigger()' the action.
 //
 //------------------------------------------------------------------------------
-class Action : public basic::ubf::Action
+class Action : public base::ubf::Action
 {
-    DECLARE_SUBCLASS(Action,basic::ubf::Action)
+    DECLARE_SUBCLASS(Action,base::ubf::Action)
 
 public:
    Action();
@@ -52,12 +52,12 @@ public:
 
    virtual bool trigger(OnboardComputer* const mgr);  // Starts this action
    virtual bool cancel();                             // Cancels this action
-   virtual void process(const LCreal dt);             // Action processing
+   virtual void process(const double dt);             // Action processing
 
    int getRefId() const    { return refId; }          // Message Ref ID
    virtual void setRefId(const int id);               // Sets the message ref ID
 
-   bool execute(basic::Component* actor) override;
+   bool execute(base::Component* actor) override;
 
 protected:
    OnboardComputer* getManager()   { return manager; } // Our manager
@@ -66,7 +66,7 @@ protected:
    virtual void setCompleted(const bool flg);      // Sets the completed flag
 
 private:
-   basic::safe_ptr<OnboardComputer> manager;   // Our manager (only set while we're in progress)
+   base::safe_ptr<OnboardComputer> manager;   // Our manager (only set while we're in progress)
    int            refId;            // Ref ID
    bool           completed;        // True if action has been completed
 };
@@ -94,29 +94,29 @@ public:
    double getSarLatitude() const       { return sarLatitude;  }   // SAR latitude in degrees
    double getSarLongitude() const      { return sarLongitude; }   // SAR longitude in degrees
    double getSarElevation() const      { return sarElevation; }   // SAR elevation in meters
-   LCreal getResolution() const        { return resolution;   }   // Image resolution in meters
+   double getResolution() const        { return resolution;   }   // Image resolution in meters
    unsigned int getImageSize() const   { return imgSize;      }   // Image size
-   LCreal getOrientation() const       { return orientation;  }   // Planned image orientation (Deg) (true)
+   double getOrientation() const       { return orientation;  }   // Planned image orientation (Deg) (true)
 
    virtual bool setSarLatitude(const double v);       // Sets the SAR latitude in degrees
    virtual bool setSarLongitude(const double v);      // Sets the SAR longitude in degrees
    virtual bool setSarElevation(const double v);      // Sets the SAR elevation in meters
-   virtual bool setResolution(const LCreal v);        // Sets the SAR image resolution (meters)
+   virtual bool setResolution(const double v);        // Sets the SAR image resolution (meters)
    virtual bool setImageSize(const unsigned int v);   // Sets the image size
 
    // Computes the planned image orientation (degs)
-   virtual LCreal computeOrientation(const Steerpoint* const wp);
+   virtual double computeOrientation(const Steerpoint* const wp);
 
    // Slot functions
-   virtual bool setSlotSarLat(const basic::LatLon* const msg);
-   virtual bool setSlotSarLon(const basic::LatLon* const msg);
-   virtual bool setSlotSarElev(const basic::Distance* const msg);
-   virtual bool setSlotResolution(const basic::Distance* const msg);
-   virtual bool setSlotImageSize(const basic::Number* const msg);
+   virtual bool setSlotSarLat(const base::LatLon* const msg);
+   virtual bool setSlotSarLon(const base::LatLon* const msg);
+   virtual bool setSlotSarElev(const base::Distance* const msg);
+   virtual bool setSlotResolution(const base::Distance* const msg);
+   virtual bool setSlotImageSize(const base::Number* const msg);
 
    bool trigger(OnboardComputer* const mgr) override;
    bool cancel() override;
-   void process(const LCreal dt) override;
+   void process(const double dt) override;
 
 protected:
    Sar* getSarSystem()        { return sar; }
@@ -128,8 +128,8 @@ private:
    double sarLatitude;        // Latitude (deg)
    double sarLongitude;       // Longitude (deg)
    double sarElevation;       // Elevation (meters)
-   LCreal resolution;         // Image resolution (meters)
-   LCreal orientation;        // orientation (true) (degrees)
+   double resolution;         // Image resolution (meters)
+   double orientation;        // orientation (true) (degrees)
    unsigned int imgSize;      // Image size (pixels)
    double timer;              // Time-Out timer
    Sar* sar;                  // SAR system
@@ -169,10 +169,10 @@ public:
    bool trigger(OnboardComputer* const mgr) override;
 
 protected:
-   bool setSlotTargetLat(const basic::LatLon* newLat);
-   bool setSlotTargetLon(const basic::LatLon* newLon);
-   bool setSlotTargetElev(const basic::Number* newElev);
-   bool setSlotStationNum(const basic::Number* newStation);
+   bool setSlotTargetLat(const base::LatLon* newLat);
+   bool setSlotTargetLon(const base::LatLon* newLon);
+   bool setSlotTargetElev(const base::Number* newElev);
+   bool setSlotStationNum(const base::Number* newStation);
 
 private:
    double targetLatitude;        // latitude (deg)
@@ -199,19 +199,19 @@ public:
     ActionDecoyRelease();
 
     // set functions
-    virtual bool setInterval(const LCreal x) { interval = x; return true; }
+    virtual bool setInterval(const double x) { interval = x; return true; }
     virtual bool setNumToLaunch(const int x) { numToLaunch = x; return true; }
-    virtual void process(const LCreal dt);
+    virtual void process(const double dt);
 
     bool trigger(OnboardComputer* const mgr) override;
 
 protected:
-    bool setSlotInterval(const basic::Number* x);
-    bool setSlotNumToLaunch(const basic::Number* x);
+    bool setSlotInterval(const base::Number* x);
+    bool setSlotNumToLaunch(const base::Number* x);
 
 private:
     int numToLaunch;    // how many decoys to launch this action?
-    LCreal interval;    // seconds delay between launch... default is 0
+    double interval;    // seconds delay between launch... default is 0
     double tod;         // the sim time of day (we are going to add to it)
     double startTOD;    // our starting tod (that way we know when we've elapsed so far)
 };
@@ -236,7 +236,7 @@ public:
 
    unsigned int getCamouflageType() const   { return camouflage; }         // Returns the user defined camouflage type (or zero for none)
    virtual bool setCamouflageType(const unsigned int v);                   // Sets the user defined camouflage type (or zero for none)
-   virtual bool setSlotCamouflageType(const basic::Number* const msg);   // Sets user defined camouflage type
+   virtual bool setSlotCamouflageType(const base::Number* const msg);   // Sets user defined camouflage type
 
    virtual bool trigger(OnboardComputer* const mgr) override;
 

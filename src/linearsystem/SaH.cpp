@@ -1,7 +1,7 @@
 
 #include "openeaagles/linearsystem/SaH.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/units/Frequencies.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/units/Frequencies.h"
 
 namespace oe {
 namespace linearsystem {
@@ -20,8 +20,8 @@ END_SLOTTABLE(SaH)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(SaH)
-   ON_SLOT( 1, setSlotSampleRate, basic::Frequency)
-   ON_SLOT( 1, setSlotSampleRate, basic::Number)
+   ON_SLOT( 1, setSlotSampleRate, base::Frequency)
+   ON_SLOT( 1, setSlotSampleRate, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ bool SaH::isValid() const
 //------------------------------------------------------------------------------
 // g() is one iteration of the difference equation.
 //------------------------------------------------------------------------------
-LCreal SaH::g(const LCreal xn)
+double SaH::g(const double xn)
 {
    if (isValid()) {
 
@@ -160,11 +160,11 @@ bool SaH::setSampleRate(const unsigned int v)
 // Set slot functions
 //------------------------------------------------------------------------------
 
-bool SaH::setSlotSampleRate(const basic::Frequency* const msg)
+bool SaH::setSlotSampleRate(const base::Frequency* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      int v = static_cast<int>( basic::Hertz::convertStatic( *msg ) + 0.5f );
+      int v = static_cast<int>( base::Hertz::convertStatic( *msg ) + 0.5f );
       if (v > 0) {
          setSampleRate( static_cast<unsigned int>(v) );
          ok = true;
@@ -173,7 +173,7 @@ bool SaH::setSlotSampleRate(const basic::Frequency* const msg)
    return ok;
 }
 
-bool SaH::setSlotSampleRate(const basic::Number* const msg)
+bool SaH::setSlotSampleRate(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -190,7 +190,7 @@ bool SaH::setSlotSampleRate(const basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for SaH
 //------------------------------------------------------------------------------
-basic::Object* SaH::getSlotByIndex(const int si)
+base::Object* SaH::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

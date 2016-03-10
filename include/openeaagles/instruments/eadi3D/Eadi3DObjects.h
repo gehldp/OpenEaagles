@@ -4,7 +4,7 @@
 #ifndef __oe_instruments_Eadi3DObjects_H__
 #define __oe_instruments_Eadi3DObjects_H__
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 #include "openeaagles/instruments/eadi3D/IrisGLCompat.h"
 
 namespace oe {
@@ -23,8 +23,8 @@ namespace instruments {
 //          Produces the stroke font map.
 //
 //------------------------------------------------------------------------------
-class Eadi3DObjects : public basic::Object {
-    DECLARE_SUBCLASS(Eadi3DObjects,basic::Object)
+class Eadi3DObjects : public base::Object {
+    DECLARE_SUBCLASS(Eadi3DObjects,base::Object)
 
 public:
     Eadi3DObjects(float radius = 1.625);

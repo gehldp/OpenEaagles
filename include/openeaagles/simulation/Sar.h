@@ -7,7 +7,7 @@
 #include "openeaagles/simulation/Radar.h"
 
 namespace oe {
-   namespace basic {
+   namespace base {
       class Pair;
       class PairStream;
    }
@@ -17,12 +17,12 @@ class Image;
 
 //------------------------------------------------------------------------------
 // Class: Sar
-// Base class: basic::Object -> ... -> RfSensor -> Radar -> Sar
+// Base class: base::Object -> ... -> RfSensor -> Radar -> Sar
 //
 // Description: Generic SAR
 // Factory name: Sar
 // Slots:
-//    chipSize      <basic::Number>      ! Chip size (pixels) (default: 0)
+//    chipSize      <base::Number>      ! Chip size (pixels) (default: 0)
 //
 //------------------------------------------------------------------------------
 class Sar : public Radar
@@ -36,7 +36,7 @@ public:
    virtual bool isSystemReady() const;
 
    // Returns a list of all images (prereferenced)
-   virtual basic::PairStream* getImages();
+   virtual base::PairStream* getImages();
 
    // Returns the most recent image (prereferenced)
    virtual const Image* getImage() const;
@@ -45,17 +45,17 @@ public:
    bool haveStarePoint() const             { return haveLL; }
    double getStarePointLatitude() const    { return stareLatitude; }
    double getStarePointLongitude() const   { return stareLongitude; }
-   LCreal getStarePointElevation() const   { return stareElevation; }
+   double getStarePointElevation() const   { return stareElevation; }
 
    // Set the stare point
    virtual bool setStarePoint(
          const double lat,               // Latitude (deg)
          const double lon,               // Longitude (deg)
-         const LCreal elev               // Elevation (meters)
+         const double elev               // Elevation (meters)
       );
 
    // Image resolution (meters/pixel)
-   LCreal getResolution() const            { return resolution; }
+   double getResolution() const            { return resolution; }
 
    unsigned int getWidth() const { return width; }    // Image width (pixels)
    unsigned int getHeight() const { return height; }  // Image height (pixels)
@@ -65,39 +65,39 @@ public:
    virtual bool setChipSize(const unsigned int pixels);
 
    // Slot functions
-   virtual bool setSlotChipSize(const basic::Number* const msg);
+   virtual bool setSlotChipSize(const base::Number* const msg);
 
    // Request a new image
    virtual bool  requestImage(
          const unsigned int width,       // Image width (pixels)
          const unsigned int height,      // Image height (pixels)
-         const LCreal resolution         // Image Resolution (meters/pixel)
+         const double resolution         // Image Resolution (meters/pixel)
       );
 
-    bool addImage(basic::Pair* const newImage);
+    bool addImage(base::Pair* const newImage);
     int getNextId();
 
    // Cancel the current SAR imaging
    virtual void cancel();
 
-   static void xyz2AzEl(const LCreal x, const LCreal y, const LCreal z, LCreal* const az, LCreal* const el);
-   static void xyz2AzEl(const osg::Vec3& vec, LCreal* const az, LCreal* const el);
+   static void xyz2AzEl(const double x, const double y, const double z, double* const az, double* const el);
+   static void xyz2AzEl(const osg::Vec3& vec, double* const az, double* const el);
 
 protected:
-    virtual bool setResolution(const LCreal res);   // SAR resolution (meters)
+    virtual bool setResolution(const double res);   // SAR resolution (meters)
 
-    void process(const LCreal dt) override;
+    void process(const double dt) override;
 
-    LCreal timer;                   // SAR timer
+    double timer;                   // SAR timer
 
 private:
-    basic::PairStream*   imgList; // List of SAR images
+    base::PairStream*   imgList; // List of SAR images
 
     int             nextId;         // Next image ID
     double          stareLatitude;  // Degrees
     double          stareLongitude; // Degrees
-    LCreal          stareElevation; // Meters
-    LCreal          resolution;     // Image Resolution (meters/pixel)
+    double          stareElevation; // Meters
+    double          resolution;     // Image Resolution (meters/pixel)
     unsigned int    chipSize;       // Chip Size (pixels)
     bool            busy;           // Busy generating an image
     bool            haveLL;         // Have latitude and longitude of the stare point

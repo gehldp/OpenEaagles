@@ -4,8 +4,10 @@
 
 #include "openeaagles/maps/rpfMap/CadrgFile.h"
 #include "openeaagles/maps/rpfMap/CadrgTocEntry.h"
-#include "openeaagles/basic/String.h"
+#include "openeaagles/base/String.h"
 #include "openeaagles/maps/rpfMap/Support.h"
+#include "openeaagles/base/util/string_utils.h"
+
 #include <cstring>
 
 //#define PRINT_MAP_LOCATIONS
@@ -133,7 +135,7 @@ void CadrgFile::setEntries(CadrgTocEntry* newEntries[MAX_TOC_ENTRIES])
 void CadrgFile::setDirectory(const char* x)
 {
     if (originalDir != nullptr) originalDir->setStr(x);
-    else originalDir = new basic::String(x);
+    else originalDir = new base::String(x);
 }
 
 //--------------------------------------------------------------------------
@@ -180,7 +182,7 @@ bool CadrgFile::checkForMap(const char* dir)
     bool ok = false;
     // Try to find and open our a.toc file
     std::ifstream toc;
-    basic::String* string = new basic::String(dir);
+    base::String* string = new base::String(dir);
     string->catStr("A.TOC");
 
     #if defined(WIN32)
@@ -260,9 +262,9 @@ bool CadrgFile::initialize(const char* dir)
 
     // Try to find and open our a.toc file
     std::ifstream toc;
-    basic::String* string = new basic::String(dir);
+    base::String* string = new base::String(dir);
     if (originalDir != nullptr) originalDir->setStr(dir);
-    else originalDir = new basic::String(dir);
+    else originalDir = new base::String(dir);
     string->catStr("A.TOC");
 
     #if defined(WIN32)
@@ -635,7 +637,7 @@ bool CadrgFile::initialize(const char* dir)
                     #endif
 
                     // 1st part of directory name is passed as our initial parameter "projects/data/maps/gncjncn/RPF/"
-                    lcStrcpy(directory, size, dir);
+                    base::lcStrcpy(directory, size, dir);
 
                     // Read rest of directory name from Toc
                     // Skip 1st 2 chars, because they are the root characters (./), and are ignored since we are creating

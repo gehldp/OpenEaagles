@@ -1,7 +1,7 @@
 
 #include "openeaagles/dafif/factory.h"
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 #include "openeaagles/dafif/AirportLoader.h"
 #include "openeaagles/dafif/NavaidLoader.h"
@@ -12,9 +12,9 @@
 namespace oe {
 namespace dafif {
 
-basic::Object* factory(const char* name)
+base::Object* factory(const char* name)
 {
-    basic::Object* obj = nullptr;
+    base::Object* obj = nullptr;
 
     if ( std::strcmp(name, AirportLoader::getFactoryName()) == 0 ) {
         obj = new AirportLoader();
