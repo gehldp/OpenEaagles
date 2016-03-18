@@ -4,7 +4,7 @@
 #include "openeaagles/graphics/BitmapFont.h"
 #include "openeaagles/base/String.h"
 #include "openeaagles/base/Number.h"
-#include "openeaagles/base/util/string_utils.h"
+#include "openeaagles/base/util/str_utils.h"
 
 #include <cstdio>
 #include <cmath>
@@ -529,11 +529,11 @@ GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
    const size_t FONTPATHNAME_LENGTH = 256;
    char fontPathname[FONTPATHNAME_LENGTH];
    if (fontDirectory() != nullptr)
-      base::lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
+      base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
    else
-      base::lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
+      base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
 
-   base::lcStrcat(fontPathname, FONTPATHNAME_LENGTH, fontMap[index]);
+   base::utStrcat(fontPathname, FONTPATHNAME_LENGTH, fontMap[index]);
 
    // Open the font file
    FILE* fp = nullptr;

@@ -4,7 +4,7 @@ include ../../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboebase.a
 
 OBJS =  \
-	$(LIB)(support.o)
+	$(LIB)(Thread_linux.o)
 
 all: ${OBJS}
 

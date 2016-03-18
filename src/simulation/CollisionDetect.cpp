@@ -100,7 +100,7 @@ void CollisionDetect::deleteData()
 unsigned int CollisionDetect::getCollisions(Player* list[], double distances[], const unsigned int arraySize)
 {
    unsigned int n = 0;
-   base::lcLock(poiLock);
+   base::lock(poiLock);
    for (unsigned int i = 0; i < maxPlayers && n < arraySize; i++) {
       if (players[i].active &&  players[i].collided) {
          list[n] = players[i].player.getRefPtr();
@@ -108,7 +108,7 @@ unsigned int CollisionDetect::getCollisions(Player* list[], double distances[], 
          n++;
       }
    }
-   base::lcUnlock(poiLock);
+   base::unlock(poiLock);
    return n;
 }
 
@@ -297,13 +297,13 @@ void CollisionDetect::updateData(const double dt)
    // ---
    // Clear all of the unmatched POIs
    // ---
-   base::lcLock(poiLock);
+   base::lock(poiLock);
    for (unsigned int i = 0; i < maxPlayers; i++) {
       if ( players[i].active && players[i].unmatched ) {
          players[i].clear();
       }
    }
-   base::lcUnlock(poiLock);
+   base::unlock(poiLock);
 
    //std::cout << "POI: ";
    //for (unsigned int i = 0; i < maxPlayers; i++) {
@@ -346,7 +346,7 @@ void CollisionDetect::process(const double dt)
    // Collision range squared
    const double cr2 = collisionRange * collisionRange;
 
-   base::lcLock(poiLock);
+   base::lock(poiLock);
 
    // ---
    // Check all active POIs to see if we've collided
@@ -439,7 +439,7 @@ void CollisionDetect::process(const double dt)
       }
    }
 
-   base::lcUnlock(poiLock);
+   base::unlock(poiLock);
 
    //{
    //   static const unsigned int SIZE = 10;
@@ -463,7 +463,7 @@ void CollisionDetect::updatePoiList(Player* const target)
 {
    if (maxPlayers > 0 && target != nullptr) {
 
-      base::lcLock(poiLock);
+      base::lock(poiLock);
 
       // ---
       // First try to match it with an existing POI
@@ -497,7 +497,7 @@ void CollisionDetect::updatePoiList(Player* const target)
          players[idx].active = true;
       }
 
-      base::lcUnlock(poiLock);
+      base::unlock(poiLock);
 
    }
 }
@@ -513,7 +513,7 @@ bool CollisionDetect::resizePoiList(const unsigned int newSize)
       // Clear the old list (has its own lcLock())
       clearPoiList();
 
-      base::lcLock(poiLock);
+      base::lock(poiLock);
 
       // Free the old list memory
       if (maxPlayers > 0 && players != nullptr) {
@@ -529,7 +529,7 @@ bool CollisionDetect::resizePoiList(const unsigned int newSize)
          players = new PlayerOfInterest[maxPlayers];
       }
 
-      base::lcUnlock(poiLock);
+      base::unlock(poiLock);
    }
    return true;
 }
@@ -540,11 +540,11 @@ bool CollisionDetect::resizePoiList(const unsigned int newSize)
 //------------------------------------------------------------------------------
 void CollisionDetect::clearPoiList()
 {
-   base::lcLock(poiLock);
+   base::lock(poiLock);
    for (unsigned int i = 0; i < maxPlayers; i++) {
       players[i].clear();
    }
-   base::lcUnlock(poiLock);
+   base::unlock(poiLock);
 }
 
 
@@ -585,25 +585,25 @@ bool CollisionDetect::setSlotPlayerTypes(const base::PairStream* const msg)
          const base::Pair* pair = static_cast<const base::Pair*>(item->getValue());
          const base::String* type = dynamic_cast<const base::String*>( pair->object() );
          if (type != nullptr) {
-            if ( lcStrcasecmp(*type,"air") == 0 ) {
+            if ( utStrcasecmp(*type,"air") == 0 ) {
                mask = (mask | Player::AIR_VEHICLE);
             }
-            else if ( lcStrcasecmp(*type,"ground") == 0 ) {
+            else if ( utStrcasecmp(*type,"ground") == 0 ) {
                mask = (mask | Player::GROUND_VEHICLE);
             }
-            else if ( lcStrcasecmp(*type,"weapon") == 0 ) {
+            else if ( utStrcasecmp(*type,"weapon") == 0 ) {
                mask = (mask | Player::WEAPON);
             }
-            else if ( lcStrcasecmp(*type,"ship") == 0 ) {
+            else if ( utStrcasecmp(*type,"ship") == 0 ) {
                mask = (mask | Player::SHIP);
             }
-            else if ( lcStrcasecmp(*type,"building") == 0 ) {
+            else if ( utStrcasecmp(*type,"building") == 0 ) {
                mask = (mask | Player::BUILDING);
             }
-            else if ( lcStrcasecmp(*type,"lifeform") == 0 ) {
+            else if ( utStrcasecmp(*type,"lifeform") == 0 ) {
                mask = (mask | Player::LIFE_FORM);
             }
-            else if ( lcStrcasecmp(*type,"space") == 0 ) {
+            else if ( utStrcasecmp(*type,"space") == 0 ) {
                mask = (mask | Player::SPACE_VEHICLE);
             }
          }

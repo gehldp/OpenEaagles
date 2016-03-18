@@ -5,7 +5,7 @@
 #define __oe_base_String_H__
 
 #include "openeaagles/base/Object.h"
-#include "openeaagles/base/util/string_utils.h"
+#include "openeaagles/base/util/str_utils.h"
 
 #include <cstdlib>
 #include <cctype>
@@ -165,7 +165,7 @@ inline char* String::getCopyString() const
     size_t l = len();
     if (l > 0) {
         p = new char[l+1];
-        lcStrcpy(p,(l+1),str);
+        utStrcpy(p,(l+1),str);
     }
     return p;
 }

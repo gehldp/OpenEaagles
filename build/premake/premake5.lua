@@ -32,7 +32,7 @@ OE3rdPartyIncPath = OE_3RD_PARTY_ROOT.."/include"
 --
 --HLA_ROOT = "../../../portico-2.0.1"
 --HLAIncPath = HLA_ROOT.."/include/hla13"
-HLA_ROOT = "../../../OpenRTI-0.7.1"
+HLA_ROOT = "../../../openrti"
 HLAIncPath = HLA_ROOT.."/include/RTI13"
 if (_ACTION == "vs2010") then
   HLALibPath = HLA_ROOT.."/lib/vc10"
@@ -127,7 +127,9 @@ solution "oe"
       }
       excludes {
          "../../src/base/osg/Matrix_implementation.cpp",
-         "../../src/base/linux/**.*"
+         "../../src/base/util/platform/system_linux.cpp",
+         "../../src/base/util/platform/system_mingw.cpp",
+         "../../src/base/platform/Thread_linux.cpp"
       }
       targetname "base"
 
@@ -188,13 +190,9 @@ solution "oe"
    project "iodevice"
       files {
          "../../include/openeaagles/iodevice/**.h",
-         "../../src/iodevice/**.cpp"
+         "../../src/iodevice/**.*"
       }
-      if (os.is("linux")) then
-         excludes { "../../src/iodevice/windows/*" }
-      else
-         excludes { "../../src/iodevice/linux/*"   }
-      end
+      excludes { "../../src/iodevice/platform/UsbJoystick_linux.*"   }
       targetname "iodevice"
 
    -- linear systems library
@@ -204,14 +202,6 @@ solution "oe"
          "../../src/linearsystem/**.cpp"
       }
       targetname "linearsystem"
-
-   -- maps library
-   project "maps"
-      files {
-         "../../include/openeaagles/maps/**.h",
-         "../../src/maps/**.cpp"
-      }
-      targetname "maps"
 
    -- models library
    project "models"
@@ -245,6 +235,14 @@ solution "oe"
       }
       defines { "_SCL_SECURE_NO_WARNINGS" } -- suppress protocol buffer warning
       targetname "recorder"
+
+   -- raster product format maps library
+   project "rpf"
+      files {
+         "../../include/openeaagles/maps/rpf/**.h",
+         "../../src/maps/rpf/**.cpp"
+      }
+      targetname "rpf"
 
    -- simulation library
    project "simulation"

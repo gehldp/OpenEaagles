@@ -29,7 +29,7 @@
 #include "openeaagles/base/units/Angles.h"
 #include "openeaagles/base/units/Distances.h"
 #include "openeaagles/base/units/Times.h"
-#include "openeaagles/base/util/string_utils.h"
+#include "openeaagles/base/util/str_utils.h"
 
 #include <cstring>
 #include <cmath>
@@ -1559,7 +1559,7 @@ NtmOutputNodeStd::NtmOutputNodeStd(const Player* const p, const char* const name
    if (name != nullptr) {
       const size_t LENGTH = std::strlen(name) + 1;
       nodeFactoryName = new char[LENGTH];
-      base::lcStrcpy(nodeFactoryName,LENGTH,name);
+      base::utStrcpy(nodeFactoryName,LENGTH,name);
    }
 
    if (p != nullptr) {
@@ -1589,7 +1589,7 @@ void NtmOutputNodeStd::copyData(const NtmOutputNodeStd& org, const bool cc)
    if (org.nodeFactoryName != nullptr) {
       const size_t LENGTH = std::strlen(org.nodeFactoryName) + 1;
       nodeFactoryName = new char[LENGTH];
-      base::lcStrcpy(nodeFactoryName,LENGTH,org.nodeFactoryName);
+      base::utStrcpy(nodeFactoryName,LENGTH,org.nodeFactoryName);
    }
 
    if (tp != nullptr) {

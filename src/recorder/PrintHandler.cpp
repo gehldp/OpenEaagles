@@ -2,7 +2,8 @@
 #include "openeaagles/recorder/PrintHandler.h"
 #include "openeaagles/base/String.h"
 #include "openeaagles/base/Number.h"
-#include "openeaagles/base/util/string_utils.h"
+#include "openeaagles/base/util/str_utils.h"
+#include "openeaagles/base/util/system.h"
 
 #include <cstring>
 
@@ -180,10 +181,10 @@ bool PrintHandler::openFile()
    // Create the (initial) full file name
    //---
    if (pathname != nullptr && pathname->len() > 0) {
-      base::lcStrcat(fullname, nameLength ,*pathname);
-      base::lcStrcat(fullname, nameLength, "/");
+      base::utStrcat(fullname, nameLength ,*pathname);
+      base::utStrcat(fullname, nameLength, "/");
    }
-   lcStrcat(fullname,nameLength,*filename);
+   utStrcat(fullname,nameLength,*filename);
 
 
    //---
@@ -194,7 +195,7 @@ bool PrintHandler::openFile()
       // If the file already exists, try appending a version number "v99" ..
 
       char* origname = new char[nameLength];
-      base::lcStrcpy(origname, nameLength, fullname);
+      base::utStrcpy(origname, nameLength, fullname);
 
       validName = false;
       for (unsigned int i = 1; i <= 99 && !validName; i++) {
@@ -283,7 +284,7 @@ void PrintHandler::setFullFilename(const char* const name)
    if (name != nullptr) {
       size_t n = std::strlen(name) + 1;
       fullFilename = new char[n];
-      base::lcStrcpy(fullFilename, n, name);
+      base::utStrcpy(fullFilename, n, name);
    }
 }
 

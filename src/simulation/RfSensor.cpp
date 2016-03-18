@@ -18,7 +18,7 @@
 #include "openeaagles/base/units/Frequencies.h"
 #include "openeaagles/base/units/Powers.h"
 #include "openeaagles/base/units/Times.h"
-#include "openeaagles/base/util/string_utils.h"
+#include "openeaagles/base/util/str_utils.h"
 
 namespace oe {
 namespace simulation {
@@ -403,7 +403,7 @@ bool RfSensor::setBeamWidth(const double v)
 // Sets the type ID
 bool RfSensor::setTypeId(const char* const str)
 {
-   base::lcStrcpy(typeId, TYPE_ID_LENGTH, str);
+   base::utStrcpy(typeId, TYPE_ID_LENGTH, str);
    return true;
 }
 

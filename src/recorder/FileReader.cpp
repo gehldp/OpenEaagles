@@ -3,7 +3,8 @@
 #include "openeaagles/recorder/protobuf/DataRecord.pb.h"
 #include "openeaagles/recorder/DataRecordHandle.h"
 #include "openeaagles/base/String.h"
-#include "openeaagles/base/util/string_utils.h"
+#include "openeaagles/base/util/str_utils.h"
+#include "openeaagles/base/util/system.h"
 
 #include <fstream>
 #include <cstdlib>
@@ -147,10 +148,10 @@ bool FileReader::openFile()
       // Create the (initial) full file name
       //---
       if (pathname != nullptr && pathname->len() > 0) {
-         base::lcStrcat(fullname, nameLength ,*pathname);
-         base::lcStrcat(fullname, nameLength, "/");
+         base::utStrcat(fullname, nameLength ,*pathname);
+         base::utStrcat(fullname, nameLength, "/");
       }
-      base::lcStrcat(fullname,nameLength,*filename);
+      base::utStrcat(fullname,nameLength,*filename);
 
       //---
       // Make sure that it exists

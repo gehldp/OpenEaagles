@@ -4,24 +4,17 @@
 
 #include "openeaagles/base/Thread.h"
 #include "openeaagles/base/Component.h"
+#include "openeaagles/base/util/math_utils.h"
+#include "openeaagles/base/util/system.h"
 
 namespace oe {
 namespace base {
-
-//------------------------------------------------------------------------------
-// Window/Linux specific code
-//------------------------------------------------------------------------------
-#if defined(WIN32)
-  #include "platform/windows/Thread.cxx"
-#else
-  #include "platform/linux/Thread.cxx"
-#endif
 
 //==============================================================================
 // class Thread
 //==============================================================================
 
-IMPLEMENT_ABSTRACT_SUBCLASS(Thread,"Thread")
+IMPLEMENT_ABSTRACT_SUBCLASS(Thread, "Thread")
 EMPTY_SLOTTABLE(Thread)
 EMPTY_SERIALIZER(Thread)
 
@@ -150,7 +143,7 @@ void Thread::setTerminated()
 // class ThreadSingleTask
 //==============================================================================
 
-IMPLEMENT_ABSTRACT_SUBCLASS(ThreadSingleTask,"ThreadSingleTask")
+IMPLEMENT_ABSTRACT_SUBCLASS(ThreadSingleTask, "ThreadSingleTask")
 EMPTY_SLOTTABLE(ThreadSingleTask)
 EMPTY_SERIALIZER(ThreadSingleTask)
 
@@ -210,7 +203,7 @@ unsigned long ThreadSingleTask::mainThreadFunc()
 // class ThreadSyncTask
 //==============================================================================
 
-IMPLEMENT_ABSTRACT_SUBCLASS(ThreadSyncTask,"ThreadSyncTask")
+IMPLEMENT_ABSTRACT_SUBCLASS(ThreadSyncTask, "ThreadSyncTask")
 EMPTY_SLOTTABLE(ThreadSyncTask)
 EMPTY_SERIALIZER(ThreadSyncTask)
 
@@ -317,7 +310,7 @@ bool ThreadSyncTask::terminate()
 // class ThreadPeriodicTask
 //==============================================================================
 
-IMPLEMENT_ABSTRACT_SUBCLASS(ThreadPeriodicTask,"ThreadPeriodicTask")
+IMPLEMENT_ABSTRACT_SUBCLASS(ThreadPeriodicTask, "ThreadPeriodicTask")
 EMPTY_SLOTTABLE(ThreadPeriodicTask)
 EMPTY_SERIALIZER(ThreadPeriodicTask)
 
@@ -384,6 +377,6 @@ bool ThreadPeriodicTask::setVariableDeltaTimeFlag(const bool enable)
    return true;
 }
 
-} // End base namespace
-} // End oe namespace
+}
+}
 

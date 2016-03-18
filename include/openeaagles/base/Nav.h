@@ -10,6 +10,8 @@
 #include "openeaagles/base/osg/Matrix"
 #include "openeaagles/base/units/Angles.h"
 #include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/util/math_utils.h"
+#include <cmath>
 
 namespace oe {
 namespace base {
@@ -783,7 +785,7 @@ public:
 // inline functions
 #include "openeaagles/base/Nav.inl"
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

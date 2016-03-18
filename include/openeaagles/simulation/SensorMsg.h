@@ -5,6 +5,9 @@
 #define __oe_simulation_SensorMsg_H__
 
 #include "openeaagles/base/Object.h"
+#include "openeaagles/base/osg/Vec3"
+#include "openeaagles/base/osg/Vec4"
+#include "openeaagles/base/safe_ptr.h"
 
 namespace oe {
 namespace simulation {
@@ -179,7 +182,7 @@ private:
    bool            localOnly;      // Local players only flag
 };
 
-} // End simulation namespace
-} // End oe namespace
+}
+}
 
 #endif

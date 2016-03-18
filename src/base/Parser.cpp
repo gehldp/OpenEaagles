@@ -82,7 +82,7 @@
 #include <cstdlib>
 #include <cstring>
 #include "openeaagles/base/Parser.h"
-#include "openeaagles/base/platform/support.h"
+#include "openeaagles/base/util/str_utils.h"
 #include "openeaagles/base/Object.h"
 #include "openeaagles/base/String.h"
 #include "openeaagles/base/Identifier.h"
@@ -94,10 +94,10 @@
 #include "openeaagles/base/List.h"
 #include "Lexical.h"
 
-static oe::base::Object*  result;       // Result of all our work
-static oe::base::Lexical* lex;          // Lex generator
-static oe::base::ParserFormFunc formFunc; // Form fuction 
-static int errCount;            // Error count
+static oe::base::Object*  result;           // Result of all our work
+static oe::base::Lexical* lex;              // Lex generator
+static oe::base::ParserFormFunc formFunc;   // Form fuction 
+static int errCount;                        // Error count
 
 //------------------------------------------------------------------------------
 // yylex() -- user defined; used by the parser to call the lexical generator
@@ -140,22 +140,22 @@ static oe::base::Object* gufParse(const char* formname, oe::base::PairStream* ar
                oe::base::Pair* p = static_cast<oe::base::Pair*>(item->getValue());
                bool ok = form->setSlotByName(*p->slot(), p->object());
                if (!ok) {
-                  oe::base::lcStrcpy(emsg,sizeof(emsg),"error while setting slot name: ");
-                  oe::base::lcStrcat(emsg,sizeof(emsg),*p->slot());
+                  oe::base::utStrcpy(emsg,sizeof(emsg),"error while setting slot name: ");
+                  oe::base::utStrcat(emsg,sizeof(emsg),*p->slot());
                   yyerror(emsg);
                }
                item = item->getNext();
           }
           bool ok = form->isValid();
           if (!ok) {
-             oe::base::lcStrcpy(emsg,sizeof(emsg),"error: invalid form: ");
-             oe::base::lcStrcat(emsg,sizeof(emsg),formname);
+             oe::base::utStrcpy(emsg,sizeof(emsg),"error: invalid form: ");
+             oe::base::utStrcat(emsg,sizeof(emsg),formname);
              yyerror(emsg);
           }
        }
        else if (form == 0) {
-          oe::base::lcStrcpy(emsg,sizeof(emsg),"undefined form name: ");
-          oe::base::lcStrcat(emsg,sizeof(emsg),formname);
+          oe::base::utStrcpy(emsg,sizeof(emsg),"undefined form name: ");
+          oe::base::utStrcat(emsg,sizeof(emsg),formname);
           yyerror(emsg);
        }
 

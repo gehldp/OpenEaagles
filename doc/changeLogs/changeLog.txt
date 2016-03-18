@@ -3,84 +3,132 @@ Changes since v15.07
 ================================================================================
 
 --------------------------------------------------------------------------------
-general
+General framework-wide changes and improvements
 
--- Renamed 'Eaagles' namespace to 'oe' to align with project name
--- Renamed all namespaces to lowercase names - this aligns with typical C++
-   conventions and avoids confusion with classnames
--- Renamed 'basic' library to 'base'
--- Renamed 'basicGL' library to 'graphics'
--- Renamed 'ioDevice' library to 'iodevice'
--- Renamed 'linearSys' library to 'linearsystem'
--- Created 'models' libraries, it now includes what used to be in 'dynamics' and 'sensors'
--- Moved 'dis' directory into 'networks'.  This so that interoperability interfaces
-   are logically grouped together.
--- Added hla library to 'networks' directory.
+   -- Renamed 'Eaagles' namespace to 'oe' to align with project name
 
--- Removed legacy support for 'formnames' in base Object
--- All form functions and Factory classes have been removed -- should use 'factory' functions
+   -- Renamed all camelcase-style namespaces to lowercase names - this aligns with
+      common C++ conventions and avoids confusion with class names
 
--- Renamed global framework configuration options to start with 'OE' instead
-   of 'EAAGLES'
+   -- Renamed 'basic' library to 'base' - 'base' and 'core' are very common names used
+      by frameworks to define a base set of functionality provided on top of C++.
+      This adjustment is designed to make the framework feel more familiar in that regard.
 
--- LCreal (which has been typed as 'double' for years) has been completely removed and
-   replaced with 'double'
--- Closely associated with LCreal is the macro "LCREAL_DOUBLE" which defined whether or not
-   LCreal was defined as a 'double' or 'float' -- this macro has been eliminated.
+   -- Renamed 'basicGL' library to 'graphics' - conveys purpose of library better, OpenGL
+      is a means, displaying graphics is the intent.
 
--- Replaced fundamental lc math macros (e.g., lcSin) with std equivalents (e.g. std::sin)
+   -- Renamed 'ioDevice' library to 'iodevice' - aligns better with all lowercase
+      library names (typically used in Linux universe)
+
+   -- Renamed 'linearSys' library to 'linearsystem' - slightly more clear
+
+   -- Created 'models' libraries, it now includes what used to be in 'dynamics' and
+      'sensors' libraries. This is the start of a fundamental effort to separate models
+      from simulation infrastructure.
+
+   -- Moved 'dis' directory into 'networks' to group different interoperability
+      interfaces into the same logical place.
+
+   -- Added an hla interoperability library to 'networks' directory.
+
+   -- Removed legacy support for 'formnames' in all Object-based classes
+
+   -- form functions and Factory classes in libraries have been replaced with 'factory'
+      functions.  This is a bit of a reversal from Factory objects that defined a
+      single static method for object creation as is common in the Java world. But then
+      again, Java is a pure OO programming language, C++ is a multi-paradigm programming
+      language - standalone functions can be defined, so take advantage of it.
+
+   -- Renamed global framework configuration options to start with 'OE' instead
+      of 'EAAGLES'
+
+   -- LCreal (which has been hardcoded and typed as 'double' for years) has been completely
+      removed and replaced with 'double'
+
+   -- Closely associated with LCreal is the macro "LCREAL_DOUBLE" which defined whether or not
+      LCreal was defined as a 'double' or 'float' -- this macro has been eliminated.
+
+   -- Replaced fundamental lc prefixed math macros (e.g., lcSin) with 'std::' equivalents
+      (e.g. std::sin) to reduce unnecessary code and improve clarity.
 
 --------------------------------------------------------------------------------
-base
+base library
+
+   -- previously named the 'basic' library
 
    -- removed legacy support for factory names "BroadcastHandler", "MulticastHandler",
-      and "UdpHandler" - instead use "UdpBroadcastHandler", "UdpMulticastHandler"
-	  and "UdpUnicastHandler"
+      and "UdpHandler" - instead use more explicit "UdpBroadcastHandler", "UdpMulticastHandler"
+      and "UdpUnicastHandler" factor names.
 
    -- separated MonitorMetrics class definition and implementation away from Cie.h/cpp file.
    
-   -- consolidated platform specific functions into the subdirectory 'platform'
+   -- broke out everything defined by 'support.h/cpp' into groups and placed functionality
+      into files located in subdirectory 'util' (i.e., 'utilities').  Object no longer
+      imports everything that was defined in 'support.h', classes now include only what is
+      needed.
+      
+   -- almost all 'support.h' functions are now defined in scope of 'base' namespace - no
+      longer are they scoped in the broader 'oe' namespace.  The combination of grouping
+      functionality into individual related utility files and more explicity including
+      them (e.g., #include "openeaagles/base/util/system.h") where needed, results in
+      more explicit explict references to them (e.g., base::msleep).  This makes it more
+      obvious as to where they are defined, and ensure they are defined only where needed.
+
+   Number class
+     -- replaced constructor to handle defined 64-bit 'Integer64' datatype to standard
+        64-bit integer 'int64_t'. 'Integer64' was dropped in favor of using 'int64_t'.
+
+   'lc' functions
+     -- removed lcMax and lcMin, use std::fmax and std::fmin from <cmath> instead.
+        When C++14 becomes better supported, should use std::max and std::min templates
+        from <algorithm> library
+     -- renamed the 'lc' prefix on all char-based string functions and replaced with
+        'ut' to indicate utility and clearly avoid any ambiquity with legacy C functions
+        such as 'strcpy', etc.  The prefix was changed to better indicate the nature
+        of function (i.e., it's a utility)
+
+   Thread classes
+     -- platform specific code associated with the thread classes has been restructured
+        to properly include files correctly.  Before, the Thread.cpp file was including
+        platform specific class methods into the oe::base namespace.  But the included
+        file for linux was including other includes, such as, <signal.h>. So declarations
+        were being imported into the oe::base namespace. Surprisingly, no apparent errors
+        resulted. Nevertheless the code has been restructured more properly.
 
 --------------------------------------------------------------------------------
-dafif
-
-
---------------------------------------------------------------------------------
-dis
-
+dafif library
 
 --------------------------------------------------------------------------------
-glut
-
-
---------------------------------------------------------------------------------
-graphics
-
+dis library
 
 --------------------------------------------------------------------------------
-hla
-
-   -- added code to support HLA interface
+glut library
 
 --------------------------------------------------------------------------------
-instruments
+graphics library
 
-
---------------------------------------------------------------------------------
-iodevice
-
+   -- previously named the 'basicGL' library
 
 --------------------------------------------------------------------------------
-linearsystem
+hla library
 
-
-
---------------------------------------------------------------------------------
-maps
-
+   -- new library - code to support HLA interoperability interface
 
 --------------------------------------------------------------------------------
-models
+instruments library
+
+--------------------------------------------------------------------------------
+iodevice library
+
+   -- previously named the 'ioDevice' library
+
+--------------------------------------------------------------------------------
+linearsystem library
+
+   -- previously named the 'linearSys' library
+
+--------------------------------------------------------------------------------
+models library
 
    JSBSimModel class
       -- Added new slot parameter ('debugLevel') to set the debug level for JSBSim
@@ -88,22 +136,29 @@ models
          of the model itself.  Slot parameter accepts an integer value.
 
 --------------------------------------------------------------------------------
-otw
-
-
---------------------------------------------------------------------------------
-recorder
-
+otw library
 
 --------------------------------------------------------------------------------
-simulation
+recorder library
+
+--------------------------------------------------------------------------------
+rpf library
+
+   -- new library - actually is all the code that was in the 'maps' library. But akin
+      to how 'dis' and 'hla' are organized relative to 'networks' directory, this
+      is now organized the same way.
+
+   -- rpf = Raster Product Format (RPF) library, it supports the reading of data in
+      this format.
+
+--------------------------------------------------------------------------------
+simulation library
 
    Autopilot class
       -- Fixed spelling error with 'velocityContoller' to 'velocityController'
 
-
 --------------------------------------------------------------------------------
-terrain
+terrain library
  
-
 --------------------------------------------------------------------------------
+
