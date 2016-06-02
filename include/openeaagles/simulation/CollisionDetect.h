@@ -77,7 +77,7 @@ public:
    virtual bool setLocalOnly(const bool flg);
    virtual bool setSendCrashEventsEnabled(const bool flg);
 
-   void updateData(const double dt = 0.0) override;
+   virtual void updateData(const double dt = 0.0) override;
 
 protected:
    virtual bool resizePoiList(const unsigned int newSize);
@@ -96,7 +96,7 @@ protected:
    virtual bool setSlotLocalOnly(const base::Number* const msg);
    virtual bool setSlotSendCrashEvents(const base::Number* const msg);
 
-   void process(const double dt) override;     // Phase 3
+   virtual void process(const double dt) override;     // Phase 3
 
 protected:
    struct PlayerOfInterest {
@@ -136,9 +136,6 @@ private:
    unsigned int maxPlayers;   // Max number of players of interest
 };
 
-//------------------------------------------------------------------------------
-// inline functions
-//------------------------------------------------------------------------------
 inline double CollisionDetect::getCollisionRange() const       { return collisionRange; }
 inline double CollisionDetect::getMaxRange2Players() const     { return maxRange2Players; }
 inline double CollisionDetect::getMaxAngle2Players() const     { return maxAngle2Players; }
@@ -148,7 +145,7 @@ inline bool CollisionDetect::isUsingWorldCoordinates() const   { return useWorld
 inline bool CollisionDetect::isLocalOnly() const               { return localOnly; }
 inline bool CollisionDetect::isSendCrashEventsEnabled() const  { return sendCrashEvents; }
 
-} // End simulation namespace
-} // End oe namespace
+}
+}
 
 #endif

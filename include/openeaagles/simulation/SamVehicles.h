@@ -49,7 +49,7 @@ public:
    virtual bool setSlotMinLaunchRange(const base::Distance* const msg);
    virtual bool setSlotMaxLaunchRange(const base::Distance* const msg);
 
-   void updateData(const double dt = 0.0) override;
+   virtual void updateData(const double dt = 0.0) override;
 
 private:
    double            maxMslRng;        // Max Launch Range        (meters)
@@ -57,7 +57,7 @@ private:
    unsigned int      numMsl;           // Number of missile available
 };
 
-} // End simulation namespace
-} // End oe namespace
+}
+}
 
 #endif

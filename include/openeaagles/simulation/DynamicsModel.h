@@ -106,7 +106,7 @@ public:
     virtual bool setFuelWt(const double lbs);
 };
 
-} // End simulation namespace
-} // End oe namespace
+}
+}
 
 #endif

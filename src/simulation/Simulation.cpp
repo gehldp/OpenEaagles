@@ -56,7 +56,7 @@ public:
 
 private:
    // ThreadSyncTask class function -- our userFunc()
-   virtual unsigned long userFunc();
+   virtual unsigned long userFunc() override;
 
 private:
    base::PairStream* pl0;
@@ -80,7 +80,7 @@ public:
 
 private:
    // ThreadSyncTask class function -- our userFunc()
-   virtual unsigned long userFunc();
+   virtual unsigned long userFunc() override;
 
 private:
    base::PairStream* pl0;
@@ -2161,6 +2161,6 @@ unsigned long SimBgThread::userFunc()
    return 0;
 }
 
-} // End simulation namespace
-} // End oe namespace
+}
+}
 

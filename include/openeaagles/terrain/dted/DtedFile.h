@@ -39,13 +39,13 @@ private:
     bool readDtedHeaders(std::istream& in);
     bool readDtedData(std::istream& in);
 
-   bool loadData() override;
+    virtual bool loadData() override;
 
    bool verifyChecksum;    // verify the file checksum flag
 };
 
 
-} // End terrain namespace
-} // End oe namespace
+}
+}
 
 #endif

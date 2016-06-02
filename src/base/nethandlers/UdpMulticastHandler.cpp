@@ -10,6 +10,7 @@
 // and make the code that much more enjoyable to read!
 //
 #if defined(WIN32)
+    #define _WINSOCK_DEPRECATED_NO_WARNINGS
     #include <sys/types.h>
     #include <Winsock2.h>
     #include <WS2tcpip.h>
@@ -341,6 +342,6 @@ std::ostream& UdpMulticastHandler::serialize(std::ostream& sout, const int i, co
     return sout;
 }
 
-} // End base namespace
-} // End oe namespace
+}
+}
 

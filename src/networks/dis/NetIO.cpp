@@ -54,9 +54,9 @@ public:
       ) const;
 
    // NetIO::NtmOutputNode class functions
-   virtual const simulation::Ntm* findNetworkTypeMapper(const simulation::Nib* const nib) const;
-   virtual bool add2OurLists(simulation::Ntm* const ntm);
-   virtual void print(std::ostream& sout, const int icnt) const;
+   virtual const simulation::Ntm* findNetworkTypeMapper(const simulation::Nib* const nib) const override;
+   virtual bool add2OurLists(simulation::Ntm* const ntm) override;
+   virtual void print(std::ostream& sout, const int icnt) const override;
 
 private:
    unsigned int level;        // Level
@@ -1327,7 +1327,7 @@ double NetIO::getEeFrngThrsh() const      { return EE_FRNG_THRSH; }
 double NetIO::getEePrfThrsh() const       { return EE_PRF_THRSH; }
 double NetIO::getEePwThrsh() const        { return EE_PW_THRSH; }
 
-//unsigned int NetIO::get_EE_HIGH_DENSITY_THRSH(void) const { return EE_HIGH_DENSITY_THRSH; }
+//unsigned int NetIO::get_EE_HIGH_DENSITY_THRSH() const { return EE_HIGH_DENSITY_THRSH; }
 
 
 // Adds an item to the emission PDU handler table

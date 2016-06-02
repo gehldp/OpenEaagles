@@ -16,7 +16,6 @@
 namespace oe {
 namespace simulation {
 
-
 // =============================================================================
 // class: Action
 // =============================================================================
@@ -1023,5 +1022,5 @@ std::ostream& ActionCamouflageType::serialize(std::ostream& sout, const int i, c
     return sout;
 }
 
-} // End simulation namespace
-} // End oe namespace
+}
+}

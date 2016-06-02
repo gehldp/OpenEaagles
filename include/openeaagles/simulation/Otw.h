@@ -100,8 +100,8 @@ public:
     virtual bool setSlotRefLongitude(const base::Number* const msg);     // Sets the visual database reference longitude (degs) slot
     virtual bool setSlotOtwModelTypes(const base::PairStream* const msg); // Sets the list of OTW model type IDs (Otm objects)
 
-    void updateTC(const double dt = 0.0) override;
-    void reset() override;
+    virtual void updateTC(const double dt = 0.0) override;
+    virtual void reset() override;
 
 protected:
     virtual void setOwnship0(Player* const newOwnship);     // Sets our ownship player
@@ -363,7 +363,7 @@ private:
     unsigned int typeId;                                 // OTW entity type ID number
 };
 
-} // End simulation namespace
-} // End oe namespace
+}
+}
 
 #endif

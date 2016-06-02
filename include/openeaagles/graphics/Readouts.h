@@ -11,9 +11,12 @@
 #include "openeaagles/base/Integer.h"
 
 namespace oe {
-   namespace base { class Float; class Integer; }
-namespace graphics {
-   class Reformat;
+namespace base { class Float; class Integer; }
+
+namespace graphics
+{
+
+class ReformatScanner;
 
 //------------------------------------------------------------------------------
 // Class: AsciiText
@@ -34,15 +37,16 @@ namespace graphics {
 //      Returns true if the text list was set to stlobj.
 //
 //------------------------------------------------------------------------------
-class AsciiText : public Field {
+class AsciiText : public Field
+{
     DECLARE_SUBCLASS(AsciiText, Field)
 
 public:
    AsciiText();
 
-   char filterInputEvent(const int event, const int tc) override;
-   bool isValidInputPosition(const int tc) override;
-   bool event(const int key, base::Object* const obj = nullptr) override;
+   virtual char filterInputEvent(const int event, const int tc) override;
+   virtual bool isValidInputPosition(const int tc) override;
+   virtual bool event(const int key, base::Object* const obj = nullptr) override;
 
    virtual bool setTextString(const base::String* const stsobj);
    virtual bool setTextList(const base::List* const stlobj);
@@ -60,7 +64,7 @@ class Cursor : public Field
 
 public:
    Cursor();
-   void updateData(const double dt = 0.0) override;
+   virtual void updateData(const double dt = 0.0) override;
 };
 
 
@@ -119,7 +123,7 @@ public:
 //------------------------------------------------------------------------------
 class NumericReadout : public Field
 {
-   DECLARE_SUBCLASS(NumericReadout,Field)
+   DECLARE_SUBCLASS(NumericReadout, Field)
 
 public:
    NumericReadout();
@@ -133,11 +137,11 @@ public:
    void setMaxValue(const int v)    { maxNum = static_cast<double>(v); redisplay(); }
    void setMaxValue(const double v) { maxNum = v; redisplay(); }
 
-   double getInputValue() const override;
-   bool isInputValueValid() const override;
-   char filterInputEvent(const int event, const int tc) override;
-   bool event(const int key, base::Object* const obj = nullptr) override;
-   void updateData(const double dt = 0.0) override;
+   virtual double getInputValue() const override;
+   virtual bool isInputValueValid() const override;
+   virtual char filterInputEvent(const int event, const int tc) override;
+   virtual bool event(const int key, base::Object* const obj = nullptr) override;
+   virtual void updateData(const double dt = 0.0) override;
 
    //event handler macro functions
    virtual bool onUpdateValue(const base::Float* const ouvobj);
@@ -176,7 +180,7 @@ protected:
    char overflowChar;            // Overflow character
    bool postSign;                // If true, sign char is at end of string
 
-   static Reformat* reformatter; // Generates format statements by example
+   static ReformatScanner* reformatter; // Generates format statements by example
 
 private:
    double   num;            // Value as double
@@ -198,18 +202,19 @@ private:
 //    00000#    // Hex number w/leading zeros
 //
 //------------------------------------------------------------------------------
-class HexReadout : public NumericReadout {
-   DECLARE_SUBCLASS(HexReadout,NumericReadout)
+class HexReadout : public NumericReadout
+{
+   DECLARE_SUBCLASS(HexReadout, NumericReadout)
 
 public:
    HexReadout();
 
-   void makeText() override;
-   char filterInputEvent(const int event, const int tc) override;
-   double getInputValue() const override;
+   virtual void makeText() override;
+   virtual char filterInputEvent(const int event, const int tc) override;
+   virtual double getInputValue() const override;
 
 protected:
-   void reformat(const char* const example) override;
+   virtual void reformat(const char* const example) override;
 };
 
 
@@ -224,17 +229,18 @@ protected:
 //    00000#    // Octal number w/leading zeros
 //
 //------------------------------------------------------------------------------
-class OctalReadout : public NumericReadout {
-   DECLARE_SUBCLASS(OctalReadout,NumericReadout)
+class OctalReadout : public NumericReadout
+{
+   DECLARE_SUBCLASS(OctalReadout, NumericReadout)
 
 public:
    OctalReadout();
-   void makeText() override;
-   char filterInputEvent(const int event, const int tc) override;
-   double getInputValue() const override;
+   virtual void makeText() override;
+   virtual char filterInputEvent(const int event, const int tc) override;
+   virtual double getInputValue() const override;
 
 protected:
-    void reformat(const char* const example) override;
+   virtual void reformat(const char* const example) override;
 };
 
 
@@ -258,18 +264,19 @@ protected:
 // number requires a zero, '0', to have leading zeros.
 //
 //------------------------------------------------------------------------------
-class TimeReadout : public NumericReadout {
-   DECLARE_SUBCLASS(TimeReadout,NumericReadout)
+class TimeReadout : public NumericReadout
+{
+   DECLARE_SUBCLASS(TimeReadout, NumericReadout)
 
 public:
    enum TimeMode { invalid, hhmmss, hhmm, hh, mmss, mm, ss };
    TimeReadout();
-   char filterInputEvent(const int event, const int tc) override;
-   double getInputValue() const override;
+   virtual char filterInputEvent(const int event, const int tc) override;
+   virtual double getInputValue() const override;
 
 protected:
-   void makeText() override;
-   void reformat(const char* const example) override;
+   virtual void makeText() override;
+   virtual void reformat(const char* const example) override;
    TimeMode tmode;
 };
 
@@ -310,18 +317,19 @@ protected:
 //    0DD@MM'SS.S+   //  ... and with the '+' or '-' character as a suffix
 //
 //------------------------------------------------------------------------------
-class DirectionReadout : public NumericReadout {
-   DECLARE_SUBCLASS(DirectionReadout,NumericReadout)
+class DirectionReadout : public NumericReadout
+{
+   DECLARE_SUBCLASS(DirectionReadout, NumericReadout)
 
 public:
    enum DirMode { invalid, ddmmss, ddmm, dd };
    DirectionReadout();
-   char filterInputEvent(const int event, const int tc) override;
-   double getInputValue() const override;
+   virtual char filterInputEvent(const int event, const int tc) override;
+   virtual double getInputValue() const override;
 
 protected:
-   void makeText() override;
-   void reformat(const char* const example) override;
+   virtual void makeText() override;
+   virtual void reformat(const char* const example) override;
    DirMode tmode;
 };
 
@@ -349,11 +357,13 @@ protected:
 //    0D@MM'SS.S+    //  ... and with the '+' or '-' character as a suffix
 //
 //------------------------------------------------------------------------------
-class LatitudeReadout : public DirectionReadout {
-    DECLARE_SUBCLASS(LatitudeReadout,DirectionReadout)
+class LatitudeReadout : public DirectionReadout
+{
+    DECLARE_SUBCLASS(LatitudeReadout, DirectionReadout)
+
 public:
     LatitudeReadout();
-    char filterInputEvent(const int event, const int tc) override;
+    virtual char filterInputEvent(const int event, const int tc) override;
 protected:
    //virtual void makeText();
 };
@@ -384,11 +394,12 @@ protected:
 //    0DD@MM'SS.S+    //  ... and with the '+' or '-' character as a suffix
 //
 //------------------------------------------------------------------------------
-class LongitudeReadout : public DirectionReadout {
-    DECLARE_SUBCLASS(LongitudeReadout,DirectionReadout)
+class LongitudeReadout : public DirectionReadout
+{
+    DECLARE_SUBCLASS(LongitudeReadout, DirectionReadout)
 public:
     LongitudeReadout();
-    char filterInputEvent(const int event, const int tc) override;
+    virtual char filterInputEvent(const int event, const int tc) override;
 protected:
    //virtual void makeText();
 };
@@ -403,12 +414,13 @@ protected:
 // Factory name: Rotary
 //
 //------------------------------------------------------------------------------
-class Rotary : public Field {
-    DECLARE_SUBCLASS(Rotary,Field)
+class Rotary : public Field
+{
+    DECLARE_SUBCLASS(Rotary, Field)
 
 public:
    Rotary();
-   void draw() override;
+   virtual void draw() override;
 
 private:
     // this flag tells us our components need to be pre-drawn (to avoid flicker)
@@ -425,17 +437,19 @@ private:
 // Factory name: Rotary2
 //
 //------------------------------------------------------------------------------
-class Rotary2 : public Rotary {
-    DECLARE_SUBCLASS(Rotary2,Rotary)
+class Rotary2 : public Rotary
+{
+    DECLARE_SUBCLASS(Rotary2, Rotary)
 
 public:
    Rotary2();
-   bool event(const int key, base::Object* const obj = nullptr) override;
+   virtual bool event(const int key, base::Object* const obj = nullptr) override;
    //macro function for event handler
    virtual bool onSelect(const base::Number* const osobj);
 };
 
-} // End graphics namespace
-} // End oe namespace
+}
+}
 
 #endif
+

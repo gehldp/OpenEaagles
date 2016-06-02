@@ -36,9 +36,9 @@ public:
     bool setYPos(const double yPos);                    // Sets the Y position (world coord)
     bool setZPos(const double zPos);                    // Sets the Z position (world coord)
 
-    void draw() override;
+    virtual void draw() override;
 
-    bool event(const int event, Object* const obj = nullptr) override;
+    virtual bool event(const int event, Object* const obj = nullptr) override;
 
 private:
     // event functions
@@ -51,7 +51,7 @@ private:
     double myZPos;
 };
 
-} // End graphics namespace
-} // End oe namespace
+}
+}
 
 #endif

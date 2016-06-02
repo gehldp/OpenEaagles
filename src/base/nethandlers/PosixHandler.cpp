@@ -10,6 +10,7 @@
 // and make the code that much more enjoyable to read!
 //
 #if defined(WIN32)
+    #define _WINSOCK_DEPRECATED_NO_WARNINGS
     #include <sys/types.h>
     #include <Winsock2.h>
     #define bzero(a,b)  ZeroMemory( a, b )
@@ -667,6 +668,6 @@ std::ostream& PosixHandler::serialize(std::ostream& sout, const int i, const boo
     return sout;
 }
 
-} // End base namespace
-} // End oe namespace
+}
+}
 

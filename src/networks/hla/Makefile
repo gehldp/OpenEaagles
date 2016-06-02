@@ -8,26 +8,17 @@ CPPFLAGS += -DRTI_USES_STD_FSTREAM
 #CPPFLAGS += -DEAAGLES_WITH_HLA -DRTI_USES_STD_FSTREAM -I$(RTI_HOME)/$(RTI_BUILD_TYPE)/include
 
 OBJS =  \
-	$(LIB)(Ambassador.o) \
-	$(LIB)(factory.o) \
-	$(LIB)(NetIO.o) \
-	$(LIB)(Nib.o)
+	Ambassador.o \
+	NetIO.o \
+	Nib.o
 
-SUBDIRS = rprfom
+.PHONY: all clean
 
-all: subdirs ${OBJS} 
+all: $(LIB)
 
-subdirs:
-	for subdir in $(SUBDIRS); do \
-	  echo making $@ in $$subdir; \
-	  (cd $$subdir && $(MAKE)) || exit 1; \
-	done
+$(LIB) : $(OBJS)
+	ar rs $@ $(OBJS)
 
 clean:
 	-rm -f *.o
-	for subdir in $(SUBDIRS); do \
-	    echo making $@ in $$subdir; \
-	    (cd $$subdir && $(MAKE) $@) || exit 1; \
-	done
 	-rm -f $(LIB)
-

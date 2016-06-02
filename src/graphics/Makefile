@@ -1,45 +1,58 @@
+
+#----------------------------------------------------------------------------------------
+# To build scanner:
 #
+# dos2unix reformat_scanner.l
+# flex -f -oReformatScanner.cpp reformat_scanner.l   // creates ReformatScanner.cpp
+#   (ReformatScanner.h already exists)
+#
+# search for "FlexLexer.h" in ReformatScanner.cpp - replace:
+#   #include <FlexLexer.h>
+# with
+#   #include "../base/platform/FlexLexer.h"
+#----------------------------------------------------------------------------------------
+
 include ../makedefs
 
 LIB = $(OPENEAAGLES_LIB_DIR)/liboegraphics.a
 
 OBJS =  \
-	$(LIB)(BmpTexture.o) \
-	$(LIB)(BitmapFont.o) \
-	$(LIB)(Clip3D.o) \
-	$(LIB)(ColorGradient.o) \
-	$(LIB)(ColorRotary.o) \
-	$(LIB)(Display.o) \
-	$(LIB)(factory.o) \
-	$(LIB)(Field.o) \
-	$(LIB)(Font.o) \
-	$(LIB)(FtglFonts.o) \
-	$(LIB)(Graphic.o) \
-	$(LIB)(Image.o) \
-	$(LIB)(Material.o) \
-	$(LIB)(Page.o) \
-	$(LIB)(Polygon.o) \
-	$(LIB)(Readouts.o) \
-	$(LIB)(Reformat.o) \
-	$(LIB)(Rotators.o) \
-	$(LIB)(Scanline.o) \
-	$(LIB)(Shapes.o) \
-	$(LIB)(StrokeFont.o) \
-	$(LIB)(Texture.o) \
-	$(LIB)(MfdPage.o) \
-	$(LIB)(MapPage.o) \
-	$(LIB)(SymbolLoader.o) \
-	$(LIB)(Translator.o)
+	BmpTexture.o \
+	BitmapFont.o \
+	Clip3D.o \
+	ColorGradient.o \
+	ColorRotary.o \
+	Display.o \
+	factory.o \
+	Field.o \
+	Font.o \
+	FtglFonts.o \
+	Graphic.o \
+	Image.o \
+	Material.o \
+	Page.o \
+	Polygon.o \
+	Readouts.o \
+	ReformatScanner.o \
+	Rotators.o \
+	Scanline.o \
+	Shapes.o \
+	StrokeFont.o \
+	Texture.o \
+	MfdPage.o \
+	MapPage.o \
+	SymbolLoader.o \
+	Translator.o
 
 CPPFLAGS += -I$(FREETYPE2_INC_DIR)
 
-all: ${OBJS}
+.PHONY: all clean
 
-#Reformat.cpp: Reformat.l
-#	dos2unix Reformat.l
-#	flex -f -oReformat.cpp Reformat.l
+all: $(LIB)
+
+$(LIB) : $(OBJS)
+	ar rs $@ $(OBJS)
 
 clean:
 	-rm -f *.o
 	-rm -f $(LIB)
-

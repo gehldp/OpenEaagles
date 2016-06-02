@@ -142,8 +142,8 @@ public:
    // convert viewport pixel position to lat / lon
    virtual void pixelsToLatLon(const int x, const int y, double &lat, double &lon);
 
-   void updateData(const double dt = 0.0) override;
-   bool event(const int event, base::Object* const obj = nullptr) override;
+   virtual void updateData(const double dt = 0.0) override;
+   virtual bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
    // slot functions
@@ -190,10 +190,6 @@ private:
    double displacement;        // how far to translate up or down when centered/decentered (display units)
    bool   isCentered;          // flag for centering our map page
 };
-
-// -------------------------------------------------------------------------------
-// Inline functions
-// -------------------------------------------------------------------------------
 
 inline double MapPage::getReferenceLatDeg() const  { return referenceLat; }
 inline double MapPage::getReferenceLonDeg() const  { return referenceLon; }

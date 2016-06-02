@@ -69,10 +69,10 @@ public:
    unsigned int getChannel() const;
    bool setChannel(const unsigned int);
 
-   void processInputs(const double dt, const base::IoDevice* const device, base::IoData* const inData) override;
-   void processOutputs(const double dt, const base::IoData* const outData, base::IoDevice* const device) override;
+   virtual void processInputs(const double dt, const base::IoDevice* const device, base::IoData* const inData) override;
+   virtual void processOutputs(const double dt, const base::IoData* const outData, base::IoDevice* const device) override;
 
-   void reset() override;
+   virtual void reset() override;
 
 protected:
    // AnalogOutput interface
@@ -98,7 +98,7 @@ private:
 };
 
 
-} // end iodevice
-} // end oe namespace
+}
+}
 
 #endif

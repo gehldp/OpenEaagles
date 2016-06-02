@@ -22,10 +22,10 @@ class Building : public Player
 public:
     Building();
 
-    unsigned int getMajorType() const override;
+    virtual unsigned int getMajorType() const override;
 };
 
-} // End simulation namespace
-} // End oe namespace
+}
+}
 
 #endif

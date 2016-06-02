@@ -23,10 +23,10 @@ public:
     Jammer();
 
 protected:
-    void transmit(const double dt) override;
+   virtual void transmit(const double dt) override;
 };
 
-} // End simulation namespace
-} // End oe namespace
+}
+}
 
 #endif

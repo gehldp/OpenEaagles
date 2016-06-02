@@ -49,8 +49,8 @@ public:
    // Event handler(s)
    virtual bool onJettisonEvent();
 
-   bool event(const int event, base::Object* const obj = nullptr) override;
-   void reset() override;
+   virtual bool event(const int event, base::Object* const obj = nullptr) override;
+   virtual void reset() override;
 
 protected:
    bool setJettisonable(const bool f);    // Sets the jettison enable flag
@@ -67,7 +67,7 @@ private:
    bool        jettisoned;      // Weapon has been jettisoned.
 };
 
-} // end simulation namespace
-} // end oe namespace
+}
+}
 
 #endif

@@ -23,15 +23,14 @@ class State : public base::Component
 public:
    State();
 
-   virtual void updateGlobalState(void);
+   virtual void updateGlobalState();
    virtual void updateState(const base::Component* const actor);
 
    virtual const State* getUbfStateByType(const std::type_info& type) const;
 };
 
-} // End ubf namespace
-} // End base namespace
-} // End oe namespace
+}
+}
+}
 
 #endif
-

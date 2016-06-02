@@ -686,5 +686,5 @@ void UnmannedAirVehicle::deleteData()
 {
 }
 
-} // End simulation namespace
-} // End oe namespace
+}
+}

@@ -23,14 +23,64 @@
 // the common macros used by Windows programmers, and all the data types used
 // by the various functions and subsystems.
 //
+
+// exclude rarely used header files in windows.h
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN 1
+#endif
+
+// prevent the min and max macros from being defined
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
+
+// winsock2.h will most likely include windows.h, hence the need for WIN32_LEAN_AND_MEAN
 #include <winsock2.h>
 
 //
-// visual studio 2012 has a bug with some intrinsics, we disable the one of concern
+// because WIN32_LEAN_AND_MEAN is defined, Mmsystem.h needs to be added
+// Mmsystem.h - defines multimedia functions - needed for usb joystick functions used by UsbJoystick
+//
+#include <Mmsystem.h>
+
+// Visual Studio version numbers
+//
+// MSVC++ 14.0 _MSC_VER == 1900 (Visual Studio 2015)
+// MSVC++ 12.0 _MSC_VER == 1800 (Visual Studio 2013)
+// MSVC++ 11.0 _MSC_VER == 1700 (Visual Studio 2012)
+// MSVC++ 10.0 _MSC_VER == 1600 (Visual Studio 2010)
+//
+
+//
+// visual studio 2012 has a bug with some intrinsics
+// we disable the one of concern
 //
 #if(_MSC_VER>=1700)   // VC11+
 #include <cmath>
 #pragma function(sqrt)
 #endif
 
+//
+// visual studio 2010 and 2012 are missing std::fmin and std::fmax (C99 std)
+//
+#if(_MSC_VER<=1700)
+namespace std {
+
+// max
+template <typename T>
+inline T const& fmax (T const& a, T const& b) {
+return a < b ? b : a ;
+}
+
+// min
+template <typename T>
+inline T const& fmin (T const& a, T const& b) {
+return a < b ? a : b ;
+}
+
+}
 #endif
+
+#endif
+
+

@@ -4,20 +4,23 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeterrain.a
 
 OBJS =  \
-	$(LIB)(DataFile.o) \
-	$(LIB)(factory.o) \
-	$(LIB)(QuadMap.o)
+	ded/DedFile.o \
+	dted/DtedFile.o \
+	srtm/SrtmHgtFile.o \
+	DataFile.o \
+	factory.o \
+	QuadMap.o
 
-SUBDIRS = ded dted srtm
+.PHONY: all clean
 
-all: subdirs ${OBJS}
+all: $(LIB)
 
-subdirs:
-	for subdir in $(SUBDIRS); do \
-	  echo making $@ in $$subdir; \
-	  (cd $$subdir && $(MAKE)) || exit 1; \
-	done
+$(LIB) : $(OBJS)
+	ar rs $@ $(OBJS)
 
 clean:
+	-rm -f ded/*.o
+	-rm -f dted/*.o
+	-rm -f srtm/*.o
 	-rm -f *.o
 	-rm -f $(LIB)

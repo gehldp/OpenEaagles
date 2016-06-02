@@ -36,7 +36,7 @@ class Arbiter : public Behavior
 public:
    Arbiter();
 
-   Action* genAction(const State* const state, const double dt) override;
+   virtual Action* genAction(const State* const state, const double dt) override;
 
 protected:
    base::List* getBehaviors();
@@ -57,9 +57,9 @@ private:
 
 inline base::List* Arbiter::getBehaviors()                 { return behaviors; }
 
-} // End ubf namespace
-} // End base namespace
-} // End oe namespace
+}
+}
+}
 
 #endif
 

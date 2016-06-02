@@ -15,7 +15,7 @@ EMPTY_DELETEDATA(State)
 EMPTY_COPYDATA(State)
 EMPTY_SERIALIZER(State)
 
-void State::updateGlobalState(void)
+void State::updateGlobalState()
 {
    // Update all my children
    base::PairStream* subcomponents = getComponents();
@@ -88,8 +88,6 @@ const State* State::getUbfStateByType(const std::type_info& type) const
    return p;
 }
 
-
-} // End ubf namespace
-} // End base namespace
-} // End oe namespace
-
+}
+}
+}

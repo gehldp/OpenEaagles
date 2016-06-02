@@ -3,24 +3,26 @@ include ../makedefs
 
 LIB = $(OPENEAAGLES_LIB_DIR)/liboemodels.a
 
-SUBDIRS = dynamics sensors
+CPPFLAGS += -I$(JSBSIM_INC_DIR)
 
 OBJS =  \
-	$(LIB)(factory.o)
+	dynamics/JSBSimModel.o \
+	dynamics/LaeroModel.o  \
+	dynamics/RacModel.o \
+	sensors/Gmti.o \
+	sensors/Stt.o \
+	sensors/Tws.o \
+	factory.o
 
-all: subdirs ${OBJS}
+.PHONY: all clean
 
-subdirs:
-	for subdir in $(SUBDIRS); do \
-	  echo making $@ in $$subdir; \
-	  (cd $$subdir && $(MAKE)) || exit 1; \
-	done
+all: $(LIB)
+
+$(LIB) : $(OBJS)
+	ar rs $@ $(OBJS)
 
 clean:
+	-rm -f dynamics/*.o
+	-rm -f sensors/*.o
 	-rm -f *.o
-	for subdir in $(SUBDIRS); do \
-	    echo making $@ in $$subdir; \
-	    (cd $$subdir && $(MAKE) $@) || exit 1; \
-	done
 	-rm -f $(LIB)
-

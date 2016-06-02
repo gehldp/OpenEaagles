@@ -108,7 +108,7 @@ class IrAtmosphere1 : public IrAtmosphere
 
 public:
    IrAtmosphere1();
-   bool calculateAtmosphereContribution(IrQueryMsg* const msg, double* totalSignal, double* totalBackground) override;
+   virtual bool calculateAtmosphereContribution(IrQueryMsg* const msg, double* totalSignal, double* totalBackground) override;
 
 protected:
 
@@ -167,7 +167,7 @@ private:
    const base::Table4* transmissivityTable;
 };
 
-} // End simulation namespace
-} // End oe namespace
+}
+}
 
 #endif

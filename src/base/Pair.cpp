@@ -73,7 +73,7 @@ void Pair::copyData(const Pair& pair1, const bool cc)
 //------------------------------------------------------------------------------
 // deleteData() -- delete this object's data
 //------------------------------------------------------------------------------
-void Pair::deleteData(void)
+void Pair::deleteData()
 {
     if (slotname != nullptr) slotname->unref();
     slotname = nullptr;
@@ -117,6 +117,5 @@ std::ostream& Pair::serialize(std::ostream& sout, const int indent, const bool) 
    return sout;
 }
 
-} // End base namespace
-} // End oe namespace
-
+}
+}

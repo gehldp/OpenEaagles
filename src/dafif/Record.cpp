@@ -458,11 +458,10 @@ float Record::dsSlaveVariance(const char* const p)
 //------------------------------------------------------------------------------
 float Record::dsMagHeading(const char* const p)
 {
-   char ct;
    double mh = 0.0;
    if (p != nullptr) {
       mh = dsAtofn(p,3);    // units
-      ct = *(p+3);          // tenths
+      char ct = *(p+3);     // tenths
       if (ct != '/') mh += static_cast<float>(ct - '0')/10.0f;
    }
    return static_cast<float>(mh);
@@ -540,5 +539,5 @@ void Record::printTrueBearingRange(std::ostream& sout, const double aclat, const
    sout << "  range " << range << "  grdrange " << grdrange << " true_bearing " << bearing;
 }
 
-} // End dafif namespace
-} // End oe namespace
+}
+}

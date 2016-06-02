@@ -4,22 +4,19 @@
 # -----------------------------------------------------------------------------
 
 # ---
-# OpenEaagles home directory
+# OpenEaagles root directory
 #   Use the environment variable OE_ROOT to locate OpenEaagles
-#   -- No Default 
+#   -- No default
 #   -- see $(OE_ROOT)/setenv
 # ---
 
 # ---
-# OpenEaagles 3rd party root 
+# OpenEaagles 3rd party root directory
 #   Use the environment variable OE_3RD_PARTY_ROOT to locate the include and
 #   lib directories for the OpenEaagles 3rd party software(e.g., cigi, JSBSim)
-#   -- Default path is "/usr/local
+#   -- No default
 #   -- see $(OE_ROOT)/setenv
 # ---
-ifndef OE_3RD_PARTY_ROOT
-   OE_3RD_PARTY_ROOT = /usr/local
-endif
 
 # ---
 # library directories
@@ -67,11 +64,20 @@ CPPFLAGS += -g -O2
 # ---
 CPPFLAGS += -fPIC
 CPPFLAGS += -I$(OE_ROOT)/include -I$(OE_3RD_PARTY_ROOT)/include
-#CPPFLAGS += -isystem$(OE_ROOT)/include -isystem$(OE_3RD_PARTY_ROOT)/include
 CPPFLAGS += -pthread
-CPPFLAGS += -Wno-long-long
 CPPFLAGS += -Wall
+#CPPFLAGS += -Wextra
 CPPFLAGS += -std=c++11
 # warn of old c-style casts, so they can be replaced
 #CPPFLAGS += -Wold-style-cast
+
+# ---
+# GCC or Clang compiler selection - by default, use system
+# default compiler
+#
+# If you want to use clang, make sure to compile 3rd party libs
+# with clang - especially, Google Protocol Buffers
+# ---
+#CXX = g++
+#CXX = clang++
 

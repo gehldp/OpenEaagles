@@ -3,12 +3,8 @@
 -- If premake command is not supplied an action (target compiler), exit!
 --
 -- Targets of interest:
---     vs2010     (Visual Studio 2010)
---     vs2012     (Visual Studio 2012)
 --     vs2013     (Visual Studio 2013)
 --     vs2015     (Visual Studio 2015)
---     codeblocks (Code::Blocks)
---     codelite   (CodeLite)
 --
 if (_ACTION == nil) then
     return
@@ -18,9 +14,7 @@ end
 -- directory location for 3rd party dependencies
 --
 OE_3RD_PARTY_ROOT = "../../../OpenEaagles3rdParty"
-if (os.is("linux")) then
-   OE_3RD_PARTY_ROOT = "/usr/local"
-end
+
 --
 -- set include and library paths
 --
@@ -34,30 +28,30 @@ OE3rdPartyIncPath = OE_3RD_PARTY_ROOT.."/include"
 --HLAIncPath = HLA_ROOT.."/include/hla13"
 HLA_ROOT = "../../../openrti"
 HLAIncPath = HLA_ROOT.."/include/RTI13"
-if (_ACTION == "vs2010") then
-  HLALibPath = HLA_ROOT.."/lib/vc10"
-end
 if (_ACTION == "vs2012") then
   HLALibPath = HLA_ROOT.."/lib/vc11"
 end
+if (_ACTION == "vs2013") then
+  HLALibPath = HLA_ROOT.."/lib/vc12"
+end
+if (_ACTION == "vs2015") then
+  HLALibPath = HLA_ROOT.."/lib/vc14"
+end
+print ("HLA Paths:")
+print ("  Include   : "..HLALibPath)
+--print ("  Libraries : "..OELibPath)
 
 --
 -- determine target directories for project/solution files and 
 -- compiled libraries
 --
 locationPath  = "../" .. _ACTION
-if (_ACTION == "vs2010") or (_ACTION == "vs2012") or (_ACTION == "vs2013") or (_ACTION == "vs2015") then
+if (_ACTION == "vs2013") or (_ACTION == "vs2015") then
   targetDirPath = "../../lib/".._ACTION
-end
-if (_ACTION == "codelite") or (_ACTION == "codeblocks") then
-  targetDirPath = "../../lib/mingw"
-end
-if (os.is("linux")) then
-  targetDirPath = "../../lib/linux"
 end
 print ("Target directory path: "..targetDirPath)
 
-solution "oe"
+workspace "oe"
 
    -- destination directory for generated solution/project files
    location (locationPath)
@@ -85,31 +79,25 @@ solution "oe"
    --     Release        (Runtime library is Multi-threaded DLL)
    --     Debug          (Runtime library is Multi-threaded Debug DLL)
    --
-   configurations { "Release", "Debug" }
+   configurations { "Release32", "Debug32" }
 
    -- common release configuration flags and symbols
-   configuration { "Release" }
+   filter { "Release32" }
       flags { "Optimize" }
-      if (_ACTION == "vs2010") or (_ACTION == "vs2012") or (_ACTION == "vs2013") or (_ACTION == "vs2015") then
+      if (_ACTION == "vs2013") or (_ACTION == "vs2015") then
          -- enable compiler intrinsics and favour speed over size
          buildoptions { "/Oi", "/Ot" }
          defines { "WIN32", "_LIB", "NDEBUG" }
       end
-      if (os.is("linux")) then
-         buildoptions { "-O3 -Wall -Wno-long-long -pthread" }
-      end
 
    -- common debug configuration flags and symbols
-   configuration { "Debug" }
+   filter { "Debug32" }
       targetsuffix "_d"
       flags { "Symbols" }
-      if (_ACTION == "vs2010") or (_ACTION == "vs2012") or (_ACTION == "vs2013") or (_ACTION == "vs2015") then
+      if (_ACTION == "vs2013") or (_ACTION == "vs2015") then
          -- enable compiler intrinsics
          buildoptions { "/Oi" }
          defines { "WIN32", "_LIB", "_DEBUG" }
-      end
-      if (os.is("linux")) then
-         buildoptions { "-Wall -Wno-long-long -pthread" }
       end
 
    --
@@ -167,15 +155,15 @@ solution "oe"
       }
       targetname "dis"
 
-   -- IEEE HLA interface library
-   project "hla"
-      files {
-         "../../include/openeaagles/networks/hla/**.h",
-         "../../src/networks/hla/**.cpp"
-      }
-      includedirs { HLAIncPath }
-      defines { "RTI_USES_STD_FSTREAM" }
-      targetname "hla"
+   -- IEEE HLA interface library (abstract support)
+--   project "hla"
+--      files {
+--         "../../include/openeaagles/networks/hla/**.h",
+--         "../../src/networks/hla/**.cpp"
+--      }
+--      includedirs { HLAIncPath }
+--      defines { "RTI_USES_STD_FSTREAM" }
+--      targetname "hla"
 	  
    -- graphical instruments library
    project "instruments"
@@ -244,6 +232,16 @@ solution "oe"
       }
       targetname "rpf"
 
+   -- IEEE HLA interface library for RPR FOM
+--   project "rprfom"
+--      files {
+--         "../../include/openeaagles/networks/rprfom/**.h",
+--         "../../src/networks/rprfom/**.cpp"
+--      }
+--      includedirs { HLAIncPath }
+--      defines { "RTI_USES_STD_FSTREAM" }
+--      targetname "rprfom"
+
    -- simulation library
    project "simulation"
       files {
@@ -260,5 +258,3 @@ solution "oe"
          "../../src/terrain/**.cpp"
       }
       targetname "terrain"
-
-

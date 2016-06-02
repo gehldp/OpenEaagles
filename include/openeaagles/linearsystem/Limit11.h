@@ -23,7 +23,7 @@ public:
    Limit11();
 };
 
-} // End linearsystem namespace
-} // End oe namespace
+}
+}
 
 #endif

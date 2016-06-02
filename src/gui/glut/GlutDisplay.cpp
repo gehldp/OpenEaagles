@@ -418,7 +418,7 @@ void GlutDisplay::reshapeSubWindow()
 
          setViewport(newX, newY, newWidth, newHeight);
 
-         //std::cout << "reshapeSubWindow(void) winID = " << winId;
+         //std::cout << "reshapeSubWindow() winID = " << winId;
          //std::cout << "; mainWinID = " << mainWinId;
          //std::cout << "; pos(" << newX << ", " << newY << ")";
          //std::cout << "; size(" << newWidth << ", " << newHeight << ")";
@@ -1094,5 +1094,5 @@ std::ostream& GlutDisplay::serialize(std::ostream& sout, const int i, const bool
    return sout;
 }
 
-} // End glut namespace
-} // End oe namespace
+}
+}

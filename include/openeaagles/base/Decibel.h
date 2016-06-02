@@ -43,7 +43,8 @@ namespace base {
 //      Input/Output stream operators: >>  <<
 //          Are C++ equivalents.  Values are in decibels.
 //------------------------------------------------------------------------------
-class Decibel : public Number {
+class Decibel : public Number
+{
     DECLARE_SUBCLASS(Decibel,Number)
 
 public:
@@ -61,14 +62,12 @@ public:
     void operator-=(const Decibel&);
     void operator-=(const double);
 
-    virtual void setValue(const double nv);
-    virtual bool setSlotValue(const Number* const svobj);
+    virtual void setValue(const double nv) override;
+    virtual bool setSlotValue(const Number* const svobj) override;
 
 private:
     double db;    // value in dBs
 };
-
-
 
 //------------------------------------------------------------------------------
 // Assignment operator:  =
@@ -79,7 +78,6 @@ inline Decibel& Decibel::operator=(const double n)
    setValueDB(n);
    return *this;
 }
-
 
 //------------------------------------------------------------------------------
 // Addition operators:  + and +=
@@ -261,7 +259,7 @@ inline std::ostream& operator<<(std::ostream& sout, const Decibel& n)
    return sout;
 }
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

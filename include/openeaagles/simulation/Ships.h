@@ -22,10 +22,10 @@ class Ship : public Player
 public:
     Ship();
 
-    unsigned int getMajorType() const override;
+    virtual unsigned int getMajorType() const override;
 };
 
-} // End simulation namespace
-} // End oe namespace
+}
+}
 
 #endif

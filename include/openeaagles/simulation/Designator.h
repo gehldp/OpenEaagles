@@ -66,7 +66,7 @@ private:
    Data data;          // Designator data (see above)
 };
 
-} // End simulation namespace
-} // End oe namespace
+}
+}
 
 #endif

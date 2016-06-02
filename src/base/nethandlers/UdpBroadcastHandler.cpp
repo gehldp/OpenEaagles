@@ -10,6 +10,7 @@
 // and make the code that much more enjoyable to read!
 //
 #if defined(WIN32)
+    #define _WINSOCK_DEPRECATED_NO_WARNINGS
     #include <sys/types.h>
     #include <Winsock2.h>
     #define bzero(a,b) ZeroMemory( a, b )
@@ -142,14 +143,13 @@ bool UdpBroadcastHandler::bindSocket()
     // ---
     if (ok) {
         ok = false;
-        uint32_t ba = 0;
         if (networkMask != nullptr) {
             // User defined broadcast address
-            uint32_t localNetAddr = getLocalAddr();
-            uint32_t localNetMask = ::inet_addr(networkMask);
+            const uint32_t localNetAddr = getLocalAddr();
+            const uint32_t localNetMask = ::inet_addr(networkMask);
             if (localNetAddr != INADDR_NONE && localNetMask != INADDR_NONE) {
-               uint32_t localNet = localNetAddr & localNetMask;
-               ba = localNet | ~localNetMask;
+               const uint32_t localNet = localNetAddr & localNetMask;
+               const uint32_t ba = localNet | ~localNetMask;
                if (isMessageEnabled(MSG_INFO)) {
                   std::cout << std::hex << "UdpBroadcast::bindSocket() -- address: " << ba << std::dec << std::endl;
                }
@@ -244,6 +244,5 @@ std::ostream& UdpBroadcastHandler::serialize(std::ostream& sout, const int i, co
     return sout;
 }
 
-} // End base namespace
-} // End oe namespace
-
+}
+}

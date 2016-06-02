@@ -24,7 +24,7 @@ protected:
    void setCurrentObj(Object* const obj);
 
 private:
-   virtual unsigned long userFunc();
+   virtual unsigned long userFunc() override;
 
 private:
    ThreadPool* threadPool;
@@ -425,5 +425,5 @@ Object* ThreadPool::getSlotByIndex(const int si)
    return BaseClass::getSlotByIndex(si);
 }
 
-} // End base namespace
-} // End oe namespace
+}
+}

@@ -4,31 +4,29 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboerecorder.a
 
 OBJS =  \
-	$(LIB)(DataRecorder.o) \
-	$(LIB)(DataRecordHandle.o) \
-	$(LIB)(factory.o) \
-	$(LIB)(FileReader.o) \
-	$(LIB)(FileWriter.o) \
-	$(LIB)(InputHandler.o) \
-	$(LIB)(NetInput.o) \
-	$(LIB)(NetOutput.o) \
-	$(LIB)(OutputHandler.o) \
-	$(LIB)(PrintHandler.o) \
-	$(LIB)(PrintPlayer.o) \
-	$(LIB)(PrintSelected.o) \
-	$(LIB)(TabPrinter.o)
+	protobuf/DataRecord.pb.o \
+	DataRecorder.o \
+	DataRecordHandle.o \
+	factory.o \
+	FileReader.o \
+	FileWriter.o \
+	InputHandler.o \
+	NetInput.o \
+	NetOutput.o \
+	OutputHandler.o \
+	PrintHandler.o \
+	PrintPlayer.o \
+	PrintSelected.o \
+	TabPrinter.o
 
-SUBDIRS = protobuf
+.PHONY: all clean
 
-all: subdirs ${OBJS}
+all: $(LIB)
 
-subdirs:
-	for subdir in $(SUBDIRS); do \
-	  echo making $@ in $$subdir; \
-	  (cd $$subdir && $(MAKE)) || exit 1; \
-	done
+$(LIB) : $(OBJS)
+	ar rs $@ $(OBJS)
 
 clean:
+	-rm -f protobuf/*.o
 	-rm -f *.o
 	-rm -f $(LIB)
-

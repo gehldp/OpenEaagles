@@ -329,5 +329,5 @@ std::ostream& SrtmHgtFile::serialize(std::ostream& sout, const int i, const bool
     return sout;
 }
 
-} // End terrain namespace
-} // End oe namespace
+}
+}

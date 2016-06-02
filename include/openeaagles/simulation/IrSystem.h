@@ -56,8 +56,8 @@ public:
    virtual bool setSlotSeekerName(base::String* const p);
    virtual bool setSlotDisableQueries(base::Number* const msg);
 
-   void updateData(const double dt = 0.0) override;
-   void reset() override;
+   virtual void updateData(const double dt = 0.0) override;
+   virtual void reset() override;
 
 protected:
 
@@ -65,7 +65,7 @@ protected:
    // This function will create a filtered list of players that IR systems will interact with.
    virtual void processPlayersOfInterest();
 
-   bool shutdownNotification() override;
+   virtual bool shutdownNotification() override;
 
 private:
    IrSeeker*  seeker;               // Our seeker
@@ -74,7 +74,7 @@ private:
    bool disableQueries;             // Disable sending queries flag
 };
 
-} // End simulation namespace
-} // End oe namespace
+}
+}
 
 #endif

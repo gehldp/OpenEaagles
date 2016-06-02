@@ -33,7 +33,7 @@ public:
 
 protected:
 
-   void initActor() override;
+   virtual void initActor() override;
 
    Station*     getStation();
    Simulation*  getSimulation();
@@ -76,8 +76,8 @@ private:
 //   ) // simulation
 //) // Station
 
-} // End simulation namespace
-} // End oe namespace
+}
+}
 
 #endif
 

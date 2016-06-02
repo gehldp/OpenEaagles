@@ -74,7 +74,8 @@ class SlSymbol;
 //     showOnlyInRange   <Number>       ! only show symbols within range (default: true)
 //
 //------------------------------------------------------------------------------
-class SymbolLoader : public MapPage {
+class SymbolLoader : public MapPage
+{
    DECLARE_SUBCLASS(SymbolLoader,MapPage)
 
 public:
@@ -166,10 +167,10 @@ public:
    virtual bool setInterconnect(const bool x);
    bool isInterconnected()  { return interconnect; };
 
-   void draw() override;
-   void drawFunc() override;
+   virtual void draw() override;
+   virtual void drawFunc() override;
 
-   void updateTC(const double dt = 0.0) override;
+   virtual void updateTC(const double dt = 0.0) override;
 
 protected:
    bool setSlotTemplates(base::PairStream* myTemps);
@@ -194,7 +195,8 @@ private:
 // Class: SlSymbol
 // Description: General symbol used by SymbolLoader
 //------------------------------------------------------------------------------
-class SlSymbol : public base::Object {
+class SlSymbol : public base::Object
+{
     DECLARE_SUBCLASS(SlSymbol,base::Object)
 
 public:
@@ -207,8 +209,8 @@ public:
    bool isVisible() const;                   // Visibility
    int getType() const;                      // Type code
    const char* getId() const;                // ID sting
-   base::Pair* getSymbolPair() const;       // Graphical component
-   base::Object* getValue() const;          // Returns user defined data item
+   base::Pair* getSymbolPair() const;        // Graphical component
+   base::Object* getValue() const;           // Returns user defined data item
 
    bool isPositionLL() const;                // Returns true if using at lat/lon position
    bool isPositionAC() const;                // Returns true if using at aircraft nose/wing position
@@ -224,7 +226,7 @@ public:
 
    double getHeadingDeg() const;             // Returns heading (degs)
    double getHeadingRad() const;             // heading (rads)
-   base::Degrees* getHdgAngleObj() const;   // base::Angle object that holds the heading value
+   base::Degrees* getHdgAngleObj() const;    // base::Angle object that holds the heading value
    Graphic* getHdgGraphics() const;          // Graphic object named 'hdg' to handle heading rotation
 
    void setVisible(const bool x);            // set our visibility
@@ -233,16 +235,16 @@ public:
    void setScreenFlag(const bool flg);       // set the manual screen position override flag
    void setType(const int t);                // Sets the user defined type (must match templates)
    void setId(const char* const v);          // Sets the ID string
-   void setValue(base::Object* const v);    // Sets the user defined value, which is set to the graphical component
+   void setValue(base::Object* const v);     // Sets the user defined value, which is set to the graphical component
 
    void setXPosition(const double v);        // Sets the X position ( latitude or NM north/south )
    void setYPosition(const double v);        // Sets the Y position { longitude or NM east/west )
    void setXScreenPos(const double v);       // Sets the X screen pos (inches)
    void setYScreenPos(const double v);       // Sets the Y screen pos (inches) (does not include displacement)
 
-   void setSymbolPair(base::Pair* const p);     // Sets the graphical component
+   void setSymbolPair(base::Pair* const p);      // Sets the graphical component
    void setHeadingDeg(const double h);           // Sets the (optional) heading (degrees)
-   void setHdgAngleObj(base::Degrees* const p); // Sets the base::Angle object that holds the heading value
+   void setHdgAngleObj(base::Degrees* const p);  // Sets the base::Angle object that holds the heading value
    void setHdgGraphics(Graphic* const p);        // Sets the graphic object named 'hdg' to handle heading rotation
 
 private:
@@ -255,8 +257,8 @@ private:
 
    int type;               // numeric type (for looking up in slottable)
    char id[MAX_ID_SIZE+1]; // ID (or name) sent to the '
-   base::Object* value;   // optional value (sent to the symbol as an UPDATE_VALUE event)
-   base::Pair* pntr;      // The graphical component
+   base::Object* value;    // optional value (sent to the symbol as an UPDATE_VALUE event)
+   base::Pair* pntr;       // The graphical component
 
    double xPos;            // X position ( latitude or NM north/south )
    double yPos;            // Y position { longitude or NM east/west )
@@ -267,12 +269,8 @@ private:
    double hdg;             // symbol heading (degrees)
    bool hdgValid;          // Heading valid flag
    Graphic* phdg;          // Object named 'hdg' to handle heading rotation
-   base::Degrees* hdgAng; // Value sent to the heading 'hdg' object
+   base::Degrees* hdgAng;  // Value sent to the heading 'hdg' object
 };
-
-// -------------------------------------------------------------------------------
-// Inline functions for SymbolLoader and SlSymbol
-// -------------------------------------------------------------------------------
 
 inline int SymbolLoader::getMaxSymbols() const { return MAX_SYMBOLS; }
 inline bool SymbolLoader::setInterconnect(const bool flg) { interconnect = flg; return true; }
@@ -306,8 +304,8 @@ inline bool SlSymbol::isPositionScreen() const           { return scrnFlg; }
 
 inline int SlSymbol::getType() const                     { return type; }
 inline const char* SlSymbol::getId() const               { return id; }
-inline base::Object* SlSymbol::getValue() const         { return value; }
-inline base::Pair* SlSymbol::getSymbolPair() const      { return pntr; }
+inline base::Object* SlSymbol::getValue() const          { return value; }
+inline base::Pair* SlSymbol::getSymbolPair() const       { return pntr; }
 
 inline double SlSymbol::getXPosition() const             { return xPos; }
 inline double SlSymbol::getYPosition() const             { return yPos; }
@@ -317,7 +315,7 @@ inline double SlSymbol::getScreenYPos() const            { return yScreenPos; }
 
 inline double SlSymbol::getHeadingDeg() const            { return hdg; }
 inline double SlSymbol::getHeadingRad() const            { return static_cast<double>(hdg * base::Angle::D2RCC); }
-inline base::Degrees* SlSymbol::getHdgAngleObj() const  { return hdgAng; }
+inline base::Degrees* SlSymbol::getHdgAngleObj() const   { return hdgAng; }
 inline Graphic* SlSymbol::getHdgGraphics() const         { return phdg; }
 
 inline void SlSymbol::setXPosition(const double v)       { xPos = v; }
@@ -330,7 +328,7 @@ inline void SlSymbol::setLatLonFlag(const bool flg)      { llFlg = flg; }
 inline void SlSymbol::setACCoordFlag(const bool flg)     { acFlg = flg; }
 inline void SlSymbol::setScreenFlag(const bool flg)      { scrnFlg = flg; }
 
-}  // end of graphics namespace
-}  // end of oe namespace
+}
+}
 
 #endif

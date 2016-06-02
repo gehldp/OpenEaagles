@@ -109,7 +109,7 @@ public:
    bool isFocusSlavedToSubpage() const          { return focusSlavedToSubpage; }
    void setFocusSlavedToSubpage(const bool f)   { focusSlavedToSubpage = f; }
 
-   // Call new sub-page
+   // call new sub-page
    bool newSubpage(Page* const newPage, Page* theCaller, base::Object* theArg = 0);
    bool newSubpage(const char* const name, Page* theCaller, base::Object* theArg = 0);
 
@@ -127,18 +127,18 @@ public:
    bool drawSubpageFirst(const base::Number* const spfobj);
    bool setSlotFocusSlavedToSubpage(const base::Number* const spfobj);
 
-   void draw() override;
-   base::Pair* findBySelectName(const GLuint name) override;
-   bool event(const int event, base::Object* const obj = nullptr) override;
+   virtual void draw() override;
+   virtual base::Pair* findBySelectName(const GLuint name) override;
+   virtual bool event(const int event, base::Object* const obj = nullptr) override;
 
-   void updateTC(const double dt = 0.0) override;
-   void updateData(const double dt = 0.0) override;
-   void reset() override;
+   virtual void updateTC(const double dt = 0.0) override;
+   virtual void updateData(const double dt = 0.0) override;
+   virtual void reset() override;
 
 protected:
    // Return our paging arguments
    base::Object* getArgument()               { return pageArg; }
-   const Page* getCaller()                    { return caller; }
+   const Page* getCaller()                   { return caller; }
 
    // Return our subpages
    base::PairStream* subPages()              { return subpages; }
@@ -157,27 +157,27 @@ protected:
 private:
    bool processSubpages();
 
-   Page*       cp;                     // Current Subpage
-   base::Identifier cpName;           // Current Subpage Name
-   Page*       np;                     // New subpage (requesting a page change)
+   Page* cp;                           // Current Subpage
+   base::Identifier cpName;            // Current Subpage Name
+   Page* np;                           // New subpage (requesting a page change)
 
-   base::PairStream* subpages;        // Subpages
-   base::PairStream* pageChgEvents;   // Page change events
+   base::PairStream* subpages;         // Subpages
+   base::PairStream* pageChgEvents;    // Page change events
 
    bool  postDraw1;                    // Post draw component (child) graphic
    bool  focusSlavedToSubpage;         // Input event focus should follow subpage changes
 
    // Passed by calling page
-   base::safe_ptr<base::Object> pageArg;   // Paging argument
+   base::safe_ptr<base::Object> pageArg;     // Paging argument
    const Page* caller;                       // Calling page
 
    // Subpage Stack
    static const int SUBPAGE_STACK_SIZE = 50;
    Page* subpageStack[SUBPAGE_STACK_SIZE];
-   int      subpageSP;                 // Stack pointer
+   int subpageSP;                            // Stack pointer
 };
 
-} // End graphics namespace
-} // End oe namespace
+}
+}
 
 #endif

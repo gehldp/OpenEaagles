@@ -7,13 +7,17 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeotw.a
 
 OBJS =  \
-	$(LIB)(factory.o) \
-	$(LIB)(OtwCigiCl.o) \
-	$(LIB)(OtwPC.o)
+	factory.o \
+	OtwCigiCl.o \
+	OtwPC.o
 
-all: ${OBJS}
+.PHONY: all clean
+
+all: $(LIB)
+
+$(LIB) : $(OBJS)
+	ar rs $@ $(OBJS)
 
 clean:
 	-rm -f *.o
 	-rm -f $(LIB)
-

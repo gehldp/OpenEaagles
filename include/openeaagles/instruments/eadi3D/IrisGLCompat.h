@@ -37,7 +37,7 @@ private:
     float vertexY;
 };
 
-} // End Instruments namespace
-} // End oe namespace
+}
+}
 
 #endif

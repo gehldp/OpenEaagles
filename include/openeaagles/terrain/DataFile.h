@@ -58,7 +58,7 @@ public:
    // base::Terrain interface
    // ---
 
-   bool isDataLoaded() const override;
+   virtual bool isDataLoaded() const override;
 
    // Locates an array of (at least two) elevation points (and sets valid flags if found)
    // returns the number of points found within this DataFile
@@ -71,7 +71,7 @@ public:
          const double direction,       // True direction (heading) angle of the data (degs)
          const double maxRng,          // Range to last elevation point (meters)
          const bool   interp = false   // Interpolate between elevation posts (default: false)
-      ) const;
+      ) const override;
 
    // Locates an elevation value (meters) for a given reference point and returns
    // it in 'elev'.  Function returns true if successful, otherwise 'elev' is unchanged.
@@ -80,7 +80,7 @@ public:
          const double lat,             // Reference latitude (degs)
          const double lon,             // Reference longitude (degs)
          const bool interp = false     // Interpolate between elevation posts (default: false)
-      ) const;
+      ) const override;
 
 protected:
    short**  columns;                // Array of data columns (values in meters)
@@ -91,10 +91,10 @@ protected:
    short    voidValue;              // Value representing a void (missing) data point
 
    // base::Terrain protected interface
-   void clearData() override;
+   virtual void clearData() override;
 };
 
-} // End terrain namespace
-} // End oe namespace
+}
+}
 
 #endif

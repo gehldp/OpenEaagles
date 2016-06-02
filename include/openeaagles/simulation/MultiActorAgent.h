@@ -35,8 +35,8 @@ class MultiActorAgent : public base::Component
 public:
    MultiActorAgent();
 
-   void updateData(const double dt = 0.0) override;
-   void reset() override;
+   virtual void updateData(const double dt = 0.0) override;
+   virtual void reset() override;
 
 protected:
    // generic controller
@@ -78,8 +78,8 @@ private:
 
 inline void MultiActorAgent::setActor(base::Component* c) { actor=c; }
 
-} // End simulation namespace
-} // End oe namespace
+}
+}
 
 
 // A MultiActorAgent can be configured as shown below: (assuming the existence of the "abc" state and behavior classes)

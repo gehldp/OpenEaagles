@@ -48,14 +48,14 @@ protected:
    virtual void rollStabilizingController(const double dt = 0.0);
    virtual void elevationStabilizingController(const double dt = 0.0);
 
-   void dynamics(const double dt) override;
+   virtual void dynamics(const double dt) override;
 
 private:
    StabilizingMode  stabilizingMode; // Gimbal stabilization mode
    MountPosition    mountPosition;   // Gimbal Mount position
 };
 
-} // End simulation namespace
-} // End oe namespace
+}
+}
 
 #endif
