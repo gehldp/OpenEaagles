@@ -9,7 +9,7 @@
 # search for "FlexLexer.h" in ReformatScanner.cpp - replace:
 #   #include <FlexLexer.h>
 # with
-#   #include "../base/platform/FlexLexer.h"
+#   #include "openeaagles/base/util/FlexLexer.h"
 #----------------------------------------------------------------------------------------
 
 include ../makedefs
@@ -17,6 +17,18 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboegraphics.a
 
 OBJS =  \
+	readouts/AsciiText.o \
+	readouts/Cursor.o \
+	readouts/DirectionReadout.o \
+	readouts/HexReadout.o \
+	readouts/LatitudeReadout.o \
+	readouts/LongitudeReadout.o \
+	readouts/NumericReadout.o \
+	readouts/OctalReadout.o \
+	readouts/ReformatScanner.o \
+	readouts/Rotary.o \
+	readouts/Rotary2.o \
+	readouts/TimeReadout.o \
 	BmpTexture.o \
 	BitmapFont.o \
 	Clip3D.o \
@@ -32,8 +44,6 @@ OBJS =  \
 	Material.o \
 	Page.o \
 	Polygon.o \
-	Readouts.o \
-	ReformatScanner.o \
 	Rotators.o \
 	Scanline.o \
 	Shapes.o \
@@ -54,5 +64,6 @@ $(LIB) : $(OBJS)
 	ar rs $@ $(OBJS)
 
 clean:
+	-rm -f readouts/*.o
 	-rm -f *.o
 	-rm -f $(LIB)

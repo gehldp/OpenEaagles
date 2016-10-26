@@ -1,27 +1,41 @@
 
-#include "openeaagles/graphics/factory.h"
+#include "openeaagles/graphics/factory.hpp"
 
-#include "openeaagles/base/Object.h"
+#include "openeaagles/base/Object.hpp"
 
-#include "openeaagles/graphics/Graphic.h"
-#include "openeaagles/graphics/Display.h"
-#include "openeaagles/graphics/Shapes.h"
-#include "openeaagles/graphics/Polygon.h"
-#include "openeaagles/graphics/ColorRotary.h"
-#include "openeaagles/graphics/ColorGradient.h"
-#include "openeaagles/graphics/Readouts.h"
-#include "openeaagles/graphics/FtglFonts.h"
-#include "openeaagles/graphics/BitmapFont.h"
-#include "openeaagles/graphics/StrokeFont.h"
-#include "openeaagles/graphics/BmpTexture.h"
-#include "openeaagles/graphics/Rotators.h"
-#include "openeaagles/graphics/Translator.h"
-#include "openeaagles/graphics/Material.h"
+#include "openeaagles/graphics/Graphic.hpp"
+#include "openeaagles/graphics/Display.hpp"
+#include "openeaagles/graphics/Shapes.hpp"
+#include "openeaagles/graphics/Polygon.hpp"
+#include "openeaagles/graphics/ColorRotary.hpp"
+#include "openeaagles/graphics/ColorGradient.hpp"
+#include "openeaagles/graphics/FtglFonts.hpp"
+#include "openeaagles/graphics/BitmapFont.hpp"
+#include "openeaagles/graphics/StrokeFont.hpp"
+#include "openeaagles/graphics/BmpTexture.hpp"
+#include "openeaagles/graphics/Rotators.hpp"
+#include "openeaagles/graphics/Translator.hpp"
+#include "openeaagles/graphics/Material.hpp"
+
+// fields and readouts
+#include "openeaagles/graphics/readouts/AsciiText.hpp"
+#include "openeaagles/graphics/readouts/Cursor.hpp"
+#include "openeaagles/graphics/readouts/Rotary.hpp"
+#include "openeaagles/graphics/readouts/Rotary2.hpp"
+#include "openeaagles/graphics/readouts/DirectionReadout.hpp"
+#include "openeaagles/graphics/readouts/HexReadout.hpp"
+#include "openeaagles/graphics/readouts/LatitudeReadout.hpp"
+#include "openeaagles/graphics/readouts/LongitudeReadout.hpp"
+#include "openeaagles/graphics/readouts/NumericReadout.hpp"
+#include "openeaagles/graphics/readouts/OctalReadout.hpp"
+#include "openeaagles/graphics/readouts/TimeReadout.hpp"
 
 // pages and maps
-#include "openeaagles/graphics/MfdPage.h"
-#include "openeaagles/graphics/MapPage.h"
-#include "openeaagles/graphics/SymbolLoader.h"
+#include "openeaagles/graphics/MfdPage.hpp"
+#include "openeaagles/graphics/MapPage.hpp"
+#include "openeaagles/graphics/SymbolLoader.hpp"
+
+
 
 #include <string>
 
@@ -87,7 +101,7 @@ base::Object* factory(const std::string& name)
         obj = new Triangle();
     }
 
-    // Test Fields
+    // Fields
     else if ( name == AsciiText::getFactoryName() ) {
         obj = new AsciiText();
     }
