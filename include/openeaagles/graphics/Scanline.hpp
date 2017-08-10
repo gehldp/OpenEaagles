@@ -3,21 +3,21 @@
 #define __oe_graphics_Scanline_H__
 
 #include "openeaagles/base/Object.hpp"
-#include "openeaagles/base/osg/Vec2"
-#include "openeaagles/base/osg/Vec3"
-#include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/osg/Vec2d"
+#include "openeaagles/base/osg/Vec3d"
+#include "openeaagles/base/osg/Matrixd"
 #include "openeaagles/base/safe_ptr.hpp"
+
+#include <array>
 
 namespace oe {
 namespace graphics {
-
 class Clip3D;
 class Polygon;
 
 //------------------------------------------------------------------------------
 // Class: Scanline
-// Base class: Object -> Scanline
-// Description:  (Abstract) 2D scan line engine.
+// Description:  (Abstract) 2D scan line engine
 // Factory name: Scanline
 //------------------------------------------------------------------------------
 class Scanline : public base::Object
@@ -46,41 +46,43 @@ public:
 
 protected:
    // PolyData Description
-   class PolyData : public base::Object {
-      DECLARE_SUBCLASS(PolyData,base::Object)
+   class PolyData : public base::Object
+   {
+      DECLARE_SUBCLASS(PolyData, base::Object)
    public:
       PolyData();
-      void getNorm(osg::Vec3& lnorm, const double x) const;
+      void getNorm(base::Vec3d& lnorm, const double x) const;
 
-      double      x0;                    // X value at start
-      osg::Vec3   n0;                    // Initial Norm
-      osg::Vec3   nslope;                // Norm slope
-      bool        aptEdge2;              // reached second edge
+      double x0 {};                         // X value at start
+      base::Vec3d n0;                       // Initial Norm
+      base::Vec3d nslope;                   // Norm slope
+      bool aptEdge2 {};                     // reached second edge
       base::safe_ptr<Polygon> polygon;      // Clipped (working) polygon
       base::safe_ptr<const Polygon> orig;   // Original polygon
    };
 
 protected:
    // Edge Description
-   class Edge : public base::Object {
+   class Edge : public base::Object
+   {
       DECLARE_SUBCLASS(Edge,base::Object)
    public:
       Edge();
-      Edge(const double v0[2], const osg::Vec3& vn0, const double v1[2], const osg::Vec3& vn1, PolyData* const p);
+      Edge(const double v0[2], const base::Vec3d& vn0, const double v1[2], const base::Vec3d& vn1, PolyData* const p);
       Edge(const double v0[2], const double v1[2], PolyData* const p);
 
       void incEdgeStart();
 
-      osg::Vec2   lv;         // Lower Vertex
-      osg::Vec2   uv;         // Upper Vertex
-      double      x;          // Current X value
-      double      slope;      // slope of the edge
-      osg::Vec3   lvn;        // Lower Vertex Norm
-      osg::Vec3   cn;         // Current Norm
-      osg::Vec3   nslope;     // Norm slope
-      bool        valid;      // valid edge
-      bool        pointLock;  // after incEdgeStart() edge became a point
-      base::safe_ptr<PolyData> polygon;    // This edge belongs to this polygon
+      base::Vec2d lv;                    // Lower Vertex
+      base::Vec2d uv;                    // Upper Vertex
+      double x {};                       // Current X value
+      double slope {};                   // slope of the edge
+      base::Vec3d lvn;                   // Lower Vertex Norm
+      base::Vec3d cn;                    // Current Norm
+      base::Vec3d nslope;                // Norm slope
+      bool valid {};                     // valid edge
+      bool pointLock {};                 // after incEdgeStart() edge became a point
+      base::safe_ptr<PolyData> polygon;  // This edge belongs to this polygon
    };
 
 protected:
@@ -106,34 +108,33 @@ private:
    static const unsigned int MAX_POLYS = 500;
    static const unsigned int MAX_ACTIVE_POLYS = 100;
 
-   Clip3D*        clipper;                // clipping object
+   Clip3D* clipper {};               // clipping object
 
-   double         angle;                  // area rotation angle     (radians)
-   double         cx, cy;                 // area center (x,y)
-   double         sx, sy;                 // area size (x,y)
-   unsigned int   ix,iy;                  // number of pixels (x,y)
+   double angle {};                  // area rotation angle (radians)
+   double cx {239.5}, cy {239.5};    // area center (x,y)
+   double sx {479.0}, sy {479.0};    // area size (x,y)
+   unsigned int ix {480}, iy {480};  // number of pixels (x,y)
 
-   double         curX;                   // current X value (pixel number)
-   double         curY;                   // current Y value (scanline number)
-   PolyData*       curPoly;               // Current polygon (one on top)
+   double curX {};                   // current X value (pixel number)
+   double curY {};                   // current Y value (scanline number)
+   PolyData* curPoly {};             // Current polygon (one on top)
 
-   osg::Matrix    mat;                    // matrix used by scanner
+   base::Matrixd mat;                // matrix used by scanner
 
-   PolyData*       pt[MAX_POLYS];         // Polygons Table (PT)
-   unsigned int   nPT;                    // Number of polygons in PT
+   std::array<PolyData*, MAX_POLYS> pt {};          // Polygons Table (PT)
+   unsigned int nPT {};                             // Number of polygons in PT
 
-   PolyData*       apt[MAX_ACTIVE_POLYS]; // Active Polygon Table (APT)
-   unsigned int   nAPT;                   // Number of polygons in APT
+   std::array<PolyData*, MAX_ACTIVE_POLYS> apt {};  // Active Polygon Table (APT)
+   unsigned int nAPT {};                            // Number of polygons in APT
 
-   Edge*          et[MAX_EDGES];          // Edge Table (ET)
-   unsigned int   nET;                    // Number of edges in ET
-   unsigned int   refET;                  // Ref index for ET
+   std::array<Edge*, MAX_EDGES> et {};          // Edge Table (ET)
+   unsigned int nET {};                         // Number of edges in ET
+   unsigned int refET {};                       // Ref index for ET
 
-   Edge*          aet[MAX_ACTIVE_EDGES];  // Active Edge Table (AET)
-   unsigned int   nAET;                   // Number of edges in AET
-   unsigned int   refAET;                 // Ref index for AET
+   std::array<Edge*, MAX_ACTIVE_EDGES> aet {};  // Active Edge Table (AET)
+   unsigned int nAET {};                        // Number of edges in AET
+   unsigned int refAET {};                      // Ref index for AET
 };
-
 
 }
 }

@@ -1,6 +1,12 @@
+
 #include "openeaagles/instruments/adi/GhostHorizon.hpp"
-#include "openeaagles/base/functors/Tables.hpp"
+
+#include "openeaagles/base/Color.hpp"
+#include "openeaagles/base/String.hpp"
+#include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/Rgba.hpp"
+#include "openeaagles/base/functors/Tables.hpp"
+
 #include "openeaagles/graphics/Display.hpp"
 
 namespace oe {
@@ -9,7 +15,6 @@ namespace instruments {
 IMPLEMENT_SUBCLASS(GhostHorizon, "GhostHorizon")
 EMPTY_SERIALIZER(GhostHorizon)
 
-// SLOTS
 BEGIN_SLOTTABLE(GhostHorizon)
     "skyColor",     // 1) determine our sky color to draw
     "groundColor",  // 2) determine our ground color to draw
@@ -26,33 +31,16 @@ BEGIN_SLOT_MAP(GhostHorizon)
     ON_SLOT(4, setSlotHeight, base::Number)
 END_SLOT_MAP()
 
-
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 GhostHorizon::GhostHorizon()
 {
     STANDARD_CONSTRUCTOR()
-
     skyColor.set(1, 1, 1);
     groundColor.set(1, 1, 1);
-    gColorName = nullptr;
-    sColorName = nullptr;
-    width = 20;
-    height = 20;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void GhostHorizon::copyData(const GhostHorizon& org, const bool cc)
+void GhostHorizon::copyData(const GhostHorizon& org, const bool)
 {
     BaseClass::copyData(org);
-
-    if (cc) {
-        gColorName = nullptr;
-        sColorName = nullptr;
-    }
 
     skyColor = org.skyColor;
     groundColor = org.groundColor;
@@ -62,9 +50,6 @@ void GhostHorizon::copyData(const GhostHorizon& org, const bool cc)
     if (org.sColorName != nullptr) setSlotSkyColor(org.sColorName);
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void GhostHorizon::deleteData()
 {
     if (gColorName != nullptr) gColorName->unref();
@@ -253,13 +238,5 @@ void GhostHorizon::updateData(const double dt)
     else setVisibility(false);
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for GhostHorizon
-//------------------------------------------------------------------------------
-base::Object* GhostHorizon::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
-
-}; // end of Instruments namespace
-}; // end of oe namespace
+}

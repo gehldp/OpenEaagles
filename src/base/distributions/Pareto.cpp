@@ -22,27 +22,11 @@ END_SLOT_MAP()
 
 EMPTY_DELETEDATA(Pareto)
 
-//------------------------------------------------------------------------------
-// slot table function
-//------------------------------------------------------------------------------
-Object* Pareto::getSlotByIndex(const int si)
-{
-  return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Pareto::Pareto()
 {
   STANDARD_CONSTRUCTOR()
-  alpha = 0.030;
-  beta = 1.0;
 }
 
-//------------------------------------------------------------------------------
-// copyData
-//------------------------------------------------------------------------------
 void Pareto::copyData(const Pareto& org, const bool cc)
 {
   BaseClass::copyData(org);
@@ -50,8 +34,6 @@ void Pareto::copyData(const Pareto& org, const bool cc)
   beta = org.beta;
 }
 
-//------------------------------------------------------------
-//------------------------------------------------------------
 double Pareto::draw()
 {
   // draw a random value in the open interval (0,1)
@@ -60,8 +42,6 @@ double Pareto::draw()
   return beta * z;
 }
 
-//------------------------------------------------------------
-//------------------------------------------------------------
 bool Pareto::setSlotAlpha(const Number* const x)
 {
   bool ok = false;
@@ -78,9 +58,6 @@ bool Pareto::setSlotBeta(const Number* const x)
   return ok;
 }
 
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& Pareto::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
   int j = 0;
@@ -108,5 +85,3 @@ std::ostream& Pareto::serialize(std::ostream& sout, const int i, const bool slot
 
 }
 }
-
-

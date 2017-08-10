@@ -3,26 +3,26 @@
 #define __oe_base_Transform_H__
 
 #include "openeaagles/base/Object.hpp"
-#include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/osg/Matrixd"
+
+#include <array>
 
 namespace oe {
 namespace base {
-
 class Angle;
 class Number;
 
 //------------------------------------------------------------------------------
 // Class: Transform
-// Base class:  Object -> Transform
 // Factory name:Transform
 // Slots:
-//  x    <Number>    ! x transform (default: identity)
+//  x    <Number>   ! x transform (default: identity)
 //  x    <Angle>    ! x transform (default: identity)
-//  y    <Number>    ! y transform (default: identity)
+//  y    <Number>   ! y transform (default: identity)
 //  y    <Angle>    ! y transform (default: identity)
-//  z    <Number>    ! z transform (default: identity)
+//  z    <Number>   ! z transform (default: identity)
 //  z    <Angle>    ! z transform (default: identity)
-//  w    <Number>    ! w transform (default: identity)
+//  w    <Number>   ! w transform (default: identity)
 //  w    <Angle>    ! w transform (default: identity)
 //
 // Description: Coordinate Transformations (e.g., translate, rotate, scale)
@@ -30,7 +30,7 @@ class Number;
 //
 // Public methods: Base class public methods, plus ...
 //
-//      operator const osg::Matrix&()
+//      operator const Matrixd&()
 //          Returns a copy of the transformation matrix
 //
 //      bool setComputeMatrix1(Angle* sc1obj)
@@ -49,7 +49,7 @@ class Transform : public Object
 
 public:
     Transform();
-    operator const osg::Matrix&()           { return m; }
+    operator const Matrixd&()                                         { return m; }
     virtual bool setComputematrix1(const Angle* const sc1obj);
     virtual bool setComputematrix1(const Number* const sc1obj);
     virtual bool setComputematrix2(const Angle* const sc2obj);
@@ -61,9 +61,9 @@ public:
 
 protected:
     virtual void computeMatrix();
-    osg::Matrix m;              // transformation matrix
-    double      v[4];           // values
-    int         nv;             // Number of values
+    Matrixd m;                   // transformation matrix
+    std::array<double, 4> v {};  // values
+    int nv {};                   // Number of values
 };
 
 //------------------------------------------------------------------------------

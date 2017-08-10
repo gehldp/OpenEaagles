@@ -2,12 +2,10 @@
 #ifndef __oe_iodevice_IoData_H__
 #define __oe_iodevice_IoData_H__
 
-#include "openeaagles/base/IoData.hpp"
+#include "openeaagles/base/io/IoData.hpp"
 
 namespace oe {
-
 namespace base { class Number; }
-
 namespace iodevice {
 
 //------------------------------------------------------------------------------
@@ -61,19 +59,17 @@ protected:
    bool setSlotNumDO(const base::Number* const msg);
 
 private:
-   void initData();
+   unsigned int numAI {};  // Number of AIs
+   double*  aiTable {};    // AIs
 
-   unsigned int numAI;  // Number of AIs
-   double*  aiTable;    // AIs
+   unsigned int numAO {};  // Number of AOs
+   double*  aoTable {};    // AOs
 
-   unsigned int numAO;  // Number of AOs
-   double*  aoTable;    // AOs
+   unsigned int numDI {};  // Number of DIs
+   bool*    diTable {};    // DIs
 
-   unsigned int numDI;  // Number of DIs
-   bool*    diTable;    // DIs
-
-   unsigned int numDO;  // Number of DOs
-   bool*    doTable;    // DOs
+   unsigned int numDO {};  // Number of DOs
+   bool*    doTable {};    // DOs
 };
 
 }

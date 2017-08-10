@@ -2,14 +2,11 @@
 #ifndef __oe_iodevice_DiscreteOutput_H__
 #define __oe_iodevice_DiscreteOutput_H__
 
-#include "openeaagles/base/IoAdapter.hpp"
+#include "openeaagles/base/io/IoAdapter.hpp"
 
 namespace oe {
-
 namespace base { class NetHandler; class Number; }
-
 namespace iodevice {
-
 class IoDevice;
 
 //------------------------------------------------------------------------------
@@ -65,13 +62,13 @@ protected:
 private:
    void initData();
 
-   bool devEnb;            // Device enabled
-   unsigned int location;  // IoData output bit location
-   unsigned int port;      // Port number
-   unsigned int channel;   // Port's channel (bit) number
-   bool value;             // Initial value of bit.
-   bool invert;            // Inverted bit flag
-   int num;                // Number of DIs (neg for reverse order)
+   bool devEnb {};            // Device enabled
+   unsigned int location {};  // IoData output bit location
+   unsigned int port {};      // Port number
+   unsigned int channel {};   // Port's channel (bit) number
+   bool value {};             // Initial value of bit.
+   bool invert {};            // Inverted bit flag
+   int num {1};               // Number of DIs (neg for reverse order)
 };
 
 }

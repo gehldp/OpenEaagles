@@ -1,7 +1,7 @@
 #
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboeinstruments.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboe_instruments.a
 
 OBJS =  \
 	adi/Adi.o \
@@ -47,7 +47,7 @@ clean:
 	-rm -f buttons/*.o
 	-rm -f dials/*.o
 	-rm -f eadi3d/*.o
-	-rm -f eng/*.o
+	-rm -f engines/*.o
 	-rm -f gauges/*.o
 	-rm -f landinggear/*.o
 	-rm -f maps/*.o

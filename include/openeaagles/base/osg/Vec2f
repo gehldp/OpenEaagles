@@ -11,13 +11,13 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef __oe_osg_Vec2f_H__
-#define __oe_osg_Vec2f_H__
+#ifndef __oe_base_osg_Vec2f_H__
+#define __oe_base_osg_Vec2f_H__
 
-#include "./Math"
+#include "openeaagles/base/osg/osg_math.hpp"
 
 namespace oe {
-namespace osg {
+namespace base {
 
 /** General purpose float pair. Uses include representation of
   * texture coordinates.

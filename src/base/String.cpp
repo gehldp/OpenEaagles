@@ -13,29 +13,17 @@ EMPTY_SLOTTABLE(String)
 String::String()
 {
    STANDARD_CONSTRUCTOR()
-
-   str = nullptr;
-   n = 0;
-   nn = 0;
 }
 
 String::String(const char* s)
 {
    STANDARD_CONSTRUCTOR()
-
-   str = nullptr;
-   n = 0;
-   nn = 0;
    setStr(s);
 }
 
 String::String(const char* s1, const char* s2)
 {
    STANDARD_CONSTRUCTOR()
-
-   str = nullptr;
-   n = 0;
-   nn = 0;
    setStr(s1);
    catStr(s2);
 }
@@ -168,7 +156,7 @@ bool String::getSubString(String& subStr, const unsigned int startIndex, const s
    else
       maxChars = numChars;
 
-   char* subString = new char[maxChars + 1];
+   const auto subString = new char[maxChars + 1];
    utStrncpy(subString, (maxChars + 1), &str[startIndex], maxChars);
    subString[maxChars] = '\0';
    subStr.setStr(subString);

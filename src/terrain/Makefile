@@ -1,7 +1,7 @@
 #
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboeterrain.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboe_terrain.a
 
 OBJS =  \
 	ded/DedFile.o \
@@ -9,7 +9,8 @@ OBJS =  \
 	srtm/SrtmHgtFile.o \
 	DataFile.o \
 	factory.o \
-	QuadMap.o
+	QuadMap.o \
+	Terrain.o
 
 .PHONY: all clean
 

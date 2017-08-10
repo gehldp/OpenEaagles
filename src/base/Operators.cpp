@@ -3,6 +3,8 @@
 //------------------------------------------------------------------------------
 #include "openeaagles/base/Operators.hpp"
 
+#include <iostream>
+
 namespace oe {
 namespace base {
 
@@ -31,7 +33,7 @@ END_SLOTTABLE(Add)
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Add)
     // Accept an Number at any slot index ...
-    Number* _msg = dynamic_cast<Number*>(obj);
+    const auto _msg = dynamic_cast<Number*>(obj);
     if (_msg != nullptr) { _ok = setSecondNumber(_msg); }
 END_SLOT_MAP()
 
@@ -41,7 +43,6 @@ END_SLOT_MAP()
 Add::Add()
 {
    STANDARD_CONSTRUCTOR()
-   n2 = 0.0;
 }
 
 Subtract::Subtract()
@@ -78,15 +79,6 @@ EMPTY_DELETEDATA(Multiply)
 
 EMPTY_COPYDATA(Divide)
 EMPTY_DELETEDATA(Divide)
-
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Add
-//------------------------------------------------------------------------------
-Object* Add::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
 
 //------------------------------------------------------------------------------
 // operation() -- the operations

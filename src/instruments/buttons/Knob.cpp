@@ -1,7 +1,10 @@
 
 #include "openeaagles/instruments/buttons/Knob.hpp"
-#include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/graphics/Display.hpp"
+
+#include "openeaagles/base/Number.hpp"
+
+#include "openeaagles/base/units/angle_utils.hpp"
 #include "openeaagles/base/functors/Tables.hpp"
 
 #include <GL/glu.h>
@@ -10,12 +13,9 @@
 namespace oe {
 namespace instruments {
 
-IMPLEMENT_SUBCLASS(Knob,"Knob")
+IMPLEMENT_SUBCLASS(Knob, "Knob")
 EMPTY_SERIALIZER(Knob)
 
-//------------------------------------------------------------------------------
-// Slot table for this form type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Knob)
     "valueTable",        // 1) table with rotation and values, else we do 1 to 1
     "endless",           // 2) If true, the knob will continue rotating past last value forever.
@@ -24,9 +24,6 @@ BEGIN_SLOTTABLE(Knob)
                          // if you have a value table and have endless set, it will reset at your high limit back to your low limit
 END_SLOTTABLE(Knob)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Knob)
     ON_SLOT(1, setSlotValueTable, base::Table1)
     ON_SLOT(2, setSlotEndless, base::Number)
@@ -34,44 +31,19 @@ BEGIN_SLOT_MAP(Knob)
     ON_SLOT(4, setSlotEndlessLimit, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Event Table
-//------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(Knob)
     ON_EVENT(ON_MOTION, onMotion)
     ON_EVENT(ON_SINGLE_CLICK, onSingleClick)
 END_EVENT_HANDLER()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Knob::Knob()
 {
     STANDARD_CONSTRUCTOR()
-    table = nullptr;
-    value = 0;
-    startX = 0;
-    startY = 0;
-    angle = 0;
-    lastAngle = 0;
-    degsRotation = 0;
-    findStartTimer = 0;
-    start = true;
-    running = 0;
-    startAngle = 0;
-    endless = false;
-    endlessStart = 0;
-    endlessLimit = 360;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
-void Knob::copyData(const Knob& org, const bool cc)
+void Knob::copyData(const Knob& org, const bool)
 {
     BaseClass::copyData(org);
-
-    if (cc) table = nullptr;
 
     setSlotValueTable(org.table);
 
@@ -86,9 +58,6 @@ void Knob::copyData(const Knob& org, const bool cc)
     endlessLimit = org.endlessLimit;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void Knob::deleteData()
 {
     setSlotValueTable(nullptr);
@@ -220,7 +189,7 @@ void Knob::computeRotation()
            angle = atan2f(static_cast<float>(posMoveY), static_cast<float>(-posMoveX));
         }
 
-        angle *= static_cast<double>(base::Angle::R2DCC);
+        angle *= static_cast<double>(base::angle::R2DCC);
 
         if (start) {
             startAngle = static_cast<double>(degsRotation);
@@ -299,22 +268,16 @@ void Knob::computeRotation()
     }
 }
 
-//------------------------------------------------------------------------------
-// draw() -
-//------------------------------------------------------------------------------
 void Knob::draw()
 {
     // rotate our knob!
     lcSaveMatrix();
-    if (endless) lcRotate(angle * static_cast<double>(base::Angle::D2RCC));
-    else lcRotate(-degsRotation * static_cast<double>(base::Angle::D2RCC));
+    if (endless) lcRotate(angle * static_cast<double>(base::angle::D2RCC));
+    else lcRotate(-degsRotation * static_cast<double>(base::angle::D2RCC));
     Graphic::draw();
     lcRestoreMatrix();
 }
 
-//------------------------------------------------------------------------------
-// updateData()
-//------------------------------------------------------------------------------
 void Knob::updateData(const double dt)
 {
     BaseClass::updateData(dt);
@@ -322,13 +285,5 @@ void Knob::updateData(const double dt)
     findStartTimer += dt;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Knob
-//------------------------------------------------------------------------------
-base::Object* Knob::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
-
-}  // end instruments namespace
-}  // end oe namespace
+}

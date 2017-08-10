@@ -1,81 +1,38 @@
-//------------------------------------------------------------------------------
-// Class:  Station
-//------------------------------------------------------------------------------
 
 #include "openeaagles/simulation/Station.hpp"
 
-#include "openeaagles/simulation/DataRecorder.hpp"
-#include "openeaagles/simulation/NetIO.hpp"
-#include "openeaagles/simulation/Otw.hpp"
-#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/AbstractPlayer.hpp"
+
+#include "openeaagles/simulation/AbstractDataRecorder.hpp"
+#include "openeaagles/simulation/AbstractNetIO.hpp"
+#include "openeaagles/simulation/AbstractOtw.hpp"
 #include "openeaagles/simulation/Simulation.hpp"
 
 #include "openeaagles/base/Color.hpp"
-#include "openeaagles/base/IoHandler.hpp"
+#include "openeaagles/base/io/IoHandler.hpp"
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/Thread.hpp"
 #include "openeaagles/base/Timers.hpp"
 #include "openeaagles/base/units/Times.hpp"
 
-#include <ctime>
+#include "openeaagles/simulation/StationTcThread.hpp"
+#include "openeaagles/simulation/StationBgThread.hpp"
+#include "openeaagles/simulation/StationNetThread.hpp"
 
-// #define NET_TIMING_TEST
+#include <ctime>
 
 namespace oe {
 namespace simulation {
 
-static const unsigned int DEFAULT_FAST_FORWARD_RATE = 1;
-
-//=============================================================================
-// Declare the thread classes
-//=============================================================================
-
-// ---
-// Time-critical thread
-// ---
-class TcThread : public base::ThreadPeriodicTask
-{
-   DECLARE_SUBCLASS(TcThread,base::ThreadPeriodicTask)
-   public: TcThread(base::Component* const parent, const double priority, const double rate);
-   private: virtual unsigned long userFunc(const double dt) override;
-};
-
-// ---
-// Interoperability Networks thread
-// ---
-class NetThread : public base::ThreadPeriodicTask
-{
-   DECLARE_SUBCLASS(NetThread,base::ThreadPeriodicTask)
-   public: NetThread(base::Component* const parent, const double priority, const double rate);
-   private: virtual unsigned long userFunc(const double dt) override;
-};
-
-// ---
-// Background thread
-// ---
-class BgThread : public base::ThreadPeriodicTask
-{
-   DECLARE_SUBCLASS(BgThread,base::ThreadPeriodicTask)
-   public: BgThread(base::Component* const parent, const double priority, const double rate);
-   private: virtual unsigned long userFunc(const double dt) override;
-};
-
-//=============================================================================
-// Station class
-//=============================================================================
-IMPLEMENT_SUBCLASS(Station,"Station")
+IMPLEMENT_SUBCLASS(Station, "Station")
 
 const double Station::DEFAULT_TC_THREAD_PRI  = 0.8;
 const double Station::DEFAULT_BG_THREAD_PRI  = 0.5;
 const double Station::DEFAULT_NET_THREAD_PRI = 0.5;
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Station)
-   "simulation",        //  1: Simulation model
+   "simulation",        //  1: Simulation executive
    "networks",          //  2: List of Network models
    "otw",               //  3: Out-The-Window (OTW) visual system  [ Otw or base::PairStream ]
    "ioHandler",         //  4: I/O data handler(s)  [ base::IoHandler or base::PairStream ]
@@ -95,15 +52,12 @@ BEGIN_SLOTTABLE(Station)
    "dataRecorder",      // 18) Our Data Recorder
 END_SLOTTABLE(Station)
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Station)
    ON_SLOT( 1,  setSlotSimulation,            Simulation)
 
    ON_SLOT( 2,  setSlotNetworks,              base::PairStream)
 
-   ON_SLOT( 3,  setSlotOutTheWindow,          Otw)
+   ON_SLOT( 3,  setSlotOutTheWindow,          AbstractOtw)
    ON_SLOT( 3,  setSlotOutTheWindow,          base::PairStream)
 
    ON_SLOT( 4,  setSlotIoHandler,             base::IoHandler)
@@ -127,62 +81,17 @@ BEGIN_SLOT_MAP(Station)
    ON_SLOT(16,  setSlotStartupResetTime,      base::Time)
    ON_SLOT(17,  setSlotEnableUpdateTimers,    base::Number)
 
-   ON_SLOT(18, setDataRecorder,            DataRecorder)
+   ON_SLOT(18, setDataRecorder,               AbstractDataRecorder)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Station::Station()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-
-//------------------------------------------------------------------------------
-// Init member data
-//------------------------------------------------------------------------------
-void Station::initData()
-{
-   sim = nullptr;
-   otw = nullptr;
-   networks = nullptr;
-   ioHandlers = nullptr;
-   ownshipName = nullptr;
-   ownship = nullptr;
-   dataRecorder = nullptr;
-
-   tcRate = 50.0;                   // default time-critical thread rate
-   tcPri = DEFAULT_TC_THREAD_PRI;
-   tcStackSize = 0;
-   tcThread = nullptr;
-   fastForwardRate = DEFAULT_FAST_FORWARD_RATE;
-
-   netRate = 0.0;                   // default network thread rate
-   netPri = DEFAULT_NET_THREAD_PRI;
-   netStackSize = 0;
-   netThread = nullptr;
-
-   bgRate = 0.0;                    // default network thread rate
-   bgPri = DEFAULT_BG_THREAD_PRI;
-   bgStackSize = 0;
-   bgThread = nullptr;
-
-   tmrUpdateEnbl = false;
-
-   startupResetTimer0 = nullptr;
-   startupResetTimer = -1.0;
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void Station::copyData(const Station& org, const bool cc)
+void Station::copyData(const Station& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    // Terminate any old threads
    setTcThread(nullptr);
@@ -230,7 +139,7 @@ void Station::copyData(const Station& org, const bool cc)
    }
 
    {  // clone the data recorder
-      DataRecorder* copy = nullptr;
+      AbstractDataRecorder* copy = nullptr;
       if (org.dataRecorder != nullptr) copy = org.dataRecorder->clone();
       setDataRecorder(copy);
       if (copy != nullptr) copy->unref();
@@ -277,9 +186,6 @@ void Station::copyData(const Station& org, const bool cc)
    }
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void Station::deleteData()
 {
    // Terminate any old threads
@@ -337,7 +243,7 @@ void Station::reset()
       base::List::Item* item = otw ->getFirstItem();
       while (item != nullptr) {
          base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         Otw* p = static_cast<Otw*>(pair->object());
+         const auto p = static_cast<AbstractOtw*>(pair->object());
          p->event(RESET_EVENT);
          item = item->getNext();
       }
@@ -347,8 +253,8 @@ void Station::reset()
    if (networks != nullptr) {
       base::List::Item* item = networks ->getFirstItem();
       while (item != nullptr) {
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         NetIO* p = static_cast<NetIO*>(pair->object());
+         const auto pair = static_cast<base::Pair*>(item->getValue());
+         const auto p = static_cast<AbstractNetIO*>(pair->object());
          p->event(RESET_EVENT);
          item = item->getNext();
       }
@@ -398,8 +304,8 @@ void Station::updateTC(const double dt)
       base::List::Item* item = otw->getFirstItem();
       while (item != nullptr) {
 
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         Otw* p = static_cast<Otw*>(pair->object());
+         const auto pair = static_cast<base::Pair*>(item->getValue());
+         const auto p = static_cast<AbstractOtw*>(pair->object());
 
          // Set ownship & player list
          p->setOwnship(ownship);
@@ -496,7 +402,7 @@ bool Station::shutdownNotification()
    }
    setSlotIoHandler(static_cast<base::PairStream*>(nullptr));
 
-   // Tell our simulation to shut down
+   // Tell our simulation executive to shut down
    Simulation* s = getSimulation();
    if (s != nullptr) {
       s->event(SHUTDOWN_EVENT);
@@ -671,8 +577,8 @@ void Station::processBackgroundTasks(const double dt)
    if (otw != nullptr) {
       base::List::Item* item = otw ->getFirstItem();
       while (item != nullptr) {
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         Otw* p = static_cast<Otw*>(pair->object());
+         const auto pair = static_cast<base::Pair*>(item->getValue());
+         const auto p = static_cast<AbstractOtw*>(pair->object());
          p->updateData(dt);
          item = item->getNext();
       }
@@ -689,8 +595,8 @@ void Station::processNetworkInputTasks(const double dt)
    if (networks != nullptr) {
       base::List::Item* item = networks->getFirstItem();
       while (item != nullptr) {
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         NetIO* p = static_cast<NetIO*>(pair->object());
+         const auto pair = static_cast<base::Pair*>(item->getValue());
+         const auto p = static_cast<AbstractNetIO*>(pair->object());
 
          p->inputFrame( dt );
 
@@ -708,8 +614,8 @@ void Station::processNetworkOutputTasks(const double dt)
    if (networks != nullptr) {
       base::List::Item* item = networks->getFirstItem();
       while (item != nullptr) {
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         NetIO* p = static_cast<NetIO*>(pair->object());
+         const auto pair = static_cast<base::Pair*>(item->getValue());
+         const auto p = static_cast<AbstractNetIO*>(pair->object());
 
          p->outputFrame( dt );
 
@@ -722,26 +628,26 @@ void Station::processNetworkOutputTasks(const double dt)
 // Get functions
 //------------------------------------------------------------------------------
 
-// Returns the simulation model
+// Returns the simulation executive
 Simulation* Station::getSimulation()
 {
    return sim;
 }
 
-// Returns the simulation model (const version)
+// Returns the simulation executive (const version)
 const Simulation* Station::getSimulation() const
 {
    return sim;
 }
 
 // Returns the ownship (primary) player
-Player* Station::getOwnship()
+AbstractPlayer* Station::getOwnship()
 {
    return ownship;
 }
 
 // Returns the ownship (primary) player (const version)
-const Player* Station::getOwnship() const
+const AbstractPlayer* Station::getOwnship() const
 {
    return ownship;
 }
@@ -801,13 +707,13 @@ const base::PairStream* Station::getIoHandlers() const
 }
 
 // Returns the data recorder
-DataRecorder* Station::getDataRecorder()
+AbstractDataRecorder* Station::getDataRecorder()
 {
    return dataRecorder;
 }
 
 // Returns the data recorder (const version)
-const DataRecorder* Station::getDataRecorder() const
+const AbstractDataRecorder* Station::getDataRecorder() const
 {
    return dataRecorder;
 }
@@ -985,7 +891,7 @@ bool Station::setOwnshipByName(const char* const newOS)
       if (newOS != nullptr) {
          base::Pair* p = pl->findByName(newOS);
          if (p != nullptr) {
-            Player* newOwnship = static_cast<Player*>(p->object());
+            const auto newOwnship = static_cast<AbstractPlayer*>(p->object());
             if (newOwnship != ownship) {
                // Ok, we found the new ownship and it IS a different
                // player then the previous ownship ...
@@ -1007,7 +913,7 @@ bool Station::setOwnshipByName(const char* const newOS)
 //------------------------------------------------------------------------------
 // setOwnshipPlayer() -- set this player as our ownship
 //------------------------------------------------------------------------------
-bool Station::setOwnshipPlayer(Player* const newOS)
+bool Station::setOwnshipPlayer(AbstractPlayer* const newOS)
 {
     // Is it already own ownship?  Yes, then nothing else to do.
     if (newOS == ownship) return true;
@@ -1030,9 +936,9 @@ bool Station::setOwnshipPlayer(Player* const newOS)
     if (pl != nullptr) {
         base::List::Item* item = pl->getFirstItem();
         while (item != nullptr && !set) {
-            base::Pair* pair = dynamic_cast<base::Pair*>(item->getValue());
+            const auto pair = dynamic_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
-                Player* ip = dynamic_cast<Player*>( pair->object() );
+                const auto ip = dynamic_cast<AbstractPlayer*>( pair->object() );
                 if (ip == newOS && ip->isLocalPlayer()) {
                     // Unref the old stuff
                     if (ownshipName != nullptr) { ownshipName->unref(); ownshipName = nullptr; }
@@ -1062,7 +968,7 @@ bool Station::setOwnshipPlayer(Player* const newOS)
 //------------------------------------------------------------------------------
 // Sets the data recorder
 //------------------------------------------------------------------------------
-bool Station::setDataRecorder(DataRecorder* const p)
+bool Station::setDataRecorder(AbstractDataRecorder* const p)
 {
    if (dataRecorder != nullptr) { dataRecorder->container(nullptr); dataRecorder->unref(); }
    dataRecorder = p;
@@ -1072,7 +978,7 @@ bool Station::setDataRecorder(DataRecorder* const p)
 
 
 //-----------------------------------------------------------------------------
-// setSlotSimulation() -- Sets a pointer to our simulation subsystem
+// setSlotSimExec() -- Sets a pointer to our simulation executive
 //-----------------------------------------------------------------------------
 bool Station::setSlotSimulation(Simulation* const p)
 {
@@ -1091,10 +997,10 @@ bool Station::setSlotSimulation(Simulation* const p)
 //-----------------------------------------------------------------------------
 // setSlotOutTheWindow() -- Sets a list of Out-The-Window subsystems
 //-----------------------------------------------------------------------------
-bool Station::setSlotOutTheWindow(Otw* const p)
+bool Station::setSlotOutTheWindow(AbstractOtw* const p)
 {
-    base::PairStream* list = new base::PairStream();
-    base::Pair* pair = new base::Pair("1",p);
+    const auto list = new base::PairStream();
+    const auto pair = new base::Pair("1",p);
     list->put( pair );
     pair->unref();
     bool ok = setSlotOutTheWindow(list);
@@ -1109,8 +1015,8 @@ bool Station::setSlotOutTheWindow(base::PairStream* const list)
    // Make sure the new list only has OTW type objects
    if (list != nullptr) {
       for (base::List::Item* item = list->getFirstItem(); item != nullptr; item = item->getNext()) {
-            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            Otw* p = dynamic_cast<Otw*>(pair->object());
+            const auto pair = static_cast<base::Pair*>(item->getValue());
+            const auto p = dynamic_cast<AbstractOtw*>(pair->object());
             if (p != nullptr) {
             if (newList == nullptr) {
                newList = new base::PairStream();
@@ -1150,7 +1056,7 @@ bool Station::setSlotOutTheWindow(base::PairStream* const list)
 //-----------------------------------------------------------------------------
 bool Station::setSlotIoHandler(base::IoHandler* const p)
 {
-    base::PairStream* list = new base::PairStream();
+    const auto list = new base::PairStream();
     list->put( new base::Pair("1",p) );
     return setSlotIoHandler(list);
 }
@@ -1176,8 +1082,8 @@ bool Station::setSlotIoHandler(base::PairStream* const list)
     // Make sure the new list is setup correctly
     if (ioHandlers != nullptr) {
         for (base::List::Item* item = ioHandlers->getFirstItem(); item != nullptr; item = item->getNext()) {
-            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            base::IoHandler* p = dynamic_cast<base::IoHandler*>(pair->object());
+            const auto pair = static_cast<base::Pair*>(item->getValue());
+            const auto p = dynamic_cast<base::IoHandler*>(pair->object());
             if (p != nullptr) {
                 // We are its container
                 p->container(this);
@@ -1214,8 +1120,8 @@ bool Station::setSlotNetworks(base::PairStream* const a)
     if (networks != nullptr) {
         // we are no longer the container for these networks
         for (base::List::Item* item = networks->getFirstItem(); item != nullptr; item = item->getNext()) {
-            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            NetIO* p = static_cast<NetIO*>(pair->object());
+            const auto pair = static_cast<base::Pair*>(item->getValue());
+            const auto p = static_cast<AbstractNetIO*>(pair->object());
             p->container(nullptr);
         }
     }
@@ -1226,8 +1132,8 @@ bool Station::setSlotNetworks(base::PairStream* const a)
     // Make sure the new network list is setup correctly
     if (networks != nullptr) {
         for (base::List::Item* item = networks->getFirstItem(); item != nullptr; item = item->getNext()) {
-            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            NetIO* p = dynamic_cast<NetIO*>(pair->object());
+            const auto pair = static_cast<base::Pair*>(item->getValue());
+            const auto p = dynamic_cast<AbstractNetIO*>(pair->object());
             if (p != nullptr) {
                 // We are this network's container
                 p->container(this);
@@ -1454,18 +1360,6 @@ bool Station::setSlotEnableUpdateTimers(const base::Number* const msg)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* Station::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& Station::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -1552,73 +1446,6 @@ std::ostream& Station::serialize(std::ostream& sout, const int i, const bool slo
     }
 
     return sout;
-}
-
-//=============================================================================
-// Time-critical thread
-//=============================================================================
-IMPLEMENT_SUBCLASS(TcThread,"TcThread")
-EMPTY_SLOTTABLE(TcThread)
-EMPTY_COPYDATA(TcThread)
-EMPTY_DELETEDATA(TcThread)
-EMPTY_SERIALIZER(TcThread)
-
-TcThread::TcThread(base::Component* const parent, const double priority, const double rate)
-      : base::ThreadPeriodicTask(parent, priority, rate)
-{
-   STANDARD_CONSTRUCTOR()
-}
-
-unsigned long TcThread::userFunc(const double dt)
-{
-   Station* station = static_cast<Station*>(getParent());
-   station->processTimeCriticalTasks(dt);
-   return 0;
-}
-
-//=============================================================================
-// Interoperability Networks thread
-//=============================================================================
-IMPLEMENT_SUBCLASS(NetThread,"NetThread")
-EMPTY_SLOTTABLE(NetThread)
-EMPTY_COPYDATA(NetThread)
-EMPTY_DELETEDATA(NetThread)
-EMPTY_SERIALIZER(NetThread)
-
-NetThread::NetThread(base::Component* const parent, const double priority, const double rate)
-      : base::ThreadPeriodicTask(parent, priority, rate)
-{
-   STANDARD_CONSTRUCTOR()
-}
-
-unsigned long NetThread::userFunc(const double dt)
-{
-   Station* station = static_cast<Station*>(getParent());
-   station->processNetworkInputTasks(dt);
-   station->processNetworkOutputTasks(dt);
-   return 0;
-}
-
-//=============================================================================
-// Background thread
-//=============================================================================
-IMPLEMENT_SUBCLASS(BgThread,"BgThread")
-EMPTY_SLOTTABLE(BgThread)
-EMPTY_COPYDATA(BgThread)
-EMPTY_DELETEDATA(BgThread)
-EMPTY_SERIALIZER(BgThread)
-
-BgThread::BgThread(base::Component* const parent, const double priority, const double rate)
-      : base::ThreadPeriodicTask(parent, priority, rate)
-{
-   STANDARD_CONSTRUCTOR()
-}
-
-unsigned long BgThread::userFunc(const double dt)
-{
-   Station* station = static_cast<Station*>(getParent());
-   station->processBackgroundTasks(dt);
-   return 0;
 }
 
 }

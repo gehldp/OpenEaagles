@@ -7,7 +7,7 @@
 
 namespace oe {
 namespace base {
-   class Number;
+class Number;
 
 //------------------------------------------------------------------------------
 // Class: Complex
@@ -121,7 +121,7 @@ public:
    virtual bool setSlotImaginary(const Number* const msg);
 
 private:
-   double imag;   // imaginary component
+   double imag {};   // imaginary component
 };
 
 #include "openeaagles/base/Complex.inl"

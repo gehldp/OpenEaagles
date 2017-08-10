@@ -2,81 +2,38 @@
 #include "openeaagles/iodevice/Controller.hpp"
 
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 namespace oe {
 namespace iodevice {
 
-/* both the linux and windows version use the 'UsbJoystick' form name */
 IMPLEMENT_SUBCLASS(Controller, "Controller")
+EMPTY_DELETEDATA(Controller)
 
-// slot table for this class type
 BEGIN_SLOTTABLE(Controller)
     "deviceIndex",   // 1) Device Index (default: 0)
 END_SLOTTABLE(Controller)
 
-//  Map slot table to handles
 BEGIN_SLOT_MAP(Controller)
     ON_SLOT( 1, setSlotDeviceIndex,  oe::base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Controller::Controller()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-//------------------------------------------------------------------------------
-// Init our data
-//------------------------------------------------------------------------------
-void Controller::initData()
-{
-   deviceIndex = 0;
-
-   numAI = 0;
-   for (unsigned int i = 0; i < MAX_AI; i++) {
-      inData[i] = 0;
-   }
-
-   numDI = 0;
-   for (unsigned int i = 0; i < MAX_DI; i++) {
-      inBits[i] = false;
-   }
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void Controller::copyData(const Controller& org, const bool)
 {
    BaseClass::copyData(org);
 
-   initData();
-
    deviceIndex = org.deviceIndex;
 
    numAI = org.numAI;
-   for (unsigned int i = 0; i < MAX_AI; i++) {
-      inData[i] = org.inData[i];
-   }
+   inData = org.inData;
 
    numDI = org.numDI;
-   for (unsigned int i = 0; i < MAX_DI; i++) {
-      inBits[i] = org.inBits[i];
-   }
-
-}
-
-//------------------------------------------------------------------------------
-//deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void Controller::deleteData()
-{
-   numAI = 0;
-   numDI = 0;
+   inBits = org.inBits;
 }
 
 //------------------------------------------------------------------------------
@@ -154,17 +111,6 @@ bool Controller::setSlotDeviceIndex(const oe::base::Number* const msg)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-base::Object* Controller::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& Controller::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;

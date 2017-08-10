@@ -1,11 +1,14 @@
+
 #include "openeaagles/instruments/gauges/AnalogGauge.hpp"
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 namespace oe {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(AnalogGauge, "AnalogGauge")
 EMPTY_SERIALIZER(AnalogGauge)
+EMPTY_DELETEDATA(AnalogGauge)
 
 BEGIN_SLOTTABLE(AnalogGauge)
     "leftBoundary",                 // the left side of the gauge (inches)
@@ -14,9 +17,6 @@ BEGIN_SLOTTABLE(AnalogGauge)
     "vertical",                     // are we drawing up and down?
 END_SLOTTABLE(AnalogGauge)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles for Analog Dial
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(AnalogGauge)
     ON_SLOT(1, setSlotLeftBoundary, base::Number)
     ON_SLOT(2, setSlotRightBoundary, base::Number)
@@ -24,26 +24,13 @@ BEGIN_SLOT_MAP(AnalogGauge)
     ON_SLOT(4, setSlotIsVertical, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 AnalogGauge::AnalogGauge()
 {
     STANDARD_CONSTRUCTOR()
-    gaugePos = 0;
-    leftBoundary = -1;
-    rightBoundary = 1;
-    outline = false;
-    vertical = true;
-    drawMe = true;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void AnalogGauge::copyData(const AnalogGauge& org, const bool)
 {
-    // copy base class stuff first
     BaseClass::copyData(org);
 
     gaugePos = org.gaugePos;
@@ -53,11 +40,6 @@ void AnalogGauge::copyData(const AnalogGauge& org, const bool)
     vertical = org.vertical;
     drawMe = org.drawMe;
 }
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-EMPTY_DELETEDATA(AnalogGauge)
 
 //------------------------------------------------------------------------------
 // drawFunc() -- draws the object(s)
@@ -176,14 +158,5 @@ bool AnalogGauge::setDrawMe(const bool x)
     return true;
 }
 
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for AnalogGauge
-//------------------------------------------------------------------------------
-base::Object* AnalogGauge::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
-
-}  // end instruments namespace
-}  // end oe namespace
+}

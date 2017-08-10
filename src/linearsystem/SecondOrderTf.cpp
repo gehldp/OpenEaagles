@@ -1,19 +1,14 @@
 
 #include "openeaagles/linearsystem/SecondOrderTf.hpp"
+#include <iostream>
 
 namespace oe {
 namespace linearsystem {
 
-//==============================================================================
-// Class SecondOrderTf
-//==============================================================================
-IMPLEMENT_SUBCLASS(SecondOrderTf,"SecondOrderTf")
+IMPLEMENT_SUBCLASS(SecondOrderTf, "SecondOrderTf")
 EMPTY_SLOTTABLE(SecondOrderTf)
 EMPTY_SERIALIZER(SecondOrderTf)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 SecondOrderTf::SecondOrderTf()
 {
    STANDARD_CONSTRUCTOR()
@@ -41,25 +36,12 @@ SecondOrderTf::SecondOrderTf(const unsigned int ir,
    initialize();
 }
 
-//------------------------------------------------------------------------------
-// initData() -- init member data
-//------------------------------------------------------------------------------
 void SecondOrderTf::initData()
 {
-   n1 = 0;
-   n2 = 0;
-   n3 = 0;
-   d1 = 0;
-   d2 = 0;
-   d3 = 0;
-
    allocateMemory(ORDER);
    clearMemory();
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void SecondOrderTf::copyData(const SecondOrderTf& org, const bool cc)
 {
    if (cc) {
@@ -78,9 +60,6 @@ void SecondOrderTf::copyData(const SecondOrderTf& org, const bool cc)
    initialize();
 }
 
-//------------------------------------------------------------------------------
-//deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void SecondOrderTf::deleteData()
 {
 }

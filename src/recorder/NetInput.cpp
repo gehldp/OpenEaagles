@@ -2,16 +2,14 @@
 #include "openeaagles/recorder/NetInput.hpp"
 #include "openeaagles/recorder/protobuf/DataRecord.pb.h"
 #include "openeaagles/recorder/DataRecordHandle.hpp"
-#include "openeaagles/base/NetHandler.hpp"
+#include "openeaagles/base/network/NetHandler.hpp"
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 namespace oe {
 namespace recorder {
 
-//==============================================================================
-// Class NetInput
-//==============================================================================
-IMPLEMENT_SUBCLASS(NetInput,"RecorderNetInput")
+IMPLEMENT_SUBCLASS(NetInput, "RecorderNetInput")
 EMPTY_SERIALIZER(NetInput)
 
 BEGIN_SLOTTABLE(NetInput)
@@ -25,10 +23,7 @@ BEGIN_SLOT_MAP(NetInput)
     ON_SLOT(2, setSlotNoWait,    oe::base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
-NetInput::NetInput() : netHandler(nullptr)
+NetInput::NetInput()
 {
    STANDARD_CONSTRUCTOR()
    initData();
@@ -37,17 +32,8 @@ NetInput::NetInput() : netHandler(nullptr)
 void NetInput::initData()
 {
    ibuf = new char[MAX_INPUT_BUFFER_SIZE];
-
-   networkInitialized = false;
-   networkInitFailed = false;
-   noWaitFlag = false;
-   firstPassFlg = true;
 }
 
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void NetInput::copyData(const NetInput& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -62,10 +48,6 @@ void NetInput::copyData(const NetInput& org, const bool cc)
    firstPassFlg = true;
 }
 
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void NetInput::deleteData()
 {
    closeConnections();
@@ -138,7 +120,7 @@ const DataRecordHandle* NetInput::readRecordImp()
       if (n > 0) {
          // Parse the data record
          std::string wireFormat(ibuf, n);
-         pb::DataRecord* dataRecord = new pb::DataRecord();
+         auto dataRecord = new pb::DataRecord();
          bool ok = dataRecord->ParseFromString(wireFormat);
 
          if (ok) {
@@ -178,14 +160,6 @@ bool NetInput::setSlotNoWait(oe::base::Number* const msg)
       ok = true;
    }
    return ok;
-}
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-oe::base::Object* NetInput::getSlotByIndex(const int si)
-{
-   return BaseClass::getSlotByIndex(si);
 }
 
 }

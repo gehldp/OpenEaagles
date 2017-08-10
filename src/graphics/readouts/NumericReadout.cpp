@@ -15,20 +15,13 @@
 #include <cstdlib>
 #include <cstring>
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 namespace oe {
 namespace graphics {
 
-IMPLEMENT_SUBCLASS(NumericReadout,"NumericReadout")
+IMPLEMENT_SUBCLASS(NumericReadout, "NumericReadout")
 
 ReformatScanner* NumericReadout::reformatter = new ReformatScanner();
 
-// Slot table
 BEGIN_SLOTTABLE(NumericReadout)
    "value",            //  1: Value to be displayed
    "maxValue",         //  2: Maximum value that can be displayed
@@ -59,7 +52,6 @@ BEGIN_SLOT_MAP(NumericReadout)
    ON_SLOT(11, setSlotBlankZero, base::Number)
 END_SLOT_MAP()
 
-// Event handlers for NumericReadout events
 BEGIN_EVENT_HANDLER(NumericReadout)
 ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, base::Float)
 ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, base::Integer)
@@ -70,21 +62,9 @@ NumericReadout::NumericReadout()
 {
    STANDARD_CONSTRUCTOR()
 
-   num  = 0.0;
    maxNum = base::UNDEFINED_VALUE;
-   cbuf[0]   = '\0';
-   format[0] = '\0';
-   base::utStrcpy(format,FORMAT_LENGTH,"%.0f");
+   base::utStrcpy(format, FORMAT_LENGTH, "%.0f");
    justification(base::String::RIGHT);
-   plusChar = '\0';
-   minusChar = '\0';
-   dpChar    = '\0';
-   undefinedChar = '-';
-   overflowChar  = '*';
-   postSign = false;
-   maxValid = base::UNDEFINED_VALUE;
-   minValid = base::UNDEFINED_VALUE;
-   blankZero = false;
 }
 
 void NumericReadout::copyData(const NumericReadout& org, const bool)
@@ -569,11 +549,6 @@ bool NumericReadout::setSlotOverflowChar(const base::String* const socobj)
       ok = false;
    }
    return ok;
-}
-
-base::Object* NumericReadout::getSlotByIndex(const int si)
-{
-   return BaseClass::getSlotByIndex(si);
 }
 
 std::ostream& NumericReadout::serialize(std::ostream& sout, const int i, const bool slotsOnly) const

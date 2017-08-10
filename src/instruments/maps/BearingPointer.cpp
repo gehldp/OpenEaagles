@@ -1,5 +1,6 @@
 
 #include "openeaagles/instruments/maps/BearingPointer.hpp"
+
 #include "openeaagles/base/units/Angles.hpp"
 
 namespace oe {
@@ -13,44 +14,25 @@ BEGIN_SLOTTABLE(BearingPointer)
     "tailGraphic",  // the graphic we will draw for the tail
 END_SLOTTABLE(BearingPointer)
 
-//  Map slot table to handles for Bearing Pointer
 BEGIN_SLOT_MAP(BearingPointer)
     ON_SLOT(1, setSlotHeadGraphic, graphics::Graphic)
     ON_SLOT(2, setSlotTailGraphic, graphics::Graphic)
 END_SLOT_MAP()
 
-// Macro event handlers for Bearing Pointer events
 BEGIN_EVENT_HANDLER(BearingPointer)
-    ON_EVENT_OBJ(UPDATE_VALUE7,onUpdateRadBearingPointer, base::Angle)          // Sets bearing to this base::Angle
-    ON_EVENT_OBJ(UPDATE_VALUE7,onUpdateRadBearingPointer, base::Number)         // Sets bearing to this angle in radians
-    ON_EVENT_OBJ(UPDATE_VALUE8, onUpdateDegBearingPointer, base::Number)        // Sets bearing to this angle in degrees
+    ON_EVENT_OBJ(UPDATE_VALUE7,onUpdateRadBearingPointer, base::Angle)    // Sets bearing to this base::Angle
+    ON_EVENT_OBJ(UPDATE_VALUE7,onUpdateRadBearingPointer, base::Number)   // Sets bearing to this angle in radians
+    ON_EVENT_OBJ(UPDATE_VALUE8, onUpdateDegBearingPointer, base::Number)  // Sets bearing to this angle in degrees
 END_EVENT_HANDLER()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 BearingPointer::BearingPointer()
 {
     STANDARD_CONSTRUCTOR()
-
-    bearing = 0;
-    myRotation = 0.0;
-    myRadius = 0;
-    head = nullptr;
-    tail = nullptr;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void BearingPointer::copyData(const BearingPointer& org, const bool cc)
+void BearingPointer::copyData(const BearingPointer& org, const bool)
 {
     BaseClass::copyData(org);
-
-    if (cc) {
-        head = nullptr;
-        tail = nullptr;
-    }
 
     setSlotHeadGraphic(org.head);
     setSlotTailGraphic(org.tail);
@@ -61,18 +43,12 @@ void BearingPointer::copyData(const BearingPointer& org, const bool cc)
 
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void BearingPointer::deleteData()
 {
     setSlotHeadGraphic(nullptr);
     setSlotTailGraphic(nullptr);
 }
 
-//------------------------------------------------------------------------------
-// draw()
-//------------------------------------------------------------------------------
 void BearingPointer::draw()
 {
     bool c = isCentered();
@@ -83,7 +59,6 @@ void BearingPointer::draw()
         graphics::Graphic::draw();
     lcRestoreMatrix();
 }
-
 
 // Event handlers
 //------------------------------------------------------------------------------
@@ -131,7 +106,7 @@ bool BearingPointer::onUpdateDegBearingPointer(const base::Number* const msg)
 //------------------------------------------------------------------------------
 bool BearingPointer::setBearingDeg(const double newB)
 {
-    bearing = newB * static_cast<double>(base::Angle::D2RCC);
+    bearing = newB * static_cast<double>(base::angle::D2RCC);
     return true;
 }
 
@@ -209,12 +184,12 @@ void BearingPointer::updateData(const double dt)
     double hdg = getRotationRad();
 
     // stay between +- 3.14 radians
-    bearing = base::Angle::aepcdRad(bearing - hdg);
-    double dbrg = base::Angle::aepcdRad(myRotation - bearing);
+    bearing = base::angle::aepcdRad(bearing - hdg);
+    double dbrg = base::angle::aepcdRad(myRotation - bearing);
 
     // if we are over the max, rotate the other way
     double dd0 = dbrg * dt;
-    double maxdd0 = (90.0f * static_cast<double>(base::Angle::D2RCC)) * dt;      // Limit to 90 degs/sec
+    double maxdd0 = (90.0f * static_cast<double>(base::angle::D2RCC)) * dt;      // Limit to 90 degs/sec
     if (dd0 < -maxdd0) dd0 = -maxdd0;
     if (dd0 > maxdd0) dd0 = maxdd0;
     bearing += dd0;
@@ -257,13 +232,5 @@ bool BearingPointer::setSlotTailGraphic(const graphics::Graphic* const newT)
     return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for BearingPointer
-//------------------------------------------------------------------------------
-base::Object* BearingPointer::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
-
-}  // end instruments namespace
-}  // end oe namespace
+}

@@ -24,29 +24,12 @@ END_SLOT_MAP()
 
 EMPTY_DELETEDATA(Lognormal)
 
-//------------------------------------------------------------------------------
-// slot table function
-//------------------------------------------------------------------------------
-Object* Lognormal::getSlotByIndex(const int si)
-{
-  return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Lognormal::Lognormal()
 {
   STANDARD_CONSTRUCTOR()
-  sigma = 0.0;
-  mu = 0.0;
-  gamma = 0.0;
 }
 
-//------------------------------------------------------------------------------
-// copyData
-//------------------------------------------------------------------------------
-void Lognormal::copyData(const Lognormal& org, const bool cc)
+void Lognormal::copyData(const Lognormal& org, const bool)
 {
   BaseClass::copyData(org);
   sigma = org.sigma;
@@ -54,8 +37,6 @@ void Lognormal::copyData(const Lognormal& org, const bool cc)
   gamma = org.gamma;
 }
 
-//------------------------------------------------------------
-//------------------------------------------------------------
 double Lognormal::draw()
 {
   double u(0.0), r2(0.0);
@@ -73,8 +54,6 @@ double Lognormal::draw()
   return z;
 }
 
-//------------------------------------------------------------
-//------------------------------------------------------------
 bool Lognormal::setSlotSigma(const Number* const x)
 {
   bool ok = false;
@@ -99,9 +78,6 @@ bool Lognormal::setSlotGamma(const Number* const x)
   return ok;
 }
 
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& Lognormal::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
   int j = 0;

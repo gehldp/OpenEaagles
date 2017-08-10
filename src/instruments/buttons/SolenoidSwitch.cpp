@@ -13,17 +13,11 @@ namespace instruments {
 IMPLEMENT_SUBCLASS(SolenoidSwitch, "SolenoidSwitch")
 EMPTY_SERIALIZER(SolenoidSwitch)
 
-//------------------------------------------------------------------------------
-// Slot table for this form type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(SolenoidSwitch)
     "holdTimeSec",      // how long to hold the button before the timer goes off
     "eventMap",         // turns our button "sticks" into events, from position 1 to 3 (center, top, bottom)
 END_SLOTTABLE(SolenoidSwitch)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(SolenoidSwitch)
     ON_SLOT(1, setSlotHoldTimer, base::Number)
     ON_SLOT(2, setSlotEventMap, base::PairStream)
@@ -33,30 +27,17 @@ BEGIN_EVENT_HANDLER(SolenoidSwitch)
     ON_EVENT_OBJ(SELECT, selectLatch, base::Number)
 END_EVENT_HANDLER()
 
-
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 SolenoidSwitch::SolenoidSwitch()
 {
     STANDARD_CONSTRUCTOR()
 
-    timer = nullptr;               // we will create our timer if we set a timer slot
-    currButtonId = CENTER_BUTTON;  // default to first current button
     picked[0] = true;              // center button picked
-    picked[1] = false;
-    picked[2] = false;
     for (int i = 0; i < NUM_BUTTONS; i++) {
         pickedSD[i].empty();
         eventMap[i] = -1;
     }
-    lastButtonId = CENTER_BUTTON;
-    latched = false;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void SolenoidSwitch::copyData(const SolenoidSwitch& org, const bool)
 {
    BaseClass::copyData(org);
@@ -77,9 +58,6 @@ void SolenoidSwitch::copyData(const SolenoidSwitch& org, const bool)
     latched = org.latched;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void SolenoidSwitch::deleteData()
 {
     if (timer != nullptr) {
@@ -112,8 +90,8 @@ bool SolenoidSwitch::setSlotEventMap(const base::PairStream* const x)
         int count = 0;
         const base::List::Item* item = x->getFirstItem();
         while (item != nullptr && count < 3) {
-            base::Pair* pair = (base::Pair*)item->getValue();
-            base::Number* num = dynamic_cast<base::Number*>(pair->object());
+            const auto pair = static_cast<const base::Pair*>(item->getValue());
+            const auto num = dynamic_cast<const base::Number*>(pair->object());
             if (num != nullptr) eventMap[count] = num->getInt();
             count++;
             item = item->getNext();
@@ -264,38 +242,22 @@ void SolenoidSwitch::updateData(const double dt)
     }
 
     // tell our buttons what position they have
-    send("button%d", USER_KEY_EVENT, picked, pickedSD, NUM_BUTTONS);
+    send("button%d", USER_KEY_EVENT, picked.data(), pickedSD.data(), NUM_BUTTONS);
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* SolenoidSwitch::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
 
 // Hold Button -------------------------------------------------------------------------------------
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SolenoidButton,"SolenoidButton")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SolenoidButton, "SolenoidButton")
 EMPTY_SERIALIZER(SolenoidButton)
 
-//------------------------------------------------------------------------------
-// Event Table
-//------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(SolenoidButton)
    ON_EVENT(INPUT_LEFT_EDGE, onMouseDown)
    ON_EVENT_OBJ(USER_KEY_EVENT, onPicked, base::Number)
 END_EVENT_HANDLER()
 
-
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 SolenoidButton::SolenoidButton()
 {
    STANDARD_CONSTRUCTOR()
-   noTimer = false;
-   pushed = false;
    pushedSD.empty();
 }
 
@@ -346,7 +308,5 @@ void SolenoidButton::updateData(double dt)
     send("push", SELECT, pushed, pushedSD);
 }
 
-
-
-}  // end instruments namespace
-}  // end oe namespace
+}
+}

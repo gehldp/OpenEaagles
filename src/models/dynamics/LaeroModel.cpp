@@ -1,19 +1,15 @@
 
 #include "openeaagles/models/dynamics/LaeroModel.hpp"
 
-#include "openeaagles/simulation/Player.hpp"
-#include "openeaagles/simulation/AirVehicle.hpp"
+#include "openeaagles/models/player/Player.hpp"
 
-#include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/String.hpp"
 #include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Distances.hpp"
-#include "openeaagles/base/units/Times.hpp"
-#include "openeaagles/base/osg/Matrix"
-#include "openeaagles/base/osg/Vec3"
+
+#include "openeaagles/base/units/time_utils.hpp"
+
+#include "openeaagles/base/osg/Vec3d"
 #include "openeaagles/base/osg/Quat"
-#include "openeaagles/base/osg/Math"
 
 #include <iostream>
 #include <iomanip>
@@ -22,7 +18,7 @@
 namespace oe {
 namespace models {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(LaeroModel,"LaeroModel")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(LaeroModel, "LaeroModel")
 EMPTY_SERIALIZER(LaeroModel)
 EMPTY_DELETEDATA(LaeroModel)
 
@@ -32,78 +28,14 @@ EMPTY_DELETEDATA(LaeroModel)
 const double LaeroModel::HALF_PI    = base::PI / 2.0;
 const double LaeroModel::EPSILON    = 1.0E-10;
 
-//----------------------------------------------------------
-// constructor
-//----------------------------------------------------------
 LaeroModel::LaeroModel()
 {
    STANDARD_CONSTRUCTOR()
-   initData();
 }
 
-//----------------------------------------------------------
-// initData() -- initialize member data
-//----------------------------------------------------------
-void LaeroModel::initData()
-{
-   dT       = 0.0;
-
-   // Body angular vel, acc components
-   p        = 0.0;
-   q        = 0.0;
-   r        = 0.0;
-   pDot     = 0.0;
-   qDot     = 0.0;
-   rDot     = 0.0;
-
-   // Euler rotation angle, rate components
-   phi      = 0.0;
-   tht      = 0.0;
-   psi      = 0.0;
-   phiDot   = 0.0;
-   thtDot   = 0.0;
-   psiDot   = 0.0;
-
-   // Body linear vel, acc components
-   u        = 0.0;
-   v        = 0.0;
-   w        = 0.0;
-   uDot     = 0.0;
-   vDot     = 0.0;
-   wDot     = 0.0;
-
-   // NED pos, vel, acc components
-   refPosN  = 0.0;
-   refPosE  = 0.0;
-   refPosD  = 0.0;
-   posN     = 0.0;
-   posE     = 0.0;
-   posD     = 0.0;
-
-   velN     = 0.0;
-   velE     = 0.0;
-   velD     = 0.0;
-   accN     = 0.0;
-   accE     = 0.0;
-   accD     = 0.0;
-
-   // Hold components
-   phiDot1  = 0.0;
-   thtDot1  = 0.0;
-   psiDot1  = 0.0;
-
-   uDot1    = 0.0;
-   vDot1    = 0.0;
-   wDot1    = 0.0;
-}
-
-//----------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//----------------------------------------------------------
-void LaeroModel::copyData(const LaeroModel& org, const bool cc)
+void LaeroModel::copyData(const LaeroModel& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    dT       = org.dT;
 
@@ -155,10 +87,9 @@ void LaeroModel::copyData(const LaeroModel& org, const bool cc)
    wDot1    = org.wDot1;
 }
 
-
-//----------------------------------------------------------
-// updateTC() -- update time critical stuff here
-//----------------------------------------------------------
+//------------------------------------------------------------------------------
+// dynamics() -- update player's vehicle dynamics
+//------------------------------------------------------------------------------
 void LaeroModel::dynamics(const double dt)
 {
     update4DofModel(dt);
@@ -172,10 +103,10 @@ void LaeroModel::reset()
 {
    BaseClass::reset();
 
-   simulation::Player* pPlr = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+   const auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
    if (pPlr != nullptr) {
-      double initVel = pPlr->getInitVelocity();
-      u = initVel * base::Distance::NM2M / base::Time::H2S;
+      const double initVel = pPlr->getInitVelocity();
+      u = initVel * base::distance::NM2M / base::time::H2S;
    }
 }
 
@@ -187,7 +118,7 @@ void LaeroModel::update4DofModel(const double dt)
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   simulation::Player* pPlr = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+   const auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
 
    if (pPlr != nullptr) {
 
@@ -309,15 +240,15 @@ bool LaeroModel::flyPhi(const double phiCmdDeg, const double phiDotCmdDps)
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   simulation::Player* pPlr = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+   const auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
    bool ok = (pPlr != nullptr);
    if (ok) {
 
       //-------------------------------------------------------
       // convert argument units (deg -> rad)
       //-------------------------------------------------------
-      double phiCmdRad    = phiCmdDeg * base::Angle::D2RCC;
-      double phiDotCmdRps = phiDotCmdDps * base::Angle::D2RCC;
+      double phiCmdRad    = phiCmdDeg * base::angle::D2RCC;
+      double phiDotCmdRps = phiDotCmdDps * base::angle::D2RCC;
 
       //-------------------------------------------------------
       // current phi error (rad)
@@ -353,15 +284,15 @@ bool LaeroModel::flyTht(const double thtCmdDeg, const double thtDotCmdDps)
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   simulation::Player* pPlr = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+   const auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
    bool ok = (pPlr != nullptr);
    if (ok) {
 
       //-------------------------------------------------------
       // convert argument units (deg -> rad)
       //-------------------------------------------------------
-      double thtCmdRad    = thtCmdDeg * base::Angle::D2RCC;
-      double thtDotCmdRps = thtDotCmdDps * base::Angle::D2RCC;
+      double thtCmdRad    = thtCmdDeg * base::angle::D2RCC;
+      double thtDotCmdRps = thtDotCmdDps * base::angle::D2RCC;
 
       //-------------------------------------------------------
       // current tht error (rad)
@@ -397,15 +328,15 @@ bool LaeroModel::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   simulation::Player* pPlr = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+   const auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
    bool ok = (pPlr != nullptr);
    if (ok) {
 
       //-------------------------------------------------------
       // convert argument units (deg -> rad)
       //-------------------------------------------------------
-      double psiCmdRad    = psiCmdDeg * base::Angle::D2RCC;
-      double psiDotCmdRps = psiDotCmdDps * base::Angle::D2RCC;
+      double psiCmdRad    = psiCmdDeg * base::angle::D2RCC;
+      double psiDotCmdRps = psiDotCmdDps * base::angle::D2RCC;
 
       //-------------------------------------------------------
       // current psi error (rad)
@@ -443,7 +374,7 @@ bool LaeroModel::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
 //   // get data pointers
 //   //-------------------------------------------------------
 //   simulation::Player* pPlr = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
-//   bool ok = (pPlr != 0);
+//   bool ok = (pPlr != nullptr);
 //   if (ok) {
 //
 //      //-------------------------------------------------------
@@ -494,7 +425,7 @@ bool LaeroModel::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
 //   //-------------------------------------------------------
 //   simulation::Player* pPlr = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
 //
-//   bool ok = (pPlr != 0);
+//   bool ok = (pPlr != nullptr);
 //   if (ok) {
 //
 //      //----------------------------------------------------
@@ -504,7 +435,7 @@ bool LaeroModel::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
 //      double osLonDeg  = pPlr->getLongitude();
 //      double brgDeg = 0.0;
 //      double rngMtr = 0.0;
-//      base::Nav::gll2bd(osLatDeg, osLonDeg, latDeg, lonDeg, &brgDeg,&rngMtr);
+//      base::nav::gll2bd(osLatDeg, osLonDeg, latDeg, lonDeg, &brgDeg,&rngMtr);
 //
 //      //-------------------------------------------------------
 //      // fly to heading necessary to intercept lat/lon
@@ -522,7 +453,7 @@ bool LaeroModel::setCommandedHeadingD(const double h, const double hDps, const d
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   simulation::Player* pPlr = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+   const auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
 
    bool ok = (pPlr != nullptr);
    if (ok) {
@@ -530,7 +461,7 @@ bool LaeroModel::setCommandedHeadingD(const double h, const double hDps, const d
       //----------------------------------------------------
       // define local constants
       //----------------------------------------------------
-      const double MAX_BANK_RAD = maxBank * base::Angle::D2RCC;
+      const double MAX_BANK_RAD = maxBank * base::angle::D2RCC;
       //const double TAU = 2.0;  // time constant [sec]
       const double TAU = 1.0;  // time constant [sec]
 
@@ -539,14 +470,14 @@ bool LaeroModel::setCommandedHeadingD(const double h, const double hDps, const d
       //-------------------------------------------------------
       double velMps        = pPlr->getTotalVelocity();
       double hdgDeg        = pPlr->getHeadingD();
-      double hdgErrDeg     = base::Angle::aepcdDeg(h - hdgDeg);
+      double hdgErrDeg     = base::angle::aepcdDeg(h - hdgDeg);
       double hdgErrAbsDeg  = std::fabs(hdgErrDeg);
 
       //-------------------------------------------------------
       // get absolute heading rate of change (hdgDotAbsDps)
       //-------------------------------------------------------
       double hdgDotMaxAbsRps = base::ETHGM * std::tan(MAX_BANK_RAD) / velMps;
-      double hdgDotMaxAbsDps = hdgDotMaxAbsRps * base::Angle::R2DCC;
+      double hdgDotMaxAbsDps = hdgDotMaxAbsRps * base::angle::R2DCC;
 
       double hdgDotAbsDps = hDps;
       if (hdgDotAbsDps > hdgDotMaxAbsDps) {
@@ -562,12 +493,12 @@ bool LaeroModel::setCommandedHeadingD(const double h, const double hDps, const d
       // define direction of heading rate of change (hdgDotDps)
       //-------------------------------------------------------
       double hdgDotDps = base::sign(hdgErrDeg) * hdgDotAbsDps;
-      psiDot = hdgDotDps * base::Angle::D2RCC;
+      psiDot = hdgDotDps * base::angle::D2RCC;
 
       //-------------------------------------------------------
       // define bank angle as a function of turn rate
       //-------------------------------------------------------
-      double phiCmdDeg = std::atan2(psiDot * velMps, base::ETHGM) * base::Angle::R2DCC;
+      double phiCmdDeg = std::atan2(psiDot * velMps, base::ETHGM) * base::angle::R2DCC;
       ok = flyPhi(phiCmdDeg);
    }
 
@@ -580,7 +511,7 @@ bool LaeroModel::setCommandedAltitude(const double a, const double aMps, const d
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   simulation::Player* pPlr = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+   const auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
 
    bool ok = (pPlr != nullptr);
    if (ok) {
@@ -613,7 +544,7 @@ bool LaeroModel::setCommandedAltitude(const double a, const double aMps, const d
       //-------------------------------------------------------
       // assign result to altitude control
       //-------------------------------------------------------
-      double thtCmdDeg = (altDotMps / u) * base::Angle::R2DCC;
+      double thtCmdDeg = (altDotMps / u) * base::angle::R2DCC;
       // SLS - TO DO: Limit commanded pitch to max pitch angle as well.
       ok = flyTht(thtCmdDeg);
    }
@@ -627,14 +558,14 @@ bool LaeroModel::setCommandedVelocityKts(const double v, const double vNps)
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   simulation::Player* pPlr = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+   const auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
    bool ok = (pPlr != nullptr);
    if (ok) {
 
       //-------------------------------------------------------
       // define local constants
       //-------------------------------------------------------
-      const double KTS2MPS = base::Distance::NM2M / base::Time::H2S;
+      const double KTS2MPS = base::distance::NM2M / base::time::H2S;
 
       //-------------------------------------------------------
       // convert argument units (deg -> rad)

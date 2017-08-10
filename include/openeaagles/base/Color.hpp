@@ -3,12 +3,11 @@
 #define __oe_base_Color_H__
 
 #include "openeaagles/base/Object.hpp"
-#include "openeaagles/base/osg/Vec3"
-#include "openeaagles/base/osg/Vec4"
+#include "openeaagles/base/osg/Vec4d"
 
 namespace oe {
 namespace base {
-
+class Vec3d;
 class Number;
 
 //------------------------------------------------------------------------------
@@ -34,13 +33,13 @@ class Number;
 //      void setDefaultAlpha(double alpha)
 //          Sets defaultAlpha (the default alpha value).
 //
-//      const osg::Vec3*()
-//      const osg::Vec3* getRGB()
-//          Convert a color to an osg::Vec3* RGB vector.
+//      const Vec3d*()
+//      const Vec3d* getRGB()
+//          Convert a color to an Vec3d* RGB vector.
 //
-//      const osg::Vec4*()
-//      const osg::Vec4* getRGBA()
-//          Converts a color to an osg::Vec4* RGBA vector.
+//      const Vec4d*()
+//      const Vec4d* getRGBA()
+//          Converts a color to an Vec4d* RGBA vector.
 //
 //      Comparison operators: ==  !=
 //          Are C++ equivalents.
@@ -60,8 +59,8 @@ public:
 public:
     Color();
 
-    operator const osg::Vec3*() const;
-    operator const osg::Vec4*() const;
+    operator const Vec3d*() const;
+    operator const Vec4d*() const;
 
     double red() const;
     double green() const;
@@ -73,17 +72,16 @@ public:
     virtual bool setBlue(const double b);
     virtual bool setAlpha(const double a);
 
-    const osg::Vec3* getRGB() const;
-    const osg::Vec4* getRGBA() const;
+    const Vec3d* getRGB() const;
+    const Vec4d* getRGBA() const;
 
     static double getDefaultAlpha();
     static void setDefaultAlpha(const double alpha);
 
 protected:
-    osg::Vec4 color;                // RGBA color vector
+    Vec4d color;                // RGBA color vector
     static double defaultAlpha;
 };
-
 
 }
 }

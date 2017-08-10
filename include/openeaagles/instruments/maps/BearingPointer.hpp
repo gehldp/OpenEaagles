@@ -1,6 +1,15 @@
+
+#ifndef __oe_instruments_BearingPointer_H__
+#define __oe_instruments_BearingPointer_H__
+
+#include "openeaagles/instruments/maps/CompassRose.hpp"
+
+namespace oe {
+namespace base { class Angle; class Number; }
+namespace instruments {
+
 //------------------------------------------------------------------------------
 // Class: BearingPointer
-// Base Class: base::Object -> graphics::Graphic -> CompassRose -> BearingPointer
 //
 // Description: This is a bearing pointer, which works in conjunction with
 // a compass rose to determine bearing, however, it is independent of CompassRose,
@@ -13,14 +22,6 @@
 //      UPDATE_VALUE7 - sets bearing (radians or base::Angle)
 //      UPDATE_VALUE8 - sets bearing (degrees)
 //------------------------------------------------------------------------------
-#ifndef __oe_instruments_BearingPointer_H__
-#define __oe_instruments_BearingPointer_H__
-
-#include "openeaagles/instruments/maps/CompassRose.hpp"
-
-namespace oe {
-namespace instruments {
-
 class BearingPointer : public CompassRose
 {
     DECLARE_SUBCLASS(BearingPointer, CompassRose)
@@ -29,7 +30,7 @@ public:
     BearingPointer();
 
     double getBearingRad() const { return bearing; } // radians
-    double getBearingDeg() const { return bearing * static_cast<double>(base::Angle::R2DCC); }    // degrees
+    double getBearingDeg() const { return bearing * static_cast<double>(base::angle::R2DCC); }    // degrees
     graphics::Graphic* getHeadGraphic() const { return head; }
     graphics::Graphic* getTailGraphic() const { return tail; }
 
@@ -53,11 +54,11 @@ private:
     bool onUpdateRadBearingPointer(const base::Number* const msg);
     bool onUpdateDegBearingPointer(const base::Number* const msg);
 
-    double bearing;     // used for bearing pointer, or if anyone else needs it for calculations (radians)
-    double myRotation;  // how much we are going to rotate the compass
-    double myRadius;    // our radius (comes from dial radius)
-    graphics::Graphic* head;    // our head graphic (if we have one)
-    graphics::Graphic* tail;    // our tail graphic (if we have one)
+    double bearing {};     // used for bearing pointer, or if anyone else needs it for calculations (radians)
+    double myRotation {};  // how much we are going to rotate the compass
+    double myRadius {};    // our radius (comes from dial radius)
+    graphics::Graphic* head {};    // our head graphic (if we have one)
+    graphics::Graphic* tail {};    // our tail graphic (if we have one)
 };
 
 }

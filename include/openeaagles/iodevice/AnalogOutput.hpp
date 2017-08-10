@@ -2,12 +2,10 @@
 #ifndef __oe_iodevice_AnalogOutput_H__
 #define __oe_iodevice_AnalogOutput_H__
 
-#include "openeaagles/base/IoAdapter.hpp"
+#include "openeaagles/base/io/IoAdapter.hpp"
 
 namespace oe {
-
 namespace base { class Number; class Table1; }
-
 namespace iodevice {
 
 //------------------------------------------------------------------------------
@@ -69,15 +67,13 @@ protected:
    virtual bool setSlotGain(const base::Number* const msg);
 
 private:
-   void initData();
-
-   bool  devEnb;              // Device enabled
-   unsigned int location;     // IoData analog output channel number
-   unsigned int channel;      // Analog channel number
-   double       value;        // Initial value
-   double       offset;       // Offset:  value = gain * (vin - offset)
-   double       gain;         // Gain:    value = gain * (vin - offset)
-   const base::Table1* table; // Shaping table
+   bool devEnb {};               // Device enabled
+   unsigned int location {};      // IoData analog output channel number
+   unsigned int channel {};       // Analog channel number
+   double value {};               // Initial value
+   double offset {};              // Offset:  value = gain * (vin - offset)
+   double gain {1.0};             // Gain:    value = gain * (vin - offset)
+   const base::Table1* table {};  // Shaping table
 };
 
 }

@@ -11,20 +11,17 @@
 namespace oe {
 namespace dafif {
 
-IMPLEMENT_SUBCLASS(AirportLoader,"AirportLoader")
+IMPLEMENT_SUBCLASS(AirportLoader, "AirportLoader")
 EMPTY_SLOTTABLE(AirportLoader)
 EMPTY_SERIALIZER(AirportLoader)
+EMPTY_DELETEDATA(AirportLoader)
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 AirportLoader::AirportLoader() : Database()
 {
    STANDARD_CONSTRUCTOR()
    // default file
    db->setPathname("/data/dafif/fullall/");
    db->setFilename("file0");
-   firstAirport = nullptr;
 }
 
 AirportLoader::AirportLoader(
@@ -38,30 +35,16 @@ AirportLoader::AirportLoader(
    db->setPathname(path);
    db->setFilename(file);
    load(country);
-   firstAirport = nullptr;
 }
 
-
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void AirportLoader::copyData(const AirportLoader& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) {
       db->setPathname("/data/dafif/fullall/");
       db->setFilename("file0");
-      firstAirport = nullptr;
    }
 }
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
-void AirportLoader::deleteData()
-{
-}
-
 
 //------------------------------------------------------------------------------
 // load() --
@@ -163,10 +146,10 @@ bool AirportLoader::load(const char* country)
       if (n > 0) {
 
          // runway's airport key
-         AirportKey* apk = static_cast<AirportKey*>(ql[0]);
+         const auto apk = static_cast<AirportKey*>(ql[0]);
 
          // create an runway key
-         RunwayKey* rwk = new RunwayKey( idx, runway );
+         const auto rwk = new RunwayKey( idx, runway );
 
          // add the runway key to the airport key
          rwk->next = apk->runways;
@@ -178,8 +161,6 @@ bool AirportLoader::load(const char* country)
       r = db->getNextRecord();
       runway.setRecord(r);
    }
-
-
 
 #ifndef ALT_ILS_FILE    /* read ILS records from DAFIF file */
 
@@ -228,10 +209,10 @@ bool AirportLoader::load(const char* country)
       if (n > 0) {
 
          // ils's runway key
-         RunwayKey* rwk = static_cast<RunwayKey*>(ql[0]);
+         const auto rwk = static_cast<RunwayKey*>(ql[0]);
 
          // create an ils key
-         IlsKey* ilsk = new IlsKey( idx, ils );
+         const auto ilsk = new IlsKey( idx, ils );
 
          // add the ils key to the runway key
          ilsk->next = rwk->ils;
@@ -298,7 +279,7 @@ bool AirportLoader::load(const char* country)
                }
 
                // create an ils key for the localizer component
-               IlsKey* lk = new IlsKey(static_cast<long>(ALT_ILS_IDX));
+               const auto lk = new IlsKey(static_cast<long>(ALT_ILS_IDX));
                lk->lat = nlat;
                lk->lon = nlon;
                dsGetString(lk->key, key, ILS_KEY_LEN);
@@ -333,7 +314,7 @@ bool AirportLoader::load(const char* country)
                }
 
                // create an ils key for the glode slope component
-               IlsKey* gsk = new IlsKey(static_cast<long>(ALT_ILS_IDX));
+               const auto gsk = new IlsKey(static_cast<long>(ALT_ILS_IDX));
                gsk->lat = nlat;
                gsk->lon = nlon;
                dsGetString(gsk->key, key, ILS_KEY_LEN);
@@ -368,7 +349,7 @@ bool AirportLoader::load(const char* country)
                }
 
                // create an ils key for the inner marker component
-               IlsKey* mk = new IlsKey(static_cast<long>(ALT_ILS_IDX));
+               const auto mk = new IlsKey(static_cast<long>(ALT_ILS_IDX));
                mk->lat = nlat;
                mk->lon = nlon;
                dsGetString(mk->key, key, ILS_KEY_LEN);
@@ -403,7 +384,7 @@ bool AirportLoader::load(const char* country)
                }
 
                // create an ils key for the inner marker component
-               IlsKey* mk = new IlsKey(static_cast<long>(ALT_ILS_IDX));
+               const auto mk = new IlsKey(static_cast<long>(ALT_ILS_IDX));
                mk->lat = nlat;
                mk->lon = nlon;
                dsGetString(mk->key, key, ILS_KEY_LEN);
@@ -439,7 +420,7 @@ bool AirportLoader::load(const char* country)
                }
 
                // create an ils key for the inner marker component
-               IlsKey* mk = new IlsKey(static_cast<long>(ALT_ILS_IDX));
+               const auto mk = new IlsKey(static_cast<long>(ALT_ILS_IDX));
                mk->lat = nlat;
                mk->lon = nlon;
                dsGetString(mk->key, key, ILS_KEY_LEN);
@@ -494,7 +475,6 @@ int AirportLoader::getMaxRecords()
 {
    return AIRPORT_MAX_RECORDS;
 }
-
 
 //------------------------------------------------------------------------------
 // airport() -- get the airport by number: 0 ... numberOfRecords()-1
@@ -682,7 +662,7 @@ int AirportLoader::queryAirport(const Airport::AirportType type, const float min
    // than maxRange
    nql = 0;
    for (int i = 0; i < nrl; i++) {
-      AirportKey* k = static_cast<AirportKey*>(rl[i]);
+      const auto k = static_cast<AirportKey*>(rl[i]);
       if ( type == k->type || type == Airport::ANY ) {
          k->rng2 = range2(k->lat,k->lon);
          if (k->rng2 < mr2) {
@@ -823,7 +803,7 @@ int AirportLoader::queryRunwayBySubkey(const char* subkey)
    // find all runways that have matching keys
    nql = 0;
    if (apk != nullptr) {
-      int len = static_cast<int>(strlen(rwKey));
+      const auto len = static_cast<int>(strlen(rwKey));
       for (RunwayKey* rwk = apk->runways; rwk != nullptr; rwk = rwk->next) {
          if (std::strncmp(rwk->key,rwKey,len) == 0) ql[nql++] = rwk;
       }
@@ -888,7 +868,7 @@ int AirportLoader::queryRunwayByFreq(const float freq)
    // than maxRange
    nql = 0;
    for (int i = 0; i < nrl; i++) {
-      AirportKey* k = static_cast<AirportKey*>(rl[i]);
+      const auto k = static_cast<AirportKey*>(rl[i]);
       k->rng2 = range2(k->lat,k->lon);
       if (k->rng2 < mr2) {
          for (RunwayKey* rwk = k->runways; rwk != nullptr; rwk = rwk->next) {
@@ -922,7 +902,7 @@ int AirportLoader::queryRunwayByChannel(const int chan)
    // than maxRange
    nql = 0;
    for (int i = 0; i < nrl; i++) {
-      AirportKey* k = static_cast<AirportKey*>(rl[i]);
+      const auto k = static_cast<AirportKey*>(rl[i]);
       k->rng2 = range2(k->lat,k->lon);
       if (k->rng2 < mr2) {
          for (RunwayKey* rwk = k->runways; rwk != nullptr; rwk = rwk->next) {
@@ -1036,9 +1016,9 @@ int AirportLoader::queryIlsBySubkey(const char* subkey)
    // find all ILS components that have matching keys
    nql = 0;
    if (rwk != nullptr) {
-      int len = static_cast<int>(strlen(subkey));
+      const auto len = static_cast<int>(strlen(subkey));
       for (IlsKey* ilsk = rwk->ils; ilsk != nullptr; ilsk = ilsk->next) {
-         if (std::strncmp(ilsk->key,subkey,len) == 0) ql[nql++] = ilsk;
+         if (std::strncmp(ilsk->key, subkey, len) == 0) ql[nql++] = ilsk;
       }
    }
 
@@ -1192,8 +1172,8 @@ AirportLoader::findGlideSlope(const RunwayKey* rwk, const IlsKey* lk)
 //------------------------------------------------------------------------------
 int AirportLoader::kl_cmp(const void* p1, const void* p2)
 {
-   const AirportKey* k1 = *(static_cast<const AirportKey**>(const_cast<void*>(p1)));
-   const AirportKey* k2 = *(static_cast<const AirportKey**>(const_cast<void*>(p2)));
+   const auto k1 = *(static_cast<const AirportKey**>(const_cast<void*>(p1)));
+   const auto k2 = *(static_cast<const AirportKey**>(const_cast<void*>(p2)));
 
    // compare the keys
    int result = std::strcmp(k1->key, k2->key);
@@ -1290,7 +1270,7 @@ void AirportLoader::printLoaded(std::ostream& sout)
    for (int i = 0; i < nrl; i++) {
 
       // print the AIRPORT record
-      AirportKey* apk = static_cast<AirportKey*>(rl[i]);
+      const auto apk = static_cast<AirportKey*>(rl[i]);
       airport.setRecord( db->getRecord( apk->idx ) ) ;
       airport.printRecord(sout);
 
@@ -1368,7 +1348,7 @@ AirportLoader::IlsKey::IlsKey(const long idx, const Ils& ils) : Key(idx)
 AirportLoader::IlsKey::IlsKey(const char* key1) : Key(0)
 {
    size = ILS_RECORD_LEN;
-   Record::dsGetString(key,key1,ILS_KEY_LEN);
+   Record::dsGetString(key, key1, ILS_KEY_LEN);
    id[0] = '\0';
    parent = nullptr;
    next = nullptr;

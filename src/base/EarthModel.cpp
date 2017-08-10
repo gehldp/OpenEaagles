@@ -1,7 +1,8 @@
 
 #include "openeaagles/base/EarthModel.hpp"
 
-#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/util/nav_utils.hpp"
+
 #include "openeaagles/base/units/Distances.hpp"
 
 #include <cstring>
@@ -35,11 +36,7 @@ const EarthModel EarthModel::wgs60              ( 6378165.0,    1.0 / 298.3 );
 const EarthModel EarthModel::wgs66              ( 6378145.0,    1.0 / 298.25);
 const EarthModel EarthModel::wgs72              ( 6378135.0,    1.0 / 298.26);
 
-//------------------------------------------------------------------------------
-// EarthModel class
-//------------------------------------------------------------------------------
-
-IMPLEMENT_SUBCLASS(EarthModel,"EarthModel")
+IMPLEMENT_SUBCLASS(EarthModel, "EarthModel")
 EMPTY_DELETEDATA(EarthModel)
 
 BEGIN_SLOTTABLE(EarthModel)
@@ -58,21 +55,18 @@ BEGIN_SLOT_MAP(EarthModel)
    ON_SLOT(3, setSlotF, Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 EarthModel::EarthModel(const double a0, const double f0)
 {
    STANDARD_CONSTRUCTOR()
 
-   initData(a0,f0);
+   initData(a0, f0);
 }
 
 EarthModel::EarthModel()
 {
    STANDARD_CONSTRUCTOR()
 
-   initData(Nav::WGS84_A, Nav::WGS84_F);
+   initData(nav::WGS84_A, nav::WGS84_F);
 }
 
 void EarthModel::initData(const double a0, const double f0)
@@ -83,13 +77,10 @@ void EarthModel::initData(const double a0, const double f0)
    e2 = f*(2.0 - f);
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void EarthModel::copyData(const EarthModel& org, const bool cc)
 {
    BaseClass::copyData(org);
-   if (cc) initData(Nav::WGS84_A, Nav::WGS84_F);
+   if (cc) initData(nav::WGS84_A, nav::WGS84_F);
 
    a = org.a;
    b = org.b;
@@ -104,7 +95,6 @@ const EarthModel* EarthModel::getEarthModel(const char* const name)
 {
    const EarthModel* em = nullptr;
    if (name != nullptr) {
-
       if      (std::strcmp( name, "airy") == 0) em = &airy;
       else if (std::strcmp( name, "australianNational") == 0) em = &australianNational;
       else if (std::strcmp( name, "bessel1841") == 0) em = &bessel1841;
@@ -127,7 +117,6 @@ const EarthModel* EarthModel::getEarthModel(const char* const name)
       else if (std::strcmp( name, "wgs66") == 0) em = &wgs66;
       else if (std::strcmp( name, "wgs72") == 0) em = &wgs72;
       else if (std::strcmp( name, "wgs84") == 0) em = &wgs84;
-
    }
    return em;
 }
@@ -212,19 +201,6 @@ bool EarthModel::setSlotF(const Number* const msg)
    return ok;
 }
 
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for EarthModel
-//------------------------------------------------------------------------------
-Object* EarthModel::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& EarthModel::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -249,6 +225,5 @@ std::ostream& EarthModel::serialize(std::ostream& sout, const int i, const bool 
     return sout;
 }
 
-
-}  // End base namespace
-}  // End oe namespace
+}
+}

@@ -1,19 +1,15 @@
 
 #include "openeaagles/linearsystem/FirstOrderTf.hpp"
+#include <iostream>
 
 namespace oe {
 namespace linearsystem {
 
-//==============================================================================
-// Class FirstOrderTf
-//==============================================================================
-IMPLEMENT_SUBCLASS(FirstOrderTf,"FirstOrderTf")
+IMPLEMENT_SUBCLASS(FirstOrderTf, "FirstOrderTf")
 EMPTY_SLOTTABLE(FirstOrderTf)
 EMPTY_SERIALIZER(FirstOrderTf)
+EMPTY_DELETEDATA(FirstOrderTf)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 FirstOrderTf::FirstOrderTf()
 {
    STANDARD_CONSTRUCTOR()
@@ -39,25 +35,14 @@ FirstOrderTf::FirstOrderTf(const unsigned int ir,
    initialize();
 }
 
-//------------------------------------------------------------------------------
-// initData() -- init member data
-//------------------------------------------------------------------------------
 void FirstOrderTf::initData()
 {
-   n1 = 0;
-   n2 = 0;
-   d1 = 0;
-   d2 = 0;
-
    allocateMemory(ORDER);
    clearMemory();
 
    initialize();
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void FirstOrderTf::copyData(const FirstOrderTf& org, const bool cc)
 {
    if (cc) {
@@ -72,13 +57,6 @@ void FirstOrderTf::copyData(const FirstOrderTf& org, const bool cc)
    d2 = org.d2;
 
    initialize();
-}
-
-//------------------------------------------------------------------------------
-//deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void FirstOrderTf::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------

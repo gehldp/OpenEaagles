@@ -1,9 +1,6 @@
-//------------------------------------------------------------------------------
-// Class: Arbiter
-//------------------------------------------------------------------------------
 
 #include "openeaagles/base/ubf/Arbiter.hpp"
-#include "openeaagles/base/ubf/Action.hpp"
+#include "openeaagles/base/ubf/AbstractAction.hpp"
 
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
@@ -16,9 +13,6 @@ IMPLEMENT_SUBCLASS(Arbiter, "UbfArbiter")
 EMPTY_COPYDATA(Arbiter)
 EMPTY_SERIALIZER(Arbiter)
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Arbiter)
    "behaviors"                    //  1) behaviors
 END_SLOTTABLE(Arbiter)
@@ -28,10 +22,6 @@ BEGIN_SLOT_MAP(Arbiter)
    ON_SLOT(1, setSlotBehaviors, base::PairStream)
 END_SLOT_MAP()
 
-
-//------------------------------------------------------------------------------
-// Class support functions
-//------------------------------------------------------------------------------
 Arbiter::Arbiter()
 {
    STANDARD_CONSTRUCTOR()
@@ -47,18 +37,18 @@ void Arbiter::deleteData()
 //------------------------------------------------------------------------------
 // genAction() - generate an action
 //------------------------------------------------------------------------------
-Action* Arbiter::genAction(const State* const state, const double dt)
+AbstractAction* Arbiter::genAction(const AbstractState* const state, const double dt)
 {
    // create list for action set
-   base::List* actionSet = new base::List();
+   const auto actionSet = new base::List();
 
    // fill out list of recommended actions by behaviors
    base::List::Item* item = behaviors->getFirstItem();
    while (item != nullptr) {
       // get a behavior
-      Behavior* behavior = static_cast<Behavior*>(item->getValue());
+      const auto behavior = static_cast<AbstractBehavior*>(item->getValue());
       // generate action, we have reference
-      Action* action = behavior->genAction(state, dt);
+      AbstractAction* action = behavior->genAction(state, dt);
       if (action != nullptr) {
          // add to action set
          actionSet->addTail(action);
@@ -71,7 +61,7 @@ Action* Arbiter::genAction(const State* const state, const double dt)
 
    // given the set of recommended actions, the arbiter
    // decides what action to take
-   Action* complexAction = genComplexAction(actionSet);
+   AbstractAction* complexAction = genComplexAction(actionSet);
 
    // done with action set
    actionSet->unref();
@@ -84,9 +74,9 @@ Action* Arbiter::genAction(const State* const state, const double dt)
 //------------------------------------------------------------------------------
 // Default: select the action with the highest vote
 //------------------------------------------------------------------------------
-Action* Arbiter::genComplexAction(base::List* const actionSet)
+AbstractAction* Arbiter::genComplexAction(base::List* const actionSet)
 {
-   Action* complexAction = nullptr;
+   AbstractAction* complexAction = nullptr;
    unsigned int maxVote = 0;
 
    // process entire action set
@@ -94,7 +84,7 @@ Action* Arbiter::genComplexAction(base::List* const actionSet)
    while (item != nullptr) {
 
       // Is this action's vote higher than the previous?
-      Action* action = static_cast<Action*>(item->getValue());
+      const auto action = static_cast<AbstractAction*>(item->getValue());
       if (maxVote==0 || action->getVote() > maxVote) {
 
          // Yes ...
@@ -123,7 +113,7 @@ Action* Arbiter::genComplexAction(base::List* const actionSet)
 //------------------------------------------------------------------------------
 // addBehavior() - add a new behavior
 //------------------------------------------------------------------------------
-void Arbiter::addBehavior(Behavior* const x)
+void Arbiter::addBehavior(AbstractBehavior* const x)
 {
    behaviors->addTail(x);
    x->container(this);
@@ -141,9 +131,9 @@ bool Arbiter::setSlotBehaviors(base::PairStream* const x)
    {
       base::List::Item* item = x->getFirstItem();
       while (item != nullptr && ok) {
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
+         const auto pair = static_cast<base::Pair*>(item->getValue());
          item = item->getNext();
-         Behavior* b = dynamic_cast<Behavior*>( pair->object() );
+         const auto b = dynamic_cast<AbstractBehavior*>( pair->object() );
          if (b == nullptr) {
             // Item is NOT a behavior
             std::cerr << "setSlotBehaviors: slot: " << *pair->slot() << " is NOT of a Behavior type!" << std::endl;
@@ -156,22 +146,14 @@ bool Arbiter::setSlotBehaviors(base::PairStream* const x)
    if (ok) {
       base::List::Item* item = x->getFirstItem();
       while (item != nullptr) {
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
+         const auto pair = static_cast<base::Pair*>(item->getValue());
          item = item->getNext();
-         Behavior* b = static_cast<Behavior*>(pair->object());
+         const auto b = static_cast<AbstractBehavior*>(pair->object());
          addBehavior(b);
       }
    }
 
    return ok;
-}
-
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* Arbiter::getSlotByIndex(const int si)
-{
-   return BaseClass::getSlotByIndex(si);
 }
 
 }

@@ -1,23 +1,19 @@
-// Class: AnalogInput
 
 #include "openeaagles/iodevice/AnalogInput.hpp"
 
-#include "openeaagles/base/IoData.hpp"
-#include "openeaagles/base/IoDevice.hpp"
-#include "openeaagles/base/IoHandler.hpp"
+#include "openeaagles/base/io/IoData.hpp"
+#include "openeaagles/base/io/IoDevice.hpp"
+#include "openeaagles/base/io/IoHandler.hpp"
+
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/functors/Tables.hpp"
+#include <iostream>
 
 namespace oe {
 namespace iodevice {
 
-//==============================================================================
-// AnalogInput
-//==============================================================================
+IMPLEMENT_SUBCLASS(AnalogInput, "AnalogInput")
 
-IMPLEMENT_SUBCLASS(AnalogInput,"AnalogInput")
-
-// slot table for this class type
 BEGIN_SLOTTABLE(AnalogInput)
     "ai",         // 1) Analog Input location (IoData's AI channel)
     "channel",    // 2) Device channel number
@@ -28,7 +24,6 @@ BEGIN_SLOTTABLE(AnalogInput)
     "table"       // 7) Shaping function table (default: none)
 END_SLOTTABLE(AnalogInput)
 
-//  Map slot table to handles
 BEGIN_SLOT_MAP(AnalogInput)
     ON_SLOT( 1, setSlotLocation, base::Number)
     ON_SLOT( 2, setSlotChannel,  base::Number)
@@ -39,36 +34,14 @@ BEGIN_SLOT_MAP(AnalogInput)
     ON_SLOT( 7, setTable,        base::Table1)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 AnalogInput::AnalogInput()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-void AnalogInput::initData()
-{
-   devEnb = false;
-   location = 0;
-   channel  = 0;
-   value = 0;
-   deadband = 0;
-   gain  = 1.0f;
-   offset = 0.0;
-   table = nullptr;
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void AnalogInput::copyData(const AnalogInput& org, const bool cc)
+void AnalogInput::copyData(const AnalogInput& org, const bool)
 {
    BaseClass::copyData(org);
-
-   if (cc) initData();
 
    devEnb = org.devEnb;
    location = org.location;
@@ -87,9 +60,6 @@ void AnalogInput::copyData(const AnalogInput& org, const bool cc)
    }
 }
 
-//------------------------------------------------------------------------------
-//deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void AnalogInput::deleteData()
 {
    setTable(nullptr);
@@ -327,17 +297,6 @@ bool AnalogInput::setSlotGain(const base::Number* const msg)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-base::Object* AnalogInput::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& AnalogInput::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;

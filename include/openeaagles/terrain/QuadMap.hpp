@@ -2,33 +2,34 @@
 #ifndef __oe_terrain_QuadMap_H__
 #define __oe_terrain_QuadMap_H__
 
-#include "openeaagles/base/Terrain.hpp"
+#include "openeaagles/terrain/Terrain.hpp"
+#include <array>
 
 namespace oe {
 namespace terrain {
-   class DataFile;
+class DataFile;
 
 //------------------------------------------------------------------------------
 // Class: QuadMap
 // Description: Manage up to 4 elevation files in a 2x2 pattern
 // Factory name: QuadMap
 //------------------------------------------------------------------------------
-class QuadMap : public base::Terrain
+class QuadMap : public Terrain
 {
-   DECLARE_SUBCLASS(QuadMap, base::Terrain)
+   DECLARE_SUBCLASS(QuadMap, Terrain)
 
 public:
    QuadMap();
 
-    unsigned int getNumDataFiles() const;
-    const base::Terrain* getDataFile(const unsigned int i) const;
-    bool setDataFile(const unsigned int i, base::Terrain* newDF);
+   unsigned int getNumDataFiles() const;
+   const Terrain* getDataFile(const unsigned int i) const;
+   bool setDataFile(const unsigned int i, Terrain* newDF);
 
    // ---
-   // base::Terrain interface
+   // simulation::Terrain interface
    // ---
 
-    virtual bool isDataLoaded() const override;
+   virtual bool isDataLoaded() const override;
 
    // Locates an array of (at least two) elevation points (and sets valid flags if found)
    // returns the number of points found within this QuadMap
@@ -62,8 +63,8 @@ protected:
 private:
    static const unsigned int MAX_DATA_FILES = 4;    // Only 4 files (as in Quad!)
 
-   const base::Terrain* dataFiles[MAX_DATA_FILES]; // Terrain data files
-   unsigned int numDataFiles;                       // Number of data files
+   std::array<const Terrain*, MAX_DATA_FILES> dataFiles {}; // Terrain data files
+   unsigned int numDataFiles {};                            // Number of data files
 
    virtual bool loadData() override;
 };

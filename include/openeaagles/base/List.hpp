@@ -15,7 +15,7 @@ namespace base {
 //
 // Public members:
 //
-//      List(float values[], unsigned int nv)
+//      List(double values[], unsigned int nv)
 //      List(int values[], unsigned int nv)
 //          Constructors; construct a list of 'nv' Float (Integer)
 //          objects each containing a value from 'values'.
@@ -33,7 +33,7 @@ namespace base {
 //      Object* get()
 //          Returns a pointer to the object at the head of this list and
 //          the object IS REMOVED from the list.  Empty lists will return
-//          null(0).  Ownership of Object is passed to the caller
+//          nullptr.  Ownership of Object is passed to the caller
 //          (i.e., this routine does not unref() the object and the
 //          caller should not ref() the object).
 //
@@ -116,7 +116,7 @@ namespace base {
 //
 //      List* list = <some list>
 //      List::Item* item = list->getFirstItem();
-//      while (item != 0) {
+//      while (item != nullptr) {
 //          Object* obj = item->getValue();
 //          <... code to use the object ...>
 //          item = item->getNext();
@@ -129,7 +129,9 @@ class List : public Object
 
 public:
    struct Item {
-      Item() { next = 0; previous = 0; value = 0; }
+      Item() = default;
+      Item(const Item&) = delete;
+      Item& operator=(const Item&) = delete;
 
       Item* getNext()                  { return next; }
       const Item* getNext() const      { return next; }
@@ -140,9 +142,9 @@ public:
       Object* getValue()               { return value; }
       const Object* getValue() const   { return value; }
 
-      Item* next;                      // Pointer to next entry
-      Item* previous;                  // Pointer to previous entry
-      Object* value;                   // Data
+      Item* next {};                   // Pointer to next entry
+      Item* previous {};               // Pointer to previous entry
+      Object* value {};                // Data
    };
 
 public:
@@ -158,7 +160,7 @@ public:
    void clear();
 
    Object* get()                                   { return removeHead(); }
-   void put(Object* obj)                           { if (obj == 0) return;  addTail(obj); }
+   void put(Object* obj)                           { if (obj == nullptr) return;  addTail(obj); }
 
    unsigned int getNumberList(double values[], const unsigned int max) const;
    unsigned int getNumberList(float values[], const unsigned int max) const;
@@ -192,11 +194,10 @@ public:
 private:
    const Object* getPosition1(const unsigned int n) const;
 
-   Item* headP;            // Pointer to head object
-   Item* tailP;            // Pointer to last object
+   Item* headP {};       // Pointer to head object
+   Item* tailP {};       // Pointer to last object
 
-   unsigned int num;       // Number of list objects
-
+   unsigned int num {};  // Number of list objects
 };
 
 }

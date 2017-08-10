@@ -7,9 +7,7 @@
 
 namespace oe {
 namespace base {
-
 class FStorage;
-class List;
 class Table;
 
 //------------------------------------------------------------------------------
@@ -53,7 +51,8 @@ private:
 //              Use Function::storageFactory() to generate pre-ref()'d
 //              FStorage objects.
 //------------------------------------------------------------------------------
-class FStorage : public Object {
+class FStorage : public Object
+{
    DECLARE_SUBCLASS(FStorage, Object)
 public:
    FStorage();

@@ -1,21 +1,18 @@
 
 #include "openeaagles/iodevice/Ai2DiSwitch.hpp"
 
-#include "openeaagles/base/IoData.hpp"
-#include "openeaagles/base/IoDevice.hpp"
-#include "openeaagles/base/IoHandler.hpp"
+#include "openeaagles/base/io/IoData.hpp"
+#include "openeaagles/base/io/IoDevice.hpp"
+#include "openeaagles/base/io/IoHandler.hpp"
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 namespace oe {
 namespace iodevice {
 
-//==============================================================================
-// Ai2DiSwitch
-//==============================================================================
+IMPLEMENT_SUBCLASS(Ai2DiSwitch, "Ai2DiSwitch")
+EMPTY_DELETEDATA(Ai2DiSwitch)
 
-IMPLEMENT_SUBCLASS(Ai2DiSwitch,"Ai2DiSwitch")
-
-// slot table for this class type
 BEGIN_SLOTTABLE(Ai2DiSwitch)
     "di",         // 1) Discrete Input location (IoData's DI channel)
     "channel",    // 2) Device's AI channel number
@@ -23,7 +20,6 @@ BEGIN_SLOTTABLE(Ai2DiSwitch)
     "inverted"    // 4) Inverted bit flag (default: false)
 END_SLOTTABLE(Ai2DiSwitch)
 
-//  Map slot table to handles
 BEGIN_SLOT_MAP(Ai2DiSwitch)
     ON_SLOT( 1, setSlotLocation, base::Number)
     ON_SLOT( 2, setSlotChannel,  base::Number)
@@ -31,36 +27,14 @@ BEGIN_SLOT_MAP(Ai2DiSwitch)
     ON_SLOT( 4, setSlotInverted, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Ai2DiSwitch::Ai2DiSwitch()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-//------------------------------------------------------------------------------
-// initData() -- init member data
-//------------------------------------------------------------------------------
-void Ai2DiSwitch::initData()
-{
-   devEnb = false;
-   location = 0;
-   channel = 0;
-   level = false;
-   invert = false;
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void Ai2DiSwitch::copyData(const Ai2DiSwitch& org, const bool cc)
+void Ai2DiSwitch::copyData(const Ai2DiSwitch& org, const bool)
 {
    BaseClass::copyData(org);
-
-   if (cc) initData();
 
    devEnb = org.devEnb;
    location = org.location;
@@ -69,12 +43,6 @@ void Ai2DiSwitch::copyData(const Ai2DiSwitch& org, const bool cc)
    invert = org.invert;
 }
 
-//------------------------------------------------------------------------------
-//deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void Ai2DiSwitch::deleteData()
-{
-}
 
 //------------------------------------------------------------------------------
 // Get functions
@@ -205,18 +173,6 @@ bool Ai2DiSwitch::setSlotInverted(const base::Number* const msg)
    return ok;
 }
 
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-base::Object* Ai2DiSwitch::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& Ai2DiSwitch::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;

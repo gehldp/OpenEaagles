@@ -1,6 +1,6 @@
 
 #include "openeaagles/terrain/ded/DedFile.hpp"
-#include "openeaagles/base/NetHandler.hpp"
+#include "openeaagles/base/network/NetHandler.hpp"
 #include "openeaagles/base/util/str_utils.hpp"
 
 #include <fstream>
@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <iomanip>
 #include <cstring>
+#include <iostream>
 
 namespace oe {
 namespace terrain {
@@ -116,30 +117,14 @@ static const char* const PARTNO  = "DMA1";
 static const char* const REVNO   = "V1.0";
 static const double NUM_SECS_PER_DEG_10 = 36000.0;    // # seconds in a degree * 10.0
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 DedFile::DedFile()
 {
    STANDARD_CONSTRUCTOR()
-
-   stdhdr = nullptr;
-   fstat = nullptr;
-   cells = nullptr;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
-void DedFile::copyData(const DedFile& org, const bool cc)
+void DedFile::copyData(const DedFile& org, const bool)
 {
    BaseClass::copyData(org);
-
-   if (cc) {
-      stdhdr = nullptr;
-      fstat = nullptr;
-      cells = nullptr;
-   }
 
    clearHeaders();
 
@@ -170,9 +155,6 @@ void DedFile::copyData(const DedFile& org, const bool cc)
 
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void DedFile::deleteData()
 {
    clearHeaders();
@@ -195,12 +177,12 @@ bool DedFile::loadData()
 {
    std::string filename;
    const char* p = getPathname();
-   if (p != 0) {
+   if (p != nullptr) {
       filename += p;
       filename += '/';
    }
    p = getFilename();
-   if (p != 0) filename += p;
+   if (p != nullptr) filename += p;
 
    // Open DED file
    std::ifstream in;
@@ -561,5 +543,5 @@ void DedFile::dump(std::ostream& sout) const
    }
 }
 
-}// end terrain namespace
-}// end oe namespace
+}
+}

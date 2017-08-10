@@ -1,18 +1,14 @@
-// Class: IoData
 
 #include "openeaagles/iodevice/IoData.hpp"
 
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 namespace oe {
 namespace iodevice {
 
-//==============================================================================
-// IoData
-//==============================================================================
-IMPLEMENT_SUBCLASS(IoData,"IoData")
+IMPLEMENT_SUBCLASS(IoData, "IoData")
 
-// slot table for this class type
 BEGIN_SLOTTABLE(IoData)
     "numAI",     // 1) Number of analog inputs (AIs)
     "numAO",     // 2) Number of analog outputs (AOs)
@@ -20,7 +16,6 @@ BEGIN_SLOTTABLE(IoData)
     "numDO",     // 4) Number of discrete outputs (DOs)
 END_SLOTTABLE(IoData)
 
-//  Map slot table to handles
 BEGIN_SLOT_MAP(IoData)
    ON_SLOT( 1, setSlotNumAI,    base::Number)
    ON_SLOT( 2, setSlotNumAO,    base::Number)
@@ -28,41 +23,14 @@ BEGIN_SLOT_MAP(IoData)
    ON_SLOT( 4, setSlotNumDO,    base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 IoData::IoData()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-//------------------------------------------------------------------------------
-// initData() -- init member data
-//------------------------------------------------------------------------------
-void IoData::initData()
-{
-   numAI = 0;
-   aiTable = nullptr;
-
-   numAO = 0;
-   aoTable = nullptr;
-
-   numDI = 0;
-   diTable = nullptr;
-
-   numDO = 0;
-   doTable = nullptr;
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void IoData::copyData(const IoData& org, const bool cc)
+void IoData::copyData(const IoData& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    setNumAI(org.numAI);
    if (aiTable != nullptr) {
@@ -83,12 +51,8 @@ void IoData::copyData(const IoData& org, const bool cc)
    if (doTable != nullptr) {
       for (unsigned int i = 0; i < numAI; i++) doTable[i] = org.doTable[i];
    }
-
 }
 
-//------------------------------------------------------------------------------
-//deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void IoData::deleteData()
 {
    setNumAI(0);
@@ -286,7 +250,6 @@ bool IoData::setNumAO(const unsigned int num)
       }
 
    }
-
    return true;
 }
 
@@ -418,17 +381,6 @@ bool IoData::setSlotNumDO(const base::Number* const msg)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-base::Object* IoData::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& IoData::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;

@@ -1,13 +1,19 @@
+
 #include "openeaagles/dafif/Navaid.hpp"
-#include "openeaagles/base/Nav.hpp"
+
+#include "openeaagles/base/util/nav_utils.hpp"
+
 #include "openeaagles/base/units/Angles.hpp"
+
 #include <iostream>
 
 namespace oe {
 namespace dafif {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Navaid,"Navaid")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Navaid, "Navaid")
 EMPTY_SERIALIZER(Navaid)
+EMPTY_COPYDATA(Navaid)
+EMPTY_DELETEDATA(Navaid)
 
 
 // Navaid class field Position Table
@@ -25,28 +31,17 @@ const Navaid::Ptbl Navaid::ptable = {
    NA_MAGVAR                     // magVariance
 };
 
-
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Navaid::Navaid()
 {
    STANDARD_CONSTRUCTOR()
    ptbl = &ptable;
 }
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Navaid::Navaid(const char* const s) : Record(s)
 {
    STANDARD_CONSTRUCTOR()
    ptbl = &ptable;
 }
-
-EMPTY_COPYDATA(Navaid)
-EMPTY_DELETEDATA(Navaid)
-
 
 //------------------------------------------------------------------------------
 // Get functions
@@ -146,18 +141,24 @@ void Navaid::printRecord(std::ostream& sout) const
 
 }
 
-
 //------------------------------------------------------------------------------
 //  print true bearing and range to system
 //------------------------------------------------------------------------------
 void Navaid::printTrueBearingRange(std::ostream& sout, const double aclat, const double aclon, const double acelev) const
 {
    double bearing(0.0), range(0.0), grdrange(0.0);
-   base::Nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &range, &grdrange);
+   base::nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &range, &grdrange);
 
-   sout << "     range " << range << "  grdrange " << grdrange << " true_bearing " << bearing << std::endl;
+   bool rangeIsValid = true;
+   bool bearingIsValid = true;
+
+   if (rangeIsValid && bearingIsValid)
+       sout << "     range " << range << "  grdrange " << grdrange << " true_bearing " << bearing << std::endl;
+   else if (rangeIsValid)
+       sout << "  range " << range << "  grdrange " << grdrange << std::endl;
+   else
+       sout << "    true bearing " << bearing << std::endl;
 }
-
 
 }
 }

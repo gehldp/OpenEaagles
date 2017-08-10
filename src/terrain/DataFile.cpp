@@ -1,14 +1,9 @@
 
-#include <fstream>
-#include <string>
-#include <stdlib.h>
-#include <iomanip>
-#include <cmath>
-
 #include "openeaagles/terrain/DataFile.hpp"
-#include "openeaagles/base/NetHandler.hpp"
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Distances.hpp"
+
+#include "openeaagles/base/network/NetHandler.hpp"
+#include "openeaagles/base/units/angle_utils.hpp"
+#include "openeaagles/base/units/distance_utils.hpp"
 
 namespace oe {
 namespace terrain {
@@ -17,34 +12,14 @@ IMPLEMENT_ABSTRACT_SUBCLASS(DataFile, "DataFile")
 EMPTY_SLOTTABLE(DataFile)
 EMPTY_SERIALIZER(DataFile)
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 DataFile::DataFile()
 {
    STANDARD_CONSTRUCTOR()
-
-   columns = nullptr;
-
-   latSpacing = 0;
-   lonSpacing = 0;
-   nptlat = 0;
-   nptlong = 0;
-   voidValue = -32767; // default void (missing) elevation value
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
-void DataFile::copyData(const DataFile& org, const bool cc)
+void DataFile::copyData(const DataFile& org, const bool)
 {
    BaseClass::copyData(org);
-
-   if (cc) {
-      columns = nullptr;
-      nptlat = 0;
-      nptlong = 0;
-   }
 
    voidValue = org.voidValue;
 
@@ -74,9 +49,6 @@ void DataFile::copyData(const DataFile& org, const bool cc)
 
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void DataFile::deleteData()
 {
     clearData();
@@ -178,11 +150,11 @@ unsigned int DataFile::getElevations(
 
    // Spacing between points (in each direction)
    double deltaPoint = maxRng / (n - 1);
-   double dirR = direction * base::Angle::D2RCC;
-   double deltaNorth = deltaPoint * std::cos(dirR) * base::Distance::M2NM;  // (NM)
-   double deltaEast  = deltaPoint * std::sin(dirR) * base::Distance::M2NM;
+   double dirR = direction * base::angle::D2RCC;
+   double deltaNorth = deltaPoint * std::cos(dirR) * base::distance::M2NM;  // (NM)
+   double deltaEast  = deltaPoint * std::sin(dirR) * base::distance::M2NM;
    double deltaLat = deltaNorth/60.0;
-   double deltaLon = deltaEast/(60.0 * std::cos(lat * base::Angle::D2RCC));
+   double deltaLon = deltaEast/(60.0 * std::cos(lat * base::angle::D2RCC));
    double deltaPointsLat = deltaLat / latSpacing;
    double deltaPointsLon = deltaLon / lonSpacing;
 
@@ -458,5 +430,5 @@ void DataFile::clearData()
    setMaxElevation(0);
 }
 
-}// end terrain namespace
-}// end oe namespace
+}
+}

@@ -2,18 +2,15 @@
 #include "openeaagles/base/Decibel.hpp"
 
 #include <cmath>
+#include <iostream>
 
 namespace oe {
 namespace base {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Decibel,"dB")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Decibel, "dB")
 
-//------------------------------------------------------------------------------
-// Constructors
-//------------------------------------------------------------------------------
 Decibel::Decibel()
 {
-   db = 0.0;
    STANDARD_CONSTRUCTOR()
 }
 
@@ -23,9 +20,6 @@ Decibel::Decibel(const double value)
    setValueDB(value);
 }
 
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
 void Decibel::copyData(const Decibel& org, const bool)
 {
    BaseClass::copyData(org);
@@ -33,7 +27,6 @@ void Decibel::copyData(const Decibel& org, const bool)
 }
 
 EMPTY_DELETEDATA(Decibel)
-
 
 //------------------------------------------------------------------------------
 // Set functions
@@ -63,9 +56,6 @@ bool Decibel::setSlotValue(const Number* const msg)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& Decibel::serialize(std::ostream& sout, const int, const bool) const
 {
    sout << db;

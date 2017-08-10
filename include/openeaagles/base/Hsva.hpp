@@ -22,10 +22,10 @@ namespace base {
 //      Hsva(double h, double s, double v, double a)
 //          Special constructor that initializes the object to h, s, v and a
 //
-//      getHSVA(osg::Vec4 hsv)
+//      getHSVA(Vec4d hsv)
 //          Returns the HSVA components in a vector.
 //
-//      setHSVA(const osg::Vec4& vec)
+//      setHSVA(const Vec4d& vec)
 //          Sets the HSVA components in a vector.
 //
 //      bool Hsva::colorInterpolate( const double value, const double minValue,
@@ -35,7 +35,7 @@ namespace base {
 //          for the min & max limits.  This routine will interpolate the HSV colors
 //          between the min & max limits to find the HSV color for the given value.
 //
-// Note:  The operators osg::Vec3*() and osg::Vec4*(), (inherited from Color)
+// Note:  The operators Vec3d*() and Vec4d*(), (inherited from Color)
 //        return a const pointer to the RGBA color vector and not the
 //        HSVA color vector.
 //
@@ -48,8 +48,8 @@ public:
     Hsva(const double h, const double s, const double v, const double a);
     Hsva();
 
-    void getHSVA(osg::Vec4& hsva) const   { Hsv::getHSVA(hsva);        }
-    bool setHSVA(const osg::Vec4& vec)    { return Hsv::setHSVA(vec);  }
+    void getHSVA(Vec4d& hsva) const   { Hsv::getHSVA(hsva);        }
+    bool setHSVA(const Vec4d& vec)    { return Hsv::setHSVA(vec);  }
 
     bool colorInterpolate(
       const double value,      // Value

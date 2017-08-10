@@ -4,9 +4,11 @@
 
 #include "openeaagles/graphics/MapPage.hpp"
 
-namespace oe {
-namespace graphics {
+#include <array>
 
+namespace oe {
+namespace base { class Degrees; }
+namespace graphics {
 class SlSymbol;
 
 //------------------------------------------------------------------------------
@@ -182,10 +184,10 @@ protected:
 private:
    void initData();
 
-   base::PairStream* templates;    // holds our pairstream of templates
-   SlSymbol* symbols[MAX_SYMBOLS];  // holds our array of symbols
-   bool showInRangeOnly;            // only show the symbols within our range, else draw all the symbols if false
-   bool interconnect;               // Connect our symbols with a line?
+   base::PairStream* templates {};                // holds our pairstream of templates
+   std::array<SlSymbol*, MAX_SYMBOLS> symbols {}; // holds our array of symbols
+   bool showInRangeOnly {true};                   // only show the symbols within our range, else draw all the symbols if false
+   bool interconnect {};                          // Connect our symbols with a line?
 };
 
 //------------------------------------------------------------------------------
@@ -247,26 +249,26 @@ public:
 private:
    void initData();
 
-   bool visibility;        // our symbol's visibility
-   bool llFlg;             // Position is Lat/lon (not X/Y)
-   bool acFlg;             // aircraft nose/wing coordinate flag
-   bool scrnFlg;           // using screen coordinates only
+   bool visibility {true};    // our symbol's visibility
+   bool llFlg {};             // Position is Lat/lon (not X/Y)
+   bool acFlg {};             // aircraft nose/wing coordinate flag
+   bool scrnFlg {};           // using screen coordinates only
 
-   int type;               // numeric type (for looking up in slottable)
-   char id[MAX_ID_SIZE+1]; // ID (or name) sent to the '
-   base::Object* value;    // optional value (sent to the symbol as an UPDATE_VALUE event)
-   base::Pair* pntr;       // The graphical component
+   int type {};               // numeric type (for looking up in slottable)
+   char id[MAX_ID_SIZE+1];    // ID (or name) sent to the '
+   base::Object* value {};    // optional value (sent to the symbol as an UPDATE_VALUE event)
+   base::Pair* pntr {};       // The graphical component
 
-   double xPos;            // X position ( latitude or NM north/south )
-   double yPos;            // Y position { longitude or NM east/west )
+   double xPos {};            // X position ( latitude or NM north/south )
+   double yPos {};            // Y position { longitude or NM east/west )
 
-   double xScreenPos;      // x position: Screen
-   double yScreenPos;      // y position: Screen
+   double xScreenPos {};      // x position: Screen
+   double yScreenPos {};      // y position: Screen
 
-   double hdg;             // symbol heading (degrees)
-   bool hdgValid;          // Heading valid flag
-   Graphic* phdg;          // Object named 'hdg' to handle heading rotation
-   base::Degrees* hdgAng;  // Value sent to the heading 'hdg' object
+   double hdg {};             // symbol heading (degrees)
+   bool hdgValid {};          // Heading valid flag
+   Graphic* phdg {};          // Object named 'hdg' to handle heading rotation
+   base::Degrees* hdgAng {};  // Value sent to the heading 'hdg' object
 };
 
 inline int SymbolLoader::getMaxSymbols() const { return MAX_SYMBOLS; }
@@ -274,20 +276,20 @@ inline bool SymbolLoader::setInterconnect(const bool flg) { interconnect = flg; 
 
 inline SlSymbol* SymbolLoader::getSymbol(const int idx)
 {
-   SlSymbol* p = 0;
+   SlSymbol* p = nullptr;
    if (idx >= 1 && idx <= MAX_SYMBOLS) {
       const int i = (idx - 1);
-      if (symbols[i] != 0) p = symbols[i];
+      if (symbols[i] != nullptr) p = symbols[i];
    }
    return p;
 }
 
 inline const SlSymbol* SymbolLoader::getSymbol(const int idx) const
 {
-   const SlSymbol* p = 0;
+   const SlSymbol* p = nullptr;
    if (idx >= 1 && idx <= MAX_SYMBOLS) {
       const int i = (idx - 1);
-      if (symbols[i] != 0) p = symbols[i];
+      if (symbols[i] != nullptr) p = symbols[i];
    }
    return p;
 }
@@ -311,7 +313,7 @@ inline double SlSymbol::getScreenXPos() const            { return xScreenPos; }
 inline double SlSymbol::getScreenYPos() const            { return yScreenPos; }
 
 inline double SlSymbol::getHeadingDeg() const            { return hdg; }
-inline double SlSymbol::getHeadingRad() const            { return static_cast<double>(hdg * base::Angle::D2RCC); }
+inline double SlSymbol::getHeadingRad() const            { return static_cast<double>(hdg * base::angle::D2RCC); }
 inline base::Degrees* SlSymbol::getHdgAngleObj() const   { return hdgAng; }
 inline Graphic* SlSymbol::getHdgGraphics() const         { return phdg; }
 

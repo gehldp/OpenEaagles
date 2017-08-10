@@ -2,30 +2,21 @@
 #ifndef __oe_models_JSBSimModel_H__
 #define __oe_models_JSBSimModel_H__
 
-#include "openeaagles/simulation/dynamics/AerodynamicsModel.hpp"
-#include "openeaagles/base/String.hpp"
+#include "openeaagles/models/dynamics/AerodynamicsModel.hpp"
 
-namespace JSBSim {
-    class FGFDMExec;
-    class FGPropertyManager;
-}
+namespace JSBSim { class FGFDMExec; class FGPropertyManager; }
 
 namespace oe {
-
-namespace base {
-    class String;
-    class Integer;
-};
-
+namespace base { class String; class Integer; }
 namespace models {
 
 //------------------------------------------------------------------------------
 // Class: JSBSimModel
 // Description: JSBSim Model
 //------------------------------------------------------------------------------
-class JSBSimModel : public simulation::AerodynamicsModel
+class JSBSimModel : public AerodynamicsModel
 {
-    DECLARE_SUBCLASS(JSBSimModel, simulation::AerodynamicsModel)
+    DECLARE_SUBCLASS(JSBSimModel, AerodynamicsModel)
 
 public:
     JSBSimModel();
@@ -80,41 +71,41 @@ public:
     virtual bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0) override;
 
     // slot methods
-    const base::String* getRootDir() const  { return rootDir;    }   // JSBSim root directory
+    const base::String* getRootDir() const                  { return rootDir;    }   // JSBSim root directory
     virtual bool setRootDir(const base::String* const);
-    const base::String* getModel() const    { return model;      }   // JSBSim model
+    const base::String* getModel() const                    { return model;      }   // JSBSim model
     virtual bool setModel(const base::String* const);
-    int getDebugLevel() const                { return debugLevel; }   // JSBSim debug level
+    int getDebugLevel() const                               { return debugLevel; }   // JSBSim debug level
     virtual bool setDebugLevel(const base::Integer* const);
 
 protected:
 
-    JSBSim::FGFDMExec* fdmex;
-    JSBSim::FGPropertyManager* propMgr;
+    JSBSim::FGFDMExec* fdmex {};
+    JSBSim::FGPropertyManager* propMgr {};
 
 private:
     void initData();
 
-    const base::String* rootDir;   // root directory for JSBSim models
-    const base::String* model;     // JSBSim model
-    int   debugLevel;
+    const base::String* rootDir {};  // root directory for JSBSim models
+    const base::String* model {};    // JSBSim model
+    int   debugLevel {};
 
-    double pitchTrimPos;    // +/- 1.0
-    double pitchTrimRate;   // maxVal(1.0) per sec
-    double pitchTrimSw;
-    double rollTrimPos;     // +/- 1.0
-    double rollTrimRate;    // maxVal(1.0) per sec
-    double rollTrimSw;
+    double pitchTrimPos {};          // +/- 1.0
+    double pitchTrimRate {};         // maxVal(1.0) per sec
+    double pitchTrimSw {};
+    double rollTrimPos {};           // +/- 1.0
+    double rollTrimRate {};          // maxVal(1.0) per sec
+    double rollTrimSw {};
 
-    bool        headingHoldOn;
-    bool        altitudeHoldOn;
-    bool        velocityHoldOn;
-    double      commandedHeadingDeg;
-    double      commandedAltitudeFt;
-    double      commandedVelocityKts;
-    bool        hasHeadingHold;
-    bool        hasVelocityHold;
-    bool        hasAltitudeHold;
+    bool   headingHoldOn {};
+    bool   altitudeHoldOn {};
+    bool   velocityHoldOn {};
+    double commandedHeadingDeg {};
+    double commandedAltitudeFt {};
+    double commandedVelocityKts {};
+    bool   hasHeadingHold {};
+    bool   hasVelocityHold {};
+    bool   hasAltitudeHold {};
 };
 
 }

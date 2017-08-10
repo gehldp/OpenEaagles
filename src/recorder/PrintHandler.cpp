@@ -3,68 +3,34 @@
 #include "openeaagles/base/String.hpp"
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/util/str_utils.hpp"
-#include "openeaagles/base/util/system.hpp"
+#include "openeaagles/base/util/system_utils.hpp"
 
 #include <cstring>
-
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
 
 namespace oe {
 namespace recorder {
 
-//==============================================================================
-// Class PrintHandler
-//==============================================================================
 IMPLEMENT_SUBCLASS(PrintHandler,"PrintHandler")
+EMPTY_SERIALIZER(PrintHandler)
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(PrintHandler)
    "filename",     // 1) Data file name (required)
    "pathname",     // 2) Path to the data file directory (optional)
 END_SLOTTABLE(PrintHandler)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(PrintHandler)
    ON_SLOT( 1, setFilename,        base::String)
    ON_SLOT( 2, setPathName,        base::String)
 END_SLOT_MAP()
 
-EMPTY_SERIALIZER(PrintHandler)
-
-//------------------------------------------------------------------------------
-// Default Constructor
-//------------------------------------------------------------------------------
 PrintHandler::PrintHandler()
 {
    STANDARD_CONSTRUCTOR()
-   initData();
 }
 
-void PrintHandler::initData()
-{
-   sout = nullptr;
-   fullFilename = nullptr;
-   filename = nullptr;
-   pathname = nullptr;
-   fileOpened = false;
-   fileFailed = false;
-   firstPassFlg = true;
-   fileEmpty = true;
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void PrintHandler::copyData(const PrintHandler& org, const bool cc)
+void PrintHandler::copyData(const PrintHandler& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    setFilename(org.filename);
    setPathName(org.pathname);
@@ -82,9 +48,6 @@ void PrintHandler::copyData(const PrintHandler& org, const bool cc)
    setFullFilename(nullptr);
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void PrintHandler::deleteData()
 {
    if (sout != nullptr) {
@@ -173,7 +136,7 @@ bool PrintHandler::openFile()
    nameLength += 4;                         // add characters for possible version number, "_V99"
    nameLength += 1;                         // Add one for the null(0) at the end of the string
 
-   char* fullname = new char[nameLength];
+   const auto fullname = new char[nameLength];
    fullname[0] = '\0';
 
 
@@ -194,7 +157,7 @@ bool PrintHandler::openFile()
    if ( !validName ) {
       // If the file already exists, try appending a version number "v99" ..
 
-      char* origname = new char[nameLength];
+      const auto origname = new char[nameLength];
       base::utStrcpy(origname, nameLength, fullname);
 
       validName = false;
@@ -328,14 +291,6 @@ void PrintHandler::printToOutput(const char* const msg)
    else {
       std::cout << msg << std::endl;
    }
-}
-
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* PrintHandler::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
 
 //------------------------------------------------------------------------------

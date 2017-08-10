@@ -1,13 +1,12 @@
 
 #include "openeaagles/models/dynamics/JSBSimModel.hpp"
 
+#include "openeaagles/models/player/Player.hpp"
+
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/functors/Tables.hpp"
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Distances.hpp"
+
 #include "openeaagles/base/Statistic.hpp"
-#include "openeaagles/simulation/Player.hpp"
-#include "openeaagles/simulation/Simulation.hpp"
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/String.hpp"
@@ -47,16 +46,12 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(JSBSimModel, "JSBSimModel")
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(JSBSimModel)
     "rootDir",      //  1: JSBSim root directory for models
     "model",        //  2: JSBSim model
     "debugLevel",   //  3: JSBSim debug level (controls verbosity)
 END_SLOTTABLE(JSBSimModel)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(JSBSimModel)
     ON_SLOT(1, setRootDir,    base::String)
     ON_SLOT(2, setModel,      base::String)
@@ -65,49 +60,14 @@ END_SLOT_MAP()
 
 EMPTY_SERIALIZER(JSBSimModel)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 JSBSimModel::JSBSimModel()
 {
     STANDARD_CONSTRUCTOR()
-
-    initData();
 }
 
-void JSBSimModel::initData()
-{
-    // slot parameters
-    rootDir = nullptr;
-    model = nullptr;
-    debugLevel = 0;
-
-    fdmex = nullptr;
-    propMgr = nullptr;
-    pitchTrimPos         = static_cast<double>(0.0);
-    pitchTrimRate        = static_cast<double>(0.1);
-    pitchTrimSw          = static_cast<double>(0.0);
-    rollTrimPos          = static_cast<double>(0.0);
-    rollTrimRate         = static_cast<double>(0.1);
-    rollTrimSw           = static_cast<double>(0.0);
-    headingHoldOn        = false;
-    altitudeHoldOn       = false;
-    velocityHoldOn       = false;
-    commandedHeadingDeg  = 0.0;
-    commandedAltitudeFt  = 0.0;
-    commandedVelocityKts = 0.0;
-    hasHeadingHold       = false;
-    hasVelocityHold      = false;
-    hasAltitudeHold      = false;
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy (delete) member data
-//------------------------------------------------------------------------------
-void JSBSimModel::copyData(const JSBSimModel& org, const bool cc)
+void JSBSimModel::copyData(const JSBSimModel& org, const bool)
 {
     BaseClass::copyData(org);
-    if (cc) initData();
 
     fdmex = nullptr;
     propMgr = nullptr;
@@ -136,9 +96,6 @@ void JSBSimModel::copyData(const JSBSimModel& org, const bool cc)
     hasAltitudeHold      = org.hasAltitudeHold;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete instance of JSBSim, if any
-//------------------------------------------------------------------------------
 void JSBSimModel::deleteData()
 {
     if (fdmex != nullptr) {
@@ -665,7 +622,7 @@ void JSBSimModel::setBrakes(const double left, const double right)
 void JSBSimModel::dynamics(const double dt)
 {
     // Get our Player (must have one!)
-    simulation::Player* p = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+    const auto p = static_cast<Player*>( findContainerByType(typeid(Player)) );
     if (p == nullptr) return;
 
     if (fdmex == nullptr) return;
@@ -723,13 +680,13 @@ void JSBSimModel::dynamics(const double dt)
     // Set values for Player & AirVehicle interfaces
     //    (Note: Player::dynamics() computes the new position)
     // ---
-    p->setAltitude(base::Distance::FT2M * Propagate->GetAltitudeASL(), true);
-    p->setVelocity(static_cast<double>(base::Distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eNorth)),
-                   static_cast<double>(base::Distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eEast)),
-                   static_cast<double>(base::Distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eDown)));
-    p->setVelocityBody(static_cast<double>(base::Distance::FT2M * Propagate->GetUVW(1)),
-                       static_cast<double>(base::Distance::FT2M * Propagate->GetUVW(2)),
-                       static_cast<double>(base::Distance::FT2M * Propagate->GetUVW(3)));
+    p->setAltitude(base::distance::FT2M * Propagate->GetAltitudeASL(), true);
+    p->setVelocity(static_cast<double>(base::distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eNorth)),
+                   static_cast<double>(base::distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eEast)),
+                   static_cast<double>(base::distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eDown)));
+    p->setVelocityBody(static_cast<double>(base::distance::FT2M * Propagate->GetUVW(1)),
+                       static_cast<double>(base::distance::FT2M * Propagate->GetUVW(2)),
+                       static_cast<double>(base::distance::FT2M * Propagate->GetUVW(3)));
 //    double accX = base::Distance::FT2M * Propagate->GetUVWdot(1);
 //    double accY = base::Distance::FT2M * Propagate->GetUVWdot(2);
 //    double accZ = base::Distance::FT2M * Propagate->GetUVWdot(3);
@@ -744,18 +701,18 @@ void JSBSimModel::dynamics(const double dt)
                             static_cast<double>(Propagate->GetPQR(JSBSim::FGJSBBase::eR)));
 
     JSBSim::FGColumnVector3 vVeldot = Tb2l * vUVWdot;
-    p->setAcceleration(static_cast<double>(base::Distance::FT2M * vVeldot(1)),
-                       static_cast<double>(base::Distance::FT2M * vVeldot(2)),
-                       static_cast<double>(base::Distance::FT2M * vVeldot(3)));
+    p->setAcceleration(static_cast<double>(base::distance::FT2M * vVeldot(1)),
+                       static_cast<double>(base::distance::FT2M * vVeldot(2)),
+                       static_cast<double>(base::distance::FT2M * vVeldot(3)));
 
     //std::printf("(%6.1f, %6.1f, %6.1f)   vel=%8.1f   alt=%8.1f alt2=%8.1f\n", acData->phi, acData->theta, acData->psi, acData->vp, acData->hp, (M2FT*getAltitude()) );
     //std::printf("f=%6.1f p=%6.1f, qa=%6.1f, a=%6.1f, g=%6.1f\n", hotasIO->pitchForce, acData->theta, acData->qa, acData->alpha, acData->gamma );
 
         //{
         // std::cout << "JSBSim: ---------------------------------" << std::endl;
-        // osg::Vec4 fq;
+        // base::Vec4d fq;
         // fq.set(acData->e1, acData->e2, acData->e4, acData->e4);
-        // osg::Matrix m2;
+        // base::Matrixd m2;
         // m2.set(
         //    acData->l1, acData->l2, acData->l3, 0,
         //    acData->m1, acData->m2, acData->m3, 0,
@@ -763,12 +720,12 @@ void JSBSimModel::dynamics(const double dt)
         //    0,          0,          0,          1
         //    );
         // std::printf("oe*EA: (%6.1f, %6.1f, %6.1f)\n", getRollD(), getPitchD(), getHeadingD());
-        // osg::Matrix m0 = getRotationalMatrix();
-        // osg::Quat q0 = getQuaternions();
+        // base::Matrixd m0 = getRotationalMatrix();
+        // base::Quat q0 = getQuaternions();
         // setRotationalMatrix(m2);
         // //setQuaternions(fq);
-        // osg::Quat eq = getQuaternions();
-        // osg::Matrix m1 = getRotationalMatrix();
+        // base::Quat eq = getQuaternions();
+        // base::Matrixd m1 = getRotationalMatrix();
         // std::printf("oe EA: (%6.1f, %6.1f, %6.1f)\n", getRollD(), getPitchD(), getHeadingD());
         // std::printf("JSBSim    EA: (%6.1f, %6.1f, %6.1f)\n", acData->phi, acData->theta, acData->psi);
         // std::printf("oe* Q: (%6.3f, %6.3f, %6.3f, %6.3f)\n", q0[0], q0[1], q0[2], q0[3]);
@@ -803,12 +760,10 @@ void JSBSimModel::dynamics(const double dt)
             }
             if (hasAltitudeHold) {
                 propNode->SetBool("ap/altitude_hold", isAltitudeHoldOn());
-                propNode->SetDouble("ap/altitude_setpoint", (getCommandedAltitude() * base::Distance::M2FT) );
+                propNode->SetDouble("ap/altitude_setpoint", (getCommandedAltitude() * base::distance::M2FT) );
             }
         }
     }
-
-    BaseClass::dynamics(dt);
 }
 
 
@@ -828,7 +783,7 @@ void JSBSimModel::reset()
     rollTrimSw    = static_cast<double>(0.0);
 
     // Get our Player (must have one!)
-    simulation::Player* p = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+    const auto p = static_cast<Player*>( findContainerByType(typeid(Player)) );
     if (p == nullptr) return;
 
     // must have strings set
@@ -879,18 +834,18 @@ void JSBSimModel::reset()
     JSBSim::FGInitialCondition* fgic = fdmex->GetIC();
     if (fgic == nullptr) return;
 
-    fgic->SetAltitudeASLFtIC(base::Distance::M2FT * p->getAltitude());
+    fgic->SetAltitudeASLFtIC(base::distance::M2FT * p->getAltitude());
 
 #if 0
     fgic->SetTrueHeadingDegIC(base::Angle::R2DCC * p->getHeading());
     fgic->SetRollAngleDegIC(base::Angle::R2DCC * p->getRoll());
     fgic->SetPitchAngleDegIC(base::Angle::R2DCC * p->getPitch());
 #else
-    fgic->SetPsiDegIC(base::Angle::R2DCC * p->getHeading());
-    fgic->SetPhiDegIC(base::Angle::R2DCC * p->getRoll());
-    fgic->SetThetaDegIC(base::Angle::R2DCC * p->getPitch());
+    fgic->SetPsiDegIC(base::angle::R2DCC * p->getHeading());
+    fgic->SetPhiDegIC(base::angle::R2DCC * p->getRoll());
+    fgic->SetThetaDegIC(base::angle::R2DCC * p->getPitch());
 #endif
-    fgic->SetVtrueKtsIC(base::Distance::M2NM * p->getTotalVelocity() * 3600.0f);
+    fgic->SetVtrueKtsIC(base::distance::M2NM * p->getTotalVelocity() * 3600.0f);
     fgic->SetLatitudeDegIC(p->getInitLatitude());
     fgic->SetLongitudeDegIC(p->getInitLongitude());
 
@@ -954,14 +909,6 @@ bool JSBSimModel::setDebugLevel(const base::Integer* const level)
       debugLevel = level->getInt();
    }
    return true;
-}
-
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* JSBSimModel::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
 
 //------------------------------------------------------------------------------
@@ -1029,7 +976,7 @@ bool JSBSimModel::isAltitudeHoldOn() const
 
 double JSBSimModel::getCommandedAltitude() const
 {
-    return commandedAltitudeFt * base::Distance::FT2M;
+    return commandedAltitudeFt * base::distance::FT2M;
 }
 
 bool JSBSimModel::setAltitudeHoldOn(const bool b)
@@ -1042,7 +989,7 @@ bool JSBSimModel::setAltitudeHoldOn(const bool b)
 
 bool JSBSimModel::setCommandedAltitude(const double a, const double, const double)
 {
-    commandedAltitudeFt = a * base::Distance::M2FT;
+    commandedAltitudeFt = a * base::distance::M2FT;
     return hasAltitudeHold;
 }
 

@@ -1,5 +1,7 @@
+
 #include "openeaagles/dafif/Runway.hpp"
-#include "openeaagles/base/Nav.hpp"
+
+#include "openeaagles/base/util/nav_utils.hpp"
 #include <iostream>
 
 namespace oe {
@@ -7,7 +9,8 @@ namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Runway,"Runway")
 EMPTY_SERIALIZER(Runway)
-
+EMPTY_COPYDATA(Runway)
+EMPTY_DELETEDATA(Runway)
 
 // Runway class field Position Table
 const Runway::Ptbl Runway::ptable = {
@@ -24,10 +27,6 @@ const Runway::Ptbl Runway::ptable = {
     RW_MAGVAR                   // magVariance
 };
 
-
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Runway::Runway()
 {
    STANDARD_CONSTRUCTOR()
@@ -40,22 +39,17 @@ Runway::Runway(const char* const s) : Record(s)
    ptbl = &ptable;
 }
 
-EMPTY_COPYDATA(Runway)
-EMPTY_DELETEDATA(Runway)
-
-
 //------------------------------------------------------------------------------
 // Get ILS glide slope and aircraft glide slope
 //------------------------------------------------------------------------------
 void Runway::getRunwayMagHeading(const double aclat, const double aclon, const double acelev, float* magHeading1, float* magHeading2, double* trueBearing1, double* trueBearing2)const
 {
    double range(0.0), grdrange(0.0);
-   base::Nav::glla2bd(aclat, aclon, acelev, latitude(LOW_END), longitude(LOW_END), elevation(LOW_END), trueBearing1, &range, &grdrange);
-   base::Nav::glla2bd(aclat, aclon, acelev, latitude(HIGH_END), longitude(HIGH_END), elevation(HIGH_END), trueBearing2, &range, &grdrange);
+   base::nav::glla2bd(aclat, aclon, acelev, latitude(LOW_END), longitude(LOW_END), elevation(LOW_END), trueBearing1, &range, &grdrange);
+   base::nav::glla2bd(aclat, aclon, acelev, latitude(HIGH_END), longitude(HIGH_END), elevation(HIGH_END), trueBearing2, &range, &grdrange);
    *magHeading1 = magHeading(LOW_END);
    *magHeading2 = magHeading(HIGH_END);
 }
-
 
 //------------------------------------------------------------------------------
 // Printing functions

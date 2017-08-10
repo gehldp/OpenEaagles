@@ -12,21 +12,12 @@ IMPLEMENT_SUBCLASS(NavaidLoader,"NavaidLoader")
 EMPTY_SLOTTABLE(NavaidLoader)
 EMPTY_SERIALIZER(NavaidLoader)
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 NavaidLoader::NavaidLoader() : Database()
 {
    STANDARD_CONSTRUCTOR()
-
    // default file
    db->setPathname("/data/dafif/fullall/");
    db->setFilename("file2");
-
-   fl = 0;
-   nfl = 0;
-   cl = 0;
-   ncl = 0;
 }
 
 NavaidLoader::NavaidLoader(
@@ -36,38 +27,20 @@ NavaidLoader::NavaidLoader(
                : Database()
 {
    STANDARD_CONSTRUCTOR()
-
    db->setPathname(path);
    db->setFilename(file);
-
-   fl = 0;
-   nfl = 0;
-   cl = 0;
-   ncl = 0;
-
    load(country);
 }
 
-
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void NavaidLoader::copyData(const NavaidLoader& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) {
       db->setPathname("/data/dafif/fullall/");
       db->setFilename("file2");
-      fl = 0;
-      nfl = 0;
-      cl = 0;
-      ncl = 0;
    }
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void NavaidLoader::deleteData()
 {
    delete[] fl;
@@ -76,9 +49,6 @@ void NavaidLoader::deleteData()
    ncl = 0;
 }
 
-//------------------------------------------------------------------------------
-// load() --
-//------------------------------------------------------------------------------
 bool NavaidLoader::load(const char* country)
 {
    // ---
@@ -151,7 +121,6 @@ bool NavaidLoader::load(const char* country)
    return true;
 }
 
-
 //------------------------------------------------------------------------------
 // getRecordLength()
 //------------------------------------------------------------------------------
@@ -167,7 +136,6 @@ int NavaidLoader::getMaxRecords()
 {
    return NAVAID_MAX_RECORDS;
 }
-
 
 //------------------------------------------------------------------------------
 // navaid() -- get the NAVAID by number: 0 ... numberOfRecords()-1
@@ -191,7 +159,6 @@ Navaid* NavaidLoader::getNavaid(const int n)
        return nullptr;
 }
 
-
 //------------------------------------------------------------------------------
 // queryByRange() -- find NAVAID record(s) less than mrng from the
 // ref point (sorted by range)
@@ -200,7 +167,6 @@ int NavaidLoader::queryByRange()
 {
    return queryByType(Navaid::ANY);
 }
-
 
 //------------------------------------------------------------------------------
 // queryByIdent() -- find NAVAID record(s) by identifier
@@ -213,7 +179,6 @@ int NavaidLoader::queryByIdent(const char* id)
    return Database::mQuery(&pkey, rl, nrl, il_cmp);
 }
 
-
 //------------------------------------------------------------------------------
 // queryByKey() -- find a NAVAID record by the NAVAID record key
 //------------------------------------------------------------------------------
@@ -223,7 +188,6 @@ int NavaidLoader::queryByKey(const char* navaidkey)
    Key* pkey = &key;
    return Database::sQuery(&pkey, rl, nrl, kl_cmp);
 }
-
 
 //------------------------------------------------------------------------------
 // queryByFreq() -- find NAVAID record(s) by frequency/Channel
@@ -235,7 +199,6 @@ int NavaidLoader::queryByFreq(const float freq)
    Key* pkey = &key;
    return Database::mQuery(&pkey, reinterpret_cast<Key**>(fl), nfl, fl_cmp);
 }
-
 
 //------------------------------------------------------------------------------
 // queryByChannel() -- find NAVAID record(s) by channel number
@@ -249,7 +212,6 @@ int NavaidLoader::queryByChannel(const long chan, const char band)
    Key* pkey = &key;
    return Database::mQuery(&pkey, reinterpret_cast<Key**>(cl), ncl, cl_cmp);
 }
-
 
 //------------------------------------------------------------------------------
 // queryByType() -- find 't' type NAVAID record(s) less than mrng from the
@@ -282,7 +244,6 @@ int NavaidLoader::queryByType(const Navaid::NavaidType t)
    return nql;
 }
 
-
 //------------------------------------------------------------------------------
 // qsort and bsearch callbacks
 //------------------------------------------------------------------------------
@@ -290,11 +251,11 @@ int NavaidLoader::queryByType(const Navaid::NavaidType t)
 // kl_cmp() -- key list compare function
 int NavaidLoader::kl_cmp(const void* p1, const void* p2)
 {
-   const NavaidKey* k1 = *(static_cast<const NavaidKey**>(const_cast<void*>(p1)));
-   const NavaidKey* k2 = *(static_cast<const NavaidKey**>(const_cast<void*>(p2)));
+   const auto k1 = *(static_cast<const NavaidKey**>(const_cast<void*>(p1)));
+   const auto k2 = *(static_cast<const NavaidKey**>(const_cast<void*>(p2)));
 
    // compare the keys
-   int result = std::strcmp(k1->key, k2->key);
+   const int result = std::strcmp(k1->key, k2->key);
    return result;
 }
 
@@ -302,8 +263,8 @@ int NavaidLoader::kl_cmp(const void* p1, const void* p2)
 // il_cmp() -- identifier list compare function
 int NavaidLoader::il_cmp(const void* p1, const void* p2)
 {
-   const NavaidKey* k1 = *(static_cast<const NavaidKey**>(const_cast<void*>(p1)));
-   const NavaidKey* k2 = *(static_cast<const NavaidKey**>(const_cast<void*>(p2)));
+   const auto k1 = *(static_cast<const NavaidKey**>(const_cast<void*>(p1)));
+   const auto k2 = *(static_cast<const NavaidKey**>(const_cast<void*>(p2)));
 
    // compare the id's
    int result = std::strcmp(k1->ident, k2->ident);
@@ -321,8 +282,8 @@ int NavaidLoader::il_cmp(const void* p1, const void* p2)
 // fl_cmp() -- frequency list compare function
 int NavaidLoader::fl_cmp(const void* p1, const void* p2)
 {
-   const NavaidKey* k1 = *(static_cast<const NavaidKey**>(const_cast<void*>(p1)));
-   const NavaidKey* k2 = *(static_cast<const NavaidKey**>(const_cast<void*>(p2)));
+   const auto k1 = *(static_cast<const NavaidKey**>(const_cast<void*>(p1)));
+   const auto k2 = *(static_cast<const NavaidKey**>(const_cast<void*>(p2)));
 
    int result = 0;
 
@@ -339,8 +300,8 @@ int NavaidLoader::fl_cmp(const void* p1, const void* p2)
 // cl_cmp() -- channel list compare function
 int NavaidLoader::cl_cmp(const void* p1, const void* p2)
 {
-   const NavaidKey* k1 = *(static_cast<const NavaidKey**>(const_cast<void*>(p1)));
-   const NavaidKey* k2 = *(static_cast<const NavaidKey**>(const_cast<void*>(p2)));
+   const auto k1 = *(static_cast<const NavaidKey**>(const_cast<void*>(p1)));
+   const auto k2 = *(static_cast<const NavaidKey**>(const_cast<void*>(p2)));
 
    int result = 0;
 
@@ -423,32 +384,23 @@ NavaidLoader::NavaidKey::NavaidKey(const char* id, const char* ccode) : Key(0)
    else
       countryCode[0] = '\0';
 
-   freq = 0.0f;
-   channel = 0;
    key[0] = '\0';
-   type = Navaid::ANY;
 }
 
-NavaidLoader::NavaidKey::NavaidKey(const float freq1) : Key(0)
+NavaidLoader::NavaidKey::NavaidKey(const float freq1) : Key(0), freq(freq1) 
 {
    size = NAVAID_RECORD_LEN;
    ident[0] = '\0';
    countryCode[0] = '\0';
-   freq = freq1;
-   channel = 0;
    key[0] = '\0';
-   type = Navaid::ANY;
 }
 
-NavaidLoader::NavaidKey::NavaidKey(const long chan) : Key(0)
+NavaidLoader::NavaidKey::NavaidKey(const long chan) : Key(0), channel(chan) 
 {
    size = NAVAID_RECORD_LEN;
    ident[0] = '\0';
    countryCode[0] = '\0';
-   freq = 0.0f;
-   channel = chan;
    key[0] = '\0';
-   type = Navaid::ANY;
 }
 
 
@@ -457,10 +409,8 @@ NavaidLoader::NavaidKey::NavaidKey(const char* key1) : Key(0)
    size = NAVAID_RECORD_LEN;
    Record::dsGetString(ident,key1,4);
    type = Navaid::NavaidType(key1[4]);
-   Record::dsGetString(countryCode,&key1[5],2);
-   Record::dsGetString(key,key1,NA_KEY_LEN);
-   freq = 0.0f;
-   channel = 0;
+   Record::dsGetString(countryCode, &key1[5],2);
+   Record::dsGetString(key, key1, NA_KEY_LEN);
 }
 
 

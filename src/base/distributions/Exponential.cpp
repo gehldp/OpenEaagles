@@ -22,37 +22,18 @@ END_SLOT_MAP()
 
 EMPTY_DELETEDATA(Exponential)
 
-//------------------------------------------------------------------------------
-// slot table function
-//------------------------------------------------------------------------------
-Object* Exponential::getSlotByIndex(const int si)
-{
-  return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Exponential::Exponential()
 {
   STANDARD_CONSTRUCTOR()
-  lambda = 1.0;
-  gamma = 0.0;
 }
 
-//------------------------------------------------------------------------------
-// copyData
-//------------------------------------------------------------------------------
-void Exponential::copyData(const Exponential& org, const bool cc)
+void Exponential::copyData(const Exponential& org, const bool)
 {
   BaseClass::copyData(org);
   lambda = org.lambda;
   gamma = org.gamma;
 }
 
-//------------------------------------------------------------
-// draw
-//------------------------------------------------------------
 double Exponential::draw()
 {
   // draw a random value in the open interval (0,1)
@@ -61,9 +42,6 @@ double Exponential::draw()
   return gamma + z;
 }
 
-//------------------------------------------------------------
-// setSlotLambda
-//------------------------------------------------------------
 bool Exponential::setSlotLambda(const Number* const x)
 {
   bool ok = false;
@@ -72,9 +50,6 @@ bool Exponential::setSlotLambda(const Number* const x)
   return ok;
 }
 
-//------------------------------------------------------------
-// setSlotGamma
-//------------------------------------------------------------
 bool Exponential::setSlotGamma(const Number* const x)
 {
   bool ok = false;
@@ -83,9 +58,6 @@ bool Exponential::setSlotGamma(const Number* const x)
   return ok;
 }
 
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& Exponential::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
   int j = 0;
@@ -113,5 +85,3 @@ std::ostream& Exponential::serialize(std::ostream& sout, const int i, const bool
 
 }
 }
-
-

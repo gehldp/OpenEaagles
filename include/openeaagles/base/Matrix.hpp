@@ -3,14 +3,16 @@
 #define __oe_base_Matrix_H__
 
 #include "openeaagles/base/Object.hpp"
-#include "openeaagles/base/osg/Matrix"
+
+#include "openeaagles/base/osg/Matrixf"
+#include "openeaagles/base/osg/Matrixd"
 
 #include <cmath>
 
 namespace oe {
 namespace base {
-   class CVector; // Column vector
-   class RVector; // Row vector
+class CVector; // Column vector
+class RVector; // Row vector
 
 //------------------------------------------------------------------------------
 // Class: Matrix
@@ -42,19 +44,19 @@ public:
    Matrix(const unsigned int r, const unsigned int c, const double* const data, const unsigned int dataSize);
 
    // Construct the matrix from an OSG matrix (double and float)
-   Matrix(const osg::Matrixd& m);
-   Matrix(const osg::Matrixf& m);
+   Matrix(const Matrixd& m);
+   Matrix(const Matrixf& m);
 
    // Assigned from an OSG matrix (double and float)
-   Matrix& operator=(const osg::Matrixd& m);
-   Matrix& operator=(const osg::Matrixf& m);
+   Matrix& operator=(const Matrixd& m);
+   Matrix& operator=(const Matrixf& m);
 
    unsigned int getRows() const                                         { return rows; }
    unsigned int getCols() const                                         { return cols; }
 
    bool isSquare() const                                                { return (rows == cols); }
    bool isGoodIndex(const unsigned int i, const unsigned int j) const   { return (i < rows) && (j < cols); }
-   bool isGoodMatrix() const                                            { return ((mda != 0) && ((rows > 0) & (cols > 0))); }
+   bool isGoodMatrix() const                                            { return ((mda != nullptr) && ((rows > 0) & (cols > 0))); }
    bool isSymmetric() const;
 
    // The (i,j) element
@@ -241,14 +243,12 @@ protected:
    bool remRowCol(const unsigned int, const unsigned int);
 
 private:
-   void initData();        // initialize data
+   unsigned int rows {};      // number of rows
+   unsigned int cols {};      // number of columns
+   double* mda {};            // pointer to the Matrix Data Array
 
-   unsigned int rows;      // number of rows
-   unsigned int cols;      // number of columns
-   double* mda;            // pointer to the Matrix Data Array
-
-   unsigned int fldWidth;  // matrix element field width for display of matrix
-   unsigned int decPoint;  // decimal point accuracy for display of matrix
+   unsigned int fldWidth {DEF_FLDWIDTH};  // matrix element field width for display of matrix
+   unsigned int decPoint {DEF_DECPOINT};  // decimal point accuracy for display of matrix
 };
 
 
@@ -335,7 +335,7 @@ inline Matrix* subtract(const Matrix& m1, const Matrix& m2)
 
 inline Matrix* minus(const Matrix& m1)
 {
-   Matrix* temp = new Matrix(m1);
+   const auto temp = new Matrix(m1);
 
    for (unsigned int i = 0; i < temp->rows; i++) {
       unsigned int idx = temp->cols*i;
@@ -373,7 +373,7 @@ inline Matrix* multiply(const Matrix& m1, const Matrix& m2)
 
 inline Matrix* multiply(const Matrix& m1, const double s)
 {
-   Matrix* temp = new Matrix(m1);
+   const auto temp = new Matrix(m1);
    for (unsigned int i=0; i<temp->rows; i++) {
       for (unsigned int j=0; j<temp->cols; j++) {
          unsigned int idx = temp->cols*i + j;

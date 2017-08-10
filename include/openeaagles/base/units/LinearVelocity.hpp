@@ -1,6 +1,4 @@
-//---------------------------------------------------------------------
-// Class: LinearVelocity
-//---------------------------------------------------------------------
+
 #ifndef __oe_base_LinearVelocity_H__
 #define __oe_base_LinearVelocity_H__
 
@@ -8,9 +6,9 @@
 
 namespace oe {
 namespace base {
-
 class Distance;
 class Time;
+
 //---------------------------------------------------------------------
 // Class: LinearVelocity
 // Base class:  Object -> Number -> LinearVelocity
@@ -99,10 +97,6 @@ class LinearVelocity : public Number
 
 public:
 
-    //---------------------------------------------------------------------
-    //Constructors:
-    //---------------------------------------------------------------------
-
     //Constructor for input parser:
     LinearVelocity();
     //Constructor with input as meters per second:
@@ -110,19 +104,10 @@ public:
     //Constructor with distance in units desired and time in units desired:
     LinearVelocity(const Distance* const newDistance, const Time* const newTime);
 
-    //---------------------------------------------------------------------
-    //Get functions:
-    //---------------------------------------------------------------------
-
     //Returns in meters/second:
     double getMetersPerSecond() const;
     //Convert routine - converts Linear velocity and outputs in units specified:
     double convert(Distance* newDistance, Time* newTime);
-
-    //---------------------------------------------------------------------
-    //Set functions:
-    //---------------------------------------------------------------------
-
 
     bool setMetersPerSecond(const double newLinearVelocity);
 
@@ -142,8 +127,8 @@ public:
     static const double FPS2KTSCC;    // feet per second to knots (conversion constant)
 
 private:
-    double        distance;                // holds our distance (meters)
-    double        time;                    // holds our time seconds)
+    double distance {1.0};                // holds our distance (meters)
+    double time {1.0};                    // holds our time seconds)
 
 };
 

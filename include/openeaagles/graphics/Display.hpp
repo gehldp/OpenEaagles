@@ -4,17 +4,11 @@
 
 #include "Page.hpp"
 
+#include <string>
+
 namespace oe {
-
-namespace base {
-   class Color;
-   class PairStream;
-   class Identifier;
-   class String;
-}
-
+namespace base { class Color; class PairStream; class Identifier; class String; }
 namespace graphics {
-
 class Font;
 class Image;
 class Texture;
@@ -118,7 +112,7 @@ public:
    virtual void drawIt();                          // Selects, configures and draws then swaps buffers
    virtual void reshapeIt(int w, int h);           // Resizes the displays's width and height
 
-   const osg::Vec4& getClearColor() const;         // Returns the clear (background) color as a Vec4 vector (RGBA).
+   const base::Vec4d& getClearColor() const;       // Returns the clear (background) color as a Vec4 vector (RGBA).
    void setClearColor(const base::Color& ccolor);  // Set the display's clear (background) color
 
    GLclampd getClearDepth() const;                 // Returns the value that the depth buffer is cleared to.
@@ -137,8 +131,8 @@ public:
    GLfloat getStdLineWidth() const;                   // Returns the standard line width
    void setStdLineWidth(const GLfloat);               // Sets the standard and current line widths
 
-   const osg::Vec4& getCurrentColor() const;          // Returns the current color RGBA vector
-   void setColor(const osg::Vec4& color);             // Sets the current color by an RGBA vector.
+   const base::Vec4d& getCurrentColor() const;        // Returns the current color RGBA vector
+   void setColor(const base::Vec4d& color);           // Sets the current color by an RGBA vector.
    void setColor(const char* cname1);                 // Sets the current color by name (color table)
 
    base::Color* getColor(const char* const name);     // Returns a color by name from the color table
@@ -226,7 +220,7 @@ public:
    void getMouse(int* const x, int* const y) const;
 
    // Sets the current mouse position.
-   virtual void setMouse(const int x, const int y, Display* const subdisplay = 0);
+   virtual void setMouse(const int x, const int y, Display* const subdisplay = nullptr);
 
    // Returns the current 'focus'
    virtual Graphic* focus() const;
@@ -276,7 +270,7 @@ public:
    bool setNormalFont(const base::Identifier* const fontName);
 
    // Sets the current font) based on the font mode flags.
-   void selectFont(const bool reversed, const bool underlined, Font* newFont = 0);
+   void selectFont(const bool reversed, const bool underlined, Font* newFont = nullptr);
 
    Font* getCurrentFont();                              // Returns a pointer to the current font
    void setFont(Font* newFont);                         // Sets the current font.
@@ -370,70 +364,74 @@ private:
     bool processTextures();
     bool processMaterials();
 
-    base::String* name;                // Display Name
-    base::PairStream* subdisplays;     // Sub-displays
+    std::string name;                  // Display name
+    base::PairStream* subdisplays {};  // Sub-displays
 
-    Graphic* focusPtr;                 // Input focus
-    base::PairStream* materials;       // list of material objects
+    Graphic* focusPtr {};              // Input focus
+    base::PairStream* materials {};    // list of material objects
 
-    base::PairStream* textures;        // List of textures
+    base::PairStream* textures {};     // List of textures
 
-    GLsizei  vpX, vpY, vpWidth, vpHeight;                   // viewport size
-    GLdouble oLeft, oRight, oBottom, oTop, oNear, oFar;     // Ortho parameters
+    GLsizei  vpX {-1}, vpY {-1};             // viewport size
+    GLsizei  vpWidth {300}, vpHeight {300};
 
-    GLfloat linewidth;                 // Current Linewidth (last glLineWidth())
-    GLfloat stdLinewidth;              // Standard linewidth
+    GLdouble oLeft {-0.5}, oRight {640.5};   // Ortho parameters
+    GLdouble oBottom {-0.5}, oTop {480.5};
+    GLdouble oNear {-1.0}, oFar {1.0};
 
-    bool subdisplayFlg;                // We're a sub-display
-    bool antialias;                    // Anti-alias flag  (default off)
-    int mx, my;                        // Mouse x, y
+    GLfloat linewidth {1.0};              // Current Linewidth (last glLineWidth())
+    GLfloat stdLinewidth {1.0};           // Standard linewidth
 
-    Orientation orientation;           // Display orientation
+    bool subdisplayFlg {};                // We're a sub-display
+    bool antialias {true};                // Anti-alias flag  (default on)
+    int mx {}, my {};                     // Mouse x, y
 
-    GLclampd  clearDepth;              // Display clear depth
-    base::PairStream* colorTable;      // Color table
-    osg::Vec4 color;                   // Current Color
-    osg::Vec4 clearColor;              // Clear (background) color
-    base::Identifier* colorName;       // Current color name
-    const base::Color* normColor;      // Color of a normal text field
-    const base::Color* hiColor;        // Color of a high lighted text field.
+    Orientation orientation {NORMAL};     // Display orientation
 
-    base::PairStream* fontList;        // List of fonts
-    Font* currentFont;                 // Current font
-    Font* normalFont;                  // Normal font
-    base::Identifier* normalFontName;  // Normal font name
-    bool    reversedFlg;               // Current font setting
-    bool    underlinedFlg;             // Current font setting
+    GLclampd clearDepth {-1.0};           // Display clear depth
+    base::PairStream* colorTable {};      // Color table
+    base::Vec4d color;                    // Current Color
+    base::Vec4d clearColor;               // Clear (background) color
+    base::Identifier* colorName {};       // Current color name
+    const base::Color* normColor {};      // Color of a normal text field
+    const base::Color* hiColor {};        // Color of a high lighted text field.
 
-    bool    rvBrackets;                // Reverse video brackets flag
-    char    leftBracketChar;           // Left bracket character
-    char    rightBracketChar;          // right bracket character
+    base::PairStream* fontList {};        // List of fonts
+    Font* currentFont {};                 // Current font
+    Font* normalFont {};                  // Normal font
+    base::Identifier* normalFontName {};  // Normal font name
+    bool reversedFlg {};                  // Current font setting
+    bool underlinedFlg {};                // Current font setting
 
-    bool okToSwap;                     // just in case we don't want to swap buffers every time, we can wait.
+    bool rvBrackets {};                   // Reverse video brackets flag
+    char leftBracketChar {'['};           // Left bracket character
+    char rightBracketChar {']'};          // right bracket character
+
+    bool okToSwap {true};                 // just in case we don't want to swap buffers every time, we can wait.
 };
 
-inline const char* Display::getName() const                            { return *name; }
+inline const char* Display::getName() const                            { return name.c_str(); }
 inline bool Display::isMainDisplay() const                             { return !subdisplayFlg; }
 inline bool Display::isSubdisplay() const                              { return subdisplayFlg; }
 inline Display::Orientation Display::getDisplayOrientation() const     { return orientation; }
 inline bool Display::isDisplayOrientation(const Orientation o) const   { return (o == getDisplayOrientation()); }
 inline bool Display::isAntialiasing() const                            { return antialias; }
-inline const osg::Vec4& Display::getClearColor() const                 { return clearColor; }
+inline const base::Vec4d& Display::getClearColor() const               { return clearColor; }
 inline GLclampd Display::getClearDepth() const                         { return clearDepth; }
 inline void Display::setClearDepth(const GLclampd depth)               { clearDepth = depth; }
 
-inline void Display::setDisplayOrientation(const Orientation o) { orientation = o; }
+inline void Display::setDisplayOrientation(const Orientation o)  { orientation = o; }
 
-inline GLfloat Display::getLinewidth() const                    { return linewidth; }
-inline GLfloat Display::getStdLineWidth() const                 { return stdLinewidth; }
-inline const osg::Vec4& Display::getCurrentColor() const        { return color; }
+inline GLfloat Display::getLinewidth() const                     { return linewidth; }
+inline GLfloat Display::getStdLineWidth() const                  { return stdLinewidth; }
+inline const base::Vec4d& Display::getCurrentColor() const       { return color; }
 
-inline void Display::getMouse(int* const x, int* const y) const { *x = mx; *y = my; }
+inline void Display::getMouse(int* const x, int* const y) const  { *x = mx; *y = my; }
 
 inline Font* Display::getCurrentFont()                         { return currentFont; }
 inline bool Display::isFontReversed() const                    { return reversedFlg; }
 inline bool Display::isFontUnderlined() const                  { return underlinedFlg; }
-inline bool Display::isDefaultFont() const                     { return currentFont == 0; }
+inline bool Display::isDefaultFont() const                     { return currentFont == nullptr; }
 inline const base::Color* Display::getNormColor() const        { return normColor; }
 inline const base::Color* Display::getHighlightColor() const   { return hiColor; }
 inline char Display::getLeftBracketCharacter() const           { return leftBracketChar; }

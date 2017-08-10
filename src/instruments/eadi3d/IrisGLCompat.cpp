@@ -1,10 +1,11 @@
 
 #include "openeaagles/instruments/eadi3d/IrisGLCompat.hpp"
-#include "openeaagles/base/units/Angles.hpp"
 
+#include "openeaagles/base/util/constants.hpp"
 #include "openeaagles/base/util/platform_api.hpp"
-#include <GL/gl.h>
+#include "openeaagles/base/units/angle_utils.hpp"
 
+#include <GL/gl.h>
 #include <cmath>
 
 #define MAX_POINTS 64
@@ -15,56 +16,43 @@ namespace instruments {
 IMPLEMENT_ABSTRACT_SUBCLASS(IrisGLCompat, "IrisGLCompat")
 EMPTY_SLOTTABLE(IrisGLCompat)
 EMPTY_SERIALIZER(IrisGLCompat)
+EMPTY_DELETEDATA(IrisGLCompat)
 
-IrisGLCompat::IrisGLCompat() : vertexX(0.0), vertexY(0.0)
+IrisGLCompat::IrisGLCompat()
 {
+    STANDARD_CONSTRUCTOR()
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void IrisGLCompat::copyData(const IrisGLCompat& org, const bool)
 {
-    // Copy our baseclass stuff first
     BaseClass::copyData(org);
 
     vertexX = org.vertexX;
     vertexY = org.vertexY;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-EMPTY_DELETEDATA(IrisGLCompat)
-
-//------------------------------------------------------------------------------
-// arc() -
-//------------------------------------------------------------------------------
 void IrisGLCompat::arc(float x, float y, float r, float startAng, float endAng)
 {
-    float ang = static_cast<float>(startAng * base::Angle::D2RCC);
-    float fraction = static_cast<float>((endAng - startAng) / 360.0);
-    int numPoints = static_cast<int>((static_cast<float>(MAX_POINTS)) * fraction);
-    float delta = static_cast<float>((2.0 * base::PI * fraction) / static_cast<float>(numPoints));
+    auto ang = static_cast<float>(startAng * base::angle::D2RCC);
+    const auto fraction = static_cast<float>((endAng - startAng) / 360.0);
+    const auto numPoints = static_cast<int>((static_cast<float>(MAX_POINTS)) * fraction);
+    const auto delta = static_cast<float>((2.0 * base::PI * fraction) / static_cast<float>(numPoints));
     glBegin(GL_LINE_STRIP);
         for (int i = 0; i < numPoints+1; i++) {
-            float vy = static_cast<float>(std::sin(ang) * r + y);
-            float vx = static_cast<float>(std::cos(ang) * r + x);
+            const auto vy = static_cast<float>(std::sin(ang) * r + y);
+            const auto vx = static_cast<float>(std::cos(ang) * r + x);
             glVertex2f(vx, vy);
             ang += delta;
         }
     glEnd();
 }
 
-//------------------------------------------------------------------------------
-// arcf() -
-//------------------------------------------------------------------------------
 void IrisGLCompat::arcf(float x, float y, float r, float startAng, float endAng)
 {
-    float ang = static_cast<float>(startAng * base::Angle::D2RCC);
-    float fraction = static_cast<float>((endAng - startAng) / 360.0);
-    int numPoints = static_cast<int>((static_cast<float>(MAX_POINTS)) * fraction);
-    float delta = static_cast<float>((2.0 * base::PI * fraction) / static_cast<float>(numPoints));
+    auto ang = static_cast<float>(startAng * base::angle::D2RCC);
+    const auto fraction = static_cast<float>((endAng - startAng) / 360.0);
+    const auto numPoints = static_cast<int>((static_cast<float>(MAX_POINTS)) * fraction);
+    const auto delta = static_cast<float>((2.0 * base::PI * fraction) / static_cast<float>(numPoints));
     glBegin(GL_TRIANGLE_FAN);
         glVertex2f(x, y);
         for (int i = 0; i < numPoints+1; i++) {
@@ -76,13 +64,10 @@ void IrisGLCompat::arcf(float x, float y, float r, float startAng, float endAng)
     glEnd();
 }
 
-//------------------------------------------------------------------------------
-// circ() -
-//------------------------------------------------------------------------------
 void IrisGLCompat::circ(float x, float y, float r)
 {
     float ang = 0.0;
-    float delta = static_cast<float>((2.0 * base::PI) / static_cast<float>(MAX_POINTS));
+    const auto delta = static_cast<float>((2.0 * base::PI) / static_cast<float>(MAX_POINTS));
     glBegin(GL_LINE_LOOP);
         for (int i = 0; i < MAX_POINTS; i++) {
             float vy = std::sin(ang) * r + y;
@@ -93,13 +78,10 @@ void IrisGLCompat::circ(float x, float y, float r)
     glEnd();
 }
 
-//------------------------------------------------------------------------------
-// circf() -
-//------------------------------------------------------------------------------
 void IrisGLCompat::circf(float x, float y, float r)
 {
     float ang = 0.0;
-    float delta = static_cast<float>((2.0 * base::PI) / static_cast<float>(MAX_POINTS));
+    const auto delta = static_cast<float>((2.0 * base::PI) / static_cast<float>(MAX_POINTS));
     glBegin(GL_POLYGON);
         for (int i = 0; i < MAX_POINTS; i++) {
             float vy = std::sin(ang) * r + y;
@@ -110,13 +92,10 @@ void IrisGLCompat::circf(float x, float y, float r)
     glEnd();
 }
 
-//------------------------------------------------------------------------------
-// washerf() -
-//------------------------------------------------------------------------------
 void IrisGLCompat::washerf(float x, float y, float r1, float r2)
 {
     float ang = 0.0;
-    float delta = static_cast<float>((2.0 * base::PI) / static_cast<float>(MAX_POINTS));
+    const auto delta = static_cast<float>((2.0 * base::PI) / static_cast<float>(MAX_POINTS));
     glBegin(GL_TRIANGLE_STRIP);
         for (int i = 0; i < MAX_POINTS+1; i++) {
             float s= std::sin(ang);
@@ -132,9 +111,6 @@ void IrisGLCompat::washerf(float x, float y, float r1, float r2)
     glEnd();
 }
 
-//------------------------------------------------------------------------------
-// rect() -
-//------------------------------------------------------------------------------
 void IrisGLCompat::rect(float x1, float y1, float x2, float y2)
 {
     glBegin(GL_LINE_LOOP);
@@ -145,9 +121,6 @@ void IrisGLCompat::rect(float x1, float y1, float x2, float y2)
     glEnd();
 }
 
-//------------------------------------------------------------------------------
-// rpmv2() -
-//------------------------------------------------------------------------------
 void IrisGLCompat::rpmv2(float x, float y)
 {
     vertexX = x;
@@ -155,9 +128,6 @@ void IrisGLCompat::rpmv2(float x, float y)
     glVertex2f(vertexX, vertexY);
 }
 
-//------------------------------------------------------------------------------
-// rpdr2() -
-//------------------------------------------------------------------------------
 void IrisGLCompat::rpdr2(float x, float y)
 {
     vertexX += x;
@@ -165,9 +135,6 @@ void IrisGLCompat::rpdr2(float x, float y)
     glVertex2f(vertexX, vertexY);
 }
 
-//------------------------------------------------------------------------------
-// rmv2() -
-//------------------------------------------------------------------------------
 void IrisGLCompat::rmv2(float x, float y)
 {
     vertexX = x;
@@ -175,9 +142,6 @@ void IrisGLCompat::rmv2(float x, float y)
     glVertex2f(vertexX, vertexY);
 }
 
-//------------------------------------------------------------------------------
-// rdr2() -
-//------------------------------------------------------------------------------
 void IrisGLCompat::rdr2(float x, float y)
 {
     vertexX += x;
@@ -187,4 +151,3 @@ void IrisGLCompat::rdr2(float x, float y)
 
 }
 }
-

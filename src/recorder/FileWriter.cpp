@@ -4,64 +4,34 @@
 #include "openeaagles/recorder/DataRecordHandle.hpp"
 #include "openeaagles/base/String.hpp"
 #include "openeaagles/base/util/str_utils.hpp"
-#include "openeaagles/base/util/system.hpp"
+#include "openeaagles/base/util/system_utils.hpp"
 
 #include <fstream>
 #include <cstring>
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 namespace oe {
 namespace recorder {
 
-//==============================================================================
-// Class FileWriter
-//==============================================================================
-IMPLEMENT_SUBCLASS(FileWriter,"RecorderFileWriter")
+IMPLEMENT_SUBCLASS(FileWriter, "RecorderFileWriter")
 
-// Slot table for this form type
 BEGIN_SLOTTABLE(FileWriter)
     "filename",         // 1) Data file name (required)
     "pathname",         // 2) Path to the data file directory (optional)
 END_SLOTTABLE(FileWriter)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(FileWriter)
     ON_SLOT( 1, setFilename, base::String)
     ON_SLOT( 2, setPathName, base::String)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 FileWriter::FileWriter()
 {
    STANDARD_CONSTRUCTOR()
-   initData();
 }
 
-void FileWriter::initData()
-{
-   sout = nullptr;
-   fullFilename = nullptr;
-   filename = nullptr;
-   pathname = nullptr;
-   fileOpened = false;
-   fileFailed = false;
-   eodFlag    = false;
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void FileWriter::copyData(const FileWriter& org, const bool cc)
+void FileWriter::copyData(const FileWriter& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    setFilename(org.filename);
    setPathName(org.pathname);
@@ -78,9 +48,6 @@ void FileWriter::copyData(const FileWriter& org, const bool cc)
    setFullFilename(nullptr);
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void FileWriter::deleteData()
 {
    if (sout != nullptr) {
@@ -183,7 +150,7 @@ bool FileWriter::openFile()
       nameLength += 4;                         // add characters for possible version number, "_V99"
       nameLength += 1;                         // Add one for the null(0) at the end of the string
 
-      char* fullname = new char[nameLength];
+      const auto fullname = new char[nameLength];
       fullname[0] = '\0';
 
       //---
@@ -202,7 +169,7 @@ bool FileWriter::openFile()
       if ( !validName ) {
          // If the file already exists, try appending a version number "v99" ..
 
-         char* origname = new char[nameLength];
+         const auto origname = new char[nameLength];
          base::utStrcpy(origname, nameLength, fullname);
 
          validName = false;
@@ -275,7 +242,7 @@ void FileWriter::closeFile()
          eodFlag = true;
 
          // write something to signify don't read any more (e.g., last message)
-         pb::DataRecord* lastMsg = new pb::DataRecord();
+         const auto lastMsg = new pb::DataRecord();
 
          // This will be the token representing the last message, but it can be
          // anything that is not one of the other event messages
@@ -288,7 +255,7 @@ void FileWriter::closeFile()
          time->set_utc_time(0);
 
          // get a handle
-         DataRecordHandle* handle = new DataRecordHandle(lastMsg);
+         auto handle = new DataRecordHandle(lastMsg);
 
          // write the message
          processRecordImp(handle);
@@ -409,17 +376,6 @@ bool FileWriter::setPathName(const base::String* const msg)
    return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-base::Object* FileWriter::getSlotByIndex(const int si)
-{
-   return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& FileWriter::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

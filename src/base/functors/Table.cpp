@@ -19,16 +19,11 @@ EMPTY_SERIALIZER(TableStorage)
 TableStorage::TableStorage()
 {
    STANDARD_CONSTRUCTOR()
-   xbp = 0;
-   ybp = 0;
-   zbp = 0;
-   wbp = 0;
-   vbp = 0;
 }
 
-void TableStorage::copyData(const TableStorage& org, const bool cc)
+void TableStorage::copyData(const TableStorage& org, const bool)
 {
-    BaseClass::copyData(org);
+   BaseClass::copyData(org);
    xbp = org.xbp;
    ybp = org.ybp;
    zbp = org.zbp;
@@ -52,18 +47,12 @@ BEGIN_SLOT_MAP(Table)
     ON_SLOT(2,setExtrapolationEnabled,Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Class support functions
-//------------------------------------------------------------------------------
-Table::Table() : valid(false), extFlg(false)
+Table::Table()
 {
    STANDARD_CONSTRUCTOR()
-   dtable = nullptr;
-   nd = 0;
 }
 
 Table::Table(const double* dtbl, const unsigned int dsize)
-   : valid(false), dtable(nullptr), nd(0), extFlg(false)
 {
     STANDARD_CONSTRUCTOR()
     if (dtbl != nullptr && dsize > 0) {   /* Copy the data table */
@@ -111,8 +100,9 @@ void Table::copyData(const Table& org, const bool cc)
     if (org.dtable != nullptr) {
         dtable = new double[nd];
         for (unsigned int i = 0; i < nd; i++) dtable[i] = org.dtable[i];
+    } else {
+        dtable = nullptr;
     }
-    else dtable = nullptr;
     valid = org.valid;
     extFlg = org.extFlg;
 }
@@ -184,7 +174,7 @@ bool Table::loadVector(const List& list, double** table, unsigned int* nn)
     unsigned int n = list.entries();
     if (n <= 0) return false;
 
-    double* p = new double[n];
+    const auto p = new double[n];
     unsigned int n2 = list.getNumberList(p, n);
     bool ok = (n == n2);
     if (ok) {
@@ -213,7 +203,7 @@ bool Table::setDataTable(const List* const sdtobj)
         unsigned int ts = tableSize();
         if (ts > 0) {
             // Allocate table space and load the table
-            double* p = new double[ts];
+            const auto p = new double[ts];
             ok = loadData(*sdtobj, p);
             if (ok) {
                 // Loading completed, so
@@ -233,17 +223,6 @@ bool Table::setDataTable(const List* const sdtobj)
     return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Table
-//------------------------------------------------------------------------------
-Object* Table::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& Table::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

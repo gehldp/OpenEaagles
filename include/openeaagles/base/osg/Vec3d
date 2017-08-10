@@ -11,14 +11,14 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef __oe_osg_Vec3d_H__
-#define __oe_osg_Vec3d_H__
+#ifndef __oe_base_osg_Vec3d_H__
+#define __oe_base_osg_Vec3d_H__
 
-#include "./Vec2d"
-#include "./Vec3f"
+#include "openeaagles/base/osg/Vec2d"
+#include "openeaagles/base/osg/Vec3f"
 
 namespace oe {
-namespace osg {
+namespace base {
 
 /** General purpose double triple for use as vertices, vectors and normals.
   * Provides general math operations from addition through to cross products.

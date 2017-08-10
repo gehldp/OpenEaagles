@@ -10,63 +10,42 @@
 namespace oe {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Matrix,"Matrix")
+IMPLEMENT_SUBCLASS(Matrix, "Matrix")
 EMPTY_SLOTTABLE(Matrix)
 EMPTY_SERIALIZER(Matrix)
 
 Matrix::Matrix()
 {
    STANDARD_CONSTRUCTOR()
-   initData();
 }
 
 Matrix::Matrix(const unsigned int r, const unsigned int c)
 {
    STANDARD_CONSTRUCTOR()
-   initData();
-
    setMatrix(r,c);
 }
 
 Matrix::Matrix(const unsigned int r, const unsigned int c, const double* const data, const unsigned int dataSize)
 {
    STANDARD_CONSTRUCTOR()
-   initData();
-
    setMatrix(r,c,data,dataSize);
 }
 
-Matrix::Matrix(const osg::Matrixd& m)
+Matrix::Matrix(const Matrixd& m)
 {
    STANDARD_CONSTRUCTOR()
-   initData();
    *this = m;
 }
 
-Matrix::Matrix(const osg::Matrixf& m)
+Matrix::Matrix(const Matrixf& m)
 {
    STANDARD_CONSTRUCTOR()
-   initData();
    *this = m;
 }
 
-void Matrix::initData()
-{
-   rows = 0;
-   cols = 0;
-   mda = nullptr;
-
-   fldWidth = DEF_FLDWIDTH;
-   decPoint = DEF_DECPOINT;
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void Matrix::copyData(const Matrix& org, const bool cc)
+void Matrix::copyData(const Matrix& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    emptyMatrix();
 
@@ -80,9 +59,6 @@ void Matrix::copyData(const Matrix& org, const bool cc)
    }
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void Matrix::deleteData()
 {
    emptyMatrix();
@@ -91,13 +67,13 @@ void Matrix::deleteData()
 //------------------------------------------------------------------------------
 // Assigned from an OSG matrix (double and float)
 //------------------------------------------------------------------------------
-Matrix& Matrix::operator=(const osg::Matrixd& m)
+Matrix& Matrix::operator=(const Matrixd& m)
 {
    setMatrix(4,4,m.ptr(), 16);
    return *this;
 }
 
-Matrix& Matrix::operator=(const osg::Matrixf& m)
+Matrix& Matrix::operator=(const Matrixf& m)
 {
    setMatrix(4,4,m.ptr(), 16);
    return *this;
@@ -157,7 +133,7 @@ double Matrix::getMinMag() const
 // Returns a pre-ref'd pointer to the transpose of this matrix
 Matrix* Matrix::getTranspose() const
 {
-   Matrix* m = new Matrix(*this);
+   const auto m = new Matrix(*this);
    m->transpose();
    return m;
 }
@@ -181,15 +157,15 @@ Matrix* Matrix::getInvLU() const
    if (!isGoodMatrix() || !isSquare()) return nullptr;
 
    const unsigned int N = rows;
-   Matrix* pL = new Matrix(N,N);
-   Matrix* pU = new Matrix(N,N);
+   const auto pL = new Matrix(N,N);
+   const auto pU = new Matrix(N,N);
    getLU(pL, pU);
 
-   Matrix* pB = new Matrix(N,N);
+   const auto pB = new Matrix(N,N);
    pB->makeIdent();
 
-   Matrix* pY = new Matrix(N,N);
-   Matrix* pX = new Matrix(N,N);
+   const auto pY = new Matrix(N,N);
+   const auto pX = new Matrix(N,N);
 
    //-------------------------------------------------------
    // find Y from LY = I using forward substitution
@@ -233,8 +209,8 @@ double Matrix::getDeterm() const
 
    // get the L and U matrices
    const unsigned int N = rows;
-   Matrix* pL = new Matrix(N,N);
-   Matrix* pU = new Matrix(N,N);
+   const auto pL = new Matrix(N,N);
+   const auto pU = new Matrix(N,N);
 
    getLU(pL, pU);
 
@@ -457,7 +433,7 @@ bool Matrix::transpose()
 {
    bool ok = mda != nullptr && rows > 0 && cols > 0;
    if (ok) {
-      double* temp = new double[rows*cols];
+      const auto temp = new double[rows*cols];
 
       for (unsigned int i=0; i<rows; i++) {
          for (unsigned int j=0; j<cols; j++) {
@@ -585,7 +561,7 @@ bool Matrix::augment(const Matrix& m)
 {
    bool ok = false;
    if (rows == m.rows) {
-      double* arr = new double[rows*(cols + m.cols)];
+      const auto arr = new double[rows*(cols + m.cols)];
       unsigned int idx = 0;
       for (unsigned int i=0; i<rows; i++) {
          unsigned int idx1 = i*cols;
@@ -753,7 +729,7 @@ bool Matrix::remRow(const unsigned int r)
 
    bool ok = false;
    if (l1 && l2) {
-      double* arr = new double[(rows-1)*cols];
+      const auto arr = new double[(rows-1)*cols];
       unsigned int idx1 = 0;
       for (unsigned int i=0; i<rows; i++) {
          for (unsigned int j=0; j<cols; j++) {
@@ -786,7 +762,7 @@ bool Matrix::remRows(const unsigned int r1, const unsigned int r2)
    if (l1 && l2) {
       unsigned int rr = 1 + std::abs(static_cast<int>(r2) - static_cast<int>(r1));
       if (rr < rows) {
-         double* arr = new double[(rows-rr)*cols];
+         const auto arr = new double[(rows-rr)*cols];
          unsigned int idx1 = 0;
          for (unsigned int i=0; i<rows; i++) {
             for (unsigned int j=0; j<cols; j++) {
@@ -817,7 +793,7 @@ bool Matrix::remCol(const unsigned int c)
 
    bool ok = false;
    if (l1 && l2) {
-      double* arr = new double[rows*(cols-1)];
+      const auto arr = new double[rows*(cols-1)];
       unsigned int idx1 = 0;
       for (unsigned int i=0; i<rows; i++) {
          for (unsigned int j=0; j<cols; j++) {
@@ -849,7 +825,7 @@ bool Matrix::remCols(const unsigned int c1, const unsigned int c2)
    if (l1 && l2) {
       unsigned int cc = 1 + std::abs(static_cast<int>(c2) - static_cast<int>(c1));
       if (cc < cols) {
-         double* arr = new double[rows*(cols-cc)];
+         const auto arr = new double[rows*(cols-cc)];
          unsigned int idx1 = 0;
          for (unsigned int i=0; i<rows; i++) {
             for (unsigned int j=0; j<cols; j++) {
@@ -881,7 +857,7 @@ bool Matrix::remRowCol(const unsigned int r, const unsigned int c)
 
    bool ok = false;
    if (l1 && l2 && l3) {
-      double* temp = new double[(rows-1)*(cols-1)];
+      const auto temp = new double[(rows-1)*(cols-1)];
       unsigned int idx1 = 0;
       for (unsigned int i=0; i<rows; i++) {
          for (unsigned int j=0; j<cols; j++) {
@@ -1074,11 +1050,11 @@ bool Matrix::getEigenPower(const double maxErr, const int maxIter,
    int Iter = 0;                          // iterator initialized to zero
    double Err = 10.0*maxErr;              // make Err > maxErr on entry
 
-   Matrix* pA = new Matrix(*this);        // A is a buffer matrix for 'this' matrix
+   const auto pA = new Matrix(*this);     // A is a buffer matrix for 'this' matrix
    const int N = pA->getRows();           // pA->getCols works too since A is square
 
    double alfa = 0.0;                     // current eigenvalue estimate
-   CVector* pZ = new CVector(N);          // current eigenvector estimate
+   const auto pZ = new CVector(N);        // current eigenvector estimate
    pZ->fillWith(1.0);                     // all 1's in initial estimate
 
    //-------------------------------------------------------
@@ -1272,20 +1248,20 @@ bool Matrix::getQR(Matrix* const pQ, Matrix* const pR) const
    //-------------------------------------------------------
    // Initialize intermediate R matrix to 'this' matrix
    //-------------------------------------------------------
-   Matrix* pRI = new Matrix(*this);
+   const auto pRI = new Matrix(*this);
 
    //-------------------------------------------------------
    // Initialize intermediate Q matrix to 'identity' matrix
    //-------------------------------------------------------
    const int N = getRows();
-   Matrix* pQI = new Matrix(N,N);
+   const auto pQI = new Matrix(N,N);
    pQI->makeIdent();
 
    //-------------------------------------------------------
    // X and V are intermediate vectors
    //-------------------------------------------------------
-   CVector* pX = new CVector(N);
-   CVector* pV = new CVector(N);
+   const auto pX = new CVector(N);
+   const auto pV = new CVector(N);
 
    //-------------------------------------------------------
    // Begin loop
@@ -1383,7 +1359,7 @@ bool Matrix::getTriDiagonal(Matrix* const pA) const
    //if (!isSymmetric()) return 0;
 
    const int N = getRows();
-   Matrix* pAI = new Matrix(*this);
+   const auto pAI = new Matrix(*this);
 
    for (int k=0; k<N-2; k++) {
       double gama = (*pAI)(k+1,k);
@@ -1399,7 +1375,7 @@ bool Matrix::getTriDiagonal(Matrix* const pA) const
       //----------------------------------------------------
       // construct column vector X
       //----------------------------------------------------
-      CVector* pX = new CVector(N);
+      const auto pX = new CVector(N);
       for (int p=0; p<k+1; p++) {
          (*pX)[p] = 0.0;
       }
@@ -1424,7 +1400,7 @@ bool Matrix::getTriDiagonal(Matrix* const pA) const
       //----------------------------------------------------
       // H = I - M = I - 2*X*X'
       //----------------------------------------------------
-      Matrix* pH = new Matrix(N,N);
+      const auto pH = new Matrix(N,N);
       pH->makeIdent();
       pH->subtract(*pM);
 

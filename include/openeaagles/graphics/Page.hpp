@@ -5,6 +5,8 @@
 #include "Graphic.hpp"
 #include "openeaagles/base/Identifier.hpp"
 
+#include <array>
+
 namespace oe {
 namespace graphics {
 
@@ -108,8 +110,8 @@ public:
    void setFocusSlavedToSubpage(const bool f)   { focusSlavedToSubpage = f; }
 
    // call new sub-page
-   bool newSubpage(Page* const newPage, Page* theCaller, base::Object* theArg = 0);
-   bool newSubpage(const char* const name, Page* theCaller, base::Object* theArg = 0);
+   bool newSubpage(Page* const newPage, Page* theCaller, base::Object* theArg = nullptr);
+   bool newSubpage(const char* const name, Page* theCaller, base::Object* theArg = nullptr);
 
    // event handler functions
    virtual bool onEntry();
@@ -143,36 +145,36 @@ protected:
 
    // Manage our (sub)page stack
    bool clearSubpageStack();
-   bool pushSubpage(const char* const name, Page* theCaller, base::Object* theArg = 0);
-   bool popSubpage(Page* theCaller, base::Object* theArg = 0);
+   bool pushSubpage(const char* const name, Page* theCaller, base::Object* theArg = nullptr);
+   bool popSubpage(Page* theCaller, base::Object* theArg = nullptr);
 
    // Call/push/pop major pages (our container's pages, which we are a member of)
-   bool newPage(Page* const newPage, Page* theCaller, base::Object* theArg = 0);
-   bool newPage(const char* const name, Page* theCaller, base::Object* theArg = 0);
-   bool pushPage(const char* const name, Page* theCaller, base::Object* theArg = 0);
-   bool popPage(Page* theCaller, base::Object* theArg = 0);
+   bool newPage(Page* const newPage, Page* theCaller, base::Object* theArg = nullptr);
+   bool newPage(const char* const name, Page* theCaller, base::Object* theArg = nullptr);
+   bool pushPage(const char* const name, Page* theCaller, base::Object* theArg = nullptr);
+   bool popPage(Page* theCaller, base::Object* theArg = nullptr);
 
 private:
    bool processSubpages();
 
-   Page* cp;                           // Current Subpage
-   base::Identifier cpName;            // Current Subpage Name
-   Page* np;                           // New subpage (requesting a page change)
+   Page* cp {};                         // Current Subpage
+   base::Identifier cpName;             // Current Subpage Name
+   Page* np {};                         // New subpage (requesting a page change)
 
-   base::PairStream* subpages;         // Subpages
-   base::PairStream* pageChgEvents;    // Page change events
+   base::PairStream* subpages {};       // Subpages
+   base::PairStream* pageChgEvents {};  // Page change events
 
-   bool  postDraw1;                    // Post draw component (child) graphic
-   bool  focusSlavedToSubpage;         // Input event focus should follow subpage changes
+   bool postDraw1 {};                   // Post draw component (child) graphic
+   bool focusSlavedToSubpage {true};    // Input event focus should follow subpage changes
 
    // Passed by calling page
    base::safe_ptr<base::Object> pageArg;     // Paging argument
-   const Page* caller;                       // Calling page
+   const Page* caller {};                    // Calling page
 
    // Subpage Stack
    static const int SUBPAGE_STACK_SIZE = 50;
-   Page* subpageStack[SUBPAGE_STACK_SIZE];
-   int subpageSP;                            // Stack pointer
+   std::array<Page*, SUBPAGE_STACK_SIZE> subpageStack {};
+   int subpageSP {SUBPAGE_STACK_SIZE};       // Stack pointer
 };
 
 }

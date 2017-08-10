@@ -1,7 +1,9 @@
 
 #include "openeaagles/dafif/Record.hpp"
-#include "openeaagles/base/Nav.hpp"
+
 #include "openeaagles/base/String.hpp"
+
+#include "openeaagles/base/util/nav_utils.hpp"
 #include "openeaagles/base/util/str_utils.hpp"
 
 #include <iostream>
@@ -14,44 +16,28 @@ namespace dafif {
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Record,"Record")
 EMPTY_SERIALIZER(Record)
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Record::Record()
 {
    STANDARD_CONSTRUCTOR()
-   ptbl = nullptr;
 }
 
 Record::Record(const char* const s)
 {
    STANDARD_CONSTRUCTOR()
-
-   ptbl = nullptr;
    setStr(s);
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
-void Record::copyData(const Record& org, const bool cc)
+void Record::copyData(const Record& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) {
-      ptbl = nullptr;
-   }
    setStr( org );
    ptbl = org.ptbl;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void Record::deleteData()
 {
    resetData();
 }
-
 
 //------------------------------------------------------------------------------
 // resetData: clears our member data
@@ -535,7 +521,7 @@ float Record::dsFrequency(const char* const p)
 void Record::printTrueBearingRange(std::ostream& sout, const double aclat, const double aclon, const double acelev)const
 {
    double bearing, range, grdrange;
-   base::Nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &range, &grdrange);
+   base::nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &range, &grdrange);
    sout << "  range " << range << "  grdrange " << grdrange << " true_bearing " << bearing;
 }
 

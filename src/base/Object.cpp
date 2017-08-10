@@ -4,21 +4,15 @@
 #include <cctype>
 #include <cstdlib>
 #include <cstring>
+#include <iostream>
 
 namespace oe {
 namespace base {
 
 // ---
-// Table of registered classes
-//    Note: class Object is pre-registered as the first class
+// Class and object metadata
 // ---
-const Object::_Static* Object::classes[MAX_CLASSES] = { &Object::_static };
-unsigned int Object::numClasses = 1;
-
-// ---
-// Object's static member data
-// ---
-Object::_Static Object::_static(0, typeid(Object).name(), "Object", &Object::slottable, nullptr);
+MetaObject Object::metaObject(typeid(Object).name(), "Object", &Object::slottable, nullptr);
 
 // ---
 // Object's SlotTable
@@ -27,31 +21,24 @@ Object::_Static Object::_static(0, typeid(Object).name(), "Object", &Object::slo
 //    slots to be the first slots -- starting at slot number 1.
 // ---
 const char* Object::slotnames[] = { "" };
-const int Object::nslots = 0;
+const int Object::nslots {};
 const SlotTable Object::slottable(nullptr, 0);
 
-
 //------------------------------------------------------------------------------
-// Standard object stuff -- derived classes used macro IMPLEMENT_SUBCLASS, see macros.h
+// Standard object stuff -- derived classes used macro IMPLEMENT_SUBCLASS, see macros.hpp
 //------------------------------------------------------------------------------
 
-// Constructor
-Object::Object()
+Object::Object():Referenced()
 {
    STANDARD_CONSTRUCTOR()
-   refCount = 1;    // (start out ref() by the creator)
-   semaphore = 0;
-   enbMsgBits = (MSG_ERROR | MSG_WARNING);
-   disMsgBits = 0;
 }
 
-Object::Object(const Object& org)
+Object::Object(const Object& org):Referenced()
 {
    STANDARD_CONSTRUCTOR()
    copyData(org,true);
 }
 
-// Destructor
 Object::~Object()
 {
    STANDARD_DESTRUCTOR()
@@ -63,7 +50,6 @@ Object& Object::operator=(const Object& org)
     return *this;
 }
 
-// Clone
 Object* Object::clone() const
 {
    return new Object(*this);
@@ -80,7 +66,7 @@ bool Object::isClassType(const std::type_info& type) const
 bool Object::isFactoryName(const char name[]) const
 {
     if (name == nullptr) return false;
-    if ( std::strcmp(_static.fname, name) == 0 )  return true;
+    if ( std::strcmp(metaObject.getFactoryName(), name) == 0 )  return true;
     else return false;
 }
 
@@ -91,10 +77,10 @@ void Object::copyData(const Object& org, const bool cc)
     slotTable = org.slotTable;
     enbMsgBits = org.enbMsgBits;
     disMsgBits = org.disMsgBits;
-    if (cc) {
-       refCount = 1;    // (start out ref() by the creator)
-       semaphore = 0;
-    }
+//    if (cc) {
+//       refCount = 1;    // (start out ref() by the creator)
+//       semaphore = 0;
+//    }
 }
 
 // Delete object data -- derived classes should delete
@@ -110,26 +96,11 @@ bool Object::setSlotByIndex(const int, Object* const)
     return false;
 }
 
-// get slots by index
-Object* Object::getSlotByIndex(const int)
-{
-    // We have no slots, so we shouldn't ever be here!
-    return nullptr;
-}
-
-// get factory name
 const char* Object::getFactoryName()
 {
-    return _static.fname;
+    return metaObject.getFactoryName();
 }
 
-// get class name
-const char* Object::getClassName()
-{
-    return _static.cname;
-}
-
-// get slot table
 const SlotTable& Object::getSlotTable()
 {
    return slottable;
@@ -172,7 +143,6 @@ int Object::slotName2Index(const char* const slotname) const
     return slotindex;
 }
 
-
 //------------------------------------------------------------------------------
 // setSlotByName() -- set the value of slot 'slotname' to 'obj'  Returns
 //                 true if the slot and object were processed; returns
@@ -188,22 +158,11 @@ bool Object::setSlotByName(const char* const slotname, Object* const obj)
 }
 
 //------------------------------------------------------------------------------
-// getSlotByName() -- Returns a pointer to the slot named 'slotname'.
-//------------------------------------------------------------------------------
-Object* Object::getSlotByName(const char* const slotname)
-{
-    Object* obj = nullptr;
-    int slotindex = slotName2Index(slotname);
-    if (slotindex > 0) obj = getSlotByIndex(slotindex);
-    return obj;
-}
-
-//------------------------------------------------------------------------------
 // slotIndex2Name() -- returns the name of the slot at 'slotindex'
 //------------------------------------------------------------------------------
 const char* Object::slotIndex2Name(const int slotindex) const
 {
-    return  slotTable->name(slotindex);
+    return slotTable->name(slotindex);
 }
 
 //------------------------------------------------------------------------------
@@ -211,7 +170,7 @@ const char* Object::slotIndex2Name(const int slotindex) const
 //------------------------------------------------------------------------------
 bool Object::isValid() const
 {
-    return (refCount > 0);
+    return true;
 }
 
 //------------------------------------------------------------------------------
@@ -276,38 +235,6 @@ bool Object::disableMessageTypes(const unsigned short msgTypeBits)
 }
 
 //------------------------------------------------------------------------------
-// Writes out the class list
-//------------------------------------------------------------------------------
-void Object::writeClassList(std::ostream& sout)
-{
-   sout << "Number of classes: " << numClasses << std::endl;
-   for (unsigned int i = 0; i < numClasses; i++) {
-      sout
-         << classes[i]->classIndex
-         << ": " << classes[i]->fname
-         << "(" << classes[i]->count
-         << "/" << classes[i]->mc
-         << "/" << classes[i]->tc
-         << ") => " << classes[i]->cname
-         << std::endl;
-   }
-}
-
-//------------------------------------------------------------------------------
-// Register a new class type
-//------------------------------------------------------------------------------
-unsigned int Object::registerClass(const _Static* const p)
-{
-   unsigned int idx = 0;
-   if (numClasses < MAX_CLASSES) {
-      classes[numClasses] = p;
-      idx = numClasses;
-      numClasses++;
-   }
-   return idx;
-}
-
-//------------------------------------------------------------------------------
 // indent() -- indent the output stream by 'ii' spaces
 //------------------------------------------------------------------------------
 void Object::indent(std::ostream& sout, const int ii) const
@@ -327,31 +254,12 @@ std::ostream& Object::serialize(std::ostream& sout, const int, const bool) const
    return sout;
 }
 
-//==============================================================================
-// struct  Object::_Static
-//==============================================================================
-
-Object::_Static::_Static(
-      const unsigned int ci,
-      const char* const cn,
-      const char* const fn,
-      const SlotTable* const p,
-      const _Static* const bs
-   ) : classIndex(ci), cname(cn), fname(fn), st(p), bstatic(bs), count(0), mc(0), tc(0)
-{
-}
-
-Object::_Static& Object::_Static::operator=(const _Static&)
-{
-   return *this;
-}
-
 //------------------------------------------------------------------------------
-// Get the Object _Static member
+// return object and class metadata
 //------------------------------------------------------------------------------
-const Object::_Static* Object::getStatic()
+const MetaObject* Object::getMetaObject()
 {
-    return &_static;
+    return &metaObject;
 }
 
 }

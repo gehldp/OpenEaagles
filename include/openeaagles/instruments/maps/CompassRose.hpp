@@ -1,6 +1,16 @@
+
+#ifndef __oe_instruments_CompassRose_H__
+#define __oe_instruments_CompassRose_H__
+
+#include "openeaagles/graphics/Graphic.hpp"
+#include "openeaagles/base/units/angle_utils.hpp"
+
+namespace oe {
+namespace base { class Number; }
+namespace instruments {
+
 //------------------------------------------------------------------------------
 // Class: CompassRose
-// Base Class: base::Object -> graphics::Graphic -> CompassRose
 //
 // Description: Generic compass used as a direction indicator.  It will
 // rotate about a heading either by someone telling it through a member function.
@@ -12,15 +22,6 @@
 //      UPDATE_VALUE5 -> displacement
 //      UPDATE_VALUE6 -> centered or not
 //------------------------------------------------------------------------------
-#ifndef __oe_instruments_CompassRose_H__
-#define __oe_instruments_CompassRose_H__
-
-#include "openeaagles/graphics/Graphic.hpp"
-#include "openeaagles/base/units/Angles.hpp"
-
-namespace oe {
-namespace instruments {
-
 class CompassRose : public graphics::Graphic
 {
     DECLARE_SUBCLASS(CompassRose, graphics::Graphic)
@@ -35,7 +36,7 @@ public:
     virtual bool setDisplacement(const double newD);
     virtual bool setCentered(const bool newC);
 
-    double getRotationDeg() const      { return rot * static_cast<double>(base::Angle::R2DCC); }
+    double getRotationDeg() const      { return rot * static_cast<double>(base::angle::R2DCC); }
     double getRotationRad() const      { return rot; }
     double getCenteredRadius() const   { return cenRadius; }
     double getDeCenteredRadius() const { return decRadius; }
@@ -62,11 +63,11 @@ protected:
     bool onUpdateCentered(const base::Number* const x);
 
 private:
-    double rot;         // rotation angle (rads)
-    double cenRadius;   // our centered radius (inches)
-    double decRadius;   // our decentered radius (inches)
-    bool centered;      // centered flag
-    double displacement;// how far to translate when we go decentered (inches)
+    double rot {};              // rotation angle (rads)
+    double cenRadius {0.5};     // our centered radius (inches)
+    double decRadius {1.0};     // our decentered radius (inches)
+    bool centered {true};       // centered flag
+    double displacement {-0.5}; // how far to translate when we go decentered (inches)
 
     SendData lTicksSD;
     SendData sTicksSD;

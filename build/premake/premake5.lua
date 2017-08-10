@@ -5,6 +5,7 @@
 -- Targets of interest:
 --     vs2013     (Visual Studio 2013)
 --     vs2015     (Visual Studio 2015)
+--     vs2017     (Visual Studio 2017)
 --
 if (_ACTION == nil) then
     return
@@ -24,19 +25,9 @@ OE3rdPartyIncPath = OE_3RD_PARTY_ROOT.."/include"
 --
 -- directory location for HLA include and library paths
 --
---HLA_ROOT = "../../../portico-2.0.1"
---HLAIncPath = HLA_ROOT.."/include/hla13"
 HLA_ROOT = "../../../openrti"
 HLAIncPath = HLA_ROOT.."/include/RTI13"
-if (_ACTION == "vs2012") then
-  HLALibPath = HLA_ROOT.."/lib/vc11"
-end
-if (_ACTION == "vs2013") then
-  HLALibPath = HLA_ROOT.."/lib/vc12"
-end
-if (_ACTION == "vs2015") then
-  HLALibPath = HLA_ROOT.."/lib/vc14"
-end
+HLALibPath = HLA_ROOT.."/lib"
 print ("HLA Paths:")
 print ("  Include   : "..HLALibPath)
 --print ("  Libraries : "..OELibPath)
@@ -59,28 +50,35 @@ workspace "oe"
    includedirs { OEIncPath, OE3rdPartyIncPath }
 
    -- target suffix (all configurations/all projects)
-   targetprefix "oe"
+   targetprefix "oe_"
 
    --
    -- Build (solution) configuration options:
    --     Release        (Runtime library is Multi-threaded DLL)
    --     Debug          (Runtime library is Multi-threaded Debug DLL)
    --
-   configurations { "Release32", "Debug32" }
+   configurations { "Release", "Debug" }
+
+   -- visual studio options and warnings
+   -- /wd4351 (C4351 warning) - disable warning associated with array brace initialization
+   -- /wd4996 (C4996 warning) - disable deprecated declarations
+   -- /wd4005 (C4005 warning) - disable macro redefinition
+   -- /wd4100 (C4100 warning) - disable unreferenced formal parameter
+   -- /Oi - generate intrinsic functions
+   buildoptions( { "/wd4351", "/wd4996", "/wd4005", "/wd4100", "/Oi" } )
 
    -- common release configuration flags and symbols
-   filter { "Release32" }
+   filter { "Release" }
       flags { "Optimize" }
-      -- enable compiler intrinsics and favour speed over size
-      buildoptions { "/Oi", "/Ot" }
+      -- favor speed over size
+      buildoptions { "/Ot" }
       defines { "WIN32", "_LIB", "NDEBUG" }
 
    -- common debug configuration flags and symbols
-   filter { "Debug32" }
+   filter { "Debug" }
       targetsuffix "_d"
-      flags { "Symbols" }
+      symbols "On"
       -- enable compiler intrinsics
-      buildoptions { "/Oi" }
       defines { "WIN32", "_LIB", "_DEBUG" }
 
    --
@@ -102,7 +100,7 @@ workspace "oe"
          "../../src/base/osg/Matrix_implementation.cpp",
          "../../src/base/util/platform/system_linux.cpp",
          "../../src/base/util/platform/system_mingw.cpp",
-         "../../src/base/platform/Thread_linux.cpp"
+         "../../src/base/concurrent/platform/*_linux.cpp"
       }
       targetname "base"
 
@@ -118,12 +116,12 @@ workspace "oe"
       targetname "graphics"
 
    -- OpenGL GLUT interface library
-   project "glut"
+   project "gui_glut"
       files {
          "../../include/openeaagles/gui/glut/**.h*",
          "../../src/gui/glut/**.cpp"
       }
-      targetname "glut"
+      targetname "gui_glut"
 
    -- DAFIF airport loader library
    project "dafif"
@@ -132,24 +130,6 @@ workspace "oe"
          "../../src/dafif/**.cpp"
       }
       targetname "dafif"
-
-   -- IEEE DIS interface library
-   project "dis"
-      files {
-         "../../include/openeaagles/networks/dis/**.h*",
-         "../../src/networks/dis/**.cpp"
-      }
-      targetname "dis"
-
-   -- IEEE HLA interface library (abstract support)
---   project "hla"
---      files {
---         "../../include/openeaagles/networks/hla/**.h*",
---         "../../src/networks/hla/**.cpp"
---      }
---      includedirs { HLAIncPath }
---      defines { "RTI_USES_STD_FSTREAM" }
---      targetname "hla"
 	  
    -- graphical instruments library
    project "instruments"
@@ -181,6 +161,7 @@ workspace "oe"
    project "models"
       files {
          "../../include/openeaagles/models/**.h*",
+         "../../include/openeaagles/models/**.inl",
          "../../src/models/**.cpp"
       }
       includedirs { OE3rdPartyIncPath.."/JSBSim" }
@@ -190,12 +171,8 @@ workspace "oe"
    project "otw"
       files {
          "../../include/openeaagles/otw/**.h*",
-         "../../src/otw/**.h",
+         "../../src/otw/**.h*",
          "../../src/otw/**.cpp"
-      }
-      excludes {
-         "../../include/openeaagles/otw/OtwCigiClV2.h",
-         "../../src/otw/OtwCigiClV2.cpp"
       }
       targetname "otw"
 
@@ -210,29 +187,19 @@ workspace "oe"
       defines { "_SCL_SECURE_NO_WARNINGS" } -- suppress protocol buffer warning
       targetname "recorder"
 
-   -- raster product format maps library
-   project "rpf"
+   -- raster product format map library
+   project "map_rpf"
       files {
-         "../../include/openeaagles/maps/rpf/**.h*",
-         "../../src/maps/rpf/**.cpp"
+         "../../include/openeaagles/map/rpf/**.h*",
+         "../../src/map/rpf/**.cpp"
       }
-      targetname "rpf"
-
-   -- IEEE HLA interface library for RPR FOM
---   project "rprfom"
---      files {
---         "../../include/openeaagles/networks/rprfom/**.h*",
---         "../../src/networks/rprfom/**.cpp"
---      }
---      includedirs { HLAIncPath }
---      defines { "RTI_USES_STD_FSTREAM" }
---      targetname "rprfom"
+      targetname "map_rpf"
 
    -- simulation library
    project "simulation"
       files {
          "../../include/openeaagles/simulation/**.h*",
-         "../../include/openeaagles/simulation/*.inl",
+         "../../include/openeaagles/simulation/**.inl",
          "../../src/simulation/**.cpp"
       }
       targetname "simulation"
@@ -244,3 +211,6 @@ workspace "oe"
          "../../src/terrain/**.cpp"
       }
       targetname "terrain"
+
+   -- interoperability libraries
+   dofile "interop.lua"

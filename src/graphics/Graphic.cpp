@@ -1,6 +1,4 @@
-//------------------------------------------------------------------------------
-// Class: Graphic
-//------------------------------------------------------------------------------
+
 #include "openeaagles/graphics/Graphic.hpp"
 #include "openeaagles/graphics/Display.hpp"
 #include "openeaagles/graphics/ColorRotary.hpp"
@@ -19,12 +17,9 @@ namespace graphics {
 
 IMPLEMENT_SUBCLASS(Graphic, "Graphic")
 
-double Graphic::fTimer = 0.0f;
+double Graphic::fTimer = 0.0;
 GLuint Graphic::autoSelName = 0x00800000;
 
-//------------------------------------------------------------------------------
-// Slot table for this form type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Graphic)
     "color",                //  1: color
     "linewidth",            //  2: linewidth
@@ -50,9 +45,6 @@ BEGIN_SLOTTABLE(Graphic)
     "translateLight",       // 22: Translate our current light to a new position (BEFORE DRAWING)
 END_SLOTTABLE(Graphic)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Graphic)
     ON_SLOT( 1, setColor, base::Color)
     ON_SLOT( 1, setColor, base::Identifier)
@@ -81,9 +73,6 @@ BEGIN_SLOT_MAP(Graphic)
     ON_SLOT(22, setSlotTranslateLight, base::PairStream)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Event Table
-//------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(Graphic)
     ON_EVENT_OBJ(SET_COLOR,setColor,base::Color)       // Color given as a base::Color object (e.g., rgb)
     ON_EVENT_OBJ(SET_COLOR,setColor,base::Identifier)  // Color given as a string (e.g., "red")
@@ -96,9 +85,6 @@ BEGIN_EVENT_HANDLER(Graphic)
     ON_EVENT_OBJ(SET_VISIBILITY,onSetVisibilityEvent,base::Number)
 END_EVENT_HANDLER()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Graphic::Graphic()
 {
     STANDARD_CONSTRUCTOR()
@@ -108,74 +94,13 @@ Graphic::Graphic()
 
 void Graphic::initData()
 {
-    // Our Display
-    displayPtr = nullptr;
-
-    // This object is visible
-    visible  = true;
-
-    // No color
-    color = nullptr;
-    colorName = nullptr;
-
-    // No texture
-    texture = 0;
-    texName = nullptr;
-
-    // No linewidth
-    linewidth = 0.0f;
-
-    // Flash rate
-    fRate = 0.0;
-
-    // Select name
-    selName = 0;
-
     // No transforms
-    haveMatrix  = false;
-    haveMatrix1 = false;
     m.makeIdentity();
     m1.makeIdentity();
-    transforms = nullptr;
-
-    // No vertices
-    vertices = nullptr;
-    nv = 0;
-
-    // No texture coordinates
-    texCoord = nullptr;
-    ntc = 0;
-
-    // No Normals
-    norms = nullptr;
-    nn = 0;
-
-    // Scissor parameters
-    scissorX = 0;
-    scissorY = 0;
-    scissorHeight = 0;
-    scissorWidth = 0;
-
-    // Default display list
-    dlist = 0;
-    noDisplayList = false;
-    postDraw = false;
-
-    stipple = false;
-    stippleFactor = 1;
-    stipplePattern = 0xFFFF;
-
-    mask = false;
-    materialName = nullptr;
-    materialObj = nullptr;
 
     lightPos.set(0.0, 0.0, 1.0, 0.0);
-    lightMoved = false;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void Graphic::copyData(const Graphic& org, const bool cc)
 {
     BaseClass::copyData(org);
@@ -308,15 +233,15 @@ base::Pair* Graphic::findBySelectName(const GLuint name)
     if (subcomponents != nullptr) {
         const base::List::Item* item = subcomponents->getFirstItem();
         while (item != nullptr && q == nullptr) {
-            base::Pair* p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
-            Graphic* gobj = dynamic_cast<Graphic*>(p->object());
+            const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
+            const auto gobj = dynamic_cast<Graphic*>(p->object());
             if (gobj != nullptr && gobj->getSelectName() == name) q = p;
             item = item->getNext();
         }
         item = subcomponents->getFirstItem();
         while (item != nullptr && q == nullptr) {
-            base::Pair* p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
-            Graphic* gobj = dynamic_cast<Graphic*>(p->object());
+            const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
+            const auto gobj = dynamic_cast<Graphic*>(p->object());
             if (gobj != nullptr) q = gobj->findBySelectName(name);
             item = item->getNext();
         }
@@ -421,12 +346,12 @@ void Graphic::setupMaterial()
         // now add all the materials we need
 
         // set our ambient color
-        osg::Vec4 amb = tempMat->getAmbientColor();
+        base::Vec4d amb = tempMat->getAmbientColor();
         GLfloat temp[4] = { static_cast<GLfloat>(amb.x()), static_cast<GLfloat>(amb.y()),
                             static_cast<GLfloat>(amb.z()), static_cast<GLfloat>(amb.w()) };
         glMaterialfv(GL_FRONT, GL_AMBIENT, temp);
 
-        osg::Vec4 dif = tempMat->getDiffuseColor();
+        base::Vec4d dif = tempMat->getDiffuseColor();
         // now set the diffuse color
         temp[0] = static_cast<GLfloat>(dif.x());
         temp[1] = static_cast<GLfloat>(dif.y());
@@ -435,7 +360,7 @@ void Graphic::setupMaterial()
         glMaterialfv(GL_FRONT, GL_DIFFUSE, temp);
 
         // now emissive
-        osg::Vec4 emis = tempMat->getEmissiveColor();
+        base::Vec4d emis = tempMat->getEmissiveColor();
         temp[0] = static_cast<GLfloat>(emis.x());
         temp[1] = static_cast<GLfloat>(emis.y());
         temp[2] = static_cast<GLfloat>(emis.z());
@@ -443,7 +368,7 @@ void Graphic::setupMaterial()
         glMaterialfv(GL_FRONT, GL_EMISSION, temp);
 
         // now specular
-        osg::Vec4 spec = tempMat->getSpecularColor();
+        base::Vec4d spec = tempMat->getSpecularColor();
         temp[0] = static_cast<GLfloat>(spec.x());
         temp[1] = static_cast<GLfloat>(spec.y());
         temp[2] = static_cast<GLfloat>(spec.z());
@@ -478,7 +403,7 @@ void Graphic::draw()
 
     // if we have a color and no material, switch to that color
     bool setOldColor = false;
-    osg::Vec4 ocolor;
+    base::Vec4d ocolor;
     if (materialName == nullptr && materialObj == nullptr) {
         if (colorName != nullptr) {
             setOldColor = true;
@@ -488,7 +413,7 @@ void Graphic::draw()
         else if (color != nullptr) {
             setOldColor = true;
             ocolor = display->getCurrentColor();
-            const osg::Vec4* p = *color;
+            const base::Vec4d* p = *color;
             display->setColor(*p);
         }
     }
@@ -564,8 +489,8 @@ void Graphic::draw()
     if (subcomponents != nullptr) {
         Component* s = getSelectedComponent();
         if (s != nullptr) {
-        // When we've selected only one
-            Graphic* selected0 = dynamic_cast<Graphic*>(s);
+            // When we've selected only one
+            const auto selected0 = dynamic_cast<Graphic*>(s);
             if (selected0 != nullptr) {
                 selected0->draw();
             }
@@ -574,8 +499,8 @@ void Graphic::draw()
             // When we should draw them all
             base::List::Item* item = subcomponents->getFirstItem();
             while (item != nullptr) {
-                base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-                Graphic* obj = dynamic_cast<Graphic*>( pair->object() );
+                const auto pair = static_cast<base::Pair*>(item->getValue());
+                const auto obj = dynamic_cast<Graphic*>( pair->object() );
                 if (obj != nullptr) obj->draw();
                 item = item->getNext();
             }
@@ -709,8 +634,8 @@ void Graphic::setupMatrix()
     if (transforms != nullptr) {
         const base::List::Item* item = transforms->getFirstItem();
         while (item != nullptr) {
-            base::Pair* p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
-            base::Transform* t = dynamic_cast<base::Transform*>(p->object());
+            const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
+            const auto t = dynamic_cast<base::Transform*>(p->object());
             if (t != nullptr) {
                 m.preMult( *t );
                 haveMatrix = true;
@@ -763,7 +688,7 @@ bool Graphic::setColor(const base::Number* const cnobj)
     if (colorName != nullptr) { colorName->unref(); colorName = nullptr; }
 
     // we have to have a color rotary to do this
-    ColorRotary* cr = dynamic_cast<ColorRotary*>(color);
+    const auto cr = dynamic_cast<ColorRotary*>(color);
     if (cr != nullptr && cnobj != nullptr) {
         cr->determineColor(cnobj->getReal());
     }
@@ -820,12 +745,12 @@ bool Graphic::onSetVisibilityEvent(const base::Number* const msg)
 //    the endpoints are not changed.
 //------------------------------------------------------------------------------
 bool Graphic::clipLine2D(
-            osg::Vec2* ep1,      // Line endpoint #1
-            osg::Vec2* ep2,      // Line endpoint #2
-            const double minX,   // Clip box min X value
-            const double maxX,   // Clip box max X value
-            const double minY,   // Clip box min Y value
-            const double maxY)   // Clip box max Y value
+            base::Vec2d* ep1,     // Line endpoint #1
+            base::Vec2d* ep2,     // Line endpoint #2
+            const double minX,    // Clip box min X value
+            const double maxX,    // Clip box max X value
+            const double minY,    // Clip box min Y value
+            const double maxY)    // Clip box max Y value
 {
    double x1 = ep1->_v[0];
    double y1 = ep1->_v[1];
@@ -934,7 +859,7 @@ bool Graphic::clipLine2D(
 //------------------------------------------------------------------------------
 // Sets the vertices
 //------------------------------------------------------------------------------
-bool Graphic::setVertices(const osg::Vec3* const v, const unsigned int n)
+bool Graphic::setVertices(const base::Vec3d* const v, const unsigned int n)
 {
    // Delete any old vertices
    if (vertices != nullptr) {
@@ -946,7 +871,7 @@ bool Graphic::setVertices(const osg::Vec3* const v, const unsigned int n)
    // Copy vertices
    if (n > 0 && v != nullptr) {
       nv = n;
-      vertices = new osg::Vec3[nv];
+      vertices = new base::Vec3d[nv];
       for (unsigned int i = 0; i < nv; i++) {
          vertices[i] = v[i];
       }
@@ -957,7 +882,7 @@ bool Graphic::setVertices(const osg::Vec3* const v, const unsigned int n)
 //------------------------------------------------------------------------------
 // Sets the normals
 //------------------------------------------------------------------------------
-bool Graphic::setNormals(const osg::Vec3* const v, const unsigned int n)
+bool Graphic::setNormals(const base::Vec3d* const v, const unsigned int n)
 {
    // Delete any old vertices
    if (norms != nullptr) {
@@ -969,7 +894,7 @@ bool Graphic::setNormals(const osg::Vec3* const v, const unsigned int n)
    // Copy vertices
    if (n > 0 && v != nullptr) {
       nn = n;
-      norms = new osg::Vec3[nn];
+      norms = new base::Vec3d[nn];
       for (unsigned int i = 0; i < nn; i++) {
          norms[i] = v[i];
       }
@@ -980,7 +905,7 @@ bool Graphic::setNormals(const osg::Vec3* const v, const unsigned int n)
 //------------------------------------------------------------------------------
 // Sets the texture coordinates
 //------------------------------------------------------------------------------
-bool Graphic::setTextureCoord(const osg::Vec2* const v, const unsigned int n)
+bool Graphic::setTextureCoord(const base::Vec2d* const v, const unsigned int n)
 {
    // Delete any old texture coordinates
    if (texCoord != nullptr) {
@@ -992,7 +917,7 @@ bool Graphic::setTextureCoord(const osg::Vec2* const v, const unsigned int n)
    // Copy texture coordinates
    if (n > 0 && v != nullptr) {
       ntc = n;
-      texCoord = new osg::Vec2[ntc];
+      texCoord = new base::Vec2d[ntc];
       for (unsigned int i = 0; i < ntc; i++) {
          texCoord[i] = v[i];
       }
@@ -1024,8 +949,8 @@ bool Graphic::setSlotTransformList(base::PairStream* list)
         transforms->ref();
         base::List::Item* item = transforms->getFirstItem();
         while (item != nullptr) {
-            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            base::Transform* ip = dynamic_cast<base::Transform*>( pair->object() );
+            const auto pair = static_cast<base::Pair*>(item->getValue());
+            const auto ip = dynamic_cast<base::Transform*>( pair->object() );
             if (ip == nullptr) {
                 // It's not a base::Transform!!!
                 if (isMessageEnabled(MSG_WARNING)) {
@@ -1044,8 +969,8 @@ bool Graphic::setSlotTransformList(base::PairStream* list)
 // setSlotSingleTransform() -- makes a list out of a single base::Transform
 bool Graphic::setSlotSingleTransform(base::Transform* const sobj)
 {
-    base::PairStream* list = new base::PairStream();
-    base::Pair* pair = new base::Pair("1", sobj);
+    const auto list = new base::PairStream();
+    const auto pair = new base::Pair("1", sobj);
     list->put(pair);
     bool ok = setSlotTransformList(list);
     pair->unref();
@@ -1061,9 +986,9 @@ bool Graphic::setSlotTranslateLight(base::PairStream* const msg)
         base::List::Item* item = msg->getFirstItem();
         int count = 0;
         while (item != nullptr && count < 4) {
-            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
+            const auto pair = static_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
-                base::Number* num = dynamic_cast<base::Number*>(pair->object());
+                const auto num = dynamic_cast<base::Number*>(pair->object());
                 if (num != nullptr) {
                     temp[count++] = num->getReal();
                 }
@@ -1085,7 +1010,7 @@ bool Graphic::setLightPosition(const double x, const double y, const double z, c
     return true;
     }
 
-bool Graphic::setLightPosition(osg::Vec4& newPos)
+bool Graphic::setLightPosition(base::Vec4d& newPos)
 {
     lightPos = newPos;
     return true;
@@ -1245,36 +1170,36 @@ bool Graphic::setSlotVertices(const base::PairStream* const msg)
 
         // allocate space for the vertices
         unsigned int n = msg->entries();
-        vertices = new osg::Vec3[n];
+        vertices = new base::Vec3d[n];
 
         // Get the vertices from the pair stream
         nv = 0;
         const base::List::Item* item = msg->getFirstItem();
         while (item != nullptr && nv < n) {
-            const base::Pair* p = dynamic_cast<const base::Pair*>(item->getValue());
-                if (p != nullptr) {
-                    const base::Object* obj2 = p->object();
-                    const base::List* msg2 = dynamic_cast<const base::List*>(obj2);
-                    if (msg2 != nullptr) {
-                        float values[3];
-                        int n = msg2->getNumberList(values, 3);
-                        if (n == 2) {
-                            vertices[nv].set(values[0],values[1],0.0f);
-                            nv++;
-                        }
-                        else if (n == 3) {
-                                vertices[nv].set(values[0],values[1],values[2]);
-                                nv++;
-                        }
-                        else {
-                              if (isMessageEnabled(MSG_WARNING)) {
-                                std::cerr << "Graphic::setVertices: Coordinates not in [ x y ] or [ x y z ] form!" << std::endl;
-                              }
-                                ok = false;
-                        }
+            const auto p = dynamic_cast<const base::Pair*>(item->getValue());
+            if (p != nullptr) {
+                const base::Object* obj2 = p->object();
+                const auto msg2 = dynamic_cast<const base::List*>(obj2);
+                if (msg2 != nullptr) {
+                    float values[3];
+                    int n = msg2->getNumberList(values, 3);
+                    if (n == 2) {
+                        vertices[nv].set(values[0],values[1],0.0f);
+                        nv++;
+                    }
+                    else if (n == 3) {
+                        vertices[nv].set(values[0],values[1],values[2]);
+                        nv++;
+                    }
+                    else {
+                        if (isMessageEnabled(MSG_WARNING)) {
+                            std::cerr << "Graphic::setVertices: Coordinates not in [ x y ] or [ x y z ] form!" << std::endl;
+                         }
+                            ok = false;
                     }
                 }
-        item = item->getNext();
+            }
+            item = item->getNext();
         }
     }
     return ok;
@@ -1297,16 +1222,16 @@ bool Graphic::setSlotNormals(const base::PairStream* const msg)
 
         // allocate space for the vertices
         unsigned int n = msg->entries();
-        norms = new osg::Vec3[n];
+        norms = new base::Vec3d[n];
 
         // Get the normals from the pair stream
         nn = 0;
         const base::List::Item* item = msg->getFirstItem();
         while (item != nullptr && nn < n) {
-            const base::Pair* p = dynamic_cast<const base::Pair*>(item->getValue());
+            const auto p = dynamic_cast<const base::Pair*>(item->getValue());
                 if (p != nullptr) {
                     const base::Object* obj2 = p->object();
-                    const base::List* msg2 = dynamic_cast<const base::List*>(obj2);
+                    const auto msg2 = dynamic_cast<const base::List*>(obj2);
                     if (msg2 != nullptr) {
                         float values[3];
                         int n = msg2->getNumberList(values, 3);
@@ -1350,16 +1275,16 @@ bool Graphic::setSlotTexCoord(const base::PairStream* const msg)
 
         // allocate space for the vertices
         unsigned int n = msg->entries();
-        texCoord = new osg::Vec2[n];
+        texCoord = new base::Vec2d[n];
 
         // Get the vertices from the pair stream
         ntc = 0;
         const base::List::Item* item = msg->getFirstItem();
         while (item != nullptr && ntc < n) {
-            const base::Pair* p = dynamic_cast<const base::Pair*>(item->getValue());
+            const auto p = dynamic_cast<const base::Pair*>(item->getValue());
                 if (p != nullptr) {
                     const base::Object* obj2 = p->object();
-                    const base::List* msg2 = dynamic_cast<const base::List*>(obj2);
+                    const auto msg2 = dynamic_cast<const base::List*>(obj2);
                     if (msg2 != nullptr) {
                         float values[2];
                         int n = msg2->getNumberList(values, 2);
@@ -1459,19 +1384,6 @@ void Graphic::processComponents(
    base::Component::processComponents(list, typeid(Graphic),add,remove);
 }
 
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Graphic
-//------------------------------------------------------------------------------
-base::Object* Graphic::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& Graphic::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

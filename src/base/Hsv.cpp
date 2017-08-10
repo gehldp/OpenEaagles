@@ -3,6 +3,9 @@
 #include "openeaagles/base/Float.hpp"
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/util/math_utils.hpp"
+#include "openeaagles/base/osg/Vec3d"
+#include "openeaagles/base/osg/Vec4d"
+
 #include <cmath>
 
 #include "openeaagles/base/util/platform_api.hpp"
@@ -10,11 +13,9 @@
 namespace oe {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Hsv,"hsv")
+IMPLEMENT_SUBCLASS(Hsv, "hsv")
+EMPTY_DELETEDATA(Hsv)
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Hsv)
     "hue",          // 1: hue component,        range(0.0 to 360.0)
     "saturation",   // 2: saturation component, range(0.0 to 1.0)
@@ -28,9 +29,6 @@ BEGIN_SLOT_MAP(Hsv)
     ON_SLOT(3,setValue,Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Hsv::Hsv(const double h, const double s, const double v)
 {
    STANDARD_CONSTRUCTOR()
@@ -51,18 +49,11 @@ Hsv::Hsv()
    hsv2rgb(color,hsv);      // set the rgb values
 }
 
-
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
 void Hsv::copyData(const Hsv& org, const bool)
 {
    BaseClass::copyData(org);
    hsv = org.hsv;
 }
-
-EMPTY_DELETEDATA(Hsv)
-
 
 //------------------------------------------------------------------------------
 // Data access functions
@@ -82,12 +73,12 @@ double Hsv::value() const
     return hsv[VALUE];
 }
 
-void Hsv::getHSV(osg::Vec3& hhh) const
+void Hsv::getHSV(Vec3d& hhh) const
 {
     hhh.set(hsv[HUE],hsv[SATURATION],hsv[VALUE]);
 }
 
-void Hsv::getHSVA(osg::Vec4& hhh) const
+void Hsv::getHSVA(Vec4d& hhh) const
 {
     hhh.set(hsv[HUE],hsv[SATURATION],hsv[VALUE],hsv[ALPHA]);
 }
@@ -147,7 +138,7 @@ bool Hsv::setAlpha(Number* const msg)
 //------------------------------------------------------------------------------
 // setHSV() -- Sets the hsv vector
 //------------------------------------------------------------------------------
-bool Hsv::setHSV(const osg::Vec3& vec)
+bool Hsv::setHSV(const Vec3d& vec)
 {
    hsv[0] = vec[0];
    hsv[1] = vec[1];
@@ -156,7 +147,7 @@ bool Hsv::setHSV(const osg::Vec3& vec)
    return true;
 }
 
-bool Hsv::setHSVA(const osg::Vec4& vec)
+bool Hsv::setHSVA(const Vec4d& vec)
 {
    hsv = vec;
    hsv2rgb(color,hsv);
@@ -169,10 +160,10 @@ bool Hsv::setHSVA(const osg::Vec4& vec)
 //
 // This code is based on '/usr/people/4Dgifts/iristools/libgutil/colormod.c'
 //------------------------------------------------------------------------------
-void Hsv::hsv2rgb(osg::Vec3& rgb, const osg::Vec3& hsv)
+void Hsv::hsv2rgb(Vec3d& rgb, const Vec3d& hsv)
 {
     // local HSV values
-    double h = base::Angle::aepcdDeg(hsv[HUE]);
+    double h = angle::aepcdDeg(hsv[HUE]);
     if (h < 0.0f) h += 360.0f;
     double s = hsv[SATURATION];
     double v = hsv[VALUE];
@@ -185,8 +176,8 @@ void Hsv::hsv2rgb(osg::Vec3& rgb, const osg::Vec3& hsv)
 
         // computer some parameters
         //int i = ffloor(h);
-        int i = static_cast<int>(h);
-        double f = h - static_cast<double>(i);
+        const auto i = static_cast<int>(h);
+        const double f = h - static_cast<double>(i);
         double p = v * (1.0f - s);
         double q = v * (1.0f - (s * f));
         double t = v * (1.0f - (s * (1.0f - f)));
@@ -249,10 +240,10 @@ void Hsv::hsv2rgb(osg::Vec3& rgb, const osg::Vec3& hsv)
     }
 }
 
-void Hsv::hsv2rgb(osg::Vec4& rgb, const osg::Vec4& hsv)
+void Hsv::hsv2rgb(Vec4d& rgb, const Vec4d& hsv)
 {
-   osg::Vec3 hsv3(hsv[0], hsv[1], hsv[2]);
-   osg::Vec3 rgb3;
+   Vec3d hsv3(hsv[0], hsv[1], hsv[2]);
+   Vec3d rgb3;
    hsv2rgb(rgb3, hsv3);
 
    // Copy to output
@@ -270,7 +261,7 @@ void Hsv::hsv2rgb(osg::Vec4& rgb, const osg::Vec4& hsv)
 //
 // This code is based on '/usr/people/4Dgifts/iristools/libgutil/colormod.c'
 //------------------------------------------------------------------------------
-void Hsv::rgb2hsv(osg::Vec3& hsv, const osg::Vec3& rgb)
+void Hsv::rgb2hsv(Vec3d& hsv, const Vec3d& rgb)
 {
    double cmax = std::fmax( rgb[RED], std::fmax(rgb[GREEN],rgb[BLUE]) );
    double cmin = std::fmin( rgb[RED], std::fmin(rgb[GREEN],rgb[BLUE]) );
@@ -304,11 +295,11 @@ void Hsv::rgb2hsv(osg::Vec3& hsv, const osg::Vec3& rgb)
    hsv[SATURATION] = s;
 }
 
-void Hsv::rgb2hsv(osg::Vec4& hsv, const osg::Vec4& rgb)
+void Hsv::rgb2hsv(Vec4d& hsv, const Vec4d& rgb)
 {
    // Let the Vec3 version do the work
-   osg::Vec3 hsv3;
-   osg::Vec3 rgb3(rgb[0], rgb[1], rgb[2]);
+   Vec3d hsv3;
+   Vec3d rgb3(rgb[0], rgb[1], rgb[2]);
    rgb2hsv(hsv3,rgb3);
 
    // Copy to output (just pass alpha)
@@ -320,17 +311,6 @@ void Hsv::rgb2hsv(osg::Vec4& hsv, const osg::Vec4& rgb)
    hsv[ALPHA] = rgb[ALPHA];
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Hsv
-//------------------------------------------------------------------------------
-Object* Hsv::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& Hsv::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

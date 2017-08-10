@@ -2,14 +2,11 @@
 #ifndef __oe_iodevice_Ai2DiSwitch_H__
 #define __oe_iodevice_Ai2DiSwitch_H__
 
-#include "openeaagles/base/IoAdapter.hpp"
+#include "openeaagles/base/io/IoAdapter.hpp"
 
 namespace oe {
-
 namespace base { class Number; }
-
 namespace iodevice {
-
 class IoDevice;
 
 //------------------------------------------------------------------------------
@@ -66,13 +63,11 @@ protected:
    virtual bool setSlotInverted(const base::Number* const msg);
 
 private:
-   void initData();
-
-   bool devEnb;             // Device enabled
-   unsigned int location;   // IoData input bit location
-   unsigned int channel;    // Port's channel (bit) number
-   double level;            // Switching level
-   bool invert;             // Inverted bit flag
+   bool devEnb {};             // Device enabled
+   unsigned int location {};   // IoData input bit location
+   unsigned int channel {};    // Port's channel (bit) number
+   double level {};            // Switching level
+   bool invert {};             // Inverted bit flag
 };
 
 }

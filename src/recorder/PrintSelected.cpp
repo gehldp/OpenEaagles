@@ -13,24 +13,11 @@
 
 #include <iomanip>
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 namespace oe {
 namespace recorder {
 
-
-//==============================================================================
-// Class PrintSelected
-//==============================================================================
 IMPLEMENT_SUBCLASS(PrintSelected,"PrintSelected")
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(PrintSelected)
    "messageToken",   // 1) Message ID (token)
    "fieldName",      // 2) Full field name (e.g., oe.Recorder.Pb.PlayerId.name)
@@ -41,7 +28,6 @@ BEGIN_SLOTTABLE(PrintSelected)
    "timeOnly",       // 7) match time conditions only. Print ALL messages that match
 END_SLOTTABLE(PrintSelected)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(PrintSelected)
    ON_SLOT( 1, setSlotMsgToken,        base::Number)
    ON_SLOT( 2, setSlotFieldName,       base::String)
@@ -53,40 +39,16 @@ BEGIN_SLOT_MAP(PrintSelected)
 END_SLOT_MAP()
 
 EMPTY_SERIALIZER(PrintSelected)
+EMPTY_DELETEDATA(PrintSelected)
 
-//------------------------------------------------------------------------------
-// Default Constructor
-//------------------------------------------------------------------------------
 PrintSelected::PrintSelected()
 {
    STANDARD_CONSTRUCTOR()
-   initData();
 }
 
-void PrintSelected::initData()
-{
-
-   msgToken = 0;
-   compareValD = 0.0;
-   compareValI = 0;
-   condition = EQ;
-
-   fieldNameStr = "";
-   compareStr = "";
-   recMsg = nullptr;
-   eventMsg = nullptr;
-   foundSelected = false;
-   printHeader = false;
-   timeOnly = false;
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void PrintSelected::copyData(const PrintSelected& org, const bool cc)
+void PrintSelected::copyData(const PrintSelected& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    msgToken = org.msgToken;
    compareValD = org.compareValD;
@@ -98,14 +60,6 @@ void PrintSelected::copyData(const PrintSelected& org, const bool cc)
    foundSelected = org.foundSelected;
    printHeader = org.printHeader;
    timeOnly = org.timeOnly;
-}
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void PrintSelected::deleteData()
-{
-
 }
 
 // Slots
@@ -169,17 +123,17 @@ bool PrintSelected::setSlotCondition(const base::String* const msg)
       ok = true;
 
       if ((*msg == "EQ") || (*msg == "eq")) {
-         condition = EQ;
+         condition = Condition::EQ;
       }
       else if ((*msg == "LT") || (*msg == "lt")) {
-         condition = LT;
+         condition = Condition::LT;
       }
       else if ((*msg == "GT") || (*msg == "gt")) {
-         condition = GT;
+         condition = Condition::GT;
       }
       else {
          // error (or set default)
-         condition = EQ;
+         condition = Condition::EQ;
       }
    }
 
@@ -195,14 +149,6 @@ bool PrintSelected::setSlotTimeOnly(const base::Number* const msg)
    }
    return ok;
 }
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* PrintSelected::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
 
 //------------------------------------------------------------------------------
 // processRecordImp
@@ -502,45 +448,45 @@ void PrintSelected::processMessage(const google::protobuf::Message* const msg)
                }
                else if (cppType == google::protobuf::FieldDescriptor::CPPTYPE_INT32) {
                   int num = reflection->GetInt32(root, fieldDescriptor);
-                  if (((condition == EQ) && (num == getCompareToNum())) ||
-                     ((condition == GT) && (num > getCompareToNum())) ||
-                     ((condition == LT) && (num < getCompareToNum()))) {
+                  if (((condition == Condition::EQ) && (num == getCompareToNum())) ||
+                     ((condition == Condition::GT) && (num > getCompareToNum())) ||
+                     ((condition == Condition::LT) && (num < getCompareToNum()))) {
                       // Found it!
                      foundSelected = true;
                   }
                }
                else if (cppType == google::protobuf::FieldDescriptor::CPPTYPE_INT64) {
                   long long num = reflection->GetInt64(root, fieldDescriptor);
-                  if (((condition == EQ) && (num == getCompareToNum())) ||
-                     ((condition == GT) && (num > getCompareToNum())) ||
-                     ((condition == LT) && (num < getCompareToNum()))) {
+                  if (((condition == Condition::EQ) && (num == getCompareToNum())) ||
+                     ((condition == Condition::GT) && (num > getCompareToNum())) ||
+                     ((condition == Condition::LT) && (num < getCompareToNum()))) {
                       // Found it!
                      foundSelected = true;
                   }
                }
                else if (cppType == google::protobuf::FieldDescriptor::CPPTYPE_UINT32) {
                   unsigned int num = reflection->GetUInt32(root, fieldDescriptor);
-                  if (((condition == EQ) && (num == getCompareToNum())) ||
-                     ((condition == GT) && (static_cast<int>(num) > getCompareToNum())) ||
-                     ((condition == LT) && (static_cast<int>(num) < getCompareToNum()))) {
+                  if (((condition == Condition::EQ) && (num == getCompareToNum())) ||
+                     ((condition == Condition::GT) && (static_cast<int>(num) > getCompareToNum())) ||
+                     ((condition == Condition::LT) && (static_cast<int>(num) < getCompareToNum()))) {
                       // Found it!
                      foundSelected = true;
                   }
                }
                else if (cppType == google::protobuf::FieldDescriptor::CPPTYPE_FLOAT) {
                   double num = static_cast<double>(reflection->GetFloat(root, fieldDescriptor));
-                  if ( ((condition == EQ) && base::equal(num, getCompareToDbl())) ||
-                     ((condition == GT) && (num > getCompareToDbl())) ||
-                     ((condition == LT) && (num < getCompareToDbl()))) {
+                  if ( ((condition == Condition::EQ) && base::equal(num, getCompareToDbl())) ||
+                     ((condition == Condition::GT) && (num > getCompareToDbl())) ||
+                     ((condition == Condition::LT) && (num < getCompareToDbl()))) {
                       // Found it!
                      foundSelected = true;
                   }
                }
                else if (cppType == google::protobuf::FieldDescriptor::CPPTYPE_DOUBLE) {
                   double num = reflection->GetDouble(root, fieldDescriptor);
-                  if ( ((condition == EQ) && base::equal(num, getCompareToDbl())) ||
-                     ((condition == GT) && (num > getCompareToDbl())) ||
-                     ((condition == LT) && (num < getCompareToDbl()))) {
+                  if ( ((condition == Condition::EQ) && base::equal(num, getCompareToDbl())) ||
+                     ((condition == Condition::GT) && (num > getCompareToDbl())) ||
+                     ((condition == Condition::LT) && (num < getCompareToDbl()))) {
                       // Found it!
                      foundSelected = true;
                   }
@@ -555,9 +501,9 @@ void PrintSelected::processMessage(const google::protobuf::Message* const msg)
                else if (cppType == google::protobuf::FieldDescriptor::CPPTYPE_ENUM) {
                   const google::protobuf::EnumValueDescriptor* enumVal = reflection->GetEnum(root, fieldDescriptor);
                   int enumIndex = enumVal->index();
-                  if (((condition == EQ) && (enumIndex == getCompareToNum())) ||
-                     ((condition == GT) && (enumIndex > getCompareToNum())) ||
-                     ((condition == LT) && (enumIndex < getCompareToNum()))) {
+                  if (((condition == Condition::EQ) && (enumIndex == getCompareToNum())) ||
+                     ((condition == Condition::GT) && (enumIndex > getCompareToNum())) ||
+                     ((condition == Condition::LT) && (enumIndex < getCompareToNum()))) {
                       // Found it!
                      foundSelected = true;
                   }
@@ -792,12 +738,11 @@ std::string PrintSelected::printTimeMsg(double time)
     double ss = 0;  // Sec
 
     // utc time
-    base::Time::getHHMMSS(static_cast<double>(time), &hh, &mm, &ss);
+    base::time::getHHMMSS(static_cast<double>(time), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     std::string timeStr;
     timeStr.assign(cbuf);
     return timeStr;
-
 }
 
 }

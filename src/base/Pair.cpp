@@ -11,9 +11,6 @@ namespace base {
 IMPLEMENT_SUBCLASS(Pair, "Pair")
 EMPTY_SLOTTABLE(Pair)
 
-//------------------------------------------------------------------------------
-// Constructors
-//------------------------------------------------------------------------------
 Pair::Pair(const char* slot, Object* object)
 {
     STANDARD_CONSTRUCTOR()
@@ -26,23 +23,11 @@ Pair::Pair(const char* slot, Object* object)
         obj = object;
         obj->ref();
     }
-    else {
-        obj  = nullptr;
-    }
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
-void Pair::copyData(const Pair& pair1, const bool cc)
+void Pair::copyData(const Pair& pair1, const bool)
 {
     BaseClass::copyData(pair1);
-
-    // If we're the copy constructor, init the following
-    if (cc) {
-        slotname = nullptr;
-        obj = nullptr;
-    }
 
     // unref() any old data
     if (slotname != nullptr) {
@@ -70,9 +55,6 @@ void Pair::copyData(const Pair& pair1, const bool cc)
     }
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void Pair::deleteData()
 {
     if (slotname != nullptr) slotname->unref();
@@ -92,9 +74,6 @@ bool Pair::isValid() const
     return slotname->isValid() && obj->isValid();
 }
 
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& Pair::serialize(std::ostream& sout, const int indent, const bool) const
 {
    if (slot() != nullptr && !slot()->isEmpty()) {

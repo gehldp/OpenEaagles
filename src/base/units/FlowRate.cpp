@@ -5,28 +5,18 @@
 namespace oe {
 namespace base {
 
-//==============================================================================
-// flowRate --
-//==============================================================================
 IMPLEMENT_SUBCLASS(FlowRate, "FlowRate")
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(FlowRate)
     "volume",   // 1: Volume
     "flowTime", // 2: Time
 END_SLOTTABLE(FlowRate)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(FlowRate)
     ON_SLOT(1, setSlotVolume, Volume)
     ON_SLOT(2, setSlotTime, Time)
 END_SLOT_MAP()
 
-// ---
-// constructors
-// ---
 FlowRate::FlowRate(double newFlowRate, Volume* volume, Time* time)
 {
     STANDARD_CONSTRUCTOR()
@@ -63,9 +53,6 @@ FlowRate::FlowRate()
     flowRate = 1;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void FlowRate::copyData(const FlowRate& org, const bool cc)
 {
     BaseClass::copyData(org);
@@ -79,9 +66,6 @@ void FlowRate::copyData(const FlowRate& org, const bool cc)
     flowRate = org.flowRate;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void FlowRate::deleteData()
 {
     if (myVolume != nullptr) myVolume->unref();
@@ -89,7 +73,6 @@ void FlowRate::deleteData()
     myVolume = nullptr;
     myTime = nullptr;
 }
-
 
 //------------------------------------------------------------------------------
 // convert() -- converts from one volume/time ratio to another
@@ -152,9 +135,6 @@ bool FlowRate::set(const double newFlowRate, Volume* newVolume, Time* newTime)
     return ok;
 }
 
-//------------------------------------------------------------------------------
-// setSlotVolume() -- sets our volume object.
-//------------------------------------------------------------------------------
 bool FlowRate::setSlotVolume(Volume* newVol)
 {
     bool ok = false;
@@ -167,9 +147,6 @@ bool FlowRate::setSlotVolume(Volume* newVol)
     return ok;
 }
 
-//------------------------------------------------------------------------------
-// setSlotTime() -- sets our time object.
-//------------------------------------------------------------------------------
 bool FlowRate::setSlotTime(Time* newTime)
 {
     bool ok = false;
@@ -182,18 +159,6 @@ bool FlowRate::setSlotTime(Time* newTime)
     return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for FlowRate
-//------------------------------------------------------------------------------
-Object* FlowRate::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& FlowRate::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -209,13 +174,13 @@ std::ostream& FlowRate::serialize(std::ostream& sout, const int i, const bool sl
     if (myVolume != nullptr) {
         indent(sout, i+j);
         sout << "volume: ";
-        Volume* mv = static_cast<Volume*>(myVolume);
+        const auto mv = static_cast<Volume*>(myVolume);
         mv->serialize(sout, i+j);
     }
     if (myTime != nullptr) {
         indent(sout, i+j);
         sout << "time: ";
-        Time* mt = static_cast<Time*>(myTime);
+        const auto mt = static_cast<Time*>(myTime);
         mt->serialize(sout, i+j);
     }
 

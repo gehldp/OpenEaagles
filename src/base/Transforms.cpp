@@ -7,44 +7,29 @@
 namespace oe {
 namespace base {
 
-//==============================================================================
-// Class: Transform
-//==============================================================================
-
-IMPLEMENT_SUBCLASS(Transform,"Transform")
+IMPLEMENT_SUBCLASS(Transform, "Transform")
 
 BEGIN_SLOTTABLE(Transform)
         "x", "y", "z", "w"
 END_SLOTTABLE(Transform)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles for Transform
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Transform)
-    ON_SLOT(1,setComputematrix1,Angle)
-    ON_SLOT(1,setComputematrix1,Number)
-    ON_SLOT(2,setComputematrix2,Angle)
-    ON_SLOT(2,setComputematrix2,Number)
-    ON_SLOT(3,setComputematrix3,Angle)
-    ON_SLOT(3,setComputematrix3,Number)
-    ON_SLOT(4,setComputematrix4,Angle)
-    ON_SLOT(4,setComputematrix4,Number)
+    ON_SLOT(1,setComputematrix1, Angle)
+    ON_SLOT(1,setComputematrix1, Number)
+    ON_SLOT(2,setComputematrix2, Angle)
+    ON_SLOT(2,setComputematrix2, Number)
+    ON_SLOT(3,setComputematrix3, Angle)
+    ON_SLOT(3,setComputematrix3, Number)
+    ON_SLOT(4,setComputematrix4, Angle)
+    ON_SLOT(4,setComputematrix4, Number)
 END_SLOT_MAP()
 
-
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Transform::Transform()
 {
     STANDARD_CONSTRUCTOR()
     m.makeIdentity();
-    nv = 0;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void Transform::copyData(const Transform& org, const bool)
 {
    BaseClass::copyData(org);
@@ -55,36 +40,16 @@ void Transform::copyData(const Transform& org, const bool)
    }
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void Transform::deleteData()
 {
    m.makeIdentity();
    nv = 0;
 }
 
-
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Transform
-//------------------------------------------------------------------------------
-Object* Transform::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-
-//------------------------------------------------------------------------------
-// computeMatrix()
-//------------------------------------------------------------------------------
 void Transform::computeMatrix()
 {
 }
 
-//------------------------------------------------------------------------------
-// serialize() -- print functions
-//------------------------------------------------------------------------------
 std::ostream& Transform::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;
@@ -119,9 +84,6 @@ std::ostream& Transform::serialize(std::ostream& sout, const int i, const bool s
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Translation, "Translation")
 EMPTY_SERIALIZER(Translation)
 
-//------------------------------------------------------------------------------
-// Constructors
-//------------------------------------------------------------------------------
 Translation::Translation()
 {
    STANDARD_CONSTRUCTOR()
@@ -130,21 +92,18 @@ Translation::Translation()
 EMPTY_COPYDATA(Translation)
 EMPTY_DELETEDATA(Translation)
 
-//------------------------------------------------------------------------------
-// computeMatrix()
-//------------------------------------------------------------------------------
 void Translation::computeMatrix()
 {
     m.makeIdentity();
     if (nv == 2) {
         // Translate X and Y
-        osg::Matrix tt;
+        Matrixd tt;
         tt.makeTranslate(v[0], v[1], 0.0f);
         m.preMult(tt);
     }
     else if (nv >= 3) {
         // Translate X, Y and Z
-        osg::Matrix tt;
+        Matrixd tt;
         tt.makeTranslate(v[0], v[1], v[2]);
         m.preMult(tt);
     }
@@ -159,9 +118,6 @@ void Translation::computeMatrix()
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Rotation, "Rotation")
 EMPTY_SERIALIZER(Rotation)
 
-//------------------------------------------------------------------------------
-// Constructors
-//------------------------------------------------------------------------------
 Rotation::Rotation()
 {
    STANDARD_CONSTRUCTOR()
@@ -170,22 +126,18 @@ Rotation::Rotation()
 EMPTY_COPYDATA(Rotation)
 EMPTY_DELETEDATA(Rotation)
 
-
-//------------------------------------------------------------------------------
-// computeMatrix()
-//------------------------------------------------------------------------------
 void Rotation::computeMatrix()
 {
     m.makeIdentity();
     if (nv == 1) {
         // Single value: rotate about the Z axis
-        osg::Matrix rr;
+        Matrixd rr;
         rr.makeRotate(v[0], 0.0f, 0.0f, 1.0f);
         m.preMult(rr);
     }
     else if (nv == 4) {
         // Four values: rotate about vector [ v[0] v[1] v[2] ] by v[3] degrees
-        osg::Matrix rr;
+        Matrixd rr;
         rr.makeRotate(v[3], v[0], v[1], v[2]);
         m.preMult(rr);
     }
@@ -199,10 +151,6 @@ void Rotation::computeMatrix()
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Scale, "Scale")
 EMPTY_SERIALIZER(Scale)
 
-
-//------------------------------------------------------------------------------
-// Constructors
-//------------------------------------------------------------------------------
 Scale::Scale()
 {
    STANDARD_CONSTRUCTOR()
@@ -211,28 +159,24 @@ Scale::Scale()
 EMPTY_COPYDATA(Scale)
 EMPTY_DELETEDATA(Scale)
 
-
-//------------------------------------------------------------------------------
-// computeMatrix()
-//------------------------------------------------------------------------------
 void Scale::computeMatrix()
 {
     m.makeIdentity();
     if (nv == 1) {
        // Single value: scale X and Y by the value and hold Z constant
-        osg::Matrix ss;
+        Matrixd ss;
         ss.makeScale(v[0], v[0], 1.0f);
         m.preMult(ss);
     }
     if (nv == 2) {
         // Two values: scale X and Y by the values and hold Z constant
-        osg::Matrix ss;
+        Matrixd ss;
         ss.makeScale(v[0], v[1], 1.0f);
         m.preMult(ss);
     }
     else if (nv >= 3) {
         // Three values: scale X, Y and Z
-        osg::Matrix ss;
+        Matrixd ss;
         ss.makeScale(v[0], v[1], v[2]);
         m.preMult(ss);
     }

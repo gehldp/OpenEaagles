@@ -2,12 +2,10 @@
 #ifndef __oe_models_RacModel_H__
 #define __oe_models_RacModel_H__
 
-#include "openeaagles/simulation/dynamics/AerodynamicsModel.hpp"
+#include "openeaagles/models/dynamics/AerodynamicsModel.hpp"
 
 namespace oe {
-
 namespace base { class Angle; class Distance; class Number; }
-
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -26,9 +24,9 @@ namespace models {
 //    cmdHeading     <Angle>     ! Command Heading
 //    cmdSpeed       <Number>    ! Command speed           (kts)
 //------------------------------------------------------------------------------
-class RacModel : public simulation::AerodynamicsModel
+class RacModel : public AerodynamicsModel
 {
-    DECLARE_SUBCLASS(RacModel, simulation::AerodynamicsModel)
+    DECLARE_SUBCLASS(RacModel, AerodynamicsModel)
 
 public:
     RacModel();
@@ -68,13 +66,13 @@ public:
 private:
     void updateRAC(const double dt);
 
-    double      vpMin;        // Minimum Velocity              (m/s)
-    double      vpMaxG;       // Velocity for Max G's          (g's)
-    double      gMax;         // Max G's                       (g's)
-    double      maxAccel;     // Max longitudinal acceleration (m/s/s)
-    double      cmdAltitude;  // Commanded Altitude            (meters)
-    double      cmdHeading;   // Commanded Heading             (degs)
-    double      cmdVelocity;  // Commanded speed               (kts)
+    double vpMin {};               // Minimum Velocity              (m/s)
+    double vpMaxG {250.0};         // Velocity for Max G's          (g's)
+    double gMax {4.0};             // Max G's                       (g's)
+    double maxAccel {10.0};        // Max longitudinal acceleration (m/s/s)
+    double cmdAltitude {-9999.0};  // Commanded Altitude            (meters)
+    double cmdHeading {-9999.0};   // Commanded Heading             (degs)
+    double cmdVelocity {-9999.0};  // Commanded speed               (kts)
 };
 
 }

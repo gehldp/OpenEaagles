@@ -14,11 +14,6 @@
 
 #include "openeaagles/base/Matrix.hpp"
 
-#include "openeaagles/base/osg/Vec2"
-#include "openeaagles/base/osg/Vec3"
-#include "openeaagles/base/osg/Vec4"
-#include "openeaagles/base/osg/Matrix"
-
 namespace oe {
 namespace base {
 
@@ -49,22 +44,22 @@ public:
    // ---
    // construct vectors from OSG vectors
    // ---
-   RVector(const osg::Vec2d& v) : Matrix()   { setMatrix(1,2,v.ptr(),2); STANDARD_CONSTRUCTOR() }
-   RVector(const osg::Vec2f& v) : Matrix()   { setMatrix(1,2,v.ptr(),2); STANDARD_CONSTRUCTOR() }
-   RVector(const osg::Vec3d& v) : Matrix()   { setMatrix(1,3,v.ptr(),3); STANDARD_CONSTRUCTOR() }
-   RVector(const osg::Vec3f& v) : Matrix()   { setMatrix(1,3,v.ptr(),3); STANDARD_CONSTRUCTOR() }
-   RVector(const osg::Vec4d& v) : Matrix()   { setMatrix(1,4,v.ptr(),4); STANDARD_CONSTRUCTOR() }
-   RVector(const osg::Vec4f& v) : Matrix()   { setMatrix(1,4,v.ptr(),4); STANDARD_CONSTRUCTOR() }
+   RVector(const Vec2d& v) : Matrix()   { setMatrix(1,2,v.ptr(),2); STANDARD_CONSTRUCTOR() }
+   RVector(const Vec2f& v) : Matrix()   { setMatrix(1,2,v.ptr(),2); STANDARD_CONSTRUCTOR() }
+   RVector(const Vec3d& v) : Matrix()   { setMatrix(1,3,v.ptr(),3); STANDARD_CONSTRUCTOR() }
+   RVector(const Vec3f& v) : Matrix()   { setMatrix(1,3,v.ptr(),3); STANDARD_CONSTRUCTOR() }
+   RVector(const Vec4d& v) : Matrix()   { setMatrix(1,4,v.ptr(),4); STANDARD_CONSTRUCTOR() }
+   RVector(const Vec4f& v) : Matrix()   { setMatrix(1,4,v.ptr(),4); STANDARD_CONSTRUCTOR() }
 
    // ---
    // Assigned from OSG vectors
    // ---
-   RVector& operator=(const osg::Vec2d& v)   { setMatrix(1,2,v.ptr(),2); return *this; }
-   RVector& operator=(const osg::Vec2f& v)   { setMatrix(1,2,v.ptr(),2); return *this; }
-   RVector& operator=(const osg::Vec3d& v)   { setMatrix(1,3,v.ptr(),3); return *this; }
-   RVector& operator=(const osg::Vec3f& v)   { setMatrix(1,3,v.ptr(),3); return *this; }
-   RVector& operator=(const osg::Vec4d& v)   { setMatrix(1,4,v.ptr(),4); return *this; }
-   RVector& operator=(const osg::Vec4f& v)   { setMatrix(1,4,v.ptr(),4); return *this; }
+   RVector& operator=(const Vec2d& v)   { setMatrix(1,2,v.ptr(),2); return *this; }
+   RVector& operator=(const Vec2f& v)   { setMatrix(1,2,v.ptr(),2); return *this; }
+   RVector& operator=(const Vec3d& v)   { setMatrix(1,3,v.ptr(),3); return *this; }
+   RVector& operator=(const Vec3f& v)   { setMatrix(1,3,v.ptr(),3); return *this; }
+   RVector& operator=(const Vec4d& v)   { setMatrix(1,4,v.ptr(),4); return *this; }
+   RVector& operator=(const Vec4f& v)   { setMatrix(1,4,v.ptr(),4); return *this; }
 
    // Size of the vector
    unsigned int getSize() const     { return getCols(); }
@@ -219,8 +214,8 @@ inline RVector* getRowVector(const Matrix& A, const unsigned int r)
 
    const unsigned int N = A.getCols();
 
-   RVector* pV = new RVector(N);
-   if (pV == 0) return 0;
+   const auto pV = new RVector(N);
+   if (pV == nullptr) return nullptr;
 
    for (unsigned int c = 0; c < N; c++)
    {
@@ -260,22 +255,22 @@ public:
    // ---
    // construct vectors from OSG vectors
    // ---
-   CVector(const osg::Vec2d& v) : Matrix()   { setMatrix(2,1,v.ptr(),2); STANDARD_CONSTRUCTOR() }
-   CVector(const osg::Vec2f& v) : Matrix()   { setMatrix(2,1,v.ptr(),2); STANDARD_CONSTRUCTOR() }
-   CVector(const osg::Vec3d& v) : Matrix()   { setMatrix(3,1,v.ptr(),3); STANDARD_CONSTRUCTOR() }
-   CVector(const osg::Vec3f& v) : Matrix()   { setMatrix(3,1,v.ptr(),3); STANDARD_CONSTRUCTOR() }
-   CVector(const osg::Vec4d& v) : Matrix()   { setMatrix(4,1,v.ptr(),4); STANDARD_CONSTRUCTOR() }
-   CVector(const osg::Vec4f& v) : Matrix()   { setMatrix(4,1,v.ptr(),4); STANDARD_CONSTRUCTOR() }
+   CVector(const Vec2d& v) : Matrix()   { setMatrix(2,1,v.ptr(),2); STANDARD_CONSTRUCTOR() }
+   CVector(const Vec2f& v) : Matrix()   { setMatrix(2,1,v.ptr(),2); STANDARD_CONSTRUCTOR() }
+   CVector(const Vec3d& v) : Matrix()   { setMatrix(3,1,v.ptr(),3); STANDARD_CONSTRUCTOR() }
+   CVector(const Vec3f& v) : Matrix()   { setMatrix(3,1,v.ptr(),3); STANDARD_CONSTRUCTOR() }
+   CVector(const Vec4d& v) : Matrix()   { setMatrix(4,1,v.ptr(),4); STANDARD_CONSTRUCTOR() }
+   CVector(const Vec4f& v) : Matrix()   { setMatrix(4,1,v.ptr(),4); STANDARD_CONSTRUCTOR() }
 
    // ---
    // Assigned from OSG vectors
    // ---
-   CVector& operator=(const osg::Vec2d& v)   { setMatrix(2,1,v.ptr(),2); return *this; }
-   CVector& operator=(const osg::Vec2f& v)   { setMatrix(2,1,v.ptr(),2); return *this; }
-   CVector& operator=(const osg::Vec3d& v)   { setMatrix(3,1,v.ptr(),3); return *this; }
-   CVector& operator=(const osg::Vec3f& v)   { setMatrix(3,1,v.ptr(),3); return *this; }
-   CVector& operator=(const osg::Vec4d& v)   { setMatrix(4,1,v.ptr(),4); return *this; }
-   CVector& operator=(const osg::Vec4f& v)   { setMatrix(4,1,v.ptr(),4); return *this; }
+   CVector& operator=(const Vec2d& v)   { setMatrix(2,1,v.ptr(),2); return *this; }
+   CVector& operator=(const Vec2f& v)   { setMatrix(2,1,v.ptr(),2); return *this; }
+   CVector& operator=(const Vec3d& v)   { setMatrix(3,1,v.ptr(),3); return *this; }
+   CVector& operator=(const Vec3f& v)   { setMatrix(3,1,v.ptr(),3); return *this; }
+   CVector& operator=(const Vec4d& v)   { setMatrix(4,1,v.ptr(),4); return *this; }
+   CVector& operator=(const Vec4f& v)   { setMatrix(4,1,v.ptr(),4); return *this; }
 
 
    // Size of the vector
@@ -432,8 +427,8 @@ inline CVector* getColVector(const Matrix& A, const unsigned int c)
    if (!B1 || !B2) return 0;
 
    const unsigned int N = A.getRows();
-   CVector* pV = new CVector(N);
-   if (pV == 0) return 0;
+   const auto pV = new CVector(N);
+   if (pV == nullptr) return nullptr;
 
    for (unsigned int r = 0; r < N; r++) {
       (*pV)[r] = A(r,c);
@@ -478,7 +473,7 @@ inline Matrix* outerProduct(const CVector& v1, const RVector& v2)
 // ---
 inline CVector* crossProduct(const CVector& v1, const CVector& v2)
 {
-   CVector* p = 0;
+   CVector* p = nullptr;
    if (v1.getSize() == 3 && v2.getSize() == 3) {
       p = new CVector(3);
       (*p)[0] =  ( v1[1]*v2[2] - v1[2]*v2[1] );
@@ -490,7 +485,7 @@ inline CVector* crossProduct(const CVector& v1, const CVector& v2)
 
 inline RVector* crossProduct(const RVector& v1, const RVector& v2)
 {
-   RVector* p = 0;
+   RVector* p = nullptr;
    if (v1.getSize() == 3 && v2.getSize() == 3) {
       p = new RVector(3);
       (*p)[0] =  ( v1[1]*v2[2] - v1[2]*v2[1] );
@@ -507,7 +502,7 @@ inline CVector* getDiag(const Matrix& A)
    }
 
    const unsigned int N = A.getRows();
-   CVector* p = new CVector(N);
+   const auto p = new CVector(N);
    for (unsigned int i = 0; i < N; i++) {
       (*p)[i] = A(i,i);
    }

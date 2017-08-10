@@ -3,7 +3,6 @@
 
 #include "openeaagles/base/Object.hpp"
 
-#include "openeaagles/base/Logger.hpp"
 #include "openeaagles/base/FileReader.hpp"
 #include "openeaagles/base/Statistic.hpp"
 #include "openeaagles/base/Transforms.hpp"
@@ -22,14 +21,18 @@
 #include "openeaagles/base/LatLon.hpp"
 #include "openeaagles/base/Operators.hpp"
 
-// Net handlers
-#include "openeaagles/base/nethandlers/TcpHandler.hpp"
-#include "openeaagles/base/nethandlers/TcpClient.hpp"
-#include "openeaagles/base/nethandlers/TcpServerMultiple.hpp"
-#include "openeaagles/base/nethandlers/TcpServerSingle.hpp"
-#include "openeaagles/base/nethandlers/UdpBroadcastHandler.hpp"
-#include "openeaagles/base/nethandlers/UdpMulticastHandler.hpp"
-#include "openeaagles/base/nethandlers/UdpUnicastHandler.hpp"
+// IO
+#include "openeaagles/base/io/IoData.hpp"
+#include "openeaagles/base/io/IoHandler.hpp"
+
+// Network handlers
+#include "openeaagles/base/network/TcpHandler.hpp"
+#include "openeaagles/base/network/TcpClient.hpp"
+#include "openeaagles/base/network/TcpServerMultiple.hpp"
+#include "openeaagles/base/network/TcpServerSingle.hpp"
+#include "openeaagles/base/network/UdpBroadcastHandler.hpp"
+#include "openeaagles/base/network/UdpMulticastHandler.hpp"
+#include "openeaagles/base/network/UdpUnicastHandler.hpp"
 
 // Colors
 #include "openeaagles/base/Cie.hpp"
@@ -63,9 +66,7 @@
 
 // Others
 #include "openeaagles/base/EarthModel.hpp"
-#include "openeaagles/base/IoData.hpp"
-#include "openeaagles/base/IoHandler.hpp"
-#include "openeaagles/base/ThreadPool.hpp"
+#include "openeaagles/base/concurrent/ThreadPool.hpp"
 
 // Ubf
 #include "openeaagles/base/ubf/Agent.hpp"
@@ -118,9 +119,6 @@ Object* factory(const std::string& name)
     // Components
     else if ( name == FileReader::getFactoryName() ) {
         obj = new FileReader();
-    }
-    else if ( name == Logger::getFactoryName() ) {
-        obj = new Logger();
     }
     else if ( name == Statistic::getFactoryName() ) {
         obj = new Statistic();

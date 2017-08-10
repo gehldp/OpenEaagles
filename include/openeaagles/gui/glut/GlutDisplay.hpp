@@ -1,6 +1,6 @@
 
-#ifndef __oe_glut_GlutDisplay_H__
-#define __oe_glut_GlutDisplay_H__
+#ifndef __oe_gui_glut_GlutDisplay_H__
+#define __oe_gui_glut_GlutDisplay_H__
 
 #include "openeaagles/graphics/Display.hpp"
 
@@ -86,10 +86,10 @@ public:
    virtual bool setResizeWindows(const bool flg);
 
    // Subwindow position [ x y ] within our main window as a ratio of its main window (see note #4)
-   const osg::Vec2d& getSubwindowPosition() const;
+   const base::Vec2d& getSubwindowPosition() const;
 
    // Subwindow size [ width height ] as a ratio of its main window (see note #4)
-   const osg::Vec2d& getSubwindowSize() const;
+   const base::Vec2d& getSubwindowSize() const;
 
    // Slot functions
    bool setSlotFullScreen(const base::Number* const msg);
@@ -118,7 +118,7 @@ protected:
    virtual void reshapeSubWindow();
 
    // Reshape this subwindow using the subwindows position and size (see note #4)
-   virtual bool reshapeSubWindow(const osg::Vec2d& position, const osg::Vec2d& size);
+   virtual bool reshapeSubWindow(const base::Vec2d& position, const base::Vec2d& size);
 
    virtual bool onEscKey();
    virtual void specialEvent(const int key);
@@ -141,7 +141,7 @@ protected:
    virtual Graphic* findSelected(const GLint hits, const GLuint sbuff[], const int item = 0);
 
 private:
-   enum { MAX_DISPLAYS = 500 };     // Maximum number of GlutDisplay classes
+   static const int MAX_DISPLAYS = 500;     // Maximum number of GlutDisplay classes
    static const float CLICK_TIME;
 
 private:
@@ -158,39 +158,39 @@ private:
    static void motionFuncCB(int x, int y);
    static void entryFuncCB(int state);
 
-   int   winId;                     // Window ID
-   bool  accumBuff;                 // Accumulation buffer enabled
-   bool  stencilBuff;               // Stencil buffer enabled
-   GLdouble pickWidth;              // Width of the pick area
-   GLdouble pickHeight;             // Height of the pick area
-   bool  okToResize;                // Ok to resize our subwindows (main windows only)
+   int winId {-1};                     // Window ID
+   bool accumBuff {};                  // Accumulation buffer enabled
+   bool stencilBuff {};                // Stencil buffer enabled
+   GLdouble pickWidth {10.0};          // Width of the pick area
+   GLdouble pickHeight {10.0};         // Height of the pick area
+   bool okToResize {};                 // Ok to resize our subwindows (main windows only)
 
    // main window only data
-   bool  fullScreenFlg;             // Full screen flag (main window only)
-   unsigned int idleSleepTimeMS;    // Idle callback sleep time (MS)
+   bool fullScreenFlg {};              // Full screen flag (main window only)
+   unsigned int idleSleepTimeMS {};    // Idle callback sleep time (MS)
 
    // Subwindow only data
-   int   mainWinId;                 // Main window ID (sub-window only)
-   osg::Vec2d swPosition;           // Our X and Y positions as a ratio [ 0 ... 1 ] of our main window
-   osg::Vec2d swSize;               // Our width and height as a ratio [ 0 ... 1 ] of our main window
+   int mainWinId {-1};                 // Main window ID (sub-window only)
+   base::Vec2d swPosition;             // Our X and Y positions as a ratio [ 0 ... 1 ] of our main window
+   base::Vec2d swSize;                 // Our width and height as a ratio [ 0 ... 1 ] of our main window
 
    // Registered GlutDisplay list
    static int idList[MAX_DISPLAYS];                    // List of window IDs
    static GlutDisplay* displayList[MAX_DISPLAYS];      // Display List
    static int numGlutDisplays;                         // Number of GlutDisplays
-   Graphic* picked;                                    // our "picked graphic"
+   Graphic* picked {};                                 // our "picked graphic"
 };
 
-inline int GlutDisplay::getWindowId() const                         { return winId;           }
-inline bool GlutDisplay::isWindowId(const int id) const             { return id == winId;     }
-inline bool GlutDisplay::isFullScreen() const                       { return fullScreenFlg;   }
-inline GLdouble GlutDisplay::getPickWidth() const                   { return pickWidth;       }
-inline GLdouble GlutDisplay::getPickHeight() const                  { return pickHeight;      }
-inline bool GlutDisplay::isAccumBuff() const                        { return accumBuff;       }
-inline bool GlutDisplay::isStencilBuff() const                      { return stencilBuff;     }
-inline unsigned int GlutDisplay::getIdleSleepTime() const           { return idleSleepTimeMS; }
-inline const osg::Vec2d& GlutDisplay::getSubwindowPosition() const  { return swPosition;      }
-inline const osg::Vec2d& GlutDisplay::getSubwindowSize() const      { return swSize;          }
+inline int GlutDisplay::getWindowId() const                               { return winId;           }
+inline bool GlutDisplay::isWindowId(const int id) const                   { return id == winId;     }
+inline bool GlutDisplay::isFullScreen() const                             { return fullScreenFlg;   }
+inline GLdouble GlutDisplay::getPickWidth() const                         { return pickWidth;       }
+inline GLdouble GlutDisplay::getPickHeight() const                        { return pickHeight;      }
+inline bool GlutDisplay::isAccumBuff() const                              { return accumBuff;       }
+inline bool GlutDisplay::isStencilBuff() const                            { return stencilBuff;     }
+inline unsigned int GlutDisplay::getIdleSleepTime() const                 { return idleSleepTimeMS; }
+inline const base::Vec2d& GlutDisplay::getSubwindowPosition() const       { return swPosition;      }
+inline const base::Vec2d& GlutDisplay::getSubwindowSize() const           { return swSize;          }
 
 }
 }

@@ -1,9 +1,9 @@
-// Class: SignalGen
 
 #include "openeaagles/iodevice/SignalGen.hpp"
 
-#include "openeaagles/base/IoData.hpp"
-#include "openeaagles/base/IoDevice.hpp"
+#include "openeaagles/base/io/IoData.hpp"
+#include "openeaagles/base/io/IoDevice.hpp"
+
 #include "openeaagles/base/String.hpp"
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Frequencies.hpp"
@@ -13,13 +13,10 @@
 namespace oe {
 namespace iodevice {
 
-//==============================================================================
-// SignalGen
-//==============================================================================
 
-IMPLEMENT_SUBCLASS(SignalGen,"SignalGenAI")
+IMPLEMENT_SUBCLASS(SignalGen, "SignalGenAI")
+EMPTY_DELETEDATA(SignalGen)
 
-// slot table for this class type
 BEGIN_SLOTTABLE(SignalGen)
     "signal",     // 1) Signal type { SINE, COSINE, SQUARE, SAW }
     "frequency",  // 2) Signal frequency
@@ -28,47 +25,22 @@ BEGIN_SLOTTABLE(SignalGen)
     "channel",    // 5) Device channel number
 END_SLOTTABLE(SignalGen)
 
-//  Map slot table to handles
 BEGIN_SLOT_MAP(SignalGen)
    ON_SLOT( 1, setSlotSignal,    base::String)
    ON_SLOT( 2, setSlotFrequency, base::Frequency)
    ON_SLOT( 3, setSlotPhase,     base::Angle)
-   ON_SLOT( 4, setSlotLocation, base::Number)
-   ON_SLOT( 5, setSlotChannel,  base::Number)
+   ON_SLOT( 4, setSlotLocation,  base::Number)
+   ON_SLOT( 5, setSlotChannel,   base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 SignalGen::SignalGen()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-//------------------------------------------------------------------------------
-// initData() -- init member data
-//------------------------------------------------------------------------------
-void SignalGen::initData()
-{
-   location = 0;
-   channel = 0;
-
-   signal = SINE;
-   phase = 0;
-   freq = 0;
-   time = 0;
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void SignalGen::copyData(const SignalGen& org, const bool cc)
+void SignalGen::copyData(const SignalGen& org, const bool)
 {
    BaseClass::copyData(org);
-
-   if (cc) initData();
 
    signal = org.signal;
    phase = org.phase;
@@ -76,16 +48,6 @@ void SignalGen::copyData(const SignalGen& org, const bool cc)
    time = org.time;
 }
 
-//------------------------------------------------------------------------------
-//deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void SignalGen::deleteData()
-{
-}
-
-//------------------------------------------------------------------------------
-// reset() --
-//------------------------------------------------------------------------------
 void SignalGen::reset()
 {
    time = 0;
@@ -195,7 +157,7 @@ double SignalGen::calc(const double dt)
    double alpha = (2.0 * base::PI * freq * time) + phase;
 
    // Local cycle (-PI to PI)
-   double beta = base::Angle::aepcdRad(alpha);
+   double beta = base::angle::aepcdRad(alpha);
 
    switch (signal) {
       case SINE : {
@@ -293,17 +255,6 @@ bool SignalGen::setSlotChannel(const base::Number* const msg)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-base::Object* SignalGen::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& SignalGen::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;

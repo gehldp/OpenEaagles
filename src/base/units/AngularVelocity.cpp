@@ -7,16 +7,10 @@
 namespace oe {
 namespace base {
 
-//------------------------------------------------------------------------------
-// AngularVelocity
-//------------------------------------------------------------------------------
 IMPLEMENT_SUBCLASS(AngularVelocity, "AngularVelocity")
 EMPTY_SERIALIZER(AngularVelocity)
 EMPTY_DELETEDATA(AngularVelocity)
 
-//------------------------------------------------------------------------------
-// Slot Table:
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(AngularVelocity)
     "angle",    // 1: angle
     "time",     // 2: time
@@ -28,16 +22,10 @@ BEGIN_SLOT_MAP(AngularVelocity)
     ON_SLOT(2, setSlotTime, Time)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructors:
-//------------------------------------------------------------------------------
 AngularVelocity::AngularVelocity()
 {
     STANDARD_CONSTRUCTOR()
 
-    //Set a default angle, time, and angularVelocity
-    angle = 1;
-    time = 1;
     val = 1;
 }
 
@@ -65,15 +53,13 @@ AngularVelocity::AngularVelocity(const Angle* const newAngle, const Time* const 
     bool okTime = false;
 
     //Check and convert the angle to radians
-    if (newAngle != nullptr)
-    {
-        double finalAngle = static_cast<double>(Radians::convertStatic(*newAngle));
+    if ( newAngle != nullptr ) {
+        const auto finalAngle = static_cast<double>(Radians::convertStatic(*newAngle));
         okAngle = setRadians(finalAngle);
     }
 
     //Check and convert the time to seconds
-    if (newTime != nullptr)
-    {
+    if ( newTime != nullptr ) {
         double finaltime = Seconds::convertStatic( *newTime );
         okTime = setSeconds(finaltime);
     }
@@ -83,14 +69,9 @@ AngularVelocity::AngularVelocity(const Angle* const newAngle, const Time* const 
     {
         //Give error if something was not set correctly:
         std::cerr << "Angle or Time not set correctly - new AngularVelocity Object bad." << std::endl;
-
     }
-
 }
 
-//------------------------------------------------------------------------------
-// getAngularVelocity() -- returns Angular Velocity:
-//------------------------------------------------------------------------------
 double AngularVelocity::getRadiansPerSecond() const
 {
     return static_cast<double>(val);
@@ -113,13 +94,13 @@ double AngularVelocity::convert(Angle* newAngleUnit, Time* newTimeUnit)
     newTimeUnit->setValue(1);
 
     //Take the internal unit and create an object of Angle to convert angles:
-    Radians* internalRadians = new Radians(static_cast<double>(angle));
+    const auto internalRadians = new Radians(static_cast<double>(angle));
 
     //Find out what units the angle is in:
     if (dynamic_cast<Degrees*>(newAngleUnit) != nullptr)
     {
         //New angle is in degrees:
-        Degrees* degrees = new Degrees;
+        const auto degrees = new Degrees;
         desiredAngle = static_cast<double>(degrees->convert(*internalRadians));
         degrees->unref();
     }
@@ -131,7 +112,7 @@ double AngularVelocity::convert(Angle* newAngleUnit, Time* newTimeUnit)
     else if (dynamic_cast<Semicircles*>(newAngleUnit) != nullptr)
     {
         //New angle is in semicircles:
-        Semicircles* semicircles = new Semicircles;
+        const auto semicircles = new Semicircles;
         desiredAngle = static_cast<double>(semicircles->convert(*internalRadians));
         semicircles->unref();
     }
@@ -143,46 +124,29 @@ double AngularVelocity::convert(Angle* newAngleUnit, Time* newTimeUnit)
     internalRadians->unref();
 
     //Find out what units the time input is in - do not use built in convert - very easy to do by hand:
-    Seconds* q = dynamic_cast<Seconds*>(newTimeUnit);
-    if(q != nullptr)
-    {
+    const auto q = dynamic_cast<Seconds*>(newTimeUnit);
+    if (q != nullptr) {
         desiredTime = time;
-    }
-    else if(dynamic_cast<MilliSeconds*>(newTimeUnit) != nullptr)
-    {
+    } else if (dynamic_cast<MilliSeconds*>(newTimeUnit) != nullptr) {
         //Time in milliseconds:
         desiredTime = time*1000;
-    }
-    else if(dynamic_cast<Minutes*>(newTimeUnit) != nullptr)
-    {
+    } else if (dynamic_cast<Minutes*>(newTimeUnit) != nullptr) {
         //Time in minutes:
         desiredTime = time/60;
-    }
-    else if(dynamic_cast<Hours*>(newTimeUnit) != nullptr)
-    {
+    } else if (dynamic_cast<Hours*>(newTimeUnit) != nullptr) {
         //Time in hours:
         desiredTime = time/3600;
-    }
-    else if(dynamic_cast<Days*>(newTimeUnit) != nullptr)
-    {
+    } else if (dynamic_cast<Days*>(newTimeUnit) != nullptr) {
         //Time in days:
         desiredTime = time/86400;
-    }
-    else
-    {
+    } else {
         //Give Error - Not sure what type it is:
         std::cerr << "Time Conversion Type Not Found." << std::endl;
     };
-
     desiredResult = desiredAngle/desiredTime;
-
     return desiredResult;
-
 }
 
-//------------------------------------------------------------------------------
-// setRadiansPerSecond() -- sets our angularVelocity:
-//------------------------------------------------------------------------------
 bool AngularVelocity::setRadiansPerSecond(const double newAngularVelocity)
 {
 
@@ -196,16 +160,12 @@ bool AngularVelocity::setRadiansPerSecond(const double newAngularVelocity)
     return ok1;
 }
 
-//------------------------------------------------------------------------------
-// setSlotAngle() -- sets angle based on input object and its value:
-//------------------------------------------------------------------------------
 bool AngularVelocity::setSlotAngle(const Angle* const msg)
 {
     bool ok = false;
 
     //Try to convert Number to an angle:
-    if(msg != nullptr)
-    {
+    if( msg != nullptr ) {
         double finalNumber = static_cast<double>(Radians::convertStatic(*msg));
         ok = setRadians(finalNumber);
     }
@@ -220,8 +180,7 @@ bool AngularVelocity::setSlotTime(const Time* const msg)
     bool ok = false;
 
     //Try to convert Number to a time:
-    if(msg != nullptr)
-    {
+    if( msg != nullptr ) {
         double finalNumber = Seconds::convertStatic(*msg);
         ok = setSeconds(finalNumber);
     }
@@ -234,7 +193,7 @@ bool AngularVelocity::setSlotTime(const Time* const msg)
 bool AngularVelocity::setDegrees(const double newAngle)
 {
     //Set the angle in radians:
-    bool ok = setRadians( newAngle * static_cast<double>(Angle::D2RCC) );
+    bool ok = setRadians( newAngle * static_cast<double>(angle::D2RCC) );
 
     return ok;
 }
@@ -262,17 +221,6 @@ bool AngularVelocity::setSeconds(const double newTime)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for AngularVelocity
-//------------------------------------------------------------------------------
-Object* AngularVelocity::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data:
-//------------------------------------------------------------------------------
 void AngularVelocity::copyData(const AngularVelocity& org, const bool)
 {
     BaseClass::copyData(org);

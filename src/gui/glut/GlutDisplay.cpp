@@ -1,6 +1,3 @@
-//------------------------------------------------------------------------------
-// Glut Display
-//------------------------------------------------------------------------------
 
 #include "openeaagles/gui/glut/GlutDisplay.hpp"
 
@@ -9,7 +6,7 @@
 #include "openeaagles/base/String.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/util/system.hpp"
+#include "openeaagles/base/util/system_utils.hpp"
 
 #include <cstdlib>
 
@@ -25,16 +22,13 @@ namespace glut {
 
 IMPLEMENT_SUBCLASS(GlutDisplay,"GlutDisplay")
 
-int GlutDisplay::idList[GlutDisplay::MAX_DISPLAYS];                     // List of window IDs
-GlutDisplay* GlutDisplay::displayList[GlutDisplay::MAX_DISPLAYS];       // Display List
-int GlutDisplay::numGlutDisplays = 0;                                   // Number of  registered GlutDisplays
+int GlutDisplay::idList[GlutDisplay::MAX_DISPLAYS] {};                 // List of window IDs
+GlutDisplay* GlutDisplay::displayList[GlutDisplay::MAX_DISPLAYS] {};   // Display List
+int GlutDisplay::numGlutDisplays {};                                   // Number of  registered GlutDisplays
 
 const float GlutDisplay::CLICK_TIME = 0.5f;                             // our double click timeout
 const unsigned int DEFAULT_IDLE_SLEEP = 40;                             // default idle CB sleep time
 
-//------------------------------------------------------------------------------
-// Slot table for this form type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(GlutDisplay)
    "fullScreen",           // 1) Full screen flag     -- Main windows only --
    "idleSleepTime",        // 2) Idle sleep time (MS; default: 40ms) -- Main windows only --
@@ -45,9 +39,6 @@ BEGIN_SLOTTABLE(GlutDisplay)
    "stencilBuff",          // 7) Enable the stencil buffer (default: false)
 END_SLOTTABLE(GlutDisplay)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(GlutDisplay)
    ON_SLOT(1,setSlotFullScreen,base::Number)
    ON_SLOT(2,setSlotIdleSleepTime,base::Number)
@@ -58,46 +49,23 @@ BEGIN_SLOT_MAP(GlutDisplay)
    ON_SLOT(7,setSlotStencilBuff,base::Number)
 END_SLOT_MAP()
 
-//-----------------------------------------------------------------------------
-// Event handler macro
-//-----------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(GlutDisplay)
    ON_EVENT(ESC_KEY,onEscKey)
 END_EVENT_HANDLER()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 GlutDisplay::GlutDisplay()
 {
    STANDARD_CONSTRUCTOR()
-
    initData();
 }
 
-//------------------------------------------------------------------------------
-// InitData
-//------------------------------------------------------------------------------
 void GlutDisplay::initData()
 {
-   winId = -1;
-   fullScreenFlg = false;
-   pickWidth = 10.0;
-   pickHeight = 10.0;
-   accumBuff = false;
-   stencilBuff = false;
    idleSleepTimeMS = DEFAULT_IDLE_SLEEP;
-   okToResize = false;
-   picked = nullptr;
-
-   mainWinId = -1;
    swPosition.set(0.0, 0.0);
    swSize.set(50.0, 50.0);
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy our objects data
-//------------------------------------------------------------------------------
 void GlutDisplay::copyData(const GlutDisplay& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -121,9 +89,6 @@ void GlutDisplay::copyData(const GlutDisplay& org, const bool cc)
    picked = nullptr;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- copy our objects data
-//------------------------------------------------------------------------------
 void GlutDisplay::deleteData()
 {
    if (picked != nullptr) picked->unref();
@@ -215,9 +180,9 @@ int GlutDisplay::createWindow()
       if (subDisplays() != nullptr) {
          base::List::Item* item = subDisplays()->getFirstItem();
          while (item != nullptr) {
-            base::Pair* pair = dynamic_cast<base::Pair*>(item->getValue());
+            const auto pair = dynamic_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
-               GlutDisplay* dobj = dynamic_cast<GlutDisplay*>( pair->object() );
+               const auto dobj = dynamic_cast<GlutDisplay*>( pair->object() );
                if (dobj != nullptr) dobj->createSubWindow(winId);
             }
             item = item->getNext();
@@ -292,9 +257,9 @@ int GlutDisplay::createSubWindow(const int mainId)
       if (subDisplays() != nullptr) {
          base::List::Item* item = subDisplays()->getFirstItem();
          while (item != nullptr) {
-            base::Pair* pair = dynamic_cast<base::Pair*>(item->getValue());
+            const auto pair = dynamic_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
-               GlutDisplay* dobj = dynamic_cast<GlutDisplay*>( pair->object() );
+               const auto dobj = dynamic_cast<GlutDisplay*>( pair->object() );
                if (dobj != nullptr) dobj->createSubWindow(winId);
             }
             item = item->getNext();
@@ -365,9 +330,9 @@ void GlutDisplay::reshapeIt(int w, int h)
          // go through and put our new numbers in
          base::List::Item* item = subDisplays()->getFirstItem();
          while (item != nullptr) {
-            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
+            const auto pair = static_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
-               GlutDisplay* gd = dynamic_cast<GlutDisplay*>(pair->object());
+               const auto gd = dynamic_cast<GlutDisplay*>(pair->object());
                if (gd != nullptr) gd->reshapeSubWindow();
             }
             item = item->getNext();
@@ -382,7 +347,7 @@ void GlutDisplay::reshapeIt(int w, int h)
 //-----------------------------------------------------------------------------
 // Reshape subwindow using the subwindows position and size (see note #4)
 //-----------------------------------------------------------------------------
-bool GlutDisplay::reshapeSubWindow(const osg::Vec2d& position, const osg::Vec2d& size)
+bool GlutDisplay::reshapeSubWindow(const base::Vec2d& position, const base::Vec2d& size)
 {
    //std::cout << "reshapeSubWindow(p,s) winID = " << winId << std::endl;
    bool ok = false;
@@ -411,10 +376,10 @@ void GlutDisplay::reshapeSubWindow()
 
          // we have our new viewport width and height
          // multiply it by our ratio and reset our width and height
-         const int newX = static_cast<int>(swPosition.x() * static_cast<double>(mainWinWidth) + 0.5);
-         const int newY = static_cast<int>(swPosition.y() * static_cast<double>(mainWinHeight) + 0.5);
-         const int newWidth = static_cast<int>(swSize.x() * static_cast<double>(mainWinWidth) + 0.5);
-         const int newHeight = static_cast<int>(swSize.y() * static_cast<double>(mainWinHeight) + 0.5);
+         const auto newX = static_cast<int>(swPosition.x() * static_cast<double>(mainWinWidth) + 0.5);
+         const auto newY = static_cast<int>(swPosition.y() * static_cast<double>(mainWinHeight) + 0.5);
+         const auto newWidth = static_cast<int>(swSize.x() * static_cast<double>(mainWinWidth) + 0.5);
+         const auto newHeight = static_cast<int>(swSize.y() * static_cast<double>(mainWinHeight) + 0.5);
 
          setViewport(newX, newY, newWidth, newHeight);
 
@@ -1044,17 +1009,6 @@ bool GlutDisplay::setSlotStencilBuff(const base::Number* const msg)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Page
-//------------------------------------------------------------------------------
-base::Object* GlutDisplay::getSlotByIndex(const int si)
-{
-   return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& GlutDisplay::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;

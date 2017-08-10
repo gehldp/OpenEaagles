@@ -4,9 +4,11 @@
 
 #include "openeaagles/base/Component.hpp"
 
+#include <array>
+
 namespace oe {
 namespace base {
-   class PairStream;
+class PairStream;
 
 //------------------------------------------------------------------------------
 // Class: StateMachine
@@ -282,7 +284,6 @@ protected:
    // Goto the 'newSubstate' substate number
    bool goToSubstate(const unsigned short newSubstate);
 
-
    // ---
    // Parent State Machine's transition functions -- these control movement
    // between our parent state machine's states.
@@ -303,8 +304,8 @@ protected:
    // ---
    // Event handlers
    // ---
-   virtual bool onEntry(Object* const msg = 0);
-   virtual bool onReturn(Object* const msg = 0);
+   virtual bool onEntry(Object* const msg = nullptr);
+   virtual bool onReturn(Object* const msg = nullptr);
    virtual bool onExit();
 
    // ---
@@ -321,29 +322,29 @@ private:
    void initData();
 
    // Next state
-   unsigned short nState;     // Next state number
-   unsigned short nSubstate;  // Next substate number
-   safe_ptr<Object> nArg;         // Next argument
-   Mode nMode;                // Next mode
+   unsigned short nState {INVALID_STATE};     // Next state number
+   unsigned short nSubstate {INVALID_STATE};  // Next substate number
+   safe_ptr<Object> nArg;                     // Next argument
+   Mode nMode {HOLD_STATE};                   // Next mode
 
    // Current state
-   unsigned short state;      // Current state number
-   unsigned short substate;   // Current substate number
-   Mode mode;                 // Current mode
-   safe_ptr<Object> arg;          // Current argument
-   StateMachine* stMach;      // Current state's state machine object
-   Identifier* stMachName;    // Current state's state machine name
+   unsigned short state {INVALID_STATE};      // Current state number
+   unsigned short substate {INVALID_STATE};   // Current substate number
+   Mode mode {HOLD_STATE};                    // Current mode
+   safe_ptr<Object> arg;                      // Current argument
+   StateMachine* stMach {};                   // Current state's state machine object
+   Identifier* stMachName {};                 // Current state's state machine name
 
    // Previous state
-   unsigned short pState;     // Previous state number
-   unsigned short pSubstate;  // Previous substate number
-   StateMachine* pStMach;     // Previous state's state machine object
+   unsigned short pState {INVALID_STATE};     // Previous state number
+   unsigned short pSubstate {INVALID_STATE};  // Previous substate number
+   StateMachine* pStMach {};                  // Previous state's state machine object
 
    // State stack and stack pointer
    static const unsigned short STACK_SIZE = 10;
-   unsigned short stateStack[STACK_SIZE];    // State number stack
-   unsigned short substateStack[STACK_SIZE]; // Substate number stack
-   unsigned short sp;                        // Stack pointer
+   std::array<unsigned short, STACK_SIZE> stateStack {};     // State number stack
+   std::array<unsigned short, STACK_SIZE> substateStack {};  // Substate number stack
+   unsigned short sp {STACK_SIZE};                           // Stack pointer
 
    // List of state machines
    safe_ptr<PairStream> stMachList;

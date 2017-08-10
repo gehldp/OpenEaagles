@@ -2,14 +2,11 @@
 #ifndef __oe_iodevice_AnalogInput_H__
 #define __oe_iodevice_AnalogInput_H__
 
-#include "openeaagles/base/IoAdapter.hpp"
+#include "openeaagles/base/io/IoAdapter.hpp"
 
 namespace oe {
-
 namespace base { class Number; class Table1; }
-
 namespace iodevice {
-
 class IoDevice;
 
 //------------------------------------------------------------------------------
@@ -89,14 +86,14 @@ protected:
 private:
    void initData();
 
-   bool devEnb;               // Device enabled
-   unsigned int location;     // IoData analog input channel number
-   unsigned int channel;      // Analog channel number
-   double value;              // Initial value
-   double deadband;           // Deadband value
-   double offset;             // Offset
-   double gain;               // Gain
-   const base::Table1* table; // Shaping table
+   bool devEnb {};               // Device enabled
+   unsigned int location {};     // IoData analog input channel number
+   unsigned int channel {};      // Analog channel number
+   double value {};              // Initial value
+   double deadband {};           // Deadband value
+   double offset {};             // Offset
+   double gain {1.0};            // Gain
+   const base::Table1* table {}; // Shaping table
 };
 
 }

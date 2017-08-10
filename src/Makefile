@@ -4,19 +4,20 @@ include makedefs
 # Library         : Requires
 # ------------------------------------------------------------------------
 # base            : -
-# graphics        : freeglut, FTGL, freetype
 # dafif           : -
-# gui             :
+# graphics        : OpenGL, FTGL, freetype
+# gui_glut        : freeglut
 # instruments     : -
+# interop         : -
+# interop_dis     : -
+# interop_hla     : HLA RTI
+# interop_rprfom  : HLA RTI
 # iodevice        : -
 # linearsystem    : -
+# map_rpf         : -
 # models          : JSBSim
-# networks/dis    : -
-# networks/hla    : HLA RTI
-# networks/rprfom : HLA RTI
 # otw             : CIGICL 3.x
 # recorder        : Google protocol buffers
-# rpf             : -
 # simulation      : -
 # terrain         : -
 #
@@ -42,9 +43,10 @@ PROJECTS += "gui/glut"
 #
 # Interoperability interfaces
 #
-PROJECTS += networks/dis
-#PROJECTS += networks/hla
-#PROJECTS += networks/rprfom
+PROJECTS += interop/common
+PROJECTS += interop/dis
+PROJECTS += interop/hla
+PROJECTS += interop/rprfom
 
 # Out-the-Window interface classes to talk to visual systems
 # - CIGI Class Library 3.x interface
@@ -54,7 +56,7 @@ PROJECTS += otw
 #
 # Map format reader libraries
 #
-PROJECTS += maps/rpf
+PROJECTS += map/rpf
 
 .PHONY: all clean $(PROJECTS)
 

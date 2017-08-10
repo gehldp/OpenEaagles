@@ -1,10 +1,11 @@
 
 #include "openeaagles/terrain/QuadMap.hpp"
 
-#include "openeaagles/base/Terrain.hpp"
+#include "openeaagles/terrain/Terrain.hpp"
+
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/NetHandler.hpp"
+#include "openeaagles/base/network/NetHandler.hpp"
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
 
@@ -15,43 +16,21 @@ IMPLEMENT_ABSTRACT_SUBCLASS(QuadMap, "QuadMap")
 EMPTY_SLOTTABLE(QuadMap)
 EMPTY_SERIALIZER(QuadMap)
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 QuadMap::QuadMap()
 {
    STANDARD_CONSTRUCTOR()
-
-   numDataFiles = 0;
-   for (unsigned int i = 0; i < MAX_DATA_FILES; i++) {
-      dataFiles[i] = nullptr;
-   }
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
-void QuadMap::copyData(const QuadMap& org, const bool cc)
+void QuadMap::copyData(const QuadMap& org, const bool)
 {
    // Our base class(s) will will copy our components, which include the
    // original QuadMap's DataFile objects.
    BaseClass::copyData(org);
 
-   if (cc) {
-      numDataFiles = 0;
-      for (unsigned int i = 0; i < MAX_DATA_FILES; i++) {
-         dataFiles[i] = nullptr;
-      }
-   }
-
    // Find the new DataFile objects
    findDataFiles();
 }
 
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void QuadMap::deleteData()
 {
     clearData();
@@ -85,7 +64,7 @@ unsigned int QuadMap::getNumDataFiles() const
     return numDataFiles;
 }
 
-const base::Terrain* QuadMap::getDataFile(const unsigned int i)  const
+const Terrain* QuadMap::getDataFile(const unsigned int i)  const
 {
     if (i < MAX_DATA_FILES) return dataFiles[i];
     else return nullptr;
@@ -173,8 +152,8 @@ void QuadMap::findDataFiles()
          unsigned int count = 0;
          base::List::Item* item = subcomponents->getFirstItem();
          while (item != nullptr && count < MAX_DATA_FILES) {
-            base::Pair* pair = static_cast<base::Pair*>( item->getValue() );
-            base::Terrain* dataFile = dynamic_cast<base::Terrain*>( pair->object() );
+            const auto pair = static_cast<base::Pair*>( item->getValue() );
+            const auto dataFile = dynamic_cast<Terrain*>( pair->object() );
             if (dataFile != nullptr && dataFile->isDataLoaded()) {
                dataFile->ref();
                dataFiles[count] = dataFile;
@@ -243,7 +222,7 @@ void QuadMap::findDataFiles()
 // data files it wishes to use, then will also override the
 // find data files so it this data does not get cleared out.
 //------------------------------------------------------------------------------
-bool QuadMap::setDataFile(const unsigned int i, base::Terrain* newDF)
+bool QuadMap::setDataFile(const unsigned int i, Terrain* newDF)
 {
     if (i < MAX_DATA_FILES && newDF != nullptr ) {
         if (dataFiles[i] == nullptr) {
@@ -285,5 +264,5 @@ void QuadMap::clearData()
    numDataFiles = 0;
 }
 
-}// end terrain namespace
-}// end oe namespace
+}
+}

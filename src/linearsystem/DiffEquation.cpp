@@ -1,37 +1,28 @@
 
 #include "openeaagles/linearsystem/DiffEquation.hpp"
+#include <iostream>
 
 namespace oe {
 namespace linearsystem {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(DiffEquation,"DiffEquation")
+IMPLEMENT_ABSTRACT_SUBCLASS(DiffEquation, "DiffEquation")
 EMPTY_SLOTTABLE(DiffEquation)
 EMPTY_SERIALIZER(DiffEquation)
+EMPTY_DELETEDATA(DiffEquation)
 
 DiffEquation::DiffEquation()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
 DiffEquation::DiffEquation(const unsigned int r) : ScalerFunc(r)
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-void DiffEquation::initData()
-{
-   pa = nullptr;
-   pb = nullptr;
-}
-
-void DiffEquation::copyData(const DiffEquation& org, const bool cc)
+void DiffEquation::copyData(const DiffEquation& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    // copy data array -- derived classes must have called allocateMemory() prior
    // to calling this copyData() function.
@@ -40,10 +31,6 @@ void DiffEquation::copyData(const DiffEquation& org, const bool cc)
       pa[i] = org.pa[i];
       pb[i] = org.pb[i];
    }
-}
-
-void DiffEquation::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------

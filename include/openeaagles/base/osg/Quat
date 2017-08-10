@@ -11,16 +11,16 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef __oe_osg_Quat_H__
-#define __oe_osg_Quat_H__
+#ifndef __oe_base_osg_Quat_H__
+#define __oe_base_osg_Quat_H__
 
-#include "./Vec3f"
-#include "./Vec4f"
-#include "./Vec3d"
-#include "./Vec4d"
+#include "openeaagles/base/osg/Vec3f"
+#include "openeaagles/base/osg/Vec4f"
+#include "openeaagles/base/osg/Vec3d"
+#include "openeaagles/base/osg/Vec4d"
 
 namespace oe {
-namespace osg {
+namespace base {
 
 class Matrixf;
 class Matrixd;
@@ -123,7 +123,7 @@ class Quat
             _v[3]=w;
         }
         
-        inline void set(const osg::Vec4f& v)
+        inline void set(const Vec4f& v)
         {
             _v[0]=v.x();
             _v[1]=v.y();
@@ -131,7 +131,7 @@ class Quat
             _v[3]=v.w();
         }
 
-        inline void set(const osg::Vec4d& v)
+        inline void set(const Vec4d& v)
         {
             _v[0]=v.x();
             _v[1]=v.y();

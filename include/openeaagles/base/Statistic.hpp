@@ -5,6 +5,7 @@
 #include "openeaagles/base/Object.hpp"
 
 #include <cmath>
+#include <limits>
 
 namespace oe {
 namespace base {
@@ -81,16 +82,16 @@ public:
    double ci(const double) const;                   // Returns confidence interval given "Z"
    double value() const      { return value1; }     // Returns the last values added by sigma()
 
-   void clear();          // Clears the statistics
+   void clear();             // Clear statistics
 
 private:
-   unsigned long n;       // number of values
-   double   maximum;      // max value
-   double   minimum;      // min value
-   double   sum;          // sum of values
-   double   absSum;       // sum of abs values
-   double   sumSq;        // sum of the squares
-   double   value1;       // last value added
+   unsigned long n {};       // number of values
+   double   maximum {-std::numeric_limits<double>::max()};  // max value
+   double   minimum {std::numeric_limits<double>::max()};   // min value
+   double   sum {};          // sum of values
+   double   absSum {};       // sum of abs values
+   double   sumSq {};        // sum of the squares
+   double   value1 {};       // last value added
 } ;
 
 // adds a data point
@@ -170,7 +171,7 @@ inline double Statistic::variance() const
    if (numer < 0.0) {
      numer = 0.0;
    }
-   double denom = static_cast<double>(n) * static_cast<double>(n1);
+   const auto denom = static_cast<double>(n) * static_cast<double>(n1);
    if (denom != 0.0) {
       var = (numer / denom);
    }

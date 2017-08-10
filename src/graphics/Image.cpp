@@ -6,14 +6,11 @@
 #include <cstring>
 #include <cstdio>
 #include <cstdint>
+#include <iostream>
 
 // if OpenGL extension is not defined by glu.h, try loading glext.h
 #ifndef GL_BGR_EXT
 #include <GL/glext.h>
-#endif
-
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
 #endif
 
 namespace oe {
@@ -117,7 +114,7 @@ static uint16_t convertUInt16(const uint16_t v)
 //==============================================================================
 // Class: Image
 //==============================================================================
-IMPLEMENT_SUBCLASS(Image,"Image")
+IMPLEMENT_SUBCLASS(Image, "Image")
 EMPTY_SERIALIZER(Image)
 EMPTY_SLOTTABLE(Image)
 
@@ -125,8 +122,6 @@ EMPTY_SLOTTABLE(Image)
 Image::Image()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
 Image::Image(
@@ -139,8 +134,6 @@ Image::Image(
 {
    STANDARD_CONSTRUCTOR()
 
-   initData();
-
    setWidth(w);
    setHeight(h);
    setFormat(f);
@@ -148,23 +141,9 @@ Image::Image(
    setPixels(image);
 }
 
-void Image::initData()
-{
-   width = 0;
-   height = 0;
-   numComponents = 0;
-   format = GL_RGB;
-   pixels = nullptr;
-
-   xPixPerMeter = 3937;  // Default: about 100 pixels per inch
-   yPixPerMeter = 3937;
-}
-
-// Copy data
-void Image::copyData(const Image& org, const bool cc)
+void Image::copyData(const Image& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    width = org.width;
    height = org.height;
@@ -250,7 +229,7 @@ bool Image::setYResolutionPPM(const unsigned int ppm)
 //------------------------------------------------------------------------------
 bool Image::readFileBMP(const char* const filename, const char* const path)
 {
-   static const unsigned int BITMAPFILE_SIZE = (MAX_PATH_LEN+MAX_FILENAME_LEN);
+   static const unsigned int BITMAPFILE_SIZE = (MAX_PATH_LEN + MAX_FILENAME_LEN);
    char bitmapFile[BITMAPFILE_SIZE];
    bitmapFile[0] = '\0';
 
@@ -423,7 +402,7 @@ bool Image::writeFileBMP(const char* const filename, const char* const path)
    }
 
    // Create the output stream
-   std::ofstream* fout = new std::ofstream();
+   auto fout = new std::ofstream();
 
    // Open the output file
    fout->open(bitmapFile, std::ios::out | std::ios::binary);
@@ -528,7 +507,7 @@ GLubyte* Image::readRgbValuesBMP(FILE* const fp, const unsigned int offset, cons
 {
     // Allocate the texture memory bits
     unsigned int bmSize = getWidth() * getHeight() * getNumComponents();
-    GLubyte* bmap = new GLubyte[bmSize];
+    const auto bmap = new GLubyte[bmSize];
 
     // Position to start of bitmap
     if (std::fseek(fp, offset, SEEK_SET) < 0) {
@@ -567,12 +546,12 @@ GLubyte* Image::readColorValuesBMP(FILE* const fp, const unsigned int offset, co
 {
     // Allocate the texture memory bits
     unsigned int bmSize = getWidth() * getHeight() * getNumComponents();
-    GLubyte* bmap = new GLubyte[bmSize];
+    auto bmap = new GLubyte[bmSize];
 
     // Read the color table
     size_t ctSize = 256;
     if (bmfi->biClrUsed > 0) ctSize = bmfi->biClrUsed;
-    GLubyte* colorTable = new GLubyte[ctSize*4];
+    const auto colorTable = new GLubyte[ctSize*4];
     size_t nItemRead = std::fread(colorTable, 4, ctSize, fp);
 
     // Position to start of colors
@@ -584,7 +563,7 @@ GLubyte* Image::readColorValuesBMP(FILE* const fp, const unsigned int offset, co
 
     // Read the bitmap
     unsigned int nbytes = (((bmfi->biWidth + 3) / 4 ) * 4); // round up to 4 byte boundary
-    GLubyte* tbuf = new GLubyte[nbytes];
+    auto tbuf = new GLubyte[nbytes];
     for (unsigned int i = 0; bmap != nullptr && i < getHeight(); i++) {
         size_t n = std::fread(tbuf, nbytes, 1, fp);
         if (n > 0) {

@@ -5,36 +5,30 @@
 #include "openeaagles/recorder/DataRecordHandle.hpp"
 #include "openeaagles/recorder/protobuf/DataRecord.pb.h"
 
-#include "openeaagles/simulation/Antenna.hpp"
-#include "openeaagles/simulation/Weapon.hpp"
-#include "openeaagles/simulation/Track.hpp"
-#include "openeaagles/simulation/Emission.hpp"
-#include "openeaagles/simulation/AirVehicle.hpp"
-#include "openeaagles/simulation/Nib.hpp"
-#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/models/player/AirVehicle.hpp"
+#include "openeaagles/models/player/Player.hpp"
+#include "openeaagles/models/player/AbstractWeapon.hpp"
+#include "openeaagles/models/system/Antenna.hpp"
+#include "openeaagles/models/Track.hpp"
+#include "openeaagles/models/Emission.hpp"
+
+#include "openeaagles/simulation/AbstractNib.hpp"
 #include "openeaagles/simulation/Simulation.hpp"
+
+#include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/String.hpp"
 #include "openeaagles/base/util/math_utils.hpp"
 
 #include <cstdio>
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 namespace oe {
 namespace recorder {
 
-IMPLEMENT_SUBCLASS(DataRecorder,"DataRecorder")
+IMPLEMENT_SUBCLASS(DataRecorder, "DataRecorder")
 EMPTY_SERIALIZER(DataRecorder)
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(DataRecorder)
-   "outputHandler",     // 1)  Output handler
+   "outputHandler",     // 1) Output handler
    "eventName",         // 2) Event (i.e., test, study, demo, exercise) name
    "application",       // 3) Application name (e.g., "mainSimExec")
    "caseNum",           // 4) Case id number (i.e., conditions)
@@ -59,10 +53,6 @@ BEGIN_SLOT_MAP(DataRecorder)
    ON_SLOT( 10, setSlotYear,       base::Number)
 END_SLOT_MAP()
 
-
-//------------------------------------------------------------------------------
-// DataRecorder dispatch table
-//------------------------------------------------------------------------------
 BEGIN_RECORDER_HANDLER_TABLE(DataRecorder)
    ON_RECORDER_EVENT_ID( REID_MARKER,            recordMarker )
    ON_RECORDER_EVENT_ID( REID_DI_EVENT,          recordDI )
@@ -84,38 +74,14 @@ BEGIN_RECORDER_HANDLER_TABLE(DataRecorder)
    ON_RECORDER_EVENT_ID( REID_TRACK_DATA,        recordTrackData)
 END_RECORDER_HANDLER_TABLE()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 DataRecorder::DataRecorder()
 {
    STANDARD_CONSTRUCTOR()
-   initData();
 }
 
-void DataRecorder::initData()
-{
-   outputHandler = nullptr;
-   setFirstPass(true);
-
-   eventName = "";
-   application = "";
-   caseNum = 0;
-   missionNum = 0;
-   subjectNum = 0;
-   runNum = 0;
-   day = 0;
-   month = 0;
-   year = 0;
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void DataRecorder::copyData(const DataRecorder& org, const bool cc)
+void DataRecorder::copyData(const DataRecorder& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    {  // clone the original's output handler
       OutputHandler* copy = nullptr;
@@ -134,14 +100,10 @@ void DataRecorder::copyData(const DataRecorder& org, const bool cc)
    year = org.year;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void DataRecorder::deleteData()
 {
    setOutputHandler(nullptr);
 }
-
 
 //------------------------------------------------------------------------------
 // Background thread processing of the output data record queue
@@ -156,7 +118,7 @@ void DataRecorder::processRecords()
 //------------------------------------------------------------------------------
 bool DataRecorder::processUnhandledId(const unsigned int id)
 {
-   pb::DataRecord* msg = new pb::DataRecord();
+   const auto msg = new pb::DataRecord();
 
    // Record the unknown ID
    pb::UnknownIdMsg* unknownIdMsg = msg->mutable_unknown_id_msg();
@@ -180,7 +142,7 @@ void DataRecorder::reset()
 {
    BaseClass::reset();
 
-   pb::DataRecord* msg = new pb::DataRecord();
+   const auto msg = new pb::DataRecord();
    timeStamp(msg);
    msg->set_id( REID_RESET_EVENT );
    sendDataRecord(msg);
@@ -195,7 +157,7 @@ bool DataRecorder::shutdownNotification()
    if (outputHandler != nullptr) {
 
       // Send an end-of-data message
-      pb::DataRecord* msg = new pb::DataRecord();
+      const auto msg = new pb::DataRecord();
       timeStamp(msg);
       msg->set_id( REID_END_OF_DATA );
       sendDataRecord(msg);
@@ -218,7 +180,7 @@ bool DataRecorder::shutdownNotification()
 //------------------------------------------------------------------------------
 bool DataRecorder::recordMarker(const base::Object* objs[4], const double values[4])
 {
-   pb::DataRecord* msg = new pb::DataRecord();
+   const auto msg = new pb::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
@@ -243,7 +205,7 @@ bool DataRecorder::recordMarker(const base::Object* objs[4], const double values
 //------------------------------------------------------------------------------
 bool DataRecorder::recordAI(const base::Object* objs[4], const double values[4])
 {
-   pb::DataRecord* msg = new pb::DataRecord();
+   const auto msg = new pb::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
@@ -270,7 +232,7 @@ bool DataRecorder::recordAI(const base::Object* objs[4], const double values[4])
 //------------------------------------------------------------------------------
 bool DataRecorder::recordDI(const base::Object* objs[4], const double values[4])
 {
-   pb::DataRecord* msg = new pb::DataRecord();
+   const auto msg = new pb::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
@@ -295,10 +257,10 @@ bool DataRecorder::recordDI(const base::Object* objs[4], const double values[4])
 //------------------------------------------------------------------------------
 bool DataRecorder::recordNewPlayer(const base::Object* objs[4], const double values[4])
 {
-   const simulation::Player* player = dynamic_cast<const simulation::Player*>( objs[0] );
+   const auto player = dynamic_cast<const models::Player*>( objs[0] );
    if (player == nullptr) return false;
 
-   pb::DataRecord* msg = new pb::DataRecord();
+   const auto msg = new pb::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
@@ -322,10 +284,10 @@ bool DataRecorder::recordNewPlayer(const base::Object* objs[4], const double val
 //------------------------------------------------------------------------------
 bool DataRecorder::recordPlayerRemoved(const base::Object* objs[4], const double values[4])
 {
-   const simulation::Player* player = dynamic_cast<const simulation::Player*>( objs[0] );
+   const auto player = dynamic_cast<const models::Player*>( objs[0] );
    if (player == nullptr) return false;
 
-   pb::DataRecord* msg = new pb::DataRecord();
+   const auto msg = new pb::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
@@ -349,10 +311,10 @@ bool DataRecorder::recordPlayerRemoved(const base::Object* objs[4], const double
 //------------------------------------------------------------------------------
 bool DataRecorder::recordPlayerData(const base::Object* objs[4], const double values[4])
 {
-   const simulation::Player* player = dynamic_cast<const simulation::Player*>( objs[0] );
+   const auto player = dynamic_cast<const models::Player*>( objs[0] );
    if (player == nullptr) return false;
 
-   pb::DataRecord* msg = new pb::DataRecord();
+   const auto msg = new pb::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
@@ -364,7 +326,7 @@ bool DataRecorder::recordPlayerData(const base::Object* objs[4], const double va
    genPlayerId( playerDataMsg->mutable_id(), player );
    genPlayerState( playerDataMsg->mutable_state(), player );
 
-   const simulation::AirVehicle* av = dynamic_cast<const simulation::AirVehicle*>( player );
+   const auto av = dynamic_cast<const models::AirVehicle*>( player );
    if (av != nullptr) {
       playerDataMsg->set_alpha( av->getAngleOfAttackD() );
       playerDataMsg->set_beta( av->getSideSlipD() );
@@ -383,10 +345,10 @@ bool DataRecorder::recordPlayerData(const base::Object* objs[4], const double va
 //------------------------------------------------------------------------------
 bool DataRecorder::recordPlayerDamaged(const base::Object* objs[4], const double values[4])
 {
-   const simulation::Player* player = dynamic_cast<const simulation::Player*>( objs[0] );
+   const auto player = dynamic_cast<const models::Player*>( objs[0] );
    if (player == nullptr) return false;
 
-   pb::DataRecord* msg = new pb::DataRecord();
+   const auto msg = new pb::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
@@ -410,10 +372,10 @@ bool DataRecorder::recordPlayerDamaged(const base::Object* objs[4], const double
 //------------------------------------------------------------------------------
 bool DataRecorder::recordPlayerCollision(const base::Object* objs[4], const double values[4])
 {
-   const simulation::Player* player = dynamic_cast<const simulation::Player*>( objs[0] );
+   const auto player = dynamic_cast<const models::Player*>( objs[0] );
    if (player == nullptr) return false;
 
-   pb::DataRecord* msg = new pb::DataRecord();
+   const auto msg = new pb::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
@@ -425,7 +387,7 @@ bool DataRecorder::recordPlayerCollision(const base::Object* objs[4], const doub
    genPlayerId( playerCollisionMsg->mutable_id(), player );
    genPlayerState( playerCollisionMsg->mutable_state(), player );
 
-   const simulation::Player* otherPlayer = dynamic_cast<const simulation::Player*>( objs[1] );
+   const auto otherPlayer = dynamic_cast<const models::Player*>( objs[1] );
    if (otherPlayer != nullptr) {
       genPlayerId( playerCollisionMsg->mutable_other_player_id(), otherPlayer );
    }
@@ -442,10 +404,10 @@ bool DataRecorder::recordPlayerCollision(const base::Object* objs[4], const doub
 //------------------------------------------------------------------------------
 bool DataRecorder::recordPlayerCrash(const base::Object* objs[4], const double values[4])
 {
-   const simulation::Player* player = dynamic_cast<const simulation::Player*>( objs[0] );
+   const auto player = dynamic_cast<const models::Player*>( objs[0] );
    if (player == nullptr) return false;
 
-   pb::DataRecord* msg = new pb::DataRecord();
+   const auto msg = new pb::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
@@ -469,10 +431,10 @@ bool DataRecorder::recordPlayerCrash(const base::Object* objs[4], const double v
 //------------------------------------------------------------------------------
 bool DataRecorder::recordPlayerKilled(const base::Object* objs[4], const double values[4])
 {
-   const simulation::Player* player = dynamic_cast<const simulation::Player*>( objs[0] );
+   const auto player = dynamic_cast<const models::Player*>( objs[0] );
    if (player == nullptr) return false;
 
-   pb::DataRecord* msg = new pb::DataRecord();
+   const auto msg = new pb::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
@@ -484,7 +446,7 @@ bool DataRecorder::recordPlayerKilled(const base::Object* objs[4], const double 
    genPlayerId( playerKilledMsg->mutable_id(), player );
    genPlayerState( playerKilledMsg->mutable_state(), player );
 
-   const simulation::Player* shooter = dynamic_cast<const simulation::Player*>( objs[1] );
+   const auto shooter = dynamic_cast<const models::Player*>( objs[1] );
    if (shooter != nullptr) {
       genPlayerId( playerKilledMsg->mutable_shooter_id(), shooter );
    }
@@ -502,10 +464,10 @@ bool DataRecorder::recordPlayerKilled(const base::Object* objs[4], const double 
 //------------------------------------------------------------------------------
 bool DataRecorder::recordWeaponReleased(const base::Object* objs[4], const double values[4])
 {
-   const simulation::Player* wpn = dynamic_cast<const simulation::Player*>( objs[0] );
+   const auto wpn = dynamic_cast<const models::Player*>( objs[0] );
    if (wpn == nullptr) return false;
 
-   pb::DataRecord* msg = new pb::DataRecord();
+   const auto msg = new pb::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
@@ -517,12 +479,12 @@ bool DataRecorder::recordWeaponReleased(const base::Object* objs[4], const doubl
    genPlayerId( wpnRelMsg->mutable_wpn_id(), wpn );
    genPlayerState( wpnRelMsg->mutable_wpn_state(), wpn );
 
-   const simulation::Player* shooter = dynamic_cast<const simulation::Player*>( objs[1] );
+   const auto shooter = dynamic_cast<const models::Player*>( objs[1] );
    if (shooter != nullptr) {
       genPlayerId( wpnRelMsg->mutable_shooter_id(), shooter );
    }
 
-   const simulation::Player* tgt = dynamic_cast<const simulation::Player*>( objs[2] );
+   const auto tgt = dynamic_cast<const models::Player*>( objs[2] );
    if (tgt != nullptr) {
       genPlayerId( wpnRelMsg->mutable_tgt_id(), tgt );
    }
@@ -541,10 +503,10 @@ bool DataRecorder::recordWeaponReleased(const base::Object* objs[4], const doubl
 //------------------------------------------------------------------------------
 bool DataRecorder::recordWeaponHung(const base::Object* objs[4], const double values[4])
 {
-   const simulation::Player* wpn = dynamic_cast<const simulation::Player*>( objs[0] );
+   const auto wpn = dynamic_cast<const models::Player*>( objs[0] );
    if (wpn == nullptr) return false;
 
-   pb::DataRecord* msg = new pb::DataRecord();
+   const auto msg = new pb::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
@@ -556,12 +518,12 @@ bool DataRecorder::recordWeaponHung(const base::Object* objs[4], const double va
    genPlayerId( wpnHungMsg->mutable_wpn_id(), wpn );
    genPlayerState( wpnHungMsg->mutable_wpn_state(), wpn );
 
-   const simulation::Player* shooter = dynamic_cast<const simulation::Player*>( objs[1] );
+   const auto shooter = dynamic_cast<const models::Player*>( objs[1] );
    if (shooter != nullptr) {
       genPlayerId( wpnHungMsg->mutable_shooter_id(), shooter );
    }
 
-   const simulation::Player* tgt = dynamic_cast<const simulation::Player*>( objs[2] );
+   const auto tgt = dynamic_cast<const models::Player*>( objs[2] );
    if (tgt != nullptr) {
       genPlayerId( wpnHungMsg->mutable_tgt_id(), tgt );
    }
@@ -581,13 +543,13 @@ bool DataRecorder::recordWeaponHung(const base::Object* objs[4], const double va
 //------------------------------------------------------------------------------
 bool DataRecorder::recordWeaponDetonation(const base::Object* objs[4], const double values[4])
 {
-   const simulation::Player* wpn = dynamic_cast<const simulation::Player*>( objs[0] );
+   const auto wpn = dynamic_cast<const models::Player*>( objs[0] );
    if (wpn == nullptr) return false;
 
    const unsigned int detType =  static_cast<unsigned int>(values[0]);
    const double missDist = values[1];
 
-   pb::DataRecord* msg = new pb::DataRecord();
+   const auto msg = new pb::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
@@ -599,43 +561,43 @@ bool DataRecorder::recordWeaponDetonation(const base::Object* objs[4], const dou
    genPlayerId( wpnDetMsg->mutable_wpn_id(), wpn );
    genPlayerState( wpnDetMsg->mutable_wpn_state(), wpn );
 
-   const simulation::Player* shooter = dynamic_cast<const simulation::Player*>( objs[1] );
+   const auto shooter = dynamic_cast<const models::Player*>( objs[1] );
    if (shooter != nullptr) {
       genPlayerId( wpnDetMsg->mutable_shooter_id(), shooter );
    }
 
-   const simulation::Player* tgt = dynamic_cast<const simulation::Player*>( objs[2] );
+   const auto tgt = dynamic_cast<const models::Player*>( objs[2] );
    if (tgt != nullptr) {
       genPlayerId( wpnDetMsg->mutable_tgt_id(), tgt );
    }
 
    // Get detonation type
    switch (detType) {
-      case simulation::Weapon::DETONATE_OTHER: {
+      case models::AbstractWeapon::DETONATE_OTHER: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_OTHER);
          break;
       }
-      case simulation::Weapon::DETONATE_ENTITY_IMPACT: {
+      case models::AbstractWeapon::DETONATE_ENTITY_IMPACT: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_ENTITY_IMPACT);
          break;
       }
-      case simulation::Weapon::DETONATE_ENTITY_PROXIMATE_DETONATION: {
+      case models::AbstractWeapon::DETONATE_ENTITY_PROXIMATE_DETONATION: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_ENTITY_PROXIMATE_DETONATION);
          break;
       }
-      case simulation::Weapon::DETONATE_GROUND_IMPACT: {
+      case models::AbstractWeapon::DETONATE_GROUND_IMPACT: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_GROUND_IMPACT);
          break;
       }
-      case simulation::Weapon::DETONATE_GROUND_PROXIMATE_DETONATION: {
+      case models::AbstractWeapon::DETONATE_GROUND_PROXIMATE_DETONATION: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_GROUND_PROXIMATE_DETONATION);
          break;
       }
-      case simulation::Weapon::DETONATE_DETONATION: {
+      case models::AbstractWeapon::DETONATE_DETONATION: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_DETONATION);
          break;
       }
-      case simulation::Weapon::DETONATE_NONE: {
+      case models::AbstractWeapon::DETONATE_NONE: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_NONE);
          break;
       }
@@ -660,11 +622,11 @@ bool DataRecorder::recordWeaponDetonation(const base::Object* objs[4], const dou
 //------------------------------------------------------------------------------
 bool DataRecorder::recordGunFired(const base::Object* objs[4], const double values[4])
 {
-   const simulation::Player* shooter = dynamic_cast<const simulation::Player*>( objs[0] );
+   const auto shooter = dynamic_cast<const models::Player*>( objs[0] );
    if (shooter == nullptr) return false;
 
-   const unsigned int rounds = static_cast<unsigned int>(values[0]);
-   pb::DataRecord* msg = new pb::DataRecord();
+   const auto rounds = static_cast<const unsigned int>( values[0] );
+   const auto msg = new pb::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
@@ -689,12 +651,12 @@ bool DataRecorder::recordGunFired(const base::Object* objs[4], const double valu
 bool DataRecorder::recordNewTrack(const base::Object* objs[4], const double values[4])
 {
    // objects
-   const simulation::Player* player = dynamic_cast<const simulation::Player*>( objs[0] );
-   const simulation::Track* newTrack = dynamic_cast<const simulation::Track*>( objs[1] );
+   const auto player = dynamic_cast<const models::Player*>( objs[0] );
+   const auto newTrack = dynamic_cast<const models::Track*>( objs[1] );
    if (player == nullptr || newTrack == nullptr) return false;
 
    // message
-   pb::DataRecord* msg = new pb::DataRecord();
+   const auto msg = new pb::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
@@ -714,17 +676,17 @@ bool DataRecorder::recordNewTrack(const base::Object* objs[4], const double valu
    genTrackData(newTrackMsg->mutable_track_data(), newTrack);
 
    // Track player
-   const simulation::Player* trkPlayer = newTrack->getTarget();
+   const models::Player* trkPlayer = newTrack->getTarget();
    if (trkPlayer != nullptr) {
       genPlayerId( newTrackMsg->mutable_trk_player_id(), trkPlayer);
       genPlayerState( newTrackMsg->mutable_trk_player_state(), trkPlayer );
    }
 
    // Emission Data
-   const simulation::RfTrack* const rfTrk = dynamic_cast<const simulation::RfTrack*>(newTrack);
+   const auto rfTrk = dynamic_cast<const models::RfTrack*>(newTrack);
    if (rfTrk != nullptr) {
 
-      const simulation::Emission* emissionData = rfTrk->getLastEmission();
+      const models::Emission* emissionData = rfTrk->getLastEmission();
       if (emissionData != nullptr) {
          genEmissionData( newTrackMsg->mutable_emission_data(), emissionData);
       }
@@ -745,12 +707,12 @@ bool DataRecorder::recordNewTrack(const base::Object* objs[4], const double valu
 bool DataRecorder::recordTrackRemoved(const base::Object* objs[4], const double values[4])
 {
    // objects
-   const simulation::Player* player = dynamic_cast<const simulation::Player*>( objs[0] );
-   const simulation::Track* track = dynamic_cast<const simulation::Track*>( objs[1] );
+   const auto player = dynamic_cast<const models::Player*>( objs[0] );
+   const auto track = dynamic_cast<const models::Track*>( objs[1] );
    if (player == nullptr || track == nullptr) return false;
 
    // message
-   pb::DataRecord* msg = new pb::DataRecord();
+   const auto msg = new pb::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
@@ -778,12 +740,12 @@ bool DataRecorder::recordTrackRemoved(const base::Object* objs[4], const double 
 bool DataRecorder::recordTrackData(const base::Object* objs[4], const double values[4])
 {
    // objects
-   const simulation::Player* player = dynamic_cast<const simulation::Player*>( objs[0] );
-   const simulation::Track* trackData = dynamic_cast<const simulation::Track*>( objs[1] );
+   const auto player = dynamic_cast<const models::Player*>( objs[0] );
+   const auto trackData = dynamic_cast<const models::Track*>( objs[1] );
    if (player == nullptr || trackData == nullptr) return false;
 
    // message
-   pb::DataRecord* msg = new pb::DataRecord();
+   const auto msg = new pb::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
@@ -803,16 +765,16 @@ bool DataRecorder::recordTrackData(const base::Object* objs[4], const double val
    genTrackData(trackDataMsg->mutable_track_data(), trackData);
 
    // track player
-   const simulation::Player* trkPlayer = trackData->getTarget();
+   const models::Player* trkPlayer = trackData->getTarget();
    if (trkPlayer != nullptr) {
       genPlayerId( trackDataMsg->mutable_trk_player_id(), trkPlayer);
       genPlayerState( trackDataMsg->mutable_trk_player_state(), trkPlayer );
    }
 
    // Emission Data
-   const simulation::RfTrack* const rfTrk = dynamic_cast<const simulation::RfTrack*>(trackData);
+   const models::RfTrack* const rfTrk = dynamic_cast<const models::RfTrack*>(trackData);
    if (rfTrk != nullptr) {
-      const simulation::Emission* emissionData = rfTrk->getLastEmission();
+      const models::Emission* emissionData = rfTrk->getLastEmission();
       if (emissionData != nullptr) {
          genEmissionData( trackDataMsg->mutable_emission_data(), emissionData);
       }
@@ -827,7 +789,7 @@ bool DataRecorder::recordTrackData(const base::Object* objs[4], const double val
 //------------------------------------------------------------------------------
 // Generate the Player ID data
 //------------------------------------------------------------------------------
-void DataRecorder::genPlayerId(pb::PlayerId* const id, const simulation::Player* const player)
+void DataRecorder::genPlayerId(pb::PlayerId* const id, const models::Player* const player)
 {
    // Check for valid message pointer
    if (id != nullptr) {
@@ -843,7 +805,7 @@ void DataRecorder::genPlayerId(pb::PlayerId* const id, const simulation::Player*
 
          // Networked player federation name
          if ( player->isNetworkedPlayer() ) {
-            const simulation::Nib* nib = player->getNib();
+            const simulation::AbstractNib* nib = player->getNib();
             const base::String* fedName = nib->getFederateName();
             if (fedName != nullptr) id->set_fed_name( *fedName );
          }
@@ -858,25 +820,25 @@ void DataRecorder::genPlayerId(pb::PlayerId* const id, const simulation::Player*
 //------------------------------------------------------------------------------
 // Generate the player state data
 //------------------------------------------------------------------------------
-void DataRecorder::genPlayerState(pb::PlayerState* const state, const simulation::Player* const player)
+void DataRecorder::genPlayerState(pb::PlayerState* const state, const models::Player* const player)
 {
    if (state != nullptr) {
       if (player != nullptr) {
 
          // position
-         osg::Vec3d pos = player->getGeocPosition();
+         base::Vec3d pos = player->getGeocPosition();
          state->mutable_pos()->set_x(pos[0]);
          state->mutable_pos()->set_y(pos[1]);
          state->mutable_pos()->set_z(pos[2]);
 
          // angles
-         osg::Vec3d angles = player->getGeocEulerAngles();
+         base::Vec3d angles = player->getGeocEulerAngles();
          state->mutable_angles()->set_x(angles[0]);
          state->mutable_angles()->set_y(angles[1]);
          state->mutable_angles()->set_z(angles[2]);
 
          // velocity
-         osg::Vec3d vel = player->getGeocVelocity();
+         base::Vec3d vel = player->getGeocVelocity();
          state->mutable_vel()->set_x(vel[0]);
          state->mutable_vel()->set_y(vel[1]);
          state->mutable_vel()->set_z(vel[2]);
@@ -898,7 +860,7 @@ void DataRecorder::genPlayerState(pb::PlayerState* const state, const simulation
 //------------------------------------------------------------------------------
 // Generate the Track ID
 //------------------------------------------------------------------------------
-std::string DataRecorder::genTrackId(const simulation::Track* const track)
+std::string DataRecorder::genTrackId(const models::Track* const track)
 {
    std::string trackIdStr = "";
    if (track != nullptr) {
@@ -917,7 +879,7 @@ std::string DataRecorder::genTrackId(const simulation::Track* const track)
 //------------------------------------------------------------------------------
 // Generate the Track data
 //------------------------------------------------------------------------------
-void DataRecorder::genTrackData(pb::TrackData* const trkMsg, const simulation::Track* const track)
+void DataRecorder::genTrackData(pb::TrackData* const trkMsg, const models::Track* const track)
 {
    if (trkMsg != nullptr) {
       if (track != nullptr) {
@@ -937,20 +899,20 @@ void DataRecorder::genTrackData(pb::TrackData* const trkMsg, const simulation::T
          trkMsg->set_latitude(lat);
          trkMsg->set_longitude(lon);
 
-         // Position: getPosition returns osg::Vec3
-         osg::Vec3 pos = track->getPosition();
+         // Position: getPosition returns base::Vec3
+         base::Vec3d pos = track->getPosition();
          trkMsg->mutable_position()->set_x(pos[0]);
          trkMsg->mutable_position()->set_y(pos[1]);
          trkMsg->mutable_position()->set_z(pos[2]);
 
-         // Velocity: getVelocity returns osg::Vec3
-         osg::Vec3 vel = track->getVelocity();
+         // Velocity: getVelocity returns base::Vec3
+         base::Vec3d vel = track->getVelocity();
          trkMsg->mutable_velocity()->set_x(vel[0]);
          trkMsg->mutable_velocity()->set_y(vel[1]);
          trkMsg->mutable_velocity()->set_z(vel[2]);
 
          // Avg signal for RF/IR track:
-         const simulation::RfTrack* const rfTrk = dynamic_cast<const simulation::RfTrack*>(track);
+         const auto rfTrk = dynamic_cast<const models::RfTrack*>(track);
          if (rfTrk != nullptr) {
             trkMsg->set_avg_signal(rfTrk->getAvgSignal());
          }
@@ -964,7 +926,7 @@ void DataRecorder::genTrackData(pb::TrackData* const trkMsg, const simulation::T
 //------------------------------------------------------------------------------
 // Generate the Emission data
 //------------------------------------------------------------------------------
-void DataRecorder::genEmissionData(pb::EmissionData* const emMsg, const simulation::Emission* const emData)
+void DataRecorder::genEmissionData(pb::EmissionData* const emMsg, const models::Emission* const emData)
 {
    if (emMsg != nullptr) {
       if (emData != nullptr) {
@@ -980,7 +942,7 @@ void DataRecorder::genEmissionData(pb::EmissionData* const emMsg, const simulati
 
          // transmitting player ID
          {
-            const simulation::Player* p = emData->getOwnship();
+            const models::Player* p = emData->getOwnship();
             if (p != nullptr) {
                genPlayerId( emMsg->mutable_origin_id(), p );
             }
@@ -988,36 +950,36 @@ void DataRecorder::genEmissionData(pb::EmissionData* const emMsg, const simulati
 
          // target player ID
          {
-            const simulation::Player* p = emData->getTarget();
+            const models::Player* p = emData->getTarget();
             if (p != nullptr) {
                genPlayerId( emMsg->mutable_target_id(), p );
             }
          }
 
          // polarization
-         simulation::Antenna::Polarization polarization = emData->getPolarization();
+         models::Antenna::Polarization polarization = emData->getPolarization();
          switch (polarization) {
-            case simulation::Antenna::NONE: {
+            case models::Antenna::NONE: {
                emMsg->set_polarization(pb::EmissionData_Polarization_NONE);
                break;
             }
-            case simulation::Antenna::VERTICAL: {
+            case models::Antenna::VERTICAL: {
                emMsg->set_polarization(pb::EmissionData_Polarization_VERTICAL);
                break;
             }
-            case simulation::Antenna::HORIZONTAL: {
+            case models::Antenna::HORIZONTAL: {
                emMsg->set_polarization(pb::EmissionData_Polarization_HORIZONTAL);
                break;
             }
-            case simulation::Antenna::SLANT: {
+            case models::Antenna::SLANT: {
                emMsg->set_polarization(pb::EmissionData_Polarization_SLANT);
                break;
             }
-            case simulation::Antenna::RHC: {
+            case models::Antenna::RHC: {
                emMsg->set_polarization(pb::EmissionData_Polarization_RHC);
                break;
             }
-            case simulation::Antenna::LHC: {
+            case models::Antenna::LHC: {
                emMsg->set_polarization(pb::EmissionData_Polarization_LHC);
                break;
             }
@@ -1044,7 +1006,8 @@ void DataRecorder::sendDataRecord(pb::DataRecord* const msg)
          setFirstPass(false);
 
          // create and send File ID
-         pb::DataRecord* msg = new pb::DataRecord();
+         const auto msg = new pb::DataRecord();
+
          // DataRecord header
          timeStamp(msg);
          msg->set_id( REID_FILE_ID );
@@ -1064,13 +1027,15 @@ void DataRecorder::sendDataRecord(pb::DataRecord* const msg)
          fileIdMsg->set_year(getYear());
 
          // Create a handle and send the message to be processed
-         DataRecordHandle* h = new DataRecordHandle(msg);
+         const auto h = new DataRecordHandle(msg);
+
          outputHandler->processRecord(h);
          h->unref();
+
       }
 
       // Create a handle and send the message to be processed
-      DataRecordHandle* h = new DataRecordHandle(msg);
+      const auto h = new DataRecordHandle(msg);
       outputHandler->addToQueue(h);
       h->unref();
    }
@@ -1205,14 +1170,6 @@ bool DataRecorder::setSlotYear(base::Number* const msg)
       year = msg->getInt();
    }
    return ok;
-}
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-base::Object* DataRecorder::getSlotByIndex(const int si)
-{
-   return BaseClass::getSlotByIndex(si);
 }
 
 }

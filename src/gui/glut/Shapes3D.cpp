@@ -7,34 +7,35 @@
 
 #include <GL/glut.h>
 #include <GL/glu.h>
+#include <iostream>
 
 namespace oe {
 namespace glut {
 
-IMPLEMENT_SUBCLASS(Sphere,"Sphere")
+IMPLEMENT_SUBCLASS(Sphere, "Sphere")
 
-IMPLEMENT_SUBCLASS(Cylinder,"Cylinder")
+IMPLEMENT_SUBCLASS(Cylinder, "Cylinder")
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Cone,"Cone")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Cone, "Cone")
 
-IMPLEMENT_SUBCLASS(Cube,"Cube")
+IMPLEMENT_SUBCLASS(Cube, "Cube")
 EMPTY_SERIALIZER(Cone)
 
-IMPLEMENT_SUBCLASS(Torus,"Torus")
+IMPLEMENT_SUBCLASS(Torus, "Torus")
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Dodecahedron,"Dodecahedron")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Dodecahedron, "Dodecahedron")
 EMPTY_SERIALIZER(Dodecahedron)
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Tetrahedron,"Tetrahedron")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Tetrahedron, "Tetrahedron")
 EMPTY_SERIALIZER(Tetrahedron)
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Icosahedron,"Icosahedron")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Icosahedron, "Icosahedron")
 EMPTY_SERIALIZER(Icosahedron)
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Octahedron,"Octahedron")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Octahedron, "Octahedron")
 EMPTY_SERIALIZER(Octahedron)
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Teapot,"Teapot")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Teapot, "Teapot")
 EMPTY_SERIALIZER(Teapot)
 
 //------------------------------------------------------------------------------
@@ -88,14 +89,11 @@ END_SLOT_MAP()
 Sphere::Sphere()
 {
     STANDARD_CONSTRUCTOR()
-    stacks = 10;
 }
 
 Cylinder::Cylinder()
 {
     STANDARD_CONSTRUCTOR()
-    topRadius = 1;
-    height = 1;
 }
 
 Cone::Cone()
@@ -106,13 +104,11 @@ Cone::Cone()
 Cube::Cube()
 {
     STANDARD_CONSTRUCTOR()
-    size = 1;
 }
 
 Torus::Torus()
 {
     STANDARD_CONSTRUCTOR()
-    oRadius = 2;
 }
 
 Dodecahedron::Dodecahedron()
@@ -414,29 +410,6 @@ std::ostream& Torus::serialize(std::ostream& sout, const int i, const bool slots
       sout << ")" << std::endl;
    }
    return sout;
-}
-
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* Sphere::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-base::Object* Cylinder::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-base::Object* Cube::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-base::Object* Torus::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
 
 }

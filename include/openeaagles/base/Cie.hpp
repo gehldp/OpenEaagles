@@ -3,15 +3,14 @@
 #define __oe_base_Cie_H__
 
 #include "openeaagles/base/Color.hpp"
-#include "openeaagles/base/osg/Matrix"
 #include "openeaagles/base/safe_ptr.hpp"
+#include "openeaagles/base/osg/Vec3d"
 
 namespace oe {
 namespace base {
-
+class Vec4d;
 class MonitorMetrics;
 class Table1;
-class List;
 
 //------------------------------------------------------------------------------
 // Class: Cie
@@ -36,10 +35,10 @@ class List;
 //     double y()
 //         Data access routines.  Returns the CIE component.
 //
-//     getCIE(osg::Vec3& cie)
+//     getCIE(Vec3d& cie)
 //         Returns the CIE components in a vector.
 //
-//     static void cie2rgb(osg::Vec4& rgba, const osg::Vec3& cie, const MonitorMetrics* m)
+//     static void cie2rgb(Vec4d& rgba, const Vec3d& cie, const MonitorMetrics* m)
 //         Static function to convert a CIE color into RGB.
 //
 // Enumerated:
@@ -47,7 +46,7 @@ class List;
 //         Used to index the CIE color vector.
 //
 //
-// Note:  The operators osg::Vec3*() and osg::Vec4*(), (inherited from Color)
+// Note:  The operators Vec3d*() and Vec4d*(), (inherited from Color)
 //        return a const pointer to the RGBA color vector and not the
 //        CIE color vector.
 //------------------------------------------------------------------------------
@@ -66,20 +65,19 @@ public:
     double luminance() const;
     double x() const;
     double y() const;
-    void getCIE(osg::Vec3& cie) const;
+    void getCIE(Vec3d& cie) const;
 
     virtual bool setMonitor(MonitorMetrics* const msg);
     virtual bool setLuminance(Number* const msg);
     virtual bool setX(Number* const msg);
     virtual bool setY(Number* const msg);
 
-    static void cie2rgb(osg::Vec4& rgba, const osg::Vec3& cie, const MonitorMetrics* m);
+    static void cie2rgb(Vec4d& rgba, const Vec3d& cie, const MonitorMetrics* m);
 
 protected:
-    osg::Vec3 cie;
+    Vec3d cie;
     safe_ptr<const MonitorMetrics> monitor;
 };
-
 
 }
 }

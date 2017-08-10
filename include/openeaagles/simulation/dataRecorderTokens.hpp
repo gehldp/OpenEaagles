@@ -1,3 +1,7 @@
+
+#ifndef __oe_simulation_Id_Tokens_H__
+#define __oe_simulation_Id_Tokens_H__
+
 //------------------------------------------------------------------------------
 // Recorder Event ID (REID) Tokens
 //
@@ -11,11 +15,9 @@
 //
 //    4) P1 to P4 are the required objects passed to the SAMPLE macro, and
 //       V1 to V4 are the required values passed to the SAMPLE macros.
-//       (see "openeaagles/simulation/DataRecorder.h")
+//       (see "openeaagles/simulation/DataRecorder.hpp")
 //
 //------------------------------------------------------------------------------
-#ifndef __oe_simulation_Id_Tokens_H__
-#define __oe_simulation_Id_Tokens_H__
 
 // Data recorder and handler messages <internal use only>
 #define REID_END_OF_DATA          0    // Last data record message <can not be disabled>

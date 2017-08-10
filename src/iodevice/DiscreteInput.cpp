@@ -1,22 +1,19 @@
-// Class: DiscreteInput
 
 #include "openeaagles/iodevice/DiscreteInput.hpp"
 
-#include "openeaagles/base/IoData.hpp"
-#include "openeaagles/base/IoDevice.hpp"
-#include "openeaagles/base/IoHandler.hpp"
+#include "openeaagles/base/io/IoData.hpp"
+#include "openeaagles/base/io/IoDevice.hpp"
+#include "openeaagles/base/io/IoHandler.hpp"
 #include "openeaagles/base/Number.hpp"
+
+#include <iostream>
 
 namespace oe {
 namespace iodevice {
 
-//==============================================================================
-// DiscreteInput
-//==============================================================================
+IMPLEMENT_SUBCLASS(DiscreteInput, "DiscreteInput")
+EMPTY_DELETEDATA(DiscreteInput)
 
-IMPLEMENT_SUBCLASS(DiscreteInput,"DiscreteInput")
-
-// slot table for this class type
 BEGIN_SLOTTABLE(DiscreteInput)
     "di",         // 1) Discrete Input location (IoData's DI channel)
     "port",       // 2) Device port number (default: 0)
@@ -26,7 +23,6 @@ BEGIN_SLOTTABLE(DiscreteInput)
     "num"         // 6) Number of DIs to manage starting at 'di' and 'channel'
 END_SLOTTABLE(DiscreteInput)
 
-//  Map slot table to handles
 BEGIN_SLOT_MAP(DiscreteInput)
     ON_SLOT( 1, setSlotLocation, base::Number)
     ON_SLOT( 2, setSlotPort,     base::Number)
@@ -36,34 +32,14 @@ BEGIN_SLOT_MAP(DiscreteInput)
     ON_SLOT( 6, setSlotNum,      base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 DiscreteInput::DiscreteInput()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-void DiscreteInput::initData()
-{
-   devEnb = false;
-   location = 0;
-   port = 0;
-   channel = 0;
-   value = false;
-   invert = false;
-   num = 1;
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void DiscreteInput::copyData(const DiscreteInput& org, const bool cc)
+void DiscreteInput::copyData(const DiscreteInput& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    devEnb = org.devEnb;
    location = org.location;
@@ -72,13 +48,6 @@ void DiscreteInput::copyData(const DiscreteInput& org, const bool cc)
    value = org.value;
    invert = org.invert;
    num = org.num;
-}
-
-//------------------------------------------------------------------------------
-//deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void DiscreteInput::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------
@@ -264,17 +233,6 @@ bool DiscreteInput::setSlotNum(const base::Number* const msg)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-base::Object* DiscreteInput::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& DiscreteInput::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;

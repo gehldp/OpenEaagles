@@ -1,12 +1,14 @@
 
 #include "openeaagles/instruments/landinggear/LandingGear.hpp"
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 namespace oe {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(LandingGear, "LandingGear")
 EMPTY_SERIALIZER(LandingGear)
+EMPTY_DELETEDATA(LandingGear)
 
 BEGIN_SLOTTABLE(LandingGear)
     "gearDownValue",  // the gear position that defines the "down" state of the gear handle
@@ -15,33 +17,17 @@ BEGIN_SLOTTABLE(LandingGear)
     // treated as such
 END_SLOTTABLE(LandingGear)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles for LandingGear
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(LandingGear)
     ON_SLOT(1, setSlotGearDownValue, base::Number)
     ON_SLOT(2, setSlotGearUpValue, base::Number)
 END_SLOT_MAP()
 
-
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 LandingGear::LandingGear()
 {
     STANDARD_CONSTRUCTOR()
-    gearState = 0;   // gear is in the up position
-    gearDV = 1;
-    gearUV = 0;
-    inTransit = false;
-    gearPos = 0;
     gearSelSD.empty();
-    haveRotary = false;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void LandingGear::copyData(const LandingGear& org, const bool)
 {
     BaseClass::copyData(org);
@@ -53,11 +39,6 @@ void LandingGear::copyData(const LandingGear& org, const bool)
     gearSelSD.empty();
     haveRotary = org.haveRotary;
 }
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-EMPTY_DELETEDATA(LandingGear)
 
 // SLOT FUNCTIONS
 //------------------------------------------------------------------------------
@@ -233,13 +214,5 @@ void LandingGear::drawFunc()
     glLineWidth(lw);
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for LandingGear
-//------------------------------------------------------------------------------
-base::Object* LandingGear::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
-
-}  // end instruments namespace
-}  // end oe namespace
+}

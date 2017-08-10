@@ -6,14 +6,13 @@
 
 namespace oe {
 namespace base {
-
 class String;
 class Number;
 
 //------------------------------------------------------------------------------
 // Class:  LatLon
 //
-// Description:  Class/form for latitude or longitude numbers.
+// Description:  For latitude or longitude numbers.
 //
 // Factory name: LatLon
 // Slots:
@@ -64,9 +63,6 @@ class Number;
 //      void LatLon::setSec(const double s)
 //          Sets seconds -- then calls computeVal().
 //
-//      Object* LatLon::getSlotByIndex(const int si)
-//          getSlotByIndex() for LatLon
-//
 //      std::ostream& LatLon::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 //          serialize() -- print the value of this object to the output stream sout.
 //
@@ -101,10 +97,10 @@ protected:
     bool setSec(const double seconds);
 
 private:
-    Dir     dir;                // direction
-    int     deg;                // degrees
-    int     min;                // minutes
-    double  sec;                // seconds
+    Dir     dir {NONE};         // direction
+    int     deg {};             // degrees
+    int     min {};             // minutes
+    double  sec {};             // seconds
 };
 
 }

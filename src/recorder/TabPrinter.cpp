@@ -3,70 +3,37 @@
 #include "openeaagles/recorder/protobuf/DataRecord.pb.h"
 #include "openeaagles/recorder/DataRecordHandle.hpp"
 
-//#include "openeaagles/simulation/recorderTokens.hpp"
-#include "openeaagles/base/units/Times.hpp"
 #include "openeaagles/base/String.hpp"
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/Nav.hpp"
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
+#include "openeaagles/base/units/Times.hpp"
+
+#include "openeaagles/base/util/nav_utils.hpp"
 
 namespace oe {
 namespace recorder {
 
+IMPLEMENT_SUBCLASS(TabPrinter, "TabPrinter")
+EMPTY_SERIALIZER(TabPrinter)
+EMPTY_DELETEDATA(TabPrinter)
 
-//==============================================================================
-// Class TabPrinter
-//==============================================================================
-IMPLEMENT_SUBCLASS(TabPrinter,"TabPrinter")
-
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(TabPrinter)
    "msgHdrOptn",   // 1) Msg Header options (see TabPrinter.h)
    "divider",      // 2) Field divider
 END_SLOTTABLE(TabPrinter)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(TabPrinter)
-   ON_SLOT( 1, setSlotMsgHdr,      base::String)
-   ON_SLOT( 2, setSlotDivider,     base::String)
+   ON_SLOT( 1, setSlotMsgHdr,  base::String)
+   ON_SLOT( 2, setSlotDivider, base::String)
 END_SLOT_MAP()
 
-EMPTY_SERIALIZER(TabPrinter)
-EMPTY_DELETEDATA(TabPrinter)
-
-//------------------------------------------------------------------------------
-// Default Constructor
-//------------------------------------------------------------------------------
 TabPrinter::TabPrinter()
 {
    STANDARD_CONSTRUCTOR()
-   initData();
 }
 
-void TabPrinter::initData()
-{
-   printHeader = false;   // print either Header or message values
-   simReset = true;
-   setMsgHeaders(true);
-   option = NO_HDR;
-   lastMessage = REID_UNHANDLED_ID_TOKEN;
-   divider = "\t";
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void TabPrinter::copyData(const TabPrinter& org, const bool cc)
+void TabPrinter::copyData(const TabPrinter& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    printHeader = org.printHeader;
    option = org.option;
@@ -105,7 +72,6 @@ void TabPrinter::setMsgHeaders(const bool f)
 // slot functions
 //------------------------------------------------------------------------------
 
-
 //------------------------------------------------------------------------------
 // setSlotMsgHdr
 //------------------------------------------------------------------------------
@@ -115,19 +81,19 @@ bool TabPrinter::setSlotMsgHdr(const base::String* const msg)
    if (msg != nullptr) {
 
       if ((*msg == "NO_HDR") || (*msg == "no_hdr") ) {
-         option = NO_HDR;
+         option = MsgHdrOptions::NO_HDR;
          ok = true;
       }
       else if ((*msg == "ALL_MSGS") || (*msg == "all_msgs") ) {
-         option = ALL_MSGS;
+         option = MsgHdrOptions::ALL_MSGS;
          ok = true;
       }
       else if ((*msg == "NEW_MSG") || (*msg == "new_msg") ) {
-         option = NEW_MSG;
+         option = MsgHdrOptions::NEW_MSG;
          ok = true;
       }
       else if ((*msg == "ON_CHANGE") || (*msg == "on_change") ) {
-         option = ON_CHANGE;
+         option = MsgHdrOptions::ON_CHANGE;
          ok = true;
       }
 
@@ -152,15 +118,6 @@ bool TabPrinter::setSlotDivider(const base::String* const msg)
    }
 
    return ok;
-}
-
-
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* TabPrinter::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
 
 //------------------------------------------------------------------------------
@@ -189,19 +146,19 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       setMsgHeaders(true);
 
    }
-   if (option == NO_HDR) {
+   if (option == MsgHdrOptions::NO_HDR) {
       printHeader = false;
    }
-   else if (option == ALL_MSGS) {
+   else if (option == MsgHdrOptions::ALL_MSGS) {
       printHeader = true;
    }
-   else if (option == ON_CHANGE) {
+   else if (option == MsgHdrOptions::ON_CHANGE) {
       if (messageId != lastMessage) {
          printHeader = true;
       }
       else printHeader = false;
    }
-   else if (option == NEW_MSG) {
+   else if (option == MsgHdrOptions::NEW_MSG) {
       // Has this header been printed before
       printHeader = false;  // need to check each message
 
@@ -211,7 +168,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
 
       case REID_FILE_ID : {
          if (dataRecord->has_file_id_msg()) {
-            if ((option == NEW_MSG) && (fileIdHdr)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (fileIdHdr)) printHeader = true;
             fileIdHdr = false;
             const pb::FileIdMsg* msg = &dataRecord->file_id_msg();
             printFileIdMsg(timeMsg, msg);
@@ -222,7 +179,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       // events:
       case REID_NEW_PLAYER : {
          if (dataRecord->has_new_player_event_msg()) {
-            if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
             const pb::NewPlayerEventMsg* msg = &dataRecord->new_player_event_msg();
             printNewPlayerEventMsg(timeMsg, msg);
@@ -232,7 +189,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
 
       case REID_PLAYER_REMOVED : {
          if (dataRecord->has_player_removed_event_msg()) {
-            if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
             const pb::PlayerRemovedEventMsg* msg = &dataRecord->player_removed_event_msg();
             printPlayerRemovedEventMsg(timeMsg, msg);
@@ -242,7 +199,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
 
       case REID_PLAYER_DATA : {
          if (dataRecord->has_player_data_msg()) {
-            if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
             const pb::PlayerDataMsg* msg = &dataRecord->player_data_msg();
             printPlayerDataMsg(timeMsg, msg);
@@ -251,7 +208,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
      case REID_PLAYER_DAMAGED : {
         if (dataRecord->has_player_damaged_event_msg()) {
-            if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
             const pb::PlayerDamagedEventMsg* msg = &dataRecord->player_damaged_event_msg();
             printPlayerDamagedEventMsg(timeMsg, msg);
@@ -260,7 +217,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_PLAYER_COLLISION : {
          if (dataRecord->has_player_collision_event_msg()) {
-            if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
             const pb::PlayerCollisionEventMsg* msg = &dataRecord->player_collision_event_msg();
             printPlayerCollisionEventMsg(timeMsg, msg);
@@ -269,7 +226,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_PLAYER_CRASH : {
          if (dataRecord->has_player_crash_event_msg()) {
-            if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
             const pb::PlayerCrashEventMsg* msg = &dataRecord->player_crash_event_msg();
             printPlayerCrashEventMsg(timeMsg, msg);
@@ -278,7 +235,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_PLAYER_KILLED : {
          if (dataRecord->has_player_killed_event_msg()) {
-            if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
             const pb::PlayerKilledEventMsg* msg = &dataRecord->player_killed_event_msg();
             printPlayerKilledEventMsg(timeMsg, msg);
@@ -287,7 +244,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_WEAPON_RELEASED : {
          if (dataRecord->has_weapon_release_event_msg()) {
-            if ((option == NEW_MSG) && (weaponHeader)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (weaponHeader)) printHeader = true;
             weaponHeader = false;
             const pb::WeaponReleaseEventMsg* msg = &dataRecord->weapon_release_event_msg();
             printWeaponReleaseEventMsg(timeMsg, msg);
@@ -296,7 +253,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_WEAPON_HUNG : {
          if (dataRecord->has_weapon_hung_event_msg()) {
-            if ((option == NEW_MSG) && (weaponHeader)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (weaponHeader)) printHeader = true;
             weaponHeader = false;
             const pb::WeaponHungEventMsg* msg = &dataRecord->weapon_hung_event_msg();
             printWeaponHungEventMsg(timeMsg, msg);
@@ -305,7 +262,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_WEAPON_DETONATION : {
          if (dataRecord->has_weapon_detonation_event_msg()) {
-            if ((option == NEW_MSG) && (weaponHeader)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (weaponHeader)) printHeader = true;
             weaponHeader = false;
             const pb::WeaponDetonationEventMsg* msg = &dataRecord->weapon_detonation_event_msg();
             printWeaponDetonationEventMsg(timeMsg, msg);
@@ -314,7 +271,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_GUN_FIRED : {
          if (dataRecord->has_gun_fired_event_msg()) {
-            if ((option == NEW_MSG) && (gunFiredHdr)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (gunFiredHdr)) printHeader = true;
             gunFiredHdr = false;
             const pb::GunFiredEventMsg* msg = &dataRecord->gun_fired_event_msg();
             printGunFiredEventMsg(timeMsg, msg);
@@ -323,7 +280,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_NEW_TRACK : {
          if (dataRecord->has_new_track_event_msg()) {
-            if ((option == NEW_MSG) && (trackHeader)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (trackHeader)) printHeader = true;
             trackHeader = false;
             const pb::NewTrackEventMsg* msg = &dataRecord->new_track_event_msg();
             printNewTrackEventMsg(timeMsg, msg);
@@ -332,7 +289,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_TRACK_REMOVED : {
          if (dataRecord->has_track_removed_event_msg()) {
-            if ((option == NEW_MSG) && (trackHeader)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (trackHeader)) printHeader = true;
             trackHeader = false;
             const pb::TrackRemovedEventMsg* msg = &dataRecord->track_removed_event_msg();
             printTrackRemovedEventMsg(timeMsg, msg);
@@ -341,7 +298,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_TRACK_DATA : {
          if (dataRecord->has_track_data_msg()) {
-            if ((option == NEW_MSG) && (trackHeader)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (trackHeader)) printHeader = true;
             trackHeader = false;
             const pb::TrackDataMsg* msg = &dataRecord->track_data_msg();
             printTrackDataMsg(timeMsg, msg);
@@ -356,7 +313,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       case REID_MARKER: {
          // Marker msg with ID, source, and time fields.
          if (dataRecord->has_marker_msg()) {
-            if ((option == NEW_MSG) && (markerHdr)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (markerHdr)) printHeader = true;
             markerHdr = false;
             const pb::MarkerMsg* msg = &dataRecord->marker_msg();
             printMarkerMsg(timeMsg, msg);
@@ -366,7 +323,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       case REID_AI_EVENT: {
          // Analog Input device msg with ID, source, value, and time fields.
          if (dataRecord->has_input_device_msg()) {
-            if ((option == NEW_MSG) && (inputDeviceHdr)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (inputDeviceHdr)) printHeader = true;
             inputDeviceHdr = false;
             const pb::InputDeviceMsg* msg = &dataRecord->input_device_msg();
             printInputDeviceMsg(timeMsg, msg, messageId);
@@ -376,7 +333,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       case REID_DI_EVENT: {
          // Discrete Input device msg with ID, source, value, and time fields.
          if (dataRecord->has_input_device_msg()) {
-            if ((option == NEW_MSG) && (inputDeviceHdr)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (inputDeviceHdr)) printHeader = true;
             inputDeviceHdr = false;
             const pb::InputDeviceMsg* msg = &dataRecord->input_device_msg();
             printInputDeviceMsg(timeMsg, msg, messageId);
@@ -1368,7 +1325,7 @@ void TabPrinter::printPlayerStateMsg(std::ostream& sout, const pb::PlayerState* 
          double pLon(0.0);
          double pAlt(0.0);
          if (( msg->pos().has_x()) && ( msg->pos().has_y()) && ( msg->pos().has_z())) {
-            oe::base::Nav::convertEcef2Geod(msg->pos().x(), msg->pos().y(),  msg->pos().z(),
+            oe::base::nav::convertEcef2Geod(msg->pos().x(), msg->pos().y(),  msg->pos().z(),
                &pLat, &pLon, &pAlt);
             sout << pLat << divider << pLon << divider << pAlt << divider;
          }
@@ -1392,17 +1349,17 @@ void TabPrinter::printPlayerStateMsg(std::ostream& sout, const pb::PlayerState* 
       // angles (convert to degrees)
       if (msg->has_angles()) {
          if (msg->angles().has_x()) {
-            sout << msg->angles().x() * base::Angle::R2DCC << divider;
+            sout << msg->angles().x() * base::angle::R2DCC << divider;
          }
          else sout << divider;
 
          if (msg->angles().has_y()) {
-            sout << msg->angles().y() * base::Angle::R2DCC << divider;
+            sout << msg->angles().y() * base::angle::R2DCC << divider;
          }
          else sout << divider;
 
          if (msg->angles().has_z()) {
-            sout << msg->angles().z() * base::Angle::R2DCC << divider;
+            sout << msg->angles().z() * base::angle::R2DCC << divider;
          }
          else sout << divider;
       }
@@ -1503,17 +1460,17 @@ void TabPrinter::printCommonTrackDataMsg(std::ostream& sout, const pb::TrackData
       else sout << divider;
 
       if (msg->has_true_az()) {
-         sout << msg->true_az() * base::Angle::R2DCC << divider;
+         sout << msg->true_az() * base::angle::R2DCC << divider;
       }
       else sout << divider;
 
       if (msg->has_rel_az()) {
-         sout << msg->rel_az() * base::Angle::R2DCC << divider;
+         sout << msg->rel_az() * base::angle::R2DCC << divider;
       }
       else sout << divider;
 
       if (msg->has_elevation()) {
-         sout << msg->elevation() * base::Angle::R2DCC << divider;
+         sout << msg->elevation() * base::angle::R2DCC << divider;
       }
       else sout << divider;
 
@@ -1663,12 +1620,12 @@ void TabPrinter::printEmissionDataMsg(std::ostream& sout, const pb::EmissionData
       else sout << " " << divider;
       if (msg->has_azimuth_aoi()) {
          // Convert to degrees
-         sout << msg->azimuth_aoi() * base::Angle::R2DCC << divider;
+         sout << msg->azimuth_aoi() * base::angle::R2DCC << divider;
       }
       else sout << " " << divider;
       if (msg->elevation_aoi()) {
          // Convert to degrees
-         sout << msg->elevation_aoi() * base::Angle::R2DCC << divider;
+         sout << msg->elevation_aoi() * base::angle::R2DCC << divider;
       }
       else sout << " " << divider;
    }
@@ -1877,7 +1834,7 @@ void TabPrinter::printExecTimeMsg(std::ostream& sout, double execTime)
     double ss = 0;  // Sec
 
     // exec time
-    base::Time::getHHMMSS(static_cast<double>(execTime), &hh, &mm, &ss);
+    base::time::getHHMMSS(static_cast<double>(execTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 }
@@ -1893,7 +1850,7 @@ void TabPrinter::printUtcTimeMsg(std::ostream& sout, double utcTime)
     double ss = 0;  // Sec
 
     // sim time
-    base::Time::getHHMMSS(static_cast<double>(utcTime), &hh, &mm, &ss);
+    base::time::getHHMMSS(static_cast<double>(utcTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 }
@@ -1909,7 +1866,7 @@ void TabPrinter::printSimTimeMsg(std::ostream& sout, double simTime)
     double ss = 0;  // Sec
 
     // utc time
-    base::Time::getHHMMSS(static_cast<double>(simTime), &hh, &mm, &ss);
+    base::time::getHHMMSS(static_cast<double>(simTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 }

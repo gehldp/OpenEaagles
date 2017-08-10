@@ -1,3 +1,4 @@
+
 #include "openeaagles/graphics/Material.hpp"
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/Pair.hpp"
@@ -6,12 +7,10 @@
 namespace oe {
 namespace graphics {
 
-IMPLEMENT_SUBCLASS(Material,"Material")
+IMPLEMENT_SUBCLASS(Material, "Material")
 EMPTY_SERIALIZER(Material)
+EMPTY_DELETEDATA(Material)
 
-//------------------------------------------------------------------------------
-// Slot table for this form type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Material)
     "ambientColor",         //  1: Ambient color - light coming from material scattered in all directions equally
     "diffuseColor",         //  2: Diffuse color - light coming from the material after light hits it (main color)
@@ -20,9 +19,6 @@ BEGIN_SLOTTABLE(Material)
     "shininess",            //  5: How shiny our material is (0 = dull, 128 = really shiny)
 END_SLOTTABLE(Material)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Material)
     ON_SLOT( 1, setSlotAmbientColor, base::PairStream )
     ON_SLOT( 1, setSlotAmbientColor, base::Number)
@@ -35,10 +31,6 @@ BEGIN_SLOT_MAP(Material)
     ON_SLOT( 5, setSlotShininess, base::Number)
 END_SLOT_MAP()
 
-
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Material::Material()
 {
     STANDARD_CONSTRUCTOR()
@@ -46,12 +38,8 @@ Material::Material()
     diffuseColor.set(1,1,1,1);      // white light diffuse off of the material (this is the closest thing to actual material color)
     emissiveColor.set(0,0,0,1);     // no emissive color
     specularColor.set(0,0,0,1);     // no specular color
-    shininess = 0;                  // no shine
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void Material::copyData(const Material& org, const bool)
 {
     BaseClass::copyData(org);
@@ -60,13 +48,6 @@ void Material::copyData(const Material& org, const bool)
     emissiveColor = org.emissiveColor;
     specularColor = org.specularColor;
     shininess = org.shininess;
-}
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
-void Material::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------
@@ -81,9 +62,9 @@ bool Material::setSlotAmbientColor(const base::PairStream* const x)
         int count = 0;
         double temp[4] = { 1,1,1,1 };
         while (item != nullptr && count < 4) {
-            base::Pair* pair = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
+            const auto pair = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
             if (pair != nullptr) {
-                base::Number* num = dynamic_cast<base::Number*>(pair->object());
+                const auto num = dynamic_cast<base::Number*>(pair->object());
                 if (num != nullptr) temp[count++] = num->getFloat();
             }
             item = item->getNext();
@@ -95,6 +76,7 @@ bool Material::setSlotAmbientColor(const base::PairStream* const x)
     }
     return true;
 }
+
 //------------------------------------------------------------------------------
 // setSlotAmbientColor() - set our ambient values all the same as the number
 // given (ie - 1 would be white, 0 black, 0.5 somewhere in between)
@@ -121,9 +103,9 @@ bool Material::setSlotDiffuseColor(const base::PairStream* const x)
         int count = 0;
         double temp[4] = { 1,1,1,1 };
         while (item != nullptr && count < 4) {
-            base::Pair* pair = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
+            const auto pair = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
             if (pair != nullptr) {
-                base::Number* num = dynamic_cast<base::Number*>(pair->object());
+                const auto num = dynamic_cast<base::Number*>(pair->object());
                 if (num != nullptr) temp[count++] = num->getFloat();
             }
             item = item->getNext();
@@ -161,9 +143,9 @@ bool Material::setSlotEmissiveColor(const base::PairStream* const x)
         int count = 0;
         double temp[4] = { 1,1,1,1 };
         while (item != nullptr && count < 4) {
-            base::Pair* pair = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
+            const auto pair = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
             if (pair != nullptr) {
-                base::Number* num = dynamic_cast<base::Number*>(pair->object());
+                const auto num = dynamic_cast<base::Number*>(pair->object());
                 if (num != nullptr) temp[count++] = num->getFloat();
             }
             item = item->getNext();
@@ -201,9 +183,9 @@ bool Material::setSlotSpecularColor(const base::PairStream* const x)
         int count = 0;
         double temp[4] = { 1,1,1,1 };
         while (item != nullptr && count < 4) {
-            base::Pair* pair = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
+            const auto pair = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
             if (pair != nullptr) {
-                base::Number* num = dynamic_cast<base::Number*>(pair->object());
+                const auto num = dynamic_cast<base::Number*>(pair->object());
                 if (num != nullptr) temp[count++] = num->getFloat();
             }
             item = item->getNext();
@@ -242,7 +224,7 @@ bool Material::setSlotShininess(const base::Number* const x)
 //------------------------------------------------------------------------------
 // setAmbientColor() - set our ambient color with an OSG or double
 //------------------------------------------------------------------------------
-bool Material::setAmbientColor(osg::Vec4 x)
+bool Material::setAmbientColor(base::Vec4d x)
 {
     ambientColor = x;
     return true;
@@ -255,7 +237,7 @@ bool Material::setAmbientColor(double x, double y, double z, double w)
 //------------------------------------------------------------------------------
 // setDiffuseColor() - set our diffuse color with an OSG
 //------------------------------------------------------------------------------
-bool Material::setDiffuseColor(osg::Vec4 x)
+bool Material::setDiffuseColor(base::Vec4d x)
 {
     diffuseColor = x;
     return true;
@@ -268,7 +250,7 @@ bool Material::setDiffuseColor(double x, double y, double z, double w)
 //------------------------------------------------------------------------------
 // setEmissiveColor() - set our emissive color with an OSG
 //------------------------------------------------------------------------------
-bool Material::setEmissiveColor(osg::Vec4 x)
+bool Material::setEmissiveColor(base::Vec4d x)
 {
     emissiveColor = x;
     return true;
@@ -281,7 +263,7 @@ bool Material::setEmissiveColor(double x, double y, double z, double w)
 //------------------------------------------------------------------------------
 // setSpecularColor() - set our specular color with an OSG
 //------------------------------------------------------------------------------
-bool Material::setSpecularColor(osg::Vec4 x)
+bool Material::setSpecularColor(base::Vec4d x)
 {
     specularColor = x;
     return true;
@@ -298,14 +280,6 @@ bool Material::setShininess(double x)
 {
     shininess = x;
     return true;
-}
-
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* Material::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
 
 }

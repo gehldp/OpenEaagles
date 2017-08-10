@@ -13,7 +13,7 @@ namespace dafif {
 //------------------------------------------------------------------------------
 class Navaid : public Record
 {
-   DECLARE_SUBCLASS(Navaid,Record)
+   DECLARE_SUBCLASS(Navaid, Record)
 
 public:
    enum { RECORD_LENGTH = NAVAID_RECORD_LEN };
@@ -54,9 +54,7 @@ public:
 
 private:
    static const Ptbl ptable;
-
 };
-
 
 //------------------------------------------------------------------------------
 // inline member functions

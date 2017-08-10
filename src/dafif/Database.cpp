@@ -2,9 +2,8 @@
 #include "openeaagles/dafif/Database.hpp"
 #include "openeaagles/dafif/Record.hpp"
 #include "openeaagles/base/FileReader.hpp"
-#include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/String.hpp"
-#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/angle_utils.hpp"
 #include "openeaagles/base/units/Distances.hpp"
 
 #include <cstring>
@@ -14,54 +13,24 @@
 namespace oe {
 namespace dafif {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(Database,"Database")
+IMPLEMENT_ABSTRACT_SUBCLASS(Database, "Database")
 
-//------------------------------------------------------------------------------
-// Slot table for this form type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Database)
     "pathname",      // 1) Path to the file
     "filename",      // 2) File name (appended to pathname)
 END_SLOTTABLE(Database)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(Database)
-    ON_SLOT(1,setSlotPathname,base::String)
-    ON_SLOT(2,setSlotFilename,base::String)
+    ON_SLOT(1, setSlotPathname, base::String)
+    ON_SLOT(2, setSlotFilename, base::String)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Database::Database()
 {
    STANDARD_CONSTRUCTOR()
-
    db = new base::FileReader();
-
-   ncache = 0;
-   rl = nullptr;
-   nrl = 0;
-
-   ol = nullptr;
-   nol = 0;
-
-   ql = nullptr;
-   nql = 0;
-   qlimit = 0;
-
-   refLat = 0.0f;
-   refLon = 0.0f;
-   coslat = 1.0f;
-   mrng = 0.0f;
-   dbInUse = false;
-   dbLoaded = false;
 }
 
-
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void Database::copyData(const Database& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -88,9 +57,6 @@ void Database::copyData(const Database& org, const bool cc)
    dbLoaded = false;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void Database::deleteData()
 {
    if (db != nullptr) {
@@ -128,7 +94,6 @@ bool Database::openDatabaseFile()
    return db->isReady();
 }
 
-
 //------------------------------------------------------------------------------
 // getArea(), setArea() -- get/set the search area (ref point)
 //------------------------------------------------------------------------------
@@ -149,7 +114,7 @@ void Database::setArea(const double lat, const double lon, const double mr)
 {
    refLat = lat;
    refLon = lon;
-   coslat = std::cos(lat * base::Angle::D2RCC);
+   coslat = std::cos(lat * base::angle::D2RCC);
    mrng   = mr;
 }
 
@@ -473,8 +438,8 @@ int Database::rangeSort()
 //------------------------------------------------------------------------------
 int Database::rlqs(const void* p1, const void* p2)
 {
-   const Key* k1 = *(static_cast<const Key**>(const_cast<void*>(p1)));
-   const Key* k2 = *(static_cast<const Key**>(const_cast<void*>(p2)));
+   const auto k1 = *(static_cast<const Key**>(const_cast<void*>(p1)));
+   const auto k2 = *(static_cast<const Key**>(const_cast<void*>(p2)));
 
    int result = 0;
    if (k1->rng2 < k2->rng2)      result = -1;
@@ -485,8 +450,8 @@ int Database::rlqs(const void* p1, const void* p2)
 
 int Database::ol_cmp(const void* p1, const void* p2)
 {
-   Key* k1 = *(static_cast<Key**>(const_cast<void*>(p1)));
-   Key* k2 = *(static_cast<Key**>(const_cast<void*>(p2)));
+   const auto k1 = *(static_cast<Key**>(const_cast<void*>(p1)));
+   const auto k2 = *(static_cast<Key**>(const_cast<void*>(p2)));
 
    return std::strcmp(k1->icao,k2->icao);
 }
@@ -517,18 +482,6 @@ void Database::printIcaoList(std::ostream& sout)
    }
 }
 
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-base::Object* Database::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& Database::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -562,39 +515,16 @@ std::ostream& Database::serialize(std::ostream& sout, const int i, const bool sl
 //------------------------------------------------------------------------------
 // Database::Key
 //------------------------------------------------------------------------------
-Database::Key::Key(const int idx1)
+Database::Key::Key(const int idx1): idx(idx1)
 {
-   idx = idx1;
-   size = 0;
-
-   lat  = 0.0f;
-   lon  = 0.0f;
-   rng2 = 0.0f;
-
-   icao[0] = '\0';
 }
 
-Database::Key::Key(const float lat1, const float lon1)
+Database::Key::Key(const float lat1, const float lon1): lat(lat1), lon(lon1)
 {
-   idx = 0;
-   size = 0;
-
-   lat  = lat1;
-   lon  = lon1;
-   rng2 = 0.0f;
-
-   icao[0] = '\0';
 }
 
 Database::Key::Key(const char* code)
 {
-   idx = 0;
-   size = 0;
-
-   lat  = 0.0f;
-   lon  = 0.0f;
-   rng2 = 0.0f;
-
    Record::dsGetString(icao,code,ICAO_CODE_LEN);
 }
 

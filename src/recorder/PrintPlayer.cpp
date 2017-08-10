@@ -8,56 +8,28 @@
 
 #include <iomanip>
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 namespace oe {
 namespace recorder {
 
-
-//==============================================================================
-// Class PrintPlayer
-//==============================================================================
 IMPLEMENT_SUBCLASS(PrintPlayer,"PrintPlayer")
+EMPTY_SERIALIZER(PrintPlayer)
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(PrintPlayer)
    "playerName",   // 1) Player name
 END_SLOTTABLE(PrintPlayer)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(PrintPlayer)
-   ON_SLOT( 1, setName,        base::String)
+   ON_SLOT( 1, setName, base::String)
 END_SLOT_MAP()
 
-EMPTY_SERIALIZER(PrintPlayer)
-
-//------------------------------------------------------------------------------
-// Default Constructor
-//------------------------------------------------------------------------------
 PrintPlayer::PrintPlayer()
 {
    STANDARD_CONSTRUCTOR()
-   initData();
 }
 
-void PrintPlayer::initData()
-{
-   name = nullptr;
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void PrintPlayer::copyData(const PrintPlayer& org, const bool cc)
+void PrintPlayer::copyData(const PrintPlayer& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    { // clone player name
       const base::String* clone = nullptr;
@@ -67,9 +39,6 @@ void PrintPlayer::copyData(const PrintPlayer& org, const bool cc)
    }
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void PrintPlayer::deleteData()
 {
    setName(nullptr);
@@ -86,15 +55,6 @@ bool PrintPlayer::setName(const base::String* const msg)
    return true;
 }
 
-
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* PrintPlayer::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
 //------------------------------------------------------------------------------
 // Print the data
 //------------------------------------------------------------------------------
@@ -105,10 +65,10 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
    if (dataRecord == nullptr) return;  // cannot continue
 
    // Get the time msg
-   const pb::Time* timeMsg = nullptr;
-   if (dataRecord->has_time()) {
-      timeMsg = &dataRecord->time();
-   }
+//   const pb::Time* timeMsg = nullptr;
+//   if (dataRecord->has_time()) {
+//      timeMsg = &dataRecord->time();
+//   }
 
    // Get message id
    unsigned int messageId = dataRecord->id();

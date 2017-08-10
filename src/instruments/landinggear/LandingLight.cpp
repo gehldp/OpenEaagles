@@ -2,52 +2,37 @@
 #include "openeaagles/instruments/landinggear/LandingLight.hpp"
 #include "openeaagles/base/Number.hpp"
 #include <GL/glu.h>
+#include <iostream>
 
 namespace oe {
 namespace instruments {
 
-IMPLEMENT_SUBCLASS(LandingLight,"LandingLight")
+IMPLEMENT_SUBCLASS(LandingLight, "LandingLight")
 EMPTY_SERIALIZER(LandingLight)
+EMPTY_DELETEDATA(LandingLight)
 
 BEGIN_SLOTTABLE(LandingLight)
     "lightRadius",          // 3 Radius of our light (if not components)
 END_SLOTTABLE(LandingLight)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles for LandingGear
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(LandingLight)
     ON_SLOT(1, setSlotLightRadius, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 LandingLight::LandingLight()
 {
     STANDARD_CONSTRUCTOR()
-    lRadius = 0;             // default to 0, means don't use it...
-    gearCurrent = 0;
     selSD.empty();
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void LandingLight::copyData(const LandingLight& org, const bool)
 {
-    // copy base class stuff first
     BaseClass::copyData(org);
 
     gearCurrent = org.gearCurrent;
     lRadius = org.lRadius;
     selSD.empty();
 }
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-EMPTY_DELETEDATA(LandingLight)
 
 // set functions
 //------------------------------------------------------------------------------
@@ -138,13 +123,5 @@ void LandingLight::updateData(const double dt)
     send("index", SELECT, x, selSD);
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for LandingLight
-//------------------------------------------------------------------------------
-base::Object* LandingLight::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
-
-}  // end instruments namespace
-}  // end oe namespace
+}

@@ -1,4 +1,3 @@
-// Polygon
 
 #include "openeaagles/graphics/Polygon.hpp"
 #include "openeaagles/base/Number.hpp"
@@ -11,22 +10,15 @@ namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Polygon,"Polygon")
 EMPTY_SERIALIZER(Polygon)
+EMPTY_DELETEDATA(Polygon)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Polygon::Polygon()
 {
    STANDARD_CONSTRUCTOR()
    coeff.set(0,0,0,0);
-   coeffValid = false;
    norm.set(1,0,0);
-   layerValue = 0;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void Polygon::copyData(const Polygon& org, const bool)
 {
    BaseClass::copyData(org);
@@ -36,11 +28,6 @@ void Polygon::copyData(const Polygon& org, const bool)
    norm = org.norm;
    layerValue = org.layerValue;
 }
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-EMPTY_DELETEDATA(Polygon)
 
 //------------------------------------------------------------------------------
 // compute the vector normal to polygon
@@ -58,12 +45,12 @@ bool Polygon::calcNormal()
    return ok;
 }
 
-bool Polygon::calcNormal(osg::Vec3& n, const osg::Vec3 v[3])
+bool Polygon::calcNormal(base::Vec3d& n, const base::Vec3d v[3])
 {
-   osg::Vec3 t1 = v[1] - v[0];
+   base::Vec3d t1 = v[1] - v[0];
    t1.normalize();
 
-   osg::Vec3 t2 = v[2] - v[1];
+   base::Vec3d t2 = v[2] - v[1];
    t2.normalize();
 
    n = (t1 ^ t2); // cross product
@@ -74,7 +61,7 @@ bool Polygon::calcNormal(osg::Vec3& n, const osg::Vec3 v[3])
 //------------------------------------------------------------------------------
 // find the coefficients of the plane equation
 //------------------------------------------------------------------------------
-bool Polygon::calcPlaneCoeff(osg::Vec4& cc, const osg::Vec3 v[3])
+bool Polygon::calcPlaneCoeff(base::Vec4d& cc, const base::Vec3d v[3])
 {
    cc[A] =  ( v[0].y() * (v[1].z() - v[2].z())
             - v[1].y() * (v[0].z() - v[2].z())
@@ -111,14 +98,14 @@ bool Polygon::calcPlaneCoeff()
 //------------------------------------------------------------------------------
 // compute the z value at point p using plane coefficients c.
 //------------------------------------------------------------------------------
-double Polygon::calcZ(const osg::Vec2& p, const osg::Vec4& cc)
+double Polygon::calcZ(const base::Vec2d& p, const base::Vec4d& cc)
 {
    double zz = 0.0;
    zz = (-cc._v[D] - (cc._v[A] * p.x()) - (cc._v[B] * p.y()) )/cc._v[C];
    return zz;
 }
 
-double Polygon::calcZ(const osg::Vec2& p) const
+double Polygon::calcZ(const base::Vec2d& p) const
 {
    return calcZ(p,*getPlaneCoeff());
 }
@@ -130,14 +117,14 @@ void Polygon::drawFunc()
 {
     BEGIN_DLIST
     unsigned int nv = getNumberOfVertices();
-    const osg::Vec3* vertices = getVertices();
+    const base::Vec3d* vertices = getVertices();
 
     if (nv >= 2) {
 
         // Draw with texture
         unsigned int ntc = getNumberOfTextureCoords();
         if (ntc > 0 && hasTexture()) {
-            const osg::Vec2* texCoord = getTextureCoord();
+            const base::Vec2d* texCoord = getTextureCoord();
             unsigned int tc = 0; // texture count
             glBegin(GL_POLYGON);
             for (unsigned int i = 0; i < nv; i++) {
@@ -154,9 +141,9 @@ void Polygon::drawFunc()
         else {
             // get our color gradient, because if we have one, instead of a regular color, we will
             // override it here and set it on a per vertex level.
-            ColorGradient* colGradient = dynamic_cast<ColorGradient*>(getColor());
+            const auto colGradient = dynamic_cast<ColorGradient*>(getColor());
             glBegin(GL_POLYGON);
-            osg::Vec3* ptr = nullptr;
+            base::Vec3d* ptr = nullptr;
             for (unsigned int i = 0; i < nv; i++) {
                 if (colGradient != nullptr) {
                     base::Color* col = colGradient->getColorByIdx(i+1);
@@ -167,7 +154,7 @@ void Polygon::drawFunc()
                 // if we have a material name, we will set up like we have a material
                 if (getMaterialName() != nullptr) {
                     //lcVertex3v( vertices[i].ptr() );
-                    ptr = const_cast<osg::Vec3*>(reinterpret_cast<const osg::Vec3*>(vertices[i].ptr()));
+                    ptr = const_cast<base::Vec3d*>(reinterpret_cast<const base::Vec3d*>(vertices[i].ptr()));
 
                     if (ptr != nullptr) {
                         calcNormal();

@@ -1,14 +1,20 @@
+
 #include "openeaagles/dafif/Ils.hpp"
-#include "openeaagles/base/Nav.hpp"
+
+#include "openeaagles/base/util/nav_utils.hpp"
+
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
+
 #include <iostream>
 
 namespace oe {
 namespace dafif {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Ils,"Ils")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Ils, "Ils")
 EMPTY_SERIALIZER(Ils)
+EMPTY_COPYDATA(Ils)
+EMPTY_DELETEDATA(Ils)
 
 // Ils class field Position Table
 const Ils::Ptbl Ils::ptable = {
@@ -25,10 +31,6 @@ const Ils::Ptbl Ils::ptable = {
         ILS_MAGVAR                      // magVariance
 };
 
-
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Ils::Ils()
 {
    STANDARD_CONSTRUCTOR()
@@ -40,9 +42,6 @@ Ils::Ils(const char* const s) : Record(s)
    STANDARD_CONSTRUCTOR()
    ptbl = &ptable;
 }
-
-EMPTY_COPYDATA(Ils)
-EMPTY_DELETEDATA(Ils)
 
 //------------------------------------------------------------------------------
 // Type functions
@@ -59,19 +58,17 @@ int Ils::isIlsType(const Ils::IlsType tt) const
    return tt == ilsType();
 }
 
-
 //------------------------------------------------------------------------------
 // Get ILS glide slope and aircraft glide slope
 //------------------------------------------------------------------------------
 void Ils::getGlideSlopeData(const double aclat, const double aclon, const double acelev, float* ilsGlideSlope, float* acGlideSlope, float* deltaGlideSlope)const
 {
    double bearing(0.0), range(0.0), grdrange(0.0), lookangle(0.0);
-   base::Nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &grdrange, &range, &lookangle);
+   base::nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &grdrange, &range, &lookangle);
    *ilsGlideSlope = glideSlopeAngle();
    *acGlideSlope = static_cast<float>(-lookangle);
    *deltaGlideSlope = *ilsGlideSlope - *acGlideSlope;
 }
-
 
 //------------------------------------------------------------------------------
 // Printing functions

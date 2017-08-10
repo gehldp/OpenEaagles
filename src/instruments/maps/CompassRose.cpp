@@ -1,12 +1,15 @@
+
 #include "openeaagles/instruments/maps/CompassRose.hpp"
+
+#include "openeaagles/base/Number.hpp"
 
 namespace oe {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(CompassRose, "CompassRose")
 EMPTY_SERIALIZER(CompassRose)
+EMPTY_DELETEDATA(CompassRose)
 
-// Event handler
 BEGIN_EVENT_HANDLER(CompassRose)
     ON_EVENT_OBJ(UPDATE_VALUE, onUpdateRotDeg, base::Number)
     ON_EVENT_OBJ(UPDATE_VALUE2, onUpdateRadius, base::Number)
@@ -22,37 +25,22 @@ BEGIN_SLOTTABLE(CompassRose)
     "displacement",     // how far to translate
 END_SLOTTABLE(CompassRose)       
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles for Analog Dial
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(CompassRose)
     ON_SLOT(1, setSlotCenteredRadius, base::Number)
     ON_SLOT(2, setSlotDeCenteredRadius, base::Number)
     ON_SLOT(3, setSlotDisplacement, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 CompassRose::CompassRose()
 {
     STANDARD_CONSTRUCTOR()
-    centered = true;
-    cenRadius = 0.5;
-    decRadius = 1.0;
-    displacement = -0.5;
     sTicksSD.empty();
     lTicksSD.empty();
     dialSD.empty();
-    rot = 0;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void CompassRose::copyData(const CompassRose& org, const bool)
 {
-    // copy our base class stuff first
     BaseClass::copyData(org);
     
     centered = org.centered;
@@ -64,11 +52,6 @@ void CompassRose::copyData(const CompassRose& org, const bool)
     dialSD.empty();
     rot = org.rot;
 }
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-EMPTY_DELETEDATA(CompassRose)
 
 // Slot functions
 //------------------------------------------------------------------------------
@@ -107,7 +90,7 @@ bool CompassRose::setSlotDisplacement(const base::Number* const newD)
 //------------------------------------------------------------------------------
 bool CompassRose::setRotationDeg(const double newR)
 {
-    rot = newR * static_cast<double>(base::Angle::D2RCC);
+    rot = newR * static_cast<double>(base::angle::D2RCC);
     return true;
 }
 
@@ -248,13 +231,5 @@ void CompassRose::updateData(const double dt)
     send("dial", UPDATE_VALUE, rad, dialSD);
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for CompassRose
-//------------------------------------------------------------------------------
-base::Object* CompassRose::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
-
-}  // end instruments namespace
-}  // end oe namespace
+}

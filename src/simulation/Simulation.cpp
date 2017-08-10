@@ -1,35 +1,20 @@
-//------------------------------------------------------------------------------
-// Class: Simulation
-//------------------------------------------------------------------------------
+
 #include "openeaagles/simulation/Simulation.hpp"
 
-#include "openeaagles/simulation/DataRecorder.hpp"
-#include "openeaagles/simulation/IrAtmosphere.hpp"
-#include "openeaagles/simulation/NetIO.hpp"
-#include "openeaagles/simulation/Nib.hpp"
-#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/AbstractPlayer.hpp"
+
+#include "openeaagles/simulation/SimTcThread.hpp"
+#include "openeaagles/simulation/SimBgThread.hpp"
+
+#include "openeaagles/simulation/AbstractDataRecorder.hpp"
+#include "openeaagles/simulation/AbstractNib.hpp"
 #include "openeaagles/simulation/Station.hpp"
-#include "openeaagles/simulation/TabLogger.hpp"
 
-#include "openeaagles/dafif/AirportLoader.hpp"
-#include "openeaagles/dafif/NavaidLoader.hpp"
-#include "openeaagles/dafif/WaypointLoader.hpp"
-
-#include "openeaagles/base/EarthModel.hpp"
-#include "openeaagles/base/Identifier.hpp"
-#include "openeaagles/base/LatLon.hpp"
-#include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/Thread.hpp"
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Distances.hpp"
 #include "openeaagles/base/units/Times.hpp"
-#include "openeaagles/base/osg/Vec3"
-#include "openeaagles/base/osg/Vec4"
 #include "openeaagles/base/Statistic.hpp"
-#include "openeaagles/base/Terrain.hpp"
-#include "openeaagles/base/util/system.hpp"
+#include "openeaagles/base/util/system_utils.hpp"
 
 #include <cstring>
 #include <cmath>
@@ -37,140 +22,44 @@
 namespace oe {
 namespace simulation {
 
-//=============================================================================
-// Declare the threads
-//=============================================================================
+IMPLEMENT_PARTIAL_SUBCLASS(Simulation, "Simulation")
 
-class SimTcThread : public base::ThreadSyncTask {
-   DECLARE_SUBCLASS(SimTcThread, base::ThreadSyncTask)
-public:
-   SimTcThread(base::Component* const parent, const double priority);
-
-   // Parent thread signals start to this child thread with these parameters.
-   void start(
-      base::PairStream* const pl0,
-      const double dt0,
-      const unsigned int idx0,
-      const unsigned int n0
-   );
-
-private:
-   // ThreadSyncTask class function -- our userFunc()
-   virtual unsigned long userFunc() override;
-
-private:
-   base::PairStream* pl0;
-   double dt0;
-   unsigned int idx0;
-   unsigned int n0;
-};
-
-class SimBgThread : public base::ThreadSyncTask {
-   DECLARE_SUBCLASS(SimBgThread,base::ThreadSyncTask)
-public:
-   SimBgThread(base::Component* const parent, const double priority);
-
-   // Parent thread signals start to this child thread with these parameters.
-   void start(
-      base::PairStream* const pl0,
-      const double dt0,
-      const unsigned int idx0,
-      const unsigned int n0
-   );
-
-private:
-   // ThreadSyncTask class function -- our userFunc()
-   virtual unsigned long userFunc() override;
-
-private:
-   base::PairStream* pl0;
-   double dt0;
-   unsigned int idx0;
-   unsigned int n0;
-};
-
-
-//=============================================================================
-// Simulation class
-//=============================================================================
-IMPLEMENT_PARTIAL_SUBCLASS(Simulation,"Simulation")
-
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Simulation)
-   "players",        //  1) All players
-   "latitude",       //  2) Ref latitude
-   "longitude",      //  3) Ref longitude
-   "simulationTime", //  4) Simulation time
-   "day",            //  5) Initial simulated day of month [ 1 .. 31 ]
-   "month",          //  6) Initial simulated month [ 1 .. 12 ]
-   "year",           //  7) Initial simulated year [ 1970 .. 2100 ]
-   "airportLoader",  //  8) Airport database
-   "navaidLoader",   //  9) NAVAID database
-   "waypointLoader", // 10) Waypoint database
-   "terrain",        // 11) Terrain elevation database
-   "irAtmosphere",   // 12) IR atmosphere
-   "firstWeaponId",  // 13) First Released Weapon ID (default: 10001)
-   "numTcThreads",   // 14) Number of T/C threads to use with the player list
-   "numBgThreads",   // 15) Number of background threads to use with the player list
+   "players",        // 1) All players
+   "simulationTime", // 2) Simulation time
+   "day",            // 3) Initial simulated day of month [ 1 .. 31 ]
+   "month",          // 4) Initial simulated month [ 1 .. 12 ]
+   "year",           // 5) Initial simulated year [ 1970 .. 2100 ]
 
-   "gamingAreaRange", // 16) Max valid range of the simulation's gaming area or zero for unlimited
-                      //     (default: zero -- unlimited range)
+   "firstWeaponId",  // 6) First Released Weapon ID (default: 10001)
 
-   "earthModel",      // 17) Earth model for geodetic lat/lon (default is WGS-84)
-
-   "gamingAreaUseEarthModel" // 18) If true, use the 'earthModel' or its WGS-84 default for flat
-                     //    earth projections between geodetic lat/lon and the gaming
-                     //    area's NED coordinates.  Otherwise, use a standard spherical
-                     //    earth with a radius of Nav::ERAD60. (default: false)
+   "numTcThreads",   // 7) Number of T/C threads to use with the player list
+   "numBgThreads"    // 8) Number of background threads to use with the player list
 END_SLOTTABLE(Simulation)
 
-// slot map
 BEGIN_SLOT_MAP(Simulation)
     ON_SLOT( 1, setSlotPlayers,         base::PairStream)
 
-    ON_SLOT( 2, setSlotRefLatitude,     base::LatLon)
-    ON_SLOT( 2, setSlotRefLatitude,     base::Number)
+    ON_SLOT( 2, setSlotSimulationTime,  base::Time)
+    ON_SLOT( 3, setSlotDay,             base::Number)
+    ON_SLOT( 4, setSlotMonth,           base::Number)
+    ON_SLOT( 5, setSlotYear,            base::Number)
 
-    ON_SLOT( 3, setSlotRefLongitude,    base::LatLon)
-    ON_SLOT( 3, setSlotRefLongitude,    base::Number)
+    ON_SLOT( 6, setSlotFirstWeaponId,   base::Number)
 
-    ON_SLOT( 4, setSlotSimulationTime,  base::Time)
-    ON_SLOT( 5, setSlotDay,             base::Number)
-    ON_SLOT( 6, setSlotMonth,           base::Number)
-    ON_SLOT( 7, setSlotYear,            base::Number)
-    ON_SLOT( 8, setAirports,            dafif::AirportLoader)
-    ON_SLOT( 9, setNavaids,             dafif::NavaidLoader)
-    ON_SLOT(10, setWaypoints,           dafif::WaypointLoader)
-    ON_SLOT(11, setSlotTerrain,         base::Terrain)
-    ON_SLOT(12, setSlotIrAtmosphere,    IrAtmosphere)
-    ON_SLOT(13, setSlotFirstWeaponId,   base::Number)
-    ON_SLOT(14, setSlotNumTcThreads,    base::Number)
-    ON_SLOT(15, setSlotNumBgThreads,    base::Number)
-    ON_SLOT(16, setSlotGamingAreaRange, base::Distance)
-
-    ON_SLOT(17, setSlotEarthModel,      base::EarthModel)
-    ON_SLOT(17, setSlotEarthModel,      base::String)
-
-    ON_SLOT(18, setSlotGamingAreaEarthModel, base::Number)
-
+    ON_SLOT( 7, setSlotNumTcThreads,    base::Number)
+    ON_SLOT( 8, setSlotNumBgThreads,    base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructors, destructor, copy operator & clone()
-//------------------------------------------------------------------------------
 Simulation::Simulation() : newPlayerQueue(MAX_NEW_PLAYERS)
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
 Simulation::Simulation(const Simulation& org) : newPlayerQueue(MAX_NEW_PLAYERS)
 {
    STANDARD_CONSTRUCTOR()
-   copyData(org,true);
+   copyData(org, true);
 }
 
 Simulation::~Simulation()
@@ -189,78 +78,9 @@ Simulation* Simulation::clone() const
    return new Simulation(*this);
 }
 
-//------------------------------------------------------------------------------
-// Init data
-//------------------------------------------------------------------------------
-void Simulation::initData()
-{
-   origPlayers = nullptr;
-   players = nullptr;
-   airports = nullptr;
-   navaids = nullptr;
-   waypoints = nullptr;
-   terrain = nullptr;
-   irAtmosphere = nullptr;
-   station = nullptr;
-
-   em = nullptr;
-
-   refLat = 0.0;
-   refLon = 0.0;
-   sinRlat = 0.0;
-   cosRlat = 1.0;
-   maxRefRange = 0.0;
-   gaUseEmFlg = false;
-   base::Nav::computeWorldMatrix(refLat, refLon, &wm);
-
-   cycleCnt = 0;
-   frameCnt = 0;
-   phaseCnt = 0;
-
-   execTime = 0.0;
-
-   pcTime = 0.0;
-   pcTvSec = 0;
-   pcTvUSec = 0;
-
-   simTime = 0.0;
-   simTvSec = 0;
-   simTvUSec = 0;
-   simTimeSlaved = true;
-
-   simTime0 = -1;
-   simDay0 = 0;
-   simMonth0 = 0;
-   simYear0 = 0;
-
-   eventID = 0;
-   eventWpnID = 0;
-   relWpnId = MIN_WPN_ID;
-
-   loggedHeadings = false;
-
-   reqTcThreads = 1;  // Default is one -- no additional T/C threads
-   numTcThreads = 0;
-   for (unsigned int i = 0; i < MAX_TC_THREADS; i++) {
-      tcThreads[i] = nullptr;
-   }
-   tcThreadsFailed = false;
-
-   reqBgThreads = 1;  // Default is one -- no additional background threads
-   numBgThreads = 0;
-   for (unsigned int i = 0; i < MAX_BG_THREADS; i++) {
-      bgThreads[i] = nullptr;
-   }
-   bgThreadsFailed = false;
-}
-
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
-void Simulation::copyData(const Simulation& org, const bool cc)
+void Simulation::copyData(const Simulation& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    // Find our own Station
    station = nullptr;
@@ -280,44 +100,6 @@ void Simulation::copyData(const Simulation& org, const bool cc)
       players = org.players->clone();
       players->unref();  // safe_ptr<> has it
    }
-
-   const dafif::AirportLoader* apLoader = org.airports;
-   setAirports( const_cast<dafif::AirportLoader*>(static_cast<const dafif::AirportLoader*>(apLoader)) );
-
-   const dafif::NavaidLoader* naLoader = org.navaids;
-   setNavaids( const_cast<dafif::NavaidLoader*>(static_cast<const dafif::NavaidLoader*>(naLoader)) );
-
-   const dafif::WaypointLoader* wpLoader = org.waypoints;
-   setWaypoints( const_cast<dafif::WaypointLoader*>(static_cast<const dafif::WaypointLoader*>(wpLoader)) );
-
-   if (org.terrain != nullptr) {
-      base::Terrain* copy = org.terrain->clone();
-      setSlotTerrain( copy );
-      copy->unref();
-   }
-   else {
-      setSlotTerrain(nullptr);
-   }
-
-   if (org.irAtmosphere != nullptr) {
-      IrAtmosphere* copy = org.irAtmosphere->clone();
-      setSlotIrAtmosphere( copy );
-      copy->unref();
-   }
-   else {
-      setSlotIrAtmosphere(nullptr);
-   }
-
-   setEarthModel( org.em );
-
-   // Center of the gaming area
-   refLat = org.refLat;
-   refLon = org.refLon;
-   sinRlat = org.sinRlat;
-   cosRlat = org.cosRlat;
-   maxRefRange = org.maxRefRange;
-   gaUseEmFlg = org.gaUseEmFlg;
-   wm = org.wm;
 
    // Timing
    cycleCnt = org.cycleCnt;
@@ -368,19 +150,10 @@ void Simulation::copyData(const Simulation& org, const bool cc)
    reqBgThreads = org.reqBgThreads;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void Simulation::deleteData()
 {
    if (origPlayers != nullptr) { origPlayers = nullptr; }
    if (players != nullptr)     { players = nullptr; }
-
-   setSlotIrAtmosphere( nullptr );
-   setSlotTerrain( nullptr );
-   setAirports( nullptr );
-   setNavaids( nullptr );
-   setWaypoints( nullptr );
 
    base::Pair* newPlayer = newPlayerQueue.get();
    while (newPlayer != nullptr) {
@@ -428,7 +201,7 @@ void Simulation::reset()
          base::List::Item* item = origPlayerList->getFirstItem();
          while (item != nullptr) {
             base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            Player* ip = static_cast<Player*>(pair->object());
+            AbstractPlayer* ip = static_cast<AbstractPlayer*>(pair->object());
 
             // reinstated the container pointer and player name
             ip->container(this);
@@ -450,7 +223,7 @@ void Simulation::reset()
          base::List::Item* item = origPlayerList->getFirstItem();
          while (item != nullptr) {
             base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            Player* ip = static_cast<Player*>(pair->object());
+            AbstractPlayer* ip = static_cast<AbstractPlayer*>(pair->object());
             if (ip->isNetworkedPlayer()) {
 
                // reinstated the container pointer and player name
@@ -469,52 +242,6 @@ void Simulation::reset()
    // Swap the lists
    // ---
    players = newList;
-
-   // ---
-   // First time resetting the terrain database will load the data
-   // ---
-   if (terrain != nullptr) {
-      std::cout << "Loading Terrain Data..." << std::endl;
-      terrain->reset();
-      std::cout << "Finished!" << std::endl;
-   }
-
-
-   // ---
-   // Resetting the IR atmospheric database
-   // ---
-   if (irAtmosphere != nullptr) irAtmosphere->reset();
-
-   if ( !loggedHeadings ) {  // EventLogger Deprecated
-      if (getAnyEventLogger() != nullptr) {
-         {
-            TabLogger::TabLogEvent* evt = new TabLogger::LogPlayerData(0, nullptr); // code 0 for "header" msg
-            getAnyEventLogger()->log(evt);
-            evt->unref();
-         }
-         {
-            TabLogger::TabLogEvent* evt = new TabLogger::LogActiveTrack(0, nullptr, nullptr); // code 0 for "header" msg
-            getAnyEventLogger()->log(evt);
-            evt->unref();
-         }
-         {
-            TabLogger::TabLogEvent* evt = new TabLogger::LogPassiveTrack(0, nullptr, nullptr); // code 0 for "header" msg
-            getAnyEventLogger()->log(evt);
-            evt->unref();
-         }
-         {
-            TabLogger::TabLogEvent* evt = new TabLogger::LogWeaponActivity(0, nullptr, nullptr, nullptr, 0, 0.0); // code 0 for "header" msg
-            getAnyEventLogger()->log(evt);
-            evt->unref();
-         }
-         {
-            TabLogger::TabLogEvent* evt = new TabLogger::LogGunActivity(0, nullptr, 0); // code 0 for "header" msg
-            getAnyEventLogger()->log(evt);
-            evt->unref();
-         }
-         loggedHeadings = true;
-      }
-   }
 
    // ---
    // Create the T/C thread pool
@@ -654,7 +381,7 @@ void Simulation::reset()
       while (item != nullptr) {
          base::Pair* pair = static_cast<base::Pair*>(item->getValue());
          if (pair != nullptr) {
-            Player* ip = static_cast<Player*>(pair->object());
+            AbstractPlayer* ip = static_cast<AbstractPlayer*>(pair->object());
             if (ip != nullptr) ip->event(RESET_EVENT);
          }
          item = item->getNext();
@@ -705,12 +432,6 @@ bool Simulation::shutdownNotification()
       newPlayer->unref();
       newPlayer = newPlayerQueue.get();
    }
-
-   // ---
-   // Tell the environments ...
-   // ---
-   if (irAtmosphere != nullptr) irAtmosphere->event(SHUTDOWN_EVENT);
-   if (terrain != nullptr) terrain->event(SHUTDOWN_EVENT);
 
    // ---
    // Shut down the thread pools
@@ -849,8 +570,8 @@ void Simulation::updateTC(const double dt)
             updateTcPlayerList(currentPlayerList, (dt0/4.0), reqTcThreads, reqTcThreads);
 
             // Now wait for the other thread(s) to complete
-            base::ThreadSyncTask** pp = reinterpret_cast<base::ThreadSyncTask**>(&tcThreads[0]);
-            base::ThreadSyncTask::waitForAllCompleted(pp, numTcThreads);
+            base::SyncTask** pp = reinterpret_cast<base::SyncTask**>(&tcThreads[0]);
+            base::SyncTask::waitForAllCompleted(pp, numTcThreads);
 
          }
          else if (isMessageEnabled(MSG_ERROR)) {
@@ -890,7 +611,7 @@ void Simulation::updateTcPlayerList(
          count++;
          if (count == index) {
             base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            Player* ip = static_cast<Player*>(pair->object());
+            AbstractPlayer* ip = static_cast<AbstractPlayer*>(pair->object());
             ip->tcFrame(dt);
             index += n;
          }
@@ -935,8 +656,8 @@ void Simulation::updateData(const double dt)
             updateBgPlayerList(currentPlayerList, dt0, reqBgThreads, reqBgThreads);
 
             // Now wait for the other thread(s) to complete
-            base::ThreadSyncTask** pp = reinterpret_cast<base::ThreadSyncTask**>(&bgThreads[0]);
-            base::ThreadSyncTask::waitForAllCompleted(pp, numBgThreads);
+            base::SyncTask** pp = reinterpret_cast<base::SyncTask**>(&bgThreads[0]);
+            base::SyncTask::waitForAllCompleted(pp, numBgThreads);
 
          }
          else if (isMessageEnabled(MSG_ERROR)) {
@@ -946,23 +667,6 @@ void Simulation::updateData(const double dt)
             std::cerr << std::endl;
         }
     }
-
-    // ---
-    // Load DAFIF files (one pre frame)
-    // ---
-    if (airports != nullptr && airports->numberOfRecords() == 0) {
-       // Load Airports
-       airports->load();
-    }
-    else if (navaids != nullptr && navaids->numberOfRecords() == 0) {
-       // Load Navaids
-       navaids->load();
-    }
-    else if (waypoints != nullptr && waypoints->numberOfRecords() == 0) {
-       // Load Waypoints
-       waypoints->load();
-    }
-
 }
 
 //------------------------------------------------------------------------------
@@ -983,7 +687,7 @@ void Simulation::updateBgPlayerList(
          count++;
          if (count == index) {
          base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            Player* ip = static_cast<Player*>(pair->object());
+            AbstractPlayer* ip = static_cast<AbstractPlayer*>(pair->object());
             ip->updateData(dt);
             index += n;
          }
@@ -1021,54 +725,6 @@ base::PairStream* Simulation::getPlayers()
 const base::PairStream* Simulation::getPlayers() const
 {
    return players.getRefPtr();
-}
-
-// Returns a pointer to the EarthModel
-const base::EarthModel* Simulation::getEarthModel() const
-{
-   return em;
-}
-
-// Gaming area using the earth model?
-bool Simulation::isGamingAreaUsingEarthModel() const
-{
-   return gaUseEmFlg;
-}
-
-// Returns the reference latitude
-double Simulation::getRefLatitude() const
-{
-   return refLat;
-}
-
-// Returns the reference longitude
-double Simulation::getRefLongitude() const
-{
-   return refLon;
-}
-
-// Returns the sine of the reference latitude
-double Simulation::getSinRefLat() const
-{
-   return sinRlat;
-}
-
-// Returns the cosine of the reference latitude
-double Simulation::getCosRefLat() const
-{
-   return cosRlat;
-}
-
-// Max valid range (meters) of the gaming area or zero if there's no limit.
-double Simulation::getMaxRefRange() const
-{
-   return maxRefRange;
-}
-
-// World transformation matrix:
-const osg::Matrixd& Simulation::getWorldMat() const
-{
-   return wm;
 }
 
 // Real-time cycle counter
@@ -1141,51 +797,10 @@ unsigned short Simulation::getNewReleasedWeaponID()
    return relWpnId++;
 };
 
-// Returns the terrain elevation database
-const base::Terrain* Simulation::getTerrain() const
-{
-   return terrain;
-}
-
-base::Terrain* Simulation::getTerrain()
-{
-   return terrain;
-}
-
-// Returns the atmosphere database for IR algorithms
-IrAtmosphere* Simulation::getIrAtmosphere()
-{
-   return irAtmosphere;
-}
-
-// Returns the atmosphere database for IR algorithms
-const IrAtmosphere* Simulation::getIrAtmosphere() const
-{
-   return irAtmosphere;
-}
-
-// Returns the airport loader
-dafif::AirportLoader* Simulation::getAirports()
-{
-   return airports;
-}
-
-// Returns the NAVAID loader
-dafif::NavaidLoader* Simulation::getNavaids()
-{
-   return navaids;
-}
-
-// Returns the waypoint loader
-dafif::WaypointLoader* Simulation::getWaypoints()
-{
-   return waypoints;
-}
-
 // Returns the data recorder
-DataRecorder* Simulation::getDataRecorder()
+AbstractDataRecorder* Simulation::getDataRecorder()
 {
-   DataRecorder* p = nullptr;
+   AbstractDataRecorder* p = nullptr;
    Station* sta = getStation();
    if (sta != nullptr) p = sta->getDataRecorder();
    return p;
@@ -1220,52 +835,6 @@ Station* Simulation::getStationImp()
    return station;
 }
 
-
-//------------------------------------------------------------------------------
-// Sets the airport loader
-//------------------------------------------------------------------------------
-bool Simulation::setAirports(dafif::AirportLoader* const p)
-{
-   if (airports != nullptr) {
-      airports->unref();
-   }
-   airports = p;
-   if (airports != nullptr) {
-      airports->ref();
-   }
-   return true;
-}
-
-//------------------------------------------------------------------------------
-// Sets the airport loader
-//------------------------------------------------------------------------------
-bool Simulation::setNavaids(dafif::NavaidLoader* const p)
-{
-   if (navaids != nullptr) {
-      navaids->unref();
-   }
-   navaids = p;
-   if (navaids != nullptr) {
-      navaids->ref();
-   }
-   return true;
-}
-
-//------------------------------------------------------------------------------
-// Sets the airport loader
-//------------------------------------------------------------------------------
-bool Simulation::setWaypoints(dafif::WaypointLoader* const p)
-{
-   if (waypoints != nullptr) {
-      waypoints->unref();
-   }
-   waypoints = p;
-   if (waypoints != nullptr) {
-      waypoints->ref();
-   }
-   return true;
-}
-
 //------------------------------------------------------------------------------
 // setSlotPlayers() -- set the original player list (make sure we have only
 // player type objects with unique names and IDs)
@@ -1288,9 +857,9 @@ bool Simulation::setSlotPlayers(base::PairStream* const pl)
       while (item != nullptr && ok) {
          base::Pair* pair = static_cast<base::Pair*>(item->getValue());
          item = item->getNext();
-         Player* ip = dynamic_cast<Player*>( pair->object() );
+         const auto ip = dynamic_cast<AbstractPlayer*>( pair->object() );
          if (ip == nullptr) {
-            // Item is NOT a Eaagle::Player
+            // Item is NOT a Player
             std::cerr << "simulation::setSlotPlayers: slot: " << *pair->slot() << " is NOT of a Player type!" << std::endl;
             ok = false;
          }
@@ -1312,7 +881,7 @@ bool Simulation::setSlotPlayers(base::PairStream* const pl)
       while (item1 != nullptr) {
          base::Pair* pair1 = static_cast<base::Pair*>(item1->getValue());
          item1 = item1->getNext();
-         Player* ip1 = static_cast<Player*>(pair1->object());
+         AbstractPlayer* ip1 = static_cast<AbstractPlayer*>(pair1->object());
 
          // unassigned ID
          if ( (ip1->getID() == 0) && (maxID < 65535) ) {
@@ -1323,7 +892,7 @@ bool Simulation::setSlotPlayers(base::PairStream* const pl)
          base::List::Item* item2 = item1;
          while (item2 != nullptr) {
             base::Pair* pair2 = static_cast<base::Pair*>(item2->getValue());
-            Player* ip2 = static_cast<Player*>(pair2->object());
+            AbstractPlayer* ip2 = static_cast<AbstractPlayer*>(pair2->object());
 
             // unassigned ID
             if ( (ip2->getID() == 0)  && (maxID < 65535) ) {
@@ -1354,7 +923,7 @@ bool Simulation::setSlotPlayers(base::PairStream* const pl)
       while (item != nullptr) {
          base::Pair* pair = static_cast<base::Pair*>(item->getValue());
          item = item->getNext();
-         Player* ip = static_cast<Player*>(pair->object());
+         const auto ip = static_cast<AbstractPlayer*>(pair->object());
          ip->container(this);
          ip->setName(*pair->slot());
       }
@@ -1405,8 +974,8 @@ void Simulation::updatePlayerList()
         base::List::Item* item = pl->getFirstItem();
         while (!yes && item != nullptr) {
             base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            Player* p = static_cast<Player*>(pair->object());
-            yes = p->isMode(Player::DELETE_REQUEST);
+            const auto p = static_cast<AbstractPlayer*>(pair->object());
+            yes = p->isMode(AbstractPlayer::DELETE_REQUEST);
             item = item->getNext();
         }
     }
@@ -1429,8 +998,8 @@ void Simulation::updatePlayerList()
         while (item != nullptr) {
             base::Pair* pair = static_cast<base::Pair*>(item->getValue());
             item = item->getNext();
-            Player* p = static_cast<Player*>(pair->object());
-            if (p->isNotMode(Player::DELETE_REQUEST)) {
+            const auto p = static_cast<AbstractPlayer*>(pair->object());
+            if (p->isNotMode(AbstractPlayer::DELETE_REQUEST)) {
                 // Add the player to the new list
                 newList->put(pair);
             }
@@ -1442,13 +1011,6 @@ void Simulation::updatePlayerList()
                 BEGIN_RECORD_DATA_SAMPLE( getDataRecorder(), REID_PLAYER_REMOVED )
                    SAMPLE_1_OBJECT( p )
                 END_RECORD_DATA_SAMPLE()
-
-                // TabLogger is deprecated
-                if (getAnyEventLogger() != nullptr) {  // EventLogger Deprecated
-                     TabLogger::TabLogEvent* evt = new TabLogger::LogPlayerData(3, p); // code 3 for "remove" msg
-                     getAnyEventLogger()->log(evt);
-                     evt->unref();
-                }
             }
         }
 
@@ -1458,18 +1020,11 @@ void Simulation::updatePlayerList()
       base::Pair* newPlayer = newPlayerQueue.get();
       while (newPlayer != nullptr) {
             // get the player
-            Player* ip = static_cast<Player*>(newPlayer->object());
+            const auto ip = static_cast<AbstractPlayer*>(newPlayer->object());
 
             BEGIN_RECORD_DATA_SAMPLE( getDataRecorder(), REID_NEW_PLAYER )
                SAMPLE_1_OBJECT( ip )
             END_RECORD_DATA_SAMPLE()
-
-            // TabLogger is deprecated
-            if (getAnyEventLogger() != nullptr) {  // EventLogger Deprecated
-                TabLogger::TabLogEvent* evt = new TabLogger::LogPlayerData(1, ip); // code 1 for "new" msg
-                getAnyEventLogger()->log(evt);
-                evt->unref();
-            }
 
             // Set container and name
             ip->container(this);
@@ -1512,11 +1067,11 @@ bool Simulation::addNewPlayer(base::Pair* const player)
 //                   the next frame.  Returns true of player will be added
 //                   or false if there is an error.
 //------------------------------------------------------------------------------
-bool Simulation::addNewPlayer(const char* const playerName, Player* const player)
+bool Simulation::addNewPlayer(const char* const playerName, AbstractPlayer* const player)
 {
     if (playerName == nullptr || player == nullptr) return false;
 
-    base::Pair* pair = new base::Pair(playerName, player);
+    const auto pair = new base::Pair(playerName, player);
     bool ok = addNewPlayer(pair);
     pair->unref();
     return ok;
@@ -1535,7 +1090,7 @@ bool Simulation::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStr
     newItem->value = newPlayerPair;
 
     // Get the player
-    Player* newPlayer = static_cast<Player*>(newPlayerPair->object());
+    const auto newPlayer = static_cast<AbstractPlayer*>(newPlayerPair->object());
 
     // Search the new player list and insert into the correct position --
     //  -- sorted by network ID and player ID
@@ -1543,7 +1098,7 @@ bool Simulation::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStr
     base::List::Item* refItem = newList->getFirstItem();
     while (refItem != nullptr && !inserted) {
         base::Pair* refPair = static_cast<base::Pair*>(refItem->getValue());
-        Player* refPlayer = static_cast<Player*>(refPair->object());
+        const auto refPlayer = static_cast<AbstractPlayer*>(refPair->object());
 
         bool insert = false;
         if (newPlayer->isNetworkedPlayer()) {
@@ -1552,8 +1107,8 @@ bool Simulation::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStr
             if (refPlayer->isNetworkedPlayer()) {
 
                // Get the NIBs
-               const Nib* nNib = newPlayer->getNib();
-               const Nib* rNib = refPlayer->getNib();
+               const AbstractNib* nNib = newPlayer->getNib();
+               const AbstractNib* rNib = refPlayer->getNib();
 
                // Compare federate names
                int result = std::strcmp(*nNib->getFederateName(), *rNib->getFederateName());
@@ -1595,28 +1150,28 @@ bool Simulation::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStr
 //------------------------------------------------------------------------------
 // findPlayer() -- Find a player that matches 'id' and 'networkID'
 //------------------------------------------------------------------------------
-Player* Simulation::findPlayer(const short id, const int netID)
+AbstractPlayer* Simulation::findPlayer(const short id, const int netID)
 {
    return findPlayerPrivate(id, netID);
 }
 
-const Player* Simulation::findPlayer(const short id, const int netID) const
+const AbstractPlayer* Simulation::findPlayer(const short id, const int netID) const
 {
    return findPlayerPrivate(id, netID);
 }
 
-Player* Simulation::findPlayerPrivate(const short id, const int netID) const
+AbstractPlayer* Simulation::findPlayerPrivate(const short id, const int netID) const
 {
     // Quick out
     if (players == nullptr) return nullptr;
 
     // Find a Player that matches player ID and Sources
-    Player* iplayer = nullptr;
+    AbstractPlayer* iplayer = nullptr;
     const base::List::Item* item = players->getFirstItem();
     while (iplayer == nullptr && item != nullptr) {
-        const base::Pair* pair = static_cast<const base::Pair*>(item->getValue());
+        const auto pair = static_cast<const base::Pair*>(item->getValue());
         if (pair != nullptr) {
-            Player* ip = const_cast<Player*>(static_cast<const Player*>(pair->object()));
+            const auto ip = const_cast<AbstractPlayer*>(static_cast<const AbstractPlayer*>(pair->object()));
             if (ip != nullptr) {
                 if (netID > 0) {
                     if ((ip->getID() == id) && (ip->getNetworkID() == netID)) {
@@ -1639,28 +1194,28 @@ Player* Simulation::findPlayerPrivate(const short id, const int netID) const
 //------------------------------------------------------------------------------
 // findPlayerByName() -- Find a player by name
 //------------------------------------------------------------------------------
-Player* Simulation::findPlayerByName(const char* const playerName)
+AbstractPlayer* Simulation::findPlayerByName(const char* const playerName)
 {
    return findPlayerByNamePrivate(playerName);
 }
 
-const Player* Simulation::findPlayerByName(const char* const playerName) const
+const AbstractPlayer* Simulation::findPlayerByName(const char* const playerName) const
 {
    return findPlayerByNamePrivate(playerName);
 }
 
-Player* Simulation::findPlayerByNamePrivate(const char* const playerName) const
+AbstractPlayer* Simulation::findPlayerByNamePrivate(const char* const playerName) const
 {
     // Quick out
     if (players == nullptr || playerName == nullptr) return nullptr;
 
     // Find a Player named 'playerName'
-    Player* iplayer = nullptr;
+    AbstractPlayer* iplayer = nullptr;
     const base::List::Item* item = players->getFirstItem();
     while (iplayer == nullptr && item != nullptr) {
-        const base::Pair* pair = static_cast<const base::Pair*>(item->getValue());
+        const auto pair = static_cast<const base::Pair*>(item->getValue());
         if (pair != nullptr) {
-            Player* ip = const_cast<Player*>(static_cast<const Player*>(pair->object()));
+            const auto ip = const_cast<AbstractPlayer*>(static_cast<const AbstractPlayer*>(pair->object()));
             if (ip != nullptr && ip->isName(playerName)) {
                iplayer = ip;
             }
@@ -1674,61 +1229,6 @@ Player* Simulation::findPlayerByNamePrivate(const char* const playerName) const
 //------------------------------------------------------------------------------
 // Data set routines
 //------------------------------------------------------------------------------
-
-bool Simulation::setEarthModel(const base::EarthModel* const msg)
-{
-   if (em != nullptr) {
-      em->unref();
-      em = nullptr;
-   }
-
-   if (msg != nullptr) {
-      em = msg->clone();
-   }
-
-   return true;
-}
-
-bool Simulation::setGamingAreaUseEarthModel(const bool flg)
-{
-   gaUseEmFlg = flg;
-   return true;
-}
-
-// Sets Ref latitude
-bool Simulation::setRefLatitude(const double v)
-{
-   bool ok = (v <= 90.0 && v >= -90.0);
-   if (ok) {
-      // Set the latitude and compute the world matrix
-      refLat = v;
-      const double r = base::Angle::D2RCC * refLat;
-      sinRlat = std::sin(r);
-      cosRlat = std::cos(r);
-      base::Nav::computeWorldMatrix(refLat, refLon, &wm);
-   }
-   return ok;
-}
-
-// Sets Ref longitude
-bool Simulation::setRefLongitude(const double v)
-{
-   bool ok = (v <= 180.0 && v >= -180.0);
-   if (ok) {
-      // Set the longitude and compute the world matrix
-      refLon = v;
-      base::Nav::computeWorldMatrix(refLat, refLon, &wm);
-   }
-   return ok;
-}
-
-// Sets the max range (meters) of the gaming area or zero if there's no limit.
-bool Simulation::setMaxRefRange(const double v)
-{
-   bool ok = (v >= 0);
-   if (ok) maxRefRange = v;
-   return ok;
-}
 
 // Sets the initial simulation time (sec; or less than zero to slave to UTC)
 bool Simulation::setInitialSimulationTime(const long time)
@@ -1776,52 +1276,17 @@ void Simulation::setWeaponEventID(unsigned short id)
 //------------------------------------------------------------------------------
 // Set Slot routines
 //------------------------------------------------------------------------------
-bool Simulation::setSlotRefLatitude(const base::LatLon* const msg)
-{
-    bool ok = false;
-    if (msg != nullptr) {
-        ok = setRefLatitude(msg->getDouble());
-    }
-    return ok;
-}
-
-bool Simulation::setSlotRefLatitude(const base::Number* const msg)
-{
-    bool ok = false;
-    if (msg != nullptr) {
-        ok = setRefLatitude(msg->getDouble());
-    }
-    return ok;
-}
-
-bool Simulation::setSlotRefLongitude(const base::LatLon* const msg)
-{
-    bool ok = false;
-    if (msg != nullptr) {
-        ok = setRefLongitude(msg->getDouble());
-    }
-    return ok;
-}
-
-bool Simulation::setSlotRefLongitude(const base::Number* const msg)
-{
-    bool ok = false;
-    if (msg != nullptr) {
-        ok = setRefLongitude(msg->getDouble());
-    }
-    return ok;
-}
 
 bool Simulation::setSlotSimulationTime(const base::Time* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-       const long t = static_cast<long>( osg::round(base::Seconds::convertStatic(*msg)) );
+       const long t = static_cast<long>( base::osg::round(base::Seconds::convertStatic(*msg)) );
        if (t >= -1 && t < (60*60*24)) {
           ok = setInitialSimulationTime(t);
        }
        else {
-         std::cerr << "simulation::setSlotSimulationTime(): invalid time of day: " << t << " seconds; use [ 0 .. 86400 ] seconds or -1" << std::endl;
+         std::cerr << "Simulation::setSlotSimulationTime(): invalid time of day: " << t << " seconds; use [ 0 .. 86400 ] seconds or -1" << std::endl;
        }
     }
     return ok;
@@ -1873,22 +1338,6 @@ bool Simulation::setSlotYear(const base::Number* const msg)
       }
    }
    return ok;
-}
-
-bool Simulation::setSlotTerrain(base::Terrain* const msg)
-{
-   if (terrain != nullptr) terrain->unref();
-   terrain = msg;
-   if (terrain != nullptr) terrain->ref();
-   return true;
-}
-
-bool Simulation::setSlotIrAtmosphere(IrAtmosphere* const msg)
-{
-   if (irAtmosphere != nullptr) irAtmosphere->unref();
-   irAtmosphere = msg;
-   if (irAtmosphere != nullptr) irAtmosphere->ref();
-   return true;
 }
 
 bool Simulation::setSlotFirstWeaponId(const base::Number* const msg)
@@ -1958,61 +1407,6 @@ bool Simulation::setSlotNumBgThreads(const base::Number* const msg)
    return ok;
 }
 
-bool Simulation::setSlotGamingAreaRange(const base::Distance* const msg)
-{
-   bool ok = false;
-   if (msg != nullptr) {
-      ok = setMaxRefRange( base::Meters::convertStatic(*msg) );
-   }
-   return ok;
-}
-
-bool Simulation::setSlotEarthModel(const base::EarthModel* const msg)
-{
-   return setEarthModel(msg);
-}
-
-bool Simulation::setSlotEarthModel(const base::String* const msg)
-{
-   bool ok = false;
-   if (msg != nullptr && msg->len() > 0) {
-      const base::EarthModel* p = base::EarthModel::getEarthModel(*msg);
-      if (p != nullptr) {
-         // found the earth model
-         ok = setEarthModel(p);
-      }
-      else {
-         // Earth model not found by name
-         std::cerr << "simulation::setSlotEarthModel() earth model not found: " << *msg << std::endl;
-      }
-   }
-   else {
-      // clear the earth model with a empty string
-      ok = setEarthModel(nullptr);
-   }
-   return ok;
-}
-
-bool Simulation::setSlotGamingAreaEarthModel(const base::Number* const msg)
-{
-   bool ok = false;
-   if (msg != nullptr) {
-      ok = setGamingAreaUseEarthModel(msg->getBoolean());
-   }
-   return ok;
-}
-
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* Simulation::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& Simulation::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -2021,33 +1415,6 @@ std::ostream& Simulation::serialize(std::ostream& sout, const int i, const bool 
         sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
-
-   // ref lat/lon position
-   {
-      double v = getRefLatitude();
-      indent(sout,i+j);
-      sout << "latitude: ( LatLon";
-
-      sout << " direction: ";
-      if (v >= 0) { sout << "n"; }
-      else { sout << "s"; v = -v; }
-
-      sout << " degrees: " << v;
-      sout << " )" << std::endl;
-   }
-   {
-      double v = getRefLongitude();
-
-      indent(sout,i+j);
-      sout << "longitude: ( LatLon";
-
-      sout << " direction: ";
-      if (v >= 0) { sout << "e"; }
-      else { sout << "w"; v = -v; }
-
-      sout << " degrees: " << v;
-      sout << " )" << std::endl;
-   }
 
     if (players != nullptr) {
         indent(sout,i+j);
@@ -2065,100 +1432,6 @@ std::ostream& Simulation::serialize(std::ostream& sout, const int i, const bool 
     }
 
     return sout;
-}
-
-//=============================================================================
-// SimTcThread: Time critical thread
-//=============================================================================
-IMPLEMENT_SUBCLASS(SimTcThread,"SimTcThread")
-EMPTY_SLOTTABLE(SimTcThread)
-EMPTY_COPYDATA(SimTcThread)
-EMPTY_DELETEDATA(SimTcThread)
-EMPTY_SERIALIZER(SimTcThread)
-
-SimTcThread::SimTcThread(base::Component* const parent, const double priority)
-      : base::ThreadSyncTask(parent, priority)
-{
-   STANDARD_CONSTRUCTOR()
-
-   pl0 = nullptr;
-   dt0 = 0.0;
-   idx0 = 0;
-   n0 = 0;
-}
-
-void SimTcThread::start(
-         base::PairStream* const pl1,
-         const double dt1,
-         const unsigned int idx1,
-         const unsigned int n1
-      )
-{
-   pl0 = pl1;
-   dt0 = dt1;
-   idx0 = idx1;
-   n0 = n1;
-
-   signalStart();
-}
-
-unsigned long SimTcThread::userFunc()
-{
-   // Make sure we've a player list and our index is valid ...
-   if (pl0 != nullptr && idx0 > 0 && idx0 <= n0) {
-      // then call the Simulation class' update TC player list functions
-      Simulation* sim = static_cast<Simulation*>(getParent());
-      sim->updateTcPlayerList(pl0, dt0, idx0, n0);
-   }
-
-   return 0;
-}
-
-//=============================================================================
-// SimBgThread: Background thread
-//=============================================================================
-IMPLEMENT_SUBCLASS(SimBgThread,"SimBgThread")
-EMPTY_SLOTTABLE(SimBgThread)
-EMPTY_COPYDATA(SimBgThread)
-EMPTY_DELETEDATA(SimBgThread)
-EMPTY_SERIALIZER(SimBgThread)
-
-SimBgThread::SimBgThread(base::Component* const parent, const double priority)
-      : base::ThreadSyncTask(parent, priority)
-{
-   STANDARD_CONSTRUCTOR()
-
-   pl0 = nullptr;
-   dt0 = 0.0;
-   idx0 = 0;
-   n0 = 0;
-}
-
-void SimBgThread::start(
-         base::PairStream* const pl1,
-         const double dt1,
-         const unsigned int idx1,
-         const unsigned int n1
-      )
-{
-   pl0 = pl1;
-   dt0 = dt1;
-   idx0 = idx1;
-   n0 = n1;
-
-   signalStart();
-}
-
-unsigned long SimBgThread::userFunc()
-{
-   // Make sure we've a player list and our index is valid ...
-   if (pl0 != nullptr && idx0 > 0 && idx0 <= n0) {
-      // then call the Simulation class' update TC player list functions
-      Simulation* sim = static_cast<Simulation*>(getParent());
-      sim->updateBgPlayerList(pl0, dt0, idx0, n0);
-   }
-
-   return 0;
 }
 
 }

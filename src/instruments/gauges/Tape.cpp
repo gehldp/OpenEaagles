@@ -2,12 +2,14 @@
 #include "openeaagles/instruments/gauges/Tape.hpp"
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/util/math_utils.hpp"
+#include <iostream>
 
 namespace oe {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(Tape, "Tape")
 EMPTY_SERIALIZER(Tape)
+EMPTY_DELETEDATA(Tape)
 
 BEGIN_SLOTTABLE(Tape)
     "range",            // 1) Total range (in units) of the scale
@@ -19,10 +21,7 @@ BEGIN_SLOTTABLE(Tape)
     "convert",          // 7) convert our max and min values to make a "rotating" display (like a heading tape, for example
     // 360 degrees would be 0 degrees, and -10 degrees would be 350 degrees, and so on)
 END_SLOTTABLE(Tape)
-//
-//------------------------------------------------------------------------------
-//  Map slot table to handles for Analog Dial
-//------------------------------------------------------------------------------
+
 BEGIN_SLOT_MAP(Tape)
     ON_SLOT(1, setSlotRange, base::Number)
     ON_SLOT(2, setSlotHeight, base::Number)
@@ -33,9 +32,6 @@ BEGIN_SLOT_MAP(Tape)
     ON_SLOT(7, setSlotConvert, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Tape::Tape()
 {
     STANDARD_CONSTRUCTOR()
@@ -53,22 +49,10 @@ Tape::Tape()
         numberValsThousSD[i].empty();
         numberValsThousVisSD[i].empty();
     }
-    range = 0;
-    height = 0;
-    increment = 1;
-    vertical = true;
-    // these values are ignored
-    maxNum = -1;
-    minNum = -1;
-    convert = false;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void Tape::copyData(const Tape& org, const bool)
 {
-    // Copy our baseclass stuff first
     BaseClass::copyData(org);
 
     transTapeGraphicSD.empty();
@@ -93,11 +77,6 @@ void Tape::copyData(const Tape& org, const bool)
     minNum = org.minNum;
     convert = org.convert;
 }
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-EMPTY_DELETEDATA(Tape)
 
 // SLOT Functions
 //------------------------------------------------------------------------------
@@ -240,10 +219,10 @@ void Tape::updateData(const double dt)
         val += increment;
     }
 
-    send("number%dhunds", UPDATE_VALUE, numberValsHunds, numberValsHundsSD, MAX_NUMBERS);
-    send("number%dthous", UPDATE_VALUE, numberValsThous, numberValsThousSD, MAX_NUMBERS);
-    send("number%dhunds", SET_VISIBILITY, numberValsHundsVis, numberValsHundsVisSD, MAX_NUMBERS);
-    send("number%dthous", SET_VISIBILITY, numberValsThousVis, numberValsThousVisSD, MAX_NUMBERS);
+    send("number%dhunds", UPDATE_VALUE, numberValsHunds.data(), numberValsHundsSD.data(), MAX_NUMBERS);
+    send("number%dthous", UPDATE_VALUE, numberValsThous.data(), numberValsThousSD.data(), MAX_NUMBERS);
+    send("number%dhunds", SET_VISIBILITY, numberValsHundsVis.data(), numberValsHundsVisSD.data(), MAX_NUMBERS);
+    send("number%dthous", SET_VISIBILITY, numberValsThousVis.data(), numberValsThousVisSD.data(), MAX_NUMBERS);
 
     double unitsOfHeightPerRange = height/range;
     double newVal = (nearest * increment) - x;
@@ -255,13 +234,5 @@ void Tape::updateData(const double dt)
     else send("tapegraphic", UPDATE_VALUE, newVal, transTapeGraphicVSD);
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Tape
-//------------------------------------------------------------------------------
-base::Object* Tape::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
-
-}  // end instruments namespace
-}  // end oe namespace
+}

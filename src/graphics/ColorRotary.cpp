@@ -1,6 +1,3 @@
-//------------------------------------------------------------------------------
-// ColorRotary
-//------------------------------------------------------------------------------
 
 #include "openeaagles/graphics/ColorRotary.hpp"
 
@@ -8,7 +5,7 @@
 #include "openeaagles/base/Identifier.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/osg/Vec4"
+#include "openeaagles/base/osg/Vec4d"
 
 namespace oe {
 namespace graphics {
@@ -16,17 +13,11 @@ namespace graphics {
 IMPLEMENT_SUBCLASS(ColorRotary,"ColorRotary")
 EMPTY_SERIALIZER(ColorRotary)
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(ColorRotary)
     "breakcolors",      // set colors
     "breakpoints",      // set our breakpoints
 END_SLOTTABLE(ColorRotary)
 
-//------------------------------------------------------------------------------
-// Map the slots for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(ColorRotary)
     ON_SLOT(1, setSlotColors, base::PairStream)
     ON_SLOT(2, setSlotValues, base::PairStream)
@@ -40,25 +31,11 @@ ColorRotary::ColorRotary()
     color[Color::GREEN] = 0;
     color[Color::BLUE] = 0;
     color[Color::ALPHA] = getDefaultAlpha();
-
-    // inits
-    myColors = nullptr;
-    numVals = 0;
-    for (unsigned int i=0; i<MAX_VALUES; i++) {
-        myValues[i] = 0;
-    }
 }
 
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void ColorRotary::copyData(const ColorRotary& org, const bool cc)
+void ColorRotary::copyData(const ColorRotary& org, const bool)
 {
     BaseClass::copyData(org);
-    if (cc) {
-        myColors = nullptr;
-    }
 
     if (org.numVals > 0) {
         for (unsigned int i = 0; i < org.numVals; i++) {
@@ -72,9 +49,6 @@ void ColorRotary::copyData(const ColorRotary& org, const bool cc)
     numVals = org.numVals;
 }
 
-//------------------------------------------------------------------------------
-//deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void ColorRotary::deleteData()
 {
     if (myColors != nullptr) myColors->unref();
@@ -106,9 +80,9 @@ bool ColorRotary::setSlotValues(const base::PairStream* const newStream)
         base::PairStream* a = newStream->clone();
         base::List::Item* item = a->getFirstItem();
         while (item != nullptr) {
-            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
+            const auto pair = static_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
-                base::Number* n = dynamic_cast<base::Number*>(pair->object());
+                const auto n = dynamic_cast<base::Number*>(pair->object());
                 if (n != nullptr) {
                     myValues[numVals] = n->getReal();
                     numVals++;
@@ -147,23 +121,15 @@ bool ColorRotary::determineColor(const double value)
     if (myColors != nullptr) {
         base::Pair* pair = myColors->getPosition(breakPoint);
         if (pair != nullptr) {
-            base::Color* listcolor = dynamic_cast<base::Color*>(pair->object());
+            const auto listcolor = dynamic_cast<base::Color*>(pair->object());
             if (listcolor != nullptr) {
-               const osg::Vec4* vec = static_cast<const osg::Vec4*>(listcolor->getRGBA());
+               const auto vec = static_cast<const base::Vec4d*>(listcolor->getRGBA());
                color = *vec;
                ok = true;
             }
         }
     }
     return ok;
-}
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for ColorRotary
-//------------------------------------------------------------------------------
-base::Object* graphics::ColorRotary::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
 
 }

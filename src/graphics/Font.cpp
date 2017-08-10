@@ -10,15 +10,11 @@
 namespace oe {
 namespace graphics {
 
-IMPLEMENT_PARTIAL_SUBCLASS(Font,"Font")
+IMPLEMENT_PARTIAL_SUBCLASS(Font, "Font")
 
-// Default font size
 const double defaultFontWidth = 1;
 const double defaultFontHeight = 1;
 
-//------------------------------------------------------------------------------
-// Slot table for this form type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Font)
         "fontWidth",
         "fontHeight",
@@ -32,27 +28,19 @@ BEGIN_SLOTTABLE(Font)
         "lineSpacing",          // spacing for each line
 END_SLOTTABLE(Font)
 
-
-//------------------------------------------------------------------------------
-//  Map slot table to handles
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Font)
-    ON_SLOT(1,setSlotFontWidth,base::Number)
-    ON_SLOT(2,setSlotFontHeight,base::Number)
-    ON_SLOT(3,setSlotFontPosition,base::List)
-    ON_SLOT(4,setSlotBitmapWidth,base::Number)
-    ON_SLOT(5,setSlotBitmapHeight,base::Number)
-    ON_SLOT(6,setSlotFontPath,base::String)
-    ON_SLOT(7,setSlotFTGLFontFileName,base::String)
-    ON_SLOT(8,setSlotLookupTable,base::List)
-    ON_SLOT(9,setSlotCharacterSpacing,base::Number);
-    ON_SLOT(10,setSlotLineSpacing,base::Number);
+    ON_SLOT(1, setSlotFontWidth, base::Number)
+    ON_SLOT(2, setSlotFontHeight, base::Number)
+    ON_SLOT(3, setSlotFontPosition, base::List)
+    ON_SLOT(4, setSlotBitmapWidth, base::Number)
+    ON_SLOT(5, setSlotBitmapHeight, base::Number)
+    ON_SLOT(6, setSlotFontPath, base::String)
+    ON_SLOT(7, setSlotFTGLFontFileName, base::String)
+    ON_SLOT(8, setSlotLookupTable, base::List)
+    ON_SLOT(9, setSlotCharacterSpacing, base::Number);
+    ON_SLOT(10, setSlotLineSpacing, base::Number);
 END_SLOT_MAP()
 
-
-//------------------------------------------------------------------------------
-// Constructors, destructor, copy operator & clone()
-//------------------------------------------------------------------------------
 Font::Font()
 {
    STANDARD_CONSTRUCTOR()
@@ -62,17 +50,6 @@ Font::Font()
 
 void Font::initData()
 {
-   leftSide = 0;
-   topSide = 0;
-   b = 0;
-   pLUT = nullptr;
-   pFTGL = nullptr;
-   fontPath = nullptr;
-   fontFile = nullptr;
-   loaded = false;
-   charSpacing = 0;
-   lineSpacing = 0;
-
    setFontWidth( defaultFontWidth );
    setFontHeight( defaultFontHeight );
 
@@ -102,9 +79,6 @@ Font* Font::clone() const
    return nullptr;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void Font::copyData(const Font& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -154,9 +128,6 @@ void Font::copyData(const Font& org, const bool cc)
    bHeight = org.bHeight;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void Font::deleteData()
 {
    if (pLUT != nullptr) delete[] pLUT;
@@ -181,7 +152,6 @@ void Font::position(const int ln, const int cp, GLdouble& px, GLdouble& py) cons
    py = topSide - lineSpacing*ln;
 }
 
-
 //------------------------------------------------------------------------------
 // setTextOrigin() -- sets the upper left corner
 //------------------------------------------------------------------------------
@@ -190,7 +160,6 @@ void Font::setTextOrigin(const GLdouble x, const GLdouble y)
     leftSide = x;
     topSide = y;
 }
-
 
 //------------------------------------------------------------------------------
 // xferChars() -- transfer characters
@@ -215,20 +184,6 @@ int Font::xferChars(char* const outp, const size_t BUF_SIZE, const char* const i
    return static_cast<int>(std::strlen(outp));
 }
 
-
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Font
-//------------------------------------------------------------------------------
-base::Object* Font::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& Font::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

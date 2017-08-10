@@ -25,25 +25,15 @@ ColorGradient::ColorGradient()
    color[Color::GREEN] = 0;
    color[Color::BLUE] = 0;
    color[Color::ALPHA] = getDefaultAlpha();
-
-   myColors = nullptr;
 }
 
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void ColorGradient::copyData(const ColorGradient& org, const bool cc)
+void ColorGradient::copyData(const ColorGradient& org, const bool)
 {
     BaseClass::copyData(org);
-    if (cc) myColors = nullptr;
 
     setSlotColors(org.myColors);
 }
 
-//------------------------------------------------------------------------------
-//deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void ColorGradient::deleteData()
 {
     if (myColors != nullptr) {
@@ -77,14 +67,6 @@ base::Color* ColorGradient::getColorByIdx(const int idx)
         }
     }
     return fCol;
-}
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for ColorGradient
-//------------------------------------------------------------------------------
-base::Object* graphics::ColorGradient::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
 
 }

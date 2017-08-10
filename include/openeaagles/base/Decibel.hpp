@@ -3,6 +3,7 @@
 #define __oe_base_Decibel_H__
 
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 namespace oe {
 namespace base {
@@ -63,7 +64,7 @@ public:
     virtual bool setSlotValue(const Number* const svobj) override;
 
 private:
-    double db;    // value in dBs
+    double db {};    // value in dBs
 };
 
 //------------------------------------------------------------------------------

@@ -10,53 +10,40 @@
 namespace oe {
 namespace base {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(List,"List")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(List, "List")
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
-List::List() : headP(nullptr), tailP(nullptr), num(0)
+List::List()
 {
     STANDARD_CONSTRUCTOR()
 }
 
-List::List(const double values[], const unsigned int nv) : headP(nullptr), tailP(nullptr), num(0)
+List::List(const double values[], const unsigned int nv)
 {
     STANDARD_CONSTRUCTOR()
 
     // Create Float's for each value and add to the list.
     for (unsigned int i = 0; i < nv; i++) {
-        Float* p = new Float(values[i]);
+        const auto p = new Float(values[i]);
         put(p);
         p->unref(); // ref() by put(), so we can unref().
     }
 }
 
-List::List(const int values[], const unsigned int nv) : headP(nullptr), tailP(nullptr), num(0)
+List::List(const int values[], const unsigned int nv)
 {
     STANDARD_CONSTRUCTOR()
 
     // Create Integer's for each value and add to the list.
     for (unsigned int i = 0; i < nv; i++) {
-        Integer* p = new Integer(values[i]);
+        const auto p = new Integer(values[i]);
         put(p);
         p->unref(); // ref() by put(), so we can unref().
     }
 }
 
-
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
-void List::copyData(const List& org, const bool cc)
+void List::copyData(const List& org, const bool)
 {
     BaseClass::copyData(org);
-
-    if (cc) {
-        headP = nullptr;
-        tailP = nullptr;
-        num = 0;
-    }
 
     // Clear the old list (if any)
     clear();
@@ -112,7 +99,7 @@ void List::clear()
 
 
 //------------------------------------------------------------------------------
-// find(Object*) -- find an object on the list
+// find(Object*) -- find object on the list
 //------------------------------------------------------------------------------
 unsigned int List::getIndex(const Object* const obj) const
 {
@@ -129,31 +116,31 @@ unsigned int List::getIndex(const Object* const obj) const
 }
 
 //------------------------------------------------------------------------------
-// addHead(Object*) -- Adds an item to the head of the list.
+// addHead(Object*) -- Adds object to the head of the list.
 //------------------------------------------------------------------------------
 void List::addHead(Object* const obj)
 {
     if (obj == nullptr) return;
-    Item* d = new Item;
+    const auto d = new Item;
     d->value = obj;
     obj->ref();
     addHead(d);
 }
 
 //------------------------------------------------------------------------------
-// addTail(Object*) -- Adds an item to the tail of the list.
+// addTail(Object*) -- Adds object to the tail of the list.
 //------------------------------------------------------------------------------
 void List::addTail(Object* const obj)
 {
     if (obj == nullptr) return;
-    Item* d = new Item;
+    const auto d = new Item;
     d->value = obj;
     obj->ref();
     addTail(d);
 }
 
 //------------------------------------------------------------------------------
-// remove(Object*) -- Removes an object from the list.
+// remove(Object*) -- Removes object from the list.
 //------------------------------------------------------------------------------
 bool List::remove(const Object* const obj)
 {
@@ -187,12 +174,12 @@ unsigned int List::getNumberList(double values[], const unsigned int max) const
     unsigned int n = 0;
     for (const Item* p = getFirstItem(); p != nullptr && n < max; p = p->getNext() ) {
         const Object* p1 = p->getValue();
-        const Pair* gp = dynamic_cast<const Pair*>(p1);
+        const auto gp = dynamic_cast<const Pair*>(p1);
         if (gp != nullptr) {
             // when the item is a Pair, use the object it contains.
             p1 = gp->object();
         }
-        const Number* pp = dynamic_cast<const Number*>(p1);
+        const auto pp = dynamic_cast<const Number*>(p1);
         if (pp != nullptr) {
             // when we have a number
             values[n++] = pp->getDouble();
@@ -210,12 +197,12 @@ unsigned int List::getNumberList(float values[], const unsigned int max) const
     unsigned int n = 0;
     for (const Item* p = getFirstItem(); p != nullptr && n < max; p = p->getNext() ) {
         const Object* p1 = p->getValue();
-        const Pair* gp = dynamic_cast<const Pair*>(p1);
+        const auto gp = dynamic_cast<const Pair*>(p1);
         if (gp != nullptr) {
             // when the item is a Pair, use the object it contains.
             p1 = gp->object();
         }
-        const Number* pp = dynamic_cast<const Number*>(p1);
+        const auto pp = dynamic_cast<const Number*>(p1);
         if (pp != nullptr) {
             // when we have a number
             values[n++] = pp->getFloat();
@@ -234,12 +221,12 @@ unsigned int List::getNumberList(int values[], const unsigned int max) const
     unsigned int n = 0;
     for (const Item* p = getFirstItem(); p != nullptr && n < max; p = p->getNext() ) {
         const Object* p1 = p->getValue();
-        const Pair* gp = dynamic_cast<const Pair*>(p1);
+        const auto gp = dynamic_cast<const Pair*>(p1);
         if (gp != nullptr) {
             // when the item is a Pair, use the object it contains.
             p1 = gp->object();
         }
-        const Number* pp = dynamic_cast<const Number*>(p1);
+        const auto pp = dynamic_cast<const Number*>(p1);
         if (pp != nullptr) {
             // when we have a number
             values[n++] = pp->getInt();
@@ -378,7 +365,6 @@ bool List::operator==(const List& l) const
       tt = tt->getNext();
       ll = ll->getNext();
    }
-
    return true;
 }
 
@@ -409,10 +395,6 @@ const Object* List::getPosition1(const unsigned int n) const
         return nullptr;
 }
 
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& List::serialize(std::ostream& sout, const int, const bool) const
 {
     std::cout << "{" << std::endl;

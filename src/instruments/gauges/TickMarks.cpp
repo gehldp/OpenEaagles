@@ -1,5 +1,7 @@
+
 #include "openeaagles/instruments/gauges/TickMarks.hpp"
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 namespace oe {
 namespace instruments {
@@ -15,9 +17,6 @@ BEGIN_SLOTTABLE(TickMarks)
     "tickGraphic",      // sets a graphic to use instead of a line
 END_SLOTTABLE(TickMarks)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles for Analog Dial
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(TickMarks)
     ON_SLOT(1, setSlotTickMarkLength, base::Number)
     ON_SLOT(2, setSlotQuantity, base::Number)
@@ -26,27 +25,14 @@ BEGIN_SLOT_MAP(TickMarks)
     ON_SLOT(5, setTickGraphic, graphics::Graphic)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 TickMarks::TickMarks()
 {
     STANDARD_CONSTRUCTOR()
-    lengthTM = 1;
-    quantity = 1;
-    gaugeLength = 0;
-    flip = false;
-    myGraphic = nullptr;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void TickMarks::copyData(const TickMarks& org, const bool cc)
+void TickMarks::copyData(const TickMarks& org, const bool)
 {
     BaseClass::copyData(org);
-
-    if (cc) myGraphic = nullptr;
 
     setTickGraphic(org.myGraphic);
     lengthTM = org.lengthTM;
@@ -55,9 +41,6 @@ void TickMarks::copyData(const TickMarks& org, const bool cc)
     flip = org.flip;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void TickMarks::deleteData()
 {
     if (myGraphic != nullptr) {
@@ -213,13 +196,5 @@ bool TickMarks::setFlip(const bool x)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for TickMarks
-//------------------------------------------------------------------------------
-base::Object* TickMarks::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
-
-}  // end instruments namespace
-}  // end oe namespace
+}

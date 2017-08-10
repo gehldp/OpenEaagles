@@ -2,17 +2,17 @@
 #ifndef __oe_recorder_DataRecorder_H__
 #define __oe_recorder_DataRecorder_H__
 
-#include "openeaagles/simulation/DataRecorder.hpp"
+#include "openeaagles/simulation/AbstractDataRecorder.hpp"
+#include <string>
 
 namespace oe {
-   namespace simulation { class Player; class Track; class Emission; }
-   namespace base { class String; }
-
+namespace models { class Player; class Track; class Emission; }
+namespace base { class String; }
 namespace recorder {
-   namespace pb { class DataRecord; class PlayerId; class PlayerState;
-      class TrackData; class EmissionData; }
-   class DataRecordHandle;
-   class OutputHandler;
+namespace pb { class DataRecord; class PlayerId; class PlayerState;
+               class TrackData; class EmissionData; }
+class DataRecordHandle;
+class OutputHandler;
 
 //------------------------------------------------------------------------------
 // Class: DataRecorder
@@ -51,22 +51,22 @@ namespace recorder {
 //    REID_TRACK_DATA         ! obj[0] => (player); obj[1] => (track)
 //
 //------------------------------------------------------------------------------
-class DataRecorder : public simulation::DataRecorder
+class DataRecorder : public simulation::AbstractDataRecorder
 {
-   DECLARE_SUBCLASS(DataRecorder, simulation::DataRecorder)
+   DECLARE_SUBCLASS(DataRecorder, simulation::AbstractDataRecorder)
 
 public:
    DataRecorder();
 
-   const char* getEventName() const       { return eventName; }
-   const char* getApplication() const     { return application; }
-   unsigned int getCaseNum() const        { return caseNum; }
-   unsigned int getMissionNum() const     { return missionNum; }
-   unsigned int getSubjectNum() const     { return subjectNum; }
-   unsigned int getRunNum() const         { return runNum; }
-   unsigned int getDay() const            { return day; }
-   unsigned int getMonth() const          { return month; }
-   unsigned int getYear() const           { return year; }
+   const char*  getEventName() const    { return eventName.c_str(); }
+   const char*  getApplication() const  { return application.c_str(); }
+   unsigned int getCaseNum() const      { return caseNum; }
+   unsigned int getMissionNum() const   { return missionNum; }
+   unsigned int getSubjectNum() const   { return subjectNum; }
+   unsigned int getRunNum() const       { return runNum; }
+   unsigned int getDay() const          { return day; }
+   unsigned int getMonth() const        { return month; }
+   unsigned int getYear() const         { return year; }
 
    virtual void processRecords() override;
    virtual void reset() override;
@@ -91,13 +91,13 @@ protected:
    bool setSlotYear(base::Number* const msg);
 
    // data filler functions
-   virtual void genPlayerId( pb::PlayerId* const id, const simulation::Player* const player );
-   virtual void genPlayerState( pb::PlayerState* const state, const simulation::Player* const player );
-   virtual void genTrackData( pb::TrackData* const trkMsg, const simulation::Track* const track );
-   virtual void genEmissionData( pb::EmissionData* const emMsg, const simulation::Emission* const emData);
+   virtual void genPlayerId( pb::PlayerId* const id, const models::Player* const player );
+   virtual void genPlayerState( pb::PlayerState* const state, const models::Player* const player );
+   virtual void genTrackData( pb::TrackData* const trkMsg, const models::Track* const track );
+   virtual void genEmissionData( pb::EmissionData* const emMsg, const models::Emission* const emData);
    virtual void sendDataRecord(pb::DataRecord* const msg);       // Send the DataRecord to our output handler
    virtual void timeStamp(pb::DataRecord* const msg);            // Time stamp the DataRecord
-   virtual std::string genTrackId(const simulation::Track* const track);
+   virtual std::string genTrackId(const models::Track* const track);
    void setFirstPass(const bool f);
 
    // Recorder data event handlers
@@ -134,18 +134,18 @@ protected:
 private:
    void initData();
 
-   OutputHandler* outputHandler;          // Our output handler
-   bool firstPass;
+   OutputHandler* outputHandler {};          // Our output handler
+   bool firstPass {true};
 
-   const char* eventName;
-   const char* application;
-   unsigned int caseNum;
-   unsigned int missionNum;
-   unsigned int subjectNum;
-   unsigned int runNum;
-   unsigned int day;
-   unsigned int month;
-   unsigned int year;
+   std::string eventName;
+   std::string application;
+   unsigned int caseNum {};
+   unsigned int missionNum {};
+   unsigned int subjectNum {};
+   unsigned int runNum {};
+   unsigned int day {};
+   unsigned int month {};
+   unsigned int year {};
 };
 
 #include "openeaagles/recorder/DataRecorder.inl"

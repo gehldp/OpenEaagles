@@ -1,19 +1,15 @@
 
 #include "openeaagles/linearsystem/LimitFunc.hpp"
+#include <iostream>
 
 namespace oe {
 namespace linearsystem {
 
-//==============================================================================
-// Class LimitFunc
-//==============================================================================
-IMPLEMENT_SUBCLASS(LimitFunc,"LimitFunc")
+IMPLEMENT_SUBCLASS(LimitFunc, "LimitFunc")
 EMPTY_SLOTTABLE(LimitFunc)
 EMPTY_SERIALIZER(LimitFunc)
+EMPTY_DELETEDATA(LimitFunc)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 LimitFunc::LimitFunc()
 {
    STANDARD_CONSTRUCTOR()
@@ -33,21 +29,12 @@ LimitFunc::LimitFunc(const double ll, const double uu) : ScalerFunc()
    initialize();
 }
 
-//------------------------------------------------------------------------------
-// initData() -- init member data
-//------------------------------------------------------------------------------
 void LimitFunc::initData()
 {
-   lower = 0;
-   upper = 0;
-
    allocateMemory(ORDER);
    clearMemory();
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void LimitFunc::copyData(const LimitFunc& org, const bool cc)
 {
    if (cc) {
@@ -61,13 +48,6 @@ void LimitFunc::copyData(const LimitFunc& org, const bool cc)
    upper = org.upper;
 
    initialize();
-}
-
-//------------------------------------------------------------------------------
-//deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void LimitFunc::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------

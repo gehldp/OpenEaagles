@@ -2,12 +2,12 @@
 #ifndef __oe_iodevice_Controller_H__
 #define __oe_iodevice_Controller_H__
 
-#include "openeaagles/base/IoDevice.hpp"
+#include "openeaagles/base/io/IoDevice.hpp"
+
+#include <array>
 
 namespace oe {
-
 namespace base { class Number; }
-
 namespace iodevice {
 
 //------------------------------------------------------------------------------
@@ -43,21 +43,21 @@ protected:
    // Slot functions
    virtual bool setSlotDeviceIndex(const base::Number* const msg);
 
-   unsigned int deviceIndex; // Device index
+   unsigned int deviceIndex {}; // Device index
 
    // ---
    // analog
    // ---
    static const unsigned short MAX_AI = 16;
-   unsigned short numAI;    // Number of analog channels
-   double inData[MAX_AI];   // Input analog array
+   unsigned short numAI {};                // Number of analog channels
+   std::array<double, MAX_AI> inData {};   // Input analog array
 
    // ---
    // digital bits
    // ---
    static const unsigned short MAX_DI = 32;
-   unsigned short numDI;      // Number of input bits
-   bool inBits[MAX_DI];       // Input bit array
+   unsigned short numDI {};                 // Number of input bits
+   std::array<bool, MAX_DI> inBits {};      // Input bit array
 
 private:
    void initData();

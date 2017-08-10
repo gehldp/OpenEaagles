@@ -1,6 +1,6 @@
-// Shapes
 
 #include "openeaagles/graphics/Shapes.hpp"
+
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/graphics/ColorGradient.hpp"
@@ -31,16 +31,11 @@ BEGIN_EVENT_HANDLER(Circle)
     ON_EVENT_OBJ(UPDATE_VALUE, updateRadius, base::Number)
 END_EVENT_HANDLER()
 
-// Constructor
 Circle::Circle()
 {
     STANDARD_CONSTRUCTOR()
-    radius = 1.0;
-    filled = false;
-    slices = 16;
 }
 
-// Copy data
 void Circle::copyData(const Circle& org, const bool)
 {
    BaseClass::copyData(org);
@@ -95,13 +90,6 @@ bool Circle::setSlotSlices(const base::Number* const x)
     return ok;
 }
 
-// getSlotByIndex()
-base::Object* Circle::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-// serialize()
 std::ostream& Circle::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;
@@ -133,7 +121,7 @@ std::ostream& Circle::serialize(std::ostream& sout, const int i, const bool slot
 //==============================================================================
 // Class: OcclusionCircle
 //==============================================================================
-IMPLEMENT_SUBCLASS(OcclusionCircle,"OcclusionCircle")
+IMPLEMENT_SUBCLASS(OcclusionCircle, "OcclusionCircle")
 EMPTY_DELETEDATA(OcclusionCircle)
 
 BEGIN_SLOTTABLE(OcclusionCircle)
@@ -144,17 +132,13 @@ BEGIN_SLOT_MAP(OcclusionCircle)
     ON_SLOT(1,setSlotOuterRadius,base::Number)
 END_SLOT_MAP()
 
-// Constructor
 OcclusionCircle::OcclusionCircle()
 {
     STANDARD_CONSTRUCTOR()
-    // outer radius just a bit bigger than inner radius
-    outerRadius = 1.1f;
     setFilled(true);
     setSlices(100);
 }
 
-// Copy data
 void OcclusionCircle::copyData(const OcclusionCircle& org, const bool)
 {
     BaseClass::copyData(org);
@@ -185,13 +169,6 @@ bool OcclusionCircle::setSlotOuterRadius(const base::Number* const x)
     return ok;
 }
 
-// getSlotByIndex()
-base::Object* OcclusionCircle::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-// serialize()
 std::ostream& OcclusionCircle::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;
@@ -234,16 +211,11 @@ BEGIN_SLOT_MAP(Arc)
     ON_SLOT(3,setSlotIsConnected,base::Number)
 END_SLOT_MAP()
 
-// Constructor
 Arc::Arc()
 {
     STANDARD_CONSTRUCTOR()
-    startAngle = 0.0;
-    arcLength = 90.0;
-    setIsConnected(false);
 }
 
-// Copy data
 void Arc::copyData(const Arc& org, const bool)
 {
    BaseClass::copyData(org);
@@ -295,13 +267,6 @@ bool Arc::setSlotIsConnected(const base::Number* const x)
     return ok;
 }
 
-// getSlotByIndex()
-base::Object* Arc::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-// serialize()
 std::ostream& Arc::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;
@@ -341,17 +306,13 @@ BEGIN_SLOT_MAP(OcclusionArc)
     ON_SLOT(1,setSlotOuterRadius,base::Number)
 END_SLOT_MAP()
 
-// Constructor
 OcclusionArc::OcclusionArc()
 {
     STANDARD_CONSTRUCTOR()
-    // outer radius just a bit bigger than inner radius
-    outerRadius = 1.1f;
     setFilled(true);
     setSlices(100);
 }
 
-// Copy data
 void OcclusionArc::copyData(const OcclusionArc& org, const bool)
 {
     BaseClass::copyData(org);
@@ -384,13 +345,6 @@ bool OcclusionArc::setSlotOuterRadius(const base::Number* const x)
     return ok;
 }
 
-// getSlotByIndex()
-base::Object* OcclusionArc::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-// serialize()
 std::ostream& OcclusionArc::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;
@@ -417,9 +371,9 @@ std::ostream& OcclusionArc::serialize(std::ostream& sout, const int i, const boo
 //==============================================================================
 // Class: Point
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Point,"Point")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Point, "Point")
 EMPTY_SERIALIZER(Point)
-EMPTY_CONSTRUCTOR(Point);
+EMPTY_CONSTRUCTOR(Point)
 EMPTY_COPYDATA(Point)
 EMPTY_DELETEDATA(Point)
 
@@ -428,7 +382,7 @@ void Point::drawFunc()
 {
    BEGIN_DLIST
    const unsigned int n = getNumberOfVertices();
-   const osg::Vec3* v = getVertices();
+   const base::Vec3d* v = getVertices();
    glBegin(GL_POINTS);
    for (unsigned int i = 0; i < n; i++) {
       lcVertex3v( v[i].ptr() );
@@ -441,9 +395,9 @@ void Point::drawFunc()
 //==============================================================================
 // Class: LineLoop
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(LineLoop,"LineLoop")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(LineLoop, "LineLoop")
 EMPTY_SERIALIZER(LineLoop)
-EMPTY_CONSTRUCTOR(LineLoop);
+EMPTY_CONSTRUCTOR(LineLoop)
 EMPTY_COPYDATA(LineLoop)
 EMPTY_DELETEDATA(LineLoop)
 
@@ -452,7 +406,7 @@ void LineLoop::drawFunc()
 {
    BEGIN_DLIST
    const unsigned int n = getNumberOfVertices();
-   const osg::Vec3* v = getVertices();
+   const base::Vec3d* v = getVertices();
    if (n >= 2) {
       glBegin(GL_LINE_LOOP);
       for (unsigned int i = 0; i < n; i++) {
@@ -467,7 +421,7 @@ void LineLoop::drawFunc()
 //==============================================================================
 // Class: Line
 //==============================================================================
-IMPLEMENT_SUBCLASS(Line,"Line")
+IMPLEMENT_SUBCLASS(Line, "Line")
 EMPTY_DELETEDATA(Line)
 
 BEGIN_SLOTTABLE(Line)
@@ -478,11 +432,9 @@ BEGIN_SLOT_MAP(Line)
     ON_SLOT(1,setSlotSegments,base::Number)
 END_SLOT_MAP()
 
-// Constructor
 Line::Line()
 {
    STANDARD_CONSTRUCTOR()
-   segment = false;
 }
 
 void Line::copyData(const Line& org, const bool)
@@ -496,7 +448,7 @@ void Line::drawFunc()
 {
    BEGIN_DLIST
    const unsigned int n = getNumberOfVertices();
-   const osg::Vec3* v = getVertices();
+   const base::Vec3d* v = getVertices();
    if (n >= 2) {
       if (segment) {
          // Draw as line segments (pairs of vertices)
@@ -526,13 +478,6 @@ bool Line::setSlotSegments(const base::Number* const x)
     return ok;
 }
 
-// getSlotByIndex()
-base::Object* Line::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-// serialize()
 std::ostream& Line::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;
@@ -558,7 +503,7 @@ std::ostream& Line::serialize(std::ostream& sout, const int i, const bool slotsO
 //==============================================================================
 // Class: Quad
 //==============================================================================
-IMPLEMENT_SUBCLASS(Quad,"Quad")
+IMPLEMENT_SUBCLASS(Quad, "Quad")
 EMPTY_DELETEDATA(Quad)
 
 BEGIN_SLOTTABLE(Quad)
@@ -573,7 +518,6 @@ END_SLOT_MAP()
 Quad::Quad()
 {
     STANDARD_CONSTRUCTOR()
-    strip = false;
 }
 
 void Quad::copyData(const Quad& org, const bool)
@@ -592,7 +536,6 @@ bool Quad::setSlotStrip(const base::Number* const x)
     }
     return ok;
 }
-
 
 // Draw function
 void Quad::drawFunc()
@@ -623,12 +566,12 @@ void Quad::drawFunc()
 
         if (ok) {
             // get our regular vertices here
-            const osg::Vec3* v = getVertices();
+            const base::Vec3d* v = getVertices();
 
             const unsigned int ntc = getNumberOfTextureCoords();
             // draw with texture
             if (ntc > 0 && hasTexture()) {
-                const osg::Vec2* texCoord = getTextureCoord();
+                const base::Vec2d* texCoord = getTextureCoord();
                 unsigned int tc = 0; // texture count
                 for (unsigned int i = 0; i < nv; i++) {
                     // add our textures coordinates
@@ -641,7 +584,7 @@ void Quad::drawFunc()
             // draw without texture
             else {
                 // get our color gradient and apply it (if we have one)
-                ColorGradient* colGradient = dynamic_cast<ColorGradient*>(getColor());
+                const auto colGradient = dynamic_cast<ColorGradient*>(getColor());
 
                 for (unsigned int i = 0; i < nv; i++) {
                     if (colGradient != nullptr) {
@@ -664,13 +607,6 @@ void Quad::drawFunc()
     else std::cerr << "Quad::drawFunc() - Quad or QuadStrip needs at least 4 vertices!" << std::endl;
 }
 
-// getSlotByIndex()
-base::Object* Quad::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-// serialize()
 std::ostream& Quad::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;
@@ -696,7 +632,7 @@ std::ostream& Quad::serialize(std::ostream& sout, const int i, const bool slotsO
 //==============================================================================
 // Class: Triangle
 //==============================================================================
-IMPLEMENT_SUBCLASS(Triangle,"Triangle")
+IMPLEMENT_SUBCLASS(Triangle, "Triangle")
 EMPTY_DELETEDATA(Triangle)
 
 BEGIN_SLOTTABLE(Triangle)
@@ -707,11 +643,9 @@ BEGIN_SLOT_MAP(Triangle)
     ON_SLOT(1,setSlotFan,base::Number)
 END_SLOT_MAP()
 
-// Constructor
 Triangle::Triangle()
 {
     STANDARD_CONSTRUCTOR()
-    fan = false;
 }
 
 void Triangle::copyData(const Triangle& org, const bool)
@@ -761,12 +695,12 @@ void Triangle::drawFunc()
 
         if (ok) {
             // get our regular vertices here
-            const osg::Vec3* v = getVertices();
+            const base::Vec3d* v = getVertices();
 
             const unsigned int ntc = getNumberOfTextureCoords();
             // draw with texture
             if (ntc > 0 && hasTexture()) {
-                const osg::Vec2* texCoord = getTextureCoord();
+                const base::Vec2d* texCoord = getTextureCoord();
                 unsigned int tc = 0; // texture count
                 for (unsigned int i = 0; i < nv; i++) {
                     // add our textures coordinates
@@ -779,7 +713,7 @@ void Triangle::drawFunc()
             // draw without texture
             else {
                 // get our color gradient and apply it (if we have one)
-                ColorGradient* colGradient = dynamic_cast<ColorGradient*>(getColor());
+                const auto colGradient = dynamic_cast<ColorGradient*>(getColor());
 
                 for (unsigned int i = 0; i < nv; i++) {
                     if (colGradient != nullptr) {
@@ -801,13 +735,6 @@ void Triangle::drawFunc()
     else std::cerr << "Triangle::drawFunc() - Triangle or Triangle needs at least 3 vertices!" << std::endl;
 }
 
-// getSlotByIndex()
-base::Object* Triangle::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-// serialize()
 std::ostream& Triangle::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;
@@ -828,7 +755,6 @@ std::ostream& Triangle::serialize(std::ostream& sout, const int i, const bool sl
    }
    return sout;
 }
-
 
 }
 }

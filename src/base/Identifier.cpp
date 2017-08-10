@@ -5,14 +5,11 @@
 namespace oe {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Identifier,"Identifier")
+IMPLEMENT_SUBCLASS(Identifier, "Identifier")
 EMPTY_SLOTTABLE(Identifier)
 EMPTY_COPYDATA(Identifier)
 EMPTY_DELETEDATA(Identifier)
 
-//------------------------------------------------------------------------------
-// Class support functions
-//------------------------------------------------------------------------------
 Identifier::Identifier() : String()
 {
    STANDARD_CONSTRUCTOR()
@@ -24,7 +21,6 @@ Identifier::Identifier(const char* string) : String()
    setStr(string);
 }
 
-
 //------------------------------------------------------------------------------
 // Replace spaces with underscores, and then call our BaseClass::setStr()
 //------------------------------------------------------------------------------
@@ -35,7 +31,7 @@ void Identifier::setStr(const char* string)
 
    // copy the string and replace any spaces
    if (len > 0) {
-      char* newStr = new char[len+1];
+      const auto newStr = new char[len+1];
       for (unsigned int i = 0; i < len; i++) {
          if (string[i] == ' ') newStr[i] = '_';
          else newStr[i] = string[i];
@@ -67,7 +63,7 @@ void Identifier::catStr(const char* s)
 
    // replace any spaces
    size_t len = std::strlen(s);
-   char* newStr = new char[len+1];
+   const auto newStr = new char[len+1];
    for (unsigned int i = 0; i < len; i++) {
       if (s[i] == ' ') newStr[i] = '_';
       else newStr[i] = s[i];
@@ -87,10 +83,6 @@ std::ostream& operator<<(std::ostream& sout, const Identifier& ident)
     return sout;
 }
 
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& Identifier::serialize(std::ostream& sout, const int, const bool) const
 {
     const char* s = *this;

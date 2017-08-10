@@ -31,13 +31,11 @@ END_SLOT_MAP()
 Table1::Table1() : Table()
 {
    STANDARD_CONSTRUCTOR()
-   xtable = nullptr;
-   nx = 0;
 }
 
 Table1::Table1(const double* dtbl, const unsigned int dsize,
                    const double* xtbl, const unsigned int xsize)
-                   : Table(dtbl, dsize), xtable(nullptr), nx(0)
+                   : Table(dtbl, dsize)
 {
     STANDARD_CONSTRUCTOR()
     if (xtbl != nullptr && xsize > 0) {   /* Copy the x breakpoints */
@@ -85,7 +83,7 @@ bool Table1::loadData(const List& list, double* const table)
     if (n1 <= 0 || n1 != nx) return false;
 
     // Transfer numbers from the list to a temp table
-    double* p = new double[nx];
+    const auto p = new double[nx];
     unsigned int n2 = list.getNumberList(p, nx);
     bool ok = (nx == n2);
     if (ok) {
@@ -143,7 +141,7 @@ Table1::lfi(const double iv1, FStorage* const f) const
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
    if (f != nullptr) {
-      TableStorage* s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_1D(iv1, getXData(), getNumXPoints(), getDataTable(), isExtrapolationEnabled(), &s->xbp);
@@ -165,17 +163,6 @@ bool Table1::setXBreakpoints1(const List* const sxb1obj)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Table
-//------------------------------------------------------------------------------
-Object* Table1::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& Table1::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -229,14 +216,12 @@ END_SLOT_MAP()
 Table2::Table2() : Table1()
 {
    STANDARD_CONSTRUCTOR()
-   ytable = nullptr;
-   ny = 0;
 }
 
 Table2::Table2(const double* dtbl, const unsigned int dsize,
                    const double* xtbl, const unsigned int xsize,
                    const double* ytbl, const unsigned int ysize)
-                   : Table1(dtbl, dsize, xtbl, xsize), ytable(nullptr), ny(0)
+                   : Table1(dtbl, dsize, xtbl, xsize)
 {
     STANDARD_CONSTRUCTOR()
     if (ytbl != nullptr && ysize > 0) {   /* Copy the y breakpoints */
@@ -288,9 +273,9 @@ bool Table2::loadData(const List& list, double* const table)
     unsigned int k = BaseClass::tableSize();
     const List::Item* item = list.getFirstItem();
     while (ok && item != nullptr) {
-        const Pair* p = dynamic_cast<const Pair*>(item->getValue());
+        const auto p = dynamic_cast<const Pair*>(item->getValue());
         if (p != nullptr) {
-            const List* slist = dynamic_cast<const List*>(p->object());
+            const auto slist = dynamic_cast<const List*>(p->object());
             if (slist != nullptr) {
                 ok &= BaseClass::loadData(*slist, &table[i]);
                 i += k;
@@ -348,7 +333,7 @@ Table2::lfi(const double iv1, FStorage* const f) const
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
    if (f != nullptr) {
-      TableStorage* s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_2D( iv1, ytable[0], getXData(), getNumXPoints(),
@@ -369,7 +354,7 @@ Table2::lfi(const double iv1, const double iv2, FStorage* const f) const
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
    if (f != nullptr) {
-      TableStorage* s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_2D( iv1, iv2, getXData(), getNumXPoints(), getYData(),
@@ -396,17 +381,6 @@ bool Table2::setYBreakpoints2(const List* const syb2obj)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Table
-//------------------------------------------------------------------------------
-Object* Table2::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& Table2::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -471,16 +445,13 @@ END_SLOT_MAP()
 Table3::Table3() : Table2()
 {
    STANDARD_CONSTRUCTOR()
-   ztable = nullptr;
-   nz = 0;
 }
 
 Table3::Table3(const double* dtbl, const unsigned int dsize,
                    const double* xtbl, const unsigned int xsize,
                    const double* ytbl, const unsigned int ysize,
                    const double* ztbl, const unsigned int zsize)
-                   : Table2(dtbl, dsize, xtbl, xsize, ytbl, ysize),
-                     ztable(nullptr), nz(0)
+                   : Table2(dtbl, dsize, xtbl, xsize, ytbl, ysize)
 {
     STANDARD_CONSTRUCTOR()
     if (ztbl != nullptr && zsize > 0) {   /* Copy the z breakpoints */
@@ -534,9 +505,9 @@ bool Table3::loadData(const List& list, double* const table)
     unsigned int k = BaseClass::tableSize();
     const List::Item* item = list.getFirstItem();
     while (ok && item != nullptr) {
-        const Pair* p = dynamic_cast<const Pair*>(item->getValue());
+        const auto p = dynamic_cast<const Pair*>(item->getValue());
         if (p != nullptr) {
-            const List* slist = dynamic_cast<const List*>(p->object());
+            const auto slist = dynamic_cast<const List*>(p->object());
             if (slist != nullptr) {
                 ok &= BaseClass::loadData(*slist, &table[i]);
                 i += k;
@@ -595,7 +566,7 @@ Table3::lfi(const double iv1, FStorage* const f) const
 
    const double* y_data = getYData();
    if (f != nullptr) {
-      TableStorage* s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_3D( iv1, y_data[0], ztable[0], getXData(), getNumXPoints(),
@@ -616,7 +587,7 @@ Table3::lfi(const double iv1, const double iv2, FStorage* const f) const
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
    if (f != nullptr) {
-      TableStorage* s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_3D( iv1, iv2, ztable[0], getXData(), getNumXPoints(),
@@ -637,7 +608,7 @@ Table3::lfi(const double iv1, const double iv2, const double iv3, FStorage* cons
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
    if (f != nullptr) {
-      TableStorage* s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_3D( iv1, iv2, iv3, getXData(), getNumXPoints(), getYData(),
@@ -664,17 +635,6 @@ bool Table3::setZBreakpoints3(const List* const szb3obj)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Table
-//------------------------------------------------------------------------------
-Object* Table3::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& Table3::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -739,16 +699,13 @@ END_SLOT_MAP()
 Table4::Table4() : Table3()
 {
    STANDARD_CONSTRUCTOR()
-   wtable = nullptr;
-   nw = 0;
 }
 Table4::Table4(const double* dtbl, const unsigned int dsize,
                    const double* xtbl, const unsigned int xsize,
                    const double* ytbl, const unsigned int ysize,
                    const double* ztbl, const unsigned int zsize,
                    const double* wtbl, const unsigned int wsize)
-                   : Table3(dtbl, dsize, xtbl, xsize, ytbl, ysize, ztbl, zsize),
-                     wtable(nullptr), nw(0)
+                   : Table3(dtbl, dsize, xtbl, xsize, ytbl, ysize, ztbl, zsize)
 {
     STANDARD_CONSTRUCTOR()
     if (wtbl != nullptr && wsize > 0) {   /* Copy the w breakpoints */
@@ -814,9 +771,9 @@ bool Table4::loadData(const List& list, double* const table)
     unsigned int k = BaseClass::tableSize();
     const List::Item* item = list.getFirstItem();
     while (ok && item != nullptr) {
-        const Pair* p = dynamic_cast<const Pair*>(item->getValue());
+        const auto p = dynamic_cast<const Pair*>(item->getValue());
         if (p != nullptr) {
-            const List* slist = dynamic_cast<const List*>(p->object());
+            const auto slist = dynamic_cast<const List*>(p->object());
             if (slist != nullptr) {
                 ok &= BaseClass::loadData(*slist, &table[i]);
                 i += k;
@@ -877,7 +834,7 @@ Table4::lfi(const double iv1, FStorage* const f) const
    const double* y_data = getYData();
    const double* z_data = getZData();
    if (f != nullptr) {
-      TableStorage* s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_4D( iv1, y_data[0], z_data[0], wtable[0], getXData(),
@@ -901,7 +858,7 @@ Table4::lfi(const double iv1, const double iv2, FStorage* const f) const
 
    const double* z_data = getZData();
    if (f != nullptr) {
-      TableStorage* s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_4D( iv1, iv2, z_data[0], wtable[0], getXData(),
@@ -924,7 +881,7 @@ Table4::lfi(const double iv1, const double iv2, const double iv3, FStorage* cons
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
    if (f != nullptr) {
-      TableStorage* s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_4D( iv1, iv2, iv3, wtable[0], getXData(), getNumXPoints(),
@@ -947,7 +904,7 @@ Table4::lfi(const double iv1, const double iv2, const double iv3, const double i
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
    if (f != nullptr) {
-       TableStorage* s = dynamic_cast<TableStorage*>(f);
+       const auto s = dynamic_cast<TableStorage*>(f);
        if (s == nullptr) throw new ExpInvalidFStorage();
 
        return lfi_4D( iv1, iv2, iv3, iv4, getXData(), getNumXPoints(),
@@ -976,17 +933,6 @@ bool Table4::setWBreakpoints4(const List* const swb4obj)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Table
-//------------------------------------------------------------------------------
-Object* Table4::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& Table4::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -1113,9 +1059,9 @@ bool Table5::loadData(const List& list, double* const table)
     unsigned int k = BaseClass::tableSize();
     const List::Item* item = list.getFirstItem();
     while (ok && item != nullptr) {
-        const Pair* p = dynamic_cast<const Pair*>(item->getValue());
+        const auto p = dynamic_cast<const Pair*>(item->getValue());
         if (p != nullptr) {
-            const List* slist = dynamic_cast<const List*>(p->object());
+            const auto slist = dynamic_cast<const List*>(p->object());
             if (slist != nullptr) {
                 ok &= BaseClass::loadData(*slist, &table[i]);
                 i += k;
@@ -1176,7 +1122,7 @@ Table5::lfi(const double iv1, FStorage* const f) const
    const double* z_data = getZData();
    const double* w_data = getWData();
    if (f != nullptr) {
-      TableStorage* s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_5D( iv1, y_data[0], z_data[0], w_data[0], vtable[0], getXData(),
@@ -1203,7 +1149,7 @@ Table5::lfi(const double iv1, const double iv2, FStorage* const f) const
    const double* z_data = getZData();
    const double* w_data = getWData();
    if (f != nullptr) {
-      TableStorage* s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_5D( iv1, iv2, z_data[0], w_data[0], vtable[0], getXData(),
@@ -1229,7 +1175,7 @@ Table5::lfi(const double iv1, const double iv2, const double iv3, FStorage* cons
 
    const double* w_data = getWData();
    if (f != nullptr) {
-      TableStorage* s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_5D( iv1, iv2, iv3, w_data[0], vtable[0], getXData(), getNumXPoints(),
@@ -1254,7 +1200,7 @@ Table5::lfi(const double iv1, const double iv2, const double iv3, const double i
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
    if (f != nullptr) {
-      TableStorage* s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_5D( iv1, iv2, iv3, iv4, vtable[0], getXData(), getNumXPoints(),
@@ -1279,7 +1225,7 @@ Table5::lfi(const double iv1, const double iv2, const double iv3, const double i
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
    if (f != nullptr) {
-      TableStorage* s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_5D( iv1, iv2, iv3, iv4, iv5, getXData(), getNumXPoints(),
@@ -1310,17 +1256,6 @@ bool Table5::setVBreakpoints5(const List* const swb5obj)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Table
-//------------------------------------------------------------------------------
-Object* Table5::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& Table5::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

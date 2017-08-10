@@ -14,9 +14,6 @@ namespace graphics {
 
 IMPLEMENT_SUBCLASS(Field, "Field")
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Field)
     "position",         // 1) Starting Position ( ln cp )
     "width",            // 2) Field width
@@ -32,9 +29,6 @@ BEGIN_SLOTTABLE(Field)
     "startCharPos",     //12) Our starting character position (we may want to skip!)
 END_SLOTTABLE(Field)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Field)
     ON_SLOT(1, setPosition, base::List)
     ON_SLOT(2, setSlotWidth, base::Number)
@@ -50,9 +44,6 @@ BEGIN_SLOT_MAP(Field)
     ON_SLOT(12, setSlotStartCharPos, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Event Table
-//------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(Field)
     if (mode == input) {
         bool kb = ( _event >= 0x20 && _event <= 0x7f );
@@ -80,22 +71,10 @@ BEGIN_EVENT_HANDLER(Field)
     ON_EVENT_OBJ(SET_JUSTIFICATION,setSlotJustification,base::String)
 END_EVENT_HANDLER()
 
-Field::Field() : origStr(), inputExample(), str()
+Field::Field()
 {
     STANDARD_CONSTRUCTOR()
-    ln = 0;
-    cp = 0;
-    w  = 0;
-    dmode = 0;
     jmode = base::String::NONE;
-    mode = display;
-    icp = 0;
-    inpDspMode = 0;
-    inpModeHold = false;
-    linked = false;
-    inheritColor = false;
-    fontName = nullptr;
-    startCP = 0;
 }
 
 void Field::copyData(const Field& org, const bool)
@@ -429,7 +408,7 @@ void Field::drawFunc()
     // ---
     graphics::Field* parent = nullptr;
     if (container() != nullptr) {
-        graphics::Field* fp = dynamic_cast<graphics::Field*>(container());
+        const auto fp = dynamic_cast<graphics::Field*>(container());
         if (fp != nullptr) parent = fp;
     }
 
@@ -454,7 +433,7 @@ void Field::drawFunc()
     // Set the color
     // ---
     bool restoreColor = false;
-    osg::Vec4 ocolor = dsp->getCurrentColor();
+    base::Vec4d ocolor = dsp->getCurrentColor();
     // only use default colors if we aren't inheriting our container's colors
 
     if (!isInheritColor()) {
@@ -463,7 +442,7 @@ void Field::drawFunc()
             if (isHighLighted()) cc = dsp->getHighlightColor();
             else cc = dsp->getNormColor();
             if (cc != nullptr) {
-                const osg::Vec4* p = cc->getRGBA();
+                const base::Vec4d* p = cc->getRGBA();
                 dsp->setColor(*p);
                 restoreColor = true;
             }
@@ -504,11 +483,6 @@ void Field::drawFunc()
     // ---
     if (restoreColor) dsp->setColor(ocolor);
 
-}
-
-base::Object* Field::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
 
 //------------------------------------------------------------------------------
@@ -583,8 +557,8 @@ bool Field::setSlotHighlight(const base::Number* const shobj)
 
             const base::List::Item* item = subcomponents->getFirstItem();
             while (item != nullptr) {
-                base::Pair* p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
-                Field* child = dynamic_cast<Field*>(p->object());
+                const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
+                const auto child = dynamic_cast<Field*>(p->object());
                 if (child != nullptr) child->setSlotHighlight(shobj); //changed from obj
                 item = item->getNext();
             }
@@ -619,8 +593,8 @@ bool Field::setSlotUnderline(const base::Number* const suobj)
 
             const base::List::Item* item = subcomponents->getFirstItem();
             while (item != nullptr) {
-                base::Pair* p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
-                Field* child = dynamic_cast<Field*>(p->object());
+                const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
+                const auto child = dynamic_cast<Field*>(p->object());
                 if (child != nullptr) child->setSlotUnderline(suobj);
                 item = item->getNext();
             }
@@ -656,8 +630,8 @@ bool Field::setSlotReversed(const base::Number* const srobj)
 
             const base::List::Item* item = subcomponents->getFirstItem();
             while (item != nullptr) {
-                base::Pair* p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
-                Field* child = dynamic_cast<Field*>(p->object());
+                const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
+                const auto child = dynamic_cast<Field*>(p->object());
                 if (child != nullptr) child->setSlotReversed(srobj);
                 item = item->getNext();
             }
@@ -760,8 +734,8 @@ bool Field::setSlotJustification(const base::String* const sjobj)
 
             const base::List::Item* item = subcomponents->getFirstItem();
             while (item != nullptr) {
-                base::Pair* p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
-                Field* child = dynamic_cast<Field*>(p->object());
+                const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
+                const auto child = dynamic_cast<Field*>(p->object());
                 if (child != nullptr) child->setSlotJustification(sjobj);
                 item = item->getNext();
             }

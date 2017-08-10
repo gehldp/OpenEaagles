@@ -4,40 +4,26 @@
 #include "openeaagles/recorder/DataRecordHandle.hpp"
 #include "openeaagles/base/String.hpp"
 #include "openeaagles/base/util/str_utils.hpp"
-#include "openeaagles/base/util/system.hpp"
+#include "openeaagles/base/util/system_utils.hpp"
 
 #include <fstream>
 #include <cstdlib>
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 namespace oe {
 namespace recorder {
 
-//==============================================================================
-// Class FileReader
-//==============================================================================
-IMPLEMENT_SUBCLASS(FileReader,"RecorderFileReader")
+IMPLEMENT_SUBCLASS(FileReader, "RecorderFileReader")
 
-// Slot table for this form type
 BEGIN_SLOTTABLE(FileReader)
     "filename",         // 1) Data file name
     "pathname",         // 2) Path to the data file directory (optional)
 END_SLOTTABLE(FileReader)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(FileReader)
     ON_SLOT( 1, setFilename, base::String)
     ON_SLOT( 2, setPathName, base::String)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 FileReader::FileReader()
 {
    STANDARD_CONSTRUCTOR()
@@ -47,17 +33,8 @@ FileReader::FileReader()
 void FileReader::initData()
 {
    ibuf = new char[MAX_INPUT_BUFFER_SIZE];
-   sin = nullptr;
-   filename = nullptr;
-   pathname = nullptr;
-   fileOpened = false;
-   fileFailed = false;
-   firstPassFlg = true;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void FileReader::copyData(const FileReader& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -76,9 +53,6 @@ void FileReader::copyData(const FileReader& org, const bool cc)
    firstPassFlg = true;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void FileReader::deleteData()
 {
    if (sin != nullptr) {
@@ -93,7 +67,6 @@ void FileReader::deleteData()
    if (ibuf != nullptr) { delete[] ibuf; ibuf = nullptr; }
 }
 
-
 //------------------------------------------------------------------------------
 // get functions
 //------------------------------------------------------------------------------
@@ -106,7 +79,6 @@ bool FileReader::isFailed() const
 {
    return fileFailed || (sin != nullptr && sin->fail());
 }
-
 
 //------------------------------------------------------------------------------
 // Open the data file
@@ -141,7 +113,7 @@ bool FileReader::openFile()
       nameLength += filename->len();           // add the length of the file name
       nameLength += 1;                         // Add one for the null(0) at the end of the string
 
-      char* fullname = new char[nameLength];
+      const auto fullname = new char[nameLength];
       fullname[0] = '\0';
 
       //---
@@ -272,7 +244,7 @@ const DataRecordHandle* FileReader::readRecordImp()
 
             // Parse the DataRecord
             std::string wireFormat(ibuf, n);
-            pb::DataRecord* dataRecord = new pb::DataRecord();
+            auto dataRecord = new pb::DataRecord();
             bool ok = dataRecord->ParseFromString(wireFormat);
 
             // Create a handle for the DataRecord (it now has ownership)
@@ -315,17 +287,6 @@ bool FileReader::setPathName(const base::String* const msg)
    return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-base::Object* FileReader::getSlotByIndex(const int si)
-{
-   return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& FileReader::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;

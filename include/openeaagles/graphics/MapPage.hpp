@@ -3,7 +3,8 @@
 #define __oe_graphics_MapPage_H__
 
 #include "openeaagles/graphics/MfdPage.hpp"
-#include "openeaagles/base/units/Angles.hpp"
+
+#include "openeaagles/base/units/angle_utils.hpp"
 
 #include <cmath>
 
@@ -168,34 +169,32 @@ protected:
    virtual bool setSlotRefHdg(const base::Number* const x);
 
 private:
-   void initData();
+   double referenceLat {};           // our latitude from center reference point (degs)
+   double referenceLon {};           // our longitude from center reference point (degs)
+   double cosineLatReference {1.0};  // cosine of our reference latitude
+   double heading {};                // heading (rad)
+   double headingCos {1.0};          // cosine of heading
+   double headingSin {};             // sine of heading
 
-   double referenceLat;        // our latitude from center reference point (degs)
-   double referenceLon;        // our longitude from center reference point (degs)
-   double cosineLatReference;  // cosine of our reference latitude
-   double heading;             // heading (rad)
-   double headingCos;          // cosine of heading
-   double headingSin;          // sine of heading
-
-   double nm2Screen;           // nautical miles to screen units
-   double range;               // range scale of the system (NM)
-   bool northUp;               // flag to determine north up
+   double nm2Screen {1.0};           // nautical miles to screen units
+   double range {1.0};               // range scale of the system (NM)
+   bool northUp {true};              // flag to determine north up
 
    // (we keep these separate because we need both of them)
-   double outerRadius;         // radius of the outer circle's ring (screen units)
-   double outerRadiusDC;       // radius if we are de-centered (screen units)
+   double outerRadius {1.0};         // radius of the outer circle's ring (screen units)
+   double outerRadiusDC {1.0};       // radius if we are de-centered (screen units)
 
-   double displacement;        // how far to translate up or down when centered/decentered (display units)
-   bool   isCentered;          // flag for centering our map page
+   double displacement {};           // how far to translate up or down when centered/decentered (display units)
+   bool   isCentered {true};         // flag for centering our map page
 };
 
 inline double MapPage::getReferenceLatDeg() const  { return referenceLat; }
 inline double MapPage::getReferenceLonDeg() const  { return referenceLon; }
-inline double MapPage::getReferenceLatRad() const  { return referenceLat * base::Angle::D2RCC; }
-inline double MapPage::getReferenceLonRad() const  { return referenceLon * base::Angle::D2RCC; }
+inline double MapPage::getReferenceLatRad() const  { return referenceLat * base::angle::D2RCC; }
+inline double MapPage::getReferenceLonRad() const  { return referenceLon * base::angle::D2RCC; }
 inline double MapPage::getCosRefLat() const        { return static_cast<double>(cosineLatReference); }
 inline double MapPage::getHeadingDeg() const       { return static_cast<double>(heading); }
-inline double MapPage::getHeadingRad() const       { return static_cast<double>(heading * base::Angle::D2RCC); }
+inline double MapPage::getHeadingRad() const       { return static_cast<double>(heading * base::angle::D2RCC); }
 inline double MapPage::getOuterRadius() const      { return static_cast<double>(outerRadius); }
 inline double MapPage::getCurrentRadius() const    { return static_cast<double>(isCentered ? outerRadius : outerRadiusDC);  }
 inline double MapPage::getOuterRadiusDC() const    { return static_cast<double>(outerRadiusDC); }
@@ -208,7 +207,7 @@ inline bool   MapPage::getNorthUp() const          { return northUp; }
 inline bool MapPage::setReferenceLatDeg(const double newLat)
 {
    referenceLat = newLat;
-   cosineLatReference = static_cast<double>(std::cos((base::Angle::D2RCC*referenceLat)));
+   cosineLatReference = static_cast<double>(std::cos((base::angle::D2RCC*referenceLat)));
    return true;
 }
 
@@ -221,19 +220,19 @@ inline bool MapPage::setReferenceLonDeg(const double newLon)
 inline bool MapPage::setReferenceLatRad(const double newLat)
 {
    cosineLatReference = static_cast<double>(std::cos(newLat));
-   referenceLat = newLat * base::Angle::R2DCC;
+   referenceLat = newLat * base::angle::R2DCC;
    return true;
 }
 
 inline bool MapPage::setReferenceLonRad(const double newLon)
 {
-   referenceLon = newLon * base::Angle::R2DCC;
+   referenceLon = newLon * base::angle::R2DCC;
    return true;
 }
 
 inline bool MapPage::setHeadingDeg(const double newHeading)
 {
-   double hdgRad = static_cast<double>(base::Angle::D2RCC * newHeading);
+   double hdgRad = static_cast<double>(base::angle::D2RCC * newHeading);
    heading = newHeading;
    headingSin = static_cast<double>(std::sin(hdgRad));
    headingCos = static_cast<double>(std::cos(hdgRad));
@@ -242,7 +241,7 @@ inline bool MapPage::setHeadingDeg(const double newHeading)
 
 inline bool MapPage::setHeadingRad(const double newHeading)
 {
-   heading = newHeading * static_cast<double>(base::Angle::R2DCC);
+   heading = newHeading * static_cast<double>(base::angle::R2DCC);
    double temp = newHeading;
    if (northUp) temp = 0;
    headingSin = static_cast<double>(std::sin(temp));
@@ -292,7 +291,7 @@ inline bool MapPage::toggleCentered()
    return true;
 }
 
-}  // End graphics namespace
-}  // End oe namespace
+}
+}
 
 #endif

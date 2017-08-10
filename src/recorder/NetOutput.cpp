@@ -2,16 +2,14 @@
 #include "openeaagles/recorder/NetOutput.hpp"
 #include "openeaagles/recorder/protobuf/DataRecord.pb.h"
 #include "openeaagles/recorder/DataRecordHandle.hpp"
-#include "openeaagles/base/NetHandler.hpp"
+#include "openeaagles/base/network/NetHandler.hpp"
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 namespace oe {
 namespace recorder {
 
-//==============================================================================
-// Class NetOutput
-//==============================================================================
-IMPLEMENT_SUBCLASS(NetOutput,"RecorderNetOutput")
+IMPLEMENT_SUBCLASS(NetOutput, "RecorderNetOutput")
 EMPTY_SERIALIZER(NetOutput)
 
 BEGIN_SLOTTABLE(NetOutput)
@@ -19,31 +17,16 @@ BEGIN_SLOTTABLE(NetOutput)
    "noWait",               // 2) No wait (unblocked) I/O flag (default: false -- blocked I/O)
 END_SLOTTABLE(NetOutput)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(NetOutput)
     ON_SLOT(1, setSlotNetwork,   oe::base::NetHandler)
     ON_SLOT(2, setSlotNoWait,    oe::base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
-NetOutput::NetOutput() : netHandler(nullptr)
+NetOutput::NetOutput()
 {
    STANDARD_CONSTRUCTOR()
-   initData();
 }
 
-void NetOutput::initData()
-{
-   networkInitialized = false;
-   networkInitFailed = false;
-   noWaitFlag = false;
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void NetOutput::copyData(const NetOutput& org, const bool)
 {
    BaseClass::copyData(org);
@@ -54,16 +37,11 @@ void NetOutput::copyData(const NetOutput& org, const bool)
    networkInitFailed = false;
 }
 
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void NetOutput::deleteData()
 {
    closeConnections();
    netHandler = nullptr;
 }
-
 
 //------------------------------------------------------------------------------
 // Returns true if the networks are initialized and connected
@@ -166,15 +144,6 @@ bool NetOutput::setSlotNoWait(oe::base::Number* const msg)
       ok = true;
    }
    return ok;
-}
-
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-oe::base::Object* NetOutput::getSlotByIndex(const int si)
-{
-   return BaseClass::getSlotByIndex(si);
 }
 
 }

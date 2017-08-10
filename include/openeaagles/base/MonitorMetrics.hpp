@@ -3,12 +3,13 @@
 #define __oe_base_MonitorMetrics_H__
 
 #include "openeaagles/base/Color.hpp"
-#include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/osg/Matrixd"
 #include "openeaagles/base/safe_ptr.hpp"
+#include "openeaagles/base/osg/Vec3d"
+#include "openeaagles/base/osg/Vec4d"
 
 namespace oe {
 namespace base {
-
 class Table1;
 class List;
 
@@ -34,10 +35,10 @@ class List;
 // Public methods: Base class public methods, plus ...
 //
 //     MonitorMetrics(const Table1* redLuminance, const Table1* greenLuminance, const Table1* blueLuminance,
-//                    const osg::Matrix& phosphorCoordinates, const osg::Vec3& whiteRGB, const osg::Vec3& whiteCIE);
+//                    const Matrixd& phosphorCoordinates, const Vec3d& whiteRGB, const Vec3d& whiteCIE);
 //         Special constructor to initialize the object with the given values.
 //
-//     cie2rgb(osg::Vec4& rgba, const osg::Vec3& cie)
+//     cie2rgb(Vec4d& rgba, const Vec3d& cie)
 //         Convert a CIE color into an RGB value for this monitor.
 //------------------------------------------------------------------------------
 class MonitorMetrics : public Object
@@ -47,7 +48,7 @@ class MonitorMetrics : public Object
 public:
     MonitorMetrics();
     MonitorMetrics(const Table1* redLuminance, const Table1* greenLuminance, const Table1* blueLuminance,
-                   const osg::Matrix& phosphorCoordinates, const osg::Vec3& whiteRGB, const osg::Vec3& whiteCIE);
+                   const Matrixd& phosphorCoordinates, const Vec3d& whiteRGB, const Vec3d& whiteCIE);
     bool setSlotRed(const Table1* red);
     bool setSlotGreen(const Table1* green);
     bool setSlotBlue(const Table1* blue);
@@ -55,13 +56,13 @@ public:
     bool setSlotWhiteRGB(const List* whiteRGB);
     bool setSlotWhiteCIE(const List* whiteCIE);
 
-    void cie2rgb(osg::Vec4& rgba, const osg::Vec3& cie) const;
+    void cie2rgb(Vec4d& rgba, const Vec3d& cie) const;
 
 private:
     bool computeMatrix();
 
     // transform matrix from CIE to RGB for this monitor
-    osg::Matrix transform;
+    Matrixd transform;
 
     // RGB luminance vs RGB level on this monitor
     safe_ptr<const Table1> redLuminance;
@@ -69,16 +70,15 @@ private:
     safe_ptr<const Table1> blueLuminance;
 
     // CIE coordinates of Red, Green, and Blue for this monitor
-    osg::Matrix phosphorCoordinates;
+    Matrixd phosphorCoordinates;
 
     // CIE and RGB coordinates of a reference white
-    osg::Vec3 refwhiteRGB;
-    osg::Vec3 refwhiteCIE;
+    Vec3d refwhiteRGB;
+    Vec3d refwhiteCIE;
 };
 
 }
 }
-
 
 #endif
 

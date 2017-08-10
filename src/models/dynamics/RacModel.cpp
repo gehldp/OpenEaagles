@@ -1,13 +1,15 @@
 
 #include "openeaagles/models/dynamics/RacModel.hpp"
 
-#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/models/player/Player.hpp"
+
 #include "openeaagles/base/String.hpp"
 #include "openeaagles/base/Number.hpp"
+
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
-#include "openeaagles/base/osg/Matrix"
-#include "openeaagles/base/osg/Vec3"
+
+#include "openeaagles/base/osg/Vec3d"
 #include "openeaagles/base/osg/Quat"
 
 #include <cmath>
@@ -40,15 +42,6 @@ END_SLOT_MAP()
 RacModel::RacModel()
 {
    STANDARD_CONSTRUCTOR()
-
-   vpMin = 0.0;
-   vpMaxG = 250.0;
-   gMax = 4.0;
-   maxAccel = 10.0;
-
-   cmdAltitude = -9999.0;
-   cmdHeading = -9999.0;
-   cmdVelocity = -9999.0;
 }
 
 void RacModel::copyData(const RacModel& org, const bool)
@@ -73,12 +66,11 @@ void RacModel::reset()
 }
 
 //------------------------------------------------------------------------------
-// updateTC() -- update time critical stuff here
+// dynamics() -- update player's vehicle dynamics
 //------------------------------------------------------------------------------
 void RacModel::dynamics(const double dt)
 {
     updateRAC(dt);
-    BaseClass::dynamics(dt);
 }
 
 //------------------------------------------------------------------------------
@@ -106,14 +98,14 @@ double RacModel::getSideSlip() const
 
 double RacModel::getFlightPath() const
 {
-   const simulation::Player* pp = static_cast<const simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+   const auto pp = static_cast<const models::Player*>( findContainerByType(typeid(models::Player)) );
    if (pp == nullptr) return 0;
    return static_cast<double>(pp->getPitchR());
 }
 
 double RacModel::getCalibratedAirspeed() const
 {
-   const simulation::Player* pp = static_cast<const simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+   const auto pp = static_cast<const models::Player*>( findContainerByType(typeid(models::Player)) );
    if (pp == nullptr) return 0;
    return pp->getTotalVelocityKts();
 }
@@ -196,11 +188,11 @@ bool RacModel::setCommandedAltitude(const double m, const double, const double)
 void RacModel::updateRAC(const double dt)
 {
    // Get our Player (must have one!)
-   simulation::Player* pp = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+   const auto pp = static_cast<models::Player*>( findContainerByType(typeid(models::Player)) );
    if (pp == nullptr) return;
 
    // Acceleration of Gravity (M/S)
-   double g = base::ETHG * base::Distance::FT2M;
+   const double g = base::ETHG * base::distance::FT2M;
 
    // Set default commanded values
    if (cmdAltitude < -9000.0)
@@ -216,7 +208,7 @@ void RacModel::updateRAC(const double dt)
    // ---
 
    // Max altitude rate 6000 ft /min converted to M/S
-   double maxAltRate = (3000.0 / 60.0) * base::Distance::FT2M;
+   double maxAltRate = (3000.0 / 60.0) * base::distance::FT2M;
 
    // commanded vertical velocity is delta altitude limited to max rate
    double cmdAltRate = (cmdAltitude - pp->getAltitudeM());
@@ -252,20 +244,20 @@ void RacModel::updateRAC(const double dt)
    // ---
    // Get old angular values
    // ---
-   const osg::Vec3 oldRates = pp->getAngularVelocities();
+   const base::Vec3d oldRates = pp->getAngularVelocities();
    //double pa1 = oldRates[simulation::Player::IROLL];
-   double qa1 = oldRates[simulation::Player::IPITCH];
-   double ra1 = oldRates[simulation::Player::IYAW];
+   double qa1 = oldRates[models::Player::IPITCH];
+   double ra1 = oldRates[models::Player::IYAW];
 
    // ---
    // Find pitch rate and update pitch
    // ---
-   double qa = base::Angle::aepcdRad(cmdPitch - pp->getPitchR()) * 0.1;
+   double qa = base::angle::aepcdRad(cmdPitch - pp->getPitchR()) * 0.1;
    if(qa > qa_max) qa = qa_max;
    if(qa < qa_min) qa = qa_min;
 
    // Find turn rate
-   double ra = base::Angle::aepcdRad((cmdHeading  * base::Angle::D2RCC) - pp->getHeadingR()) * 0.1;
+   double ra = base::angle::aepcdRad((cmdHeading  * base::angle::D2RCC) - pp->getHeadingR()) * 0.1;
    if(ra > ra_max) ra = ra_max;
    if(ra < -ra_max) ra = -ra_max;
 
@@ -286,10 +278,10 @@ void RacModel::updateRAC(const double dt)
 
    // Roll angle is proportional to max turn rate - filtered
    double pa = 0.0;
-   double newPhi = 0.98 * pp->getRollR() + 0.02 * (ra / ra_max * (base::Angle::D2RCC * 60.0));
+   double newPhi = 0.98 * pp->getRollR() + 0.02 * (ra / ra_max * (base::angle::D2RCC * 60.0));
 
    // Find Acceleration
-   double cmdVelMPS = cmdVelocity * (base::Distance::NM2M / 3600.0);
+   double cmdVelMPS = cmdVelocity * (base::distance::NM2M / 3600.0);
    double vpdot = (cmdVelMPS - pp->getTotalVelocity()) * 0.05;
    if(vpdot > maxAccel)  vpdot = maxAccel;
    if(vpdot < -maxAccel) vpdot = -maxAccel;
@@ -386,17 +378,6 @@ bool RacModel::setSlotCmdVelocity(const base::Number* const msg)
     return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Graphic
-//------------------------------------------------------------------------------
-base::Object* RacModel::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& RacModel::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
